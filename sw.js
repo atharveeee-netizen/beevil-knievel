@@ -16,9 +16,9 @@ const ASSETS_TO_CACHE = [
   './styles.css',
   './components.js',
   './manifest.json',
-  './assets/beevil_product_hero.jpg',
-  './assets/beevil_hardware_render.jpg',
-  './assets/architecture_diagram.jpg'
+  './assets/beevil_product_hero.png',
+  './assets/beevil_hardware_render.png',
+  './assets/architecture_diagram.png'
 ];
 
 self.addEventListener('install', (event) => {

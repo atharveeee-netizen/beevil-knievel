@@ -250,16 +250,12 @@ button {
 .nav-logo-mark {
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, var(--color-amber), #E8941E);
+    background: url('assets/icon-192.png') center/cover no-repeat;
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--color-ink-inverse);
-    box-shadow: 0 0 20px rgba(245, 166, 35, 0.2);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.15); /* Subtle yellowish glow */
 }
 
 .nav-logo-text {
