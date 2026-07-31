@@ -310,6 +310,19 @@ button {
     text-shadow: 0 0 20px rgba(245, 166, 35, 0.5);
 }
 
+.nav-logo-img {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    filter: drop-shadow(0 0 10px rgba(245, 166, 35, 0.4));
+    transition: transform var(--duration-fast) ease;
+}
+
+.nav-logo:hover .nav-logo-img {
+    transform: scale(1.05);
+}
+
 .nav-logo-text {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 16px;

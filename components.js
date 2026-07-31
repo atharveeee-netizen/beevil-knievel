@@ -8,7 +8,7 @@
 const NAV_HTML = `
 <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-        <div class="nav-logo-mark">BK</div>
+        <img src="assets/icon-192.png" alt="BK Logo" class="nav-logo-img">
         <div class="nav-logo-text">Beevil Knievel</div>
     </a>
 
@@ -37,7 +37,7 @@ const FOOTER_HTML = `
 <div class="container footer-grid">
     <div>
         <a href="index.html" class="nav-logo" style="margin-bottom: 24px;">
-            <div class="nav-logo-mark">BK</div>
+            <img src="assets/icon-192.png" alt="BK Logo" class="nav-logo-img">
             <div class="nav-logo-text">Beevil Knievel</div>
         </a>
         <p class="footer-brand-desc">
