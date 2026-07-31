@@ -2,12 +2,19 @@
    Beevil Knievel — Shared Component Injection & Interactivity Engine
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+function initApp() {
     injectNavigation();
     injectFooter();
     injectDemoModal();
     initInteractivity();
-});
+}
+
+// Guaranteed execution even if DOMContentLoaded already fired
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
 
 // Helper: Check active page
 function isPage(keyword) {
@@ -20,20 +27,8 @@ function isPage(keyword) {
 const NAV_HTML = `
 <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-        <div class="nav-logo-svg">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="36" height="36" rx="9" fill="#121215" stroke="url(#bk-amber-grad)" stroke-width="1.5"/>
-                <path d="M10 9V27M10 20C12.8 15.5 17 15.5 17 20C17 24.5 12.8 24.5 10 20Z" stroke="#F5A623" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M21 16L26 21M26 16L21 26" stroke="#F5A623" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="26" cy="11" r="1.5" fill="#F5A623"/>
-                <defs>
-                    <linearGradient id="bk-amber-grad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#F5A623"/>
-                        <stop offset="1" stop-color="#D97706"/>
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
+        <img src="assets/bk_yellow_logo.png" alt="bK Logo" class="nav-logo-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+        <div class="nav-logo-fallback" style="display:none; width:36px; height:36px; background:#121215; border:1px solid #F5A623; border-radius:8px; align-items:center; justify-content:center; font-family:'Bungee', sans-serif; font-size:18px; color:#F5A623;">bK</div>
         <div class="nav-logo-text">Beevil Knievel</div>
     </a>
 
@@ -62,20 +57,8 @@ const FOOTER_HTML = `
 <div class="container footer-grid">
     <div>
         <a href="index.html" class="nav-logo" style="margin-bottom: 24px;">
-            <div class="nav-logo-svg">
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="36" height="36" rx="9" fill="#121215" stroke="url(#bk-amber-grad-foot)" stroke-width="1.5"/>
-                    <path d="M10 9V27M10 20C12.8 15.5 17 15.5 17 20C17 24.5 12.8 24.5 10 20Z" stroke="#F5A623" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M21 16L26 21M26 16L21 26" stroke="#F5A623" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="26" cy="11" r="1.5" fill="#F5A623"/>
-                    <defs>
-                        <linearGradient id="bk-amber-grad-foot" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#F5A623"/>
-                            <stop offset="1" stop-color="#D97706"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </div>
+            <img src="assets/bk_yellow_logo.png" alt="bK Logo" class="nav-logo-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
+            <div class="nav-logo-fallback" style="display:none; width:36px; height:36px; background:#121215; border:1px solid #F5A623; border-radius:8px; align-items:center; justify-content:center; font-family:'Bungee', sans-serif; font-size:18px; color:#F5A623;">bK</div>
             <div class="nav-logo-text">Beevil Knievel</div>
         </a>
         <p class="footer-brand-desc">
