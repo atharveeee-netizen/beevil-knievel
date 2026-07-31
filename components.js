@@ -7,7 +7,7 @@
 const NAV_HTML = `
 <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-        <div class="nav-logo-mark"></div>
+        <div class="nav-logo-mark">BK</div>
         <div class="nav-logo-text">Beevil Knievel</div>
     </a>
 
@@ -33,7 +33,7 @@ const FOOTER_HTML = `
 <div class="container footer-grid">
     <div>
         <a href="index.html" class="nav-logo" style="margin-bottom: 24px;">
-            <div class="nav-logo-mark"></div>
+            <div class="nav-logo-mark">BK</div>
             <div class="nav-logo-text">Beevil Knievel</div>
         </a>
         <p class="footer-brand-desc">
@@ -141,3 +141,29 @@ function initScrollAnimations() {
     const revealElements = document.querySelectorAll('.reveal');
     revealElements.forEach(el => observer.observe(el));
 }
+
+// PWA Install Logic
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const installBtns = document.querySelectorAll('.pwa-install-btn');
+    installBtns.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    deferredPrompt = null;
+                }
+            } else {
+                alert("App is either already installed or your browser doesn't support automatic installation. You can add it to your home screen from the browser menu.");
+            }
+        });
+    });
+});
+
