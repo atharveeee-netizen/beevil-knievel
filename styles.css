@@ -298,20 +298,16 @@ button {
     text-decoration: none;
 }
 
-.nav-logo-img {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    object-fit: cover;
-    border: 1px solid rgba(245, 166, 35, 0.4);
-    background: var(--color-surface-2);
-    box-shadow: 0 0 12px rgba(245, 166, 35, 0.35);
-    transition: transform var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+.nav-logo-svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--duration-fast) ease, filter var(--duration-fast) ease;
 }
 
-.nav-logo:hover .nav-logo-img {
+.nav-logo:hover .nav-logo-svg {
     transform: scale(1.06);
-    box-shadow: 0 0 20px rgba(245, 166, 35, 0.6);
+    filter: drop-shadow(0 0 12px rgba(245, 166, 35, 0.5));
 }
 
 .nav-logo-text {
@@ -325,7 +321,7 @@ button {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
     list-style: none;
 }
 
