@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* HASHICORP DESIGN SYSTEM TOKENS FOR MOBILE APP - PROFESSIONAL / NO EMOJIS */
+        /* HASHICORP DESIGN SYSTEM TOKENS - NATURAL WRITING */
         :root {
             --colors-canvas: #000000;
             --colors-surface-1: #161B26;
@@ -98,7 +98,7 @@
         .btn-primary-8px:hover { background: #E2E8F0; }
 
         /* Bottom Tab Bar */
-        .tab-bar { padding: 10px 16px; background: var(--colors-surface-1); border-top: 1px solid var(--colors-hairline); display: flex; justify-content: space-around; }
+        .tab-bar { padding: 10px 16px; background: var(--colors-surface-1); border-top: 1px solid var(--colors-hairline); display: flex; justify-space: space-around; }
         .tab-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--colors-ink-muted); font-size: 11px; font-weight: 600; text-decoration: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.4px; }
         .tab-btn.active { color: var(--colors-product-waypoint); }
 
@@ -121,8 +121,8 @@
         <!-- App Nav -->
         <div class="app-nav">
             <div>
-                <span class="eyebrow" style="margin-bottom:0; color:var(--colors-product-nomad);">● LoRa Active (-84 dBm)</span>
-                <div class="app-title">Farmer Mobile Application</div>
+                <span class="eyebrow" style="margin-bottom:0; color:var(--colors-product-nomad);">● LoRa Connected (-84 dBm)</span>
+                <div class="app-title">Farmer Mobile App</div>
             </div>
             <a href="index.html" style="font-size:12px; color:var(--colors-product-waypoint); text-decoration:none; font-weight:600;">Home</a>
         </div>
@@ -132,7 +132,7 @@
 
             <!-- Hive Scroll Selector -->
             <div>
-                <span class="eyebrow">Apiary Hive Selector</span>
+                <span class="eyebrow">Select Hive</span>
                 <div class="hive-scroll">
                     <div class="hive-chip active" id="chip1" onclick="selectHive(1)">
                         <div class="hive-chip-name">Hive Alpha (#01)</div>
@@ -144,64 +144,64 @@
                     </div>
                     <div class="hive-chip" id="chip3" onclick="selectHive(3)">
                         <div class="hive-chip-name">Hive Gamma (#03)</div>
-                        <span style="font-size:10px; color:var(--colors-product-consul); font-weight:700;">CRITICAL MITE</span>
+                        <span style="font-size:10px; color:var(--colors-product-consul); font-weight:700;">MITE ATTACK</span>
                     </div>
                 </div>
             </div>
 
             <!-- Model 2 Cloud AI Diagnostic Advisory Banner -->
             <div class="banner banner-vault" id="diagBanner">
-                <span class="eyebrow" style="color:var(--colors-product-vault);">Model 2 Cloud AI Diagnostic Outcome</span>
-                <div class="banner-title" id="diagTitle">Swarming Risk Detected</div>
+                <span class="eyebrow" style="color:var(--colors-product-vault);">Cloud AI Diagnosis</span>
+                <div class="banner-title" id="diagTitle">Swarm Warning</div>
                 <p class="banner-text" id="diagBody">
-                    Acoustic peak at 310 Hz with thermal spike (+3.1°C). 92% risk of queen cell swarming preparation within 24-48h.
+                    Hive audio peaked at 310 Hz and brood temp jumped +3.1°C. The colony is likely preparing to swarm within 24 to 48 hours.
                 </p>
                 <div class="action-box" id="diagAction">
-                    <strong>RECOMMENDED ACTION:</strong> Inspect queen cells. Prepare secondary hive box within 36h.
+                    <strong>WHAT TO DO:</strong> Check queen cells and set up a split box within 36 hours.
                 </div>
             </div>
 
             <!-- 4 Metric Cards Grid -->
             <div class="metrics-grid">
                 <div class="m-card">
-                    <div class="m-label" id="lblBrood">Brood Nest Temp</div>
+                    <div class="m-label" id="lblBrood">Brood Temp</div>
                     <div class="m-val" id="valBrood">37.8°C</div>
                     <div class="m-sub" style="color:var(--colors-product-vault);" id="footBrood">+3.1°C thermal spike</div>
                 </div>
                 <div class="m-card">
-                    <div class="m-label">Ambient Temp</div>
+                    <div class="m-label">Outside Temp</div>
                     <div class="m-val" id="valAmbient">34.7°C</div>
-                    <div class="m-sub" style="color:var(--colors-ink-muted);">Outside field</div>
+                    <div class="m-sub" style="color:var(--colors-ink-muted);">Apiary field</div>
                 </div>
                 <div class="m-card">
-                    <div class="m-label">Acoustic Peak</div>
+                    <div class="m-label">Audio Peak</div>
                     <div class="m-val" id="valAcoustics">310 Hz</div>
                     <div class="m-sub" style="color:var(--colors-product-vault);" id="footAcoustics">High hum frequency</div>
                 </div>
                 <div class="m-card">
-                    <div class="m-label">Solar LiPo Cell</div>
+                    <div class="m-label">Battery Level</div>
                     <div class="m-val">94%</div>
-                    <div class="m-sub" style="color:var(--colors-product-nomad);">Solar charging active</div>
+                    <div class="m-sub" style="color:var(--colors-product-nomad);">Solar charging</div>
                 </div>
             </div>
 
             <!-- Telemetry Chart -->
             <div class="chart-card">
-                <span class="eyebrow" style="color:var(--colors-product-waypoint);">Telemetry Analytics (ΔT)</span>
+                <span class="eyebrow" style="color:var(--colors-product-waypoint);">Temperature History (ΔT)</span>
                 <div style="height: 155px; position: relative;">
                     <canvas id="appChart"></canvas>
                 </div>
             </div>
 
-            <!-- Push Alert Test Button (8px Radius) -->
+            <!-- Push Alert Test Button -->
             <button class="btn-primary-8px" onclick="showModal()">
-                Trigger Push Alert Test
+                Test Push Alert
             </button>
 
             <!-- Navigation Back to Team Landing Page -->
             <div style="text-align: center;">
                 <a href="index.html" style="color:var(--colors-product-waypoint); font-size:13px; text-decoration:none; font-weight:600;">
-                    ← View Team Landing Page
+                    ← Back to Overview
                 </a>
             </div>
 
@@ -226,12 +226,12 @@
         <!-- Push Alert Preview Modal -->
         <div class="modal" id="waModal">
             <div class="modal-box">
-                <span class="eyebrow" style="color:var(--colors-product-vault);">Tier 1 Push Notification</span>
-                <div style="font-size:14px; font-weight:700; margin-bottom:8px;" id="modalTitle">Emergency Alert Dispatched</div>
+                <span class="eyebrow" style="color:var(--colors-product-vault);">Urgent Alert Sent</span>
+                <div style="font-size:14px; font-weight:700; margin-bottom:8px;" id="modalTitle">Emergency Alert Sent</div>
                 <div style="font-size:12px; color:var(--colors-ink-muted); line-height:1.45; margin-bottom:16px;" id="modalBody">
-                    Alert delivered to Beekeeper Mobile (+91 98765 43210).
+                    Text alert dispatched to Beekeeper Phone (+91 98765 43210).
                 </div>
-                <button class="btn-primary-8px" onclick="closeModal()">Close Preview</button>
+                <button class="btn-primary-8px" onclick="closeModal()">Close</button>
             </div>
         </div>
 
@@ -240,19 +240,19 @@
     <script>
         const DIAG = {
             1: {
-                title: "Swarming Risk Detected",
-                body: "Acoustic peak at 310 Hz with thermal spike (+3.1°C). 92% risk of queen cell swarming preparation within 24-48h.",
-                act: "RECOMMENDED ACTION: Inspect queen cells. Prepare secondary hive box within 36h."
+                title: "Swarm Warning",
+                body: "Hive audio peaked at 310 Hz and brood temp jumped +3.1°C. The colony is likely preparing to swarm within 24 to 48 hours.",
+                act: "WHAT TO DO: Check queen cells and set up a split box within 36 hours."
             },
             2: {
                 title: "Hive Healthy & Stable",
-                body: "Brood nest temp steady at 34.9°C. Acoustic frequency normal at 220 Hz. No disease or swarming vectors.",
-                act: "RECOMMENDED ACTION: No manual action needed. Continue 14-day inspection routine."
+                body: "Brood nest temp is steady at 34.9°C with normal audio hum (220 Hz). No signs of disease or swarming.",
+                act: "WHAT TO DO: No action needed right now. Continue your normal 14-day check schedule."
             },
             3: {
-                title: "Varroa Mite Attack Detected",
-                body: "Thermal drop to 31.2°C with high agitation sound (410 Hz). 89% probability of Varroa parasite attack.",
-                act: "RECOMMENDED ACTION: Apply Formic Acid treatment immediately to protect brood."
+                title: "Varroa Mite Attack",
+                body: "Brood temp dropped to 31.2°C while hive agitation sound spiked to 410 Hz. High likelihood of Varroa mite infestation.",
+                act: "WHAT TO DO: Apply Formic Acid treatment promptly to protect brood."
             }
         };
 
@@ -333,10 +333,10 @@
             const title = document.getElementById('diagTitle').innerText;
             const action = document.getElementById('diagAction').innerText;
             document.getElementById('modalBody').innerHTML = `
-                <strong>CRITICAL PUSH ALERT DISPATCHED</strong><br/><br/>
-                <b>Hive Unit:</b> Hive #${currentHive}<br/>
+                <strong>ALERT SENT TO PHONE</strong><br/><br/>
+                <b>Hive:</b> Hive #${currentHive}<br/>
                 <b>Diagnosis:</b> ${title}<br/><br/>
-                <b>Telemetry:</b> Brood Temp ${document.getElementById('valBrood').innerText} | Acoustic Peak ${document.getElementById('valAcoustics').innerText}<br/><br/>
+                <b>Readings:</b> Brood Temp ${document.getElementById('valBrood').innerText} | Audio Peak ${document.getElementById('valAcoustics').innerText}<br/><br/>
                 ${action}<br/><br/>
                 <font size="1" color="#656A76">IEEE HardwAIre Challenge • Model 2 Gateway</font>
             `;

@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Beevil Knievel — IEEE HardwAIre</title>
-    <meta name="description" content="HashiCorp-styled dark-canvas precision apiculture monitoring platform by Team Beevil Knievel.">
+    <meta name="description" content="Precision beehive monitoring built by Team Beevil Knievel for the IEEE HardwAIre Challenge.">
     <!-- Google Fonts: Inter font stack -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* ---------------------------------------------------------
-           HASHICORP DESIGN SYSTEM TOKENS - NO EMOJIS / PROFESSIONAL
+           HASHICORP DESIGN SYSTEM TOKENS - NATURAL HUMAN WRITING
            --------------------------------------------------------- */
         :root {
             --colors-canvas: #000000;
@@ -49,7 +49,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
         body { background-color: var(--colors-canvas); color: var(--colors-ink); line-height: 1.50; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-        /* Top Bar Navigation (Monochrome Chrome) */
+        /* Top Bar Navigation */
         .top-nav {
             position: sticky; top: 0; z-index: 100;
             height: 64px; background: var(--colors-canvas);
@@ -102,7 +102,7 @@
         .hero-section { padding: var(--spacing-section) 0 64px; }
         .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
         
-        .display-xl { font-size: 56px; font-weight: 700; line-height: 1.17; letter-spacing: -1.8px; color: var(--colors-ink); margin-bottom: 24px; }
+        .display-xl { font-size: 54px; font-weight: 700; line-height: 1.17; letter-spacing: -1.8px; color: var(--colors-ink); margin-bottom: 24px; }
         .body-lg { font-size: 18px; font-weight: 500; line-height: 1.69; color: var(--colors-ink-muted); margin-bottom: 32px; }
 
         .hero-illustration {
@@ -118,7 +118,7 @@
         /* Product Cards Grid (3-Up) */
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
 
-        /* Signature Product-Card Chromatic Identity Surfaces */
+        /* Product Card Surfaces */
         .product-card-terraform {
             background: var(--colors-product-terraform); color: var(--colors-ink);
             border-radius: var(--rounded-lg); padding: 24px;
@@ -133,7 +133,7 @@
         }
 
         .card-title { font-size: 22px; font-weight: 600; line-height: 1.18; letter-spacing: -0.4px; margin-bottom: 12px; }
-        .card-body { font-size: 14px; font-weight: 500; line-height: 1.71; opacity: 0.9; }
+        .card-body { font-size: 14px; font-weight: 500; line-height: 1.71; opacity: 0.95; }
 
         /* Product Pills */
         .product-pill {
@@ -197,7 +197,7 @@
             <span class="badge-ieee">IEEE HardwAIre</span>
         </div>
         <div class="nav-ctas">
-            <a href="download.html" class="button-primary">Download Mobile App →</a>
+            <a href="download.html" class="button-primary">Get the Mobile App →</a>
         </div>
     </header>
 
@@ -208,13 +208,13 @@
             <div class="hero-grid">
                 <div>
                     <span class="eyebrow eyebrow-vault">Team Beevil Knievel • IEEE HardwAIre Challenge</span>
-                    <h1 class="display-xl">Protect your hives 24/7 with edge AI.</h1>
+                    <h1 class="display-xl">Keep your bee hives healthy and catch swarms early.</h1>
                     <p class="body-lg">
-                        An edge-to-cloud precision apiculture platform. Model 1 Edge TinyML executes real-time acoustic & thermal anomaly classification in 8.4ms, while Model 2 Cloud AI delivers actionable health advisories directly to the farmer.
+                        We built a hardware sensor unit that listens to your hives and measures brood nest temperatures. When something goes wrong — like a swarm forming or a mite attack — your phone gets an immediate text alert.
                     </p>
                     <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                        <a href="download.html" class="button-primary">Download Mobile App →</a>
-                        <a href="#team" class="button-secondary">View Team Credentials</a>
+                        <a href="download.html" class="button-primary">Get the Mobile App →</a>
+                        <a href="#team" class="button-secondary">Meet the Team</a>
                     </div>
                 </div>
 
@@ -224,36 +224,36 @@
             </div>
         </section>
 
-        <!-- Product Identity Showcase (Signature HashiCorp Chromatic Surfaces) -->
+        <!-- System Architecture Section -->
         <section class="section-block">
-            <span class="eyebrow eyebrow-terraform">System Architecture & Multi-Tier Delivery</span>
-            <h2 class="display-lg">Built around per-product identity surfaces</h2>
+            <span class="eyebrow eyebrow-terraform">System Architecture</span>
+            <h2 class="display-lg">How the system monitors your apiary</h2>
 
             <div class="cards-grid">
-                <!-- Terraform Purple Card: Edge Hardware -->
+                <!-- Hardware Node -->
                 <div class="product-card-terraform">
                     <span class="product-pill">Hardware Node</span>
-                    <h3 class="card-title">Wio-E5 / STM32WL Node</h3>
+                    <h3 class="card-title">Wio-E5 / STM32WL Unit</h3>
                     <p class="card-body">
-                        Integrated LoRa SoC running Model 1 TinyML on-device. Dual DS18B20 1-Wire thermal probes + ICS-43434 MEMS audio sensor with solar trickle-charging.
+                        Mounts directly on the hive body. Uses twin DS18B20 temperature probes and an ICS-43434 MEMS microphone with a solar panel for battery charging.
                     </p>
                 </div>
 
-                <!-- Vault Yellow Card: Model 2 Cloud AI -->
+                <!-- Cloud Intelligence -->
                 <div class="product-card-vault">
                     <span class="product-pill">Cloud Intelligence</span>
-                    <h3 class="card-title">Model 2 Cloud AI Engine</h3>
+                    <h3 class="card-title">Cloud AI Engine</h3>
                     <p class="card-body">
-                        Diagnostic AI cross-referencing multi-day thermal delta-T (ΔT) and 200-400Hz acoustic FFT spectrum to detect queen swarming and Varroa mite attacks.
+                        Tracks temperature shifts (ΔT) and audio frequencies (200–400Hz) over time. Flags swarming, queen loss, and Varroa mite stress before you notice it during routine checks.
                     </p>
                 </div>
 
-                <!-- Waypoint Cyan Card: Farmer Alert Mobile App -->
+                <!-- Push Delivery -->
                 <div class="product-card-waypoint">
                     <span class="product-pill">Push Delivery</span>
-                    <h3 class="card-title">Farmer Mobile App</h3>
+                    <h3 class="card-title">Mobile Alerts</h3>
                     <p class="card-body">
-                        Instant Tier 1 WhatsApp/SMS push notifications + Tier 2 color-coded action cards.
+                        Sends immediate WhatsApp and SMS pings when a hive needs attention, along with color-coded status cards for quick field inspection.
                     </p>
                 </div>
             </div>
@@ -261,7 +261,7 @@
 
         <!-- Team Showcase Section -->
         <section class="section-block" id="team">
-            <span class="eyebrow eyebrow-nomad">Team & Institutional Credentials</span>
+            <span class="eyebrow eyebrow-nomad">Team & Background</span>
             <h2 class="display-lg">Team Beevil Knievel</h2>
             <p style="color:var(--colors-ink-muted); margin-bottom: 24px;">
                 School of Applied Sciences, Engineering & Technology (SASET) • Rashtriya Raksha University (RRU)
@@ -271,44 +271,44 @@
                 <div class="team-card">
                     <div class="team-avatar-box">AD</div>
                     <h3 class="team-name">Atharve Dahima</h3>
-                    <div class="team-role">Team Lead & Embedded AI</div>
-                    <p class="card-body">Leads hardware architecture, LoRa sub-GHz RF integration, and TinyML state-machine optimization on STM32WLE5.</p>
+                    <div class="team-role">Team Lead & Embedded Systems</div>
+                    <p class="card-body">Handles hardware layout, LoRa wireless transmission, and on-device signal processing on the STM32WLE5 chip.</p>
                 </div>
 
                 <div class="team-card">
                     <div class="team-avatar-box">LS</div>
                     <h3 class="team-name">Loshini Shankar</h3>
-                    <div class="team-role">Sensor Systems Lead</div>
-                    <p class="card-body">Specializes in 1-Wire thermal probes, MEMS acoustics calibration, and ultra-low IQ power management circuits.</p>
+                    <div class="team-role">Sensor Integration Lead</div>
+                    <p class="card-body">Focuses on temperature probe placement, microphone calibration, and outdoor battery power management.</p>
                 </div>
 
                 <div class="team-card">
                     <div class="team-avatar-box">SM</div>
                     <h3 class="team-name">Srajan Mishra</h3>
-                    <div class="team-role">Cloud AI & Logistics Lead</div>
-                    <p class="card-body">Oversees Model 2 Cloud AI diagnostic rule engine, multi-channel notification gateways, and field deployment testing.</p>
+                    <div class="team-role">Cloud Backend & Testing</div>
+                    <p class="card-body">Manages the diagnostic cloud rules, push notification delivery, and field testing setups.</p>
                 </div>
             </div>
 
             <!-- Mentor Box -->
             <div class="inst-box">
                 <div>
-                    <span class="eyebrow eyebrow-waypoint" style="margin-bottom:4px;">Faculty Guidance</span>
-                    <h3 style="font-size:20px; font-weight:600;">Faculty Mentor: Dr. Vishal Sharma</h3>
+                    <span class="eyebrow eyebrow-waypoint" style="margin-bottom:4px;">Faculty Mentor</span>
+                    <h3 style="font-size:20px; font-weight:600;">Dr. Vishal Sharma</h3>
                     <p style="color:var(--colors-ink-muted); font-size:14px; margin-top:4px;">SASET, Rashtriya Raksha University (RRU), Lavad, Dahegam, Gujarat 382305, India.</p>
                 </div>
-                <a href="download.html" class="button-primary">Download Mobile App →</a>
+                <a href="download.html" class="button-primary">Get the Mobile App →</a>
             </div>
         </section>
 
         <!-- CTA Banner -->
         <div class="cta-banner">
             <div>
-                <span class="eyebrow eyebrow-waypoint">Farmer Delivery Interface</span>
-                <h3 style="font-size:28px; font-weight:600; line-height:1.21; letter-spacing:-0.6px;">Get the Mobile Application</h3>
-                <p style="color:var(--colors-ink-muted); margin-top:4px;">Download Android APK (v2.4.0), join iOS TestFlight, or test the live web app preview.</p>
+                <span class="eyebrow eyebrow-waypoint">Mobile App</span>
+                <h3 style="font-size:28px; font-weight:600; line-height:1.21; letter-spacing:-0.6px;">Try the Mobile Application</h3>
+                <p style="color:var(--colors-ink-muted); margin-top:4px;">Download the Android APK (v2.4.0), join the iOS TestFlight beta, or test the interactive web preview.</p>
             </div>
-            <a href="download.html" class="button-primary">Go to Download Portal →</a>
+            <a href="download.html" class="button-primary">Download Portal →</a>
         </div>
 
     </main>
@@ -322,7 +322,7 @@
                 <span style="color:var(--colors-ink-subtle);">Faculty Mentor: Dr. Vishal Sharma • IEEE HardwAIre Challenge Phase 2</span>
             </div>
             <div>
-                <a href="download.html" style="color:var(--colors-accent-blue); text-decoration:none; font-weight:600;">Download Mobile App →</a>
+                <a href="download.html" style="color:var(--colors-accent-blue); text-decoration:none; font-weight:600;">Get the Mobile App →</a>
             </div>
         </div>
     </footer>
