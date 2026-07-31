@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Hive Monitor | Team Beevil Knievel — IEEE HardwAIre</title>
+    <meta name="description" content="HashiCorp-styled dark-canvas precision apiculture monitoring platform by Team Beevil Knievel.">
+    <!-- Google Fonts: Inter font stack -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ---------------------------------------------------------
+           HASHICORP DESIGN SYSTEM TOKENS - NO EMOJIS / PROFESSIONAL
+           --------------------------------------------------------- */
+        :root {
+            --colors-canvas: #000000;
+            --colors-surface-1: #161B26;
+            --colors-surface-2: #252D3D;
+            --colors-surface-3: #333D52;
+            --colors-hairline: rgba(178, 182, 189, 0.15);
+            --colors-hairline-soft: rgba(178, 182, 189, 0.06);
+            --colors-inverse-canvas: #FFFFFF;
+
+            --colors-ink: #FFFFFF;
+            --colors-ink-muted: #B2B6BD;
+            --colors-ink-subtle: #656A76;
+            --colors-inverse-ink: #000000;
+
+            --colors-product-terraform: #844FBA;
+            --colors-product-vault: #FFC107;
+            --colors-product-consul: #E0384D;
+            --colors-product-waypoint: #00BCF2;
+            --colors-product-vagrant: #1868F2;
+            --colors-product-nomad: #00A86B;
+            --colors-product-boundary: #F26522;
+            --colors-accent-blue: #00BCF2;
+
+            --rounded-xs: 4px;
+            --rounded-sm: 6px;
+            --rounded-md: 8px;     /* HashiCorp 8px Developer CTA Radius */
+            --rounded-lg: 12px;
+            --rounded-xxl: 24px;
+            --rounded-pill: 9999px;
+
+            --spacing-section: 96px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        body { background-color: var(--colors-canvas); color: var(--colors-ink); line-height: 1.50; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+        /* Top Bar Navigation (Monochrome Chrome) */
+        .top-nav {
+            position: sticky; top: 0; z-index: 100;
+            height: 64px; background: var(--colors-canvas);
+            border-bottom: 1px solid var(--colors-hairline);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 32px;
+        }
+        .nav-brand { display: flex; align-items: center; gap: 12px; }
+        .nav-brand-logo {
+            width: 32px; height: 32px; background: var(--colors-surface-1);
+            border: 1px solid var(--colors-hairline); border-radius: var(--rounded-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 800; color: var(--colors-product-vault);
+        }
+        .nav-brand h1 { font-size: 15px; font-weight: 700; color: var(--colors-ink); letter-spacing: -0.4px; }
+        .badge-ieee {
+            background: var(--colors-surface-2); color: var(--colors-ink-muted);
+            border: 1px solid var(--colors-hairline); padding: 3px 10px;
+            border-radius: var(--rounded-pill); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px;
+        }
+
+        .nav-ctas { display: flex; align-items: center; gap: 12px; }
+        .button-primary {
+            background: var(--colors-inverse-canvas); color: var(--colors-inverse-ink);
+            padding: 10px 18px; border-radius: var(--rounded-md); font-size: 14px; font-weight: 600;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s ease;
+        }
+        .button-primary:hover { background: #E2E8F0; }
+        
+        .button-secondary {
+            background: var(--colors-surface-2); color: var(--colors-ink);
+            border: 1px solid var(--colors-hairline); padding: 10px 18px;
+            border-radius: var(--rounded-md); font-size: 14px; font-weight: 600;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s ease;
+        }
+        .button-secondary:hover { background: var(--colors-surface-3); }
+
+        /* Container & Eyebrow Typography */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+        .eyebrow {
+            font-size: 12px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.6px; line-height: 1.23; margin-bottom: 12px; display: block;
+        }
+        .eyebrow-terraform { color: var(--colors-product-terraform); }
+        .eyebrow-vault { color: var(--colors-product-vault); }
+        .eyebrow-waypoint { color: var(--colors-product-waypoint); }
+        .eyebrow-nomad { color: var(--colors-product-nomad); }
+
+        /* Hero Section */
+        .hero-section { padding: var(--spacing-section) 0 64px; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+        
+        .display-xl { font-size: 56px; font-weight: 700; line-height: 1.17; letter-spacing: -1.8px; color: var(--colors-ink); margin-bottom: 24px; }
+        .body-lg { font-size: 18px; font-weight: 500; line-height: 1.69; color: var(--colors-ink-muted); margin-bottom: 32px; }
+
+        .hero-illustration {
+            background: var(--colors-surface-1); border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-lg); padding: 16px; overflow: hidden;
+        }
+        .hero-illustration img { width: 100%; border-radius: var(--rounded-md); display: block; }
+
+        /* Section Block Rhythm */
+        .section-block { padding: 64px 0; border-top: 1px solid var(--colors-hairline-soft); }
+        .display-lg { font-size: 36px; font-weight: 700; line-height: 1.18; letter-spacing: -1.0px; color: var(--colors-ink); margin-bottom: 16px; }
+
+        /* Product Cards Grid (3-Up) */
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+
+        /* Signature Product-Card Chromatic Identity Surfaces */
+        .product-card-terraform {
+            background: var(--colors-product-terraform); color: var(--colors-ink);
+            border-radius: var(--rounded-lg); padding: 24px;
+        }
+        .product-card-vault {
+            background: var(--colors-product-vault); color: var(--colors-inverse-ink);
+            border-radius: var(--rounded-lg); padding: 24px;
+        }
+        .product-card-waypoint {
+            background: var(--colors-product-waypoint); color: var(--colors-inverse-ink);
+            border-radius: var(--rounded-lg); padding: 24px;
+        }
+
+        .card-title { font-size: 22px; font-weight: 600; line-height: 1.18; letter-spacing: -0.4px; margin-bottom: 12px; }
+        .card-body { font-size: 14px; font-weight: 500; line-height: 1.71; opacity: 0.9; }
+
+        /* Product Pills */
+        .product-pill {
+            display: inline-block; background: rgba(0,0,0,0.2); color: inherit;
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
+            padding: 4px 10px; border-radius: var(--rounded-pill); margin-bottom: 16px;
+        }
+
+        /* Team Showcase Grid */
+        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+        .team-card {
+            background: var(--colors-surface-1); border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-lg); padding: 24px; text-align: left;
+        }
+        .team-avatar-box {
+            width: 44px; height: 44px; background: var(--colors-surface-2); border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-md); display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 700; color: var(--colors-product-waypoint); margin-bottom: 16px;
+        }
+        .team-name { font-size: 18px; font-weight: 600; color: var(--colors-ink); margin-bottom: 4px; }
+        .team-role { font-size: 12px; font-weight: 600; color: var(--colors-product-waypoint); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.6px; }
+
+        /* Institutional Card */
+        .inst-box {
+            background: var(--colors-surface-1); border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-lg); padding: 32px; margin-top: 32px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: var(--colors-surface-1); border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-xxl); padding: 48px; margin: 64px 0;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--colors-hairline); padding: 64px 0 32px;
+            color: var(--colors-ink-muted); font-size: 13px; line-height: 1.38;
+        }
+
+        @media (max-width: 1024px) {
+            .cards-grid, .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-grid { grid-template-columns: 1fr; }
+            .display-xl { font-size: 40px; }
+        }
+        @media (max-width: 640px) {
+            .cards-grid, .team-grid { grid-template-columns: 1fr; }
+            .cta-banner { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Header -->
+    <header class="top-nav">
+        <div class="nav-brand">
+            <div class="nav-brand-logo">SHM</div>
+            <h1>Smart Hive Monitor</h1>
+            <span class="badge-ieee">IEEE HardwAIre</span>
+        </div>
+        <div class="nav-ctas">
+            <a href="download.html" class="button-primary">Download Mobile App →</a>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-grid">
+                <div>
+                    <span class="eyebrow eyebrow-vault">Team Beevil Knievel • IEEE HardwAIre Challenge</span>
+                    <h1 class="display-xl">Protect your hives 24/7 with edge AI.</h1>
+                    <p class="body-lg">
+                        An edge-to-cloud precision apiculture platform. Model 1 Edge TinyML executes real-time acoustic & thermal anomaly classification in 8.4ms, while Model 2 Cloud AI delivers actionable health advisories directly to the farmer.
+                    </p>
+                    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                        <a href="download.html" class="button-primary">Download Mobile App →</a>
+                        <a href="#team" class="button-secondary">View Team Credentials</a>
+                    </div>
+                </div>
+
+                <div class="hero-illustration">
+                    <img src="assets/hero_product.jpg" alt="Smart Hive Hardware Unit">
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Identity Showcase (Signature HashiCorp Chromatic Surfaces) -->
+        <section class="section-block">
+            <span class="eyebrow eyebrow-terraform">System Architecture & Multi-Tier Delivery</span>
+            <h2 class="display-lg">Built around per-product identity surfaces</h2>
+
+            <div class="cards-grid">
+                <!-- Terraform Purple Card: Edge Hardware -->
+                <div class="product-card-terraform">
+                    <span class="product-pill">Hardware Node</span>
+                    <h3 class="card-title">Wio-E5 / STM32WL Node</h3>
+                    <p class="card-body">
+                        Integrated LoRa SoC running Model 1 TinyML on-device. Dual DS18B20 1-Wire thermal probes + ICS-43434 MEMS audio sensor with solar trickle-charging.
+                    </p>
+                </div>
+
+                <!-- Vault Yellow Card: Model 2 Cloud AI -->
+                <div class="product-card-vault">
+                    <span class="product-pill">Cloud Intelligence</span>
+                    <h3 class="card-title">Model 2 Cloud AI Engine</h3>
+                    <p class="card-body">
+                        Diagnostic AI cross-referencing multi-day thermal delta-T ($\Delta T$) and 200-400Hz acoustic FFT spectrum to detect queen swarming and Varroa mite attacks.
+                    </p>
+                </div>
+
+                <!-- Waypoint Cyan Card: Farmer Alert Mobile App -->
+                <div class="product-card-waypoint">
+                    <span class="product-pill">Push Delivery</span>
+                    <h3 class="card-title">Farmer Mobile App</h3>
+                    <p class="card-body">
+                        Instant Tier 1 WhatsApp/SMS push notifications + Tier 2 color-coded action cards + Gujarati, Hindi, and English vernacular support.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Showcase Section -->
+        <section class="section-block" id="team">
+            <span class="eyebrow eyebrow-nomad">Team & Institutional Credentials</span>
+            <h2 class="display-lg">Team Beevil Knievel</h2>
+            <p style="color:var(--colors-ink-muted); margin-bottom: 24px;">
+                School of Applied Sciences, Engineering & Technology (SASET) • Rashtriya Raksha University (RRU)
+            </p>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar-box">AD</div>
+                    <h3 class="team-name">Atharve Dahima</h3>
+                    <div class="team-role">Team Lead & Embedded AI</div>
+                    <p class="card-body">Leads hardware architecture, LoRa sub-GHz RF integration, and TinyML state-machine optimization on STM32WLE5.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar-box">LS</div>
+                    <h3 class="team-name">Loshini Shankar</h3>
+                    <p class="team-role">Sensor Systems Lead</p>
+                    <p class="card-body">Specializes in 1-Wire thermal probes, MEMS acoustics calibration, and ultra-low IQ power management circuits.</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar-box">SM</div>
+                    <h3 class="team-name">Srajan Mishra</h3>
+                    <p class="team-role">Cloud AI & Logistics Lead</p>
+                    <p class="card-body">Oversees Model 2 Cloud AI diagnostic rule engine, multi-channel notification gateways, and field deployment testing.</p>
+                </div>
+            </div>
+
+            <!-- Mentor Box -->
+            <div class="inst-box">
+                <div>
+                    <span class="eyebrow eyebrow-waypoint" style="margin-bottom:4px;">Faculty Guidance</span>
+                    <h3 style="font-size:20px; font-weight:600;">Faculty Mentor: Dr. Vishal Sharma</h3>
+                    <p style="color:var(--colors-ink-muted); font-size:14px; margin-top:4px;">SASET, Rashtriya Raksha University (RRU), Lavad, Dahegam, Gujarat 382305, India.</p>
+                </div>
+                <a href="download.html" class="button-primary">Download Mobile App →</a>
+            </div>
+        </section>
+
+        <!-- CTA Banner -->
+        <div class="cta-banner">
+            <div>
+                <span class="eyebrow eyebrow-waypoint">Farmer Delivery Interface</span>
+                <h3 style="font-size:28px; font-weight:600; line-height:1.21; letter-spacing:-0.6px;">Get the Smart Hive Mobile Application</h3>
+                <p style="color:var(--colors-ink-muted); margin-top:4px;">Download Android APK (v2.4.0), join iOS TestFlight, or test the live web app preview.</p>
+            </div>
+            <a href="download.html" class="button-primary">Go to Download Portal →</a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer container">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+            <div>
+                <strong>Smart Hive Monitor</strong> • Team Beevil Knievel (SASET, Rashtriya Raksha University)
+                <br/>
+                <span style="color:var(--colors-ink-subtle);">Faculty Mentor: Dr. Vishal Sharma • IEEE HardwAIre Challenge Phase 2</span>
+            </div>
+            <div>
+                <a href="download.html" style="color:var(--colors-accent-blue); text-decoration:none; font-weight:600;">Download Mobile App →</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
