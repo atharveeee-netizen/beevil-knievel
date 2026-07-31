@@ -1,20 +1,7 @@
 /* ==========================================================================
    Beevil Knievel — Shared Component Injection & Interactivity Engine
+   ALL CONSTANTS MUST BE DEFINED BEFORE initApp() IS CALLED
    ========================================================================== */
-
-function initApp() {
-    injectNavigation();
-    injectFooter();
-    injectDemoModal();
-    initInteractivity();
-}
-
-// Guaranteed execution even if DOMContentLoaded already fired
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
-    initApp();
-}
 
 // Helper: Check active page
 function isPage(keyword) {
@@ -23,12 +10,12 @@ function isPage(keyword) {
     return path.includes(keyword) ? 'active' : '';
 }
 
-// Global Navigation HTML Template
+// Global Navigation HTML — Evaluated once at parse time with correct isPage() context
 const NAV_HTML = `
 <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-        <img src="assets/bk_yellow_logo.png" alt="bK Logo" class="nav-logo-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
-        <div class="nav-logo-fallback" style="display:none; width:36px; height:36px; background:#121215; border:1px solid #F5A623; border-radius:8px; align-items:center; justify-content:center; font-family:'Bungee', sans-serif; font-size:18px; color:#F5A623;">bK</div>
+        <img src="assets/bk_yellow_logo.png" alt="bK Logo" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="nav-logo-fallback">bK</div>
         <div class="nav-logo-text">Beevil Knievel</div>
     </a>
 
@@ -45,30 +32,22 @@ const NAV_HTML = `
     <div class="nav-cta">
         <button class="btn btn-amber btn-sm open-demo-btn">Try Web Demo</button>
         <a href="store.html" class="btn btn-secondary btn-sm">Buy Now</a>
-        <button class="nav-menu-btn" aria-label="Toggle menu">
-            <span></span>
-        </button>
+        <button class="nav-menu-btn" aria-label="Toggle menu"><span></span></button>
     </div>
 </div>
 `;
 
-// Global Footer HTML Template
 const FOOTER_HTML = `
 <div class="container footer-grid">
     <div>
-        <a href="index.html" class="nav-logo" style="margin-bottom: 24px;">
-            <img src="assets/bk_yellow_logo.png" alt="bK Logo" class="nav-logo-img" onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='flex';">
-            <div class="nav-logo-fallback" style="display:none; width:36px; height:36px; background:#121215; border:1px solid #F5A623; border-radius:8px; align-items:center; justify-content:center; font-family:'Bungee', sans-serif; font-size:18px; color:#F5A623;">bK</div>
+        <a href="index.html" class="nav-logo" style="margin-bottom:24px;">
+            <img src="assets/bk_yellow_logo.png" alt="bK Logo" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="nav-logo-fallback">bK</div>
             <div class="nav-logo-text">Beevil Knievel</div>
         </a>
-        <p class="footer-brand-desc">
-            Industrial Edge AI hardware nodes for precision apiculture. Predict swarms 36h in advance and eliminate colony loss.
-        </p>
-        <p class="body-sm text-gradient-amber font-mono" style="margin-top: 16px;">
-            IP68 Sub-GHz Telemetry Architecture
-        </p>
+        <p class="footer-brand-desc">Industrial Edge AI hardware nodes for precision apiculture. Predict swarms 36h in advance and eliminate colony loss.</p>
+        <p class="body-sm" style="margin-top:16px; color:var(--color-amber); font-family:monospace;">IP68 Sub-GHz Telemetry Architecture</p>
     </div>
-
     <div>
         <h4 class="footer-heading">Ecosystem</h4>
         <ul class="footer-links">
@@ -79,7 +58,6 @@ const FOOTER_HTML = `
             <li><a href="accessories.html">Accessories</a></li>
         </ul>
     </div>
-
     <div>
         <h4 class="footer-heading">Support & Docs</h4>
         <ul class="footer-links">
@@ -89,90 +67,160 @@ const FOOTER_HTML = `
             <li><a href="privacy.html">Privacy & Telemetry</a></li>
         </ul>
     </div>
-
     <div>
         <h4 class="footer-heading">Company</h4>
         <ul class="footer-links">
             <li><a href="about.html">About & Founding Team</a></li>
             <li><a href="investors.html">Investor Relations</a></li>
             <li><a href="research.html">Acoustic Research</a></li>
-            <li><a href="about.html#contact">Contact Us</a></li>
+            <li><a href="about.html">Contact Us</a></li>
         </ul>
     </div>
 </div>
-
 <div class="container footer-bottom">
     <div>&copy; 2026 Beevil Knievel Commercial Startup Inc. All Rights Reserved.</div>
-    <div style="display:flex; gap: 24px;">
+    <div style="display:flex; gap:24px;">
         <a href="privacy.html">Privacy</a>
-        <a href="privacy.html#terms">Terms of SLA</a>
+        <a href="privacy.html">Terms of SLA</a>
         <a href="support.html">Contact</a>
     </div>
 </div>
 `;
 
-// Global Modal HTML Template for Try Web Demo
 const DEMO_MODAL_HTML = `
 <div id="demo-modal" class="modal-backdrop">
     <div class="modal-content">
-        <button id="close-demo-modal" class="modal-close" aria-label="Close modal">&times;</button>
-        
+        <button id="close-demo-modal" class="modal-close" aria-label="Close">&times;</button>
         <div class="modal-header">
             <span class="badge badge-amber mb-8">Farmer Companion App Simulator</span>
-            <h3 class="heading-small" id="demo-modal-title">Live Field Telemetry & AI Diagnostics</h3>
+            <h3 class="heading-small">Live Field Telemetry & AI Diagnostics</h3>
         </div>
-
-        <div class="modal-body flex justify-center py-16">
+        <div class="modal-body flex justify-center" style="padding: 24px 0;">
             <div class="phone-mockup">
                 <div class="phone-notch"></div>
                 <div class="phone-screen" id="demo-phone-screen">
-                    <div id="demo-screen-content" style="padding-top: 24px; transition: opacity 0.3s ease;">
-                        <!-- Dynamic Content Injected Here -->
-                    </div>
-                    
-                    <!-- Bottom Nav -->
+                    <div id="demo-screen-content" style="padding-top:24px; transition:opacity 0.25s ease;"></div>
                     <div class="phone-nav-bar">
-                        <div class="phone-nav-item active" id="pnav-home" onclick="selectDemoStep(0)">
-                            <div class="pnav-icon">📊</div>
-                            <span>Dash</span>
-                        </div>
-                        <div class="phone-nav-item" id="pnav-hives" onclick="selectDemoStep(1)">
-                            <div class="pnav-icon">🐝</div>
-                            <span>Hives</span>
-                        </div>
-                        <div class="phone-nav-item" id="pnav-alerts" onclick="selectDemoStep(2)">
-                            <div class="pnav-icon">🔔</div>
-                            <span>Alerts</span>
-                        </div>
-                        <div class="phone-nav-item" id="pnav-ai" onclick="selectDemoStep(3)">
-                            <div class="pnav-icon">🧠</div>
-                            <span>AI Engine</span>
-                        </div>
-                        <div class="phone-nav-item" id="pnav-settings" onclick="selectDemoStep(4)">
-                            <div class="pnav-icon">⚙️</div>
-                            <span>Status</span>
-                        </div>
+                        <div class="phone-nav-item active" id="pnav-home" onclick="selectDemoStep(0)"><div class="pnav-icon">📊</div><span>Dash</span></div>
+                        <div class="phone-nav-item" id="pnav-hives" onclick="selectDemoStep(1)"><div class="pnav-icon">🐝</div><span>Hives</span></div>
+                        <div class="phone-nav-item" id="pnav-alerts" onclick="selectDemoStep(2)"><div class="pnav-icon">🔔</div><span>Alerts</span></div>
+                        <div class="phone-nav-item" id="pnav-ai" onclick="selectDemoStep(3)"><div class="pnav-icon">🧠</div><span>AI</span></div>
+                        <div class="phone-nav-item" id="pnav-settings" onclick="selectDemoStep(4)"><div class="pnav-icon">⚙️</div><span>Status</span></div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="modal-footer flex justify-between items-center">
-            <span class="body-sm" id="demo-step-indicator" style="font-family: 'JetBrains Mono', monospace; color: var(--color-amber); font-size: 12px;">STEP 1 / 5 — Live Dashboard</span>
-            <a href="download.html" class="btn btn-amber btn-sm">Download Native App (APK)</a>
+            <span id="demo-step-indicator" style="font-family:monospace; color:var(--color-amber); font-size:12px;">STEP 1 / 5 — Live Dashboard</span>
+            <a href="download.html" class="btn btn-amber btn-sm">Download App (APK)</a>
         </div>
     </div>
 </div>
 `;
 
+const DEMO_STEPS = [
+    {
+        title: "Live Hive Dashboard", tab: "pnav-home",
+        html: `<div style="text-align:left;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <div><div style="font-size:11px;color:var(--color-amber);font-weight:700;text-transform:uppercase;">North Yard • Hive #01</div>
+                <h4 style="font-size:16px;font-weight:700;color:var(--color-ink);">Colony Alpha</h4></div>
+                <span style="background:rgba(16,185,129,0.15);color:var(--color-success);padding:3px 8px;border-radius:12px;font-size:10px;font-weight:700;">ONLINE</span>
+            </div>
+            <div style="background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:12px;padding:14px;margin-bottom:10px;">
+                <div style="font-size:11px;color:var(--color-ink-tertiary);">Brood Nest Core Temp</div>
+                <div style="font-size:30px;font-weight:800;color:var(--color-ink);">35.2 °C</div>
+                <div style="font-size:10px;color:var(--color-success);font-weight:600;">✓ Optimal Thermal Regulation</div>
+            </div>
+            <div style="background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:12px;padding:10px;display:flex;justify-content:space-between;">
+                <div><span style="font-size:10px;color:var(--color-ink-tertiary);">Solar Battery</span><div style="font-weight:700;font-size:13px;">98% (+4.2V)</div></div>
+                <div><span style="font-size:10px;color:var(--color-ink-tertiary);">Sub-GHz Signal</span><div style="font-weight:700;font-size:13px;color:var(--color-amber);">-84 dBm</div></div>
+            </div></div>`
+    },
+    {
+        title: "Apiary Yard Overview", tab: "pnav-hives",
+        html: `<div style="text-align:left;">
+            <h4 style="font-size:15px;font-weight:700;color:var(--color-ink);margin-bottom:10px;">Yard Hives (4 Nodes Active)</h4>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="background:var(--color-surface-2);border:1px solid var(--color-border);padding:10px 12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+                    <div><strong style="font-size:12px;color:var(--color-ink);">Hive #01 (Alpha)</strong><div style="font-size:10px;color:var(--color-ink-tertiary);">35.2°C • 98% Battery</div></div>
+                    <span style="color:var(--color-success);font-weight:700;font-size:11px;">Healthy</span>
+                </div>
+                <div style="background:var(--color-surface-2);border:1px solid var(--color-border);padding:10px 12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+                    <div><strong style="font-size:12px;color:var(--color-ink);">Hive #02 (Beta)</strong><div style="font-size:10px;color:var(--color-ink-tertiary);">34.8°C • 95% Battery</div></div>
+                    <span style="color:var(--color-success);font-weight:700;font-size:11px;">Healthy</span>
+                </div>
+                <div style="background:var(--color-surface-2);border:1px solid rgba(245,166,35,0.4);padding:10px 12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+                    <div><strong style="font-size:12px;color:var(--color-amber);">Hive #03 (Gamma)</strong><div style="font-size:10px;color:var(--color-ink-tertiary);">38.1°C • ⚠ Pre-Swarm</div></div>
+                    <span style="color:var(--color-amber);font-weight:700;font-size:11px;">Warning</span>
+                </div>
+            </div></div>`
+    },
+    {
+        title: "Acoustic Swarm Alert", tab: "pnav-alerts",
+        html: `<div style="text-align:left;">
+            <div style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:14px;margin-bottom:12px;">
+                <div style="display:flex;gap:6px;align-items:center;color:var(--color-danger);font-weight:700;font-size:11px;margin-bottom:6px;">⚠️ CRITICAL PRE-SWARM ALERT</div>
+                <h4 style="font-size:14px;font-weight:700;color:var(--color-ink);margin-bottom:4px;">Queen Piping Detected (Hive #03)</h4>
+                <p style="font-size:11px;color:var(--color-ink-secondary);">FFT peak at 315 Hz. Pre-swarm probability: 94%. Action recommended within 24h.</p>
+            </div>
+            <div style="background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:10px;padding:10px;">
+                <div style="font-size:10px;font-weight:700;color:var(--color-amber);margin-bottom:2px;">Suggested Action</div>
+                <p style="font-size:10px;color:var(--color-ink-secondary);">Inspect brood frames to split queen cells or set swarm trap.</p>
+            </div></div>`
+    },
+    {
+        title: "AI Diagnostics Engine", tab: "pnav-ai",
+        html: `<div style="text-align:left;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <div style="width:26px;height:26px;border-radius:6px;background:var(--color-amber-glow);color:var(--color-amber);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;">AI</div>
+                <h4 style="font-size:14px;font-weight:700;color:var(--color-ink);">Neural Hive Analytics</h4>
+            </div>
+            <div style="background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:10px;padding:10px;margin-bottom:8px;">
+                <div style="font-size:10px;color:var(--color-ink-tertiary);">Varroa Mite Stress Index</div>
+                <div style="font-weight:700;color:var(--color-success);font-size:13px;">LOW (0.4%) — No treatment required</div>
+            </div>
+            <div style="background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:10px;padding:10px;">
+                <div style="font-size:10px;color:var(--color-ink-tertiary);">Honey Flow Forecast</div>
+                <div style="font-weight:700;color:var(--color-amber);font-size:13px;">+1.4 kg / day expected peak</div>
+            </div></div>`
+    },
+    {
+        title: "Node Telemetry Status", tab: "pnav-settings",
+        html: `<div style="text-align:left;">
+            <h4 style="font-size:14px;font-weight:700;color:var(--color-ink);margin-bottom:10px;">Hardware Node Diagnostics</h4>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="background:var(--color-surface-2);padding:8px 10px;border-radius:6px;font-size:10px;display:flex;justify-content:space-between;"><span style="color:var(--color-ink-tertiary);">Firmware</span><span style="font-family:monospace;color:var(--color-amber);">v2.4.0-edge</span></div>
+                <div style="background:var(--color-surface-2);padding:8px 10px;border-radius:6px;font-size:10px;display:flex;justify-content:space-between;"><span style="color:var(--color-ink-tertiary);">Solar Charger</span><span style="color:var(--color-success);font-weight:600;">+4.2V Active</span></div>
+                <div style="background:var(--color-surface-2);padding:8px 10px;border-radius:6px;font-size:10px;display:flex;justify-content:space-between;"><span style="color:var(--color-ink-tertiary);">IP68 Ingress</span><span style="color:var(--color-success);font-weight:600;">100% Sealed</span></div>
+                <div style="background:var(--color-surface-2);padding:8px 10px;border-radius:6px;font-size:10px;display:flex;justify-content:space-between;"><span style="color:var(--color-ink-tertiary);">LoRaWAN Gateway</span><span style="color:var(--color-info);font-weight:600;">Connected (11.4 km)</span></div>
+            </div></div>`
+    }
+];
+
+// ---- NOW safe to define initApp (all consts already declared above) ----
+function initApp() {
+    injectNavigation();
+    injectFooter();
+    injectDemoModal();
+    initInteractivity();
+}
+
+// Execute after DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
+
 function injectNavigation() {
-    const navElem = document.getElementById('bk-nav');
-    if (navElem) navElem.innerHTML = NAV_HTML;
+    const el = document.getElementById('bk-nav');
+    if (el) el.innerHTML = NAV_HTML;
 }
 
 function injectFooter() {
-    const footerElem = document.getElementById('bk-footer');
-    if (footerElem) footerElem.innerHTML = FOOTER_HTML;
+    const el = document.getElementById('bk-footer');
+    if (el) el.innerHTML = FOOTER_HTML;
 }
 
 function injectDemoModal() {
@@ -182,211 +230,61 @@ function injectDemoModal() {
 }
 
 function initInteractivity() {
-    // Mobile Nav Toggle
+    // Mobile Nav Toggle (class-based, no inline style conflicts)
     const menuBtn = document.querySelector('.nav-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     if (menuBtn && navLinks) {
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('mobile-open');
-        });
-        // Close menu when any nav link is clicked
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => navLinks.classList.remove('mobile-open'));
-        });
+        menuBtn.addEventListener('click', () => navLinks.classList.toggle('mobile-open'));
+        navLinks.querySelectorAll('a').forEach(link =>
+            link.addEventListener('click', () => navLinks.classList.remove('mobile-open'))
+        );
     }
 
-    // Accordion Logic
-    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
-        trigger.addEventListener('click', () => {
-            trigger.parentElement.classList.toggle('open');
+    // Accordion
+    document.querySelectorAll('.accordion-trigger').forEach(trigger =>
+        trigger.addEventListener('click', () => trigger.parentElement.classList.toggle('open'))
+    );
+
+    // Scroll Reveal
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
         });
-    });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Scroll Reveal Observer
-    initScrollAnimations();
-
-    // Setup Try Web Demo Modal & Simulation Loop
+    // Demo simulator
     setupDemoSimulator();
 
-    // Setup PWA Install Listener
+    // PWA install
     setupPwaInstall();
 }
 
-// Scroll Reveal
-function initScrollAnimations() {
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                obs.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-}
-
-// Automated Smartphone App Walkthrough Demo Loop
+// Demo Simulator
 let demoInterval = null;
 let currentDemoStep = 0;
 let autoPauseTimeout = null;
 
-const DEMO_STEPS = [
-    {
-        title: "Live Hive Dashboard",
-        tab: "pnav-home",
-        html: `
-            <div style="text-align:left;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                    <div>
-                        <div style="font-size:11px; color:var(--color-amber); font-weight:700; text-transform:uppercase;">North Yard • Hive #01</div>
-                        <h4 style="font-size:16px; font-weight:700; color:var(--color-ink);">Colony Alpha Telemetry</h4>
-                    </div>
-                    <span style="background:rgba(16,185,129,0.15); color:var(--color-success); padding:3px 8px; border-radius:12px; font-size:10px; font-weight:700;">ONLINE</span>
-                </div>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:12px; padding:14px; margin-bottom:10px;">
-                    <div style="font-size:11px; color:var(--color-ink-tertiary);">Brood Nest Core Temp</div>
-                    <div style="font-size:30px; font-weight:800; color:var(--color-ink);">35.2 °C</div>
-                    <div style="font-size:10px; color:var(--color-success); font-weight:600;">✓ Optimal Thermal Regulation</div>
-                </div>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:12px; padding:10px; display:flex; justify-content:space-between;">
-                    <div><span style="font-size:10px; color:var(--color-ink-tertiary);">Solar Battery</span><div style="font-weight:700; font-size:13px; color:var(--color-ink);">98% (+4.2V)</div></div>
-                    <div><span style="font-size:10px; color:var(--color-ink-tertiary);">Sub-GHz Signal</span><div style="font-weight:700; font-size:13px; color:var(--color-amber);">-84 dBm</div></div>
-                </div>
-            </div>
-        `
-    },
-    {
-        title: "Apiary Yard Overview",
-        tab: "pnav-hives",
-        html: `
-            <div style="text-align:left;">
-                <h4 style="font-size:15px; font-weight:700; color:var(--color-ink); margin-bottom:10px;">Yard Hives (4 Nodes Active)</h4>
-                <div style="display:flex; flex-direction:column; gap:8px;">
-                    <div style="background:var(--color-surface-2); border:1px solid var(--color-border); padding:10px 12px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <div><strong style="font-size:12px; color:var(--color-ink);">Hive #01 (Alpha)</strong><div style="font-size:10px; color:var(--color-ink-tertiary);">35.2°C • 98% Battery</div></div>
-                        <span style="color:var(--color-success); font-weight:700; font-size:11px;">Healthy</span>
-                    </div>
-                    <div style="background:var(--color-surface-2); border:1px solid var(--color-border); padding:10px 12px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <div><strong style="font-size:12px; color:var(--color-ink);">Hive #02 (Beta)</strong><div style="font-size:10px; color:var(--color-ink-tertiary);">34.8°C • 95% Battery</div></div>
-                        <span style="color:var(--color-success); font-weight:700; font-size:11px;">Healthy</span>
-                    </div>
-                    <div style="background:var(--color-surface-2); border:1px solid rgba(245,166,35,0.4); padding:10px 12px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <div><strong style="font-size:12px; color:var(--color-amber);">Hive #03 (Gamma)</strong><div style="font-size:10px; color:var(--color-ink-tertiary);">38.1°C • Pre-Swarm Warning</div></div>
-                        <span style="color:var(--color-amber); font-weight:700; font-size:11px;">Warning</span>
-                    </div>
-                </div>
-            </div>
-        `
-    },
-    {
-        title: "Acoustic Swarm Alert",
-        tab: "pnav-alerts",
-        html: `
-            <div style="text-align:left;">
-                <div style="background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3); border-radius:12px; padding:14px; margin-bottom:12px;">
-                    <div style="display:flex; gap:6px; align-items:center; color:var(--color-danger); font-weight:700; font-size:11px; margin-bottom:6px;">
-                        <span>⚠️</span> CRITICAL PRE-SWARM ALERT
-                    </div>
-                    <h4 style="font-size:14px; font-weight:700; color:var(--color-ink); margin-bottom:4px;">Queen Piping Detected (Hive #03)</h4>
-                    <p style="font-size:11px; color:var(--color-ink-secondary);">FFT frequency peak at 315 Hz. Pre-swarm probability: 94%. Action recommended within 24 hours.</p>
-                </div>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:10px; padding:10px;">
-                    <div style="font-size:10px; font-weight:700; color:var(--color-amber); margin-bottom:2px;">Suggested Action</div>
-                    <p style="font-size:10px; color:var(--color-ink-secondary);">Inspect brood box frames to split queen cells or set swarm trap.</p>
-                </div>
-            </div>
-        `
-    },
-    {
-        title: "AI Diagnostics Engine",
-        tab: "pnav-ai",
-        html: `
-            <div style="text-align:left;">
-                <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-                    <div style="width:26px; height:26px; border-radius:6px; background:var(--color-amber-glow); color:var(--color-amber); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11px;">AI</div>
-                    <h4 style="font-size:14px; font-weight:700; color:var(--color-ink);">Neural Hive Analytics</h4>
-                </div>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:10px; padding:10px; margin-bottom:8px;">
-                    <div style="font-size:10px; color:var(--color-ink-tertiary);">Varroa Mite Stress Index</div>
-                    <div style="font-weight:700; color:var(--color-success); font-size:13px;">LOW (0.4%) — No treatment required</div>
-                </div>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:10px; padding:10px;">
-                    <div style="font-size:10px; color:var(--color-ink-tertiary);">Honey Flow Forecast</div>
-                    <div style="font-weight:700; color:var(--color-amber); font-size:13px;">+1.4 kg / day expected peak</div>
-                </div>
-            </div>
-        `
-    },
-    {
-        title: "Node Telemetry Status",
-        tab: "pnav-settings",
-        html: `
-            <div style="text-align:left;">
-                <h4 style="font-size:14px; font-weight:700; color:var(--color-ink); margin-bottom:10px;">Hardware Node Diagnostics</h4>
-                <div style="display:flex; flex-direction:column; gap:6px;">
-                    <div style="background:var(--color-surface-2); padding:8px 10px; border-radius:6px; font-size:10px; display:flex; justify-content:space-between;">
-                        <span style="color:var(--color-ink-tertiary);">Firmware</span>
-                        <span style="font-family:monospace; color:var(--color-amber);">v2.4.0-edge</span>
-                    </div>
-                    <div style="background:var(--color-surface-2); padding:8px 10px; border-radius:6px; font-size:10px; display:flex; justify-content:space-between;">
-                        <span style="color:var(--color-ink-tertiary);">Solar Trickle Charger</span>
-                        <span style="color:var(--color-success); font-weight:600;">+4.2V (Active)</span>
-                    </div>
-                    <div style="background:var(--color-surface-2); padding:8px 10px; border-radius:6px; font-size:10px; display:flex; justify-content:space-between;">
-                        <span style="color:var(--color-ink-tertiary);">IP68 Ingress Rating</span>
-                        <span style="color:var(--color-success); font-weight:600;">100% Sealed</span>
-                    </div>
-                    <div style="background:var(--color-surface-2); padding:8px 10px; border-radius:6px; font-size:10px; display:flex; justify-content:space-between;">
-                        <span style="color:var(--color-ink-tertiary);">LoRaWAN Gateway</span>
-                        <span style="color:var(--color-info); font-weight:600;">Connected (11.4 km)</span>
-                    </div>
-                </div>
-            </div>
-        `
-    }
-];
-
 function setupDemoSimulator() {
-    const openBtns = document.querySelectorAll('.open-demo-btn, a[href="#demo"]');
     const modal = document.getElementById('demo-modal');
     const closeBtn = document.getElementById('close-demo-modal');
 
-    openBtns.forEach(btn => {
+    document.querySelectorAll('.open-demo-btn, a[href="#demo"]').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            if (modal) {
-                modal.classList.add('open');
-                startDemoLoop();
-            }
+            if (modal) { modal.classList.add('open'); startDemoLoop(); }
         });
     });
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            if (modal) modal.classList.remove('open');
-            stopDemoLoop();
-        });
-    }
-
-    if (modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('open');
-                stopDemoLoop();
-            }
-        });
-    }
+    if (closeBtn) closeBtn.addEventListener('click', () => { modal.classList.remove('open'); stopDemoLoop(); });
+    if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) { modal.classList.remove('open'); stopDemoLoop(); } });
 }
 
 function selectDemoStep(index) {
     stopDemoLoop();
     renderDemoStep(index);
-    // Resume auto-loop after 6 seconds of user inactivity
     if (autoPauseTimeout) clearTimeout(autoPauseTimeout);
-    autoPauseTimeout = setTimeout(() => {
-        startDemoLoop();
-    }, 6000);
+    autoPauseTimeout = setTimeout(startDemoLoop, 6000);
 }
 
 function startDemoLoop() {
@@ -399,14 +297,8 @@ function startDemoLoop() {
 }
 
 function stopDemoLoop() {
-    if (demoInterval) {
-        clearInterval(demoInterval);
-        demoInterval = null;
-    }
-    if (autoPauseTimeout) {
-        clearTimeout(autoPauseTimeout);
-        autoPauseTimeout = null;
-    }
+    clearInterval(demoInterval); demoInterval = null;
+    clearTimeout(autoPauseTimeout); autoPauseTimeout = null;
 }
 
 function renderDemoStep(index) {
@@ -414,30 +306,20 @@ function renderDemoStep(index) {
     const step = DEMO_STEPS[index];
     const screen = document.getElementById('demo-screen-content');
     const badge = document.getElementById('demo-step-indicator');
-
     if (screen) {
         screen.style.opacity = '0';
-        setTimeout(() => {
-            screen.innerHTML = step.html;
-            screen.style.opacity = '1';
-        }, 120);
+        setTimeout(() => { screen.innerHTML = step.html; screen.style.opacity = '1'; }, 120);
     }
     if (badge) badge.innerText = `STEP ${index + 1} / ${DEMO_STEPS.length} — ${step.title}`;
-
-    // Highlight nav item
     document.querySelectorAll('.phone-nav-item').forEach(el => el.classList.remove('active'));
-    const activeTab = document.getElementById(step.tab);
-    if (activeTab) activeTab.classList.add('active');
+    const tab = document.getElementById(step.tab);
+    if (tab) tab.classList.add('active');
 }
 
-// PWA Logic
+// PWA Install
 let deferredPrompt;
 function setupPwaInstall() {
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-    });
-
+    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
     document.querySelectorAll('.pwa-install-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
             e.preventDefault();
@@ -446,7 +328,7 @@ function setupPwaInstall() {
                 const { outcome } = await deferredPrompt.userChoice;
                 if (outcome === 'accepted') deferredPrompt = null;
             } else {
-                alert("Beevil Knievel Companion App: You can install directly or add to your Home Screen from your browser options.");
+                alert('To install: tap Share → Add to Home Screen (iOS) or use the browser Install option (Chrome/Android).');
             }
         });
     });
