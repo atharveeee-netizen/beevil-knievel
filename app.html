@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Farmer Mobile App | Team Beevil Knievel</title>
+    <title>Farmer Mobile App | Beevil Knievel PWA</title>
     <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* HASHICORP DESIGN SYSTEM TOKENS - NATURAL WRITING */
+        /* HASHICORP / APPLE DESIGN SYSTEM TOKENS - PWA MOBILE APP */
         :root {
             --colors-canvas: #000000;
-            --colors-surface-1: #161B26;
-            --colors-surface-2: #252D3D;
-            --colors-surface-3: #333D52;
-            --colors-hairline: rgba(178, 182, 189, 0.15);
-            --colors-hairline-soft: rgba(178, 182, 189, 0.06);
+            --colors-surface-1: #111622;
+            --colors-surface-2: #1D2636;
+            --colors-surface-3: #2A364F;
+            --colors-hairline: rgba(255, 255, 255, 0.12);
+            --colors-hairline-soft: rgba(255, 255, 255, 0.05);
+
             --colors-ink: #FFFFFF;
-            --colors-ink-muted: #B2B6BD;
-            --colors-ink-subtle: #656A76;
+            --colors-ink-muted: #94A3B8;
+            --colors-ink-subtle: #64748B;
 
             /* Chromatic Product Identity Tokens */
             --colors-product-terraform: #844FBA;
@@ -30,7 +32,7 @@
             --colors-product-nomad: #00A86B;
 
             --rounded-md: 8px;   /* 8px CTA & inputs */
-            --rounded-lg: 12px;  /* Cards */
+            --rounded-lg: 14px;  /* Cards */
             --rounded-pill: 9999px;
         }
 
@@ -41,13 +43,13 @@
         .phone-frame {
             width: 100%; max-width: 420px; height: 860px; max-height: 95vh;
             background: var(--colors-canvas); border-radius: 36px;
-            border: 6px solid #161B26; box-shadow: 0 0 0 1px var(--colors-hairline);
+            border: 6px solid #111622; box-shadow: 0 0 0 1px var(--colors-hairline);
             display: flex; flex-direction: column; overflow: hidden; position: relative;
         }
 
         /* Mobile Top Chrome */
         .status-bar { padding: 12px 20px 4px; display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: var(--colors-ink-muted); }
-        .notch { width: 90px; height: 14px; background: #161B26; border-radius: 8px; }
+        .notch { width: 90px; height: 14px; background: #111622; border-radius: 8px; }
 
         .app-nav { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--colors-hairline); background: var(--colors-canvas); }
         .app-title { font-size: 15px; font-weight: 700; color: var(--colors-ink); letter-spacing: -0.3px; }
@@ -98,7 +100,7 @@
         .btn-primary-8px:hover { background: #E2E8F0; }
 
         /* Bottom Tab Bar */
-        .tab-bar { padding: 10px 16px; background: var(--colors-surface-1); border-top: 1px solid var(--colors-hairline); display: flex; justify-space: space-around; }
+        .tab-bar { padding: 10px 16px; background: var(--colors-surface-1); border-top: 1px solid var(--colors-hairline); display: flex; justify-content: space-around; }
         .tab-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--colors-ink-muted); font-size: 11px; font-weight: 600; text-decoration: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.4px; }
         .tab-btn.active { color: var(--colors-product-waypoint); }
 
@@ -122,7 +124,7 @@
         <div class="app-nav">
             <div>
                 <span class="eyebrow" style="margin-bottom:0; color:var(--colors-product-nomad);">● LoRa Connected (-84 dBm)</span>
-                <div class="app-title">Farmer Mobile App</div>
+                <div class="app-title">Farmer Mobile App (PWA)</div>
             </div>
             <a href="index.html" style="font-size:12px; color:var(--colors-product-waypoint); text-decoration:none; font-weight:600;">Home</a>
         </div>
@@ -201,7 +203,7 @@
             <!-- Navigation Back to Team Landing Page -->
             <div style="text-align: center;">
                 <a href="index.html" style="color:var(--colors-product-waypoint); font-size:13px; text-decoration:none; font-weight:600;">
-                    ← Back to Overview
+                    ← Back to Landing Page
                 </a>
             </div>
 
@@ -238,6 +240,17 @@
     </div>
 
     <script>
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then((reg) => {
+                    console.log('Beevil Knievel PWA Service Worker registered:', reg.scope);
+                }).catch((err) => {
+                    console.error('Service Worker registration failed:', err);
+                });
+            });
+        }
+
         const DIAG = {
             1: {
                 title: "Swarm Warning",
@@ -280,8 +293,8 @@
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        x: { ticks: { color: '#656A76', font: { size: 9 } }, grid: { display: false } },
-                        y: { ticks: { color: '#656A76', font: { size: 9 } }, grid: { color: 'rgba(178,182,189,0.06)' } }
+                        x: { ticks: { color: '#64748B', font: { size: 9 } }, grid: { display: false } },
+                        y: { ticks: { color: '#64748B', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.06)' } }
                     }
                 }
             });
@@ -338,7 +351,7 @@
                 <b>Diagnosis:</b> ${title}<br/><br/>
                 <b>Readings:</b> Brood Temp ${document.getElementById('valBrood').innerText} | Audio Peak ${document.getElementById('valAcoustics').innerText}<br/><br/>
                 ${action}<br/><br/>
-                <font size="1" color="#656A76">IEEE HardwAIre Challenge • Model 2 Gateway</font>
+                <font size="1" color="#64748B">IEEE HardwAIre Challenge • Model 2 Gateway</font>
             `;
             document.getElementById('waModal').classList.add('active');
         }
