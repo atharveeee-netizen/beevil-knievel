@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Smart Hive Farmer Mobile App</title>
+    <title>Farmer Mobile App | Team Beevil Knievel</title>
     <meta name="theme-color" content="#000000">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,8 +51,6 @@
 
         .app-nav { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--colors-hairline); background: var(--colors-canvas); }
         .app-title { font-size: 15px; font-weight: 700; color: var(--colors-ink); letter-spacing: -0.3px; }
-
-        .lang-select { background: var(--colors-surface-1); color: var(--colors-ink); border: 1px solid var(--colors-hairline); padding: 4px 8px; border-radius: var(--rounded-md); font-size: 12px; font-weight: 600; }
 
         /* App Main Body */
         .app-body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
@@ -124,13 +122,9 @@
         <div class="app-nav">
             <div>
                 <span class="eyebrow" style="margin-bottom:0; color:var(--colors-product-nomad);">● LoRa Active (-84 dBm)</span>
-                <div class="app-title">Smart Hive Mobile App</div>
+                <div class="app-title">Farmer Mobile Application</div>
             </div>
-            <select class="lang-select" id="langSelect" onchange="changeLanguage(this.value)">
-                <option value="en">English</option>
-                <option value="gu">ગુજરાતી</option>
-                <option value="hi">हिंदी</option>
-            </select>
+            <a href="index.html" style="font-size:12px; color:var(--colors-product-waypoint); text-decoration:none; font-weight:600;">Home</a>
         </div>
 
         <!-- Scrollable App Body -->
@@ -207,7 +201,7 @@
             <!-- Navigation Back to Team Landing Page -->
             <div style="text-align: center;">
                 <a href="index.html" style="color:var(--colors-product-waypoint); font-size:13px; text-decoration:none; font-weight:600;">
-                    ← View Team Beevil Knievel Landing Page
+                    ← View Team Landing Page
                 </a>
             </div>
 
@@ -244,43 +238,24 @@
     </div>
 
     <script>
-        const I18N = {
-            en: {
-                titleSwarm: "Swarming Risk Detected",
-                bodySwarm: "Acoustic peak at 310 Hz with thermal spike (+3.1°C). 92% risk of queen cell swarming preparation within 24-48h.",
-                actSwarm: "RECOMMENDED ACTION: Inspect queen cells. Prepare secondary hive box within 36h.",
-                titleNormal: "Hive Healthy & Stable",
-                bodyNormal: "Brood nest temp steady at 34.9°C. Acoustic frequency normal at 220 Hz. No disease or swarming vectors.",
-                actNormal: "RECOMMENDED ACTION: No manual action needed. Continue 14-day inspection routine.",
-                titleMite: "Varroa Mite Attack Detected",
-                bodyMite: "Thermal drop to 31.2°C with high agitation sound (410 Hz). 89% probability of Varroa parasite attack.",
-                actMite: "RECOMMENDED ACTION: Apply Formic Acid treatment immediately to protect brood."
+        const DIAG = {
+            1: {
+                title: "Swarming Risk Detected",
+                body: "Acoustic peak at 310 Hz with thermal spike (+3.1°C). 92% risk of queen cell swarming preparation within 24-48h.",
+                act: "RECOMMENDED ACTION: Inspect queen cells. Prepare secondary hive box within 36h."
             },
-            gu: {
-                titleSwarm: "મધમાખી જૂથ વિભાજન જોખમ",
-                bodySwarm: "અવાજ ફ્રીક્વન્સી 310 Hz અને તાપમાનમાં +3.1°C વધારો થયો છે. 24-48 કલાકમાં જૂથ છૂટું પડવાનું 92% જોખમ.",
-                actSwarm: "ભલામણ કરેલ પગલું: રાણી કોષની તપાસ કરો. 36 કલાકમાં નવું બોક્સ તૈયાર કરો.",
-                titleNormal: "મધપૂડો સ્વસ્થ છે",
-                bodyNormal: "મધપૂડાનું તાપમાન 34.9°C પર સ્થિર છે. અવાજ 220 Hz પર સામાન્ય છે. કોઈ રોગ નથી.",
-                actNormal: "ભલામણ કરેલ પગલું: કોઈ પગલાંની જરૂર નથી. નિયમિત 14-દિવસીય તપાસ ચાલુ રાખો.",
-                titleMite: "વરોઆ જીવાતનો હુમલો",
-                bodyMite: "તાપમાન ઘટીને 31.2°C થયું છે અને 410 Hz અવાજ છે. 89% વરોઆ પરોપજીવી જીવાતનો હુમલો.",
-                actMite: "ભલામણ કરેલ પગલું: મધમાખીના રક્ષણ માટે તરત જ ફોર્મિક એસિડ ઉપચાર આપો."
+            2: {
+                title: "Hive Healthy & Stable",
+                body: "Brood nest temp steady at 34.9°C. Acoustic frequency normal at 220 Hz. No disease or swarming vectors.",
+                act: "RECOMMENDED ACTION: No manual action needed. Continue 14-day inspection routine."
             },
-            hi: {
-                titleSwarm: "झुंड अलग होने का जोखिम",
-                bodySwarm: "ध्वनि आवृत्ति 310 Hz एवं तापमान +3.1°C बढ़ा है। 24-48 घंटे में मधुमक्खियां छत्ता छोड़ सकती हैं।",
-                actSwarm: "अनुशंसित कार्रवाई: रानी फ्रेम का निरीक्षण करें। 36 घंटे में नया बक्सा तैयार करें।",
-                titleNormal: "छत्ता स्वस्थ है",
-                bodyNormal: "छत्ते का तापमान 34.9°C पर सामान्य है। ध्वनि आवृत्ति 220 Hz पर स्थिर है।",
-                actNormal: "अनुशंसित कार्रवाई: किसी कार्रवाई की आवश्यकता नहीं है। नियमित देखभाल जारी रखें।",
-                titleMite: "वरोआ कीड़े का हमला",
-                bodyMite: "तापमान गिरकर 31.2°C हुआ है और 410 Hz ध्वनि दर्ज की गई है। 89% वरोआ कीड़े का हमला संभव है।",
-                actMite: "अनुशंसित कार्रवाई: मधुमक्खियों की सुरक्षा हेतु तुरंत फॉर्मिक एसिड का छिड़काव करें।"
+            3: {
+                title: "Varroa Mite Attack Detected",
+                body: "Thermal drop to 31.2°C with high agitation sound (410 Hz). 89% probability of Varroa parasite attack.",
+                act: "RECOMMENDED ACTION: Apply Formic Acid treatment immediately to protect brood."
             }
         };
 
-        let currentLang = 'en';
         let currentHive = 1;
         let chart = null;
 
@@ -347,26 +322,11 @@
             chart.update();
         }
 
-        function changeLanguage(lang) {
-            currentLang = lang;
-            updateTexts();
-        }
-
         function updateTexts() {
-            const dict = I18N[currentLang];
-            if (currentHive === 1) {
-                document.getElementById('diagTitle').innerText = dict.titleSwarm;
-                document.getElementById('diagBody').innerText = dict.bodySwarm;
-                document.getElementById('diagAction').innerText = dict.actSwarm;
-            } else if (currentHive === 2) {
-                document.getElementById('diagTitle').innerText = dict.titleNormal;
-                document.getElementById('diagBody').innerText = dict.bodyNormal;
-                document.getElementById('diagAction').innerText = dict.actNormal;
-            } else if (currentHive === 3) {
-                document.getElementById('diagTitle').innerText = dict.titleMite;
-                document.getElementById('diagBody').innerText = dict.bodyMite;
-                document.getElementById('diagAction').innerText = dict.actMite;
-            }
+            const data = DIAG[currentHive];
+            document.getElementById('diagTitle').innerText = data.title;
+            document.getElementById('diagBody').innerText = data.body;
+            document.getElementById('diagAction').innerText = data.act;
         }
 
         function showModal() {
