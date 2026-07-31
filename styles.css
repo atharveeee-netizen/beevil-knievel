@@ -998,3 +998,71 @@ button {
     .btn-lg { width: 100%; }
     .phone-mockup { width: 100%; max-width: 320px; height: 600px; }
 }
+
+/* ==========================================================
+   🐝 Bee Cursor & Particle Trail
+   ========================================================== */
+
+/* Hide system cursor globally on desktop */
+@media (hover: hover) {
+    *, *::before, *::after {
+        cursor: none !important;
+    }
+}
+
+/* The bee itself */
+#bee-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    font-size: 22px;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 99999;
+    user-select: none;
+    transform: translate(-100px, -100px);
+    will-change: transform;
+    transition: opacity 0.2s ease;
+    /* Tiny wing-buzz animation */
+    animation: bee-buzz 0.18s ease-in-out infinite alternate;
+}
+
+@keyframes bee-buzz {
+    from { letter-spacing: 0px; }
+    to   { letter-spacing: 1px; }
+}
+
+/* Particle drops / sparkles */
+.bee-particle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99998;
+    user-select: none;
+    line-height: 1;
+    will-change: transform, opacity;
+    animation: bee-particle-float linear forwards;
+    color: #F5A623;
+    font-size: 8px;
+    /* CSS custom props set per-particle by JS */
+    --drift-x: 0px;
+    --drift-y: -30px;
+}
+
+@keyframes bee-particle-float {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: var(--particle-opacity, 0.8);
+    }
+    60% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate(var(--drift-x), var(--drift-y)) scale(0.3);
+        opacity: 0;
+    }
+}
+

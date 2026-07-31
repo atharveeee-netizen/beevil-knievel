@@ -333,3 +333,109 @@ function setupPwaInstall() {
         });
     });
 }
+
+/* ==========================================================================
+   🐝 Bee Cursor — Custom bee that follows the mouse & leaves amber particles
+   ========================================================================== */
+function initBeeCursor() {
+    // Skip on touch devices
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    // Create the bee cursor element
+    const bee = document.createElement('div');
+    bee.id = 'bee-cursor';
+    bee.innerHTML = '🐝';
+    document.body.appendChild(bee);
+
+    let mouseX = -100, mouseY = -100;
+    let beeX = -100, beeY = -100;
+    let lastParticleTime = 0;
+    let tilt = 0;
+    let prevX = -100;
+
+    // Track mouse position
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Tilt bee based on horizontal movement direction
+        const dx = e.clientX - prevX;
+        tilt = Math.max(-25, Math.min(25, dx * 3));
+        prevX = e.clientX;
+
+        // Spawn particle trail (throttled to every 40ms for performance)
+        const now = Date.now();
+        if (now - lastParticleTime > 40) {
+            spawnParticle(e.clientX, e.clientY);
+            lastParticleTime = now;
+        }
+    });
+
+    // Smooth bee follow using lerp
+    function animateBee() {
+        beeX += (mouseX - beeX) * 0.18;
+        beeY += (mouseY - beeY) * 0.18;
+
+        bee.style.transform = `translate(${beeX}px, ${beeY}px) rotate(${tilt}deg) scaleX(${tilt < 0 ? -1 : 1})`;
+
+        // Recover tilt toward 0
+        tilt *= 0.88;
+
+        requestAnimationFrame(animateBee);
+    }
+    animateBee();
+
+    // Click burst — spawn 6 particles on click
+    document.addEventListener('click', (e) => {
+        for (let i = 0; i < 6; i++) {
+            setTimeout(() => spawnParticle(e.clientX, e.clientY, true), i * 30);
+        }
+    });
+
+    // Hide bee when cursor leaves window
+    document.addEventListener('mouseleave', () => { bee.style.opacity = '0'; });
+    document.addEventListener('mouseenter', () => { bee.style.opacity = '1'; });
+}
+
+function spawnParticle(x, y, burst = false) {
+    const particle = document.createElement('div');
+    particle.className = 'bee-particle';
+
+    // Randomly choose between honey drop styles
+    const types = ['💛', '✨', '·', '•', '◆'];
+    const isSVG = Math.random() > 0.5;
+
+    if (isSVG) {
+        particle.innerHTML = types[Math.floor(Math.random() * types.length)];
+    } else {
+        // Plain glowing amber dot
+    }
+
+    // Random offset from cursor
+    const spread = burst ? 40 : 12;
+    const offsetX = (Math.random() - 0.5) * spread;
+    const offsetY = burst ? (Math.random() - 0.5) * spread : Math.random() * 10;
+
+    particle.style.cssText = `
+        left: ${x + offsetX}px;
+        top: ${y + offsetY}px;
+        font-size: ${burst ? (10 + Math.random() * 8) : (6 + Math.random() * 6)}px;
+        opacity: ${burst ? 0.9 : 0.7};
+        --drift-x: ${(Math.random() - 0.5) * 40}px;
+        --drift-y: ${-(20 + Math.random() * 40)}px;
+        animation-duration: ${burst ? 700 : (500 + Math.random() * 400)}ms;
+    `;
+
+    document.body.appendChild(particle);
+
+    // Remove after animation
+    particle.addEventListener('animationend', () => particle.remove());
+}
+
+// Initialize bee cursor after DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBeeCursor);
+} else {
+    initBeeCursor();
+}
+
