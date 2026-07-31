@@ -311,31 +311,32 @@ button {
 }
 
 .nav-logo-img {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    object-fit: cover;
-    border: 1px solid rgba(245, 166, 35, 0.4);
-    background: var(--color-canvas);
-    box-shadow: 0 0 10px rgba(245, 166, 35, 0.25);
-    transition: transform var(--duration-fast) ease;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(245, 166, 35, 0.3));
+    transition: filter var(--duration-fast) ease, transform var(--duration-fast) ease;
     flex-shrink: 0;
 }
 
-.nav-logo:hover .nav-logo-img { transform: scale(1.06); }
+.nav-logo:hover .nav-logo-img {
+    filter: drop-shadow(0 0 16px rgba(245, 166, 35, 0.7));
+    transform: scale(1.05);
+}
 
 .nav-logo-fallback {
     display: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
     background: #0A0A0C;
-    border: 1px solid #F5A623;
+    border: 1.5px solid #F5A623;
     align-items: center;
     justify-content: center;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 800;
+    font-size: 14px;
+    font-weight: 900;
     color: #F5A623;
     flex-shrink: 0;
     letter-spacing: -1px;
