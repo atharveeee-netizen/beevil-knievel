@@ -1,25 +1,37 @@
-/**
- * Beevil Knievel — Commercial Startup Web Architecture & Interactive Components
- * Features: Dynamic Navbar/Footer, PWA install prompt, Automated Web Demo Simulator,
- * Hotspot diagrams, Cart modal drawer, and FAQ accordions.
- */
+/* ==========================================================================
+   Beevil Knievel — Shared Component Injection & Interactivity Engine
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+    injectNavigation();
+    injectFooter();
+    injectDemoModal();
+    initInteractivity();
+});
+
+// Helper: Check active page
+function isPage(keyword) {
+    const path = window.location.pathname.toLowerCase();
+    if (keyword === 'index' && (path.endsWith('/') || path.endsWith('index.html') || path.endsWith('beevil-knievel') || path === '')) return 'active';
+    return path.includes(keyword) ? 'active' : '';
+}
 
 // Global Navigation HTML Template
 const NAV_HTML = `
 <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-        <img src="assets/icon-192.png" alt="BK Logo" class="nav-logo-img">
+        <img src="assets/bk_yellow_logo.png" alt="BK Logo" class="nav-logo-img" onerror="this.onerror=null; this.src='assets/icon-192.png';">
         <div class="nav-logo-text">Beevil Knievel</div>
     </a>
 
     <ul class="nav-links">
-        <li><a href="index.html" class="\${isPage('index')}">Overview</a></li>
-        <li><a href="product.html" class="\${isPage('product')}">Hardware</a></li>
-        <li><a href="store.html" class="\${isPage('store')}">Store</a></li>
-        <li><a href="app.html" class="\${isPage('app')}">App Ecosystem</a></li>
-        <li><a href="support.html" class="\${isPage('support')}">Support</a></li>
-        <li><a href="investors.html" class="\${isPage('investors')}">Investors</a></li>
-        <li><a href="about.html" class="\${isPage('about')}">About</a></li>
+        <li><a href="index.html" class="${isPage('index')}">Overview</a></li>
+        <li><a href="product.html" class="${isPage('product')}">Hardware</a></li>
+        <li><a href="store.html" class="${isPage('store')}">Store</a></li>
+        <li><a href="app.html" class="${isPage('app')}">App Ecosystem</a></li>
+        <li><a href="support.html" class="${isPage('support')}">Support</a></li>
+        <li><a href="investors.html" class="${isPage('investors')}">Investors</a></li>
+        <li><a href="about.html" class="${isPage('about')}">About</a></li>
     </ul>
 
     <div class="nav-cta">
@@ -37,119 +49,138 @@ const FOOTER_HTML = `
 <div class="container footer-grid">
     <div>
         <a href="index.html" class="nav-logo" style="margin-bottom: 24px;">
-            <img src="assets/icon-192.png" alt="BK Logo" class="nav-logo-img">
+            <img src="assets/bk_yellow_logo.png" alt="BK Logo" class="nav-logo-img" onerror="this.onerror=null; this.src='assets/icon-192.png';">
             <div class="nav-logo-text">Beevil Knievel</div>
         </a>
         <p class="footer-brand-desc">
-            Industrial Edge AI hardware for precision beekeeping. Engineered to predict swarms, detect diseases early, and maximize colony yield.
+            Industrial Edge AI hardware nodes for precision apiculture. Predict swarms 36h in advance and eliminate colony loss.
+        </p>
+        <p class="body-sm text-gradient-amber font-mono" style="margin-top: 16px;">
+            IP68 Sub-GHz Telemetry Architecture
         </p>
     </div>
 
-    <div class="footer-col">
-        <h4>Product</h4>
-        <a href="product.html">Hardware Node</a>
-        <a href="store.html">Pre-Order Store</a>
-        <a href="accessories.html">Accessories & Spares</a>
-        <a href="app.html">Farmer App</a>
+    <div>
+        <h4 class="footer-heading">Ecosystem</h4>
+        <ul class="footer-links">
+            <li><a href="product.html">Hardware Spec</a></li>
+            <li><a href="store.html">Pre-Order Store</a></li>
+            <li><a href="app.html">Farmer App</a></li>
+            <li><a href="download.html">Download APK / PWA</a></li>
+            <li><a href="accessories.html">Accessories</a></li>
+        </ul>
     </div>
 
-    <div class="footer-col">
-        <h4>Resources</h4>
-        <a href="download.html">Mobile App Download</a>
-        <a href="docs.html">Field Documentation</a>
-        <a href="support.html">Help Center</a>
-        <a href="support.html#warranty">Warranty & SLA</a>
+    <div>
+        <h4 class="footer-heading">Support & Docs</h4>
+        <ul class="footer-links">
+            <li><a href="support.html">Help Center</a></li>
+            <li><a href="docs.html">Field Installation</a></li>
+            <li><a href="support.html#warranty">2-Year Warranty SLA</a></li>
+            <li><a href="privacy.html">Privacy & Telemetry</a></li>
+        </ul>
     </div>
 
-    <div class="footer-col">
-        <h4>Company</h4>
-        <a href="about.html">About & Team</a>
-        <a href="investors.html">Investors & Roadmap</a>
-        <a href="research.html">Acoustic Research</a>
-        <a href="privacy.html">Privacy Policy</a>
+    <div>
+        <h4 class="footer-heading">Company</h4>
+        <ul class="footer-links">
+            <li><a href="about.html">About & Founding Team</a></li>
+            <li><a href="investors.html">Investor Relations</a></li>
+            <li><a href="research.html">Acoustic Research</a></li>
+            <li><a href="about.html#contact">Contact Us</a></li>
+        </ul>
     </div>
 </div>
 
 <div class="container footer-bottom">
-    <div>© 2026 Beevil Knievel Inc. All rights reserved. Industrial AgriTech Telemetry.</div>
-    <div style="display: flex; gap: 24px;">
-        <a href="privacy.html" style="color: inherit;">Privacy</a>
-        <a href="privacy.html#terms" style="color: inherit;">Terms of Service</a>
-        <a href="privacy.html#compliance" style="color: inherit;">Compliance</a>
+    <div>&copy; 2026 Beevil Knievel Commercial Startup Inc. All Rights Reserved.</div>
+    <div style="display:flex; gap: 24px;">
+        <a href="privacy.html">Privacy</a>
+        <a href="privacy.html#terms">Terms of SLA</a>
+        <a href="support.html">Contact</a>
     </div>
 </div>
 `;
 
-// Try Web Demo Smartphone Modal Template
+// Global Modal HTML Template for Try Web Demo
 const DEMO_MODAL_HTML = `
-<div id="demo-modal" class="modal-overlay">
-    <div class="modal-content text-center">
-        <button class="modal-close" id="close-demo-modal">&times;</button>
-        <span class="eyebrow" style="color: var(--color-amber);">Interactive Product Simulator</span>
-        <h2 class="heading-card mb-24">Farmer Companion App — Live Walkthrough</h2>
-        <p class="body-sm mb-32 mx-auto" style="max-width: 500px;">
-            Automated production preview showcasing real-time brood telemetry, acoustic swarm alerts, and Edge AI recommendations.
-        </p>
+<div id="demo-modal" class="modal-backdrop">
+    <div class="modal-content">
+        <button id="close-demo-modal" class="modal-close" aria-label="Close modal">&times;</button>
+        
+        <div class="modal-header">
+            <span class="badge badge-amber mb-8">Farmer Companion App Simulator</span>
+            <h3 class="heading-small" id="demo-modal-title">Live Field Telemetry & AI Diagnostics</h3>
+        </div>
 
-        <!-- Smartphone Device Frame -->
-        <div class="phone-mockup">
-            <div class="phone-notch"></div>
-            <span class="demo-step-badge" id="demo-step-indicator">STEP 1 / 5</span>
-            
-            <div class="phone-screen" id="demo-screen-content">
-                <!-- Screen Content Injected via JS Loop -->
-            </div>
-
-            <div class="phone-nav-bar">
-                <div class="phone-nav-item active" id="pnav-home"><span>🏠</span>Home</div>
-                <div class="phone-nav-item" id="pnav-hives"><span>🐝</span>Hives</div>
-                <div class="phone-nav-item" id="pnav-ai"><span>⚡</span>AI</div>
-                <div class="phone-nav-item" id="pnav-alerts"><span>🔔</span>Alerts</div>
-                <div class="phone-nav-item" id="pnav-settings"><span>⚙️</span>More</div>
+        <div class="modal-body flex justify-center py-16">
+            <div class="phone-mockup">
+                <div class="phone-notch"></div>
+                <div class="phone-screen" id="demo-phone-screen">
+                    <div id="demo-screen-content" style="padding-top: 24px; transition: opacity 0.3s ease;">
+                        <!-- Dynamic Content Injected Here -->
+                    </div>
+                    
+                    <!-- Bottom Nav -->
+                    <div class="phone-nav-bar">
+                        <div class="phone-nav-item active" id="pnav-home" onclick="selectDemoStep(0)">
+                            <div class="pnav-icon">📊</div>
+                            <span>Dash</span>
+                        </div>
+                        <div class="phone-nav-item" id="pnav-hives" onclick="selectDemoStep(1)">
+                            <div class="pnav-icon">🐝</div>
+                            <span>Hives</span>
+                        </div>
+                        <div class="phone-nav-item" id="pnav-alerts" onclick="selectDemoStep(2)">
+                            <div class="pnav-icon">🔔</div>
+                            <span>Alerts</span>
+                        </div>
+                        <div class="phone-nav-item" id="pnav-ai" onclick="selectDemoStep(3)">
+                            <div class="pnav-icon">🧠</div>
+                            <span>AI Engine</span>
+                        </div>
+                        <div class="phone-nav-item" id="pnav-settings" onclick="selectDemoStep(4)">
+                            <div class="pnav-icon">⚙️</div>
+                            <span>Status</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="flex justify-center gap-16 mt-32">
+        <div class="modal-footer flex justify-between items-center">
+            <span class="body-sm" id="demo-step-indicator" style="font-family: 'JetBrains Mono', monospace; color: var(--color-amber); font-size: 12px;">STEP 1 / 5 — Live Dashboard</span>
             <a href="download.html" class="btn btn-amber btn-sm">Download Native App (APK)</a>
-            <a href="store.html" class="btn btn-secondary btn-sm">Order Hardware Starter Kit</a>
         </div>
     </div>
 </div>
 `;
 
-// Helper: Check active page
-function isPage(keyword) {
-    const path = window.location.pathname;
-    if (keyword === 'index' && (path.endsWith('/') || path.endsWith('index.html') || path === '')) return 'active';
-    return path.includes(keyword) ? 'active' : '';
+function injectNavigation() {
+    const navElem = document.getElementById('bk-nav');
+    if (navElem) navElem.innerHTML = NAV_HTML;
 }
 
-// DOM Initializer
-document.addEventListener('DOMContentLoaded', () => {
-    // Inject Nav
-    const navEl = document.getElementById('bk-nav');
-    if (navEl) {
-        navEl.innerHTML = NAV_HTML.replace(/\$\{isPage\('([^']+)'\)\}/g, (match, p1) => isPage(p1));
-    }
+function injectFooter() {
+    const footerElem = document.getElementById('bk-footer');
+    if (footerElem) footerElem.innerHTML = FOOTER_HTML;
+}
 
-    // Inject Footer
-    const footerEl = document.getElementById('bk-footer');
-    if (footerEl) {
-        footerEl.innerHTML = FOOTER_HTML;
-    }
-
-    // Inject Demo Modal
+function injectDemoModal() {
     if (!document.getElementById('demo-modal')) {
         document.body.insertAdjacentHTML('beforeend', DEMO_MODAL_HTML);
     }
+}
 
-    // Mobile Menu Toggle
+function initInteractivity() {
+    // Mobile Nav Toggle
     const menuBtn = document.querySelector('.nav-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     if (menuBtn && navLinks) {
         menuBtn.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            if (navLinks.style.display === 'flex') {
+            const isOpen = navLinks.style.display === 'flex';
+            navLinks.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen) {
                 navLinks.style.flexDirection = 'column';
                 navLinks.style.position = 'absolute';
                 navLinks.style.top = '72px';
@@ -163,11 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Accordion Logic
-    const accordionTriggers = document.querySelectorAll('.accordion-trigger');
-    accordionTriggers.forEach(trigger => {
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
         trigger.addEventListener('click', () => {
-            const item = trigger.parentElement;
-            item.classList.toggle('open');
+            trigger.parentElement.classList.toggle('open');
         });
     });
 
@@ -179,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Setup PWA Install Listener
     setupPwaInstall();
-});
+}
 
 // Scroll Reveal
 function initScrollAnimations() {
@@ -198,103 +227,117 @@ function initScrollAnimations() {
 // Automated Smartphone App Walkthrough Demo Loop
 let demoInterval = null;
 let currentDemoStep = 0;
+let autoPauseTimeout = null;
 
 const DEMO_STEPS = [
     {
-        title: "Welcome & Auth",
-        tab: "pnav-home",
-        html: `
-            <div style="text-align:center; padding-top: 40px;">
-                <div style="font-size:48px; margin-bottom:16px;">🔐</div>
-                <h4 style="font-size:18px; font-weight:700; color:var(--color-ink); margin-bottom:8px;">Biometric Verification</h4>
-                <p style="font-size:12px; color:var(--color-ink-secondary); margin-bottom:24px;">Encrypted Apiary Security</p>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); padding:12px; border-radius:10px; font-size:12px; color:var(--color-success); font-weight:600;">
-                    ✓ Authenticated: Atharve Dahima (Commercial Apiary #04)
-                </div>
-            </div>
-        `
-    },
-    {
-        title: "Live Dashboard",
+        title: "Live Hive Dashboard",
         tab: "pnav-home",
         html: `
             <div style="text-align:left;">
-                <div style="display:flex; justify-between; align-items:center; margin-bottom:16px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
                     <div>
-                        <div style="font-size:11px; color:var(--color-amber); font-weight:700; text-transform:uppercase;">North Apiary Yard</div>
-                        <h4 style="font-size:16px; font-weight:700; color:var(--color-ink);">Hive Alpha (#01)</h4>
+                        <div style="font-size:11px; color:var(--color-amber); font-weight:700; text-transform:uppercase;">North Yard • Hive #01</div>
+                        <h4 style="font-size:16px; font-weight:700; color:var(--color-ink);">Colony Alpha Telemetry</h4>
                     </div>
-                    <span style="background:rgba(16,185,129,0.15); color:var(--color-success); padding:4px 8px; border-radius:12px; font-size:10px; font-weight:700;">ONLINE</span>
+                    <span style="background:rgba(16,185,129,0.15); color:var(--color-success); padding:3px 8px; border-radius:12px; font-size:10px; font-weight:700;">ONLINE</span>
                 </div>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:12px; padding:16px; margin-bottom:12px;">
+                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:12px; padding:14px; margin-bottom:10px;">
                     <div style="font-size:11px; color:var(--color-ink-tertiary);">Brood Nest Core Temp</div>
-                    <div style="font-size:32px; font-weight:800; color:var(--color-ink);">35.2 °C</div>
-                    <div style="font-size:11px; color:var(--color-success);">Optimal Thermal Regulation</div>
+                    <div style="font-size:30px; font-weight:800; color:var(--color-ink);">35.2 °C</div>
+                    <div style="font-size:10px; color:var(--color-success); font-weight:600;">✓ Optimal Thermal Regulation</div>
                 </div>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:12px; padding:12px; display:flex; justify-between;">
-                    <div><span style="font-size:11px; color:var(--color-ink-tertiary);">Battery</span><div style="font-weight:700; font-size:14px;">98% (Solar)</div></div>
-                    <div><span style="font-size:11px; color:var(--color-ink-tertiary);">LoRa Signal</span><div style="font-weight:700; font-size:14px;">-84 dBm</div></div>
+                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:12px; padding:10px; display:flex; justify-content:space-between;">
+                    <div><span style="font-size:10px; color:var(--color-ink-tertiary);">Solar Battery</span><div style="font-weight:700; font-size:13px; color:var(--color-ink);">98% (+4.2V)</div></div>
+                    <div><span style="font-size:10px; color:var(--color-ink-tertiary);">Sub-GHz Signal</span><div style="font-weight:700; font-size:13px; color:var(--color-amber);">-84 dBm</div></div>
                 </div>
             </div>
         `
     },
     {
-        title: "Swarm Alert",
+        title: "Apiary Yard Overview",
+        tab: "pnav-hives",
+        html: `
+            <div style="text-align:left;">
+                <h4 style="font-size:15px; font-weight:700; color:var(--color-ink); margin-bottom:10px;">Yard Hives (4 Nodes Active)</h4>
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                    <div style="background:var(--color-surface-2); border:1px solid var(--color-border); padding:10px 12px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div><strong style="font-size:12px; color:var(--color-ink);">Hive #01 (Alpha)</strong><div style="font-size:10px; color:var(--color-ink-tertiary);">35.2°C • 98% Battery</div></div>
+                        <span style="color:var(--color-success); font-weight:700; font-size:11px;">Healthy</span>
+                    </div>
+                    <div style="background:var(--color-surface-2); border:1px solid var(--color-border); padding:10px 12px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div><strong style="font-size:12px; color:var(--color-ink);">Hive #02 (Beta)</strong><div style="font-size:10px; color:var(--color-ink-tertiary);">34.8°C • 95% Battery</div></div>
+                        <span style="color:var(--color-success); font-weight:700; font-size:11px;">Healthy</span>
+                    </div>
+                    <div style="background:var(--color-surface-2); border:1px solid rgba(245,166,35,0.4); padding:10px 12px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div><strong style="font-size:12px; color:var(--color-amber);">Hive #03 (Gamma)</strong><div style="font-size:10px; color:var(--color-ink-tertiary);">38.1°C • Pre-Swarm Warning</div></div>
+                        <span style="color:var(--color-amber); font-weight:700; font-size:11px;">Warning</span>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+    {
+        title: "Acoustic Swarm Alert",
         tab: "pnav-alerts",
         html: `
             <div style="text-align:left;">
-                <div style="background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3); border-radius:12px; padding:16px; margin-bottom:16px;">
-                    <div style="display:flex; gap:8px; align-items:center; color:var(--color-danger); font-weight:700; font-size:12px; margin-bottom:6px;">
-                        <span>⚠️</span> CRITICAL ACOUSTIC ALERT
+                <div style="background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3); border-radius:12px; padding:14px; margin-bottom:12px;">
+                    <div style="display:flex; gap:6px; align-items:center; color:var(--color-danger); font-weight:700; font-size:11px; margin-bottom:6px;">
+                        <span>⚠️</span> CRITICAL PRE-SWARM ALERT
                     </div>
-                    <h4 style="font-size:14px; font-weight:700; color:var(--color-ink); margin-bottom:4px;">Pre-Swarm Piping Detected</h4>
-                    <p style="font-size:11px; color:var(--color-ink-secondary);">Acoustic FFT frequency peak at 315 Hz registered. Queen piping probability: 94%.</p>
+                    <h4 style="font-size:14px; font-weight:700; color:var(--color-ink); margin-bottom:4px;">Queen Piping Detected (Hive #03)</h4>
+                    <p style="font-size:11px; color:var(--color-ink-secondary);">FFT frequency peak at 315 Hz. Pre-swarm probability: 94%. Action recommended within 24 hours.</p>
                 </div>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:12px; padding:12px;">
-                    <div style="font-size:11px; font-weight:700; color:var(--color-amber); margin-bottom:4px;">Action Protocol</div>
-                    <p style="font-size:11px; color:var(--color-ink-secondary);">Inspect brood box within 24 hours to split colony or install swarm trap.</p>
+                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:10px; padding:10px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--color-amber); margin-bottom:2px;">Suggested Action</div>
+                    <p style="font-size:10px; color:var(--color-ink-secondary);">Inspect brood box frames to split queen cells or set swarm trap.</p>
                 </div>
             </div>
         `
     },
     {
-        title: "AI Diagnostic Engine",
+        title: "AI Diagnostics Engine",
         tab: "pnav-ai",
         html: `
             <div style="text-align:left;">
-                <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
-                    <div style="width:28px; height:28px; border-radius:6px; background:var(--color-amber-glow); color:var(--color-amber); display:flex; align-items:center; justify-center; font-weight:700; font-size:12px;">AI</div>
-                    <h4 style="font-size:14px; font-weight:700; color:var(--color-ink);">Colony Health Diagnostics</h4>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                    <div style="width:26px; height:26px; border-radius:6px; background:var(--color-amber-glow); color:var(--color-amber); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11px;">AI</div>
+                    <h4 style="font-size:14px; font-weight:700; color:var(--color-ink);">Neural Hive Analytics</h4>
                 </div>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:12px; padding:12px; margin-bottom:10px;">
-                    <div style="font-size:11px; color:var(--color-ink-tertiary);">Varroa Mite Stress Index</div>
-                    <div style="font-weight:700; color:var(--color-success); font-size:14px;">LOW (0.4%)</div>
+                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:10px; padding:10px; margin-bottom:8px;">
+                    <div style="font-size:10px; color:var(--color-ink-tertiary);">Varroa Mite Stress Index</div>
+                    <div style="font-weight:700; color:var(--color-success); font-size:13px;">LOW (0.4%) — No treatment required</div>
                 </div>
-                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:12px; padding:12px;">
-                    <div style="font-size:11px; color:var(--color-ink-tertiary);">Honey Flow Rate Prediction</div>
-                    <div style="font-weight:700; color:var(--color-amber); font-size:14px;">+1.4 kg / day expected</div>
+                <div style="background:var(--color-surface-2); border:1px solid var(--color-border); border-radius:10px; padding:10px;">
+                    <div style="font-size:10px; color:var(--color-ink-tertiary);">Honey Flow Forecast</div>
+                    <div style="font-weight:700; color:var(--color-amber); font-size:13px;">+1.4 kg / day expected peak</div>
                 </div>
             </div>
         `
     },
     {
-        title: "Hardware Health",
+        title: "Node Telemetry Status",
         tab: "pnav-settings",
         html: `
             <div style="text-align:left;">
-                <h4 style="font-size:14px; font-weight:700; color:var(--color-ink); margin-bottom:12px;">Node Telemetry Status</h4>
-                <div style="display:flex; flex-direction:column; gap:8px;">
-                    <div style="background:var(--color-surface-2); padding:10px; border-radius:8px; font-size:11px; display:flex; justify-between;">
-                        <span>Node Firmware</span>
+                <h4 style="font-size:14px; font-weight:700; color:var(--color-ink); margin-bottom:10px;">Hardware Node Diagnostics</h4>
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                    <div style="background:var(--color-surface-2); padding:8px 10px; border-radius:6px; font-size:10px; display:flex; justify-content:space-between;">
+                        <span style="color:var(--color-ink-tertiary);">Firmware</span>
                         <span style="font-family:monospace; color:var(--color-amber);">v2.4.0-edge</span>
                     </div>
-                    <div style="background:var(--color-surface-2); padding:10px; border-radius:8px; font-size:11px; display:flex; justify-between;">
-                        <span>Solar Cell Charging</span>
-                        <span style="color:var(--color-success);">+4.2V (Trickle Active)</span>
+                    <div style="background:var(--color-surface-2); padding:8px 10px; border-radius:6px; font-size:10px; display:flex; justify-content:space-between;">
+                        <span style="color:var(--color-ink-tertiary);">Solar Trickle Charger</span>
+                        <span style="color:var(--color-success); font-weight:600;">+4.2V (Active)</span>
                     </div>
-                    <div style="background:var(--color-surface-2); padding:10px; border-radius:8px; font-size:11px; display:flex; justify-between;">
-                        <span>Enclosure Ingress</span>
-                        <span style="color:var(--color-success);">IP68 Sealed</span>
+                    <div style="background:var(--color-surface-2); padding:8px 10px; border-radius:6px; font-size:10px; display:flex; justify-content:space-between;">
+                        <span style="color:var(--color-ink-tertiary);">IP68 Ingress Rating</span>
+                        <span style="color:var(--color-success); font-weight:600;">100% Sealed</span>
+                    </div>
+                    <div style="background:var(--color-surface-2); padding:8px 10px; border-radius:6px; font-size:10px; display:flex; justify-content:space-between;">
+                        <span style="color:var(--color-ink-tertiary);">LoRaWAN Gateway</span>
+                        <span style="color:var(--color-info); font-weight:600;">Connected (11.4 km)</span>
                     </div>
                 </div>
             </div>
@@ -323,15 +366,34 @@ function setupDemoSimulator() {
             stopDemoLoop();
         });
     }
+
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('open');
+                stopDemoLoop();
+            }
+        });
+    }
+}
+
+function selectDemoStep(index) {
+    stopDemoLoop();
+    renderDemoStep(index);
+    // Resume auto-loop after 6 seconds of user inactivity
+    if (autoPauseTimeout) clearTimeout(autoPauseTimeout);
+    autoPauseTimeout = setTimeout(() => {
+        startDemoLoop();
+    }, 6000);
 }
 
 function startDemoLoop() {
     stopDemoLoop();
-    renderDemoStep(0);
+    renderDemoStep(currentDemoStep);
     demoInterval = setInterval(() => {
         currentDemoStep = (currentDemoStep + 1) % DEMO_STEPS.length;
         renderDemoStep(currentDemoStep);
-    }, 3500);
+    }, 3800);
 }
 
 function stopDemoLoop() {
@@ -339,14 +401,25 @@ function stopDemoLoop() {
         clearInterval(demoInterval);
         demoInterval = null;
     }
+    if (autoPauseTimeout) {
+        clearTimeout(autoPauseTimeout);
+        autoPauseTimeout = null;
+    }
 }
 
 function renderDemoStep(index) {
+    currentDemoStep = index;
     const step = DEMO_STEPS[index];
     const screen = document.getElementById('demo-screen-content');
     const badge = document.getElementById('demo-step-indicator');
 
-    if (screen) screen.innerHTML = step.html;
+    if (screen) {
+        screen.style.opacity = '0';
+        setTimeout(() => {
+            screen.innerHTML = step.html;
+            screen.style.opacity = '1';
+        }, 120);
+    }
     if (badge) badge.innerText = `STEP ${index + 1} / ${DEMO_STEPS.length} — ${step.title}`;
 
     // Highlight nav item
