@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Support & Warranty | Beevil Knievel</title>
-    <meta name="description" content="Get help with your Beevil Knievel hardware, file a warranty claim, or contact our engineering support team.">
+    <title>Customer Support & Help Center | Beevil Knievel</title>
+    <meta name="description" content="Access Beevil Knievel hardware documentation, field setup guides, warranty claims, and 24/7 commercial technical support.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,72 +12,89 @@
     <!-- Shared Navigation -->
     <nav id="bk-nav" class="nav"></nav>
 
-    <!-- Page Content -->
+    <!-- Main Content -->
     <div class="page-top">
         
-        <section class="section text-center" style="padding-bottom: 64px;">
+        <!-- Support Hero -->
+        <section class="section text-center" style="padding-bottom: 48px;">
             <div class="container container-narrow reveal">
-                <span class="eyebrow" style="color: var(--color-success);">Help Center</span>
-                <h1 class="heading-display mt-24 mb-24">We've got your back.</h1>
-                <p class="body-lg mx-auto" style="max-width: 600px;">
-                    Whether you need help configuring a gateway or need to file a warranty claim for a damaged node, our commercial support team is here to assist.
+                <span class="eyebrow" style="color: var(--color-info);">Customer Support</span>
+                <h1 class="heading-display mt-24 mb-24">How Can We Help You?</h1>
+                <p class="body-lg mx-auto mb-32" style="max-width: 600px;">
+                    Search our commercial field guide, view hardware setup tutorials, or submit a priority support request directly to our engineering team.
                 </p>
+
+                <!-- Search Bar -->
+                <div class="mx-auto" style="max-width: 540px; position: relative;">
+                    <input type="text" placeholder="Search articles (e.g. LoRa gateway pairing, solar charging, acoustic FFT)..." style="width: 100%; padding: 18px 24px; border-radius: var(--radius-pill); background: var(--color-surface-2); border: 1px solid var(--color-border); color: var(--color-ink); font-size: 15px; outline: none;" onkeyup="if(event.key==='Enter') alert('Searching knowledge base for: ' + this.value);">
+                </div>
             </div>
         </section>
 
-        <!-- Support Channels -->
+        <!-- Knowledge Categories -->
         <section class="section section-divider">
-            <div class="container">
-                <div class="grid-3 reveal">
-                    <div class="card text-center">
-                        <div class="feature-icon mx-auto">⚙️</div>
-                        <h3 class="heading-card mb-8">Technical Support</h3>
-                        <p class="body-sm mb-24">Help with LoRa pairing, AI configurations, or API integrations.</p>
-                        <a href="mailto:support@beevilknievel.com" class="btn btn-secondary btn-full">Email Tech Support</a>
+            <div class="container reveal">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="feature-icon">🔧</div>
+                        <h3 class="heading-card mb-12">Hardware Installation</h3>
+                        <p class="body-sm mb-16">Mounting IP68 nodes, inserting thermal probes into brood nests, and bracket positioning.</p>
+                        <a href="docs.html" class="btn btn-ghost btn-sm" style="padding-left:0;">View Guide &rarr;</a>
                     </div>
-                    <div class="card text-center">
-                        <div class="feature-icon mx-auto">🛡️</div>
-                        <h3 class="heading-card mb-8">Warranty Claims</h3>
-                        <p class="body-sm mb-24">Request a replacement node under our 2-Year Hardware Warranty.</p>
-                        <a href="#warranty" class="btn btn-secondary btn-full">Start a Claim</a>
+                    <div class="card">
+                        <div class="feature-icon" style="background:rgba(59,130,246,0.12); color:var(--color-info); border-color:rgba(59,130,246,0.2);">📡</div>
+                        <h3 class="heading-card mb-12">Gateway & RF Telemetry</h3>
+                        <p class="body-sm mb-16">LoRaWAN Sub-GHz setup, antenna orientation, and long-range field range optimization.</p>
+                        <a href="docs.html" class="btn btn-ghost btn-sm" style="padding-left:0;">View Guide &rarr;</a>
                     </div>
-                    <div class="card text-center">
-                        <div class="feature-icon mx-auto">📖</div>
-                        <h3 class="heading-card mb-8">Documentation</h3>
-                        <p class="body-sm mb-24">Read the setup guides, AT command lists, and sensor specifications.</p>
-                        <a href="docs.html" class="btn btn-secondary btn-full">View Guides</a>
+                    <div class="card">
+                        <div class="feature-icon" style="background:rgba(16,185,129,0.12); color:var(--color-success); border-color:rgba(16,185,129,0.2);">📱</div>
+                        <h3 class="heading-card mb-12">App & Cloud Sync</h3>
+                        <p class="body-sm mb-16">Farmer Companion App setup, offline SQLite caching, and configuring WhatsApp push alerts.</p>
+                        <a href="docs.html" class="btn btn-ghost btn-sm" style="padding-left:0;">View Guide &rarr;</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Form Placeholder -->
-        <section id="warranty" class="section section-divider" style="padding-bottom: 120px;">
+        <!-- Warranty & Support Form -->
+        <section class="section section-divider" style="background: var(--color-surface-1);" id="warranty">
             <div class="container container-narrow reveal">
-                <div class="card">
-                    <h2 class="heading-section mb-16">Submit a Request</h2>
-                    <p class="body-md mb-32">Fill out the form below and an engineer will get back to you within 24 hours.</p>
-                    
-                    <form onsubmit="event.preventDefault(); alert('Request submitted successfully!');">
-                        <div class="grid-2 mb-24">
+                <div class="text-center mb-48">
+                    <span class="eyebrow">Priority Support</span>
+                    <h2 class="heading-section">Contact Engineering Support</h2>
+                    <p class="body-sm mt-8">Commercial Pro & Enterprise customers receive guaranteed 2-hour SLA response times.</p>
+                </div>
+
+                <div class="card p-8">
+                    <form onsubmit="event.preventDefault(); alert('Support ticket submitted successfully. Ticket ID: #BK-8902');" style="display:flex; flex-direction:column; gap:20px;">
+                        <div class="grid-2">
                             <div>
-                                <label class="body-sm" style="color:var(--color-ink); display:block; margin-bottom:8px;">Full Name</label>
-                                <input type="text" required style="width:100%; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); padding:12px; border-radius:var(--radius-md);">
+                                <label style="font-size:12px; color:var(--color-ink-tertiary); display:block; margin-bottom:6px;">Full Name</label>
+                                <input type="text" required placeholder="e.g. Atharve Dahima" style="width:100%; padding:14px; border-radius:8px; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); font-size:14px;">
                             </div>
                             <div>
-                                <label class="body-sm" style="color:var(--color-ink); display:block; margin-bottom:8px;">Email Address</label>
-                                <input type="email" required style="width:100%; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); padding:12px; border-radius:var(--radius-md);">
+                                <label style="font-size:12px; color:var(--color-ink-tertiary); display:block; margin-bottom:6px;">Email Address</label>
+                                <input type="email" required placeholder="e.g. atharve@beevil-knievel.com" style="width:100%; padding:14px; border-radius:8px; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); font-size:14px;">
                             </div>
                         </div>
-                        <div class="mb-24">
-                            <label class="body-sm" style="color:var(--color-ink); display:block; margin-bottom:8px;">Hardware Node ID (EUI) - Optional</label>
-                            <input type="text" style="width:100%; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); padding:12px; border-radius:var(--radius-md);">
+
+                        <div>
+                            <label style="font-size:12px; color:var(--color-ink-tertiary); display:block; margin-bottom:6px;">Support Topic</label>
+                            <select style="width:100%; padding:14px; border-radius:8px; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); font-size:14px;">
+                                <option>Hardware Replacement / 2-Year Warranty Claim</option>
+                                <option>LoRaWAN Gateway Range / Connectivity</option>
+                                <option>Companion Mobile App Assistance</option>
+                                <option>Commercial Pre-Order / Sales Inquiry</option>
+                            </select>
                         </div>
-                        <div class="mb-32">
-                            <label class="body-sm" style="color:var(--color-ink); display:block; margin-bottom:8px;">Describe your issue</label>
-                            <textarea required rows="4" style="width:100%; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); padding:12px; border-radius:var(--radius-md); font-family:inherit; resize:vertical;"></textarea>
+
+                        <div>
+                            <label style="font-size:12px; color:var(--color-ink-tertiary); display:block; margin-bottom:6px;">Message / Issue Details</label>
+                            <textarea rows="4" required placeholder="Describe your field question or node serial number..." style="width:100%; padding:14px; border-radius:8px; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); font-size:14px; font-family:inherit;"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-amber btn-full">Submit Request</button>
+
+                        <button type="submit" class="btn btn-amber btn-full">Submit Priority Support Ticket</button>
                     </form>
                 </div>
             </div>

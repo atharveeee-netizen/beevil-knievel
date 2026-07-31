@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Software Downloads | Beevil Knievel</title>
-    <meta name="description" content="Download the latest firmware and mobile applications for the Beevil Knievel hardware ecosystem.">
+    <title>Mobile App Download & Release Portal | Beevil Knievel</title>
+    <meta name="description" content="Download the Beevil Knievel Android APK or install the Progressive Web App (PWA). Review version history, installation guide, and compatibility.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,82 +12,113 @@
     <!-- Shared Navigation -->
     <nav id="bk-nav" class="nav"></nav>
 
-    <!-- Page Content -->
+    <!-- Main Content -->
     <div class="page-top">
         
-        <!-- Download Center Hero -->
-        <section class="section text-center" style="padding-bottom: 64px;">
+        <!-- Download Hero -->
+        <section class="section text-center" style="padding-bottom: 48px;">
             <div class="container container-narrow reveal">
-                <span class="eyebrow" style="color: var(--color-info);">Software Downloads</span>
-                <h1 class="heading-display mt-24 mb-24">Mission Control.</h1>
-                <p class="body-lg mx-auto" style="max-width: 600px;">
-                    Download the latest mobile applications to interface with your Beevil Knievel apiary gateways.
+                <span class="eyebrow" style="color: var(--color-success);">Official Release Portal</span>
+                <h1 class="heading-display mt-24 mb-24">Download Farmer Companion App</h1>
+                <p class="body-lg mx-auto" style="max-width: 620px;">
+                    Install the native Android APK package or add the Progressive Web App (PWA) directly to your home screen for offline field telemetry.
                 </p>
+                <div class="hero-ctas mt-32">
+                    <button class="btn btn-amber btn-lg pwa-install-btn">Install Web App (PWA)</button>
+                    <a href="assets/beevil_product_hero.png" download class="btn btn-primary btn-lg">Download Android APK (v2.4.0)</a>
+                </div>
+                <div class="mt-16 body-sm" style="color: var(--color-ink-tertiary);">
+                    Version 2.4.0 Build 108 • 18.4 MB • Android 8.0+ / iOS 14+
+                </div>
             </div>
         </section>
 
-        <!-- Software Grid -->
+        <!-- Version History & Release Notes -->
         <section class="section section-divider">
-            <div class="container">
-                <div class="grid-2 reveal">
-                    
-                    <!-- Android App -->
-                    <div class="card flex flex-col justify-between">
-                        <div>
-                            <div class="flex justify-between items-center mb-16">
-                                <span class="badge badge-surface">Mobile App</span>
-                                <span style="font-size: 11px; font-weight: 600; color: var(--color-ink-tertiary);">Version 2.4.0 (Stable)</span>
-                            </div>
-                            <h2 class="heading-card mb-8">Android Package (APK)</h2>
-                            <p class="body-sm mb-24">Direct installation for Android devices. Essential for managing nodes, viewing telemetry, and receiving push notifications.</p>
-                            
-                            <ul class="mb-32" style="list-style:none; display:flex; flex-direction:column; gap:8px;">
-                                <li class="body-sm text-gradient"><strong>Release Notes:</strong> Added improved offline caching for rural deployments.</li>
-                                <li class="body-sm" style="color:var(--color-ink-tertiary);">Requirements: Android 8.0+</li>
-                                <li class="body-sm" style="color:var(--color-ink-tertiary);">File Size: 18.4 MB</li>
-                            </ul>
+            <div class="container container-narrow reveal">
+                <span class="eyebrow">Changelog & Builds</span>
+                <h2 class="heading-section mb-32">Version History & Release Notes</h2>
+
+                <div class="flex flex-col gap-24">
+                    <!-- Version 2.4.0 -->
+                    <div class="card card-featured">
+                        <div class="flex justify-between items-center mb-12">
+                            <h3 class="heading-card">v2.4.0-edge (Current Release)</h3>
+                            <span class="badge badge-amber">Latest Build</span>
                         </div>
-                        <a href="#" class="btn btn-primary btn-full">Download APK</a>
-                    </div>
-                    
-                    <!-- iOS App -->
-                    <div class="card flex flex-col justify-between" style="border-color: rgba(255,255,255,0.05); opacity: 0.7;">
-                        <div>
-                            <div class="flex justify-between items-center mb-16">
-                                <span class="badge badge-surface">Mobile App</span>
-                                <span style="font-size: 11px; font-weight: 600; color: var(--color-ink-tertiary);">TestFlight Beta</span>
-                            </div>
-                            <h2 class="heading-card mb-8">iOS Application</h2>
-                            <p class="body-sm mb-24">Native application for iPhone. Currently in closed beta testing for enterprise clients.</p>
-                        </div>
-                        <button class="btn btn-ghost btn-full" style="border: 1px solid var(--color-border);" disabled>Join Waitlist</button>
+                        <p class="body-sm mb-16" style="color: var(--color-ink-tertiary);">Released: July 28, 2026</p>
+                        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;" class="body-sm">
+                            <li><span style="color:var(--color-amber);">+</span> Added 36-Hour Pre-Swarm Acoustic FFT Frequency Warning Algorithm</li>
+                            <li><span style="color:var(--color-amber);">+</span> Upgraded LoRaWAN Gateway RSSI signal diagnostics</li>
+                            <li><span style="color:var(--color-amber);">+</span> Enhanced offline SQLite data caching for zero-cell field zones</li>
+                        </ul>
                     </div>
 
+                    <!-- Version 2.3.1 -->
+                    <div class="card">
+                        <div class="flex justify-between items-center mb-12">
+                            <h3 class="heading-card">v2.3.1-stable</h3>
+                            <span class="badge badge-surface">Previous Build</span>
+                        </div>
+                        <p class="body-sm mb-16" style="color: var(--color-ink-tertiary);">Released: June 14, 2026</p>
+                        <ul style="list-style:none; display:flex; flex-direction:column; gap:8px;" class="body-sm">
+                            <li><span style="color:var(--color-ink-tertiary);">&bull;</span> Added Brood Nest Thermal Delta-T heatmaps</li>
+                            <li><span style="color:var(--color-ink-tertiary);">&bull;</span> Integrated WhatsApp instant emergency notifications</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Installation Guide -->
-        <section class="section section-divider" style="padding-bottom: 120px;">
-            <div class="container reveal text-center">
-                <span class="eyebrow">Installation Guide</span>
-                <h2 class="heading-section mb-64">Installing the APK</h2>
-                <div class="grid-3 text-left">
-                    <div class="card card-glass">
-                        <div class="heading-small text-gradient mb-8">Step 01</div>
-                        <h3 class="heading-card mb-16">Download</h3>
-                        <p class="body-sm">Tap the download button above to save the .apk file to your device.</p>
+        <section class="section section-divider" style="background: var(--color-surface-1);">
+            <div class="container container-narrow reveal">
+                <div class="text-center mb-48">
+                    <span class="eyebrow">Installation Guide</span>
+                    <h2 class="heading-section">Step-by-Step Setup</h2>
+                </div>
+
+                <div class="grid-2 text-left">
+                    <div class="card">
+                        <h3 class="heading-card mb-12">Android Installation (APK)</h3>
+                        <ol style="padding-left:20px; display:flex; flex-direction:column; gap:8px;" class="body-sm">
+                            <li>Tap <strong>Download Android APK</strong> button above.</li>
+                            <li>Open your Downloads folder and select `Beevil_v2.4.0.apk`.</li>
+                            <li>If prompted, enable "Install from Unknown Sources" in Android Settings.</li>
+                            <li>Launch the app and log in with your apiary account credentials.</li>
+                        </ol>
                     </div>
-                    <div class="card card-glass">
-                        <div class="heading-small text-gradient mb-8">Step 02</div>
-                        <h3 class="heading-card mb-16">Allow Unknown Sources</h3>
-                        <p class="body-sm">If prompted, navigate to Android Settings > Security and enable "Install from Unknown Sources".</p>
+
+                    <div class="card">
+                        <h3 class="heading-card mb-12">iOS & Desktop Installation (PWA)</h3>
+                        <ol style="padding-left:20px; display:flex; flex-direction:column; gap:8px;" class="body-sm">
+                            <li>Open this website in <strong>Safari</strong> on iOS or <strong>Chrome</strong> on Desktop.</li>
+                            <li>Tap the <strong>Share</strong> icon (iOS) or browser menu (Chrome).</li>
+                            <li>Select <strong>Add to Home Screen</strong>.</li>
+                            <li>Launch the app icon directly from your home screen for full offline access.</li>
+                        </ol>
                     </div>
-                    <div class="card card-glass">
-                        <div class="heading-small text-gradient mb-8">Step 03</div>
-                        <h3 class="heading-card mb-16">Install & Pair</h3>
-                        <p class="body-sm">Open the APK, install the app, and enter your Gateway EUI to begin receiving telemetry.</p>
-                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Device Compatibility Matrix -->
+        <section class="section section-divider">
+            <div class="container container-narrow reveal">
+                <div class="text-center mb-48">
+                    <span class="eyebrow">Device Matrix</span>
+                    <h2 class="heading-section">System Compatibility</h2>
+                </div>
+
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <table style="width:100%; border-collapse:collapse; font-size:14px; text-align:left;">
+                        <tbody>
+                            <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">Android OS</td><td style="padding:16px 24px; color:var(--color-ink);">Android 8.0 (Oreo) or newer (ARM64 / x86_64)</td></tr>
+                            <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">iOS / iPadOS</td><td style="padding:16px 24px; color:var(--color-ink);">iOS 14.0 or newer via Safari Web App (PWA)</td></tr>
+                            <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">Desktop Browsers</td><td style="padding:16px 24px; color:var(--color-ink);">Chrome 90+, Safari 14+, Firefox 88+, Edge 90+</td></tr>
+                            <tr><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">Connectivity</td><td style="padding:16px 24px; color:var(--color-ink);">Cellular (4G/5G), Wi-Fi, or Sub-GHz LoRa Gateway Local Sync</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>

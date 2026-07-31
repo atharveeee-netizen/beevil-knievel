@@ -3,139 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hardware Overview | Beevil Knievel</title>
-    <meta name="description" content="Explore the Beevil Knievel smart beehive sensor node, engineered for extreme apiary conditions with Edge AI and LoRa connectivity.">
+    <title>Industrial Hardware Node Specs | Beevil Knievel</title>
+    <meta name="description" content="Explore the technical engineering behind the Beevil Knievel IP68 Edge AI hardware node. Dual thermal probes, MEMS acoustic array, and Sub-GHz LoRaWAN telemetry.">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Product Page Specifics */
-        .product-hero {
-            padding: 120px 0 60px;
-            text-align: center;
-            background: radial-gradient(circle at 50% 0%, rgba(26,26,26,1) 0%, var(--color-canvas) 80%);
-        }
-        .deep-dive-img {
-            width: 100%;
-            border-radius: var(--radius-xl);
-            border: 1px solid var(--color-border);
-            margin: 40px 0;
-            box-shadow: var(--shadow-lg);
-        }
-    </style>
 </head>
 <body>
 
     <!-- Shared Navigation -->
     <nav id="bk-nav" class="nav"></nav>
 
-    <!-- Page Content -->
+    <!-- Main Content -->
     <div class="page-top">
         
         <!-- Hardware Hero -->
-        <section class="product-hero">
+        <section class="section text-center" style="padding-bottom: 64px;">
             <div class="container container-narrow reveal">
-                <span class="eyebrow">The Hardware</span>
-                <h1 class="heading-display mb-24">Precision Engineered.<br>Field Proven.</h1>
-                <p class="body-lg mb-48">
-                    Built to withstand the toughest apiary conditions while delivering real-time acoustic and thermal intelligence straight from the brood nest.
+                <span class="eyebrow">Industrial Edge AI Node</span>
+                <h1 class="heading-display mt-24 mb-24">Precision Field Hardware.</h1>
+                <p class="body-lg mx-auto" style="max-width: 640px;">
+                    Engineered to endure extreme outdoor climates while sampling internal acoustic frequencies and brood nest thermal dynamics continuously.
                 </p>
-                <img src="assets/beevil_hardware_render.png" alt="Beevil Knievel Hardware Node Exploded View" class="deep-dive-img animate-float">
-            </div>
-        </section>
-
-        <!-- Tech Specs Grid -->
-        <section class="section section-divider">
-            <div class="container reveal">
-                <h2 class="heading-section mb-48">Industrial Specifications</h2>
-                <div class="grid-4">
-                    <div class="stat-block card">
-                        <div class="stat-value">IP68</div>
-                        <div class="stat-label mt-8">Weather Dust & Water Rating</div>
-                    </div>
-                    <div class="stat-block card">
-                        <div class="stat-value">4.0<span class="text-gradient" style="font-size: 24px;">km</span></div>
-                        <div class="stat-label mt-8">Sub-GHz LoRa Range</div>
-                    </div>
-                    <div class="stat-block card">
-                        <div class="stat-value">18<span class="text-gradient" style="font-size: 24px;">mo</span></div>
-                        <div class="stat-label mt-8">Solar LiPo Battery Life</div>
-                    </div>
-                    <div class="stat-block card">
-                        <div class="stat-value">8.4<span class="text-gradient" style="font-size: 24px;">ms</span></div>
-                        <div class="stat-label mt-8">On-Device Edge AI Inference</div>
-                    </div>
+                <div class="hero-ctas mt-32">
+                    <a href="store.html" class="btn btn-amber btn-lg">Pre-Order Hardware Node</a>
+                    <button class="btn btn-secondary btn-lg open-demo-btn">Try Web Demo</button>
                 </div>
             </div>
         </section>
 
-        <!-- Internal Components Breakdown -->
+        <!-- Exploded View Hardware Render -->
+        <section class="section section-divider">
+            <div class="container reveal">
+                <div class="card card-featured p-4 text-center">
+                    <img src="assets/beevil_hardware_render.png" alt="Beevil Knievel Exploded Hardware View Internal Render" class="mx-auto" style="max-height: 480px; object-fit: contain;">
+                </div>
+            </div>
+        </section>
+
+        <!-- Component Deep Dive Grid -->
+        <section class="section section-divider">
+            <div class="container">
+                <div class="flex flex-col gap-64">
+                    
+                    <!-- Deep Dive 1: Dual Thermal Probes -->
+                    <div class="flex flex-wrap items-center gap-48 reveal">
+                        <div style="flex:1; min-width:300px;">
+                            <span class="eyebrow">Sensor 01</span>
+                            <h2 class="heading-section mb-16">Brood Nest Thermal Telemetry</h2>
+                            <p class="body-md mb-24">
+                                Dual medical-grade DS18B20 digital temperature probes with ±0.1°C precision penetrate directly into the brood nest core. Detects sudden thermal drops signaling queen loss or hyper-thermic spikes preceding swarms.
+                            </p>
+                            <span class="badge badge-amber">±0.1°C Precision Probe</span>
+                        </div>
+                        <div style="flex:1; min-width:300px;" class="card">
+                            <h3 class="heading-card mb-12">Thermal Delta-T Engine</h3>
+                            <p class="body-sm">Cross-references external ambient weather against internal brood core temperatures to measure thermal insulation efficacy and Varroa parasitic stress levels.</p>
+                        </div>
+                    </div>
+
+                    <!-- Deep Dive 2: MEMS Acoustic Array -->
+                    <div class="flex flex-wrap items-center gap-48 reveal">
+                        <div style="flex:1; min-width:300px;" class="card">
+                            <h3 class="heading-card mb-12">FFT Frequency Sampling</h3>
+                            <p class="body-sm">High-bandwidth 16-bit acoustic micro-array captures low-frequency hive humming and high-pitched queen piping frequencies without intrusive physical box opening.</p>
+                        </div>
+                        <div style="flex:1; min-width:300px;">
+                            <span class="eyebrow" style="color:var(--color-info);">Sensor 02</span>
+                            <h2 class="heading-section mb-16">Acoustic MEMS Micro-Array</h2>
+                            <p class="body-md mb-24">
+                                Onboard digital signal processing computes FFT spectral power distributions every 15 minutes. Instantly identifies pre-swarm agitation sounds in the 300Hz-500Hz band 36 hours prior to swarming.
+                            </p>
+                            <span class="badge badge-success">36-Hour Advance Alert</span>
+                        </div>
+                    </div>
+
+                    <!-- Deep Dive 3: Sub-GHz Wireless & Power -->
+                    <div class="flex flex-wrap items-center gap-48 reveal">
+                        <div style="flex:1; min-width:300px;">
+                            <span class="eyebrow">Power & RF</span>
+                            <h2 class="heading-section mb-16">Solar Autonomy & Sub-GHz LoRaWAN</h2>
+                            <p class="body-md mb-24">
+                                Powered by a monocrystalline solar trickle charger feeding a long-life LiFePO4 battery cell. Long-range Sub-GHz LoRaWAN radio transmits telemetry through dense forest foliage up to 15km line-of-sight.
+                            </p>
+                            <span class="badge badge-surface">15km LoRa Range</span>
+                        </div>
+                        <div style="flex:1; min-width:300px;" class="card">
+                            <h3 class="heading-card mb-12">IP68 Polycarbonate Casing</h3>
+                            <p class="body-sm">Hermetically sealed against moisture, dust, rain, propolis, and sting bites. Operates reliably from -40°C to +85°C in high-humidity agricultural environments.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Datasheet -->
         <section class="section section-divider" style="background: var(--color-surface-1);">
-            <div class="container reveal">
-                <div class="grid-2 items-center">
-                    <div>
-                        <span class="eyebrow">Sensor Architecture</span>
-                        <h2 class="heading-section mb-24">Intelligence on the edge.</h2>
-                        <p class="body-md mb-24">
-                            The heart of Beevil Knievel is the ultralow-power Wio-E5 (STM32WLE5) SoC, which processes raw acoustic streams utilizing our proprietary TinyML state-machine locally on the device (Model 1), eliminating constant cellular data costs.
-                        </p>
-                        
-                        <ul class="mb-48" style="list-style: none;">
-                            <li class="flex items-center gap-16 mb-16">
-                                <div class="badge badge-surface" style="width: 32px; height: 32px; justify-content: center; border-radius: var(--radius-md);">1</div>
-                                <span class="body-md"><strong>Acoustics:</strong> ICS-43434 MEMS Mic (200-400Hz FFT)</span>
-                            </li>
-                            <li class="flex items-center gap-16 mb-16">
-                                <div class="badge badge-surface" style="width: 32px; height: 32px; justify-content: center; border-radius: var(--radius-md);">2</div>
-                                <span class="body-md"><strong>Thermals:</strong> Dual DS18B20 1-Wire Probes (Delta-T)</span>
-                            </li>
-                            <li class="flex items-center gap-16">
-                                <div class="badge badge-surface" style="width: 32px; height: 32px; justify-content: center; border-radius: var(--radius-md);">3</div>
-                                <span class="body-md"><strong>Comms:</strong> Sub-GHz LoRa RF Transceiver</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <!-- Reusing the render image for the component showcase -->
-                        <img src="assets/architecture_diagram.png" alt="Architecture flow diagram" class="deep-dive-img" style="margin:0;">
-                    </div>
+            <div class="container container-narrow reveal">
+                <div class="text-center mb-48">
+                    <span class="eyebrow">Engineering Specifications</span>
+                    <h2 class="heading-section">Node Technical Datasheet</h2>
+                </div>
+
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <table style="width:100%; border-collapse:collapse; font-size:14px; text-align:left;">
+                        <tbody>
+                            <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">Processor</td><td style="padding:16px 24px; color:var(--color-ink);">Ultra-Low-Power Dual Core ARM Cortex-M4 @ 48MHz</td></tr>
+                            <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">Wireless Radio</td><td style="padding:16px 24px; color:var(--color-ink);">Semtech SX1262 LoRaWAN Transceiver (868/915 MHz)</td></tr>
+                            <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">Temperature Sensors</td><td style="padding:16px 24px; color:var(--color-ink);">Dual DS18B20 1-Wire Digital Probes (±0.1°C Accuracy)</td></tr>
+                            <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">Acoustic Sensor</td><td style="padding:16px 24px; color:var(--color-ink);">MEMS Microphone (10Hz - 20kHz, SNR 64dB)</td></tr>
+                            <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">Enclosure Materials</td><td style="padding:16px 24px; color:var(--color-ink);">UV-Stabilized Polycarbonate, Stainless Hardware</td></tr>
+                            <tr style="border-bottom:1px solid var(--color-border);"><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">Power Supply</td><td style="padding:16px 24px; color:var(--color-ink);">Monocrystalline Solar Panel + 2200mAh LiFePO4 Cell</td></tr>
+                            <tr><td style="padding:16px 24px; font-weight:600; color:var(--color-ink-secondary);">Dimensions & Weight</td><td style="padding:16px 24px; color:var(--color-ink);">140mm x 90mm x 45mm, 320 grams</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
 
-        <!-- Installation Flow -->
-        <section class="section section-divider">
-            <div class="container text-center reveal">
-                <span class="eyebrow">Setup</span>
-                <h2 class="heading-section mb-64">Zero configuration installation.</h2>
-                
-                <div class="grid-4 text-left">
-                    <div class="card card-glass">
-                        <div class="heading-small text-gradient mb-8">Step 01</div>
-                        <h3 class="heading-card mb-16">Mount Node</h3>
-                        <p class="body-sm">Attach the bracket to the exterior hive face.</p>
-                    </div>
-                    <div class="card card-glass">
-                        <div class="heading-small text-gradient mb-8">Step 02</div>
-                        <h3 class="heading-card mb-16">Insert Probes</h3>
-                        <p class="body-sm">Slide thermal probes down into the brood frames.</p>
-                    </div>
-                    <div class="card card-glass">
-                        <div class="heading-small text-gradient mb-8">Step 03</div>
-                        <h3 class="heading-card mb-16">Power On</h3>
-                        <p class="body-sm">Pull tab to activate battery and initiate LoRa handshake.</p>
-                    </div>
-                    <div class="card card-glass">
-                        <div class="heading-small text-gradient mb-8">Step 04</div>
-                        <h3 class="heading-card mb-16">App Sync</h3>
-                        <p class="body-sm">Open the Beevil App to confirm real-time telemetry.</p>
-                    </div>
+        <!-- CTA -->
+        <section class="section section-divider text-center">
+            <div class="container container-narrow reveal">
+                <span class="eyebrow">Pre-Order Hardware</span>
+                <h2 class="heading-section mb-24">Equip Your Hives With Edge AI Telemetry</h2>
+                <div class="hero-ctas">
+                    <a href="store.html" class="btn btn-amber btn-lg">Pre-Order Store</a>
+                    <button class="btn btn-secondary btn-lg open-demo-btn">Try Web Demo</button>
                 </div>
-            </div>
-        </section>
-
-        <section class="section section-divider text-center" style="padding-bottom: 200px;">
-            <div class="container reveal">
-                <h2 class="heading-section mb-32">Ready for deployment?</h2>
-                <a href="store.html" class="btn btn-amber btn-lg">Shop Packages</a>
             </div>
         </section>
 
