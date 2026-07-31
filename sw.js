@@ -1,15 +1,24 @@
-const CACHE_NAME = 'beevil-knievel-v2.4';
+const CACHE_NAME = 'beevil-knievel-v3.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './product.html',
   './store.html',
-  './download.html',
   './app.html',
+  './download.html',
   './docs.html',
+  './support.html',
+  './accessories.html',
+  './about.html',
+  './investors.html',
+  './research.html',
   './privacy.html',
+  './styles.css',
+  './components.js',
   './manifest.json',
   './assets/beevil_product_hero.jpg',
-  './assets/beevil_hardware_render.jpg'
+  './assets/beevil_hardware_render.jpg',
+  './assets/architecture_diagram.jpg'
 ];
 
 self.addEventListener('install', (event) => {

@@ -3,239 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get the Mobile App | Team Beevil Knievel</title>
-    <meta name="description" content="Download the Smart Hive Monitor Mobile Application for Android & iOS - IEEE HardwAIre Challenge.">
-    <!-- Google Fonts: Inter font stack -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* HASHICORP DESIGN SYSTEM TOKENS - NATURAL WRITING */
-        :root {
-            --colors-canvas: #000000;
-            --colors-surface-1: #161B26;
-            --colors-surface-2: #252D3D;
-            --colors-surface-3: #333D52;
-            --colors-hairline: rgba(178, 182, 189, 0.15);
-            --colors-hairline-soft: rgba(178, 182, 189, 0.06);
-            --colors-inverse-canvas: #FFFFFF;
-
-            --colors-ink: #FFFFFF;
-            --colors-ink-muted: #B2B6BD;
-            --colors-ink-subtle: #656A76;
-            --colors-inverse-ink: #000000;
-
-            --colors-product-terraform: #844FBA;
-            --colors-product-vault: #FFC107;
-            --colors-product-consul: #E0384D;
-            --colors-product-waypoint: #00BCF2;
-            --colors-product-nomad: #00A86B;
-
-            --rounded-md: 8px;     /* HashiCorp 8px Developer CTA Radius */
-            --rounded-lg: 12px;
-            --rounded-xxl: 24px;
-            --rounded-pill: 9999px;
-
-            --spacing-section: 64px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
-        body { background-color: var(--colors-canvas); color: var(--colors-ink); line-height: 1.50; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-
-        /* Navigation Header */
-        .top-nav {
-            position: sticky; top: 0; z-index: 100;
-            height: 64px; background: var(--colors-canvas);
-            border-bottom: 1px solid var(--colors-hairline);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 32px;
-        }
-        .nav-brand { display: flex; align-items: center; gap: 12px; }
-        .nav-brand-logo {
-            width: 32px; height: 32px; background: var(--colors-surface-1);
-            border: 1px solid var(--colors-hairline); border-radius: var(--rounded-md);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 13px; font-weight: 800; color: var(--colors-product-vault);
-        }
-        .nav-brand h1 { font-size: 15px; font-weight: 700; color: var(--colors-ink); letter-spacing: -0.4px; }
-        .badge-ieee {
-            background: var(--colors-surface-2); color: var(--colors-ink-muted);
-            border: 1px solid var(--colors-hairline); padding: 3px 10px;
-            border-radius: var(--rounded-pill); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px;
-        }
-
-        .button-primary {
-            background: var(--colors-inverse-canvas); color: var(--colors-inverse-ink);
-            padding: 10px 18px; border-radius: var(--rounded-md); font-size: 14px; font-weight: 600;
-            text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s ease;
-        }
-        .button-primary:hover { background: #E2E8F0; }
-
-        .button-secondary {
-            background: var(--colors-surface-2); color: var(--colors-ink);
-            border: 1px solid var(--colors-hairline); padding: 10px 18px;
-            border-radius: var(--rounded-md); font-size: 14px; font-weight: 600;
-            text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background 0.15s ease;
-        }
-        .button-secondary:hover { background: var(--colors-surface-3); }
-
-        /* Container & Eyebrow */
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
-        .eyebrow {
-            font-size: 12px; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 0.6px; line-height: 1.23; margin-bottom: 12px; display: block;
-        }
-        .eyebrow-waypoint { color: var(--colors-product-waypoint); }
-        .eyebrow-vault { color: var(--colors-product-vault); }
-
-        .display-xl { font-size: 48px; font-weight: 700; line-height: 1.17; letter-spacing: -1.5px; color: var(--colors-ink); margin-bottom: 16px; }
-        .body-lg { font-size: 18px; font-weight: 500; line-height: 1.69; color: var(--colors-ink-muted); margin-bottom: 32px; }
-
-        /* Download Options Grid (3-Up) */
-        .download-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
-        .download-card {
-            background: var(--colors-surface-1); border: 1px solid var(--colors-hairline);
-            border-radius: var(--rounded-lg); padding: 28px; display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .platform-tag {
-            display: inline-block; background: var(--colors-surface-2); color: var(--colors-product-waypoint);
-            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
-            padding: 4px 10px; border-radius: var(--rounded-pill); margin-bottom: 16px; width: max-content;
-        }
-        .card-title { font-size: 20px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.4px; }
-        .card-desc { font-size: 14px; font-weight: 500; color: var(--colors-ink-muted); line-height: 1.6; margin-bottom: 24px; }
-
-        /* Steps List */
-        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
-        .step-card { background: var(--colors-surface-1); border: 1px solid var(--colors-hairline); border-radius: var(--rounded-lg); padding: 20px; }
-        .step-num { font-size: 12px; font-weight: 700; color: var(--colors-product-vault); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
-        .step-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-
-        /* Footer */
-        .footer {
-            border-top: 1px solid var(--colors-hairline); padding: 48px 0 32px; margin-top: 64px;
-            color: var(--colors-ink-muted); font-size: 13px;
-        }
-
-        @media (max-width: 900px) {
-            .download-grid, .steps-grid { grid-template-columns: 1fr; }
-            .display-xl { font-size: 36px; }
-        }
-    </style>
+    <title>Software Downloads | Beevil Knievel</title>
+    <meta name="description" content="Download the latest firmware and mobile applications for the Beevil Knievel hardware ecosystem.">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="top-nav">
-        <div class="nav-brand">
-            <div class="nav-brand-logo">BK</div>
-            <h1>Team Beevil Knievel</h1>
-            <span class="badge-ieee">IEEE HardwAIre</span>
-        </div>
-        <div>
-            <a href="index.html" class="button-secondary">← Back to Overview</a>
-        </div>
-    </header>
+    <!-- Shared Navigation -->
+    <nav id="bk-nav" class="nav"></nav>
 
-    <main class="container" style="padding-top: var(--spacing-section);">
+    <!-- Page Content -->
+    <div class="page-top">
+        
+        <!-- Download Center Hero -->
+        <section class="section text-center" style="padding-bottom: 64px;">
+            <div class="container container-narrow reveal">
+                <span class="eyebrow" style="color: var(--color-info);">Software Downloads</span>
+                <h1 class="heading-display mt-24 mb-24">Mission Control.</h1>
+                <p class="body-lg mx-auto" style="max-width: 600px;">
+                    Download the latest mobile applications to interface with your Beevil Knievel apiary gateways.
+                </p>
+            </div>
+        </section>
 
-        <!-- Download Banner -->
-        <div>
-            <span class="eyebrow eyebrow-waypoint">Mobile App • Build 2.4.0</span>
-            <h1 class="display-xl">Get the Mobile App</h1>
-            <p class="body-lg">
-                Download the app to get real-time hive alerts, view diagnostic notes, and track brood nest temperatures across your apiaries.
-            </p>
-        </div>
+        <!-- Software Grid -->
+        <section class="section section-divider">
+            <div class="container">
+                <div class="grid-2 reveal">
+                    
+                    <!-- Android App -->
+                    <div class="card flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-16">
+                                <span class="badge badge-surface">Mobile App</span>
+                                <span style="font-size: 11px; font-weight: 600; color: var(--color-ink-tertiary);">Version 2.4.0 (Stable)</span>
+                            </div>
+                            <h2 class="heading-card mb-8">Android Package (APK)</h2>
+                            <p class="body-sm mb-24">Direct installation for Android devices. Essential for managing nodes, viewing telemetry, and receiving push notifications.</p>
+                            
+                            <ul class="mb-32" style="list-style:none; display:flex; flex-direction:column; gap:8px;">
+                                <li class="body-sm text-gradient"><strong>Release Notes:</strong> Added improved offline caching for rural deployments.</li>
+                                <li class="body-sm" style="color:var(--color-ink-tertiary);">Requirements: Android 8.0+</li>
+                                <li class="body-sm" style="color:var(--color-ink-tertiary);">File Size: 18.4 MB</li>
+                            </ul>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-full">Download APK</a>
+                    </div>
+                    
+                    <!-- iOS App -->
+                    <div class="card flex flex-col justify-between" style="border-color: rgba(255,255,255,0.05); opacity: 0.7;">
+                        <div>
+                            <div class="flex justify-between items-center mb-16">
+                                <span class="badge badge-surface">Mobile App</span>
+                                <span style="font-size: 11px; font-weight: 600; color: var(--color-ink-tertiary);">TestFlight Beta</span>
+                            </div>
+                            <h2 class="heading-card mb-8">iOS Application</h2>
+                            <p class="body-sm mb-24">Native application for iPhone. Currently in closed beta testing for enterprise clients.</p>
+                        </div>
+                        <button class="btn btn-ghost btn-full" style="border: 1px solid var(--color-border);" disabled>Join Waitlist</button>
+                    </div>
 
-        <!-- 3 Download Option Cards -->
-        <div class="download-grid">
-
-            <!-- Card 1: Android APK -->
-            <div class="download-card">
-                <div>
-                    <span class="platform-tag">Android APK</span>
-                    <h3 class="card-title">Android App (v2.4.0)</h3>
-                    <p class="card-desc">
-                        Direct APK install for Android phones and field tablets (Android 8+). Caches sensor data locally when cellular signal drops out in remote apiaries.
-                    </p>
-                </div>
-                <div>
-                    <a href="app.html" class="button-primary" style="width:100%; justify-content:center;">Download APK (18.4 MB) →</a>
                 </div>
             </div>
-
-            <!-- Card 2: iOS TestFlight -->
-            <div class="download-card">
-                <div>
-                    <span class="platform-tag" style="color:var(--colors-product-vault);">iOS TestFlight</span>
-                    <h3 class="card-title">iOS TestFlight Beta</h3>
-                    <p class="card-desc">
-                        TestFlight beta build for iPhone and iPad (iOS 15+). Sends immediate push notifications through Apple APNs.
-                    </p>
-                </div>
-                <div>
-                    <a href="app.html" class="button-secondary" style="width:100%; justify-content:center;">Join iOS TestFlight →</a>
-                </div>
-            </div>
-
-            <!-- Card 3: Interactive Web Preview -->
-            <div class="download-card" style="border-color: rgba(0, 188, 242, 0.4);">
-                <div>
-                    <span class="platform-tag" style="color:var(--colors-product-nomad);">Web App / PWA</span>
-                    <h3 class="card-title">Browser Demo</h3>
-                    <p class="card-desc">
-                        Test out the app interface in your browser right now without downloading or installing anything.
-                    </p>
-                </div>
-                <div>
-                    <a href="app.html" class="button-primary" style="width:100%; justify-content:center; background:var(--colors-product-waypoint); color:#000;">Try Browser Demo →</a>
-                </div>
-            </div>
-
-        </div>
+        </section>
 
         <!-- Installation Guide -->
-        <div style="margin-top: 64px;">
-            <span class="eyebrow eyebrow-vault">Installation Guide</span>
-            <h2 style="font-size:28px; font-weight:700; letter-spacing:-0.6px; margin-bottom:12px;">Setting Up on Your Phone</h2>
-
-            <div class="steps-grid">
-                <div class="step-card">
-                    <div class="step-num">Step 01</div>
-                    <div class="step-title">Download the APK</div>
-                    <p style="font-size:13px; color:var(--colors-ink-muted);">Tap the APK download button above to save the installer file to your phone.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-num">Step 02</div>
-                    <div class="step-title">Allow Unknown Apps</div>
-                    <p style="font-size:13px; color:var(--colors-ink-muted);">If prompted by Android, enable "Install unknown apps" for your browser in system settings.</p>
-                </div>
-
-                <div class="step-card">
-                    <div class="step-num">Step 03</div>
-                    <div class="step-title">Pair Your Gateway</div>
-                    <p style="font-size:13px; color:var(--colors-ink-muted);">Open the app and type in your Wio-E5 gateway ID to connect your hive sensors.</p>
+        <section class="section section-divider" style="padding-bottom: 120px;">
+            <div class="container reveal text-center">
+                <span class="eyebrow">Installation Guide</span>
+                <h2 class="heading-section mb-64">Installing the APK</h2>
+                <div class="grid-3 text-left">
+                    <div class="card card-glass">
+                        <div class="heading-small text-gradient mb-8">Step 01</div>
+                        <h3 class="heading-card mb-16">Download</h3>
+                        <p class="body-sm">Tap the download button above to save the .apk file to your device.</p>
+                    </div>
+                    <div class="card card-glass">
+                        <div class="heading-small text-gradient mb-8">Step 02</div>
+                        <h3 class="heading-card mb-16">Allow Unknown Sources</h3>
+                        <p class="body-sm">If prompted, navigate to Android Settings > Security and enable "Install from Unknown Sources".</p>
+                    </div>
+                    <div class="card card-glass">
+                        <div class="heading-small text-gradient mb-8">Step 03</div>
+                        <h3 class="heading-card mb-16">Install & Pair</h3>
+                        <p class="body-sm">Open the APK, install the app, and enter your Gateway EUI to begin receiving telemetry.</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-    </main>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer container">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-            <div>
-                <strong>Team Beevil Knievel</strong> (SASET, Rashtriya Raksha University)
-                <br/>
-                <span style="color:var(--colors-ink-subtle);">Faculty Mentor: Dr. Vishal Sharma • IEEE HardwAIre Challenge Phase 2</span>
-            </div>
-            <div>
-                <a href="index.html" style="color:var(--colors-product-waypoint); text-decoration:none; font-weight:600;">← Back to Overview</a>
-            </div>
-        </div>
-    </footer>
+    <!-- Shared Footer -->
+    <footer id="bk-footer" class="footer"></footer>
 
+    <!-- Scripts -->
+    <script src="components.js"></script>
 </body>
 </html>

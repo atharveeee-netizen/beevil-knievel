@@ -3,136 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation & Support | Beevil Knievel</title>
-    <meta name="description" content="Technical documentation, hardware installation guides, sensor calibration, and gateway configuration for Beevil Knievel.">
-    <!-- Google Fonts: Inter font stack -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Technical Documentation | Beevil Knievel</title>
+    <meta name="description" content="Technical documentation, hardware installation guides, sensor calibration, and gateway configuration for the Beevil Knievel platform.">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* HASHICORP / APPLE / NOTHING DARK CANVAS DESIGN SYSTEM */
-        :root {
-            --colors-canvas: #000000;
-            --colors-surface-1: #111622;
-            --colors-surface-2: #1D2636;
-            --colors-surface-3: #2A364F;
-            --colors-hairline: rgba(255, 255, 255, 0.12);
-            --colors-hairline-soft: rgba(255, 255, 255, 0.05);
-
-            --colors-ink: #FFFFFF;
-            --colors-ink-muted: #94A3B8;
-            --colors-ink-subtle: #64748B;
-            --colors-inverse-ink: #000000;
-
-            --colors-product-terraform: #844FBA;
-            --colors-product-vault: #FFC107;
-            --colors-product-waypoint: #00BCF2;
-            --colors-product-nomad: #00A86B;
-
-            --rounded-md: 8px;
-            --rounded-lg: 14px;
-            --spacing-section: 48px;
+        .doc-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 64px;
+            padding-bottom: 120px;
+        }
+        
+        .doc-sidebar {
+            position: sticky;
+            top: 100px;
+            height: max-content;
+            border-right: 1px solid var(--color-border);
+            padding-right: 32px;
+        }
+        
+        .doc-nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .doc-nav-list a {
+            font-size: 14px;
+            color: var(--color-ink-tertiary);
+            transition: color var(--duration-fast);
+        }
+        
+        .doc-nav-list a:hover {
+            color: var(--color-ink);
+        }
+        
+        .doc-content h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 24px;
+            color: var(--color-ink);
+            letter-spacing: -0.5px;
+            padding-top: 24px;
+        }
+        
+        .doc-content h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 32px 0 16px;
+            color: var(--color-ink);
+        }
+        
+        .doc-section {
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 48px;
+            margin-bottom: 48px;
+        }
+        
+        .doc-code {
+            background: #000;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            font-family: monospace;
+            font-size: 13px;
+            color: var(--color-amber-light);
+            overflow-x: auto;
+            margin: 24px 0;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
-        body { background-color: var(--colors-canvas); color: var(--colors-ink); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-
-        /* Top Navigation */
-        .top-nav {
-            position: sticky; top: 0; z-index: 100;
-            height: 64px; background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--colors-hairline);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 32px;
+        @media (max-width: 900px) {
+            .doc-layout { grid-template-columns: 1fr; gap: 32px; }
+            .doc-sidebar { position: static; border-right: none; border-bottom: 1px solid var(--color-border); padding-bottom: 32px; }
         }
-        .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .nav-brand-logo { width: 32px; height: 32px; background: var(--colors-surface-1); border: 1px solid var(--colors-hairline); border-radius: var(--rounded-md); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--colors-product-vault); }
-        .nav-brand h1 { font-size: 15px; font-weight: 700; color: var(--colors-ink); letter-spacing: -0.4px; }
-
-        .button-secondary { background: var(--colors-surface-2); color: var(--colors-ink); border: 1px solid var(--colors-hairline); padding: 10px 18px; border-radius: var(--rounded-md); font-size: 14px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
-        .eyebrow { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--colors-product-waypoint); display: block; margin-bottom: 12px; }
-
-        .doc-section { background: var(--colors-surface-1); border: 1px solid var(--colors-hairline); border-radius: var(--rounded-lg); padding: 32px; margin-bottom: 24px; text-align: left; }
-        .doc-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--colors-ink); }
-        .doc-section p { font-size: 14px; color: var(--colors-ink-muted); margin-bottom: 16px; }
-
-        .code-block { background: #000000; border: 1px solid var(--colors-hairline); border-radius: var(--rounded-md); padding: 16px; font-family: monospace; font-size: 13px; color: var(--colors-product-vault); overflow-x: auto; margin-bottom: 16px; }
-
-        .footer { border-top: 1px solid var(--colors-hairline); padding: 48px 0 32px; margin-top: 64px; color: var(--colors-ink-muted); font-size: 13px; text-align: left; }
     </style>
 </head>
 <body>
 
-    <header class="top-nav">
-        <a href="index.html" class="nav-brand">
-            <div class="nav-brand-logo">BK</div>
-            <h1>Beevil Knievel Docs</h1>
-        </a>
-        <a href="index.html" class="button-secondary">← Back to Overview</a>
-    </header>
+    <!-- Shared Navigation -->
+    <nav id="bk-nav" class="nav"></nav>
 
-    <main class="container" style="padding-top: var(--spacing-section);">
-
-        <span class="eyebrow">Technical User Guide & Specs</span>
-        <h1 style="font-size:42px; font-weight:800; letter-spacing:-1.5px; margin-bottom:32px;">Documentation & Field Guide</h1>
-
-        <!-- Section 1: Mounting -->
-        <div class="doc-section" id="mounting">
-            <h2>1. Hardware Mounting & Placement</h2>
-            <p>
-                Mount the IP68 weatherproof enclosure directly on the exterior side wall of the brood chamber using the included stainless steel bracket. Ensure the solar top panel faces south for optimal trickle-charging.
-            </p>
-            <p>
-                Insert Probe A into the central brood nest frame (between frames 4 and 5) to monitor core temperature. Place Probe B under the outer hive lid to capture ambient reference temperature.
-            </p>
-        </div>
-
-        <!-- Section 2: Gateway Pairing -->
-        <div class="doc-section" id="gateway">
-            <h2>2. Wio-E5 LoRa Gateway Setup</h2>
-            <p>
-                Power on the Gateway station. Connect it to your local Wi-Fi or insertion of a 4G SIM card. Pair your sensor node using the unit EUI printed on the hardware label:
-            </p>
-            <div class="code-block">
-                # Example Gateway Pairing Command (AT Command Interface)<br/>
-                AT+KEY=APPKEY,"2B7E151628AED2A6ABF7158809CF4F3C"<br/>
-                AT+JOIN=AUTO
+    <!-- Page Content -->
+    <div class="page-top">
+        
+        <header class="section" style="padding-bottom: 40px; border-bottom: 1px solid var(--color-border);">
+            <div class="container">
+                <span class="eyebrow" style="color: var(--color-info);">Developer & User Guides</span>
+                <h1 class="heading-display">Documentation</h1>
             </div>
-        </div>
+        </header>
 
-        <!-- Section 3: Diagnostic Thresholds -->
-        <div class="doc-section" id="specs">
-            <h2>3. AI Thresholds & Diagnostic Rule Engine</h2>
-            <p>
-                <strong>Swarming Detection:</strong> Triggers when Brood Core Temp spikes +3.0°C above baseline while 200–400Hz acoustic FFT energy exceeds 82dB for over 15 minutes.
-            </p>
-            <p>
-                <strong>Varroa Mite Attack:</strong> Triggers when Brood Core Temp drops below 32.5°C while high-frequency agitation hums (400–450Hz) are detected.
-            </p>
-        </div>
+        <section class="container mt-48">
+            <div class="doc-layout">
+                
+                <!-- Sidebar -->
+                <aside class="doc-sidebar">
+                    <h3 class="heading-small mb-24">Getting Started</h3>
+                    <ul class="doc-nav-list mb-32">
+                        <li><a href="#overview">System Overview</a></li>
+                        <li><a href="#mounting">Hardware Mounting</a></li>
+                        <li><a href="#gateway">Gateway Pairing</a></li>
+                    </ul>
+                    
+                    <h3 class="heading-small mb-24">AI Diagnostics</h3>
+                    <ul class="doc-nav-list">
+                        <li><a href="#thresholds">Alert Thresholds (Delta-T)</a></li>
+                        <li><a href="#acoustics">Acoustic FFT Parameters</a></li>
+                    </ul>
+                </aside>
+                
+                <!-- Content -->
+                <main class="doc-content">
+                    
+                    <div id="mounting" class="doc-section">
+                        <h2>Hardware Mounting & Placement</h2>
+                        <p class="body-md mb-16">Proper installation is critical for accurate thermal readings and solar battery maintenance.</p>
+                        <p class="body-md mb-24">
+                            1. Mount the IP68 weatherproof enclosure directly on the exterior side wall of the brood chamber using the included stainless steel bracket.<br>
+                            2. Ensure the solar top panel faces south for optimal trickle-charging.<br>
+                            3. Insert Probe A into the central brood nest frame (between frames 4 and 5) to monitor core temperature.<br>
+                            4. Place Probe B under the outer hive lid to capture ambient reference temperature.
+                        </p>
+                    </div>
 
-        <!-- Section 4: Support -->
-        <div class="doc-section" id="support">
-            <h2>4. Customer Support & Field Assistance</h2>
-            <p>
-                Need help with installation, custom API integration, or large apiary deployments? Contact our engineering team directly at <strong style="color:var(--colors-ink);">support@beevilknievel.com</strong>.
-            </p>
-        </div>
+                    <div id="gateway" class="doc-section">
+                        <h2>Wio-E5 LoRa Gateway Setup</h2>
+                        <p class="body-md mb-24">
+                            Power on the Gateway station. Connect it to your local Wi-Fi or cellular backhaul. Pair your sensor node using the unit EUI printed on the hardware label via the AT command interface:
+                        </p>
+                        <div class="doc-code">
+# Standard Gateway Pairing AT Command
+AT+KEY=APPKEY,"2B7E151628AED2A6ABF7158809CF4F3C"
+AT+JOIN=AUTO
+                        </div>
+                    </div>
 
-    </main>
-
-    <footer class="footer container">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-            <div>
-                <strong>Beevil Knievel Documentation</strong> • Team Beevil Knievel (SASET, Rashtriya Raksha University)
+                    <div id="thresholds" class="doc-section">
+                        <h2>Diagnostic Rule Engine Thresholds</h2>
+                        <h3 class="text-gradient">Swarming Detection</h3>
+                        <p class="body-md mb-24">
+                            Triggers when Brood Core Temp spikes +3.0°C above baseline while 200–400Hz acoustic FFT energy exceeds 82dB for over 15 minutes.
+                        </p>
+                        <h3 style="color: var(--color-danger);">Varroa Mite Attack</h3>
+                        <p class="body-md">
+                            Triggers when Brood Core Temp drops below 32.5°C while high-frequency agitation hums (400–450Hz) are detected.
+                        </p>
+                    </div>
+                </main>
             </div>
-            <div>
-                <a href="index.html" style="color:var(--colors-product-waypoint); text-decoration:none; font-weight:600;">← Back to Landing Page</a>
-            </div>
-        </div>
-    </footer>
+        </section>
 
+    </div>
+
+    <!-- Shared Footer -->
+    <footer id="bk-footer" class="footer"></footer>
+
+    <!-- Scripts -->
+    <script src="components.js"></script>
 </body>
 </html>

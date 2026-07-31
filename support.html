@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support & Warranty | Beevil Knievel</title>
+    <meta name="description" content="Get help with your Beevil Knievel hardware, file a warranty claim, or contact our engineering support team.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Shared Navigation -->
+    <nav id="bk-nav" class="nav"></nav>
+
+    <!-- Page Content -->
+    <div class="page-top">
+        
+        <section class="section text-center" style="padding-bottom: 64px;">
+            <div class="container container-narrow reveal">
+                <span class="eyebrow" style="color: var(--color-success);">Help Center</span>
+                <h1 class="heading-display mt-24 mb-24">We've got your back.</h1>
+                <p class="body-lg mx-auto" style="max-width: 600px;">
+                    Whether you need help configuring a gateway or need to file a warranty claim for a damaged node, our commercial support team is here to assist.
+                </p>
+            </div>
+        </section>
+
+        <!-- Support Channels -->
+        <section class="section section-divider">
+            <div class="container">
+                <div class="grid-3 reveal">
+                    <div class="card text-center">
+                        <div class="feature-icon mx-auto">⚙️</div>
+                        <h3 class="heading-card mb-8">Technical Support</h3>
+                        <p class="body-sm mb-24">Help with LoRa pairing, AI configurations, or API integrations.</p>
+                        <a href="mailto:support@beevilknievel.com" class="btn btn-secondary btn-full">Email Tech Support</a>
+                    </div>
+                    <div class="card text-center">
+                        <div class="feature-icon mx-auto">🛡️</div>
+                        <h3 class="heading-card mb-8">Warranty Claims</h3>
+                        <p class="body-sm mb-24">Request a replacement node under our 2-Year Hardware Warranty.</p>
+                        <a href="#warranty" class="btn btn-secondary btn-full">Start a Claim</a>
+                    </div>
+                    <div class="card text-center">
+                        <div class="feature-icon mx-auto">📖</div>
+                        <h3 class="heading-card mb-8">Documentation</h3>
+                        <p class="body-sm mb-24">Read the setup guides, AT command lists, and sensor specifications.</p>
+                        <a href="docs.html" class="btn btn-secondary btn-full">View Guides</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Placeholder -->
+        <section id="warranty" class="section section-divider" style="padding-bottom: 120px;">
+            <div class="container container-narrow reveal">
+                <div class="card">
+                    <h2 class="heading-section mb-16">Submit a Request</h2>
+                    <p class="body-md mb-32">Fill out the form below and an engineer will get back to you within 24 hours.</p>
+                    
+                    <form onsubmit="event.preventDefault(); alert('Request submitted successfully!');">
+                        <div class="grid-2 mb-24">
+                            <div>
+                                <label class="body-sm" style="color:var(--color-ink); display:block; margin-bottom:8px;">Full Name</label>
+                                <input type="text" required style="width:100%; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); padding:12px; border-radius:var(--radius-md);">
+                            </div>
+                            <div>
+                                <label class="body-sm" style="color:var(--color-ink); display:block; margin-bottom:8px;">Email Address</label>
+                                <input type="email" required style="width:100%; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); padding:12px; border-radius:var(--radius-md);">
+                            </div>
+                        </div>
+                        <div class="mb-24">
+                            <label class="body-sm" style="color:var(--color-ink); display:block; margin-bottom:8px;">Hardware Node ID (EUI) - Optional</label>
+                            <input type="text" style="width:100%; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); padding:12px; border-radius:var(--radius-md);">
+                        </div>
+                        <div class="mb-32">
+                            <label class="body-sm" style="color:var(--color-ink); display:block; margin-bottom:8px;">Describe your issue</label>
+                            <textarea required rows="4" style="width:100%; background:var(--color-surface-2); border:1px solid var(--color-border); color:var(--color-ink); padding:12px; border-radius:var(--radius-md); font-family:inherit; resize:vertical;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-amber btn-full">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Shared Footer -->
+    <footer id="bk-footer" class="footer"></footer>
+
+    <!-- Scripts -->
+    <script src="components.js"></script>
+</body>
+</html>

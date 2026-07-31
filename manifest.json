@@ -4,8 +4,8 @@
   "description": "Commercial Precision Apiculture & Hive Monitoring PWA",
   "start_url": "app.html",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#050505",
+  "theme_color": "#F5A623",
   "orientation": "portrait",
   "icons": [
     {

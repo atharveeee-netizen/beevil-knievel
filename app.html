@@ -2,368 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Farmer Mobile App | Beevil Knievel PWA</title>
-    <meta name="theme-color" content="#000000">
-    <link rel="manifest" href="manifest.json">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* HASHICORP / APPLE DESIGN SYSTEM TOKENS - PWA MOBILE APP */
-        :root {
-            --colors-canvas: #000000;
-            --colors-surface-1: #111622;
-            --colors-surface-2: #1D2636;
-            --colors-surface-3: #2A364F;
-            --colors-hairline: rgba(255, 255, 255, 0.12);
-            --colors-hairline-soft: rgba(255, 255, 255, 0.05);
-
-            --colors-ink: #FFFFFF;
-            --colors-ink-muted: #94A3B8;
-            --colors-ink-subtle: #64748B;
-
-            /* Chromatic Product Identity Tokens */
-            --colors-product-terraform: #844FBA;
-            --colors-product-vault: #FFC107;
-            --colors-product-consul: #E0384D;
-            --colors-product-waypoint: #00BCF2;
-            --colors-product-nomad: #00A86B;
-
-            --rounded-md: 8px;   /* 8px CTA & inputs */
-            --rounded-lg: 14px;  /* Cards */
-            --rounded-pill: 9999px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--colors-canvas); color: var(--colors-ink); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 16px; -webkit-font-smoothing: antialiased; }
-
-        /* Phone Frame Shell */
-        .phone-frame {
-            width: 100%; max-width: 420px; height: 860px; max-height: 95vh;
-            background: var(--colors-canvas); border-radius: 36px;
-            border: 6px solid #111622; box-shadow: 0 0 0 1px var(--colors-hairline);
-            display: flex; flex-direction: column; overflow: hidden; position: relative;
-        }
-
-        /* Mobile Top Chrome */
-        .status-bar { padding: 12px 20px 4px; display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; color: var(--colors-ink-muted); }
-        .notch { width: 90px; height: 14px; background: #111622; border-radius: 8px; }
-
-        .app-nav { padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--colors-hairline); background: var(--colors-canvas); }
-        .app-title { font-size: 15px; font-weight: 700; color: var(--colors-ink); letter-spacing: -0.3px; }
-
-        /* App Main Body */
-        .app-body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
-
-        /* Eyebrow Label */
-        .eyebrow { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--colors-ink-muted); display: block; margin-bottom: 6px; }
-
-        /* Chromatic Identity Status Banners */
-        .banner { padding: 16px; border-radius: var(--rounded-lg); border: 1px solid var(--colors-hairline); }
-        .banner-vault { background: rgba(255, 193, 7, 0.12); border-color: rgba(255, 193, 7, 0.4); color: var(--colors-ink); }
-        .banner-consul { background: rgba(224, 56, 77, 0.12); border-color: rgba(224, 56, 77, 0.4); color: var(--colors-ink); }
-        .banner-nomad { background: rgba(0, 168, 107, 0.12); border-color: rgba(0, 168, 107, 0.4); color: var(--colors-ink); }
-
-        .banner-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px; }
-        .banner-text { font-size: 13px; font-weight: 500; line-height: 1.5; color: var(--colors-ink-muted); margin-bottom: 10px; }
-        .action-box { background: var(--colors-surface-1); border: 1px solid var(--colors-hairline); padding: 10px 12px; border-radius: var(--rounded-md); font-size: 12px; font-weight: 500; color: var(--colors-ink); }
-
-        /* Hive Carousel Selectors */
-        .hive-scroll { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
-        .hive-scroll::-webkit-scrollbar { display: none; }
-
-        .hive-chip {
-            min-width: 130px; background: var(--colors-surface-1); border: 1px solid var(--colors-hairline);
-            border-radius: var(--rounded-lg); padding: 12px; cursor: pointer; transition: all 0.15s ease; flex-shrink: 0;
-        }
-        .hive-chip.active { border-color: var(--colors-product-waypoint); background: var(--colors-surface-2); }
-        .hive-chip-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-
-        /* 4 Metric Cards Grid */
-        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .m-card { background: var(--colors-surface-1); border: 1px solid var(--colors-hairline); border-radius: var(--rounded-lg); padding: 14px; }
-        .m-label { font-size: 12px; font-weight: 600; color: var(--colors-ink-muted); }
-        .m-val { font-size: 22px; font-weight: 700; margin: 4px 0 2px; letter-spacing: -0.5px; }
-        .m-sub { font-size: 11px; font-weight: 600; }
-
-        /* Chart Box */
-        .chart-card { background: var(--colors-surface-1); border: 1px solid var(--colors-hairline); border-radius: var(--rounded-lg); padding: 14px; height: 210px; }
-
-        /* HashiCorp 8px Primary Button */
-        .btn-primary-8px {
-            background: var(--colors-ink); color: #000000; border: none;
-            padding: 12px 18px; border-radius: var(--rounded-md); font-size: 14px; font-weight: 600;
-            cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
-        .btn-primary-8px:hover { background: #E2E8F0; }
-
-        /* Bottom Tab Bar */
-        .tab-bar { padding: 10px 16px; background: var(--colors-surface-1); border-top: 1px solid var(--colors-hairline); display: flex; justify-content: space-around; }
-        .tab-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--colors-ink-muted); font-size: 11px; font-weight: 600; text-decoration: none; cursor: pointer; text-transform: uppercase; letter-spacing: 0.4px; }
-        .tab-btn.active { color: var(--colors-product-waypoint); }
-
-        /* Modal */
-        .modal { position: absolute; inset: 0; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 16px; z-index: 200; }
-        .modal.active { display: flex; }
-        .modal-box { width: 100%; background: var(--colors-surface-1); border: 1px solid var(--colors-hairline); border-radius: var(--rounded-lg); padding: 20px; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial App Ecosystem | Beevil Knievel</title>
+    <meta name="description" content="Manage your apiary with the Beevil Knievel mobile companion app. Real-time telemetry, AI diagnostic alerts, and offline field support.">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="phone-frame">
-        <!-- Top Status Bar -->
-        <div class="status-bar">
-            <span>10:41 AM</span>
-            <div class="notch"></div>
-            <span>100%</span>
-        </div>
+    <!-- Shared Navigation -->
+    <nav id="bk-nav" class="nav"></nav>
 
-        <!-- App Nav -->
-        <div class="app-nav">
-            <div>
-                <span class="eyebrow" style="margin-bottom:0; color:var(--colors-product-nomad);">● LoRa Connected (-84 dBm)</span>
-                <div class="app-title">Farmer Mobile App (PWA)</div>
-            </div>
-            <a href="index.html" style="font-size:12px; color:var(--colors-product-waypoint); text-decoration:none; font-weight:600;">Home</a>
-        </div>
-
-        <!-- Scrollable App Body -->
-        <div class="app-body">
-
-            <!-- Hive Scroll Selector -->
-            <div>
-                <span class="eyebrow">Select Hive</span>
-                <div class="hive-scroll">
-                    <div class="hive-chip active" id="chip1" onclick="selectHive(1)">
-                        <div class="hive-chip-name">Hive Alpha (#01)</div>
-                        <span style="font-size:10px; color:var(--colors-product-vault); font-weight:700;">SWARM WARNING</span>
-                    </div>
-                    <div class="hive-chip" id="chip2" onclick="selectHive(2)">
-                        <div class="hive-chip-name">Hive Beta (#02)</div>
-                        <span style="font-size:10px; color:var(--colors-product-nomad); font-weight:700;">HEALTHY</span>
-                    </div>
-                    <div class="hive-chip" id="chip3" onclick="selectHive(3)">
-                        <div class="hive-chip-name">Hive Gamma (#03)</div>
-                        <span style="font-size:10px; color:var(--colors-product-consul); font-weight:700;">MITE ATTACK</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Model 2 Cloud AI Diagnostic Advisory Banner -->
-            <div class="banner banner-vault" id="diagBanner">
-                <span class="eyebrow" style="color:var(--colors-product-vault);">Cloud AI Diagnosis</span>
-                <div class="banner-title" id="diagTitle">Swarm Warning</div>
-                <p class="banner-text" id="diagBody">
-                    Hive audio peaked at 310 Hz and brood temp jumped +3.1°C. The colony is likely preparing to swarm within 24 to 48 hours.
+    <!-- Page Content -->
+    <div class="page-top">
+        
+        <!-- App Ecosystem Hero -->
+        <section class="section text-center" style="padding-bottom: 64px;">
+            <div class="container container-narrow reveal">
+                <span class="eyebrow" style="color: var(--color-info);">Software Ecosystem</span>
+                <h1 class="heading-display mt-24 mb-24">Apiary Intelligence.<br>In Your Pocket.</h1>
+                <p class="body-lg mx-auto" style="max-width: 600px;">
+                    The essential companion to your hardware nodes. Monitor live brood temperatures, receive critical push notifications, and review acoustic AI diagnostics from anywhere in the world.
                 </p>
-                <div class="action-box" id="diagAction">
-                    <strong>WHAT TO DO:</strong> Check queen cells and set up a split box within 36 hours.
+                <div class="hero-ctas mt-32">
+                    <a href="download.html" class="btn btn-primary">Download Android APK</a>
+                    <a href="#demo" class="btn btn-secondary">Try Web Demo</a>
                 </div>
             </div>
+        </section>
 
-            <!-- 4 Metric Cards Grid -->
-            <div class="metrics-grid">
-                <div class="m-card">
-                    <div class="m-label" id="lblBrood">Brood Temp</div>
-                    <div class="m-val" id="valBrood">37.8°C</div>
-                    <div class="m-sub" style="color:var(--colors-product-vault);" id="footBrood">+3.1°C thermal spike</div>
-                </div>
-                <div class="m-card">
-                    <div class="m-label">Outside Temp</div>
-                    <div class="m-val" id="valAmbient">34.7°C</div>
-                    <div class="m-sub" style="color:var(--colors-ink-muted);">Apiary field</div>
-                </div>
-                <div class="m-card">
-                    <div class="m-label">Audio Peak</div>
-                    <div class="m-val" id="valAcoustics">310 Hz</div>
-                    <div class="m-sub" style="color:var(--colors-product-vault);" id="footAcoustics">High hum frequency</div>
-                </div>
-                <div class="m-card">
-                    <div class="m-label">Battery Level</div>
-                    <div class="m-val">94%</div>
-                    <div class="m-sub" style="color:var(--colors-product-nomad);">Solar charging</div>
+        <!-- Premium Mockup Showcase -->
+        <section class="section section-divider">
+            <div class="container reveal">
+                <div class="flex flex-wrap justify-center gap-32">
+                    <!-- Placeholder app screens -->
+                    <div style="width: 280px; height: 560px; background: var(--color-canvas); border: 8px solid var(--color-surface-2); border-radius: 40px; box-shadow: var(--shadow-xl); overflow: hidden; position: relative;">
+                        <div style="background: var(--color-surface-1); height: 100%; border-radius: 32px; padding: 24px; text-align: left;">
+                            <div style="width: 40%; height: 6px; background: var(--color-surface-3); border-radius: 4px; margin: 0 auto 32px;"></div>
+                            <h4 style="font-size:16px; font-weight:700; color:var(--color-ink); mb-16;">Hive Alpha (#01)</h4>
+                            <div style="background: rgba(245, 166, 35, 0.1); border: 1px solid rgba(245, 166, 35, 0.3); padding: 16px; border-radius: 12px; margin-top: 16px;">
+                                <div style="color: var(--color-amber); font-weight: 700; font-size: 13px; margin-bottom: 4px;">Swarm Warning</div>
+                                <div style="color: var(--color-ink-secondary); font-size: 11px;">Acoustic peak at 310Hz detected. Check queen cells immediately.</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Telemetry Chart -->
-            <div class="chart-card">
-                <span class="eyebrow" style="color:var(--colors-product-waypoint);">Temperature History (ΔT)</span>
-                <div style="height: 155px; position: relative;">
-                    <canvas id="appChart"></canvas>
+        <!-- Feature Grid -->
+        <section class="section section-divider">
+            <div class="container">
+                <div class="grid-3 reveal">
+                    <div class="card card-glass">
+                        <div class="feature-icon">📡</div>
+                        <h3 class="heading-card mb-16">Global Connectivity</h3>
+                        <p class="body-sm">Syncs via the cloud. Whether you're across the field or across the country, your apiary data is always live.</p>
+                    </div>
+                    <div class="card card-glass">
+                        <div class="feature-icon" style="background: rgba(34,197,94,0.1); color: var(--color-success); border-color: rgba(34,197,94,0.2);">🔔</div>
+                        <h3 class="heading-card mb-16">Push Notifications</h3>
+                        <p class="body-sm">Immediate alerts via native push, SMS, and WhatsApp for critical events like swarming or sudden temperature drops.</p>
+                    </div>
+                    <div class="card card-glass">
+                        <div class="feature-icon" style="background: rgba(59,130,246,0.1); color: var(--color-info); border-color: rgba(59,130,246,0.2);">📴</div>
+                        <h3 class="heading-card mb-16">Offline Field Mode</h3>
+                        <p class="body-sm">PWA local caching ensures you can still read the latest synchronized sensor telemetry even when cellular service drops.</p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Push Alert Test Button -->
-            <button class="btn-primary-8px" onclick="showModal()">
-                Test Push Alert
-            </button>
-
-            <!-- Navigation Back to Team Landing Page -->
-            <div style="text-align: center;">
-                <a href="index.html" style="color:var(--colors-product-waypoint); font-size:13px; text-decoration:none; font-weight:600;">
-                    ← Back to Landing Page
-                </a>
-            </div>
-
-        </div>
-
-        <!-- Bottom Tab Bar -->
-        <div class="tab-bar">
-            <div class="tab-btn active" onclick="selectHive(1)">
-                <span>Hives</span>
-            </div>
-            <div class="tab-btn" onclick="showModal()">
-                <span>Alerts</span>
-            </div>
-            <div class="tab-btn" onclick="selectHive(2)">
-                <span>Telemetry</span>
-            </div>
-            <div class="tab-btn" onclick="window.location.href='index.html'">
-                <span>Team</span>
-            </div>
-        </div>
-
-        <!-- Push Alert Preview Modal -->
-        <div class="modal" id="waModal">
-            <div class="modal-box">
-                <span class="eyebrow" style="color:var(--colors-product-vault);">Urgent Alert Sent</span>
-                <div style="font-size:14px; font-weight:700; margin-bottom:8px;" id="modalTitle">Emergency Alert Sent</div>
-                <div style="font-size:12px; color:var(--colors-ink-muted); line-height:1.45; margin-bottom:16px;" id="modalBody">
-                    Text alert dispatched to Beekeeper Phone (+91 98765 43210).
+        <!-- Interactive Web Demo Container -->
+        <section id="demo" class="section section-divider" style="background: var(--color-surface-1); padding-bottom: 120px;">
+            <div class="container text-center reveal">
+                <span class="eyebrow">PWA Web Demo</span>
+                <h2 class="heading-section mb-64">Experience the dashboard format.</h2>
+                <div class="mx-auto" style="max-width: 400px; border: 1px solid var(--color-border); border-radius: var(--radius-2xl); overflow: hidden; background: var(--color-canvas);">
+                    <!-- A simplified placeholder indicating the PWA would load here -->
+                    <div style="padding: 32px;">
+                        <h4 class="heading-small text-center mb-16">Dashboard Simulator</h4>
+                        <p class="body-sm text-center mb-24">Interactive preview requires JavaScript integration.</p>
+                        <a href="download.html" class="btn btn-secondary btn-full">Get the full app instead</a>
+                    </div>
                 </div>
-                <button class="btn-primary-8px" onclick="closeModal()">Close</button>
             </div>
-        </div>
+        </section>
 
     </div>
 
-    <script>
-        // PWA Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').then((reg) => {
-                    console.log('Beevil Knievel PWA Service Worker registered:', reg.scope);
-                }).catch((err) => {
-                    console.error('Service Worker registration failed:', err);
-                });
-            });
-        }
+    <!-- Shared Footer -->
+    <footer id="bk-footer" class="footer"></footer>
 
-        const DIAG = {
-            1: {
-                title: "Swarm Warning",
-                body: "Hive audio peaked at 310 Hz and brood temp jumped +3.1°C. The colony is likely preparing to swarm within 24 to 48 hours.",
-                act: "WHAT TO DO: Check queen cells and set up a split box within 36 hours."
-            },
-            2: {
-                title: "Hive Healthy & Stable",
-                body: "Brood nest temp is steady at 34.9°C with normal audio hum (220 Hz). No signs of disease or swarming.",
-                act: "WHAT TO DO: No action needed right now. Continue your normal 14-day check schedule."
-            },
-            3: {
-                title: "Varroa Mite Attack",
-                body: "Brood temp dropped to 31.2°C while hive agitation sound spiked to 410 Hz. High likelihood of Varroa mite infestation.",
-                act: "WHAT TO DO: Apply Formic Acid treatment promptly to protect brood."
-            }
-        };
-
-        let currentHive = 1;
-        let chart = null;
-
-        function initChart() {
-            const ctx = document.getElementById('appChart').getContext('2d');
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'],
-                    datasets: [{
-                        label: 'Brood Temp (°C)',
-                        data: [35.1, 36.2, 37.4, 37.8, 37.6, 37.1],
-                        borderColor: '#FFC107',
-                        backgroundColor: 'rgba(255, 193, 7, 0.12)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { ticks: { color: '#64748B', font: { size: 9 } }, grid: { display: false } },
-                        y: { ticks: { color: '#64748B', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.06)' } }
-                    }
-                }
-            });
-        }
-
-        function selectHive(id) {
-            currentHive = id;
-            document.querySelectorAll('.hive-chip').forEach((c, idx) => {
-                if (idx + 1 === id) c.classList.add('active');
-                else c.classList.remove('active');
-            });
-
-            const banner = document.getElementById('diagBanner');
-            if (id === 1) {
-                banner.className = 'banner banner-vault';
-                document.getElementById('valBrood').innerText = '37.8°C';
-                document.getElementById('valAcoustics').innerText = '310 Hz';
-                document.getElementById('footBrood').innerText = '+3.1°C thermal spike';
-                chart.data.datasets[0].data = [35.1, 36.2, 37.4, 37.8, 37.6, 37.1];
-                chart.data.datasets[0].borderColor = '#FFC107';
-            } else if (id === 2) {
-                banner.className = 'banner banner-nomad';
-                document.getElementById('valBrood').innerText = '34.9°C';
-                document.getElementById('valAcoustics').innerText = '220 Hz';
-                document.getElementById('footBrood').innerText = 'Normal range';
-                chart.data.datasets[0].data = [34.8, 34.9, 35.0, 34.9, 35.1, 34.9];
-                chart.data.datasets[0].borderColor = '#00A86B';
-            } else if (id === 3) {
-                banner.className = 'banner banner-consul';
-                document.getElementById('valBrood').innerText = '31.2°C';
-                document.getElementById('valAcoustics').innerText = '410 Hz';
-                document.getElementById('footBrood').innerText = '-3.7°C drop';
-                chart.data.datasets[0].data = [35.0, 34.1, 33.0, 32.2, 31.5, 31.2];
-                chart.data.datasets[0].borderColor = '#E0384D';
-            }
-
-            updateTexts();
-            chart.update();
-        }
-
-        function updateTexts() {
-            const data = DIAG[currentHive];
-            document.getElementById('diagTitle').innerText = data.title;
-            document.getElementById('diagBody').innerText = data.body;
-            document.getElementById('diagAction').innerText = data.act;
-        }
-
-        function showModal() {
-            const title = document.getElementById('diagTitle').innerText;
-            const action = document.getElementById('diagAction').innerText;
-            document.getElementById('modalBody').innerHTML = `
-                <strong>ALERT SENT TO PHONE</strong><br/><br/>
-                <b>Hive:</b> Hive #${currentHive}<br/>
-                <b>Diagnosis:</b> ${title}<br/><br/>
-                <b>Readings:</b> Brood Temp ${document.getElementById('valBrood').innerText} | Audio Peak ${document.getElementById('valAcoustics').innerText}<br/><br/>
-                ${action}<br/><br/>
-                <font size="1" color="#64748B">IEEE HardwAIre Challenge • Model 2 Gateway</font>
-            `;
-            document.getElementById('waModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('waModal').classList.remove('active');
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initChart();
-            selectHive(1);
-        });
-    </script>
+    <!-- Scripts -->
+    <script src="components.js"></script>
 </body>
 </html>
