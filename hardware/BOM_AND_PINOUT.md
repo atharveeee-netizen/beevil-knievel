@@ -19,7 +19,7 @@
 | 10 | **Gas & Humidity** | Bosch BME680 I2C eCO2/VOC/Temp/Hum | 1 | $8.50 | ₹705.00 | Tracks CO2 spikes predicting massive swarming prep |
 | 11 | **Cabling Protection** | Mouser Nylon Expandable Sleeving + Coating | 1 | $1.20 | ₹115.04 | Propolis-resistant cable sleeving & conformal coat |
 | 12 | **Custom PCB** | JLCPCB 2-Layer FR4 (60x50mm, 50$\Omega$ RF trace) | 1 | $2.00 | ₹191.74 | Low-noise 2-layer PCB with RF ground plane |
-| 13 | **Custom Receiver Unit** | Seeed Studio Wio-E5 Mini Receiver Board | 1 | $15.90 | ₹1,524.33 | Apiary yard gateway receiver unit |
+| 13 | **Custom Receiver Unit** | Custom JLCPCB Gateway Carrier Board (ThingPulse base) | 1 | $2.00 | ₹191.74 | Bare PCB routing Wio-E5 to ESP32 perfectly |
 | 14 | **Cloud Wi-Fi Bridge** | ESP32-WROOM-32 NodeMCU Dev Board | 1 | $4.50 | ₹375.00 | Bridges Wio-E5 UART data to Cloud API via Wi-Fi |
 | 15 | **Passives & Connectors**| Adafruit 4.7K Resistors, Caps, JST Connectors | 1 | $7.50 | ₹719.03 | Decoupling, pull-ups, and 4-wire scale headers |
 | **Total Node & Receiver** | | | | **$113.75** | **₹10,729.00** | |
