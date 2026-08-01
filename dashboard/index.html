@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beevil Knievel — Smart Apiary Telemetry & AI Gateway</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --card-bg: rgba(18, 26, 43, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-green: #10b981;
+            --accent-green-glow: rgba(16, 185, 129, 0.25);
+            --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
+            overflow-x: hidden;
+        }
+
+        /* Sidebar */
+        aside {
+            width: 300px;
+            background: rgba(13, 18, 30, 0.85);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid var(--card-border);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--accent-green-glow);
+            font-size: 1.2rem;
+        }
+
+        .hive-selector-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .hive-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .hive-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            padding: 14px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hive-card:hover, .hive-card.active {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--accent-green);
+            transform: translateX(4px);
+        }
+
+        .hive-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .hive-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+        }
+
+        .hive-status-dot.warning { background-color: var(--accent-amber); box-shadow: 0 0 8px var(--accent-amber); }
+        .hive-status-dot.danger { background-color: var(--accent-red); box-shadow: 0 0 8px var(--accent-red); }
+
+        .add-hive-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .add-hive-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--accent-green-glow);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            overflow-y: auto;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-title h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .header-title p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* AI Advisory Banner */
+        .ai-banner {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(59, 130, 246, 0.12));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .ai-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .ai-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+
+        .ai-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .metric-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .metric-unit {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .metric-footer {
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Analytics Section */
+        .charts-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .chart-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #121a2b;
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 32px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-title { font-size: 1.25rem; font-weight: 700; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-size: 0.85rem; color: var(--text-secondary); }
+        .form-group input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--card-border);
+            padding: 12px;
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+        }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; }
+        .btn-cancel { background: transparent; border: 1px solid var(--card-border); color: #fff; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside>
+        <div class="brand">
+            <div class="brand-icon">🐝</div>
+            <div>
+                <div>Beevil Knievel</div>
+                <div style="font-size: 0.7rem; color: var(--text-secondary); font-weight: 400;">Apiculture Gateway v2.4</div>
+            </div>
+        </div>
+
+        <div class="hive-selector-title">Monitored Broods (N-Scale)</div>
+
+        <div class="hive-list" id="hiveList">
+            <!-- Dynamic Brood Cards -->
+        </div>
+
+        <button class="add-hive-btn" onclick="openAddHiveModal()">
+            <span>+</span> Add Brood / Hive
+        </button>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main>
+        <header>
+            <div class="header-title">
+                <h1 id="selectedHiveTitle">Brood Node #01 — Apiary Alpha</h1>
+                <p id="selectedHiveSub">Wio-E5 LoRa Node ID: <span style="font-family: monospace; color: var(--accent-green);">0x8F94A2B1</span> | Last Ping: Just Now</p>
+            </div>
+            <div class="status-badge" id="aiStatusBadge">
+                <span class="hive-status-dot" id="badgeDot"></span>
+                <span id="badgeText">MODEL 2: HEALTHY BASELINE</span>
+            </div>
+        </header>
+
+        <!-- Model 2 AI Banner -->
+        <div class="ai-banner">
+            <div class="ai-icon">🧠</div>
+            <div class="ai-content">
+                <h3>Cloud Diagnostic Advisory (Model 2)</h3>
+                <p id="aiAdvisoryText">Brood thermal regulation is perfectly maintained at 34.6°C. Acoustic frequency analysis shows normal fanning activity with zero swarming or distress markers detected.</p>
+            </div>
+        </div>
+
+        <!-- 4-Sensor Metrics Grid -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span>Brood Core Temp (DS18B20)</span>
+                    <span>🌡️</span>
+                </div>
+                <div class="metric-value" id="valTemp">34.6 <span class="metric-unit">°C</span></div>
+                <div class="metric-footer">Target: 34.0°C - 35.5°C</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span>Acoustic Peak (ICS-43432)</span>
+                    <span>🎙️</span>
+                </div>
+                <div class="metric-value" id="valAudio">145 <span class="metric-unit">Hz</span></div>
+                <div class="metric-footer">Ventilation Band</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span>Gas / VOC (BME680)</span>
+                    <span>💨</span>
+                </div>
+                <div class="metric-value" id="valCO2">780 <span class="metric-unit">ppm</span></div>
+                <div class="metric-footer">Normal Respiration</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span>Hive Scale Weight (HX711)</span>
+                    <span>⚖️</span>
+                </div>
+                <div class="metric-value" id="valWeight">26.4 <span class="metric-unit">kg</span></div>
+                <div class="metric-footer">Winter Reserve Stable</div>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-container">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div class="chart-title">24-Hour Telemetry Tele-Stream</div>
+                </div>
+                <canvas id="telemetryChart" height="120"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <div class="chart-title">Node Battery & Solar Yield</div>
+                </div>
+                <canvas id="batteryChart" height="200"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Hive Modal -->
+    <div class="modal-overlay" id="addHiveModal">
+        <div class="modal-content">
+            <div class="modal-title">Register New Brood Node</div>
+            <div class="form-group">
+                <label>Brood Hive Name</label>
+                <input type="text" id="newHiveName" placeholder="e.g. Hive #04 - South Meadow">
+            </div>
+            <div class="form-group">
+                <label>Wio-E5 LoRa Hardware Address</label>
+                <input type="text" id="newHiveAddr" placeholder="0x7E3A9C...">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeAddHiveModal()">Cancel</button>
+                <button class="add-hive-btn" onclick="addNewHive()">Register Node</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // N-Scale Broods State Management
+        let broods = [
+            { id: 1, name: "Brood Node #01 — Apiary Alpha", addr: "0x8F94A2B1", temp: 34.6, audio: 145, co2: 780, weight: 26.4, status: "healthy", advice: "Brood thermal regulation is perfectly maintained at 34.6°C. Acoustic frequency analysis shows normal fanning activity with zero swarming or distress markers." },
+            { id: 2, name: "Brood Node #02 — North Orchard", addr: "0x91C4D2E5", temp: 33.8, audio: 340, co2: 2450, weight: 25.1, status: "warning", advice: "⚠️ IMMINENT SWARM WARNING: BME680 detects a massive CO2 respiration spike (2,450 ppm) correlated with 340 Hz departure acoustic buzzing. Prepare swarm traps!" },
+            { id: 3, name: "Brood Node #03 — Meadow Frame", addr: "0x63A1F4B9", temp: 24.2, audio: 110, co2: 650, weight: 4.8, status: "danger", advice: "🚨 WINTER STARVATION RISK: Hive scale dropped to 4.8 kg while internal temp dropped to 24.2°C. Immediate emergency syrup feeding required!" }
+        ];
+
+        let selectedId = 1;
+        let chartInstance;
+        let batteryChartInstance;
+
+        function renderHiveList() {
+            const list = document.getElementById('hiveList');
+            list.innerHTML = '';
+            broods.forEach(b => {
+                const card = document.createElement('div');
+                card.className = `hive-card ${b.id === selectedId ? 'active' : ''}`;
+                card.onclick = () => selectBrood(b.id);
+                
+                let dotClass = '';
+                if(b.status === 'warning') dotClass = 'warning';
+                if(b.status === 'danger') dotClass = 'danger';
+
+                card.innerHTML = `
+                    <span class="hive-name">${b.name}</span>
+                    <span class="hive-status-dot ${dotClass}"></span>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function selectBrood(id) {
+            selectedId = id;
+            const b = broods.find(x => x.id === id);
+            renderHiveList();
+
+            document.getElementById('selectedHiveTitle').innerText = b.name;
+            document.getElementById('selectedHiveSub').innerHTML = `Wio-E5 LoRa Node ID: <span style="font-family: monospace; color: var(--accent-green);">${b.addr}</span> | Last Ping: Just Now`;
+            
+            document.getElementById('valTemp').innerText = b.temp.toFixed(1);
+            document.getElementById('valAudio').innerText = b.audio;
+            document.getElementById('valCO2').innerText = b.co2;
+            document.getElementById('valWeight').innerText = b.weight.toFixed(1);
+            document.getElementById('aiAdvisoryText').innerText = b.advice;
+
+            const badge = document.getElementById('aiStatusBadge');
+            const dot = document.getElementById('badgeDot');
+            const text = document.getElementById('badgeText');
+
+            if(b.status === 'healthy') {
+                badge.style.borderColor = '#10b981'; badge.style.color = '#10b981'; badge.style.background = 'rgba(16, 185, 129, 0.15)';
+                dot.className = 'hive-status-dot'; text.innerText = 'MODEL 2: HEALTHY BASELINE';
+            } else if(b.status === 'warning') {
+                badge.style.borderColor = '#f59e0b'; badge.style.color = '#f59e0b'; badge.style.background = 'rgba(245, 158, 11, 0.15)';
+                dot.className = 'hive-status-dot warning'; text.innerText = 'MODEL 2: IMMINENT SWARM ALERT';
+            } else {
+                badge.style.borderColor = '#ef4444'; badge.style.color = '#ef4444'; badge.style.background = 'rgba(239, 68, 68, 0.15)';
+                dot.className = 'hive-status-dot danger'; text.innerText = 'MODEL 2: STARVATION / CRITICAL';
+            }
+
+            updateChartData();
+        }
+
+        function initCharts() {
+            const ctx = document.getElementById('telemetryChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', 'Now'],
+                    datasets: [
+                        { label: 'Temp (°C)', data: [34.1, 34.3, 34.5, 34.8, 34.6, 34.5, 34.6], borderColor: '#10b981', tension: 0.4 },
+                        { label: 'Weight (kg)', data: [26.8, 26.7, 26.6, 26.5, 26.4, 26.4, 26.4], borderColor: '#3b82f6', tension: 0.4 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#9ca3af' } } },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } }
+                    }
+                }
+            });
+
+            const ctxBat = document.getElementById('batteryChart').getContext('2d');
+            batteryChartInstance = new Chart(ctxBat, {
+                type: 'doughnut',
+                data: {
+                    labels: ['LiPo Reserve (3.95V)', 'Solar Charge Rate'],
+                    datasets: [{ data: [88, 12], backgroundColor: ['#10b981', 'rgba(255,255,255,0.1)'] }]
+                },
+                options: { plugins: { legend: { labels: { color: '#9ca3af' } } } }
+            });
+        }
+
+        function updateChartData() {
+            const b = broods.find(x => x.id === selectedId);
+            chartInstance.data.datasets[0].data = [b.temp - 0.5, b.temp - 0.3, b.temp, b.temp + 0.2, b.temp, b.temp];
+            chartInstance.data.datasets[1].data = [b.weight + 0.4, b.weight + 0.3, b.weight + 0.2, b.weight + 0.1, b.weight, b.weight];
+            chartInstance.update();
+        }
+
+        function openAddHiveModal() { document.getElementById('addHiveModal').style.display = 'flex'; }
+        function closeAddHiveModal() { document.getElementById('addHiveModal').style.display = 'none'; }
+
+        function addNewHive() {
+            const name = document.getElementById('newHiveName').value || `Brood Node #${broods.length + 1}`;
+            const addr = document.getElementById('newHiveAddr').value || `0x${Math.floor(Math.random()*16777215).toString(16).toUpperCase()}`;
+            
+            const newBrood = {
+                id: broods.length + 1,
+                name: name,
+                addr: addr,
+                temp: 34.5,
+                audio: 150,
+                co2: 790,
+                weight: 24.5,
+                status: "healthy",
+                advice: "Newly registered node online. All 4 sensors reporting stable baseline parameters."
+            };
+
+            broods.push(newBrood);
+            closeAddHiveModal();
+            selectBrood(newBrood.id);
+        }
+
+        window.onload = () => {
+            renderHiveList();
+            initCharts();
+            selectBrood(1);
+        };
+    </script>
+</body>
+</html>
