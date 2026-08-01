@@ -18,8 +18,9 @@
 | 9 | **Cabling Protection** | Mouser Nylon Expandable Sleeving + Coating | 1 | $1.20 | ₹115.04 | Propolis-resistant cable sleeving & conformal coat |
 | 10 | **Custom PCB** | JLCPCB 2-Layer FR4 (60x50mm, 50$\Omega$ RF trace) | 1 | $2.00 | ₹191.74 | Low-noise 2-layer PCB with RF ground plane |
 | 11 | **Custom Receiver Unit** | Seeed Studio Wio-E5 Mini Receiver Board | 1 | $15.90 | ₹1,524.33 | Apiary yard gateway receiver unit |
-| 12 | **Passives & Connectors**| Adafruit 4.7K Resistors, Caps, JST Connectors | 1 | $7.50 | ₹719.03 | Decoupling & 1-Wire pull-up resistors |
-| **Total Node & Receiver** | | | | **$99.95** | **₹9,582.20** | |
+| 12 | **Cloud Wi-Fi Bridge** | ESP32-WROOM-32 NodeMCU Dev Board | 1 | $4.50 | ₹375.00 | Bridges Wio-E5 UART data to Cloud API via Wi-Fi |
+| 13 | **Passives & Connectors**| Adafruit 4.7K Resistors, Caps, JST Connectors | 1 | $7.50 | ₹719.03 | Decoupling & 1-Wire pull-up resistors |
+| **Total Node & Receiver** | | | | **$104.45** | **₹9,957.20** | |
 
 ---
 
