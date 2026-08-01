@@ -30,6 +30,9 @@ const NAV_HTML = `
     </ul>
 
     <div class="nav-cta">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">
+            <span class="theme-toggle-icon"></span>
+        </button>
         <button class="btn btn-amber btn-sm open-demo-btn">Try Web Demo</button>
         <a href="store.html" class="btn btn-secondary btn-sm">Buy Now</a>
         <button class="nav-menu-btn" aria-label="Toggle menu"><span></span></button>
@@ -229,7 +232,62 @@ function injectDemoModal() {
     }
 }
 
+/* ==========================================================================
+   Theme System — Dark (default) / Light toggle with localStorage persistence
+   ========================================================================== */
+function initTheme() {
+    // Determine initial theme:
+    // 1. localStorage preference (user's explicit choice)
+    // 2. System preference (prefers-color-scheme)
+    // 3. Default: dark
+    const stored = localStorage.getItem('bk-theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = stored || (systemPrefersDark ? 'dark' : 'light');
+
+    applyTheme(theme);
+
+    // Wire up toggle button (injected by nav, may run after injectNavigation)
+    // Use event delegation in case button isn't in DOM yet
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('#theme-toggle')) {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            applyTheme(current === 'dark' ? 'light' : 'dark');
+        }
+    });
+
+    // Listen for system preference changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('bk-theme')) {
+            applyTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('bk-theme', theme);
+
+    // Update toggle icon
+    const iconEl = document.querySelector('.theme-toggle-icon');
+    if (iconEl) {
+        iconEl.textContent = theme === 'dark' ? '☀️' : '🌙';
+        iconEl.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+
+    // Update meta theme-color for browser chrome
+    let meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) {
+        meta = document.createElement('meta');
+        meta.name = 'theme-color';
+        document.head.appendChild(meta);
+    }
+    meta.content = theme === 'dark' ? '#040405' : '#F8F7F4';
+}
+
 function initInteractivity() {
+    // Theme toggle
+    initTheme();
+
     // Mobile Nav Toggle (class-based, no inline style conflicts)
     const menuBtn = document.querySelector('.nav-menu-btn');
     const navLinks = document.querySelector('.nav-links');

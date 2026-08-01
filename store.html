@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,13 @@
     <title>Commercial Pre-Order Store | Beevil Knievel</title>
     <meta name="description" content="Pre-order Beevil Knievel IP68 hardware kits, LoRaWAN gateways, and commercial apiary telemetry packages. Guaranteed 30-day money back & 2-year warranty.">
     <link rel="stylesheet" href="styles.css">
+    <!-- Flash prevention: apply saved theme before first paint -->
+    <script>
+        (function(){
+            var t = localStorage.getItem('bk-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
 
@@ -24,9 +31,9 @@
                     All packages include IP68 hardware nodes, monocrystalline solar trickle cells, dual thermal probes, Sub-GHz gateway hardware, and full companion app access.
                 </p>
                 <div class="flex justify-center gap-24 mt-24 flex-wrap" style="font-size: 13px; color: var(--color-success); font-weight: 600;">
-                    <span>✓ Guaranteed 30-Day Money-Back</span>
-                    <span>✓ 2-Year Full Hardware Warranty</span>
-                    <span>✓ Worldwide Priority Dispatch</span>
+                    <span>âœ“ Guaranteed 30-Day Money-Back</span>
+                    <span>âœ“ 2-Year Full Hardware Warranty</span>
+                    <span>âœ“ Worldwide Priority Dispatch</span>
                 </div>
             </div>
         </section>
@@ -57,11 +64,11 @@
                             </div>
                             
                             <ul class="mb-32" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> 1x Beevil Hardware Node</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> 1x Sub-GHz LoRaWAN Gateway</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> Dual DS18B20 Thermal Probes</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> 1 Year Cloud Telemetry Access</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> 2-Year Hardware Warranty</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> 1x Beevil Hardware Node</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> 1x Sub-GHz LoRaWAN Gateway</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> Dual DS18B20 Thermal Probes</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> 1 Year Cloud Telemetry Access</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> 2-Year Hardware Warranty</li>
                             </ul>
                         </div>
                         <button class="btn btn-secondary btn-full" onclick="alert('Starter Apiary Kit added to cart!')">Add to Cart</button>
@@ -90,11 +97,11 @@
                             </div>
                             
                             <ul class="mb-32" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> <strong>4x</strong> Beevil Hardware Nodes</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> 1x Long-Range LoRaWAN Gateway</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> 8x DS18B20 Thermal Probes</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> 2 Years Cloud Telemetry & AI Alerts</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> Priority SLA Hardware Replacement</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> <strong>4x</strong> Beevil Hardware Nodes</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> 1x Long-Range LoRaWAN Gateway</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> 8x DS18B20 Thermal Probes</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> 2 Years Cloud Telemetry & AI Alerts</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> Priority SLA Hardware Replacement</li>
                             </ul>
                         </div>
                         <button class="btn btn-amber btn-full" onclick="alert('Commercial Pro Kit added to cart!')">Build Pro Kit Payload</button>
@@ -120,11 +127,11 @@
                             </div>
                             
                             <ul class="mb-32" style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> <strong>20x</strong> Beevil Hardware Nodes</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> 1x Industrial Cellular Gateway</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> On-Site Field Setup Assistance</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> Lifetime Cloud AI Telemetry</li>
-                                <li class="body-sm"><span style="color:var(--color-amber);">✓</span> Custom REST API & Webhooks Integration</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> <strong>20x</strong> Beevil Hardware Nodes</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> 1x Industrial Cellular Gateway</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> On-Site Field Setup Assistance</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> Lifetime Cloud AI Telemetry</li>
+                                <li class="body-sm"><span style="color:var(--color-amber);">âœ“</span> Custom REST API & Webhooks Integration</li>
                             </ul>
                         </div>
                         <button class="btn btn-ghost btn-full" style="border:1px solid var(--color-border);" onclick="alert('Enterprise Quotation requested. Sales team will contact you within 2 hours.')">Request Quotation</button>
@@ -142,17 +149,17 @@
 
                 <div class="grid-3 text-left">
                     <div class="card">
-                        <div class="feature-icon" style="font-size:20px;">📦</div>
+                        <div class="feature-icon" style="font-size:20px;">ðŸ“¦</div>
                         <h4 class="heading-small mb-8">Shipping Policy</h4>
                         <p class="body-sm">Dispatches from engineering facilities within 5 business days via tracked DHL/FedEx Express.</p>
                     </div>
                     <div class="card">
-                        <div class="feature-icon" style="font-size:20px;">🛡️</div>
+                        <div class="feature-icon" style="font-size:20px;">ðŸ›¡ï¸</div>
                         <h4 class="heading-small mb-8">2-Year Warranty</h4>
                         <p class="body-sm">Complete hardware replacement SLA covering sensor drift, solar cell failure, and field ingress.</p>
                     </div>
                     <div class="card">
-                        <div class="feature-icon" style="font-size:20px;">🔄</div>
+                        <div class="feature-icon" style="font-size:20px;">ðŸ”„</div>
                         <h4 class="heading-small mb-8">30-Day Returns</h4>
                         <p class="body-sm">Test in your apiary risk-free. 100% money-back guarantee if not fully satisfied with performance.</p>
                     </div>
@@ -178,3 +185,4 @@
     <script src="components.js"></script>
 </body>
 </html>
+

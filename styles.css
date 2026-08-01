@@ -6,65 +6,117 @@
 /* ---------- Google Fonts ---------- */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&family=Bungee&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-/* ---------- Design Tokens ---------- */
+/* ---------- Design Tokens — DARK MODE (default) ---------- */
 :root {
-    /* Color Palette */
-    --color-canvas: #040405;
+    /* Surface hierarchy: canvas → 1 → 2 → 3 → 4 */
+    --color-canvas:    #040405;
     --color-surface-1: #0A0A0C;
     --color-surface-2: #121215;
     --color-surface-3: #1A1A1F;
     --color-surface-4: #24242B;
 
-    /* Borders */
-    --color-border: rgba(255, 255, 255, 0.08);
-    --color-border-hover: rgba(255, 255, 255, 0.18);
+    /* Borders — felt, not seen */
+    --color-border:        rgba(255, 255, 255, 0.08);
+    --color-border-hover:  rgba(255, 255, 255, 0.18);
     --color-border-accent: rgba(245, 166, 35, 0.35);
 
-    /* Typography */
-    --color-ink: #FFFFFF;
+    /* Typography ink scale */
+    --color-ink:          #FFFFFF;
     --color-ink-secondary: #A1A1AA;
-    --color-ink-tertiary: #71717A;
-    --color-ink-inverse: #050505;
+    --color-ink-tertiary:  #71717A;
+    --color-ink-inverse:   #050505;
 
-    /* Brand Accent */
-    --color-amber: #F5A623;
+    /* Brand Accent — amber is the product identity color */
+    --color-amber:      #F5A623;
     --color-amber-light: #FFC86B;
-    --color-amber-dark: #D48408;
-    --color-amber-glow: rgba(245, 166, 35, 0.14);
+    --color-amber-dark:  #D48408;
+    --color-amber-glow:  rgba(245, 166, 35, 0.14);
 
-    /* Status Colors */
+    /* Status */
     --color-success: #10B981;
     --color-warning: #F59E0B;
-    --color-danger: #EF4444;
-    --color-info: #3B82F6;
+    --color-danger:  #EF4444;
+    --color-info:    #3B82F6;
 
-    /* Border Radii */
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
-    --radius-2xl: 32px;
+    /* Border Radii — 8px CTA (engineered, not consumer) */
+    --radius-sm:   6px;
+    --radius-md:   10px;
+    --radius-lg:   16px;
+    --radius-xl:   24px;
+    --radius-2xl:  32px;
     --radius-pill: 9999px;
 
-    /* Layout & Spacing */
-    --container-max: 1240px;
+    /* Layout */
+    --container-max:    1240px;
     --container-narrow: 840px;
-    --section-gap: 120px;
+    --section-gap:      120px;
 
-    /* Easing & Timing */
-    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-    --duration-fast: 0.15s;
+    /* Motion */
+    --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+    --duration-fast:   0.15s;
     --duration-normal: 0.3s;
-    --duration-slow: 0.6s;
+    --duration-slow:   0.6s;
 
-    /* Box Shadows */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
-    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
-    --shadow-xl: 0 32px 96px rgba(0, 0, 0, 0.7);
+    /* Shadows (used sparingly — surface-lift is primary elevation) */
+    --shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-md:    0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-lg:    0 16px 48px rgba(0, 0, 0, 0.6);
+    --shadow-xl:    0 32px 96px rgba(0, 0, 0, 0.7);
     --shadow-amber: 0 0 50px rgba(245, 166, 35, 0.2);
+
+    /* Theme toggle icon */
+    --theme-icon: '☀️';
 }
+
+/* ---------- Design Tokens — LIGHT MODE override ---------- */
+[data-theme="light"] {
+    /* Warm off-white canvas — NOT pure white (too harsh) */
+    --color-canvas:    #F8F7F4;
+    --color-surface-1: #EFEDE8;
+    --color-surface-2: #E4E1DA;
+    --color-surface-3: #D9D5CC;
+    --color-surface-4: #CCC8BE;
+
+    /* Borders — hairlines on light */
+    --color-border:        rgba(0, 0, 0, 0.08);
+    --color-border-hover:  rgba(0, 0, 0, 0.18);
+    --color-border-accent: rgba(212, 132, 8, 0.4);
+
+    /* Typography — near-black on warm white */
+    --color-ink:           #0A0A0C;
+    --color-ink-secondary: #52525B;
+    --color-ink-tertiary:  #A1A1AA;
+    --color-ink-inverse:   #FFFFFF;
+
+    /* Amber deepens slightly on light for contrast */
+    --color-amber:       #C87204;
+    --color-amber-light: #F5A623;
+    --color-amber-dark:  #8F4F00;
+    --color-amber-glow:  rgba(200, 114, 4, 0.10);
+
+    /* Status — same semantics, slightly muted */
+    --color-success: #059669;
+    --color-warning: #D97706;
+    --color-danger:  #DC2626;
+    --color-info:    #2563EB;
+
+    /* Shadows get lighter on light mode */
+    --shadow-sm:    0 1px 4px rgba(0, 0, 0, 0.10);
+    --shadow-md:    0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg:    0 8px 32px rgba(0, 0, 0, 0.14);
+    --shadow-xl:    0 16px 64px rgba(0, 0, 0, 0.16);
+    --shadow-amber: 0 0 32px rgba(200, 114, 4, 0.15);
+
+    /* Theme toggle icon */
+    --theme-icon: '🌙';
+}
+
+/* Smooth theme transition */
+*, *::before, *::after {
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
 
 /* ---------- Reset & Base Styling ---------- */
 *, *::before, *::after {
@@ -388,6 +440,36 @@ button {
     align-items: center;
     gap: 12px;
 }
+
+/* Theme toggle button */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    font-size: 16px;
+    transition: background var(--duration-fast) ease,
+                border-color var(--duration-fast) ease,
+                transform var(--duration-fast) ease;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    background: var(--color-surface-3);
+    border-color: var(--color-border-hover);
+    transform: scale(1.08);
+}
+
+.theme-toggle-icon {
+    line-height: 1;
+    pointer-events: none;
+}
+
 
 .nav-menu-btn {
     display: none;

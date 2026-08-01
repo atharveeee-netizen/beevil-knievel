@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,13 @@
     <title>Farmer Companion App Ecosystem | Beevil Knievel</title>
     <meta name="description" content="Explore the Beevil Knievel mobile companion application. Live hive telemetry, acoustic swarm alerts, AI diagnostics, and offline field sync.">
     <link rel="stylesheet" href="styles.css">
+    <!-- Flash prevention: apply saved theme before first paint -->
+    <script>
+        (function(){
+            var t = localStorage.getItem('bk-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
 
@@ -37,13 +44,13 @@
                     <div class="phone-mockup">
                         <div class="phone-notch"></div>
                         <div class="phone-screen" style="padding-top: 48px; text-align: left;">
-                            <div style="font-size: 11px; color: var(--color-amber); font-weight: 700; text-transform: uppercase;">North Yard • Hive #01</div>
+                            <div style="font-size: 11px; color: var(--color-amber); font-weight: 700; text-transform: uppercase;">North Yard â€¢ Hive #01</div>
                             <h3 style="font-size: 20px; font-weight: 800; color: var(--color-ink); margin-bottom: 12px;">Colony Alpha Telemetry</h3>
                             
                             <div style="background: var(--color-surface-2); border: 1px solid var(--color-border); border-radius: 12px; padding: 14px; margin-bottom: 12px;">
                                 <div style="font-size: 11px; color: var(--color-ink-tertiary);">Brood Nest Core Temp</div>
-                                <div style="font-size: 28px; font-weight: 800; color: var(--color-ink);">35.2 °C</div>
-                                <div style="font-size: 10px; color: var(--color-success); font-weight: 600;">✓ Optimal Thermoregulation</div>
+                                <div style="font-size: 28px; font-weight: 800; color: var(--color-ink);">35.2 Â°C</div>
+                                <div style="font-size: 10px; color: var(--color-success); font-weight: 600;">âœ“ Optimal Thermoregulation</div>
                             </div>
 
                             <div style="background: rgba(245, 166, 35, 0.12); border: 1px solid rgba(245, 166, 35, 0.3); border-radius: 12px; padding: 14px;">
@@ -66,77 +73,77 @@
                     
                     <!-- Module 1 -->
                     <div class="card">
-                        <div class="feature-icon">🚀</div>
+                        <div class="feature-icon">ðŸš€</div>
                         <h3 class="heading-card mb-8">1. User Onboarding</h3>
                         <p class="body-sm">Seamless first-time setup guide. Configure farm profile, select beekeeping operation scale, and create encrypted credentials.</p>
                     </div>
 
                     <!-- Module 2 -->
                     <div class="card">
-                        <div class="feature-icon" style="background:rgba(59,130,246,0.12); color:var(--color-info); border-color:rgba(59,130,246,0.2);">📷</div>
+                        <div class="feature-icon" style="background:rgba(59,130,246,0.12); color:var(--color-info); border-color:rgba(59,130,246,0.2);">ðŸ“·</div>
                         <h3 class="heading-card mb-8">2. Hardware Pairing</h3>
                         <p class="body-sm">Instant Sub-GHz node discovery via camera QR code scanning. Pair hardware nodes with hive boxes in under 30 seconds.</p>
                     </div>
 
                     <!-- Module 3 -->
                     <div class="card">
-                        <div class="feature-icon" style="background:rgba(16,185,129,0.12); color:var(--color-success); border-color:rgba(16,185,129,0.2);">🐝</div>
+                        <div class="feature-icon" style="background:rgba(16,185,129,0.12); color:var(--color-success); border-color:rgba(16,185,129,0.2);">ðŸ</div>
                         <h3 class="heading-card mb-8">3. Real Farmer Workflow</h3>
-                        <p class="body-sm">Prioritized task list. Identifies exactly which hives require feeding, splitting, or Varroa inspection—eliminating manual box opening.</p>
+                        <p class="body-sm">Prioritized task list. Identifies exactly which hives require feeding, splitting, or Varroa inspectionâ€”eliminating manual box opening.</p>
                     </div>
 
                     <!-- Module 4 -->
                     <div class="card">
-                        <div class="feature-icon" style="background:rgba(239,68,68,0.12); color:var(--color-danger); border-color:rgba(239,68,68,0.2);">🔔</div>
+                        <div class="feature-icon" style="background:rgba(239,68,68,0.12); color:var(--color-danger); border-color:rgba(239,68,68,0.2);">ðŸ””</div>
                         <h3 class="heading-card mb-8">4. Smart Notifications</h3>
                         <p class="body-sm">Push, SMS, and WhatsApp alerts triggered by acoustic pre-swarm queen piping (315Hz) or severe brood thermal drops.</p>
                     </div>
 
                     <!-- Module 5 -->
                     <div class="card">
-                        <div class="feature-icon">🌾</div>
+                        <div class="feature-icon">ðŸŒ¾</div>
                         <h3 class="heading-card mb-8">5. Farm Management</h3>
                         <p class="body-sm">Multi-site yard overview map. Track honey yield per yard, colony distribution, and seasonal production analytics.</p>
                     </div>
 
                     <!-- Module 6 -->
                     <div class="card">
-                        <div class="feature-icon" style="background:rgba(245,166,35,0.12); color:var(--color-amber); border-color:rgba(245,166,35,0.2);">📈</div>
+                        <div class="feature-icon" style="background:rgba(245,166,35,0.12); color:var(--color-amber); border-color:rgba(245,166,35,0.2);">ðŸ“ˆ</div>
                         <h3 class="heading-card mb-8">6. Business Value & ROI</h3>
                         <p class="body-sm">Quantifies colony mortality savings, fuel reduction from skipped inspections, and honey yield optimization metrics.</p>
                     </div>
 
                     <!-- Module 7 -->
                     <div class="card">
-                        <div class="feature-icon">💳</div>
+                        <div class="feature-icon">ðŸ’³</div>
                         <h3 class="heading-card mb-8">7. Subscription System</h3>
                         <p class="body-sm">In-app tier switching between Free Basic, Pro AI Telemetry ($29/mo), and Enterprise Fleet ($99/mo) plans.</p>
                     </div>
 
                     <!-- Module 8 -->
                     <div class="card">
-                        <div class="feature-icon">⚙️</div>
+                        <div class="feature-icon">âš™ï¸</div>
                         <h3 class="heading-card mb-8">8. Device Management</h3>
                         <p class="body-sm">Real-time solar charging battery voltage, LoRa RSSI signal strength, firmware version, and IP68 sensor health diagnostics.</p>
                     </div>
 
                     <!-- Module 9 -->
                     <div class="card">
-                        <div class="feature-icon">🎧</div>
+                        <div class="feature-icon">ðŸŽ§</div>
                         <h3 class="heading-card mb-8">9. Customer Support</h3>
                         <p class="body-sm">Integrated help center, hardware field installation guides, video tutorials, and priority support ticket submission.</p>
                     </div>
 
                     <!-- Module 10 -->
                     <div class="card">
-                        <div class="feature-icon">📊</div>
+                        <div class="feature-icon">ðŸ“Š</div>
                         <h3 class="heading-card mb-8">10. Data History</h3>
                         <p class="body-sm">Interactive temperature trend graphs, acoustic FFT historical logs, and downloadable CSV/PDF farm reports.</p>
                     </div>
 
                     <!-- Module 11 -->
                     <div class="card">
-                        <div class="feature-icon" style="background:rgba(16,185,129,0.12); color:var(--color-success); border-color:rgba(16,185,129,0.2);">🧠</div>
+                        <div class="feature-icon" style="background:rgba(16,185,129,0.12); color:var(--color-success); border-color:rgba(16,185,129,0.2);">ðŸ§ </div>
                         <h3 class="heading-card mb-8">11. AI Recommendations</h3>
                         <p class="body-sm">Neural advice engine delivering actionable suggestions for swarm prevention, feeding, and mite treatments.</p>
                     </div>
@@ -169,3 +176,4 @@
     <script src="components.js"></script>
 </body>
 </html>
+

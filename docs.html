@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,13 @@
     <title>Technical Documentation | Beevil Knievel</title>
     <meta name="description" content="Technical documentation, hardware installation guides, sensor calibration, and gateway configuration for the Beevil Knievel platform.">
     <link rel="stylesheet" href="styles.css">
+    <!-- Flash prevention: apply saved theme before first paint -->
+    <script>
+        (function(){
+            var t = localStorage.getItem('bk-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
     <style>
         .doc-layout {
             display: grid;
@@ -145,11 +152,11 @@ AT+JOIN=AUTO
                         <h2>Diagnostic Rule Engine Thresholds</h2>
                         <h3 class="text-gradient">Swarming Detection</h3>
                         <p class="body-md mb-24">
-                            Triggers when Brood Core Temp spikes +3.0°C above baseline while 200–400Hz acoustic FFT energy exceeds 82dB for over 15 minutes.
+                            Triggers when Brood Core Temp spikes +3.0Â°C above baseline while 200â€“400Hz acoustic FFT energy exceeds 82dB for over 15 minutes.
                         </p>
                         <h3 style="color: var(--color-danger);">Varroa Mite Attack</h3>
                         <p class="body-md">
-                            Triggers when Brood Core Temp drops below 32.5°C while high-frequency agitation hums (400–450Hz) are detected.
+                            Triggers when Brood Core Temp drops below 32.5Â°C while high-frequency agitation hums (400â€“450Hz) are detected.
                         </p>
                     </div>
                 </main>
@@ -165,3 +172,4 @@ AT+JOIN=AUTO
     <script src="components.js"></script>
 </body>
 </html>
+

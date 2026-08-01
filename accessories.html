@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,13 @@
     <title>Hardware Accessories | Beevil Knievel</title>
     <meta name="description" content="Shop replacement parts, expansion modules, and accessories for your Beevil Knievel smart beehive hardware.">
     <link rel="stylesheet" href="styles.css">
+    <!-- Flash prevention: apply saved theme before first paint -->
+    <script>
+        (function(){
+            var t = localStorage.getItem('bk-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
 
@@ -95,3 +102,4 @@
     <script src="components.js"></script>
 </body>
 </html>
+

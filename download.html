@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,13 @@
     <title>Mobile App Download & Release Portal | Beevil Knievel</title>
     <meta name="description" content="Download the Beevil Knievel Android APK or install the Progressive Web App (PWA). Review version history, installation guide, and compatibility.">
     <link rel="stylesheet" href="styles.css">
+    <!-- Flash prevention: apply saved theme before first paint -->
+    <script>
+        (function(){
+            var t = localStorage.getItem('bk-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
 
@@ -28,7 +35,7 @@
                     <a href="assets/beevil_product_hero.png" download class="btn btn-primary btn-lg">Download Android APK (v2.4.0)</a>
                 </div>
                 <div class="mt-16 body-sm" style="color: var(--color-ink-tertiary);">
-                    Version 2.4.0 Build 108 • 18.4 MB • Android 8.0+ / iOS 14+
+                    Version 2.4.0 Build 108 â€¢ 18.4 MB â€¢ Android 8.0+ / iOS 14+
                 </div>
             </div>
         </section>
@@ -132,3 +139,4 @@
     <script src="components.js"></script>
 </body>
 </html>
+

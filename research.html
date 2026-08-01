@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,13 @@
     <title>Research & Competitions | Beevil Knievel</title>
     <meta name="description" content="Technical research, academic origins, and competition awards for the Beevil Knievel platform.">
     <link rel="stylesheet" href="styles.css">
+    <!-- Flash prevention: apply saved theme before first paint -->
+    <script>
+        (function(){
+            var t = localStorage.getItem('bk-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
 
@@ -56,13 +63,13 @@
                     <div class="card">
                         <h3 class="heading-card mb-16">Acoustic Entomology</h3>
                         <p class="body-md">
-                            Honeybees emit distinct acoustic frequencies based on colony state. Our research leverages Fast Fourier Transform (FFT) extraction to isolate 200–400Hz frequency bands, which correlate strongly with queen piping (pre-swarming events) and Varroa mite irritation behavior.
+                            Honeybees emit distinct acoustic frequencies based on colony state. Our research leverages Fast Fourier Transform (FFT) extraction to isolate 200â€“400Hz frequency bands, which correlate strongly with queen piping (pre-swarming events) and Varroa mite irritation behavior.
                         </p>
                     </div>
                     <div class="card">
                         <h3 class="heading-card mb-16">Thermoregulation Core Tracking</h3>
                         <p class="body-md">
-                            A healthy brood nest maintains a strict 34.5°C to 35.5°C core temperature regardless of ambient weather. Our dual-probe Delta-T algorithms track the colony's thermoregulatory efficiency to detect population collapse before it becomes irreversible.
+                            A healthy brood nest maintains a strict 34.5Â°C to 35.5Â°C core temperature regardless of ambient weather. Our dual-probe Delta-T algorithms track the colony's thermoregulatory efficiency to detect population collapse before it becomes irreversible.
                         </p>
                     </div>
                 </div>
@@ -78,3 +85,4 @@
     <script src="components.js"></script>
 </body>
 </html>
+

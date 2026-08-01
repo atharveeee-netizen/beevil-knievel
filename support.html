@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,13 @@
     <title>Customer Support & Help Center | Beevil Knievel</title>
     <meta name="description" content="Access Beevil Knievel hardware documentation, field setup guides, warranty claims, and 24/7 commercial technical support.">
     <link rel="stylesheet" href="styles.css">
+    <!-- Flash prevention: apply saved theme before first paint -->
+    <script>
+        (function(){
+            var t = localStorage.getItem('bk-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
 
@@ -36,19 +43,19 @@
             <div class="container reveal">
                 <div class="grid-3">
                     <div class="card">
-                        <div class="feature-icon">🔧</div>
+                        <div class="feature-icon">ðŸ”§</div>
                         <h3 class="heading-card mb-12">Hardware Installation</h3>
                         <p class="body-sm mb-16">Mounting IP68 nodes, inserting thermal probes into brood nests, and bracket positioning.</p>
                         <a href="docs.html" class="btn btn-ghost btn-sm" style="padding-left:0;">View Guide &rarr;</a>
                     </div>
                     <div class="card">
-                        <div class="feature-icon" style="background:rgba(59,130,246,0.12); color:var(--color-info); border-color:rgba(59,130,246,0.2);">📡</div>
+                        <div class="feature-icon" style="background:rgba(59,130,246,0.12); color:var(--color-info); border-color:rgba(59,130,246,0.2);">ðŸ“¡</div>
                         <h3 class="heading-card mb-12">Gateway & RF Telemetry</h3>
                         <p class="body-sm mb-16">LoRaWAN Sub-GHz setup, antenna orientation, and long-range field range optimization.</p>
                         <a href="docs.html" class="btn btn-ghost btn-sm" style="padding-left:0;">View Guide &rarr;</a>
                     </div>
                     <div class="card">
-                        <div class="feature-icon" style="background:rgba(16,185,129,0.12); color:var(--color-success); border-color:rgba(16,185,129,0.2);">📱</div>
+                        <div class="feature-icon" style="background:rgba(16,185,129,0.12); color:var(--color-success); border-color:rgba(16,185,129,0.2);">ðŸ“±</div>
                         <h3 class="heading-card mb-12">App & Cloud Sync</h3>
                         <p class="body-sm mb-16">Farmer Companion App setup, offline SQLite caching, and configuring WhatsApp push alerts.</p>
                         <a href="docs.html" class="btn btn-ghost btn-sm" style="padding-left:0;">View Guide &rarr;</a>
@@ -109,3 +116,4 @@
     <script src="components.js"></script>
 </body>
 </html>
+

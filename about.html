@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,13 @@
     <title>About & Founding Team | Beevil Knievel</title>
     <meta name="description" content="Meet the founders of Beevil Knievel: Atharve Dahima, Ishini, Srajan, and Technical Advisor Dr. Vishal. Pioneer in commercial precision AgriTech telemetry.">
     <link rel="stylesheet" href="styles.css">
+    <!-- Flash prevention: apply saved theme before first paint -->
+    <script>
+        (function(){
+            var t = localStorage.getItem('bk-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
 </head>
 <body>
 
@@ -97,3 +104,4 @@
     <script src="components.js"></script>
 </body>
 </html>
+
