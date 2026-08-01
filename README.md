@@ -12,7 +12,7 @@ Beevil Knievel is a commercial AgriTech hardware and software ecosystem. By comb
 
 **1. Beehive Node (per hive)**
 *   **STM32WLE5CCU6** — MCU + integrated LoRa radio
-*   **Sensors:** DS18B20 x3 (Temp), ICS-43434 (Audio), BME280 (Humidity), HX711 (Weight/Scale)
+*   **Sensors:** DS18B20 x3 (Temp), ICS-43434 (Audio), BME680 (Gas/CO2/Humidity), HX711 (Weight/Scale)
 *   **TP4056** — LiPo charging
 *   **TPS7A02** — 3.3V LDO regulator
 *   **LiPo battery + solar panel**

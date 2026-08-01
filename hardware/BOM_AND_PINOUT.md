@@ -16,13 +16,13 @@
 | 7 | **LiPo Battery** | Adafruit 1000mAh 3.7V LiPo Cell (803040) | 1 | $9.95 | ₹953.91 | Main energy storage (>18 months runtime with solar) |
 | 8 | **Solar Panel** | Seeed Studio 1W 6V Mini Solar Panel | 1 | $1.90 | ₹182.15 | Solar trickle-charging panel |
 | 9 | **Scale/Weight ADC** | HX711 24-Bit Load Cell Amplifier | 1 | $0.80 | ₹67.00 | Digital scale ADC for honey yield tracking & starvation |
-| 10 | **Humidity Sensor** | Bosch BME280 I2C Temp/Humidity/Pressure | 1 | $2.50 | ₹209.00 | Crucial for tracking internal moisture (Chalkbrood risk) |
+| 10 | **Gas & Humidity** | Bosch BME680 I2C eCO2/VOC/Temp/Hum | 1 | $8.50 | ₹705.00 | Tracks CO2 spikes predicting massive swarming prep |
 | 11 | **Cabling Protection** | Mouser Nylon Expandable Sleeving + Coating | 1 | $1.20 | ₹115.04 | Propolis-resistant cable sleeving & conformal coat |
 | 12 | **Custom PCB** | JLCPCB 2-Layer FR4 (60x50mm, 50$\Omega$ RF trace) | 1 | $2.00 | ₹191.74 | Low-noise 2-layer PCB with RF ground plane |
 | 13 | **Custom Receiver Unit** | Seeed Studio Wio-E5 Mini Receiver Board | 1 | $15.90 | ₹1,524.33 | Apiary yard gateway receiver unit |
 | 14 | **Cloud Wi-Fi Bridge** | ESP32-WROOM-32 NodeMCU Dev Board | 1 | $4.50 | ₹375.00 | Bridges Wio-E5 UART data to Cloud API via Wi-Fi |
 | 15 | **Passives & Connectors**| Adafruit 4.7K Resistors, Caps, JST Connectors | 1 | $7.50 | ₹719.03 | Decoupling, pull-ups, and 4-wire scale headers |
-| **Total Node & Receiver** | | | | **$107.75** | **₹10,233.20** | |
+| **Total Node & Receiver** | | | | **$113.75** | **₹10,729.00** | |
 
 ---
 
@@ -47,8 +47,8 @@
        |  PA2  ------> ICS-43434 I2S SCK (Clock)     |
        |  PA3  ------> ICS-43434 I2S WS (Word Sel)   |
        |  PA4  ------> ICS-43434 I2S SD (Data Out)   |
-       |  PB6  ------> BME280 I2C SCL (Clock)        |
-       |  PB7  ------> BME280 I2C SDA (Data)         |
+       |  PB6  ------> BME680 I2C SCL (Clock/Gas)    |
+       |  PB7  ------> BME680 I2C SDA (Data/Gas)     |
        |  PA5  ------> HX711 Load Cell DT (Data)     |
        |  PA0  ------> HX711 Load Cell SCK (Clock)   |
        |  PA1  ------> Battery Voltage Sense (100K/100K)|

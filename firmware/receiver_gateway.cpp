@@ -2,7 +2,7 @@
  * ============================================================================
  * BEEVIL KNIEVEL — Commercial Smart Hive Gateway RECEIVER Firmware (Phase 2)
  * Target MCU: STM32WLE5JC (Seeed Wio-E5 Mini Receiver Board @ 868MHz)
- * Function: Receives 16-byte LoRa packets from Hive Transmitters,
+ * Function: Receives 20-byte LoRa packets from Hive Transmitters,
  *           decodes telemetry, and Serial UI bridges it to ESP32 Wi-Fi Module.
  * ============================================================================
  */
@@ -19,7 +19,7 @@
 // ---------- Radio Object ----------
 STM32WLx radio = new STM32WLx();
 
-// ---------- Telemetry Packet Structure (16 Bytes - Matches Transmitter) ----------
+// ---------- Telemetry Packet Structure (20 Bytes - Matches Transmitter) ----------
 struct __attribute__((__packed__)) HiveTelemetryPacket {
     uint8_t  node_id;        // 1 Byte
     int16_t  temp_brood_1;   // 2 Bytes (Temperature x 100)
@@ -29,7 +29,9 @@ struct __attribute__((__packed__)) HiveTelemetryPacket {
     uint16_t v_battery_mv;   // 2 Bytes (Battery Millivolts)
     uint16_t weight_g;       // 2 Bytes (Hive Weight in grams)
     uint8_t  humidity_rh;    // 1 Byte  (Relative Humidity %)
-    uint8_t  alert_flags;    // 1 Byte  (Bit0:Swarm, Bit1:Temp, Bit2:Batt, Bit3:Heartbeat, Bit4:Fault)
+    uint16_t eco2_ppm;       // 2 Bytes (Equivalent CO2 ppm)
+    uint16_t tvoc_ppb;       // 2 Bytes (Total VOCs ppb)
+    uint8_t  alert_flags;    // 1 Byte  (Bit0:Swarm, Bit1:Anomaly, Bit2:Batt, Bit3:Heartbeat, Bit4:Fault)
     uint8_t  padding;        // 1 Byte  (Padding)
 };
 
@@ -38,7 +40,6 @@ void setup() {
     delay(1000);
     Serial.println(F("[BK-RECEIVER] Gateway Booting... Awaiting LoRa 868MHz..."));
 
-    // Initialize LoRa Radio in RX Mode
     int state = radio.begin(LORA_FREQ, LORA_BW, LORA_SF, LORA_CR, RADIOLIB_SX126X_SYNC_WORD_PRIVATE, 14);
     if (state == RADIOLIB_ERR_NONE) {
         Serial.println(F("[BK-RECEIVER] System Ready. Bridging JSON to ESP32 Cloud Node."));
@@ -57,7 +58,7 @@ void loop() {
         float b2 = packet.temp_brood_2 / 100.0f;
         float amb = packet.temp_ambient / 100.0f;
         float batt_v = packet.v_battery_mv / 1000.0f;
-        float weight = packet.weight_g / 1000.0f; // Convert g to kg
+        float weight = packet.weight_g / 1000.0f; 
         float rssi = radio.getRSSI();
         float snr = radio.getSNR();
 
@@ -74,6 +75,10 @@ void loop() {
         Serial.print(packet.humidity_rh);
         Serial.print(F(",\"weight_kg\":"));
         Serial.print(weight, 2);
+        Serial.print(F(",\"eco2_ppm\":"));
+        Serial.print(packet.eco2_ppm);
+        Serial.print(F(",\"tvoc_ppb\":"));
+        Serial.print(packet.tvoc_ppb);
         Serial.print(F(",\"fft_200_400hz\":"));
         Serial.print(packet.fft_200_400hz);
         Serial.print(F(",\"battery_v\":"));
