@@ -3,33 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Beevil Knievel Mobile App</title>
-    <!-- Google Fonts -->
+    <title>Beevil Knievel — Enterprise Apiary Mobile</title>
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* HashiCorp Marketing System Color Tokens & Auto System Dark/Light Adaptation */
         :root {
-            --bg-body: #1c2029;
-            --bg-frame: #2b303a;
-            --bg-card: #222732;
-            --bg-card-active: #2a313f;
-            --border-color: #3b4354;
-            --accent-green: #82C29B;
-            --accent-blue: #0047AB;
-            --accent-warning: #f59e0b;
-            --accent-danger: #ef4444;
-            --text-main: #ffffff;
-            --text-sub: #a0aec0;
+            --colors-canvas: #090a0c;
+            --colors-surface-1: #14171d;
+            --colors-surface-2: #1e232d;
+            --colors-surface-3: #282e3b;
+            --colors-hairline: rgba(178, 182, 189, 0.12);
+            --colors-hairline-soft: rgba(178, 182, 189, 0.06);
+            --colors-ink: #ffffff;
+            --colors-ink-muted: #b2b6bd;
+            --colors-ink-subtle: #656a76;
+            
+            /* Signature Per-Product Accents */
+            --colors-product-vault: #ffd843;
+            --colors-product-vault-text: #090a0c;
+            --colors-product-nomad: #10b981;
+            --colors-product-consul: #f94144;
+            --colors-product-terraform: #844fba;
+            --colors-product-waypoint: #00f5d4;
+
+            --rounded-sm: 4px;
+            --rounded-md: 8px; /* HashiCorp Developer CTA Shape */
+            --rounded-lg: 12px;
+            --rounded-xl: 16px;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
-        
+        /* Auto System Light Mode Support (Respects User Phone Settings) */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --colors-canvas: #f8fafc;
+                --colors-surface-1: #ffffff;
+                --colors-surface-2: #f1f5f9;
+                --colors-surface-3: #e2e8f0;
+                --colors-hairline: rgba(0, 0, 0, 0.08);
+                --colors-hairline-soft: rgba(0, 0, 0, 0.04);
+                --colors-ink: #0f172a;
+                --colors-ink-muted: #475569;
+                --colors-ink-subtle: #94a3b8;
+                --colors-product-vault: #d97706;
+                --colors-product-vault-text: #ffffff;
+            }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-tap-highlight-color: transparent; }
+
         body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
+            background-color: var(--colors-canvas);
+            color: var(--colors-ink);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -37,30 +66,20 @@
             padding: 12px;
         }
 
-        /* Mobile Phone Viewport Simulation Frame */
+        /* Mobile Viewport Simulation Frame */
         .mobile-frame {
             width: 100%;
             max-width: 412px;
             height: 860px;
             max-height: 92vh;
-            background: var(--bg-frame);
-            border: 8px solid #14171f;
-            border-radius: 44px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            background: var(--colors-canvas);
+            border: 1px solid var(--colors-hairline);
+            border-radius: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
-        }
-
-        /* Geometric Brand Accents in Mobile Header */
-        .accent-stripe-blue {
-            position: absolute; top: -40px; left: -40px; width: 120px; height: 220px;
-            background-color: var(--accent-blue); transform: rotate(45deg); opacity: 0.8; z-index: 1; pointer-events: none;
-        }
-        .accent-stripe-green {
-            position: absolute; top: -20px; left: 20px; width: 90px; height: 220px;
-            background-color: var(--accent-green); transform: rotate(45deg); opacity: 0.8; z-index: 1; pointer-events: none;
         }
 
         /* Mobile Status Bar */
@@ -71,59 +90,64 @@
             align-items: center;
             justify-content: space-between;
             font-size: 0.75rem;
-            color: var(--text-sub);
-            background: rgba(43, 48, 58, 0.95);
-            z-index: 10;
+            color: var(--colors-ink-muted);
+            background: var(--colors-canvas);
+            border-bottom: 1px solid var(--colors-hairline-soft);
         }
 
-        .status-time { font-weight: 600; color: var(--text-main); }
-        .status-icons { display: flex; gap: 6px; align-items: center; }
+        .status-time { font-weight: 600; color: var(--colors-ink); }
+
+        /* HashiCorp Style Eyebrow Header */
+        .eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: var(--colors-product-vault);
+            margin-bottom: 4px;
+        }
 
         /* Mobile Header */
         .app-header {
-            padding: 12px 20px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--bg-frame);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 10;
-            position: relative;
+            background: var(--colors-surface-1);
+            border-bottom: 1px solid var(--colors-hairline);
         }
 
-        .header-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .header-title-box h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--colors-ink);
         }
 
-        .brand-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--accent-blue);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--accent-green);
+        .header-title-box p {
+            font-size: 0.75rem;
+            color: var(--colors-ink-muted);
         }
 
-        .brand-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
-        .brand-subtitle { font-size: 0.7rem; color: var(--accent-green); font-weight: 500; }
-
-        .btn-icon {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* HashiCorp 8px Rounded primary CTA */
+        .btn-vault {
+            background-color: var(--colors-product-vault);
+            color: var(--colors-product-vault-text);
+            border: none;
+            padding: 8px 14px;
+            border-radius: var(--rounded-md);
+            font-size: 0.8rem;
+            font-weight: 600;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.15s ease;
         }
 
-        /* Mobile Viewport Scroll */
+        .btn-vault:hover { opacity: 0.9; }
+
+        /* Scrollable Viewport */
         .app-viewport {
             flex: 1;
             overflow-y: auto;
@@ -131,169 +155,205 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            z-index: 5;
         }
 
-        .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent-green); margin-bottom: 8px; }
-
-        /* N-Brood Carousel */
-        .broods-carousel {
+        /* High-Density Search & Filter bar for 1000+ Broods */
+        .search-bar {
+            background: var(--colors-surface-1);
+            border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-md);
+            padding: 10px 14px;
             display: flex;
+            align-items: center;
             gap: 10px;
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: var(--colors-ink);
+            width: 100%;
+            outline: none;
+            font-size: 0.85rem;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 6px;
             overflow-x: auto;
-            padding-bottom: 4px;
             scrollbar-width: none;
         }
-        .broods-carousel::-webkit-scrollbar { display: none; }
+        .filter-row::-webkit-scrollbar { display: none; }
 
-        .brood-tab {
-            min-width: 140px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            transition: all 0.15s ease;
-        }
-
-        .brood-tab.active {
-            background: var(--bg-card-active);
-            border-color: var(--accent-green);
-        }
-
-        .brood-tab-title { font-size: 0.85rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .brood-tab-sub { font-size: 0.7rem; color: var(--text-sub); }
-        .brood-tab-badge { font-size: 0.65rem; font-weight: 700; color: var(--accent-green); margin-top: 4px; }
-
-        .add-brood-chip {
-            min-width: 100px;
-            background: rgba(130, 194, 155, 0.1);
-            border: 1px dashed var(--accent-green);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
+        .chip-btn {
+            background: var(--colors-surface-1);
+            border: 1px solid var(--colors-hairline);
+            color: var(--colors-ink-muted);
+            padding: 6px 12px;
+            border-radius: var(--rounded-md);
             font-size: 0.75rem;
-            color: var(--accent-green);
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
+            white-space: nowrap;
         }
 
-        /* Model 2 AI Card */
-        .ai-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--accent-green);
-            border-radius: 14px;
+        .chip-btn.active {
+            background: var(--colors-surface-2);
+            color: var(--colors-ink);
+            border-color: var(--colors-product-vault);
+        }
+
+        /* Fleet Metrics Header */
+        .fleet-summary {
+            background: var(--colors-surface-1);
+            border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-lg);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-item { display: flex; flex-direction: column; gap: 2px; }
+        .summary-val { font-size: 1.1rem; font-weight: 700; color: var(--colors-ink); }
+        .summary-lbl { font-size: 0.7rem; color: var(--colors-ink-muted); }
+
+        /* Model 2 Advisory Banner */
+        .advisory-card {
+            background: var(--colors-surface-1);
+            border: 1px solid var(--colors-hairline);
+            border-left: 4px solid var(--colors-product-vault);
+            border-radius: var(--rounded-lg);
             padding: 14px 16px;
             display: flex;
             flex-direction: column;
             gap: 6px;
         }
 
-        .ai-header { display: flex; justify-content: space-between; align-items: center; }
-        .ai-status-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--accent-green); }
-        .ai-body { font-size: 0.85rem; color: var(--text-main); line-height: 1.4; }
+        .advisory-title { font-size: 0.75rem; font-weight: 700; color: var(--colors-product-vault); text-transform: uppercase; }
+        .advisory-body { font-size: 0.85rem; color: var(--colors-ink); line-height: 1.5; }
 
-        /* 2x2 Telemetry Grid */
-        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        /* 2x2 Sensor Tile Grid */
+        .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-        .metric-tile {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
+        .tile-card {
+            background: var(--colors-surface-1);
+            border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-lg);
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .tile-header { font-size: 0.7rem; font-weight: 500; color: var(--colors-ink-muted); display: flex; justify-content: space-between; }
+        .tile-value { font-size: 1.3rem; font-weight: 700; color: var(--colors-ink); }
+        .tile-unit { font-size: 0.8rem; font-weight: 400; color: var(--colors-ink-muted); }
+        .tile-footer { font-size: 0.65rem; color: var(--colors-product-nomad); }
+
+        /* Paginated 1000+ Brood List View */
+        .brood-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 220px;
+            overflow-y: auto;
+        }
+
+        .brood-row {
+            background: var(--colors-surface-1);
+            border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-md);
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.15s ease;
+        }
+
+        .brood-row.active, .brood-row:hover {
+            border-color: var(--colors-product-vault);
+            background: var(--colors-surface-2);
+        }
+
+        .brood-row-info { display: flex; flex-direction: column; gap: 2px; }
+        .brood-row-name { font-size: 0.85rem; font-weight: 600; color: var(--colors-ink); }
+        .brood-row-meta { font-size: 0.7rem; color: var(--colors-ink-muted); }
+
+        .badge-pill {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .badge-pill.healthy { background: rgba(16, 185, 129, 0.15); color: var(--colors-product-nomad); }
+        .badge-pill.warning { background: rgba(245, 158, 11, 0.15); color: var(--colors-product-vault); }
+        .badge-pill.danger { background: rgba(249, 65, 68, 0.15); color: var(--colors-product-consul); }
+
+        /* Chart Card */
+        .chart-card {
+            background: var(--colors-surface-1);
+            border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-lg);
             padding: 14px;
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
 
-        .tile-head { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-sub); }
-        .tile-val { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
-        .tile-unit { font-size: 0.8rem; font-weight: 400; color: var(--text-sub); }
-        .tile-foot { font-size: 0.7rem; color: var(--accent-green); }
-
-        /* Chart Card */
-        .chart-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .chart-title { font-size: 0.8rem; font-weight: 600; color: var(--text-main); }
-
-        /* Bottom Mobile Bar */
+        /* Bottom Navigation Bar */
         .bottom-nav {
-            height: 62px;
-            background: var(--bg-frame);
-            border-top: 1px solid var(--border-color);
+            height: 60px;
+            background: var(--colors-surface-1);
+            border-top: 1px solid var(--colors-hairline);
             display: flex;
             align-items: center;
             justify-content: space-around;
-            padding: 0 10px;
-            z-index: 10;
         }
 
-        .nav-item {
+        .nav-link {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
             font-size: 0.65rem;
-            color: var(--text-sub);
+            color: var(--colors-ink-muted);
             cursor: pointer;
         }
 
-        .nav-item.active { color: var(--accent-green); }
+        .nav-link.active { color: var(--colors-product-vault); }
 
         /* Modal */
-        .modal-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(28, 32, 41, 0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            z-index: 200;
+        .modal-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none; align-items: center; justify-content: center;
+            padding: 20px; z-index: 100;
         }
-
-        .modal-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            width: 100%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
+        .modal-card {
+            background: var(--colors-surface-1);
+            border: 1px solid var(--colors-hairline);
+            border-radius: var(--rounded-lg);
+            width: 100%; padding: 20px;
+            display: flex; flex-direction: column; gap: 12px;
         }
-
-        .modal-title { font-size: 1rem; font-weight: 700; color: var(--text-main); }
-        .modal-box input { background: var(--bg-frame); border: 1px solid var(--border-color); padding: 10px; border-radius: 8px; color: #fff; font-size: 0.85rem; outline: none; }
-        .modal-btns { display: flex; justify-content: flex-end; gap: 8px; }
-        .btn-sm { padding: 8px 14px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; border: none; }
+        .modal-card input {
+            background: var(--colors-surface-2);
+            border: 1px solid var(--colors-hairline);
+            padding: 10px; border-radius: var(--rounded-md);
+            color: var(--colors-ink); font-size: 0.85rem; outline: none;
+        }
     </style>
 </head>
 <body>
 
     <div class="mobile-frame">
-        <div class="accent-stripe-blue"></div>
-        <div class="accent-stripe-green"></div>
-
         <!-- Status Bar -->
         <div class="status-bar">
             <span class="status-time">09:41</span>
-            <div class="status-icons">
+            <div style="display:flex; gap:6px;">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/></svg>
             </div>
@@ -301,109 +361,132 @@
 
         <!-- App Header -->
         <div class="app-header">
-            <div class="header-brand">
-                <div class="brand-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                </div>
-                <div>
-                    <div class="brand-title">Beevil Mobile</div>
-                    <div class="brand-subtitle">IEEE HART Gateway</div>
-                </div>
+            <div class="header-title-box">
+                <div class="eyebrow">IEEE HARDWAIRE CHALLENGE</div>
+                <h1>Beevil Knievel Mobile</h1>
+                <p>Enterprise Apiary System — Scaled for 1,000+ Broods</p>
             </div>
-            <div style="display:flex; gap:8px;">
-                <div class="btn-icon" onclick="exportCSV()">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                </div>
-            </div>
+            <button class="btn-vault" onclick="openAddModal()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                Add Node
+            </button>
         </div>
 
         <!-- Viewport -->
         <div class="app-viewport">
-            <div>
-                <div class="section-label">Active Broods (N-Scale)</div>
-                <div class="broods-carousel" id="broodsCarousel"></div>
-            </div>
-
-            <!-- Model 2 Card -->
-            <div class="ai-card" id="aiCard">
-                <div class="ai-header">
-                    <span class="ai-status-title" id="aiTitle">Model 2: Healthy Baseline</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            
+            <!-- Fleet Overview -->
+            <div class="fleet-summary">
+                <div class="summary-item">
+                    <span class="summary-val" id="cntTotal">1,000</span>
+                    <span class="summary-lbl">Total Broods</span>
                 </div>
-                <div class="ai-body" id="aiText">Brood thermal regulation is maintained at 34.6°C. Acoustic spectrum shows nominal worker fanning.</div>
+                <div class="summary-item">
+                    <span class="summary-val" style="color: var(--colors-product-nomad);" id="cntHealthy">942</span>
+                    <span class="summary-lbl">Healthy</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-val" style="color: var(--colors-product-consul);" id="cntAlerts">58</span>
+                    <span class="summary-lbl">AI Alerts</span>
+                </div>
             </div>
 
-            <!-- 2x2 Telemetry Grid -->
+            <!-- Search & Filter Bar for 1,000 Hives -->
+            <div class="search-bar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--colors-ink-muted)" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" id="searchInput" placeholder="Search 1,000 Broods by ID or Location..." onkeyup="handleSearch(this.value)">
+            </div>
+
+            <div class="filter-row">
+                <button class="chip-btn active" onclick="setFilter('all')">All (1,000)</button>
+                <button class="chip-btn" onclick="setFilter('warning')">Swarm Alerts</button>
+                <button class="chip-btn" onclick="setFilter('danger')">Starvation Risk</button>
+            </div>
+
+            <!-- Model 2 Cloud Advisory -->
+            <div class="advisory-card" id="advisoryCard">
+                <div class="advisory-title" id="advisoryTitle">Model 2: Healthy Baseline</div>
+                <div class="advisory-body" id="advisoryText">Internal hive core temperature is regulated at 34.6°C. Acoustic FFT spectrum indicates standard worker fanning activity. Zero anomalies detected.</div>
+            </div>
+
+            <!-- Selected Brood Telemetry Grid -->
             <div class="metrics-grid">
-                <div class="metric-tile">
-                    <div class="tile-head">
+                <div class="tile-card">
+                    <div class="tile-header">
                         <span>Brood Temp</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--colors-ink-muted)" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
                     </div>
-                    <div class="tile-val"><span id="valTemp">34.6</span> <span class="tile-unit">°C</span></div>
-                    <div class="tile-foot">DS18B20 1-Wire</div>
+                    <div class="tile-value"><span id="valTemp">34.6</span> <span class="tile-unit">°C</span></div>
+                    <div class="tile-footer">DS18B20 1-Wire Probe</div>
                 </div>
 
-                <div class="metric-tile">
-                    <div class="tile-head">
-                        <span>Acoustics</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="2"><path d="M12 1v22M17 5v14M22 9v6M7 5v14M2 9v6"/></svg>
+                <div class="tile-card">
+                    <div class="tile-header">
+                        <span>Acoustic Peak</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--colors-ink-muted)" stroke-width="2"><path d="M12 1v22M17 5v14M22 9v6M7 5v14M2 9v6"/></svg>
                     </div>
-                    <div class="tile-val"><span id="valAudio">145</span> <span class="tile-unit">Hz</span></div>
-                    <div class="tile-foot">ICS-43432 Mic</div>
+                    <div class="tile-value"><span id="valAudio">145</span> <span class="tile-unit">Hz</span></div>
+                    <div class="tile-footer">ICS-43432 I2S Mic</div>
                 </div>
 
-                <div class="metric-tile">
-                    <div class="tile-head">
+                <div class="tile-card">
+                    <div class="tile-header">
                         <span>Gas (CO2)</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="2"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--colors-ink-muted)" stroke-width="2"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
                     </div>
-                    <div class="tile-val"><span id="valCO2">780</span> <span class="tile-unit">ppm</span></div>
-                    <div class="tile-foot">BME680 Sensor</div>
+                    <div class="tile-value"><span id="valCO2">780</span> <span class="tile-unit">ppm</span></div>
+                    <div class="tile-footer">BME680 Sensor</div>
                 </div>
 
-                <div class="metric-tile">
-                    <div class="tile-head">
+                <div class="tile-card">
+                    <div class="tile-header">
                         <span>Scale Weight</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a0aec0" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--colors-ink-muted)" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>
                     </div>
-                    <div class="tile-val"><span id="valWeight">26.4</span> <span class="tile-unit">kg</span></div>
-                    <div class="tile-foot">HX711 Load Cell</div>
+                    <div class="tile-value"><span id="valWeight">26.4</span> <span class="tile-unit">kg</span></div>
+                    <div class="tile-footer">HX711 Load Cell</div>
                 </div>
             </div>
 
-            <!-- Mobile Chart View -->
+            <!-- Brood List (Fast Scalable Render) -->
+            <div>
+                <div class="eyebrow">BROOD SELECTION LIST</div>
+                <div class="brood-list-container" id="broodList"></div>
+            </div>
+
+            <!-- Chart -->
             <div class="chart-card">
-                <div class="chart-title">24-Hour Telemetry Trend</div>
+                <div class="tile-header"><span>24-Hour Telemetry Trend</span></div>
                 <canvas id="mobileChart" height="140"></canvas>
             </div>
+
         </div>
 
         <!-- Bottom Bar -->
         <div class="bottom-nav">
-            <div class="nav-item active">
+            <div class="nav-link active">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                <span>Broods</span>
+                <span>Fleet</span>
             </div>
-            <div class="nav-item" onclick="alert('LoRaWAN Gateway Protocol: 868MHz Operational')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
-                <span>Gateway</span>
+            <div class="nav-link" onclick="exportCSV()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                <span>Export CSV</span>
             </div>
-            <div class="nav-item" onclick="openAddModal()">
+            <div class="nav-link" onclick="openAddModal()">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-                <span>Add Node</span>
+                <span>Add Brood</span>
             </div>
         </div>
 
-        <!-- Add Modal -->
-        <div class="modal-overlay" id="modalOverlay">
-            <div class="modal-box">
-                <div class="modal-title">Register Brood Node</div>
-                <input type="text" id="inName" placeholder="Node Name (e.g. Brood #04)">
-                <input type="text" id="inAddr" placeholder="Wio-E5 Address (0x...)">
-                <div class="modal-btns">
-                    <button class="btn-sm" style="background:#3b4354; color:#fff;" onclick="closeAddModal()">Cancel</button>
-                    <button class="btn-sm" style="background:var(--accent-green); color:#1c2029; font-weight:700;" onclick="saveBrood()">Register</button>
+        <!-- Modal -->
+        <div class="modal-bg" id="modalBg">
+            <div class="modal-card">
+                <div style="font-weight:700; font-size:1rem; color:var(--colors-ink);">Provision New Node</div>
+                <input type="text" id="inName" placeholder="Brood Name (e.g. Brood #1001)">
+                <input type="text" id="inAddr" placeholder="Hardware Address (0x...)">
+                <div style="display:flex; justify-content:flex-end; gap:8px;">
+                    <button style="background:transparent; border:1px solid var(--colors-hairline); color:var(--colors-ink); padding:8px 14px; border-radius:var(--rounded-md); cursor:pointer;" onclick="closeAddModal()">Cancel</button>
+                    <button class="btn-vault" onclick="registerBrood()">Register</button>
                 </div>
             </div>
         </div>
@@ -411,64 +494,111 @@
     </div>
 
     <script>
-        let broods = [
-            { id: 1, name: "Brood #01 — Alpha", addr: "0x8F94A2B1", temp: 34.6, audio: 145, co2: 780, weight: 26.4, status: "healthy", text: "Brood thermal regulation is maintained at 34.6°C. Acoustic spectrum shows nominal worker fanning." },
-            { id: 2, name: "Brood #02 — Orchard", addr: "0x91C4D2E5", temp: 33.8, audio: 340, co2: 2450, weight: 25.1, status: "warning", text: "SWARM WARNING: CO2 respiration spike (2,450 ppm) correlated with 340 Hz departure buzzing!" },
-            { id: 3, name: "Brood #03 — Meadow", addr: "0x63A1F4B9", temp: 24.2, audio: 110, co2: 650, weight: 4.8, status: "danger", text: "STARVATION RISK: Hive scale dropped to 4.8 kg while internal temp dropped to 24.2°C. Feed syrup!" }
-        ];
+        // Generate 1,000 Broods for Scalable Enterprise Demo
+        let broods = [];
+        for (let i = 1; i <= 1000; i++) {
+            let status = "healthy";
+            let temp = 34.2 + (Math.random() * 0.8);
+            let audio = 135 + Math.floor(Math.random() * 30);
+            let co2 = 700 + Math.floor(Math.random() * 150);
+            let weight = 24.0 + (Math.random() * 4.0);
+            let text = "Brood core temperature is fully regulated. Acoustic FFT spectrum nominal.";
+
+            if (i % 25 === 0) {
+                status = "warning";
+                audio = 340; co2 = 2450;
+                text = "SWARM WARNING: CO2 respiration spike (2,450 ppm) correlated with 340 Hz departure acoustic buzzing!";
+            } else if (i % 40 === 0) {
+                status = "danger";
+                temp = 24.2; weight = 4.8;
+                text = "STARVATION RISK: Hive scale dropped to 4.8 kg while internal temp dropped to 24.2°C. Syrup feeding needed!";
+            }
+
+            broods.push({
+                id: i,
+                name: `Brood Node #${String(i).padStart(4, '0')}`,
+                addr: `0x${(0x8F94A2B1 + i).toString(16).toUpperCase()}`,
+                temp, audio, co2, weight, status, text
+            });
+        }
 
         let selectedId = 1;
+        let activeFilter = 'all';
+        let searchQuery = '';
         let mobileChart;
 
-        function renderCarousel() {
-            const carousel = document.getElementById('broodsCarousel');
-            carousel.innerHTML = '';
-            
-            broods.forEach(b => {
-                const tab = document.createElement('div');
-                tab.className = `brood-tab ${b.id === selectedId ? 'active' : ''}`;
-                tab.onclick = () => selectBrood(b.id);
-                tab.innerHTML = `
-                    <div class="brood-tab-title">${b.name}</div>
-                    <div class="brood-tab-sub">${b.addr}</div>
-                    <div class="brood-tab-badge" style="color: ${b.status==='healthy'?'#82C29B':b.status==='warning'?'#f59e0b':'#ef4444'}">${b.status.toUpperCase()}</div>
-                `;
-                carousel.appendChild(tab);
+        function renderList() {
+            const container = document.getElementById('broodList');
+            container.innerHTML = '';
+
+            let filtered = broods.filter(b => {
+                const matchSearch = b.name.toLowerCase().includes(searchQuery.toLowerCase()) || b.addr.toLowerCase().includes(searchQuery.toLowerCase());
+                if (activeFilter === 'warning') return matchSearch && b.status === 'warning';
+                if (activeFilter === 'danger') return matchSearch && b.status === 'danger';
+                return matchSearch;
             });
 
-            const addChip = document.createElement('div');
-            addChip.className = 'add-brood-chip';
-            addChip.onclick = openAddModal;
-            addChip.innerHTML = `<span>+</span><span>Add Node</span>`;
-            carousel.appendChild(addChip);
+            // Display top 50 matches for high performance
+            filtered.slice(0, 50).forEach(b => {
+                const row = document.createElement('div');
+                row.className = `brood-row ${b.id === selectedId ? 'active' : ''}`;
+                row.onclick = () => selectBrood(b.id);
+                row.innerHTML = `
+                    <div class="brood-row-info">
+                        <div class="brood-row-name">${b.name}</div>
+                        <div class="brood-row-meta">${b.temp.toFixed(1)}°C | ${b.weight.toFixed(1)}kg | ${b.addr}</div>
+                    </div>
+                    <span class="badge-pill ${b.status}">${b.status}</span>
+                `;
+                container.appendChild(row);
+            });
         }
 
         function selectBrood(id) {
             selectedId = id;
             const b = broods.find(x => x.id === id);
-            renderCarousel();
+            renderList();
 
             document.getElementById('valTemp').innerText = b.temp.toFixed(1);
             document.getElementById('valAudio').innerText = b.audio;
             document.getElementById('valCO2').innerText = b.co2;
             document.getElementById('valWeight').innerText = b.weight.toFixed(1);
-            document.getElementById('aiText').innerText = b.text;
+            document.getElementById('advisoryText').innerText = b.text;
 
-            const card = document.getElementById('aiCard');
-            const title = document.getElementById('aiTitle');
-            if(b.status === 'healthy') {
-                card.style.borderLeftColor = '#82C29B'; title.style.color = '#82C29B'; title.innerText = 'MODEL 2: HEALTHY BASELINE';
-            } else if(b.status === 'warning') {
-                card.style.borderLeftColor = '#f59e0b'; title.style.color = '#f59e0b'; title.innerText = 'MODEL 2: IMMINENT SWARM ALERT';
+            const card = document.getElementById('advisoryCard');
+            const title = document.getElementById('advisoryTitle');
+
+            if (b.status === 'healthy') {
+                card.style.borderLeftColor = 'var(--colors-product-nomad)';
+                title.style.color = 'var(--colors-product-nomad)';
+                title.innerText = 'MODEL 2: HEALTHY BASELINE';
+            } else if (b.status === 'warning') {
+                card.style.borderLeftColor = 'var(--colors-product-vault)';
+                title.style.color = 'var(--colors-product-vault)';
+                title.innerText = 'MODEL 2: IMMINENT SWARM ALERT';
             } else {
-                card.style.borderLeftColor = '#ef4444'; title.style.color = '#ef4444'; title.innerText = 'MODEL 2: STARVATION RISK';
+                card.style.borderLeftColor = 'var(--colors-product-consul)';
+                title.style.color = 'var(--colors-product-consul)';
+                title.innerText = 'MODEL 2: STARVATION RISK';
             }
 
-            if(mobileChart) {
+            if (mobileChart) {
                 mobileChart.data.datasets[0].data = [b.temp - 0.4, b.temp - 0.2, b.temp, b.temp + 0.1, b.temp];
                 mobileChart.data.datasets[1].data = [b.weight + 0.3, b.weight + 0.2, b.weight + 0.1, b.weight, b.weight];
                 mobileChart.update();
             }
+        }
+
+        function handleSearch(val) {
+            searchQuery = val;
+            renderList();
+        }
+
+        function setFilter(type) {
+            activeFilter = type;
+            document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderList();
         }
 
         function initChart() {
@@ -478,45 +608,45 @@
                 data: {
                     labels: ['04:00', '08:00', '12:00', '16:00', 'Now'],
                     datasets: [
-                        { label: 'Temp (°C)', data: [34.2, 34.4, 34.6, 34.5, 34.6], borderColor: '#82C29B', tension: 0.3 },
-                        { label: 'Weight (kg)', data: [26.7, 26.6, 26.5, 26.4, 26.4], borderColor: '#0047AB', tension: 0.3 }
+                        { label: 'Temp (°C)', data: [34.2, 34.4, 34.6, 34.5, 34.6], borderColor: '#10b981', tension: 0.3 },
+                        { label: 'Weight (kg)', data: [26.7, 26.6, 26.5, 26.4, 26.4], borderColor: '#ffd843', tension: 0.3 }
                     ]
                 },
                 options: {
                     responsive: true,
-                    plugins: { legend: { labels: { color: '#a0aec0', font: { family: 'Outfit', size: 10 } } } },
+                    plugins: { legend: { labels: { color: '#b2b6bd', font: { family: 'Inter', size: 10 } } } },
                     scales: {
-                        x: { grid: { color: '#3b4354' }, ticks: { color: '#a0aec0', font: { family: 'Outfit', size: 9 } } },
-                        y: { grid: { color: '#3b4354' }, ticks: { color: '#a0aec0', font: { family: 'Outfit', size: 9 } } }
+                        x: { grid: { color: 'rgba(178,182,189,0.1)' }, ticks: { color: '#b2b6bd', font: { family: 'Inter', size: 9 } } },
+                        y: { grid: { color: 'rgba(178,182,189,0.1)' }, ticks: { color: '#b2b6bd', font: { family: 'Inter', size: 9 } } }
                     }
                 }
             });
         }
 
-        function openAddModal() { document.getElementById('modalOverlay').style.display = 'flex'; }
-        function closeAddModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+        function openAddModal() { document.getElementById('modalBg').style.display = 'flex'; }
+        function closeAddModal() { document.getElementById('modalBg').style.display = 'none'; }
 
-        function saveBrood() {
-            const name = document.getElementById('inName').value || `Brood #${broods.length + 1}`;
+        function registerBrood() {
+            const name = document.getElementById('inName').value || `Brood Node #${broods.length + 1}`;
             const addr = document.getElementById('inAddr').value || `0x${Math.floor(Math.random()*16777215).toString(16).toUpperCase()}`;
-            const b = { id: broods.length + 1, name, addr, temp: 34.5, audio: 148, co2: 760, weight: 25.0, status: "healthy", text: "New brood node provisioned." };
-            broods.push(b);
+            const b = { id: broods.length + 1, name, addr, temp: 34.5, audio: 148, co2: 760, weight: 25.0, status: "healthy", text: "New node provisioned." };
+            broods.unshift(b);
             closeAddModal();
             selectBrood(b.id);
         }
 
         function exportCSV() {
             let csv = "Brood_Name,Hardware_ID,Temp_C,Audio_Hz,CO2_ppm,Weight_kg,Status\n";
-            broods.forEach(b => csv += `"${b.name}",${b.addr},${b.temp},${b.audio},${b.co2},${b.weight},${b.status}\n`);
+            broods.forEach(b => csv += `"${b.name}",${b.addr},${b.temp.toFixed(1)},${b.audio},${b.co2},${b.weight.toFixed(1)},${b.status}\n`);
             const blob = new Blob([csv], { type: 'text/csv' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = 'Beevil_Mobile_Report.csv';
+            a.download = 'Beevil_1000_Broods_Report.csv';
             a.click();
         }
 
         window.onload = () => {
-            renderCarousel();
+            renderList();
             initChart();
             selectBrood(1);
         };
