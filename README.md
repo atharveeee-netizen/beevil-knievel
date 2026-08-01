@@ -8,30 +8,41 @@ Beevil Knievel is a commercial AgriTech hardware and software ecosystem. By comb
 
 ## 🏗️ System Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│ 1. HARDWARE SENSOR NODE (Field Apiary)                                  │
-│ • STM32WLE5 / Wio-E5 LoRa SoC                                           │
-│ • Dual DS18B20 1-Wire Thermal Probes + ICS-43434 MEMS Audio Sensor      │
-│ • Edge AI: Real-time delta-T & FFT energy classification                │
-│ • Uplink: Sub-GHz LoRa Wireless (<=4km range)                           │
-└────────────────────────────────────┬────────────────────────────────────┘
-                                     │ LoRa Sub-GHz RF Wireless
-                                     ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│ 2. GATEWAY RECEIVER & CLOUD BACKEND                                     │
-│ • Gateway Station -> Cellular / WiFi Backhaul                           │
-│ • Cloud Diagnostic Engine: Multi-day trend pathology classifier         │
-└────────────────────────────────────┬────────────────────────────────────┘
-                                     │ Automated Alert Pipeline
-                                     ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│ 3. FARMER DELIVERY CHANNELS                                             │
-│ • Push Notifications & SMS Alerts                                       │
-│ • Mobile Application (iOS / Android / PWA)                              │
-│ • Web Portal Dashboard                                                  │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+## 🏗️ System Architecture
+
+**1. Beehive Node (per hive)**
+*   **STM32WLE5CCU6** — MCU + integrated LoRa radio
+*   **DS18B20 x3** — 2 brood, 1 ambient
+*   **ICS-43434 mic** — I2S, acoustic sensing
+*   **TP4056** — LiPo charging
+*   **TPS7A02** — 3.3V LDO regulator
+*   **LiPo battery + solar panel**
+*   **Custom 60x50mm PCB**, deep-sleep architecture
+*   **Edge AI (Model 1)** — On-device decision tree for Healthy/Distressed classification
+*   **Logic:** Wakes every 5 min, samples, sleeps; radio fires only on distress event + 1 daily heartbeat
+
+↓ *LoRa (no SIM, no recurring cost)*
+
+**2. Gateway Station (per apiary)**
+*   **Wio-E5 module** (STM32WLE5JC + SX126x, pre-matched)
+*   **Design:** Based on hallard/LoRa-E5-Breakout, extended
+*   **SMA/u.FL antenna** (switchable)
+*   **Power:** mains adapter + small backup battery + power-path IC
+*   **Pluggable Backhaul Header:** ESP32 WiFi card populated (Ethernet/cellular cards as future options)
+*   **Logic:** Always-on, continuous LoRa receive. Decodes packets, forwards over backhaul.
+
+↓ *WiFi/Ethernet (Internet)*
+
+**3. Cloud Infrastructure**
+*   **Backend:** Receives forwarded alert payload (node ID, $\Delta$T, acoustic feature, confidence)
+*   **Model 2:** Multi-class cause classifier (mites, queenlessness, cold stress, starvation)
+*   **Logic:** Lookup-table mapped farmer recommendation.
+*   **Dashboard:** (MQTT + rule engine)
+
+↓ *Alert Data*
+
+**4. Farmer Companion System**
+*   **Action:** Push notification with specific AI diagnosis + suggested apiary action.
 
 ---
 
