@@ -1,9 +1,9 @@
 /**
  * ============================================================================
- * BEEVIL KNIEVEL — Commercial Smart Hive Gateway RECEIVER Firmware
+ * BEEVIL KNIEVEL — Commercial Smart Hive Gateway RECEIVER Firmware (Phase 2)
  * Target MCU: STM32WLE5JC (Seeed Wio-E5 Mini Receiver Board @ 868MHz)
- * Function: Receives 868MHz LoRa packets from Hive Transmitter Nodes,
- *           decodes 12-byte binary telemetry, and outputs JSON for Web App.
+ * Function: Receives 16-byte LoRa packets from Hive Transmitters,
+ *           decodes telemetry, and Serial UI bridges it to ESP32 Wi-Fi Module.
  * ============================================================================
  */
 
@@ -19,7 +19,7 @@
 // ---------- Radio Object ----------
 STM32WLx radio = new STM32WLx();
 
-// ---------- Telemetry Packet Structure (12 Bytes - Matches Transmitter Node) ----------
+// ---------- Telemetry Packet Structure (16 Bytes - Matches Transmitter) ----------
 struct __attribute__((__packed__)) HiveTelemetryPacket {
     uint8_t  node_id;        // 1 Byte
     int16_t  temp_brood_1;   // 2 Bytes (Temperature x 100)
@@ -27,20 +27,23 @@ struct __attribute__((__packed__)) HiveTelemetryPacket {
     int16_t  temp_ambient;   // 2 Bytes (Temperature x 100)
     uint16_t fft_200_400hz;  // 2 Bytes (Acoustic Band Energy)
     uint16_t v_battery_mv;   // 2 Bytes (Battery Millivolts)
-    uint8_t  alert_flags;    // 1 Byte  (Bit 0: Swarm, Bit 1: Temp Anomaly, Bit 2: Low Batt)
+    uint16_t weight_g;       // 2 Bytes (Hive Weight in grams)
+    uint8_t  humidity_rh;    // 1 Byte  (Relative Humidity %)
+    uint8_t  alert_flags;    // 1 Byte  (Bit0:Swarm, Bit1:Temp, Bit2:Batt, Bit3:Heartbeat, Bit4:Fault)
+    uint8_t  padding;        // 1 Byte  (Padding)
 };
 
 void setup() {
-    Serial.begin(115200);
+    Serial.begin(115200); // Connected directly to ESP32 RX pin
     delay(1000);
-    Serial.println(F("[BK-RECEIVER] Initializing Beevil Knievel Gateway Receiver..."));
+    Serial.println(F("[BK-RECEIVER] Gateway Booting... Awaiting LoRa 868MHz..."));
 
     // Initialize LoRa Radio in RX Mode
     int state = radio.begin(LORA_FREQ, LORA_BW, LORA_SF, LORA_CR, RADIOLIB_SX126X_SYNC_WORD_PRIVATE, 14);
     if (state == RADIOLIB_ERR_NONE) {
-        Serial.println(F("[BK-RECEIVER] Gateway Listening on 868 MHz LoRa Frequency..."));
+        Serial.println(F("[BK-RECEIVER] System Ready. Bridging JSON to ESP32 Cloud Node."));
     } else {
-        Serial.print(F("[BK-RECEIVER] LoRa Receiver Init Failed, Code: "));
+        Serial.print(F("[BK-RECEIVER] Radio Init Error: "));
         Serial.println(state);
     }
 }
@@ -54,10 +57,11 @@ void loop() {
         float b2 = packet.temp_brood_2 / 100.0f;
         float amb = packet.temp_ambient / 100.0f;
         float batt_v = packet.v_battery_mv / 1000.0f;
+        float weight = packet.weight_g / 1000.0f; // Convert g to kg
         float rssi = radio.getRSSI();
         float snr = radio.getSNR();
 
-        // Output Formatted JSON for Cloud Dashboard
+        // Output Formatted JSON designed for the ESP32 bridge to grab and POST to AWS
         Serial.print(F("{\"node_id\":"));
         Serial.print(packet.node_id);
         Serial.print(F(",\"brood_temp_1\":"));
@@ -66,6 +70,10 @@ void loop() {
         Serial.print(b2, 2);
         Serial.print(F(",\"ambient_temp\":"));
         Serial.print(amb, 2);
+        Serial.print(F(",\"humidity\":"));
+        Serial.print(packet.humidity_rh);
+        Serial.print(F(",\"weight_kg\":"));
+        Serial.print(weight, 2);
         Serial.print(F(",\"fft_200_400hz\":"));
         Serial.print(packet.fft_200_400hz);
         Serial.print(F(",\"battery_v\":"));
