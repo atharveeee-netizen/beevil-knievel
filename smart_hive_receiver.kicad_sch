@@ -1,0 +1,76 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (paper "A4")
+
+  (title_block
+    (title "Beevil Knievel — Smart Hive Gateway Receiver")
+    (company "Beevil Knievel AgriTech / IEEE HART Phase 2")
+    (rev "2.0")
+    (date "2026-08-01")
+    (comment 1 "Sub-GHz 868MHz LoRa Gateway Receiver with OLED & USB-UART")
+    (comment 2 "STM32WLE5JC + CH340E (3.3V Logic) + 0.96 OLED + USBLC6-2P6 ESD")
+  )
+
+  (lib_symbols
+    (symbol "Module:Seeed_Wio-E5_Mini"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U1" (at 0 0 0))
+      (property "Value" "STM32WLE5JC_Wio-E5_Receiver" (at 0 2.54 0))
+    )
+    (symbol "Interface_USB:CH340E"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U2" (at 0 0 0))
+      (property "Value" "CH340E_USB_UART_3V3" (at 0 2.54 0))
+    )
+    (symbol "Display:OLED_0.96_I2C"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "DISP1" (at 0 0 0))
+      (property "Value" "OLED_0.96_I2C_128x64" (at 0 2.54 0))
+    )
+    (symbol "Power_Protection:USBLC6-2P6"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U3" (at 0 0 0))
+      (property "Value" "USBLC6-2P6_ESD_Protection" (at 0 2.54 0))
+    )
+    (symbol "Connector:USB_C_Receptacle"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "J1" (at 0 0 0))
+      (property "Value" "USB_C_Receptacle_USB2.0" (at 0 2.54 0))
+    )
+  )
+
+  (wire (pts (xy 25.4 50.8) (xy 50.8 50.8)) (stroke (width 0.1524) (type default)))
+  (wire (pts (xy 50.8 50.8) (xy 76.2 50.8)) (stroke (width 0.1524) (type default)))
+
+  (symbol (lib_id "Module:Seeed_Wio-E5_Mini") (at 120.0 80.0 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "receiver-mcu-wio-e5-0001")
+    (property "Reference" "U1" (at 120.0 65.0 0))
+    (property "Value" "Wio-E5_Receiver" (at 120.0 68.0 0))
+    (property "Footprint" "Module:Seeed_Wio-E5_Mini" (at 120.0 80.0 0) (effects (hide yes)))
+  )
+
+  (symbol (lib_id "Interface_USB:CH340E") (at 40.0 80.0 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "receiver-usb-ch340e-0002")
+    (property "Reference" "U2" (at 40.0 65.0 0))
+    (property "Value" "CH340E_3V3_Logic" (at 40.0 68.0 0))
+    (property "Footprint" "Package_SO:MSOP-10_3x3mm_P0.5mm" (at 40.0 80.0 0) (effects (hide yes)))
+  )
+
+  (symbol (lib_id "Display:OLED_0.96_I2C") (at 180.0 80.0 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "receiver-oled-0003")
+    (property "Reference" "DISP1" (at 180.0 65.0 0))
+    (property "Value" "OLED_0.96_I2C_128x64" (at 180.0 68.0 0))
+    (property "Footprint" "Display:OLED_0.96in_I2C" (at 180.0 80.0 0) (effects (hide yes)))
+  )
+
+  (symbol (lib_id "Power_Protection:USBLC6-2P6") (at 40.0 140.0 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "receiver-esd-usblc6-0004")
+    (property "Reference" "U3" (at 40.0 125.0 0))
+    (property "Value" "USBLC6-2P6_ESD" (at 40.0 128.0 0))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-6" (at 40.0 140.0 0) (effects (hide yes)))
+  )
+)

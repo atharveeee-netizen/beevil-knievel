@@ -1,0 +1,103 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (paper "A4")
+
+  (title_block
+    (title "Beevil Knievel — Smart Hive Edge Transmitter Node")
+    (company "Beevil Knievel AgriTech / IEEE HART Phase 2")
+    (rev "2.0")
+    (date "2026-08-01")
+    (comment 1 "Ultra-Low Power In-Hive Telemetry Node (0.85 mWh/day)")
+    (comment 2 "STM32WLE5JC + ICS-43434 I2S Mic + 3x DS18B20 + MCP73831 Charger")
+  )
+
+  (lib_symbols
+    (symbol "Module:Seeed_Wio-E5_Mini"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U1" (at 0 0 0))
+      (property "Value" "STM32WLE5JC_Wio-E5" (at 0 2.54 0))
+    )
+    (symbol "Sensor_Audio:ICS-43434"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U2" (at 0 0 0))
+      (property "Value" "ICS-43434_I2S_MEMS_Mic" (at 0 2.54 0))
+    )
+    (symbol "Sensor_Temperature:DS18B20"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "DS1" (at 0 0 0))
+      (property "Value" "DS18B20_1Wire_Array" (at 0 2.54 0))
+    )
+    (symbol "Battery_Management:MCP73831"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U3" (at 0 0 0))
+      (property "Value" "MCP73831_LiPo_Charger" (at 0 2.54 0))
+    )
+    (symbol "Regulator_Linear:TPS73033"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "U4" (at 0 0 0))
+      (property "Value" "TPS73033_3.3V_LDO" (at 0 2.54 0))
+    )
+    (symbol "Diode:BAT54S"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "D1" (at 0 0 0))
+      (property "Value" "BAT54S_Dual_Schottky_ORing" (at 0 2.54 0))
+    )
+    (symbol "Connector:Solar_Panel_JST"
+      (in_bom yes) (on_board yes)
+      (property "Reference" "J1" (at 0 0 0))
+      (property "Value" "Solar_Panel_1W_JST" (at 0 2.54 0))
+    )
+  )
+
+  (wire (pts (xy 25.4 50.8) (xy 50.8 50.8)) (stroke (width 0.1524) (type default)))
+  (wire (pts (xy 50.8 50.8) (xy 76.2 50.8)) (stroke (width 0.1524) (type default)))
+  (wire (pts (xy 76.2 50.8) (xy 101.6 50.8)) (stroke (width 0.1524) (type default)))
+
+  (symbol (lib_id "Module:Seeed_Wio-E5_Mini") (at 120.0 80.0 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "node-mcu-wio-e5-0001")
+    (property "Reference" "U1" (at 120.0 65.0 0))
+    (property "Value" "Wio-E5_STM32WLE5JC" (at 120.0 68.0 0))
+    (property "Footprint" "Module:Seeed_Wio-E5_Mini" (at 120.0 80.0 0) (effects (hide yes)))
+  )
+
+  (symbol (lib_id "Sensor_Audio:ICS-43434") (at 40.0 80.0 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "node-mic-ics43434-0002")
+    (property "Reference" "U2" (at 40.0 65.0 0))
+    (property "Value" "ICS-43434_I2S_Mic" (at 40.0 68.0 0))
+    (property "Footprint" "Sensor_Audio:LGA-6_3.5x2.65mm" (at 40.0 80.0 0) (effects (hide yes)))
+  )
+
+  (symbol (lib_id "Sensor_Temperature:DS18B20") (at 180.0 80.0 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "node-temp-ds18b20-0003")
+    (property "Reference" "DS1" (at 180.0 65.0 0))
+    (property "Value" "DS18B20_1Wire_Array" (at 180.0 68.0 0))
+    (property "Footprint" "Sensor_Temperature:TO-92_3" (at 180.0 80.0 0) (effects (hide yes)))
+  )
+
+  (symbol (lib_id "Battery_Management:MCP73831") (at 80.0 140.0 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "node-charger-mcp73831-0004")
+    (property "Reference" "U3" (at 80.0 125.0 0))
+    (property "Value" "MCP73831_LiPo_Charger" (at 80.0 128.0 0))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 80.0 140.0 0) (effects (hide yes)))
+  )
+
+  (symbol (lib_id "Regulator_Linear:TPS73033") (at 140.0 140.0 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "node-ldo-tps73033-0005")
+    (property "Reference" "U4" (at 140.0 125.0 0))
+    (property "Value" "TPS73033_3.3V_25nA_LDO" (at 140.0 128.0 0))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 140.0 140.0 0) (effects (hide yes)))
+  )
+
+  (symbol (lib_id "Diode:BAT54S") (at 40.0 140.0 0) (unit 1)
+    (in_bom yes) (on_board yes)
+    (uuid "node-diode-bat54s-0006")
+    (property "Reference" "D1" (at 40.0 125.0 0))
+    (property "Value" "BAT54S_Solar_USB_ORing" (at 40.0 128.0 0))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-3" (at 40.0 140.0 0) (effects (hide yes)))
+  )
+)
