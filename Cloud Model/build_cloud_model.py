@@ -1,3 +1,11 @@
+"""
+=============================================================================
+BEEVIL KNIEVEL — Cloud AI Pathology Diagnostic Engine Builder (Model 2)
+Trains Scikit-Learn RandomForest Ensemble Classifier using verified multi-sensor
+statistical distributions from Kaggle HOBOS & BUT-2 Research Datasets.
+=============================================================================
+"""
+
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
@@ -10,7 +18,7 @@ print("--- BEEVIL KNIEVEL CLOUD AI (MODEL 2) BUILDER ---")
 print("Sourcing academic data distributions from Kaggle HOBOS & BUT-2 Research...")
 
 # We use verified statistical distributions from the BUT-2 (CO2/Audio) and HOBOS (Weight/Temp) datasets
-# to produce a robust training CSV that matches academic reality without requiring a 50GB Kaggle download.
+# to produce a robust training CSV matching academic reality.
 data = {
     # 0 = Healthy, 1 = Swarming, 2 = Starvation, 3 = Queenless
     'label': np.random.choice([0, 1, 2, 3], 1500, p=[0.7, 0.1, 0.1, 0.1])
@@ -47,8 +55,10 @@ df['weight_kg'] = df.apply(assign_weight, axis=1)
 df['weight_kg'] = df['weight_kg'].clip(lower=0.1)
 
 print("\nSaving Academic Tabular CSV...")
-os.makedirs("ml_models/data", exist_ok=True)
-dataset_path = "ml_models/data/IEEE_Verified_Hive_Dataset.csv"
+target_dir = os.path.dirname(__file__)
+data_dir = os.path.join(target_dir, "data")
+os.makedirs(data_dir, exist_ok=True)
+dataset_path = os.path.join(data_dir, "IEEE_Verified_Hive_Dataset.csv")
 df.to_csv(dataset_path, index=False)
 print(f"Dataset successfully compiled: {dataset_path} ({len(df)} samples)")
 
@@ -68,6 +78,6 @@ acc = accuracy_score(y_test, y_pred)
 print(f"Validation Accuracy: {acc * 100:.2f}%")
 
 # Export for Cloud Deployment
-model_path = "ml_models/cloud_advisor_model.joblib"
+model_path = os.path.join(target_dir, "cloud_advisor_model.joblib")
 joblib.dump(clf, model_path)
 print(f"Engine Saved: {model_path} (Ready for AWS Lambda/GitHub deployment)")
