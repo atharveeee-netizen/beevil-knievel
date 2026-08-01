@@ -2,511 +2,511 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beevil Knievel — Enterprise Apiary Management Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Beevil Knievel Mobile App</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --bg-base: #0b0f19;
-            --bg-surface: #111827;
-            --bg-card: #1f2937;
-            --border-color: #374151;
+            --bg-body: #070a11;
+            --bg-card: #121826;
+            --bg-card-active: #1a2336;
+            --border-color: #263147;
             --accent-primary: #10b981;
-            --accent-primary-hover: #059669;
             --accent-warning: #f59e0b;
             --accent-danger: #ef4444;
-            --accent-info: #3b82f6;
-            --text-heading: #f9fafb;
-            --text-body: #d1d5db;
-            --text-muted: #9ca3af;
+            --accent-blue: #3b82f6;
+            --text-main: #f9fafb;
+            --text-sub: #9ca3af;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-base); color: var(--text-body); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 12px;
+        }
 
-        /* Top Navigation Bar */
-        nav {
-            background-color: var(--bg-surface);
-            border-bottom: 1px solid var(--border-color);
-            padding: 0 24px;
-            height: 64px;
+        /* Mobile Phone Container Simulation Frame */
+        .mobile-frame {
+            width: 100%;
+            max-width: 412px;
+            height: 860px;
+            max-height: 92vh;
+            background: #0d131f;
+            border: 8px solid #1f293d;
+            border-radius: 44px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Mobile Status Bar */
+        .status-bar {
+            height: 36px;
+            padding: 0 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            background: rgba(13, 19, 31, 0.95);
         }
 
-        .nav-brand {
+        .status-time { font-weight: 600; color: var(--text-main); }
+        .status-icons { display: flex; gap: 6px; align-items: center; }
+
+        /* Mobile Header */
+        .app-header {
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-heading);
-            letter-spacing: -0.3px;
+            justify-content: space-between;
+            background: #0d131f;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .brand-logo {
-            width: 32px;
-            height: 32px;
-            background: var(--accent-primary);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .nav-stats {
-            display: flex;
-            gap: 24px;
-            font-size: 0.85rem;
-        }
-
-        .stat-item { display: flex; align-items: center; gap: 8px; }
-        .stat-label { color: var(--text-muted); }
-        .stat-val { font-weight: 600; color: var(--text-heading); }
-
-        .app-container { display: flex; flex: 1; height: calc(100vh - 64px); }
-
-        /* Sidebar Hive Management */
-        aside {
-            width: 320px;
-            background-color: var(--bg-surface);
-            border-right: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            gap: 16px;
-        }
-
-        .search-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px 14px;
+        .header-brand {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .search-box input {
-            background: transparent;
-            border: none;
-            color: var(--text-heading);
-            width: 100%;
-            outline: none;
-            font-size: 0.85rem;
-        }
-
-        .filter-tabs { display: flex; gap: 8px; }
-        .tab-btn {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            cursor: pointer;
-            flex: 1;
-        }
-        .tab-btn.active { background: var(--bg-card); color: var(--text-heading); border-color: var(--text-muted); }
-
-        .hive-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-
-        .hive-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .hive-card:hover, .hive-card.active { border-color: var(--accent-primary); background: #1a2332; }
-
-        .hive-card-top { display: flex; justify-content: space-between; align-items: center; }
-        .hive-card-name { font-weight: 600; font-size: 0.9rem; color: var(--text-heading); }
-        
-        .status-pill {
-            font-size: 0.7rem; font-weight: 600; text-transform: uppercase; padding: 2px 8px; border-radius: 4px;
-        }
-        .status-pill.healthy { background: rgba(16,185,129,0.15); color: var(--accent-primary); }
-        .status-pill.warning { background: rgba(245,158,11,0.15); color: var(--accent-warning); }
-        .status-pill.danger { background: rgba(239,68,68,0.15); color: var(--accent-danger); }
-
-        .hive-card-meta { font-size: 0.75rem; color: var(--text-muted); display: flex; justify-content: space-between; }
-
-        .add-node-btn {
+        .brand-icon {
+            width: 32px;
+            height: 32px;
             background: var(--accent-primary);
-            color: #fff;
-            border: none;
-            padding: 10px;
             border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
         }
 
-        /* Main Workspace */
-        main { flex: 1; padding: 24px 32px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; }
+        .brand-title { font-size: 0.95rem; font-weight: 700; }
+        .brand-subtitle { font-size: 0.7rem; color: var(--text-sub); }
 
-        .main-header { display: flex; justify-content: space-between; align-items: center; }
-        .main-title h2 { font-size: 1.5rem; font-weight: 700; color: var(--text-heading); }
-        .main-title p { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
-
-        .btn-export {
+        .btn-icon {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            color: var(--text-heading);
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            cursor: pointer;
         }
 
-        /* Model 2 Advisory Banner */
-        .advisory-box {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--accent-primary);
-            padding: 18px 24px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .advisory-title { font-size: 0.8rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; color: var(--accent-primary); }
-        .advisory-text { font-size: 0.95rem; color: var(--text-heading); font-weight: 500; }
-
-        /* Telemetry Cards */
-        .telemetry-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-
-        .telemetry-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .card-label { font-size: 0.8rem; font-weight: 500; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; }
-        .card-value { font-size: 1.8rem; font-weight: 700; color: var(--text-heading); }
-        .card-unit { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
-        .card-footer { font-size: 0.75rem; color: var(--accent-primary); }
-
-        /* Charts */
-        .analytics-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .chart-box {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
+        /* Mobile Scrollable Viewport */
+        .app-viewport {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
-        .chart-title { font-size: 0.9rem; font-weight: 600; color: var(--text-heading); }
 
-        /* Modal */
-        .modal-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 1000; }
-        .modal-body { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; width: 380px; display: flex; flex-direction: column; gap: 16px; }
-        .modal-body input { background: var(--bg-card); border: 1px solid var(--border-color); padding: 10px; border-radius: 6px; color: #fff; outline: none; }
+        /* N-Brood Horizontal Swiper / Selector */
+        .section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-sub); margin-bottom: 8px; }
+
+        .broods-carousel {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+        .broods-carousel::-webkit-scrollbar { display: none; }
+
+        .brood-tab {
+            min-width: 140px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transition: all 0.15s ease;
+        }
+
+        .brood-tab.active {
+            background: var(--bg-card-active);
+            border-color: var(--accent-primary);
+        }
+
+        .brood-tab-title { font-size: 0.85rem; font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .brood-tab-sub { font-size: 0.7rem; color: var(--text-sub); }
+        .brood-tab-badge { font-size: 0.65rem; font-weight: 700; color: var(--accent-primary); margin-top: 4px; }
+
+        .add-brood-chip {
+            min-width: 100px;
+            background: rgba(16,185,129,0.1);
+            border: 1px dashed var(--accent-primary);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* AI Alert Status Banner */
+        .ai-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 14px;
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .ai-header { display: flex; justify-content: space-between; align-items: center; }
+        .ai-status-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--accent-primary); }
+        .ai-body { font-size: 0.85rem; color: var(--text-main); line-height: 1.4; }
+
+        /* 2x2 Telemetry Metric Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .metric-tile {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tile-head { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-sub); }
+        .tile-val { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
+        .tile-unit { font-size: 0.8rem; font-weight: 400; color: var(--text-sub); }
+        .tile-foot { font-size: 0.7rem; color: var(--accent-primary); }
+
+        /* Mobile Chart Container */
+        .chart-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chart-title { font-size: 0.8rem; font-weight: 600; color: var(--text-main); }
+
+        /* Bottom Mobile Navigation Bar */
+        .bottom-nav {
+            height: 62px;
+            background: #0d131f;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.65rem;
+            color: var(--text-sub);
+            cursor: pointer;
+        }
+
+        .nav-item.active { color: var(--accent-primary); }
+
+        /* Add Brood Modal */
+        .modal-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 200;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .modal-title { font-size: 1rem; font-weight: 700; }
+        .modal-box input { background: #070a11; border: 1px solid var(--border-color); padding: 10px; border-radius: 8px; color: #fff; font-size: 0.85rem; outline: none; }
+        .modal-btns { display: flex; justify-content: flex-end; gap: 8px; }
+        .btn-sm { padding: 8px 14px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; border: none; }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation -->
-    <nav>
-        <div class="nav-brand">
-            <div class="brand-logo">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            </div>
-            <span>Beevil Knievel AgriTech</span>
-        </div>
-
-        <div class="nav-stats">
-            <div class="stat-item"><span class="stat-label">Total Active Broods:</span><span class="stat-val" id="totalBroodsVal">3</span></div>
-            <div class="stat-item"><span class="stat-label">Fleet Status:</span><span class="stat-val" style="color: var(--accent-primary);">99.4% Operational</span></div>
-            <div class="stat-item"><span class="stat-label">Gateway Protocol:</span><span class="stat-val">LoRaWAN 868MHz</span></div>
-        </div>
-    </nav>
-
-    <div class="app-container">
-        <!-- Sidebar -->
-        <aside>
-            <div class="search-box">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                <input type="text" placeholder="Search Brood ID or Location..." onkeyup="filterBroods(this.value)">
-            </div>
-
-            <div class="filter-tabs">
-                <button class="tab-btn active" onclick="setFilter('all')">All</button>
-                <button class="tab-btn" onclick="setFilter('warning')">Alerts</button>
-            </div>
-
-            <div class="hive-list" id="hiveList"></div>
-
-            <button class="add-node-btn" onclick="openModal()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-                Add Brood Node
-            </button>
-        </aside>
-
-        <!-- Main Workspace -->
-        <main>
-            <div class="main-header">
-                <div class="main-title">
-                    <h2 id="hiveTitle">Brood Node #01 — Apiary Alpha</h2>
-                    <p id="hiveSubtitle">Hardware ID: 0x8F94A2B1 | RF Transceiver: Wio-E5 | Telemetry Cycle: 5 Min</p>
-                </div>
-                <button class="btn-export" onclick="exportData()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                    Export CSV Log
-                </button>
-            </div>
-
-            <!-- Model 2 Advisory Banner -->
-            <div class="advisory-box" id="advisoryCard">
-                <div class="advisory-title" id="advisoryStatusTitle">Model 2 AI Classifier: Normal Operation</div>
-                <div class="advisory-text" id="advisoryText">Internal hive core temperature is regulated at 34.6°C. Acoustic frequency FFT spectrum indicates standard worker fanning activity. Zero anomalies detected.</div>
-            </div>
-
-            <!-- Telemetry Cards -->
-            <div class="telemetry-grid">
-                <div class="telemetry-card">
-                    <div class="card-label">
-                        <span>Brood Nest Temperature</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
-                    </div>
-                    <div class="card-value"><span id="valTemp">34.6</span> <span class="card-unit">°C</span></div>
-                    <div class="card-footer">Sensor: DS18B20 Probes (x3)</div>
-                </div>
-
-                <div class="telemetry-card">
-                    <div class="card-label">
-                        <span>Acoustic Peak Frequency</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M12 1v22M17 5v14M22 9v6M7 5v14M2 9v6"/></svg>
-                    </div>
-                    <div class="card-value"><span id="valAudio">145</span> <span class="card-unit">Hz</span></div>
-                    <div class="card-footer">Sensor: ICS-43432 I2S Mic</div>
-                </div>
-
-                <div class="telemetry-card">
-                    <div class="card-label">
-                        <span>Respiration Gas (VOC/CO2)</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
-                    </div>
-                    <div class="card-value"><span id="valCO2">780</span> <span class="card-unit">ppm</span></div>
-                    <div class="card-footer">Sensor: BME680 Environmental</div>
-                </div>
-
-                <div class="telemetry-card">
-                    <div class="card-label">
-                        <span>Hive Scale Weight</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>
-                    </div>
-                    <div class="card-value"><span id="valWeight">26.4</span> <span class="card-unit">kg</span></div>
-                    <div class="card-footer">Sensor: HX711 Load Cell</div>
-                </div>
-            </div>
-
-            <!-- Charts -->
-            <div class="analytics-grid">
-                <div class="chart-box">
-                    <div class="chart-title">24-Hour Multi-Sensor Telemetry Trends</div>
-                    <canvas id="mainChart" height="110"></canvas>
-                </div>
-                <div class="chart-box">
-                    <div class="chart-title">Power Delivery & LiPo Health</div>
-                    <canvas id="powerChart" height="180"></canvas>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal-bg" id="modalBg">
-        <div class="modal-body">
-            <h3 style="color:#fff;">Add New Brood Node</h3>
-            <input type="text" id="inName" placeholder="Node Name (e.g. Brood Node #04)">
-            <input type="text" id="inAddr" placeholder="Wio-E5 Hardware Address (0x...)">
-            <div style="display:flex; justify-end:flex-end; gap:8px;">
-                <button onclick="closeModal()" style="background:transparent; border:1px solid var(--border-color); color:#fff; padding:8px 14px; border-radius:6px; cursor:pointer;">Cancel</button>
-                <button onclick="saveNode()" style="background:var(--accent-primary); border:none; color:#fff; padding:8px 14px; border-radius:6px; cursor:pointer; font-weight:600;">Register</button>
+    <!-- Mobile Frame Simulation -->
+    <div class="mobile-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span class="status-time">09:41</span>
+            <div class="status-icons">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/></svg>
             </div>
         </div>
+
+        <!-- Header -->
+        <div class="app-header">
+            <div class="header-brand">
+                <div class="brand-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <div>
+                    <div class="brand-title">Beevil Mobile</div>
+                    <div class="brand-subtitle">Apiary Gateway v2.4</div>
+                </div>
+            </div>
+            <div style="display:flex; gap:8px;">
+                <div class="btn-icon" onclick="exportCSV()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrollable Content Viewport -->
+        <div class="app-viewport">
+            
+            <!-- N-Brood Selector Carousel -->
+            <div>
+                <div class="section-label">Active Broods (N-Scale)</div>
+                <div class="broods-carousel" id="broodsCarousel"></div>
+            </div>
+
+            <!-- AI Model 2 Health Card -->
+            <div class="ai-card" id="aiCard">
+                <div class="ai-header">
+                    <span class="ai-status-title" id="aiTitle">Model 2: Healthy Baseline</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                </div>
+                <div class="ai-body" id="aiText">Brood thermal regulation is maintained at 34.6°C. Acoustic spectrum shows nominal worker fanning.</div>
+            </div>
+
+            <!-- 2x2 Telemetry Tile Grid -->
+            <div class="metrics-grid">
+                <div class="metric-tile">
+                    <div class="tile-head">
+                        <span>Brood Temp</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 00-5 0v11.26a4.5 4.5 0 105 0z"/></svg>
+                    </div>
+                    <div class="tile-val"><span id="valTemp">34.6</span> <span class="tile-unit">°C</span></div>
+                    <div class="tile-foot">DS18B20 1-Wire</div>
+                </div>
+
+                <div class="metric-tile">
+                    <div class="tile-head">
+                        <span>Acoustics</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M12 1v22M17 5v14M22 9v6M7 5v14M2 9v6"/></svg>
+                    </div>
+                    <div class="tile-val"><span id="valAudio">145</span> <span class="tile-unit">Hz</span></div>
+                    <div class="tile-foot">ICS-43432 Mic</div>
+                </div>
+
+                <div class="metric-tile">
+                    <div class="tile-head">
+                        <span>Gas (CO2)</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+                    </div>
+                    <div class="tile-val"><span id="valCO2">780</span> <span class="tile-unit">ppm</span></div>
+                    <div class="tile-foot">BME680 Sensor</div>
+                </div>
+
+                <div class="metric-tile">
+                    <div class="tile-head">
+                        <span>Scale Weight</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>
+                    </div>
+                    <div class="tile-val"><span id="valWeight">26.4</span> <span class="tile-unit">kg</span></div>
+                    <div class="tile-foot">HX711 Load Cell</div>
+                </div>
+            </div>
+
+            <!-- Mobile Chart View -->
+            <div class="chart-card">
+                <div class="chart-title">24-Hour Telemetry Trend</div>
+                <canvas id="mobileChart" height="140"></canvas>
+            </div>
+
+        </div>
+
+        <!-- Bottom Mobile Bar -->
+        <div class="bottom-nav">
+            <div class="nav-item active">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <span>Hives</span>
+            </div>
+            <div class="nav-item" onclick="alert('Gateway LoRaWAN Link: 868MHz Active')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/></svg>
+                <span>Gateway</span>
+            </div>
+            <div class="nav-item" onclick="openAddModal()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                <span>Add Node</span>
+            </div>
+        </div>
+
+        <!-- Add Modal -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal-box">
+                <div class="modal-title">Register Brood Node</div>
+                <input type="text" id="inName" placeholder="Node Name (e.g. Brood #04)">
+                <input type="text" id="inAddr" placeholder="Wio-E5 Address (0x...)">
+                <div class="modal-btns">
+                    <button class="btn-sm" style="background:#263147; color:#fff;" onclick="closeAddModal()">Cancel</button>
+                    <button class="btn-sm" style="background:var(--accent-primary); color:#fff; font-weight:600;" onclick="saveBrood()">Register</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
         let broods = [
-            { id: 1, name: "Brood Node #01 — Apiary Alpha", addr: "0x8F94A2B1", temp: 34.6, audio: 145, co2: 780, weight: 26.4, status: "healthy", text: "Internal hive core temperature is regulated at 34.6°C. Acoustic frequency FFT spectrum indicates standard worker fanning activity. Zero anomalies detected." },
-            { id: 2, name: "Brood Node #02 — North Orchard", addr: "0x91C4D2E5", temp: 33.8, audio: 340, co2: 2450, weight: 25.1, status: "warning", text: "IMMINENT SWARM WARNING: BME680 detects a high CO2 respiration spike (2,450 ppm) correlated with 340 Hz departure acoustic buzzing. Prepare swarm traps!" },
-            { id: 3, name: "Brood Node #03 — Meadow Frame", addr: "0x63A1F4B9", temp: 24.2, audio: 110, co2: 650, weight: 4.8, status: "danger", text: "WINTER STARVATION RISK: Hive scale dropped to 4.8 kg while internal temp dropped to 24.2°C. Immediate emergency syrup feeding required!" }
+            { id: 1, name: "Brood #01 — Alpha", addr: "0x8F94A2B1", temp: 34.6, audio: 145, co2: 780, weight: 26.4, status: "healthy", text: "Brood thermal regulation is maintained at 34.6°C. Acoustic spectrum shows nominal worker fanning." },
+            { id: 2, name: "Brood #02 — Orchard", addr: "0x91C4D2E5", temp: 33.8, audio: 340, co2: 2450, weight: 25.1, status: "warning", text: "SWARM WARNING: CO2 respiration spike (2,450 ppm) correlated with 340 Hz departure buzzing!" },
+            { id: 3, name: "Brood #03 — Meadow", addr: "0x63A1F4B9", temp: 24.2, audio: 110, co2: 650, weight: 4.8, status: "danger", text: "STARVATION RISK: Hive scale dropped to 4.8 kg while internal temp dropped to 24.2°C. Feed syrup!" }
         ];
 
         let selectedId = 1;
-        let mainChart, powerChart;
+        let mobileChart;
 
-        function renderList(items = broods) {
-            const list = document.getElementById('hiveList');
-            list.innerHTML = '';
-            items.forEach(b => {
-                const el = document.createElement('div');
-                el.className = `hive-card ${b.id === selectedId ? 'active' : ''}`;
-                el.onclick = () => selectNode(b.id);
-                el.innerHTML = `
-                    <div class="hive-card-top">
-                        <span class="hive-card-name">${b.name}</span>
-                        <span class="status-pill ${b.status}">${b.status.toUpperCase()}</span>
-                    </div>
-                    <div class="hive-card-meta">
-                        <span>${b.temp}°C | ${b.weight}kg</span>
-                        <span>${b.addr}</span>
-                    </div>
+        function renderCarousel() {
+            const carousel = document.getElementById('broodsCarousel');
+            carousel.innerHTML = '';
+            
+            broods.forEach(b => {
+                const tab = document.createElement('div');
+                tab.className = `brood-tab ${b.id === selectedId ? 'active' : ''}`;
+                tab.onclick = () => selectBrood(b.id);
+                tab.innerHTML = `
+                    <div class="brood-tab-title">${b.name}</div>
+                    <div class="brood-tab-sub">${b.addr}</div>
+                    <div class="brood-tab-badge" style="color: ${b.status==='healthy'?'#10b981':b.status==='warning'?'#f59e0b':'#ef4444'}">${b.status.toUpperCase()}</div>
                 `;
-                list.appendChild(el);
+                carousel.appendChild(tab);
             });
-            document.getElementById('totalBroodsVal').innerText = broods.length;
+
+            const addChip = document.createElement('div');
+            addChip.className = 'add-brood-chip';
+            addChip.onclick = openAddModal;
+            addChip.innerHTML = `<span>+</span><span>Add Node</span>`;
+            carousel.appendChild(addChip);
         }
 
-        function selectNode(id) {
+        function selectBrood(id) {
             selectedId = id;
             const b = broods.find(x => x.id === id);
-            renderList();
+            renderCarousel();
 
-            document.getElementById('hiveTitle').innerText = b.name;
-            document.getElementById('hiveSubtitle').innerText = `Hardware ID: ${b.addr} | RF Transceiver: Wio-E5 | Telemetry Cycle: 5 Min`;
             document.getElementById('valTemp').innerText = b.temp.toFixed(1);
             document.getElementById('valAudio').innerText = b.audio;
             document.getElementById('valCO2').innerText = b.co2;
             document.getElementById('valWeight').innerText = b.weight.toFixed(1);
-            document.getElementById('advisoryText').innerText = b.text;
+            document.getElementById('aiText').innerText = b.text;
 
-            const card = document.getElementById('advisoryCard');
-            const title = document.getElementById('advisoryStatusTitle');
+            const card = document.getElementById('aiCard');
+            const title = document.getElementById('aiTitle');
             if(b.status === 'healthy') {
-                card.style.borderLeftColor = '#10b981'; title.style.color = '#10b981'; title.innerText = 'MODEL 2 AI CLASSIFIER: NORMAL OPERATION';
+                card.style.borderLeftColor = '#10b981'; title.style.color = '#10b981'; title.innerText = 'MODEL 2: HEALTHY BASELINE';
             } else if(b.status === 'warning') {
-                card.style.borderLeftColor = '#f59e0b'; title.style.color = '#f59e0b'; title.innerText = 'MODEL 2 AI CLASSIFIER: IMMINENT SWARM WARNING';
+                card.style.borderLeftColor = '#f59e0b'; title.style.color = '#f59e0b'; title.innerText = 'MODEL 2: IMMINENT SWARM ALERT';
             } else {
-                card.style.borderLeftColor = '#ef4444'; title.style.color = '#ef4444'; title.innerText = 'MODEL 2 AI CLASSIFIER: CRITICAL STARVATION ALERT';
+                card.style.borderLeftColor = '#ef4444'; title.style.color = '#ef4444'; title.innerText = 'MODEL 2: STARVATION RISK';
             }
 
-            if(mainChart) {
-                mainChart.data.datasets[0].data = [b.temp - 0.4, b.temp - 0.2, b.temp, b.temp + 0.1, b.temp];
-                mainChart.data.datasets[1].data = [b.weight + 0.3, b.weight + 0.2, b.weight + 0.1, b.weight, b.weight];
-                mainChart.update();
+            if(mobileChart) {
+                mobileChart.data.datasets[0].data = [b.temp - 0.4, b.temp - 0.2, b.temp, b.temp + 0.1, b.temp];
+                mobileChart.data.datasets[1].data = [b.weight + 0.3, b.weight + 0.2, b.weight + 0.1, b.weight, b.weight];
+                mobileChart.update();
             }
         }
 
-        function initAnalytics() {
-            const ctx = document.getElementById('mainChart').getContext('2d');
-            mainChart = new Chart(ctx, {
+        function initChart() {
+            const ctx = document.getElementById('mobileChart').getContext('2d');
+            mobileChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['04:00', '08:00', '12:00', '16:00', 'Now'],
                     datasets: [
-                        { label: 'Brood Temp (°C)', data: [34.2, 34.4, 34.6, 34.5, 34.6], borderColor: '#10b981', tension: 0.3 },
-                        { label: 'Hive Weight (kg)', data: [26.7, 26.6, 26.5, 26.4, 26.4], borderColor: '#3b82f6', tension: 0.3 }
+                        { label: 'Temp (°C)', data: [34.2, 34.4, 34.6, 34.5, 34.6], borderColor: '#10b981', tension: 0.3 },
+                        { label: 'Weight (kg)', data: [26.7, 26.6, 26.5, 26.4, 26.4], borderColor: '#3b82f6', tension: 0.3 }
                     ]
                 },
                 options: {
                     responsive: true,
-                    plugins: { legend: { labels: { color: '#9ca3af' } } },
+                    plugins: { legend: { labels: { color: '#9ca3af', font: { size: 10 } } } },
                     scales: {
-                        x: { grid: { color: '#374151' }, ticks: { color: '#9ca3af' } },
-                        y: { grid: { color: '#374151' }, ticks: { color: '#9ca3af' } }
+                        x: { grid: { color: '#263147' }, ticks: { color: '#9ca3af', font: { size: 9 } } },
+                        y: { grid: { color: '#263147' }, ticks: { color: '#9ca3af', font: { size: 9 } } }
                     }
                 }
             });
-
-            const ctxPwr = document.getElementById('powerChart').getContext('2d');
-            powerChart = new Chart(ctxPwr, {
-                type: 'doughnut',
-                data: {
-                    labels: ['LiPo Battery (3.92V)', 'Solar Charge Yield'],
-                    datasets: [{ data: [91, 9], backgroundColor: ['#10b981', '#374151'] }]
-                },
-                options: { plugins: { legend: { labels: { color: '#9ca3af' } } } }
-            });
         }
 
-        function filterBroods(q) {
-            const res = broods.filter(b => b.name.toLowerCase().includes(q.toLowerCase()) || b.addr.toLowerCase().includes(q.toLowerCase()));
-            renderList(res);
-        }
+        function openAddModal() { document.getElementById('modalOverlay').style.display = 'flex'; }
+        function closeAddModal() { document.getElementById('modalOverlay').style.display = 'none'; }
 
-        function setFilter(type) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            if(type === 'warning') {
-                renderList(broods.filter(b => b.status !== 'healthy'));
-            } else {
-                renderList(broods);
-            }
-        }
-
-        function openModal() { document.getElementById('modalBg').style.display = 'flex'; }
-        function closeModal() { document.getElementById('modalBg').style.display = 'none'; }
-
-        function saveNode() {
-            const name = document.getElementById('inName').value || `Brood Node #${broods.length + 1}`;
+        function saveBrood() {
+            const name = document.getElementById('inName').value || `Brood #${broods.length + 1}`;
             const addr = document.getElementById('inAddr').value || `0x${Math.floor(Math.random()*16777215).toString(16).toUpperCase()}`;
-            const newNode = {
-                id: broods.length + 1,
-                name: name,
-                addr: addr,
-                temp: 34.5,
-                audio: 148,
-                co2: 760,
-                weight: 25.0,
-                status: "healthy",
-                text: "Node successfully provisioned via Gateway. Sensor telemetry nominal."
-            };
-            broods.push(newNode);
-            closeModal();
-            selectNode(newNode.id);
+            const b = { id: broods.length + 1, name, addr, temp: 34.5, audio: 148, co2: 760, weight: 25.0, status: "healthy", text: "New brood node provisioned." };
+            broods.push(b);
+            closeAddModal();
+            selectBrood(b.id);
         }
 
-        function exportData() {
+        function exportCSV() {
             let csv = "Brood_Name,Hardware_ID,Temp_C,Audio_Hz,CO2_ppm,Weight_kg,Status\n";
-            broods.forEach(b => {
-                csv += `"${b.name}",${b.addr},${b.temp},${b.audio},${b.co2},${b.weight},${b.status}\n`;
-            });
+            broods.forEach(b => csv += `"${b.name}",${b.addr},${b.temp},${b.audio},${b.co2},${b.weight},${b.status}\n`);
             const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.setAttribute('href', url);
-            a.setAttribute('download', 'Beevil_Knievel_Apiary_Report.csv');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'Beevil_Mobile_Report.csv';
             a.click();
         }
 
         window.onload = () => {
-            renderList();
-            initAnalytics();
-            selectNode(1);
+            renderCarousel();
+            initChart();
+            selectBrood(1);
         };
     </script>
 </body>
