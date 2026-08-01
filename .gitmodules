@@ -1,0 +1,3 @@
+[submodule "firmware/lib/stm32-mw-lorawan"]
+	path = firmware/lib/stm32-mw-lorawan
+	url = https://github.com/STMicroelectronics/stm32-mw-lorawan.git
