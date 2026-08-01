@@ -1,0 +1,5 @@
+# Exclude audio WAV binaries and python cache
+*.wav
+*.mp3
+__pycache__/
+datasets/sample_bee_audio/*.wav
