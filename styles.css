@@ -112,17 +112,21 @@
     --theme-icon: '🌙';
 }
 
-/* Smooth theme transition */
-*, *::before, *::after {
-    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-}
-
-
 /* ---------- Reset & Base Styling ---------- */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Smooth theme transition — only on non-animated elements */
+body, nav, .nav, .card, .card-glass, .btn, .badge, .stat-block,
+.nav-links a, .nav-logo-text, .heading-display, .heading-hero,
+.heading-section, .heading-card, .heading-small, .body-lg, .body-md,
+.body-sm, .eyebrow, footer, .footer-heading, .footer-links a,
+.theme-toggle, .modal-content, .phone-mockup, .phone-screen {
+    transition: background-color 0.25s ease, border-color 0.25s ease,
+                color 0.25s ease, box-shadow 0.25s ease;
 }
 
 html {
@@ -236,7 +240,7 @@ button {
 }
 
 .text-gradient {
-    background: linear-gradient(135deg, #FFFFFF 0%, #A1A1AA 100%);
+    background: linear-gradient(135deg, var(--color-ink) 0%, var(--color-ink-secondary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -326,11 +330,17 @@ button {
     right: 0;
     z-index: 1000;
     height: 72px;
-    background: rgba(4, 4, 5, 0.85);
+    background: color-mix(in srgb, var(--color-canvas) 88%, transparent);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid var(--color-border);
-    transition: all var(--duration-normal) var(--ease-out);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Fallback for browsers without color-mix */
+@supports not (background: color-mix(in srgb, red, blue)) {
+    .nav { background: rgba(4, 4, 5, 0.88); }
+    [data-theme="light"] .nav { background: rgba(248, 247, 244, 0.90); }
 }
 
 .nav-inner {
@@ -524,7 +534,7 @@ button {
 }
 
 .btn-primary:hover {
-    background: #E4E4E7;
+    background: var(--color-ink-secondary);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
@@ -591,12 +601,16 @@ button {
 }
 
 .card-glass {
-    background: rgba(18, 18, 21, 0.6);
+    background: color-mix(in srgb, var(--color-surface-2) 70%, transparent);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
     padding: 32px;
+}
+
+@supports not (background: color-mix(in srgb, red, blue)) {
+    .card-glass { background: var(--color-surface-2); }
 }
 
 .card-featured {
@@ -825,6 +839,7 @@ button {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    /* The phone physical body is always dark regardless of mode */
 }
 
 .phone-notch {
@@ -857,7 +872,7 @@ button {
     font-size: 10px;
     font-family: 'JetBrains Mono', monospace;
     color: var(--color-amber);
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.75);
     padding: 2px 8px;
     border-radius: 4px;
     z-index: 110;
@@ -886,8 +901,9 @@ button {
     color: var(--color-amber);
 }
 
-/* Modal Overlay for Demo */
-.modal-overlay {
+/* Modal Overlay for Demo — supports both .modal-overlay and .modal-backdrop class names */
+.modal-overlay,
+.modal-backdrop {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.85);
@@ -901,7 +917,8 @@ button {
     transition: opacity var(--duration-normal) ease;
 }
 
-.modal-overlay.open {
+.modal-overlay.open,
+.modal-backdrop.open {
     opacity: 1;
     pointer-events: auto;
 }
@@ -987,6 +1004,38 @@ button {
     border-top: 1px solid var(--color-border);
     padding: 80px 0 40px;
     margin-top: var(--section-gap);
+}
+
+/* Support both .footer-col h4 and .footer-heading class */
+.footer-heading {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-ink);
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Support both .footer-col a and .footer-links li a */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links a, .footer-links li a {
+    display: block;
+    font-size: 14px;
+    color: var(--color-ink-tertiary);
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: color var(--duration-fast) ease;
+}
+
+.footer-links a:hover, .footer-links li a:hover {
+    color: var(--color-ink);
 }
 
 .footer-grid {
