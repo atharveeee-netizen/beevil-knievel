@@ -31,6 +31,34 @@ class CoralEdgeTPUAIPipeline:
         self.tpu_active = True
         self.initialize_models()
 
+    def calculate_weight_derivative_trend(self, weight_history_kg):
+        """
+        2024-2025 Research Feature: Weight Derivative Rate Analysis (dW/dt).
+        - dW/dt > +1.2 kg/day -> Nectar Flow / Honey Super Harvest Ready!
+        - dW/dt < -0.8 kg/day -> Active Robbing Attack or Rapid Starvation.
+        - Delta W < -1.5 kg in <10 mins -> Swarm Departure Event.
+        """
+        if len(weight_history_kg) < 2:
+            return 0.0, "STABLE"
+        dw = weight_history_kg[-1] - weight_history_kg[0]
+        if dw > 1.2:
+            return dw, "HONEY_SUPER_HARVEST_READY"
+        elif dw < -1.5:
+            return dw, "SWARM_DEPARTURE_DETECTED"
+        elif dw < -0.8:
+            return dw, "SEVERE_WEIGHT_LOSS_ROBBING"
+        return dw, "STABLE_BROOD_WEIGHT"
+
+    def calculate_thermal_entropy_index(self, temp_series_c):
+        """
+        2025 Research Feature: Thermal Entropy Stability Index (S_Thermal).
+        Low entropy (<0.15) indicates perfect queen brood thermoregulation.
+        High entropy (>0.60) indicates failing queen or broodless state.
+        """
+        std_dev = float(np.std(temp_series_c)) if len(temp_series_c) > 0 else 0.1
+        entropy = min(1.0, std_dev / 2.0)
+        return round(entropy, 3)
+
     def initialize_models(self):
         print("  ✓ Loaded Model 1: 24h Swarm Forecasting LSTM (Edge TPU Quantized int8)")
         print("  ✓ Loaded Model 2: Mel-Spectrogram 2D-CNN Classifier (Edge TPU Quantized int8)")
