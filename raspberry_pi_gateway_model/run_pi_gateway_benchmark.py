@@ -9,24 +9,24 @@ from pi_gateway_server import predict_pi_gateway_pathology, PATHOLOGY_ADVISORY
 
 def run_pi_benchmark():
     print("=================================================================================")
-    print("  BEEVIL KNIEVEL — RASPBERRY PI GATEWAY DIAGNOSTIC BENCHMARK SUITE              ")
+    print("  BEEVIL KNIEVEL - RASPBERRY PI GATEWAY DIAGNOSTIC BENCHMARK SUITE              ")
     print("=================================================================================")
     print("  * Hardware Target:  Raspberry Pi CM4 + Google Coral Edge TPU (4 TOPS)")
-    print("  * Input Vector:     [Temp (°C), Audio (Hz), CO2 (PPM), Weight (kg), Gas (kΩ)]")
+    print("  * Input Vector:     [Temp (C), Audio (Hz), CO2 (PPM), Weight (kg), Gas (kOhm)]")
     print("=================================================================================")
 
     test_scenarios = [
         # (Temp, Audio_Hz, CO2_PPM, Weight_kg, Gas_kohm, Delta_W, Expected_Key, Description)
         (34.5, 150.0, 800.0,  28.0, 20.0,  0.00,  "HEALTHY",    "Normal Brood Thermoregulation"),
         (34.0, 340.0, 2200.0, 24.5, 22.0, -1.10,  "SWARM",      "Imminent Swarm: CO2 Spike + 340Hz Acoustic + Weight Drop"),
-        (24.5, 120.0, 600.0,   6.5, 16.0, -0.30,  "STARVATION",  "Winter Starvation: Sub-28°C Drop + 6.5kg Weight"),
+        (24.5, 120.0, 600.0,   6.5, 16.0, -0.30,  "STARVATION",  "Winter Starvation: Sub-28C Drop + 6.5kg Weight"),
         (33.0, 580.0, 750.0,  26.0, 18.0, -0.05,  "QUEENLESS",   "Queenless Distress: 580Hz Piping Frequency"),
-        (34.1, 180.0, 850.0,  24.0,  4.5, -0.10,  "VARROA",      "Varroa Infection: Gas Resistance Drop <8 kΩ")
+        (34.1, 180.0, 850.0,  24.0,  4.5, -0.10,  "VARROA",      "Varroa Infection: Gas Resistance Drop <8 kOhm")
     ]
 
     print("\n[STEP 1] Executing Raspberry Pi Multi-Variable Diagnostics...")
     print("-" * 115)
-    print(f"{'#':<3} | {'Temp (°C)':<10} | {'Audio (Hz)':<11} | {'CO2 (PPM)':<10} | {'Weight (kg)':<11} | {'Predicted Pathology':<32} | Status")
+    print(f"{'#':<3} | {'Temp (C)':<10} | {'Audio (Hz)':<11} | {'CO2 (PPM)':<10} | {'Weight (kg)':<11} | {'Predicted Pathology':<32} | Status")
     print("-" * 115)
 
     passed = 0
