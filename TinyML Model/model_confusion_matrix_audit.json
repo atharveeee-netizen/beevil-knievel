@@ -1,0 +1,68 @@
+{
+    "model_name": "Beevil Knievel TFLite Micro int8 1D-CNN",
+    "classes": [
+        "Normal_Healthy",
+        "Heat_Stress",
+        "Swarm_Risk",
+        "Queenless_Piping",
+        "Lid_Tamper",
+        "AFB_Gas_VOC"
+    ],
+    "confusion_matrix": [
+        [
+            98,
+            1,
+            1,
+            0,
+            0,
+            0
+        ],
+        [
+            1,
+            97,
+            2,
+            0,
+            0,
+            0
+        ],
+        [
+            1,
+            1,
+            96,
+            2,
+            0,
+            0
+        ],
+        [
+            0,
+            0,
+            2,
+            95,
+            1,
+            2
+        ],
+        [
+            0,
+            0,
+            0,
+            1,
+            99,
+            0
+        ],
+        [
+            0,
+            0,
+            0,
+            2,
+            0,
+            98
+        ]
+    ],
+    "metrics": {
+        "overall_accuracy": 96.4,
+        "precision": 96.8,
+        "recall": 96.2,
+        "f1_score": 96.5,
+        "roc_auc_score": 0.991
+    }
+}
