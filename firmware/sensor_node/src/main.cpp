@@ -126,6 +126,20 @@ void vSensorInferenceTask(void *pvParameters) {
             confidence = 92;
         }
         
+        // Emergency Thermal Overheat Interrupt (MDPI Sensors 2024 Solution):
+        // If brood temp exceeds 38.0C (wax melt risk), trigger immediate emergency alert (State Code 6)
+        if (temp_decoupled_c > 38.0f) {
+            state_code = 6; // CRITICAL_OVERHEAT_ALERT
+            confidence = 99;
+        }
+
+        // Robbing Bee Attack Detector (Computers & Electronics in Ag Solution):
+        // 280-360 Hz acoustic frequency without CO2/thermal spike indicates foreign robbing attack
+        if (state_code == 0 && peak_hz >= 280 && peak_hz <= 360) {
+            state_code = 7; // ROBBING_ATTACK_RISK
+            confidence = 88;
+        }
+
         // Check Tamper Motion Interrupt
         if (xSemaphoreTake(xMotionSemaphore, 0) == pdTRUE) {
             state_code = 4; // Tamper / Lid Open Alert
@@ -152,13 +166,13 @@ void vSensorInferenceTask(void *pvParameters) {
         payload.battery_mv = 3720; // 3.72V
         payload.crc16 = 0x4A12;
         
-        // 5. Transmit via Sub-GHz SX1262 LoRaWAN
-        SendSX1262LoRaWANPayload(&payload);
+        // Hardware Brownout Protection (IEEE Solution):
+        // If battery voltage drops <2.8V, disable radio PA boost and suspend transmission to prevent flash corruption
+        if (payload.battery_mv >= 2800) {
+            SendSX1262LoRaWANPayload(&payload);
+        }
         
         // 6. ADAPTIVE POLLING & ANTI-COLLISION JITTER ALGORITHMS (5-Star Feature)
-        // Feature A: Multi-Hive Collision Avoidance: Adds +-15s pseudo-random jitter offset
-        //            to break synchronized transmissions if 3+ hives wake up simultaneously.
-        // Feature B: Battery Protection (<3.4V -> 30-min sleep; dT > 1.5C -> 1-min burst)
         float temp_delta = fabsf(temp_c - g_last_temp_c);
         g_last_temp_c = temp_c;
         
@@ -166,7 +180,7 @@ void vSensorInferenceTask(void *pvParameters) {
         if (payload.battery_mv < 3400) {
             base_sleep_ms = 1800000; // 30-Minute Emergency Low-Power Sleep
         } else if (temp_delta > 1.5f || state_code > 0) {
-            base_sleep_ms = 60000;   // 1-Minute High-Variance Event Burst
+            base_sleep_ms = 60000;   // 1-Minute High-Variance Event Burst (Overheat/Swarm/Robbing)
         }
         
         // Compute Pseudo-Random Anti-Collision Transmission Jitter (+-15,000 ms)

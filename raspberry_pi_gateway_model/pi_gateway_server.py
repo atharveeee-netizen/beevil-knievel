@@ -52,6 +52,16 @@ PATHOLOGY_ADVISORY = {
         "title": "Model 2: Varroa Mite Bacterial VOC Infection",
         "probabilities": {"Varroa Mite Infestation": 75.0, "Queenless Stress": 15.0, "Fungal Foulbrood": 10.0},
         "advisory": "Gas resistance dropped <8 kΩ. Volatile organic decay detected."
+    },
+    "CRITICAL_OVERHEAT": {
+        "title": "Model 2: Critical Brood Overheating Crisis (>38°C)",
+        "probabilities": {"Comb Melt Risk": 95.0, "Thermal Exhaustion": 5.0},
+        "advisory": "Brood temperature exceeded 38.0°C! Severe wax comb melting risk. Provide shade & water immediately."
+    },
+    "ROBBING_ATTACK": {
+        "title": "Model 2: Foreign Colony Robbing Bee Invasion",
+        "probabilities": {"Robbing Bee Attack": 85.0, "Defense Flight": 15.0},
+        "advisory": "High-frequency flight acoustics (280-360 Hz) without thermal/CO2 spike. Robbing bees attacking hive."
     }
 }
 
