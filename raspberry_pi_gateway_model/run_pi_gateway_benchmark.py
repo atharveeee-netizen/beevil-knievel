@@ -20,7 +20,7 @@ def run_pi_benchmark():
         (34.5, 150.0, 800.0,  28.0, 20.0,  0.00,  "HEALTHY",    "Normal Brood Thermoregulation"),
         (34.0, 340.0, 2200.0, 24.5, 22.0, -1.10,  "SWARM",      "Imminent Swarm: CO2 Spike + 340Hz Acoustic + Weight Drop"),
         (24.5, 120.0, 600.0,   6.5, 16.0, -0.30,  "STARVATION",  "Winter Starvation: Sub-28C Drop + 6.5kg Weight"),
-        (33.0, 580.0, 750.0,  26.0, 18.0, -0.05,  "QUEENLESS",   "Queenless Distress: 580Hz Piping Frequency"),
+        (33.0, 580.0, 750.0,  26.0, 18.0, -0.05,  "QUEENLESS_PIPING",   "Queenless Distress: 580Hz Piping Frequency"),
         (34.1, 180.0, 850.0,  24.0,  4.5, -0.10,  "VARROA",      "Varroa Infection: Gas Resistance Drop <8 kOhm")
     ]
 
