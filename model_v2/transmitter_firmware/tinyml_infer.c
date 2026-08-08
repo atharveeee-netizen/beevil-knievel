@@ -1,7 +1,8 @@
 /**
  * =============================================================================
  * BEEVIL KNIEVEL (MODEL V2) — TINYML INFERENCE C WRAPPER IMPLEMENTATION
- * Target: STM32WLE5CCU6 (ARM Cortex-M4F @ 48 MHz)
+ * Target SoC: Nordic nRF52840 + Semtech SX1262 (RAK4631 Core SoC)
+ * Processor: 64 MHz ARM Cortex-M4F (1MB Flash, 256KB SRAM, Hardware FPU)
  * =============================================================================
  */
 
@@ -25,31 +26,31 @@ int classify(const float features[7]) {
     float weight_delta   = features[5];
     float acoustic_rms   = features[6];
 
-    /* 1. Cold Stress Check */
-    if (temp_core < 28.0f || (temp_core < 30.0f && acoustic_rms < 10.0f)) {
-        return 2;
-    }
-
-    /* 2. Starvation Risk Check */
+    /* 1. Starvation Risk Check: Hive weight dropping below 12.0kg */
     if (weight_kg < 12.0f && weight_delta < -0.1f) {
-        return 5;
+        return 5; /* Starvation Risk */
     }
 
-    /* 3. Imminent Swarming Check */
+    /* 2. Cold Stress Check: Core temp dropping severely below 28°C */
+    if (temp_core < 28.0f || (temp_core < 30.0f && acoustic_rms < 10.0f)) {
+        return 2; /* Cold Stress */
+    }
+
+    /* 3. Imminent Swarming Check: Sharp negative weight delta + high acoustic energy */
     if (weight_delta < -0.4f || (acoustic_rms > 65.0f && weight_delta < -0.2f)) {
-        return 4;
+        return 4; /* Imminent Swarming */
     }
 
-    /* 4. Queenless Distress Check */
+    /* 4. Queenless Distress Check: High acoustic piping noise (>55.0) */
     if (acoustic_rms > 55.0f) {
-        return 1;
+        return 1; /* Queenless */
     }
 
-    /* 5. Varroa Mite Check */
+    /* 5. Varroa Mite Pathogen Check: Abnormally low VOC gas resistance (< 8.0 kΩ) */
     if (gas_kohm < 8.0f) {
-        return 3;
+        return 3; /* Varroa Mites */
     }
 
-    /* 6. Healthy */
-    return 0;
+    /* 6. Baseline Healthy Colony Condition */
+    return 0; /* Healthy (Skip Transmission) */
 }
