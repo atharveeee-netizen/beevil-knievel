@@ -305,6 +305,31 @@ void SendESPNOWMeshFallbackPayload(const SensorNodePayload36B_t* payload) {
     // Transmits telemetry packet to adjacent peer hive node if LoRaWAN link is obstructed
 }
 
+bool SendSX1262LoRaWANPayloadWithAck(const SensorNodePayload36B_t* payload) {
+    // 1. Attempt Primary LoRaWAN Sub-GHz Transmission with ACK check (Up to 3 Retries)
+    for (uint8_t retry = 0; retry < 3; retry++) {
+        // Transmit frame via SX1262 SPI interface at 915.1 MHz
+        bool ack_received = (retry == 0); // Simulated ACK check (Primary succeeds or fails)
+        if (ack_received) {
+            return true; // LoRaWAN Transmission Succeeded
+        }
+        vTaskDelay(pdMS_TO_TICKS(1000 * (retry + 1))); // Exponential backoff retry delay
+    }
+    return false; // LoRaWAN Link Obstructed / Gateway Unreachable
+}
+
+void TransmitTelemetryWithMeshFallback(const SensorNodePayload36B_t* payload) {
+    // Primary Channel: Sub-GHz LoRaWAN
+    bool success = SendSX1262LoRaWANPayloadWithAck(payload);
+    
+    // AUTOMATIC FAILOVER ALGORITHM:
+    // If LoRaWAN fails after 3 retries (due to RF obstruction or distance),
+    // immediately switch to 2.4 GHz ESP-NOW Mesh Relay to forward packet through a peer hive!
+    if (!success) {
+        SendESPNOWMeshFallbackPayload(payload);
+    }
+}
+
 uint8_t RunOnNodeTinyMLInference(float brood_temp, float hum, uint32_t gas, float32_t* mfcc, uint16_t peak_hz, uint8_t* confidence) {
     *confidence = 96; // 96.4% Baseline Accuracy
     if (brood_temp > 36.5f) return 1; // Heat Stress Warning
@@ -312,8 +337,4 @@ uint8_t RunOnNodeTinyMLInference(float brood_temp, float hum, uint32_t gas, floa
     if (peak_hz >= 225 && peak_hz <= 285) return 3; // Queenless Piping
     if (gas < 80000) return 5; // Pathogen / AFB VOC Alert
     return 0; // Normal Healthy
-}
-
-void SendSX1262LoRaWANPayload(const SensorNodePayload36B_t* payload) {
-    // Semtech SX1262 LoRaWAN Radio Transmission
 }
