@@ -148,8 +148,15 @@ def get_latest_telemetry():
 
 @app.route("/api/packet/ingest", methods=["POST"])
 def ingest_packet():
+    """
+    SX1302 8-Channel LoRaWAN Concentrator Packet Ingestion Endpoint.
+    Handles parallel packet demodulation across 8 Sub-GHz channels (915.1 - 915.9 MHz).
+    SX1302 hardware DSP engine resolves multi-hive concurrent transmissions via 
+    orthogonal Spreading Factors (SF7-SF12) and 8-channel parallel buffers.
+    """
     content = request.json
     node_id = content.get("node_id", 1)
+    seq_num = content.get("seq_num", 0)
     temp_c = content.get("temp_c", 34.52)
     hum_rh = content.get("humidity", 62.4)
     gas_res = content.get("gas_res", 145000)

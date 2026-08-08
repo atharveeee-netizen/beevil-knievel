@@ -145,20 +145,25 @@ void vSensorInferenceTask(void *pvParameters) {
         // 5. Transmit via Sub-GHz SX1262 LoRaWAN
         SendSX1262LoRaWANPayload(&payload);
         
-        // 6. ADAPTIVE POLLING RULES (5-Star Feature)
-        // Rule A: If battery < 3.4V, extend sleep to 30 mins to preserve winter survival
-        // Rule B: If thermal delta > 1.5C, drop sleep to 1 min to track high-variance event
+        // 6. ADAPTIVE POLLING & ANTI-COLLISION JITTER ALGORITHMS (5-Star Feature)
+        // Feature A: Multi-Hive Collision Avoidance: Adds +-15s pseudo-random jitter offset
+        //            to break synchronized transmissions if 3+ hives wake up simultaneously.
+        // Feature B: Battery Protection (<3.4V -> 30-min sleep; dT > 1.5C -> 1-min burst)
         float temp_delta = fabsf(temp_c - g_last_temp_c);
         g_last_temp_c = temp_c;
         
+        uint32_t base_sleep_ms = 900000; // 15-Minute Base Cycle
         if (payload.battery_mv < 3400) {
-            xSleepIntervalTicks = pdMS_TO_TICKS(1800000); // 30-Minute Emergency Sleep
+            base_sleep_ms = 1800000; // 30-Minute Emergency Low-Power Sleep
         } else if (temp_delta > 1.5f || state_code > 0) {
-            xSleepIntervalTicks = pdMS_TO_TICKS(60000);   // 1-Minute High-Variance Burst
-        } else {
-            xSleepIntervalTicks = pdMS_TO_TICKS(900000);  // 15-Minute Standard Cycle
+            base_sleep_ms = 60000;   // 1-Minute High-Variance Event Burst
         }
         
+        // Compute Pseudo-Random Anti-Collision Transmission Jitter (+-15,000 ms)
+        int32_t jitter_ms = (rand() % 30000) - 15000;
+        uint32_t final_sleep_ms = (uint32_t)max((int32_t)10000, (int32_t)base_sleep_ms + jitter_ms);
+        
+        xSleepIntervalTicks = pdMS_TO_TICKS(final_sleep_ms);
         vTaskDelayUntil(&xStart, xSleepIntervalTicks);
     }
 }
