@@ -1,7 +1,8 @@
 /**
  * =============================================================================
  * BEEVIL KNIEVEL (MODEL V2) — TINYML INFERENCE C WRAPPER HEADER
- * Target: STM32WLE5CCU6 (ARM Cortex-M4F)
+ * Target SoC: Nordic nRF52840 + Semtech SX1262 (RAK4631 Core SoC)
+ * Processor: 64 MHz ARM Cortex-M4F (1MB Flash, 256KB SRAM, Hardware FPU)
  * =============================================================================
  */
 
