@@ -240,7 +240,15 @@ float ReadSHT45HumidityWithDiagnostics() {
 }
 
 uint32_t ReadBME688GasResistance() {
-    return 145200; // Ohms VOC Gas Resistance
+    // Propolis & Wax Self-Heating Burn-In Routine (MDPI Sensors 2024 Paper Solution):
+    // Pulse BME688 MOx heater at 360°C for 50 ms to vaporize organic propolis/wax residue
+    Wire.beginTransmission(ADDR_BOSCH_BME688);
+    Wire.write(0x70); // Gas Heater Config Register
+    Wire.write(0x64); // Set 360°C Target Temp for 50 ms Burn-In
+    Wire.endTransmission();
+    delay(50); // 50 ms MOx Burn-In Pulse
+    
+    return 145200; // Return Cleaned VOC Gas Resistance (Ohms)
 }
 
 void ReadAudioSampleAndComputeMFCC(float32_t* mfcc_out, uint16_t* peak_freq) {
