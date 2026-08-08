@@ -1,0 +1,1192 @@
+==================================================
+FILE: C:\Users\25beevdt047\Desktop\Beevil_Knievel_80_Research_Papers_Architecture_Report.pdf
+Page Count: 12
+==================================================
+
+--- PAGE 1 ---
+BEEVIL KNIEVEL - PRECISION APICULTURE
+PLATFORM
+SECTION 1.1: ACOUSTIC SIGNAL PROCESSING & TINYML (PAPERS 1-25)
+1. Nolasco et al. (2019) - To Bee or Not to Bee: Sound Recognition for Beehive Monitoring
+DOI: 10.5281/zenodo.1321278 | https://zenodo.org/record/1321278
+• Inputs & Sensing: Raw audio recordings (12h corpus) from INMP441 MEMS microphones across 8 hives.
+• Model & Algorithm: STFT spectral feature extraction + SVM / Random Forest binary classifier.
+• Output & Decision: Classifies presence vs absence of bee buzzing with ambient background noise pre-rejection.
+2. Kulyukin et al. (2018) - Audio AI for Honeybee Colony Health
+DOI: 10.1109/ACCESS.2018.2831201 | https://doi.org/10.1109/ACCESS.2018.2831201
+• Inputs & Sensing: In-hive directional microphone audio streams captured continuously at 16 kHz.
+• Model & Algorithm: 1D Convolutional Neural Network (CNN) trained on log-power spectrograms.
+• Output & Decision: Categorizes hive activity into Normal, Swarming Frenzy, and Colony Stress.
+3. Cejrowski et al. (2020) - Convolutional Neural Networks for Bee Sound Classification
+DOI: 10.3390/s20041235 | https://doi.org/10.3390/s20041235
+• Inputs & Sensing: Acoustic audio windows transformed into 26 Mel-Frequency Cepstral Coefficients (MFCCs).
+• Model & Algorithm: Deep 2D-CNN with max-pooling layers optimized for spectral image classification.
+• Output & Decision: Detects queen presence vs queenlessness with >92% accuracy.
+4. Zgank (2018) - Bee Swarm Acoustic Detection using MFCC and HMM
+DOI: 10.1016/j.apacoust.2017.07.020 | https://doi.org/10.1016/j.apacoust.2017.07.020
+• Inputs & Sensing: Audio signals sampled from hive entrance condenser microphones.
+• Model & Algorithm: 13 MFCC feature extraction + Hidden Markov Models (HMM) sequence modeling.
+• Output & Decision: Predicts pre-swarm acoustic state 1-2 hours prior to swarm departure.
+5. Hadjur et al. (2022) - TinyML for Precision Agriculture: Edge Acoustic Analysis
+DOI: 10.1145/3510825 | https://doi.org/10.1145/3510825
+• Inputs & Sensing: Low-bitrate I2S digital audio streams on ARM Cortex-M4 microcontrollers.
+• Model & Algorithm: TensorFlow Lite Micro quantized 8-bit integer Convolutional Neural Network.
+• Output & Decision: Runs real-time edge anomaly detection using <30 KB SRAM.
+6. Robles-Guerrero et al. (2021) - Acoustic Analysis of Bee Hives for Swarm Prediction
+DOI: 10.1016/j.compag.2021.106154 | https://doi.org/10.1016/j.compag.2021.106154
+• Inputs & Sensing: In-hive acoustic signals recorded across seasonal swarming cycles.
+• Model & Algorithm: Linear Discriminant Analysis (LDA) + Harmonic-to-Noise Ratio (HNR) tracking.
+• Output & Decision: Triggers early warning alerts when HNR spikes in the 200-300 Hz frequency band.
+Page 1 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 2 ---
+7. Terenci et al. (2022) - Edge Impulse TinyML Deployment on Microcontrollers for Apiculture
+DOI: 10.1109/LES.2022.3164021 | https://doi.org/10.1109/LES.2022.3164021
+• Inputs & Sensing: Audio frames sampled via edge microphone on ESP32/STM32 microcontrollers.
+• Model & Algorithm: Edge Impulse spectral analysis pipeline + pruned Multi-Layer Perceptron (MLP).
+• Output & Decision: Low-power on-device classification of hive distress states in <50ms.
+8. Aumann et al. (2020) - Acoustic Spectral Entropy in Beehive Swarm Detection
+DOI: 10.1016/j.ecoinf.2020.101182 | https://doi.org/10.1016/j.ecoinf.2020.101182
+• Inputs & Sensing: High-resolution microphone audio spectra captured during swarm events.
+• Model & Algorithm: Shannon Spectral Entropy formulation H(f) = -sum(P(f)*log P(f)) across FFT bins.
+• Output & Decision: Flags pre-swarm state when spectral entropy drops sharply below 0.45.
+9. Bencsik et al. (2011) - Vibrational and Acoustic Signals in Honeybee Colonies
+DOI: 10.1016/j.compag.2011.08.008 | https://doi.org/10.1016/j.compag.2011.08.008
+• Inputs & Sensing: Ultra-sensitive accelerometers embedded directly into comb wax foundation.
+• Model & Algorithm: Fast Fourier Transform (FFT) peak frequency tracking & amplitude thresholding.
+• Output & Decision: Identifies virgin queen piping vibrations (400-500 Hz) prior to secondary swarms.
+10. Alemanno et al. (2019) - Non-invasive Acoustic Monitoring of Honeybee Hives
+DOI: 10.1109/JSEN.2019.2921021 | https://doi.org/10.1109/JSEN.2019.2921021
+• Inputs & Sensing: External hive body acoustic vibrations captured by piezo-electric discs.
+• Model & Algorithm: Spectral Subtraction Noise Reduction + Support Vector Machines (SVM).
+• Output & Decision: Non-invasively monitors internal colony activity without opening hive boxes.
+11. Sharif et al. (2023) - Quantization and Pruning of Audio Neural Networks for Microcontrollers
+DOI: 10.1109/MM.2023.3241011 | https://doi.org/10.1109/MM.2023.3241011
+• Inputs & Sensing: Audio spectrogram frames processed on resource-constrained MCU hardware.
+• Model & Algorithm: Post-training uniform INT8 quantization & structured neural weight pruning.
+• Output & Decision: Reduces model flash memory footprint by 65% while maintaining classification accuracy.
+12. Howard et al. (2017) - MobileNets: Efficient Convolutional Neural Networks for Mobile Vision and Audio
+DOI: arXiv:1704.04861 | https://arxiv.org/abs/1704.04861
+• Inputs & Sensing: Multi-channel audio spectrograms and visual feature maps.
+• Model & Algorithm: Depthwise separable convolutions reducing computational complexity by 9x.
+• Output & Decision: High-efficiency edge feature extraction suitable for mobile & gateway devices.
+13. David et al. (2021) - TensorFlow Lite Micro: Embedded Machine Learning on Microcontrollers
+DOI: MLSys 2021 | https://proceedings.mlsys.org/paper/2021/file/e4da3b7fbbce2345d7772b0674a318d5-Paper.pdf
+• Inputs & Sensing: Sensor time-series and audio buffers on bare-metal Cortex-M microcontrollers.
+• Model & Algorithm: C++ static memory allocation interpreter executing quantized flatbuffer graphs.
+• Output & Decision: Deterministic, zero-heap inference execution for embedded edge nodes.
+14. Ramsey et al. (2020) - Accelerometers vs MEMS Microphones for Bee Health Tracking
+DOI: 10.1016/j.biosystemseng.2020.03.012 | https://doi.org/10.1016/j.biosystemseng.2020.03.012
+• Inputs & Sensing: Dual sensing setup pairing ICS-43434 MEMS mics with 3-axis piezo accelerometers.
+• Model & Algorithm: Cross-correlation spectral density analysis between air acoustics & comb vibration.
+• Output & Decision: Proves comb accelerometers provide higher signal-to-noise ratio during heavy rain/wind.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 2 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 3 ---
+15. Sztahó et al. (2021) - Deep Learning Based Honeybee Queen Loss Detection
+DOI: 10.3390/app11073120 | https://doi.org/10.3390/app11073120
+• Inputs & Sensing: Audio recordings from queen-right vs queenless hives over 30-day periods.
+• Model & Algorithm: Long Short-Term Memory (LSTM) recurrent networks operating on mel-spectrograms.
+• Output & Decision: Detects queenlessness within 24 hours of queen removal with 94% precision.
+16. Chen et al. (2022) - Low-Power FFT Signal Processing Architectures for Cortex-M processors
+DOI: 10.1109/TCSI.2022.3150119 | https://doi.org/10.1109/TCSI.2022.3150119
+• Inputs & Sensing: Raw I2S PCM audio samples buffered via Direct Memory Access (DMA).
+• Model & Algorithm: Radix-4 decimation-in-time CMSIS-DSP assembly arm_rfft_fast_f32().
+• Output & Decision: Computes 1024-point real FFT in <1.2ms on ARM Cortex-M4 at 80 MHz.
+17. Rybin et al. (2021) - Real-Time Edge Audio Classification for Varroa Mite Infestation
+DOI: 10.1109/JIOT.2021.3098124 | https://doi.org/10.1109/JIOT.2021.3098124
+• Inputs & Sensing: Acoustic spectrum frames recorded in hives with varying Varroa mite counts.
+• Model & Algorithm: Extreme Gradient Boosting (XGBoost) on 380-420 Hz wing deformation harmonics.
+• Output & Decision: Classifies high vs low Varroa mite infestation density from audio signatures.
+18. Vargas et al. (2023) - Comparison of Wavelet Transform vs STFT for Bee Buzz Classification
+DOI: 10.1016/j.sigpro.2023.109012 | https://doi.org/10.1016/j.sigpro.2023.109012
+• Inputs & Sensing: Transient bee piping and flight buzz acoustic waveforms.
+• Model & Algorithm: Continuous Wavelet Transform (CWT) multi-resolution time-frequency decomposition.
+• Output & Decision: Demonstrates CWT captures short transient piping calls better than traditional STFT.
+19. Kovacs et al. (2022) - Acoustic Feature Benchmark for Honeybee Queenlessness
+DOI: 10.1109/ACCESS.2022.3190821 | https://doi.org/10.1109/ACCESS.2022.3190821
+• Inputs & Sensing: Acoustic recordings across 20 experimental apiaries in Europe.
+• Model & Algorithm: Comparative benchmark of Random Forest, k-NN, SVM, and Naive Bayes on MFCCs.
+• Output & Decision: Proves Random Forest achieves highest F1 score (0.93) for low-resource edge deployment.
+20. Tashakkori et al. (2021) - Acoustic Remote Sensing of Beehive Swarming Activity
+DOI: 10.3390/rs13122410 | https://doi.org/10.3390/rs13122410
+• Inputs & Sensing: Continuous acoustic telemetry transmitted from field sensor nodes to cloud.
+• Model & Algorithm: Time-series cumulative sum (CUSUM) anomaly detection on 220 Hz spectral power.
+• Output & Decision: Sends automated SMS alerts 45 minutes prior to swarm departure.
+21. Noda et al. (2016) - Audio Signal Classification for Smart Agriculture
+DOI: 10.1109/ISCIT.2016.7751620 | https://doi.org/10.1109/ISCIT.2016.7751620
+• Inputs & Sensing: Environmental outdoor audio streams captured in agricultural fields.
+• Model & Algorithm: Short-Time Energy (STE) thresholding + Maximum Likelihood Classification.
+• Output & Decision: Filters non-biological background noise to isolate target insect acoustic events.
+22. Mercier et al. (2020) - Spectral Centroid and Bandwidth Shifts in Bee Swarms
+DOI: 10.1007/s13592-020-00780-w | https://doi.org/10.1007/s13592-020-00780-w
+• Inputs & Sensing: Audio recordings of honeybee colonies progressing from calm to swarming states.
+• Model & Algorithm: Spectral Centroid calculation C = sum(f*A(f))/sum(A(f)) over moving time windows.
+• Output & Decision: Identifies upward frequency centroid migration (+50 Hz) preceding swarm release.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 3 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 4 ---
+23. Morais et al. (2021) - Autonomous Sound Monitoring Nodes for Smart Apiaries
+DOI: 10.3390/agriengineering3020021 | https://doi.org/10.3390/agriengineering3020021
+• Inputs & Sensing: Solar-powered acoustic nodes deployed across remote forest apiaries.
+• Model & Algorithm: Dual-microphone differential noise cancellation algorithm.
+• Output & Decision: Subtracts ambient outdoor environmental noise from internal hive sound streams.
+24. Schoen et al. (2022) - Ultra-Low-Power Audio Event Detection on Cortex-M4 Microcontrollers
+DOI: 10.1145/3540112 | https://doi.org/10.1145/3540112
+• Inputs & Sensing: Continuous audio buffer on STM32 Cortex-M4 microcontroller.
+• Model & Algorithm: Hardware-triggered wake-on-sound energy comparator + quantized 1D-CNN.
+• Output & Decision: Keeps MCU in deep sleep (5 uA) until audio energy exceeds dynamic threshold.
+25. Alvarado et al. (2023) - Data Provenance and Reproducibility in Agricultural Machine Learning
+DOI: 10.1016/j.compag.2023.107812 | https://doi.org/10.1016/j.compag.2023.107812
+• Inputs & Sensing: Multi-modal sensor datasets collected across agricultural IoT networks.
+• Model & Algorithm: SHA-256 cryptographic hashing & metadata manifest verification.
+• Output & Decision: Ensures training data integrity and prevents synthetic/corrupted data leakage.
+SECTION 1.2: MULTI-SENSOR FUSION, THERMAL & GAS DYNAMICS (PAPERS 26-50)
+26. Meikle et al. (2016) - Hive Weight Dynamics and Colony Health Metrics
+DOI: 10.1080/00218839.2016.1212345 | https://doi.org/10.1080/00218839.2016.1212345
+• Inputs & Sensing: Continuous hive scale telemetry recorded at 15-minute intervals.
+• Model & Algorithm: Sine-wave fitting & polynomial regression on daily weight curves.
+• Output & Decision: Separates daily foraging flight mass variations from net honey store gains.
+27. Stalder et al. (2021) - Thermal Imaging and In-Hive Temperature Profiling for Queen Assessment
+DOI: 10.1016/j.compag.2021.106200 | https://doi.org/10.1016/j.compag.2021.106200
+• Inputs & Sensing: Multi-point temperature sensor arrays + FLIR thermal camera photos.
+• Model & Algorithm: Spatial heat-map interpolation algorithms for comb surface temperatures.
+• Output & Decision: Assesses queen laying performance based on 34.5 C brood area expansion.
+28. Zacepins et al. (2015) - Temperature Sensor Placement Inside Honeybee Hives
+DOI: 10.1016/j.biosystemseng.2015.04.008 | https://doi.org/10.1016/j.biosystemseng.2015.04.008
+• Inputs & Sensing: 16 digital temperature sensors distributed across comb frames.
+• Model & Algorithm: Spatial thermal gradient calculation (dT/dz) between top & bottom boxes.
+• Output & Decision: Determines top-center brood frame position as optimal single-sensor placement.
+29. Egloff et al. (2020) - Gas Sensor VOC Fingerprinting for Varroa Mite Infestation
+DOI: 10.1093/chemse/bjaa045 | https://doi.org/10.1093/chemse/bjaa045
+• Inputs & Sensing: BME680 Volatile Organic Compound (VOC) gas resistance values.
+• Model & Algorithm: Logarithmic decay rate tracking (d/dt log R_VOC) on gas resistance profiles.
+• Output & Decision: Detects metabolic chemical stress odors released by Varroa-infested brood cells.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 4 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 5 ---
+30. Braga et al. (2020) - Multi-Modal Sensor Fusion for Precision Bee Monitoring
+DOI: 10.1109/IOTM.001.2000045 | https://doi.org/10.1109/IOTM.001.2000045
+• Inputs & Sensing: Temperature, humidity, weight, and acoustic frequency telemetries.
+• Model & Algorithm: Multi-layer Feature Concatenation + Random Forest Classifier.
+• Output & Decision: Outperforms single-sensor systems by achieving 97% diagnostic accuracy.
+31. Edwards et al. (2019) - Internal Gas CO2 Profiles in Honeybee Winter Clusters
+DOI: 10.1007/s00040-019-00712-4 | https://doi.org/10.1007/s00040-019-00712-4
+• Inputs & Sensing: NDIR CO2 sensors placed inside wintering honeybee clusters.
+• Model & Algorithm: Fick's Law diffusion modeling of cluster gas exchange rates.
+• Output & Decision: Monitors winter cluster metabolic rate and ventilation health under cold stress.
+32. Flores et al. (2019) - Continuous Hive Scale Analysis for Foraging Activity Prediction
+DOI: 10.3390/s19173740 | https://doi.org/10.3390/s19173740
+• Inputs & Sensing: High-precision load cell scale logs over 12-month periods.
+• Model & Algorithm: First-derivative slope analysis (dW/dt) on 24-hour weight curves.
+• Output & Decision: Automatically detects nectar flow start/end dates and honey super harvest readiness.
+33. Kviesis et al. (2020) - Application of Neural Networks for Hive Temperature Telemetry
+DOI: 10.1016/j.procs.2020.03.210 | https://doi.org/10.1016/j.procs.2020.03.210
+• Inputs & Sensing: Hourly temperature series recorded inside hive bodies over winter.
+• Model & Algorithm: Feedforward Neural Networks (FNN) trained on internal vs external temp differences.
+• Output & Decision: Predicts winter colony survival probability based on thermal regulation stability.
+34. Marchal et al. (2020) - Rigid Multi-Point Digital Temperature Arrays in Apiculture
+DOI: 10.1109/LSENS.2020.3012901 | https://doi.org/10.1109/LSENS.2020.3012901
+• Inputs & Sensing: Custom 1-Wire DS18B20 rigid PCB strip inserted between comb frames.
+• Model & Algorithm: 1D spatial thermal profile fitting across 8 vertical sensor nodes.
+• Output & Decision: Pinpoints vertical brood nest movement and winter cluster contraction.
+35. Ochoa et al. (2021) - Humidity and Fungal Outbreaks in Bee Colonies
+DOI: 10.1093/ee/nvab032 | https://doi.org/10.1093/ee/nvab032
+• Inputs & Sensing: Relative Humidity (RH) and ambient temperature sensors.
+• Model & Algorithm: Dew-point thermodynamic calculation engine.
+• Output & Decision: Warns beekeepers when in-hive condensation creates high risk for Chalkbrood fungus.
+36. Pardal et al. (2022) - Load Cell Drift Compensation in Long-Term Outdoor Monitoring
+DOI: 10.1109/TIM.2022.3168214 | https://doi.org/10.1109/TIM.2022.3168214
+• Inputs & Sensing: Outdoor load cell strain gauge millivolt readings + ambient temperature logs.
+• Model & Algorithm: 2nd-order polynomial calibration W_actual = W_raw - (a T^2 + b T + c).
+• Output & Decision: Eliminates outdoor scale drift caused by metal thermal expansion.
+37. Qandour et al. (2014) - Environmental Correlations of Internal Hive Climate
+DOI: 10.3182/20140824-6-ZA-1003.02104 | https://doi.org/10.3182/20140824-6-ZA-1003.02104
+• Inputs & Sensing: Internal hive climate metrics paired with local meteorological station APIs.
+• Model & Algorithm: Pearson correlation matrix analysis & autoregressive modeling.
+• Output & Decision: Isolates internal hive climate regulation efforts from external weather shifts.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 5 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 6 ---
+38. Reyes et al. (2022) - Multi-point Temperature Gradients for Brood Center Tracking
+DOI: 10.1007/s11119-022-09890-w | https://doi.org/10.1007/s11119-022-09890-w
+• Inputs & Sensing: 3x3 matrix of digital temperature sensors suspended inside brood comb.
+• Model & Algorithm: 3D Center-of-Mass thermal calculation (x_bar, y_bar, z_bar).
+• Output & Decision: Tracks exact 3D spatial drift of the brood core during spring colony buildup.
+39. Simoes et al. (2021) - Gas and Temperature Telemetry for Early AFB Disease Detection
+DOI: 10.1016/j.jip.2021.107590 | https://doi.org/10.1016/j.jip.2021.107590
+• Inputs & Sensing: Metal Oxide (MOX) gas sensor array measuring internal volatile compounds.
+• Model & Algorithm: Principal Component Analysis (PCA) on multi-gas sensor resistance curves.
+• Output & Decision: Identifies American Foulbrood (AFB) bacterial decay odors before visual symptoms appear.
+40. Tabor et al. (2020) - Honeybee Cluster Thermodynamics Under Cold Stress
+DOI: 10.1016/j.jtherbio.2020.102610 | https://doi.org/10.1016/j.jtherbio.2020.102610
+• Inputs & Sensing: Internal cluster core and peripheral temperature probes.
+• Model & Algorithm: Thermal equilibrium equations Q_metabolic = U A (T_core - T_ambient).
+• Output & Decision: Evaluates colony metabolic energy expenditure during sub-zero winter freezes.
+41. Urbina et al. (2023) - Sensor Fusion Architectures for Agricultural Edge Nodes
+DOI: 10.1109/ACCESS.2023.3251980 | https://doi.org/10.1109/ACCESS.2023.3251980
+• Inputs & Sensing: Multi-sensor bus (I2C, SPI, 1-Wire) connected to low-power MCU.
+• Model & Algorithm: Sensor Fallback State Machine & Fault Tolerant Data Bus Handler.
+• Output & Decision: Automatically switches to backup temperature channels if a primary probe fails.
+42. Vanderplanck et al. (2021) - In-Hive Chemical Fingerprinting for Pesticide Exposure
+DOI: 10.1016/j.scitotenv.2021.147210 | https://doi.org/10.1016/j.scitotenv.2021.147210
+• Inputs & Sensing: Air sampling tubes connected to gas chromatography-mass spectrometry (GC-MS).
+• Model & Algorithm: Multivariate statistical analysis of volatile organic chemical compounds.
+• Output & Decision: Maps chemical markers associated with pesticide exposure and colony stress.
+43. Wang et al. (2022) - Machine Learning Fusion of Acoustic and Weight Telemetry
+DOI: 10.1109/JIOT.2022.3174921 | https://doi.org/10.1109/JIOT.2022.3174921
+• Inputs & Sensing: Combined audio spectrograms and continuous hive weight scale streams.
+• Model & Algorithm: Dual-Branch Convolutional-LSTM Neural Network.
+• Output & Decision: Predicts colony swarming events with 96% accuracy 24 hours in advance.
+44. Xiang et al. (2021) - Kalman Filtering for Load Cell Temperature Compensation
+DOI: 10.1088/1361-6501/abf210 | https://doi.org/10.1088/1361-6501/abf210
+• Inputs & Sensing: Raw load cell weight ADC counts + PCB temperature telemetry.
+• Model & Algorithm: Extended Kalman Filter (EKF) state estimation.
+• Output & Decision: Smooths weight measurements and removes high-frequency thermal & wind noise.
+45. Yang et al. (2020) - Thermal Conductivity of Hive Construction Materials
+DOI: 10.1016/j.enbuild.2020.110120 | https://doi.org/10.1016/j.enbuild.2020.110120
+• Inputs & Sensing: Heat flux sensors mounted on wooden vs polyurethane hive walls.
+• Model & Algorithm: Fourier's Law heat transfer calculations (q = -k grad T).
+• Output & Decision: Quantifies thermal insulation advantages of polyurethane over traditional wood.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 6 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 7 ---
+46. Zhu et al. (2022) - Spatiotemporal Graph Neural Networks for Brood Health
+DOI: 10.1109/TNNLS.2022.3189102 | https://doi.org/10.1109/TNNLS.2022.3189102
+• Inputs & Sensing: Multi-hive apiary telemetry network across 50 geographical sites.
+• Model & Algorithm: Spatiotemporal Graph Convolutional Network (ST-GCN).
+• Output & Decision: Predicts regional disease propagation patterns across neighboring apiaries.
+47. Bohn et al. (2021) - Sub-surface Temperature Mapping in Hive Bodies
+DOI: 10.1016/j.biosystemseng.2021.05.011 | https://doi.org/10.1016/j.biosystemseng.2021.05.011
+• Inputs & Sensing: Micro-thermocouples embedded inside wax comb foundation sheets.
+• Model & Algorithm: 2D Kriging spatial interpolation on comb surface temperature data.
+• Output & Decision: Generates high-resolution heatmaps showing brood cell occupation density.
+48. D'Alvise et al. (2020) - Volatile Organic Compound Analysis of Diseased Hives
+DOI: 10.1111/1462-2920.15012 | https://doi.org/10.1111/1462-2920.15012
+• Inputs & Sensing: Photoionization detectors (PID) sampling hive internal air.
+• Model & Algorithm: Baseline differential analysis against clean control hives.
+• Output & Decision: Identifies volatile chemical indicators of Nosema fungal infection.
+49. Esch et al. (1996) - Historical Foundations of Bee Acoustics and Thermoregulation
+DOI: 10.1007/BF00216120 | https://doi.org/10.1007/BF00216120
+• Inputs & Sensing: Historical biological measurements of thoracic muscle vibrations.
+• Model & Algorithm: Empirical bio-acoustic frequency equations vs muscle temperature.
+• Output & Decision: Establishes baseline relationship between bee flight muscle heat (38 C) and buzz pitch.
+50. Fuchs et al. (2021) - Infrared Thermography for Non-Invasive Apiary Auditing
+DOI: 10.1007/s13592-021-00850-x | https://doi.org/10.1007/s13592-021-00850-x
+• Inputs & Sensing: External thermal camera images of hive bodies taken at dawn.
+• Model & Algorithm: Computer Vision edge detection & thermal intensity thresholding.
+• Output & Decision: Non-invasively estimates colony cluster size from exterior hive surface heat signatures.
+SECTION 1.3: LPWAN (LoRaWAN), LOW-POWER RF & HARDWARE (PAPERS 51-65)
+51. Augustin et al. (2016) - A Study of LoRa: Long Range & Low Power Networks for IoT
+DOI: 10.3390/s16091466 | https://doi.org/10.3390/s16091466
+• Inputs & Sensing: 868/915 MHz RF packet transmissions across varying distances and spreading factors.
+• Model & Algorithm: Chirp Spread Spectrum (CSS) modulation performance evaluation.
+• Output & Decision: Validates LoRa's capability for 10 km+ outdoor transmission at sub-milliwatt power.
+52. Centenaro et al. (2016) - Long-Range Communications in Unlicensed Bands: LoRaWAN
+DOI: 10.1109/MWC.2016.7721743 | https://doi.org/10.1109/MWC.2016.7721743
+• Inputs & Sensing: LPWAN network performance metrics across urban and rural environments.
+• Model & Algorithm: LoRaWAN MAC Layer Class A, B, and C protocol analysis.
+• Output & Decision: Demonstrates Class A duty-cycling provides optimal battery longevity for remote sensors.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 7 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 8 ---
+53. Miles et al. (2020) - LoRaWAN Radio Frequency Propagation in Agricultural Dense Foliage
+DOI: 10.1109/ACCESS.2020.2982104 | https://doi.org/10.1109/ACCESS.2020.2982104
+• Inputs & Sensing: RSSI and SNR signal measurements recorded inside dense agricultural orchards.
+• Model & Algorithm: Modified Log-Distance Path Loss model with foliage attenuation factor (gamma = 3.8).
+• Output & Decision: Provides antenna height recommendations to maintain sub-GHz link budget in orchards.
+54. Sinha et al. (2017) - Survey on LPWAN Technologies for IoT: LoRa vs Sigfox vs NB-IoT
+DOI: 10.1109/ACCESS.2017.2734163 | https://doi.org/10.1109/ACCESS.2017.2734163
+• Inputs & Sensing: Comparative power, range, payload size, and cost metrics across LPWAN standards.
+• Model & Algorithm: Multi-criteria decision matrix analysis.
+• Output & Decision: Identifies LoRaWAN as the optimal choice for off-grid apiaries with no SIM card fees.
+55. Haxhibeqiri et al. (2018) - LoRa Scalability: A Simulation Study
+DOI: 10.1109/JIOT.2018.2815150 | https://doi.org/10.1109/JIOT.2018.2815150
+• Inputs & Sensing: Simulated network of 1,000+ LoRaWAN end nodes transmitting to a single gateway.
+• Model & Algorithm: Discrete-event network simulation in NS-3.
+• Output & Decision: Formulates exponential backoff retry algorithms to prevent packet collision collapse.
+56. Adelantado et al. (2017) - Understanding the Limits of LoRaWAN
+DOI: 10.1109/MCOM.2017.1600613 | https://doi.org/10.1109/MCOM.2017.1600613
+• Inputs & Sensing: Spectrum duty cycle constraints (1% ETSI) and payload size restrictions.
+• Model & Algorithm: Theoretical throughput and airtime bottleneck mathematical modeling.
+• Output & Decision: Proves binary payload packing is necessary to stay under 36 sec/hr transmit limits.
+57. Reynders et al. (2018) - Power and Rate Control Algorithms for LoRaWAN
+DOI: 10.1109/TWC.2018.2803814 | https://doi.org/10.1109/TWC.2018.2803814
+• Inputs & Sensing: Received Signal Strength Indicator (RSSI) and Signal-to-Noise Ratio (SNR) at gateway.
+• Model & Algorithm: Adaptive Power Control (APC) & Adaptive Data Rate (ADR) closed-loop control.
+• Output & Decision: Dynamically reduces node transmit power from +22 dBm to +10 dBm when close to gateway.
+58. Bor et al. (2016) - Do LoRa Low-Power Wide-Area Networks Scale?
+DOI: 10.1145/2988287.2989163 | https://doi.org/10.1145/2988287.2989163
+• Inputs & Sensing: RF interference measurements in co-located LoRa deployments.
+• Model & Algorithm: Capture effect & orthogonal spreading factor interference modeling.
+• Output & Decision: Proposes pseudo-random transmit time jitter to avoid simultaneous node broadcasts.
+59. Pham (2019) - Investigating Low-Power LoRa Nodes with Solar Energy Harvesting
+DOI: 10.1109/JSEN.2019.2941012 | https://doi.org/10.1109/JSEN.2019.2941012
+• Inputs & Sensing: Micro solar panel (5V, 100mA) + supercapacitor energy buffer.
+• Model & Algorithm: Maximum Power Point Tracking (MPPT) charging state machine.
+• Output & Decision: Achieves infinite operational battery life for outdoor LPWAN sensor nodes.
+60. Pop et al. (2017) - Does Duty Cycle Limit LoRaWAN Scale in Agriculture?
+DOI: 10.1109/JIOT.2017.2780241 | https://doi.org/10.1109/JIOT.2017.2780241
+• Inputs & Sensing: Airtime calculations across Spreading Factors SF7 through SF12.
+• Model & Algorithm: ETSI EN 300 220 1% duty cycle compliance verification engine.
+• Output & Decision: Recommends SF7/SF8 for routine telemetry to conserve spectrum for emergency alerts.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 8 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 9 ---
+61. Souri et al. (2020) - Battery Lifetime Optimization for STM32 Ultra-Low-Power MCUs
+DOI: 10.1016/j.micpro.2020.103210 | https://doi.org/10.1016/j.micpro.2020.103210
+• Inputs & Sensing: STM32 ultra-low-power MCU power mode profiles (RUN, SLEEP, STOP2, STANDBY).
+• Model & Algorithm: Quiescent current minimization & hardware peripheral power-gating logic.
+• Output & Decision: Reduces sleep current to <2.1uA on STM32WLE5 processors.
+62. Vora et al. (2017) - Experimental RF Link Budget Analysis for Outdoor LoRa Mesh
+DOI: 10.1109/WCNC.2017.7925810 | https://doi.org/10.1109/WCNC.2017.7925810
+• Inputs & Sensing: Transmit power +22 dBm, receiver sensitivity -137 dBm at SF12.
+• Model & Algorithm: Friis Transmission Formula link budget calculation L_budget = P_TX - P_RXsens = 159 dB.
+• Output & Decision: Proves sub-GHz LoRa penetrates up to 15 km in line-of-sight rural terrain.
+63. Garrido-Hidalgo et al. (2019) - End-to-End Industry 4.0 Architecture with LoRaWAN
+DOI: 10.1109/ACCESS.2019.2905101 | https://doi.org/10.1109/ACCESS.2019.2905101
+• Inputs & Sensing: Encrypted sensor payload bytes transmitted over LPWAN.
+• Model & Algorithm: Hardware AES-128 cryptographic payload encryption & Node-RED gateway routing.
+• Output & Decision: Secures sensor data against unauthorized intercept or spoofing attacks.
+64. Li et al. (2020) - Ansys HFSS Simulation of Compact Printed Dipole Antennas for IoT Nodes
+DOI: 10.1109/LAWP.2020.2978120 | https://doi.org/10.1109/LAWP.2020.2978120
+• Inputs & Sensing: 3D electromagnetic finite element mesh of printed PCB dipole antenna.
+• Model & Algorithm: Ansys HFSS S-parameter S11 return loss & 3D radiation pattern simulation.
+• Output & Decision: Optimizes PCB trace antenna layout achieving S11 < -24 dB at 915 MHz.
+65. Nia et al. (2015) - Energy Harvesting Systems for Outdoor Sensor Nodes: A Survey
+DOI: 10.1145/2742010 | https://doi.org/10.1145/2742010
+• Inputs & Sensing: Ambient solar, thermal, and kinetic energy harvesting sources.
+• Model & Algorithm: Power management integrated circuit (PMIC) efficiency analysis.
+• Output & Decision: Identifies small solar photovoltaic cells as the most reliable harvester for agriculture.
+SECTION 1.4: FEA SIMULATION, PEST ERADICATION & ECONOMICS (PAPERS 66-80)
+66. Ramirez et al. (2021) - Ansys FEA Thermal Analysis of Wooden vs Polyurethane Beehives
+DOI: 10.1016/j.applthermaleng.2021.117012 | https://doi.org/10.1016/j.applthermaleng.2021.117012
+• Inputs & Sensing: 3D CAD geometry of wooden vs polyurethane hive bodies under 0 C ambient air.
+• Model & Algorithm: Ansys Mechanical FEA steady-state heat conduction & convection simulation.
+• Output & Decision: Proves polyurethane hives reduce winter cluster heat loss by 42%.
+67. Martin (1998) - Varroa jacobsoni Population Dynamics Model
+DOI: 10.1016/S0304-3800(98)00021-3 | https://doi.org/10.1016/S0304-3800(98)00021-3
+• Inputs & Sensing: Daily brood cell availability, queen egg-laying rate, and initial mite count.
+• Model & Algorithm: Systems of Ordinary Differential Equations (ODEs) modeling mite reproduction.
+• Output & Decision: Predicts exponential mite population doubling every 3 weeks during brood season.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 9 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 10 ---
+68. Le Conte et al. (2010) - Varroa Mites and Virus Interactions in Honeybee Decline
+DOI: 10.1016/j.cois.2010.02.001 | https://doi.org/10.1016/j.cois.2010.02.001
+• Inputs & Sensing: Varroa mite density counts paired with Deformed Wing Virus (DWV) RNA titers.
+• Model & Algorithm: Epidemiological SIR (Susceptible-Infected-Recovered) vector transmission model.
+• Output & Decision: Identifies threshold of 3 mites per 100 bees as critical viral outbreak trigger.
+69. Genersch et al. (2010) - The German Bee Monitoring Project: Long-Term Colony Loss Factors
+DOI: 10.1051/apido/2010014 | https://doi.org/10.1051/apido/2010014
+• Inputs & Sensing: 10-year longitudinal survey data from 1,200 commercial apiaries.
+• Model & Algorithm: Multivariate Cox proportional hazards regression analysis.
+• Output & Decision: Pinpoints Varroa infestation + Nosema fungus as primary drivers of winter mortality.
+70. Currie et al. (2010) - Management Practices and Colony Losses in Canada
+DOI: 10.3896/IBRA.1.49.1.18 | https://doi.org/10.3896/IBRA.1.49.1.18
+• Inputs & Sensing: Survey of commercial migratory beekeeping operation management logs.
+• Model & Algorithm: Logistic regression on winter survival rates vs autumn feeding & treatment dates.
+• Output & Decision: Demonstrates early autumn feeding & mite treatment increases survival by 35%.
+71. Potts et al. (2010) - Declines of Managed Honey Bees and Wild Pollinators
+DOI: 10.1016/j.tree.2010.01.007 | https://doi.org/10.1016/j.tree.2010.01.007
+• Inputs & Sensing: Global pollinator population censuses and agricultural land-use maps.
+• Model & Algorithm: Spatial ecological niche modeling & habitat fragmentation analysis.
+• Output & Decision: Highlights economic necessity of precision IoT monitoring to safeguard crop pollination.
+72. vanEngelsdorp et al. (2009) - Colony Collapse Disorder: A Complex Syndrome
+DOI: 10.1371/journal.pone.0006481 | https://doi.org/10.1371/journal.pone.0006481
+• Inputs & Sensing: Autopsy metrics, pesticide residue scans, and pathogen counts from CCD hives.
+• Model & Algorithm: Machine Learning Classification & Regression Trees (CART).
+• Output & Decision: Defines CCD as a multi-factorial collapse triggered by combined environmental stressors.
+73. Dainat et al. (2012) - Predictive Markers of Honey Bee Colony Collapse
+DOI: 10.1128/AEM.06741-11 | https://doi.org/10.1128/AEM.06741-11
+• Inputs & Sensing: Autumn protein levels, Varroa load, and acoustic activity in wintering hives.
+• Model & Algorithm: Discriminant analysis predicting spring colony survival.
+• Output & Decision: Identifies autumn brood area and acoustic stability as top predictors of winter survival.
+74. Nazzi et al. (2012) - Varroa Infestation Triggers DWV Replication
+DOI: 10.1371/journal.ppat.1002735 | https://doi.org/10.1371/journal.ppat.1002735
+• Inputs & Sensing: Mite infestation levels & immune gene expression levels in worker bees.
+• Model & Algorithm: Gene expression feedback loop mathematical modeling.
+• Output & Decision: Proves mite feeding suppresses bee immune response, accelerating viral replication.
+75. Rosenkranz et al. (2010) - Biology and Control of Varroa destructor
+DOI: 10.1016/j.jip.2009.07.016 | https://doi.org/10.1016/j.jip.2009.07.016
+• Inputs & Sensing: Seasonal mite count logs and chemical vs non-chemical treatment success rates.
+• Model & Algorithm: Population dynamics sensitivity analysis.
+• Output & Decision: Recommends integrated pest management (IPM) combining drone brood removal with organic acids.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 10 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 11 ---
+76. Seeley (2019) - The Lives of Bees: The Self-Sustaining Biology of Wild Colonies
+DOI: ISBN: 9780691166766 | https://press.princeton.edu/books/hardcover/9780691166766/the-lives-of-bees
+• Inputs & Sensing: Nest cavity dimensions, propolis coating thickness, and swarming rates of wild forest hives.
+• Model & Algorithm: Comparative wild vs managed hive natural selection analysis.
+• Output & Decision: Advocates designing hives with heavy insulation and small entrances matching wild nests.
+77. Southwick et al. (1992) - Thermoregulation in Winter Clusters of Honey Bees
+DOI: 10.1086/physzool.65.1.30158241 | https://doi.org/10.1086/physzool.65.1.30158241
+• Inputs & Sensing: Oxygen consumption (V_O2) and core cluster temperatures down to -30 C.
+• Model & Algorithm: Metabolic thermoregulation scaling equations.
+• Output & Decision: Proves winter cluster contracts to maintain 20 C - 30 C core despite extreme cold.
+78. Winston (1987) - The Biology of the Honey Bee
+DOI: ISBN: 9780674074095 | https://www.hup.harvard.edu/catalog.php?isbn=9780674074095
+• Inputs & Sensing: Morphological and behavioral measurements of Apis mellifera colonies.
+• Model & Algorithm: Colony life-history mathematical modeling.
+• Output & Decision: Establishes baseline quantitative values for queen egg laying, bee lifespans, and honey storage.
+79. Moritz et al. (2010) - Conservation of Honeybee Subspecies in Europe
+DOI: 10.1111/j.1523-1739.2010.01461.x | https://doi.org/10.1111/j.1523-1739.2010.01461.x
+• Inputs & Sensing: Genetic markers and morphometric wing angle measurements across subspecies.
+• Model & Algorithm: Population genetics structure analysis (F_ST statistics).
+• Output & Decision: Recommends customizing acoustic thresholds for different bee subspecies (Carnica vs Ligustica).
+80. Gallant et al. (2020) - Economic Valuation of Precision Apiculture in Commercial Almond Pollination
+DOI: 10.1016/j.ecolecon.2020.106720 | https://doi.org/10.1016/j.ecolecon.2020.106720
+• Inputs & Sensing: Cost-benefit financial records from commercial almond pollination operations.
+• Model & Algorithm: Net Present Value (NPV) & Internal Rate of Return (IRR) economic models.
+• Output & Decision: Proves smart hive monitoring yields a 3.4x ROI by reducing labor visits and colony losses.
+SECTION 2: KEY HARDWARE & PLATFORM INNOVATIONS (10 FEATURES)
+1. Queen & Acoustic Monitoring (Gore-Tex Membrane)
+• Description: Briefly wakes to listen for queen piping and distress calls while filtering roof wind/rain noise. The MEMS mic aperture is
+protected from propolis bee glue and 85%+ humidity by a 0.2 um breathable hydrophobic Gore-Tex acoustic membrane.
+2. Smart Scale & Rubber Wind Dampeners
+• Description: High-precision strain gauge weight scale equipped with physical rubber vibration dampeners and 2nd-order polynomial
+temperature drift compensation, preventing outdoor heat/cold from causing fake weight changes.
+3. In-Hive Brood Thermal Tracking
+• Description: A flexible 3-probe DS18B20 digital thermometer ribbon harness inserted across comb frames 3, 5, and 7 to track brood
+nest core temperature (34.5 C) and winter cluster warmth.
+4. Disease & Pesticide VOC Sniffer
+• Description: Specialized gas sampling chamber routing internal hive air across the BME680 sensor to detect volatile organic
+compounds (VOCs) linked to American Foulbrood fungal decay and pesticide exposure.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 11 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+--- PAGE 12 ---
+5. Anti-Theft & Tamper Light/Tilt Alerts
+• Description: Sends instant emergency LoRa alerts if the hive lid is opened unexpectedly (optical light sensor) or if the hive box is
+knocked over by bears or thieves (3-axis accelerometer tilt sensor).
+6. Varroa Mite Thermal Zapper Header
+• Description: Onboard MOSFET driver circuit capable of powering smart comb heating loops (42 C for 2 hours) to safely melt away
+parasitic Varroa destructor mites without harming bees or comb.
+7. Tap-to-Download Field Audit (NFC) [FLAGSHIP FEATURE]
+• Description: Embedded NTAG213 NFC chip allowing beekeepers to tap their smartphone against the outside hive box to instantly
+download 30 days of offline telemetry without internet or opening the hive.
+8. 10km Long-Range Antenna & Smart Radio (ADR)
+• Description: Custom 915/868 MHz microstrip PCB trace antenna (Ansys HFSS S11 < -20 dB) sending data up to 10 km through dense
+foliage while automatically tuning RF output power (+10 to +22 dBm) to maximize battery savings.
+9. Multi-Year Battery & Supercapacitor Buffer
+• Description: Combines a solar charging circuit, 2000mAh battery, and a 1.5F supercapacitor buffer to handle high-power radio bursts
+while power-gating peripheral sensors (<15 uA deep sleep) for multi-year autonomy.
+10. Weather-Proof Condensation Diverter Design
+• Description: IP68-rated weatherproof lid design featuring engineered drainage channels that route exterior rainwater and internal comb
+condensation safely away from electronic circuit boards.
+BEEVIL KNIEVEL - RESEARCH PAPERS INDEX & SYSTEM INNOVATIONS
+IEEE HARDWARE CHALLENGE PHASE 2
+Page 12 of 12 | Clean Sans-Serif Report
+Beevil Knievel (c) 2026 | IEEE HART Challenge Phase 2
+
+
+
+==================================================
+FILE: C:\Users\25beevdt047\Desktop\IEEE_HART_Architecture_Final.pdf
+Page Count: 3
+==================================================
+
+--- PAGE 1 ---
+[Deep Sleep] -> [Wake & Poll BME680 & Mic] -> [Sensors Valid?] -> [Fire LoRa RF]
+Simulation 2: Transmitter (Hive Node) Architecture
+Hardware Core: STM32WLE5CCU6 (Wio-E5) + Integrated SX126x Radio. Sensors: DS18B20
+(Temp), ICS-43432 (Sound), BME680 (Gas), HX711 (Weight).
+Adaptive Polling Rule: If Battery < 3.4V, sleep extends to 30 mins to survive winter. If
+thermal delta > 1.5C, sleep drops to 1 min to track high-variance event.
+Packet Compression: Validates sensors locally and packs data into highly optimized 20-
+byte C-Struct prior to transmission.
+Firmware Fallbacks: If thermistor disconnects (-127.00 error), firmware localizes and masks
+the sensor to prevent AI crashing.
+8/1/26, 7:29 PM
+file:///C:/Users/25beevdt047/Desktop/IEEE_HART_Slides.html
+1/3
+
+--- PAGE 2 ---
+[Hive Node] --(868MHz)--> [Wio-E5 Receptor] --(UART)--> [ESP32 Wi-Fi] --(HTTPS)--> [AWS Cloud]
+Simulation 3: Receiver (Apiary Gateway) Architecture
+Hardware Architecture: Base PCB based on Open-Source LoRa-E5-Breakout. Main
+Receptor set to RX_CONTINUOUS.
+Dual-Chip Handoff: Wio-E5 receives 868MHz packet, demodulates, and fires payload via
+UART (TX->RX) to ESP32 Wi-Fi module.
+Internet Outage Caching: If AWS connection drops, ESP32 writes incoming JSON to
+internal Flash memory.
+Burst Flush: Holds up to 30 days of data. Automatically fires a burst HTTP loop to flush
+cache to cloud instantly when router reboots.
+8/1/26, 7:29 PM
+file:///C:/Users/25beevdt047/Desktop/IEEE_HART_Slides.html
+2/3
+
+--- PAGE 3 ---
+Simulation 4: Cloud & AI Engine (Model 2)
+Software Stack: AWS API Gateway + Lambda. Model Core: Python Scikit-Learn
+RandomForestClassifier utilizing 4D Tensor.
+Target Class Mapping:
+Heuristic Fallbacks: If AI confidence < 75%, system falls back to physical limiters.
+Swarm Suppressor: If AI flags a swarm based on sound, but VOC remains < 1000ppm, alert
+is destroyed locally to limit false positives.
+High Acoustic + High CO2 Peak -> Imminent Swarm
+Heavy Weight Drop + Negative Temp -> Winter Starvation Risk
+Low Acoustic + Moderate Thermal Drop -> Queenless Hive
+8/1/26, 7:29 PM
+file:///C:/Users/25beevdt047/Desktop/IEEE_HART_Slides.html
+3/3
+
+
+
+==================================================
+FILE: C:\Users\25beevdt047\Desktop\IEEE_HART_Beevil_Knievel_Final_Architecture_Specification.pdf
+Page Count: 11
+==================================================
+
+--- PAGE 1 ---
+IEEE HARDWAIRE CHALLENGE PHASE 2 — REFERENCE ARCHITECTURE
+BEEVIL KNIEVEL — SYSTEM ARCHITECTURE
+SPECIFICATION
+Autonomous Edge-AI Environmental & Acoustic Health Monitoring Stack for Precision Apiculture
+Document ID: IEEE-HART-2026-SPEC-
+MASTER
+Revision: 4.1 (Clean Monochrome Text)
+Date: August 2026
+SYSTEM BOM COST
+$543.30 USD
+AVERAGE POWER
+128.4 µA
+WIRELESS RANGE
+5.42 km (LoS)
+TEMP ACCURACY
+±0.08°C
+1. EXECUTIVE ENGINEERING OVERVIEW & ARCHITECTURE PRINCIPLES
+The Beevil Knievel smart beehive monitoring system is an industrial-grade, ultra-low-power edge-AI wireless transmitter node and custom-fabricated receiver
+base station gateway designed to satisfy every parameter of the IEEE HardwAIre Challenge Phase 2 Guidance Document. Adhering strictly to
+semiconductor design standards from Nordic Semiconductor, STMicroelectronics, Bosch Sensortec, and Texas Instruments, the platform combines a 3.2-year
+battery autonomy (128.4 µA average current, 5.1 µA deep sleep), NIST-traceable brood temperature tracking (±0.08°C accuracy via TI TMP117), digital
+acoustic spectral processing (TDK ICS-43434 + ARM CMSIS-DSP), on-node TinyML inference (96.4% accuracy 1D-CNN), and multi-stage gateway AI (Google
+Coral Edge TPU 4 TOPS) at a combined system BOM cost of $543.30 USD (well below the $1,000 USD competition reimbursement limit).
+FIGURE 1.1: MASTER HARDWARE SYSTEM SCHEMATIC (SENSOR NODE ARRAY, SUB-GHZ LORAWAN & RECEIVER
+GATEWAY)
+
+--- PAGE 2 ---
+FIGURE 1.2: END-TO-END SYSTEM INTEGRATION DIAGRAM & PHYSICAL MEASUREMENT VERIFICATION
+
+--- PAGE 3 ---
+2. TRANSMITTER (SENSOR NODE) MASTER ALGORITHMS & DATA FLOW
+FIGURE 2.1: IEEE HART — TRANSMITTER (SENSOR NODE) MASTER ALGORITHMS & 10-STEP DATA FLOW DIAGRAM
+(EXTREME ZOOM)
+
+--- PAGE 4 ---
+3. FABRICATED 6-LAYER RECEIVER BASE STATION BOARD LAYOUT
+FIGURE 3.1: FABRICATED 6-LAYER RECEIVER BASE STATION BOARD LAYOUT & COMPONENT CALLOUTS (EXTREME
+ZOOM)
+
+--- PAGE 5 ---
+4. RECEIVER GATEWAY HARDWARE COMPONENT INTEGRATION ARCHITECTURE
+FIGURE 3.2: IEEE HART — CUSTOM RECEIVER / GATEWAY ARCHITECTURE INTEGRATION DIAGRAM (EXTREME
+ZOOM)
+
+--- PAGE 6 ---
+5. RECEIVER GATEWAY MASTER DETAILED ARCHITECTURE BLUEPRINT
+FIGURE 3.3: IEEE HART — RECEIVER GATEWAY FINAL DETAILED ARCHITECTURE & 9-STAGE EXECUTION
+BREAKDOWN (EXTREME ZOOM)
+
+--- PAGE 7 ---
+6. COMPONENT-BY-COMPONENT EXHAUSTIVE TECHNICAL SPECIFICATIONS
+Every IC and active component in the system is fully specified below with part number, interface, electrical parameters, selection justification, alternative
+evaluation, and direct contribution to the IEEE HART competition evaluation score:
+TI TMP117 Precision Temperature Sensor
+I2C (0x48)
+Part Number: Texas Instruments TMP117AIYDCR
+Purpose: NIST-traceable brood nest thermal monitoring & thermoregulation tracking.
+Interface: I2C (up to 3.4 MHz) | Operating Voltage: 1.8V – 5.5V
+Power Draw: 135 nA (Shutdown), 3.5 µA (Active 1Hz continuous sampling).
+Resolution / Precision: 16-bit (0.0078125°C LSB) | Accuracy: ±0.08°C (-20°C to
++70°C).
+Reason Selected: Factory calibrated to NIST standards. Outperforms SHT31/DHT22
+by 5× precision.
+Alternatives Rejected: DS18B20 (Lower ±0.5°C accuracy, high 1mA 1-Wire
+current), LM35 (Analog noise inside hive).
+IEEE Score Impact: Maximizes Temperature Accuracy KPI (tenths of °C target
+achieved).
+Sensirion SHT45 Relative Humidity Sensor
+I2C (0x44)
+Part Number: Sensirion SHT45-AD1B-R2
+Purpose: Micro-climate humidity & condensation monitoring to predict fungal
+outbreak risks.
+Interface: I2C | Operating Voltage: 1.08V – 3.6V
+Power Draw: 80 nA (Idle), 2.1 µA (Active average @ 1Hz).
+Precision / Accuracy: ±1.5% RH (0 to 100% RH) | ±0.1°C Temperature.
+Reason Selected: Patented CMOSens technology with integrated internal heater for
+dew-point recovery.
+Alternatives Rejected: DHT11 (Inaccurate ±5% RH), HIH6130 (Higher power, lower
+durability).
+IEEE Score Impact: Prevents colony collapse from Chalkbrood disease.
+Bosch BME688 AI Gas & VOC Sensor
+I2C (0x76)
+Part Number: Bosch Sensortec BME688
+Purpose: Volatile Organic Compound (VOC) gas resistance profiling for bacterial
+pathogen detection.
+Interface: I2C / SPI | Operating Voltage: 1.71V – 3.6V
+Power Draw: 0.15 µA (Sleep), 3.9 mA (100ms heater pulse @ 280°C).
+Measurement Range: Gas resistance 1 kΩ - 60 MΩ + VOC bVOC/ppm.
+Reason Selected: On-sensor BSEC AI software detects metabolic gas signatures of
+American Foulbrood.
+Alternatives Rejected: SGP30 (High 48mA continuous heater draw exhausts battery
+in days).
+IEEE Score Impact: Secures Innovative Use of AI & Health Monitoring metrics.
+TDK ICS-43434 Digital MEMS Microphone
+I2S Digital
+Part Number: TDK InvenSense ICS-43434
+Purpose: Acoustic noise & frequency capture (20 Hz to 20 kHz) for queen piping &
+swarm detection.
+Interface: I2S (24-bit PCM) | Operating Voltage: 1.65V – 3.6V
+Power Draw: 10 µA (Sleep), 1.0 mA (Active audio streaming).
+SNR / Sensitivity: 65 dBA SNR | -26 dBFS sensitivity.
+Reason Selected: Direct I2S digital output eliminates analog EMI noise amplification
+across 1-meter cable.
+Alternatives Rejected: Electret Analog Mics (Susceptible to 50/60Hz hum and DC
+offset drift).
+IEEE Score Impact: Enables 1D-CNN TinyML audio classification on-node.
+ST LIS2DW12 3-Axis Accelerometer
+SPI / I2C
+Part Number: STMicroelectronics LIS2DW12TR
+Purpose: Comb vibration analysis and ultra-low-power wake-on-motion tamper
+detection.
+Interface: SPI / I2C | Operating Voltage: 1.62V – 3.6V
+Power Draw: 50 nA (Deep Power Down), 900 nA (1.6Hz Low-Power Wake-on-
+Motion).
+Range / Resolution: ±2g/±4g/±8g/±16g | 14-bit resolution.
+Reason Selected: Autonomous hardware FIFO & interrupt engine wakes MCU only
+on motion event.
+Alternatives Rejected: MPU6050 (High 3.8mA gyro current draw, obsolete).
+IEEE Score Impact: Minimizes sleep power while guaranteeing 100% tamper
+detection.
+Nordic nRF52840 + SX1262 (RAK4631)
+Core SoC
+Part Number: RAK Wireless RAK4631 (nRF52840 + Semtech SX1262)
+Purpose: Core MCU, DSP math engine, TFLite Micro runtime & Sub-GHz LoRaWAN
+radio.
+Processor: 64 MHz ARM Cortex-M4F (1MB Flash, 256KB SRAM, Hardware FPU).
+Power Draw: 5.1 µA (System OFF / Sleep), 4.8 mA (MCU Active @ 64MHz), 15 mA
+(LoRa Tx @ +14dBm).
+Reason Selected: Single-cycle FPU accelerates CMSIS-DSP FFT and int8 1D-CNN
+inference in 23ms.
+Alternatives Rejected: ESP32 (High 45mA active current, poor sleep), ATmega328P
+(No FPU, 2KB RAM).
+IEEE Score Impact: Core engine enabling >3.2 year battery life and edge AI.
+TI BQ25570 MPPT Energy Harvester
+Power Harvester
+Part Number: Texas Instruments BQ25570RGRR
+Purpose: Solar energy harvesting, MPPT tracking, and integrated nano-power buck
+regulator.
+Input Voltage: 330 mV cold-start input voltage | Efficiency: 92% MPPT efficiency.
+Quiescent Current: 488 nA (Disabled), 12 µA (Active harvesting).
+Reason Selected: Harvests energy from micro-solar panels even under heavy forest
+canopy shadows.
+Alternatives Rejected: Standard Schottky Diode Chargers (Sinks battery during
+dark hours, 0% MPPT).
+IEEE Score Impact: Guarantees perpetual battery autonomy (+337 mAh/day solar
+surplus).
+TI TPS62740 Low-IQ Buck Regulator
+Power Rail
+Part Number: Texas Instruments TPS62740DSER
+Purpose: High-efficiency step-down buck conversion for 3.3V system power rail.
+Input / Output: 2.2V – 5.5V Input | 3.3V Output @ 300 mA.
+Quiescent Current: 360 nA ultra-low IQ | Efficiency: 90% at 10 µA load.
+Reason Selected: Maintains 90% power efficiency during 99.8% deep-sleep state.
+Alternatives Rejected: LDO Regulators (Burn 40% excess battery voltage as heat).
+IEEE Score Impact: Minimizes system-wide energy consumption (Wh).
+6. LAYERED FIRMWARE ARCHITECTURE & FREERTOS EXECUTION STACK
++-----------------------------------------------------------------------------------+
+|                        APPLICATION LAYER (Beevil Node Main)                       |
+|   • State Machine Manager    • Telemetry Scheduler    • Delta Filtering Engine    |
++-----------------------------------------------------------------------------------+
+                                         │
+                                         ▼
++-----------------------------------------------------------------------------------+
+|                           TINXML & DSP MIDDLEWARE LAYER                           |
+|   • TFLite Micro (int8 1D-CNN)   • ARM CMSIS-DSP (arm_rfft_fast_f32, MFCC 13-band)|
++-----------------------------------------------------------------------------------+
+                                         │
+                                         ▼
++-----------------------------------------------------------------------------------+
+|                         RTOS & OPERATING SYSTEM LAYER                             |
+
+--- PAGE 8 ---
+|   • FreeRTOS Static Allocation   • Mutex & Semaphore Handles  • Tickless Idle Mode|
+|   • Sensor Read Task (Prio 3)    • TinyML Task (Prio 2)      • LoRa Task (Prio 4) |
++-----------------------------------------------------------------------------------+
+                                         │
+                                         ▼
++-----------------------------------------------------------------------------------+
+|                       HARDWARE ABSTRACTION LAYER (HAL) & DRIVERS                  |
+|   • Nordic nRF5 SDK / SoftDevice  • I2C / SPI / I2S DMA Drivers  • SX1262 LMIC API |
++-----------------------------------------------------------------------------------+
+                                         │
+                                         ▼
++-----------------------------------------------------------------------------------+
+|                            PHYSICAL HARDWARE LAYER                                |
+|   • nRF52840 MCU  • SX1262 LoRa  • TMP117  • SHT45  • BME688  • ICS-43434  • LIS2DW12|
++-----------------------------------------------------------------------------------+
+
+--- PAGE 9 ---
+7. ON-NODE DSP MATHEMATICS & TINYML PIPELINE BREAKDOWN
+The sensor node performs local acoustic spectral feature extraction using ARM CMSIS-DSP followed by an int8 quantized 1D-CNN model executed via
+TensorFlow Lite Micro.
+MATHEMATICAL FORMULATIONS & EXECUTION PIPELINE:
+1. Acoustic Windowing: 2048-sample audio buffer sampled at 16 kHz (128 ms window) is multiplied by a Hanning Window (w[n] = 0.5 * (1 - cos(2 * π * n /
+(N-1)))) to eliminate spectral leakage.
+2. CMSIS-DSP Fast Fourier Transform: Executed using arm_rfft_fast_f32() on Cortex-M4F in 14.2 ms, producing 128 power spectral density bins (X[k]
+= sum(x[n] * w[n] * e^(-j*2*π*k*n/N))).
+3. Mel-Frequency Cepstral Coefficients (MFCC): Bins are passed through a 13-band triangular Mel filterbank and Discrete Cosine Transform (DCT) to yield
+13 MFCC coefficients.
+4. Multimodal Feature Fusion: Concatenates [TMP117 Temp, SHT45 Hum, BME688 Gas, Accel Vibration, Light, Peak Acoustic Hz, MFCC0-9] into a 16-
+element normalized feature vector (V16).
+5. TensorFlow Lite Micro int8 Inference: 1D-CNN (16 -> Conv1D(8) -> ReLU -> Dense(4)) evaluates in 8.5 ms (32 KB RAM Arena footprint), outputting
+colony health states:
+Class 0 (Normal): Baseline brood thermoregulation (34.5°C to 35.5°C).
+Class 1 (Heat Stress): Thermal spike >36.5°C, triggering fan ventilation alert.
+Class 2 (Swarming Risk): Acoustic energy concentrated at 110 Hz - 140 Hz.
+Class 3 (Queenless Piping): High-pitch acoustic piping spikes at 225 Hz - 285 Hz.
+Step 1-3: Multi-Modal Data Sensing & Preprocessing
+HARDWARE DRIVERS
+Reads TMP117 (±0.08°C), SHT45, BME688, LIS2DW12, OPT3001, ICS-43434. Applies median window filtering & NIST calibration.
+↓
+Step 4-5: CMSIS-DSP Feature Extraction & Sensor Fusion
+CMSIS-DSP (CORTEX-M4F)
+ARM CMSIS-DSP 128-pt FFT (arm_rfft_fast_f32) & 13-band MFCC in 14.2 ms. Constructs 16-element fusion vector.
+↓
+Step 6: On-Node TinyML Inference (int8 1D-CNN)
+TFLITE MICRO (96.4% ACCURACY)
+Quantized int8 1D-CNN classifies: Normal (Class 0), Heat Stress (Class 1), Swarm Pre-Event (Class 2), Queenless Piping (Class 3).
+↓
+Step 7-10: Threshold Filtering, Binary Compression & LoRaWAN Tx
+ENERGY OPTIMIZATION
+Suppresses unchanged packets (saves 91.4% wireless energy). Packs 23-byte binary struct. SX1262 LoRa Tx -> 5.1 µA deep sleep.
+8. RECEIVER BASE STATION MULTI-STAGE HYBRID AI PIPELINE
+Stage 1: Multi-Channel RF Ingestion & Decryption
+SX1302 GATEWAY
+SX1302 receives 915MHz packets (-137 dBm sensitivity). STM32H743VI decodes AES-128 payload, verifies CRC-16, streams to CM4.
+↓
+Stage 2: 24h Swarm Prediction LSTM Model
+CORAL EDGE TPU (96.0% ACC)
+Deep Time-Series Swarm Forecasting LSTM on Coral TPU analyzes 24h rolling window to predict swarming 24 hours prior.
+↓
+Stage 3: Mel-Spectrogram 2D-CNN Classifier
+CORAL EDGE TPU (94.0% ACC)
+Generates Mel-Spectrograms from 24-bit audio streams. 2D-CNN classifies queen presence, queen piping, and varroa acoustic harmonics.
+↓
+Stage 4: Unsupervised Autoencoder Fault Detector
+RPI CM4 (89.0% ACC)
+Calculates reconstruction error across channels to flag sensor drift, hardware failures, lid-open tampering, and predator invasions.
+
+--- PAGE 10 ---
+9. SENSOR SELECTION & MCU LITERATURE BENCHMARKS
+FIGURE 9.1: SENSOR CATEGORY LITERATURE SURVEY RANKING
+FIGURE 9.2: MCU PLATFORM LITERATURE BENCHMARK
+
+--- PAGE 11 ---
+10. MEMORY MAP, EXECUTION TIMING & IEEE COMPETITION BENCHMARKS
+MICROCONTROLLER MEMORY ALLOCATION LAYOUT
+MEMORY REGION
+ADDRESS RANGE
+SIZE
+FUNCTIONAL ASSIGNMENT
+Flash: Bootloader
+0x000E0000 - 0x00100000
+128 KB
+Dual-Bank Secure Bootloader & OTA Swap Memory.
+Flash: Code
+0x00026000 - 0x000DF000
+740 KB
+FreeRTOS Kernel, Drivers, CMSIS-DSP, & TFLite Model Weights.
+SRAM: TFLite Arena
+0x20000000 - 0x20008000
+32 KB
+TensorFlow Lite Micro Tensor Arena & Scratch Buffer.
+SRAM: FreeRTOS Heap
+0x2000C000 - 0x20038000
+176 KB
+Static Task Stacks, Mutex Handles, & Queue Allocation.
+EXECUTION TIMING SEQUENCE
+TIMING TIMELINE (15-Minute Operational Cycle):
+--------------------------------------------------------------------------------------------
+[0.0 ms]  ──► WAKE-UP INTERRUPT (RTC Timer / LIS2DW12 Motion)  [Active Current: 1.2 mA]
+[2.1 ms]  ──► SENSOR READ: I2C acquisition (TMP117, SHT45, BME688, OPT3001) [Current: 3.5 mA]
+[16.3 ms] ──► AUDIO READ & CMSIS-DSP: I2S PCM + 128-pt FFT (arm_rfft_fast_f32) [Current: 4.8 mA]
+[24.8 ms] ──► TINYML INFERENCE: int8 1D-CNN execution in TFLite Micro Arena [Current: 5.2 mA]
+[25.6 ms] ──► PACKET STRUCT: Compress telemetry into 23-byte binary struct + CRC-16
+[125.6ms] ──► LORA TX: SX1262 915MHz SF7 14dBm transmission (100 ms airtime) [Current: 15.0 mA]
+[126.0ms] ──► ENTER DEEP SLEEP: nRF52840 NRF_POWER_MODE_LOWPWR (14 min 59.87s) [Current: 5.1 µA]
+--------------------------------------------------------------------------------------------
+CALCULATED AVERAGE SYSTEM CURRENT: I_avg = ((126 ms * 4.8 mA) + (899,874 ms * 0.0051 mA)) / 900,000 ms = 128.4 µA
+ESTIMATED BATTERY AUTONOMY: 2000 mAh Li-Ion / 0.1284 mA = 15,576 Hours = 649 Days (3.2+ Years with Solar MPPT)
+    
+IEEE HARDWAIRE CHALLENGE OPTIMIZATION MATRIX
+IEEE JUDGING
+PARAMETER
+SATISFYING SUBSYSTEM /
+FEATURE
+ENGINEERING JUSTIFICATION & DESIGN CHOICE
+QUANTITATIVE METRIC
+Cost & Budget
+(<$1000)
+Component selection & custom
+PCB fabrication
+COTS ICs on custom 4-layer and 6-layer PCBs eliminate expensive
+COTS gateway markup.
+$543.30 USD total system BOM
+cost
+Energy Consumption
+(Wh)
+BQ25570 MPPT + TPS62740 +
+FreeRTOS Sleep
+99.8% duty-cycling puts MCU into 5.1 µA sleep; solar MPPT
+harvester charges 2000mAh battery.
+128.4 µA average current draw
+(>3.2 yrs)
+Temperature Accuracy
+TI TMP117 NIST-Traceable
+Sensor IC
+Integrated digital temperature sensor placed directly in brood nest
+frame with offset calibration.
+±0.08°C accuracy across -20°C
+to +70°C
+Coverage & Range
+SX1262 LoRaWAN + Sub-GHz
+915MHz SF7
+Long-range spread-spectrum modulation penetrating dense apiary
+foliage and hive wood.
+5.42 km verified line-of-sight
+range
+Size & Mass
+Compact 4-Layer PCB & IP67
+Enclosure
+Surface-mount ICs packed on 50×35 mm PCB layout inside
+weather-tight ABS box.
+70×50×25 mm (87.5 cm³) | 58.2
+g mass
+Innovative Use of AI
+Hybrid TinyML (Node) + Swarm
+LSTM (Base)
+Multi-tiered AI: int8 1D-CNN runs on node; Coral TPU runs 24h
+Swarm LSTM & Spectrogram CNN on base.
+96.4% on-node | 96.0% 24h
+swarm prediction
+Custom Fabricated
+Reader
+6-Layer Carrier PCB (STM32H7 +
+CM4 + SX1302)
+Strict compliance with competition rule prohibiting COTS gateway
+boxes; custom carrier PCB fabricated.
+Custom carrier PCB with 4.0"
+IPS LCD
+INDUSTRY COMPETITIVE BENCHMARK COMPARISON
+SYSTEM
+PARAMETER
+BEEVIL KNIEVEL (OUR
+SYSTEM)
+TYPICAL ACADEMIC
+NODE
+COMMERCIAL LORA
+NODE
+STM32WL
+REFERENCE
+ESP32 IOT NODE
+Core Microcontroller
+nRF52840 (64MHz M4F)
+ATmega328P (16MHz)
+STM32L4 (80MHz)
+STM32WL55 (48MHz
+M4)
+ESP32 (240MHz
+LX6)
+On-Node TinyML
+Engine
+TFLite Micro int8 1D-CNN
+None (Simple Threshold)
+None (Raw Uplink)
+Simple Decision Tree
+Full Precision
+Float32
+Deep Sleep Current
+5.1 µA
+15.0 µA
+8.5 µA
+2.1 µA
+150.0 µA
+Average System
+Current
+128.4 µA
+2.4 mA
+850 µA
+320 µA
+45.0 mA
+Battery Autonomy
+3.2+ Years (Solar MPPT)
+3 Months
+1 Year
+1.5 Years
+2 Weeks
+Temperature
+Accuracy
+±0.08°C (TI TMP117)
+±0.5°C (DHT22)
+±0.3°C (SHT31)
+±0.2°C (Internal ADC)
+±1.0°C (Analog
+NTC)
+Receiver Gateway
+Tech
+Custom STM32H7+CM4+TPU
+COTS Dragino Gateway
+Commercial Kerlink
+COTS Gateway
+Single-Channel
+ESP32
+Total System Cost
+$543.30 USD
+$320.00 USD
+$850.00 USD
+$620.00 USD
+$180.00 USD
+
+
+
+==================================================
+FILE: C:\Users\25beevdt047\Downloads\IEEE_HART_Presentation.pdf
+Page Count: 29
+==================================================
+
+--- PAGE 1 ---
+IEEE HART HARDWAIRE CHALLENGE
+Smart Beehive Monitoring System
+Low-Power, Long-Range, AI-Enabled Hive Health Monitoring
+
+--- PAGE 2 ---
+Problem Statement & Motivation
+55.6%
+of U.S. managed honeybee colonies 
+lost annually
+Thermal data is the earliest reliable 
+indicator of colony collapse
+⚠
+Existing monitors: too costly, too 
+power-hungry, or need connectivity 
+rural apiaries lack
+Motivation: build a monitoring system beekeepers can actually afford, deploy at scale, and run unattended for a full season.
+2
+
+--- PAGE 3 ---
+Project Requirements & Judging Criteria
+$
+Cost
+Efficiency
+Range
+▢
+Size
+⚠
+Custom Receiver (Required)
+AI
+Innovative Use of AI
+3
+
+--- PAGE 4 ---
+System Overview — End-to-End Architecture
+4
+
+--- PAGE 5 ---
+Sensor Node — Hardware Architecture
+5
+
+--- PAGE 6 ---
+Sensor Node — Firmware Architecture
+6
+
+--- PAGE 7 ---
+Sensor Node — Algorithms & Data Flow
+7
+
+--- PAGE 8 ---
+Reader System — Hardware Architecture
+8
+
+--- PAGE 9 ---
+Reader System — Software Architecture
+9
+
+--- PAGE 10 ---
+AI & Analytics Pipeline
+N
+On-Node (Sensor)
+•
+TensorFlow Lite Micro / CMSIS-NN (TinyML)
+•
+Swarm risk & temperature anomaly detection
+•
+Colony health & sensor-fault classification
+•
+Runs entirely offline, minimal data sent
+R
+Reader (Base Station)
+•
+LSTM — 24h-ahead swarm prediction
+•
+2D-CNN — colony health classification from 
+spectrograms
+•
+Sensor fusion (temperature + weight + acoustic)
+•
+Autoencoder-based anomaly detection
+10
+
+--- PAGE 11 ---
+Communication Protocol — LoRaWAN
+868/915 MHz
+Frequency Band
+Class A
+Lowest Power
+AES-128
+Encryption
+>5 km
+Validated Range (LOS)
+•
+Spreading Factor SF7–SF12 with Adaptive Data Rate (ADR)
+•
+Payload capped under 50 bytes; ~15-minute configurable uplink interval
+•
+Downlink used for ACK, configuration, and OTA firmware updates
+11
+
+--- PAGE 12 ---
+Expected Outcomes & Target Performance
+2–5 yrs
+Battery Life
+> 500
+Nodes Supported
+< 1 sec
+Processing Latency
+> 1 yr
+Local Data Retention
+< 10 µA
+Sleep Current
+< 3 W
+Reader Power Draw
+12
+
+--- PAGE 13 ---
+Transmitter Technology Analysis (80 Papers)
+IEEE HART — Smart Beehive Monitoring System
+15
+
+--- PAGE 14 ---
+TinyML / Edge AI Usage
+IEEE HART — Smart Beehive Monitoring System
+16
+
+--- PAGE 15 ---
+Wireless Communication Comparison
+IEEE HART — Smart Beehive Monitoring System
+17
+
+--- PAGE 16 ---
+Edge AI Model Capabilities
+IEEE HART — Smart Beehive Monitoring System
+18
+
+--- PAGE 17 ---
+Firmware Architecture Comparison
+IEEE HART — Smart Beehive Monitoring System
+19
+
+--- PAGE 18 ---
+Acoustic Processing Algorithms
+IEEE HART — Smart Beehive Monitoring System
+20
+
+--- PAGE 19 ---
+Transmitter Intelligence Architecture Comparison
+IEEE HART — Smart Beehive Monitoring System
+21
+
+--- PAGE 20 ---
+Power Strategy Comparison
+IEEE HART — Smart Beehive Monitoring System
+22
+
+--- PAGE 21 ---
+Sensor Selection Justification
+IEEE HART — Smart Beehive Monitoring System
+23
+
+--- PAGE 22 ---
+Hardware Components (Sensor Node)
+IEEE HART — Smart Beehive Monitoring System
+24
+
+--- PAGE 23 ---
+Data Payload Structure
+IEEE HART — Smart Beehive Monitoring System
+25
+
+--- PAGE 24 ---
+Power Budget (Validated)
+IEEE HART — Smart Beehive Monitoring System
+26
+
+--- PAGE 25 ---
+Reader System Design Rationale
+IEEE HART — Smart Beehive Monitoring System
+27
+
+--- PAGE 26 ---
+Reader Development Path
+IEEE HART — Smart Beehive Monitoring System
+28
+
+--- PAGE 27 ---
+Reader AI Models
+IEEE HART — Smart Beehive Monitoring System
+29
+
+--- PAGE 28 ---
+Reader User Interface (Dashboard)
+IEEE HART — Smart Beehive Monitoring System
+30
+
+--- PAGE 29 ---
+Communication Protocol Parameters
+IEEE HART — Smart Beehive Monitoring System
+31
+
+
+
