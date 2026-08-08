@@ -1,5 +1,7 @@
 (kicad_sch (version 20211123) (generator eeschema)
+
   (paper "A4")
+
   (title_block
     (title "Beevil Knievel In-Hive Sensor Node - nRF52840 + SX1262")
     (date "2026-08-08")
@@ -9,24 +11,32 @@
     (comment 2 "Sensors: TI TMP117 (+-0.08C), SHT45, BME688, ICS-43434 I2S Mic, LIS2DW12 Accel")
     (comment 3 "Harvester: TI BQ25570 Solar MPPT + TPS62740 360nA Low-IQ Buck Regulator")
   )
+
   (symbol (lib_id "MCU_Nordic:nRF52840-QIAA") (at 100 100 0) (unit 1)
     (in_bom yes) (on_board yes)
     (property "Reference" "U1" (id 0) (at 100 80 0))
     (property "Value" "nRF52840-QIAA" (id 1) (at 100 85 0))
+    (property "Footprint" "Package_DFN_QFN:QFN-73-1EP_7x7mm_P0.35mm_EP5.15x5.15mm" (id 2) (at 100 90 0))
   )
+
   (symbol (lib_id "RF_LoRa:SX1262IMLTRT") (at 180 100 0) (unit 1)
     (in_bom yes) (on_board yes)
     (property "Reference" "U2" (id 0) (at 180 80 0))
     (property "Value" "SX1262IMLTRT" (id 1) (at 180 85 0))
+    (property "Footprint" "Package_DFN_QFN:QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm" (id 2) (at 180 90 0))
   )
+
   (symbol (lib_id "Sensor_Temperature:TMP117AIYDCR") (at 100 150 0) (unit 1)
     (in_bom yes) (on_board yes)
     (property "Reference" "U3" (id 0) (at 100 140 0))
     (property "Value" "TI TMP117 (NIST +-0.08C)" (id 1) (at 100 145 0))
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-563" (id 2) (at 100 148 0))
   )
+
   (symbol (lib_id "Audio:ICS-43434") (at 180 150 0) (unit 1)
     (in_bom yes) (on_board yes)
     (property "Reference" "U4" (id 0) (at 180 140 0))
     (property "Value" "TDK ICS-43434 I2S Mic" (id 1) (at 180 145 0))
+    (property "Footprint" "Audio:InvenSense_ICS-43434" (id 2) (at 180 148 0))
   )
 )
