@@ -1,0 +1,14 @@
+(version 1)
+
+(rule "Inner CSI"
+	(layer inner)
+	(condition "A.NetClass == '100Ohm-diff_CSI' && A.inDiffPair('*')")
+	(constraint diff_pair_gap (opt 0.335mm))
+	(constraint track_width (opt 0.138mm))
+)
+
+(rule "Track-edge clearance"
+	(condition "A.Type == 'Track'")
+	(constraint edge_clearance (min 0.4mm))
+)
+
