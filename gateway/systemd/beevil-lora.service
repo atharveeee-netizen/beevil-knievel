@@ -1,0 +1,17 @@
+[Unit]
+Description=Beevil Knievel LoRa Packet Receiver Daemon (Semtech SX1262)
+After=beevil-gateway.service
+Requires=beevil-gateway.service
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/beevil-knievel/gateway
+ExecStart=/home/pi/beevil-knievel/venv/bin/python lora_receiver.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

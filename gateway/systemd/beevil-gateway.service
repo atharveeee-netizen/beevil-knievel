@@ -1,0 +1,16 @@
+[Unit]
+Description=Beevil Knievel Linux Edge Gateway Server (FastAPI + AI Engine)
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/beevil-knievel/gateway
+ExecStart=/home/pi/beevil-knievel/venv/bin/python server.py
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
