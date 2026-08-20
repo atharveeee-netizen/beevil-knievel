@@ -369,7 +369,7 @@ def get_all_hives():
 
 @app.get("/api/v1/hives/{hive_id}")
 def get_hive_detail(hive_id: int):
-    """Returns high-resolution telemetry and recent history for a single hive."""
+    """Returns high-resolution telemetry, Varroa mite count, and 7-day honey yield forecast."""
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM hives WHERE hive_id = ?;", (hive_id,))
@@ -395,8 +395,25 @@ def get_hive_detail(hive_id: int):
     alerts = [dict(r) for r in cursor.fetchall()]
 
     conn.close()
+
+    # --- MSPB 2.0 & BEEP FORECASTING INTEGRATION ---
+    from gateway.phenotypic_forecaster import phenotypic_forecaster
+    latest = history[0] if history else {}
+    core_t = latest.get("brood_core_temp", 34.8)
+    frames = [latest.get(f"frame_t{i}", 33.5) for i in range(1, 6)]
+    voc = latest.get("voc_gas_res", 140.0)
+    co2 = latest.get("co2_ppm", 1200.0)
+    weight = latest.get("weight_kg", 32.5)
+    lux = latest.get("lux", 45000.0)
+    tare = hive["tare_weight_kg"]
+
+    varroa_data = phenotypic_forecaster.estimate_varroa_load(core_t, frames, voc, co2)
+    honey_data = phenotypic_forecaster.forecast_honey_yield(weight, tare, 0.65, lux)
+
     return {
         "hive": dict(hive),
+        "varroa_analytics": varroa_data,
+        "honey_forecast": honey_data,
         "recent_telemetry": history,
         "recent_alerts": alerts
     }
