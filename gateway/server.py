@@ -450,6 +450,20 @@ async def ingest_telemetry(payload: TelemetryPayload, background_tasks: Backgrou
     diagnosis = ai_result["diagnosis"]
     confidence = ai_result["confidence"]
 
+    # --- ENVIRONMENTAL NOISE REJECTION HEAD (AudioSet & OSBH) ---
+    from gateway.noise_filter import noise_filter
+    noise_eval = noise_filter.evaluate_acoustic_signal(payload.fft_bands)
+    
+    if noise_eval["is_environmental_noise"]:
+        if noise_eval["noise_type"] == "RAIN_CLATTER" and diagnosis in ["PRE_SWARM_WARNING", "ACTIVE_SWARM"]:
+            # Rainstorm on tin roof confused for swarm buzz -> Suppress false alarm!
+            diagnosis = "HEALTHY_NORMAL"
+            confidence = noise_eval["confidence"]
+        elif noise_eval["noise_type"] == "TRACTOR_DIESEL" and payload.tilt_deg <= 15.0:
+            # Low frequency engine vibration -> Suppress false anomaly!
+            diagnosis = "HEALTHY_NORMAL"
+            confidence = noise_eval["confidence"]
+
     # Determine health score and status
     is_healthy = diagnosis in ["HEALTHY_NORMAL", "QUEEN_PRESENT"]
     health_score = 98.0 if is_healthy else round(max(15.0, (1.0 - confidence) * 100.0), 1)
