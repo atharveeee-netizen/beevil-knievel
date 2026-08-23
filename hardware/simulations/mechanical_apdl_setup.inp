@@ -1,0 +1,69 @@
+! ANSYS Mechanical APDL Script for Beevil Knievel Drop Shock & Modal Decoupling
+/BATCH
+/TITLE, Beevil_Knievel_Drop_and_Modal_FEA
+/UNITS, SI
+
+/PREP7
+! 1. Define Element Types
+ET,1,SOLID185         ! 3D 8-Node Structural Solid (Enclosure & PCB)
+ET,2,CONTA174         ! 3D Surface-to-Surface Contact
+ET,3,TARGE170         ! 3D Target Surface (Concrete Ground)
+
+! 2. Define Material Models
+! Material 1: PC/ABS Enclosure
+MP,DENS,1,1180.0
+MP,EX,1,2.4E9
+MP,NUXY,1,0.38
+TB,BISO,1,1
+TBDATA,1,65.0E6,2.0E8 ! Bilinear Isotropic Hardening (Yield=65MPa, Tangent Modulus=200MPa)
+
+! Material 2: FR4 PCB
+MP,DENS,2,1850.0
+MP,EX,2,22.0E9
+MP,NUXY,2,0.28
+
+! Material 3: Concrete Ground Target
+MP,DENS,3,2400.0
+MP,EX,3,32.0E9
+MP,NUXY,3,0.20
+
+! 3. Geometry Generation
+! Create Hexagonal Prism (Enclosure Shell)
+CYL4, 0, 0, 0.04, 0, 0.04, 360, 0.035
+WPOFFS, 0, 0, 0.0025
+CYL4, 0, 0, 0.0375, 0, 0.0375, 360, 0.035
+VSBV, 1, 2
+
+! Create PCB Plate inside Enclosure
+BLOCK, -0.030, 0.030, -0.025, 0.025, 0.010, 0.0116
+
+! 4. Meshing
+TYPE,1
+MAT,1
+ESIZE, 0.002 ! 2.0 mm Adaptive Mesh Element Size
+VMESH, 3     ! Mesh Enclosure
+
+MAT,2
+ESIZE, 0.0015
+VMESH, 4     ! Mesh PCB
+
+! 5. Modal Analysis Setup (Bee Decoupling 100-500 Hz)
+/SOLU
+ANTYPE, MODAL
+MODOPT, LANB, 10
+MXPAND, 10
+D, ALL, ALL, 0 ! Constrained Mounting Bosses
+SOLVE
+FINISH
+
+! 6. Transient Explicit Drop Shock Setup (1.5m drop, v0 = 5.424 m/s)
+/SOLU
+ANTYPE, TRANS
+TRNOPT, FULL
+IC, ALL, VZ, -5.424
+TIME, 0.003
+AUTOTS, ON
+DELTIM, 1.0E-6, 1.0E-7, 5.0E-6
+OUTRES, ALL, ALL
+SOLVE
+FINISH

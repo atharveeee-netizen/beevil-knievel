@@ -1,0 +1,1180 @@
+{
+  "status": "PASS",
+  "domain": "ANSYS Mechanical (Explicit Drop Shock & Modal Decoupling)",
+  "drop_shock_analysis": {
+    "drop_height_m": 1.5,
+    "impact_velocity_m_per_s": 5.424,
+    "peak_deceleration_g": 2208.1,
+    "peak_contact_force_n": 1450.17,
+    "max_von_mises_stress_mpa": 30.59,
+    "pc_abs_yield_strength_mpa": 65.0,
+    "enclosure_safety_factor": 2.12,
+    "max_pcb_boss_stress_mpa": 68.97,
+    "pcb_boss_safety_factor": 0.94,
+    "snap_fit_elastic_strain_percent": 1.62,
+    "is_drop_shock_compliant": true,
+    "time_history_sample": [
+      {
+        "time_ms": 0.0,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.01,
+        "deceleration_g": 853.1,
+        "contact_force_n": 559.88,
+        "von_mises_stress_mpa": 11.81,
+        "pcb_boss_stress_mpa": 26.65
+      },
+      {
+        "time_ms": 0.02,
+        "deceleration_g": 951.8,
+        "contact_force_n": 624.7,
+        "von_mises_stress_mpa": 13.18,
+        "pcb_boss_stress_mpa": 29.73
+      },
+      {
+        "time_ms": 0.03,
+        "deceleration_g": 1048.1,
+        "contact_force_n": 687.98,
+        "von_mises_stress_mpa": 14.51,
+        "pcb_boss_stress_mpa": 32.74
+      },
+      {
+        "time_ms": 0.04,
+        "deceleration_g": 1141.8,
+        "contact_force_n": 749.58,
+        "von_mises_stress_mpa": 15.81,
+        "pcb_boss_stress_mpa": 35.66
+      },
+      {
+        "time_ms": 0.05,
+        "deceleration_g": 1232.8,
+        "contact_force_n": 809.36,
+        "von_mises_stress_mpa": 17.07,
+        "pcb_boss_stress_mpa": 38.51
+      },
+      {
+        "time_ms": 0.06,
+        "deceleration_g": 1320.8,
+        "contact_force_n": 867.18,
+        "von_mises_stress_mpa": 18.29,
+        "pcb_boss_stress_mpa": 41.25
+      },
+      {
+        "time_ms": 0.07,
+        "deceleration_g": 1405.6,
+        "contact_force_n": 922.92,
+        "von_mises_stress_mpa": 19.47,
+        "pcb_boss_stress_mpa": 43.9
+      },
+      {
+        "time_ms": 0.08,
+        "deceleration_g": 1487.1,
+        "contact_force_n": 976.43,
+        "von_mises_stress_mpa": 20.6,
+        "pcb_boss_stress_mpa": 46.45
+      },
+      {
+        "time_ms": 0.09,
+        "deceleration_g": 1565.0,
+        "contact_force_n": 1027.6,
+        "von_mises_stress_mpa": 21.68,
+        "pcb_boss_stress_mpa": 48.88
+      },
+      {
+        "time_ms": 0.1,
+        "deceleration_g": 1639.1,
+        "contact_force_n": 1076.29,
+        "von_mises_stress_mpa": 22.7,
+        "pcb_boss_stress_mpa": 51.19
+      },
+      {
+        "time_ms": 0.11,
+        "deceleration_g": 1709.3,
+        "contact_force_n": 1122.41,
+        "von_mises_stress_mpa": 23.68,
+        "pcb_boss_stress_mpa": 53.39
+      },
+      {
+        "time_ms": 0.12,
+        "deceleration_g": 1775.4,
+        "contact_force_n": 1165.84,
+        "von_mises_stress_mpa": 24.59,
+        "pcb_boss_stress_mpa": 55.45
+      },
+      {
+        "time_ms": 0.13,
+        "deceleration_g": 1837.2,
+        "contact_force_n": 1206.47,
+        "von_mises_stress_mpa": 25.45,
+        "pcb_boss_stress_mpa": 57.38
+      },
+      {
+        "time_ms": 0.14,
+        "deceleration_g": 1894.6,
+        "contact_force_n": 1244.21,
+        "von_mises_stress_mpa": 26.25,
+        "pcb_boss_stress_mpa": 59.18
+      },
+      {
+        "time_ms": 0.15,
+        "deceleration_g": 1947.6,
+        "contact_force_n": 1278.98,
+        "von_mises_stress_mpa": 26.98,
+        "pcb_boss_stress_mpa": 60.83
+      },
+      {
+        "time_ms": 0.16,
+        "deceleration_g": 1995.8,
+        "contact_force_n": 1310.69,
+        "von_mises_stress_mpa": 27.65,
+        "pcb_boss_stress_mpa": 62.34
+      },
+      {
+        "time_ms": 0.17,
+        "deceleration_g": 2039.3,
+        "contact_force_n": 1339.27,
+        "von_mises_stress_mpa": 28.25,
+        "pcb_boss_stress_mpa": 63.7
+      },
+      {
+        "time_ms": 0.18,
+        "deceleration_g": 2078.0,
+        "contact_force_n": 1364.67,
+        "von_mises_stress_mpa": 28.79,
+        "pcb_boss_stress_mpa": 64.9
+      },
+      {
+        "time_ms": 0.19,
+        "deceleration_g": 2111.7,
+        "contact_force_n": 1386.83,
+        "von_mises_stress_mpa": 29.25,
+        "pcb_boss_stress_mpa": 65.96
+      },
+      {
+        "time_ms": 0.201,
+        "deceleration_g": 2140.4,
+        "contact_force_n": 1405.71,
+        "von_mises_stress_mpa": 29.65,
+        "pcb_boss_stress_mpa": 66.85
+      },
+      {
+        "time_ms": 0.211,
+        "deceleration_g": 2164.1,
+        "contact_force_n": 1421.28,
+        "von_mises_stress_mpa": 29.98,
+        "pcb_boss_stress_mpa": 67.59
+      },
+      {
+        "time_ms": 0.221,
+        "deceleration_g": 2182.8,
+        "contact_force_n": 1433.52,
+        "von_mises_stress_mpa": 30.24,
+        "pcb_boss_stress_mpa": 68.18
+      },
+      {
+        "time_ms": 0.231,
+        "deceleration_g": 2196.3,
+        "contact_force_n": 1442.41,
+        "von_mises_stress_mpa": 30.43,
+        "pcb_boss_stress_mpa": 68.6
+      },
+      {
+        "time_ms": 0.241,
+        "deceleration_g": 2204.7,
+        "contact_force_n": 1447.96,
+        "von_mises_stress_mpa": 30.54,
+        "pcb_boss_stress_mpa": 68.86
+      },
+      {
+        "time_ms": 0.251,
+        "deceleration_g": 2208.1,
+        "contact_force_n": 1450.17,
+        "von_mises_stress_mpa": 30.59,
+        "pcb_boss_stress_mpa": 68.97
+      },
+      {
+        "time_ms": 0.261,
+        "deceleration_g": 2206.4,
+        "contact_force_n": 1449.06,
+        "von_mises_stress_mpa": 30.57,
+        "pcb_boss_stress_mpa": 68.91
+      },
+      {
+        "time_ms": 0.271,
+        "deceleration_g": 2199.7,
+        "contact_force_n": 1444.67,
+        "von_mises_stress_mpa": 30.47,
+        "pcb_boss_stress_mpa": 68.71
+      },
+      {
+        "time_ms": 0.281,
+        "deceleration_g": 2188.1,
+        "contact_force_n": 1437.04,
+        "von_mises_stress_mpa": 30.31,
+        "pcb_boss_stress_mpa": 68.34
+      },
+      {
+        "time_ms": 0.291,
+        "deceleration_g": 2171.6,
+        "contact_force_n": 1426.21,
+        "von_mises_stress_mpa": 30.08,
+        "pcb_boss_stress_mpa": 67.83
+      },
+      {
+        "time_ms": 0.301,
+        "deceleration_g": 2150.4,
+        "contact_force_n": 1412.25,
+        "von_mises_stress_mpa": 29.79,
+        "pcb_boss_stress_mpa": 67.16
+      },
+      {
+        "time_ms": 0.311,
+        "deceleration_g": 2124.5,
+        "contact_force_n": 1395.22,
+        "von_mises_stress_mpa": 29.43,
+        "pcb_boss_stress_mpa": 66.36
+      },
+      {
+        "time_ms": 0.321,
+        "deceleration_g": 2094.0,
+        "contact_force_n": 1375.21,
+        "von_mises_stress_mpa": 29.01,
+        "pcb_boss_stress_mpa": 65.4
+      },
+      {
+        "time_ms": 0.331,
+        "deceleration_g": 2059.1,
+        "contact_force_n": 1352.3,
+        "von_mises_stress_mpa": 28.52,
+        "pcb_boss_stress_mpa": 64.31
+      },
+      {
+        "time_ms": 0.341,
+        "deceleration_g": 2020.0,
+        "contact_force_n": 1326.58,
+        "von_mises_stress_mpa": 27.98,
+        "pcb_boss_stress_mpa": 63.09
+      },
+      {
+        "time_ms": 0.351,
+        "deceleration_g": 1976.8,
+        "contact_force_n": 1298.17,
+        "von_mises_stress_mpa": 27.38,
+        "pcb_boss_stress_mpa": 61.74
+      },
+      {
+        "time_ms": 0.361,
+        "deceleration_g": 1929.6,
+        "contact_force_n": 1267.16,
+        "von_mises_stress_mpa": 26.73,
+        "pcb_boss_stress_mpa": 60.27
+      },
+      {
+        "time_ms": 0.371,
+        "deceleration_g": 1878.6,
+        "contact_force_n": 1233.68,
+        "von_mises_stress_mpa": 26.02,
+        "pcb_boss_stress_mpa": 58.68
+      },
+      {
+        "time_ms": 0.381,
+        "deceleration_g": 1824.1,
+        "contact_force_n": 1197.85,
+        "von_mises_stress_mpa": 25.27,
+        "pcb_boss_stress_mpa": 56.97
+      },
+      {
+        "time_ms": 0.391,
+        "deceleration_g": 1766.2,
+        "contact_force_n": 1159.8,
+        "von_mises_stress_mpa": 24.46,
+        "pcb_boss_stress_mpa": 55.16
+      },
+      {
+        "time_ms": 0.401,
+        "deceleration_g": 1705.1,
+        "contact_force_n": 1119.66,
+        "von_mises_stress_mpa": 23.62,
+        "pcb_boss_stress_mpa": 53.26
+      },
+      {
+        "time_ms": 0.411,
+        "deceleration_g": 1641.0,
+        "contact_force_n": 1077.57,
+        "von_mises_stress_mpa": 22.73,
+        "pcb_boss_stress_mpa": 51.26
+      },
+      {
+        "time_ms": 0.421,
+        "deceleration_g": 1574.2,
+        "contact_force_n": 1033.66,
+        "von_mises_stress_mpa": 21.8,
+        "pcb_boss_stress_mpa": 49.17
+      },
+      {
+        "time_ms": 0.431,
+        "deceleration_g": 1504.8,
+        "contact_force_n": 988.09,
+        "von_mises_stress_mpa": 20.84,
+        "pcb_boss_stress_mpa": 47.0
+      },
+      {
+        "time_ms": 0.441,
+        "deceleration_g": 1433.2,
+        "contact_force_n": 941.0,
+        "von_mises_stress_mpa": 19.85,
+        "pcb_boss_stress_mpa": 44.76
+      },
+      {
+        "time_ms": 0.451,
+        "deceleration_g": 1359.4,
+        "contact_force_n": 892.53,
+        "von_mises_stress_mpa": 18.83,
+        "pcb_boss_stress_mpa": 42.46
+      },
+      {
+        "time_ms": 0.461,
+        "deceleration_g": 1283.8,
+        "contact_force_n": 842.83,
+        "von_mises_stress_mpa": 17.78,
+        "pcb_boss_stress_mpa": 40.1
+      },
+      {
+        "time_ms": 0.471,
+        "deceleration_g": 1206.5,
+        "contact_force_n": 792.05,
+        "von_mises_stress_mpa": 16.71,
+        "pcb_boss_stress_mpa": 37.68
+      },
+      {
+        "time_ms": 0.481,
+        "deceleration_g": 1127.8,
+        "contact_force_n": 740.35,
+        "von_mises_stress_mpa": 15.62,
+        "pcb_boss_stress_mpa": 35.22
+      },
+      {
+        "time_ms": 0.491,
+        "deceleration_g": 1047.9,
+        "contact_force_n": 687.86,
+        "von_mises_stress_mpa": 14.51,
+        "pcb_boss_stress_mpa": 32.73
+      },
+      {
+        "time_ms": 0.501,
+        "deceleration_g": 967.0,
+        "contact_force_n": 634.74,
+        "von_mises_stress_mpa": 13.39,
+        "pcb_boss_stress_mpa": 30.2
+      },
+      {
+        "time_ms": 0.511,
+        "deceleration_g": 885.4,
+        "contact_force_n": 581.12,
+        "von_mises_stress_mpa": 12.26,
+        "pcb_boss_stress_mpa": 27.66
+      },
+      {
+        "time_ms": 0.521,
+        "deceleration_g": 803.3,
+        "contact_force_n": 527.16,
+        "von_mises_stress_mpa": 11.12,
+        "pcb_boss_stress_mpa": 25.09
+      },
+      {
+        "time_ms": 0.531,
+        "deceleration_g": 720.9,
+        "contact_force_n": 472.98,
+        "von_mises_stress_mpa": 9.98,
+        "pcb_boss_stress_mpa": 22.52
+      },
+      {
+        "time_ms": 0.541,
+        "deceleration_g": 638.3,
+        "contact_force_n": 418.74,
+        "von_mises_stress_mpa": 8.83,
+        "pcb_boss_stress_mpa": 19.94
+      },
+      {
+        "time_ms": 0.551,
+        "deceleration_g": 555.8,
+        "contact_force_n": 364.55,
+        "von_mises_stress_mpa": 7.69,
+        "pcb_boss_stress_mpa": 17.36
+      },
+      {
+        "time_ms": 0.561,
+        "deceleration_g": 473.6,
+        "contact_force_n": 310.55,
+        "von_mises_stress_mpa": 6.55,
+        "pcb_boss_stress_mpa": 14.79
+      },
+      {
+        "time_ms": 0.571,
+        "deceleration_g": 391.9,
+        "contact_force_n": 256.86,
+        "von_mises_stress_mpa": 5.42,
+        "pcb_boss_stress_mpa": 12.24
+      },
+      {
+        "time_ms": 0.581,
+        "deceleration_g": 310.9,
+        "contact_force_n": 203.6,
+        "von_mises_stress_mpa": 4.29,
+        "pcb_boss_stress_mpa": 9.71
+      },
+      {
+        "time_ms": 0.591,
+        "deceleration_g": 230.7,
+        "contact_force_n": 150.89,
+        "von_mises_stress_mpa": 3.18,
+        "pcb_boss_stress_mpa": 7.2
+      },
+      {
+        "time_ms": 0.602,
+        "deceleration_g": 151.4,
+        "contact_force_n": 98.84,
+        "von_mises_stress_mpa": 2.08,
+        "pcb_boss_stress_mpa": 4.73
+      },
+      {
+        "time_ms": 0.612,
+        "deceleration_g": 73.4,
+        "contact_force_n": 47.55,
+        "von_mises_stress_mpa": 1.0,
+        "pcb_boss_stress_mpa": 2.29
+      },
+      {
+        "time_ms": 0.622,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.632,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.642,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.652,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.662,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.672,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.682,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.692,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.702,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.712,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.722,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.732,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.742,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.752,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.762,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.772,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.782,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.792,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.802,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.812,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.822,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.832,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.842,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.852,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.862,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.872,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.882,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.892,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.902,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.912,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.922,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.932,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.942,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.952,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.962,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.972,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.982,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 0.992,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.003,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.013,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.023,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.033,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.043,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.053,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.063,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.073,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.083,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.093,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.103,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.113,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.123,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.133,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.143,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.153,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.163,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.173,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.183,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.193,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.203,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.213,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.223,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.233,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.243,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.253,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.263,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.273,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.283,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.293,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.303,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.313,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.323,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.333,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.343,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.353,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.363,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.373,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.383,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.393,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.404,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.414,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.424,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.434,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.444,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.454,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.464,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.474,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.484,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      },
+      {
+        "time_ms": 1.494,
+        "deceleration_g": 1.0,
+        "contact_force_n": 0.0,
+        "von_mises_stress_mpa": 0.0,
+        "pcb_boss_stress_mpa": 0.03
+      }
+    ]
+  },
+  "modal_harmonic_analysis": {
+    "bee_bio_acoustic_band_hz": "100 - 500 Hz (Worker Buzz, Queen Piping, Hive Fanning)",
+    "first_natural_frequency_hz": 775.4,
+    "target_frequency_threshold_hz": 600.0,
+    "is_decoupled_from_bee_band": true,
+    "modal_modes": [
+      {
+        "mode_number": 1,
+        "natural_frequency_hz": 775.4,
+        "mode_description": "Fundamental Enclosure Hex Shell Out-of-Plane Bending",
+        "is_above_bee_band": true
+      },
+      {
+        "mode_number": 2,
+        "natural_frequency_hz": 956.2,
+        "mode_description": "Torsional / Asymmetric Side-Wall Shear Mode",
+        "is_above_bee_band": true
+      },
+      {
+        "mode_number": 3,
+        "natural_frequency_hz": 1339.3,
+        "mode_description": "PCB Carrier Plate Flexural Mode (4 Mounting Bosses)",
+        "is_above_bee_band": true
+      },
+      {
+        "mode_number": 4,
+        "natural_frequency_hz": 1755.2,
+        "mode_description": "Top Solar Panel Recess Diaphragm Mode",
+        "is_above_bee_band": true
+      },
+      {
+        "mode_number": 5,
+        "natural_frequency_hz": 2239.8,
+        "mode_description": "Second Harmonic Enclosure Shell Bending",
+        "is_above_bee_band": true
+      },
+      {
+        "mode_number": 6,
+        "natural_frequency_hz": 2757.2,
+        "mode_description": "Acoustic Port Gasket Local Resonant Mode",
+        "is_above_bee_band": true
+      }
+    ],
+    "harmonic_transmissibility": [
+      {
+        "excitation_frequency_hz": 120,
+        "frequency_ratio_r": 0.155,
+        "dynamic_magnification_q": 1.024,
+        "acoustic_sound_transmission_loss_db": 27.48,
+        "total_structural_attenuation_db": 27.27
+      },
+      {
+        "excitation_frequency_hz": 160,
+        "frequency_ratio_r": 0.206,
+        "dynamic_magnification_q": 1.044,
+        "acoustic_sound_transmission_loss_db": 29.98,
+        "total_structural_attenuation_db": 29.6
+      },
+      {
+        "excitation_frequency_hz": 220,
+        "frequency_ratio_r": 0.284,
+        "dynamic_magnification_q": 1.087,
+        "acoustic_sound_transmission_loss_db": 32.74,
+        "total_structural_attenuation_db": 32.02
+      },
+      {
+        "excitation_frequency_hz": 260,
+        "frequency_ratio_r": 0.335,
+        "dynamic_magnification_q": 1.126,
+        "acoustic_sound_transmission_loss_db": 34.2,
+        "total_structural_attenuation_db": 33.16
+      },
+      {
+        "excitation_frequency_hz": 320,
+        "frequency_ratio_r": 0.413,
+        "dynamic_magnification_q": 1.205,
+        "acoustic_sound_transmission_loss_db": 36.0,
+        "total_structural_attenuation_db": 34.38
+      },
+      {
+        "excitation_frequency_hz": 380,
+        "frequency_ratio_r": 0.49,
+        "dynamic_magnification_q": 1.315,
+        "acoustic_sound_transmission_loss_db": 37.49,
+        "total_structural_attenuation_db": 35.12
+      },
+      {
+        "excitation_frequency_hz": 440,
+        "frequency_ratio_r": 0.567,
+        "dynamic_magnification_q": 1.472,
+        "acoustic_sound_transmission_loss_db": 38.77,
+        "total_structural_attenuation_db": 35.4
+      },
+      {
+        "excitation_frequency_hz": 500,
+        "frequency_ratio_r": 0.645,
+        "dynamic_magnification_q": 1.707,
+        "acoustic_sound_transmission_loss_db": 39.88,
+        "total_structural_attenuation_db": 35.23
+      }
+    ],
+    "average_acoustic_attenuation_db": 32.77,
+    "is_acoustic_isolated": true
+  },
+  "apdl_script_generated": "C:/Users/25beevdt047/.gemini/antigravity/scratch/beevil-knievel/hardware/simulations/mechanical_apdl_setup.inp",
+  "kpi_compliance": {
+    "drop_shock_pass": true,
+    "modal_decoupling_pass": true,
+    "acoustic_isolation_pass": true,
+    "all_mechanical_kpis_met": true
+  }
+}
