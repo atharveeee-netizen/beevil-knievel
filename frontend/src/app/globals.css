@@ -1,0 +1,247 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@font-face {
+  font-family: 'Roobert';
+  src: url('/fonts/Roobert-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roobert';
+  src: url('/fonts/Roobert-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roobert';
+  src: url('/fonts/Roobert-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roobert';
+  src: url('/fonts/Roobert-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roobert';
+  src: url('/fonts/Roobert-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roobert';
+  src: url('/fonts/Roobert-Heavy.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme inline {
+  --font-sans: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-roobert: 'Roobert', sans-serif;
+  --color-brand-yellow: #ffc833;
+  --color-device-yellow: #fbc651;
+  --color-screen-black: #312f28;
+  --color-screen-white: #b1afa8;
+  --color-psd-darkest-gray: #212223;
+  --color-psd-dark-gray: #7a8085;
+  --color-psd-mid-gray: #64676c;
+  --color-psd-light-gray: #bbb;
+  --color-psd-lightest-gray: #efefef;
+  --color-purple: #6c00ff;
+  --color-aqua: #00a88a;
+  --color-aqua-light: #21c6a9;
+  --color-aqua-dark: #127866;
+  --color-alert-red: #ef5023;
+}
+
+:root {
+  --brand-yellow: #ffc833;
+  --screen-black: #312f28;
+  --screen-white: #b1afa8;
+  --psd-darkest-gray: #212223;
+  --psd-dark-gray: #7a8085;
+  --psd-mid-gray: #64676c;
+  --psd-light-gray: #bbbbbb;
+  --psd-lightest-gray: #efefef;
+  --purple: #6c00ff;
+  --aqua: #00a88a;
+  --aqua-light: #21c6a9;
+  --aqua-dark: #127866;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--psd-dark-gray);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 3D Order Button */
+.btn-order-purple {
+  display: inline-block;
+  text-decoration: none;
+  padding: 0.35em 1.2em 0.45em 1.2em;
+  border-radius: 3em;
+  user-select: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 0.02em 0.04em rgba(0, 0, 0, 0.4);
+  color: var(--white);
+  background-color: var(--purple);
+  background-image: linear-gradient(#9400ff, #5c00ff);
+  box-shadow:
+    inset 0 0.05em 0.05em rgba(255, 255, 255, 0.6),
+    inset 0 -0.05em 0.08em rgba(0, 0, 0, 0.5),
+    inset 0 -0.01em 0.5em rgba(255, 255, 255, 0.3),
+    0 0.05em 0.1em rgba(0, 0, 0, 0.4);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.btn-order-purple:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 0.05em 0.05em rgba(255, 255, 255, 0.7),
+    inset 0 -0.05em 0.08em rgba(0, 0, 0, 0.5),
+    inset 0 -0.01em 0.5em rgba(255, 255, 255, 0.4),
+    0 0.15em 0.25em rgba(0, 0, 0, 0.5);
+}
+
+.btn-order-purple:active {
+  transform: translateY(1px);
+  background-image: linear-gradient(#4a00d1, #7800ff);
+  box-shadow:
+    inset 0 0.05em 0.15em rgba(0, 0, 0, 0.5),
+    inset 0 -0.03em 0.03em rgba(255, 255, 255, 0.6),
+    0 0.05em 0.2em rgba(0, 0, 0, 0.2);
+}
+
+/* Secondary Buttons */
+.btn-pill-black {
+  display: inline-block;
+  background-color: var(--screen-black);
+  color: var(--white);
+  padding: 0.6em 1.6em;
+  border-radius: 2em;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.btn-pill-black:hover {
+  background-color: #000000;
+  transform: translateY(-1px);
+}
+
+.btn-pill-yellow {
+  display: inline-block;
+  background-color: var(--brand-yellow);
+  color: var(--screen-black);
+  padding: 0.6em 1.6em;
+  border-radius: 2em;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.btn-pill-yellow:hover {
+  background-color: #ffd659;
+  transform: translateY(-1px);
+}
+
+.btn-pill-aqua-dark {
+  display: inline-block;
+  background-color: var(--aqua-dark);
+  color: var(--white);
+  padding: 0.6em 1.6em;
+  border-radius: 2em;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.btn-pill-aqua-dark:hover {
+  background-color: #0d5a4d;
+  transform: translateY(-1px);
+}
+
+/* Large Header Download Button */
+.btn-header-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--brand-yellow);
+  color: var(--screen-black);
+  padding: 0.55em 1.4em;
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+.btn-header-download:hover {
+  background-color: #ffe066;
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+.btn-header-download:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Perspective & 3D Helpers */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Clouds Blobble Animation */
+@keyframes blobble {
+  0% { transform: scale(1, 1); }
+  30% { transform: scale(1.05, 0.97); }
+  70% { transform: scale(0.99, 1.03); }
+  100% { transform: scale(1.03, 0.99); }
+}
+
+.animate-blobble {
+  animation: blobble 5s infinite ease-in-out alternate;
+}
