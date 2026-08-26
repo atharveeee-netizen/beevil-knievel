@@ -91,6 +91,12 @@
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
+  --hue-1: #f59e0b;
+  --hue-2: #06b6d4;
+  --hue-3: #10b981;
+  --hue-4: #a855f7;
+  --hue-5: #f43f5e;
+  --hue-6: #3b82f6;
 }
 
 html {
