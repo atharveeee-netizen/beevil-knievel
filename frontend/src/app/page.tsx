@@ -17,28 +17,28 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100">
+    <div className="min-h-screen flex flex-col bg-[#070a12] text-[#f8fafc]">
       {/* Top Sticky Navbar with Universal Search */}
       <Navbar />
 
       {/* Main Page Sections */}
       <main className="flex-grow">
-        {/* 1. Hero Section with Live Telemetry */}
+        {/* 1. Hero Section with Live Telemetry & Bento Grid */}
         <HeroSection />
 
-        {/* 2. The System, The Design, The Acoustic Ear */}
+        {/* 2. Hardware Architecture & Sensor Suite */}
         <SystemSection />
 
-        {/* 3. Edge AI Intelligence (8 Core Diagnostic Models - Zero Game Cards) */}
+        {/* 3. Edge AI Intelligence & 8 Diagnostic Models */}
         <EdgeAISection />
 
-        {/* 4. Model Variations by Hive Count (Catalog & Future Work) */}
+        {/* 4. Model Variations by Hive Count (Catalog) */}
         <CatalogSection />
 
         {/* 5. Open Apiculture SDK & HiveOS App */}
         <DeveloperSection />
 
-        {/* 6. University Research & Education Program (15% Off) */}
+        {/* 6. University Research & Education Program */}
         <EducationSection />
 
         {/* 7. Hardware Packages & Antmicro CM4 Gateway */}
@@ -47,10 +47,10 @@ export default function Home() {
         {/* 8. Master Hardware & Software Specifications */}
         <SpecsSection />
 
-        {/* 9. Hardware Gallery (Images pulled from GitHub Repository) */}
+        {/* 9. Hardware Gallery */}
         <GallerySection />
 
-        {/* 10. Consolidated "Our Mission" & Marcus Varro 2,000-Year Heritage */}
+        {/* 10. Consolidated Mission & Marcus Varro 2,000-Year Heritage */}
         <MissionSection />
 
         {/* 11. Research Newsletter & Support Portal */}

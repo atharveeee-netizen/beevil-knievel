@@ -244,7 +244,7 @@ export function EdgeAISection() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between pb-3 border-b border-white/10">
                   <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400">
-                    {diag.category}
+                    <DecryptedText text={diag.category} speed={30} maxIterations={5} />
                   </span>
                   <div className="p-1.5 bg-[#070a12] border border-white/10 rounded-lg">
                     {diag.icon}
@@ -268,7 +268,7 @@ export function EdgeAISection() {
                     {diag.metricLabel}:
                   </span>
                   <span className="text-xs font-mono font-bold text-amber-400">
-                    {diag.metric}
+                    <ShinyText text={diag.metric} speed={3} className="text-amber-400 font-bold" />
                   </span>
                 </div>
 
@@ -279,7 +279,7 @@ export function EdgeAISection() {
                       key={idx}
                       className="text-[9px] font-mono bg-[#070a12] text-slate-400 px-1.5 py-0.2 rounded border border-white/5"
                     >
-                      {s}
+                      <DecryptedText text={s} speed={25} maxIterations={4} />
                     </span>
                   ))}
                 </div>
