@@ -1,165 +1,249 @@
 "use client";
 
 import React, { useState } from "react";
-import { Grid, Thermometer, Volume2, Flame, ShieldAlert, CheckCircle2, Info } from "lucide-react";
+import { AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
+
+interface HiveData {
+  id: number;
+  yard: "Yard Alpha" | "Yard Beta";
+  status: "nominal" | "watch" | "action";
+  temp: number;
+  freq: number;
+  co2: number;
+  weight: number;
+  anomaly?: string;
+  actionProtocol?: string;
+}
+
+const GENERATED_HIVES: HiveData[] = Array.from({ length: 100 }, (_, i) => {
+  const id = i + 1;
+  const yard = id <= 50 ? "Yard Alpha" : "Yard Beta";
+
+  if (id === 42) {
+    return {
+      id,
+      yard,
+      status: "action",
+      temp: 37.2,
+      freq: 485,
+      co2: 2480,
+      weight: 42.1,
+      anomaly: "Acoustic frequency at 485 Hz (virgin queen piping). Brood temp at 37.2°C.",
+      actionProtocol: "Perform Demaree split or remove swarm cells within 24h.",
+    };
+  }
+  if (id === 15) {
+    return {
+      id,
+      yard,
+      status: "watch",
+      temp: 33.1,
+      freq: 285,
+      co2: 910,
+      weight: 38.4,
+      anomaly: "Acoustic frequency at 285 Hz (queenless roar). Brood temp dropped to 33.1°C.",
+      actionProtocol: "Inspect frames 3-5 for fresh eggs. Introduce caged mated queen.",
+    };
+  }
+  if (id === 73) {
+    return {
+      id,
+      yard,
+      status: "watch",
+      temp: 34.6,
+      freq: 340,
+      co2: 1240,
+      weight: 40.2,
+      anomaly: "Acoustic grooming vibration at 340 Hz. Mite load estimate at 5.4%.",
+      actionProtocol: "Apply Formic Pro flash vapor pads. Schedule sticky board count in 48h.",
+    };
+  }
+  if (id === 88) {
+    return {
+      id,
+      yard,
+      status: "watch",
+      temp: 34.7,
+      freq: 228,
+      co2: 1100,
+      weight: 39.1,
+      anomaly: "Stand tilt at 14.2°. Accelerometer shock vibration logged.",
+      actionProtocol: "Relevel foundation blocks. Tighten ratchet tie-down strap.",
+    };
+  }
+
+  return {
+    id,
+    yard,
+    status: "nominal",
+    temp: 34.8 + (Math.sin(id) * 0.15),
+    freq: 220 + (id % 15),
+    co2: 1100 + (id * 5),
+    weight: 40.0 + (id % 4),
+    anomaly: "Optimal brood homeostasis (34.8°C).",
+    actionProtocol: "No box entry required. Colony healthy.",
+  };
+});
 
 export function Section05TheFleet() {
-  const [activeHiveId, setActiveHiveId] = useState<number>(42);
-
-  // Generate 100 quiet nodes for spatial representation
-  const nodes = Array.from({ length: 100 }, (_, i) => {
-    const id = i + 1;
-    if (id === 42) {
-      return { id, status: "ACTION", label: "Hive 042", temp: "37.2°C", hz: "485 Hz", desc: "Pre-swarm acoustic surge (72h split window)", action: "Prepare vertical swarm split." };
-    }
-    if (id === 15) {
-      return { id, status: "WATCH", label: "Hive 015", temp: "33.1°C", hz: "285 Hz", desc: "Queenless roar & brood nest chill", action: "Inspect center frames for queen presence." };
-    }
-    if (id === 73) {
-      return { id, status: "WATCH", label: "Hive 073", temp: "34.6°C", hz: "310 Hz", desc: "Varroa grooming friction spike", action: "Verify sticky board mite drop count." };
-    }
-    if (id === 88) {
-      return { id, status: "WATCH", label: "Hive 088", temp: "34.9°C", hz: "230 Hz", desc: "Stand tilt displacement (14.2°)", action: "Check hive stand level." };
-    }
-    return { id, status: "NOMINAL", label: `Hive ${id < 10 ? `00${id}` : id < 100 ? `0${id}` : id}`, temp: "34.8°C", hz: "220 Hz", desc: "Optimal brood homeostasis", action: "No intervention needed." };
-  });
-
-  const activeNode = nodes.find((n) => n.id === activeHiveId) || nodes[41];
+  const [selectedHive, setSelectedHive] = useState<HiveData>(GENERATED_HIVES[41]);
 
   return (
-    <section id="the-fleet" className="py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-[#222632]">
-      <div className="space-y-16">
+    <section id="the-fleet" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-[#222738]">
+      <div className="space-y-12">
         
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div className="max-w-2xl space-y-4">
-            <div className="text-[11px] font-mono tracking-widest text-[#8a90a0] uppercase">
-              05 - THE FLEET
-            </div>
-
-            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4f4f6] font-sans uppercase">
-              Many hives. One intelligence layer.
-            </h2>
-
-            <p className="text-sm sm:text-base text-[#8a90a0] font-mono leading-relaxed">
-              Managing 100 hives in the field no longer means opening 100 boxes. The fleet command interface isolates only the colonies requiring physical attention.
-            </p>
+        <div className="max-w-3xl space-y-4">
+          <div className="text-[11px] font-mono tracking-widest text-[#8a90a0] uppercase">
+            05 - 100-HIVE FLEET
           </div>
 
-          {/* Quiet Metric Summary */}
-          <div className="flex items-center gap-4 text-xs font-mono">
-            <div className="px-3.5 py-2 bg-[#12151e] border border-[#222632] rounded-sm">
-              <span className="text-[#8a90a0] block text-[9px] uppercase">APIARY FLEET</span>
-              <span className="text-[#f4f4f6] font-bold text-sm">100 Hives</span>
-            </div>
-            <div className="px-3.5 py-2 bg-[#12151e] border border-[#2ea043]/30 rounded-sm">
-              <span className="text-[#2ea043] block text-[9px] uppercase">NOMINAL</span>
-              <span className="text-[#2ea043] font-bold text-sm">96</span>
-            </div>
-            <div className="px-3.5 py-2 bg-[#12151e] border border-[#f0b840]/30 rounded-sm">
-              <span className="text-[#f0b840] block text-[9px] uppercase">WATCH</span>
-              <span className="text-[#f0b840] font-bold text-sm">3</span>
-            </div>
-            <div className="px-3.5 py-2 bg-[#12151e] border border-[#da3633]/30 rounded-sm">
-              <span className="text-[#da3633] block text-[9px] uppercase">ACTION</span>
-              <span className="text-[#da3633] font-bold text-sm">1</span>
-            </div>
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4f4f6] font-sans uppercase">
+            100-Hive fleet triage.
+          </h2>
+
+          <p className="text-sm sm:text-base text-[#8a90a0] font-mono leading-relaxed">
+            Manage 100 hives without opening every box. The fleet screen isolates the 4 hives that need work.
+          </p>
+
+          {/* Status Counts */}
+          <div className="flex flex-wrap items-center gap-3 pt-2 text-xs font-mono">
+            <span className="px-2.5 py-1 rounded-sm bg-[#12151e] border border-[#222738] text-white">
+              TOTAL: 100 Hives
+            </span>
+            <span className="px-2.5 py-1 rounded-sm bg-[#12151e] border border-[#2ea043]/40 text-[#2ea043]">
+              NOMINAL: 96
+            </span>
+            <span className="px-2.5 py-1 rounded-sm bg-[#12151e] border border-[#f0b840]/40 text-[#f0b840]">
+              WATCH: 3
+            </span>
+            <span className="px-2.5 py-1 rounded-sm bg-[#12151e] border border-[#da3633]/40 text-[#da3633]">
+              ACTION: 1
+            </span>
           </div>
         </div>
 
-        {/* Spatial Field Matrix Layout */}
+        {/* 100-Hive Spatial Grid + Reactive Lateral Inspector */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Left: 100 Micro-Nodes Array */}
-          <div className="lg:col-span-7 bg-[#12151e] border border-[#222632] p-6 rounded-sm space-y-4">
-            <div className="flex items-center justify-between text-[10px] font-mono text-[#8a90a0] border-b border-[#222632] pb-2">
-              <span>SPATIAL YARD MAP (YARDS ALPHA &amp; BETA)</span>
-              <span>CLICK TO SELECT</span>
+          {/* 100 Nodes Spatial Matrix (Left 7 Cols) */}
+          <div className="lg:col-span-7 bg-[#12151e] border border-[#222738] p-5 sm:p-6 rounded-sm space-y-4">
+            <div className="flex items-center justify-between text-xs font-mono text-[#8a90a0] border-b border-[#222738] pb-3">
+              <span className="uppercase font-bold">YARD MAP (YARDS ALPHA & BETA)</span>
+              <span className="text-[10px]">CLICK ANY NODE TO INSPECT</span>
             </div>
 
+            {/* 10x10 Matrix Grid */}
             <div className="grid grid-cols-10 gap-1.5 sm:gap-2">
-              {nodes.map((node) => {
-                const isSelected = activeHiveId === node.id;
-                let dotColor = "bg-[#2ea043]";
-                if (node.status === "ACTION") dotColor = "bg-[#da3633] animate-pulse";
-                if (node.status === "WATCH") dotColor = "bg-[#f0b840]";
+              {GENERATED_HIVES.map((hive) => {
+                const isSelected = selectedHive.id === hive.id;
+                let bgClass = "bg-[#181c28] hover:bg-[#252c40] text-[#8a90a0]";
+                let dotClass = "bg-[#2ea043]";
+
+                if (hive.status === "action") {
+                  bgClass = "bg-[#da3633]/20 border border-[#da3633] text-[#da3633] font-bold";
+                  dotClass = "bg-[#da3633] animate-pulse";
+                } else if (hive.status === "watch") {
+                  bgClass = "bg-[#f0b840]/15 border border-[#f0b840] text-[#f0b840]";
+                  dotClass = "bg-[#f0b840]";
+                }
+
+                if (isSelected) {
+                  bgClass += " ring-2 ring-white";
+                }
 
                 return (
                   <button
-                    key={node.id}
-                    onClick={() => setActiveHiveId(node.id)}
-                    className={`h-9 rounded-sm border flex flex-col items-center justify-center transition-all cursor-pointer ${
-                      isSelected
-                        ? "bg-[#0a0d14] border-[#f0b840] text-[#f4f4f6] shadow-md ring-1 ring-[#f0b840]/30"
-                        : "bg-[#0a0d14] border-[#222632] hover:border-[#8a90a0] text-[#8a90a0]"
-                    }`}
+                    key={hive.id}
+                    onClick={() => setSelectedHive(hive)}
+                    className={`h-7 sm:h-8 rounded-xs flex items-center justify-center text-[10px] font-mono transition-all relative ${bgClass} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f0b840]`}
+                    title={`Hive #${hive.id} (${hive.yard}) - ${hive.status.toUpperCase()}`}
+                    aria-label={`Inspect Hive ${hive.id} in ${hive.yard}`}
                   >
-                    <span className="text-[9px] font-mono font-bold leading-none mb-1">
-                      {node.id}
-                    </span>
-                    <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`} />
+                    <span>{hive.id}</span>
+                    <span
+                      className={`absolute top-0.5 right-0.5 w-1 h-1 rounded-full ${dotClass}`}
+                    />
                   </button>
                 );
               })}
             </div>
 
-            <div className="flex items-center justify-between text-[10px] font-mono text-[#8a90a0] pt-2 border-t border-[#1e2330]">
-              <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#2ea043]" /> Nominal</span>
-              <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#f0b840]" /> Watch</span>
-              <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[#da3633]" /> Field Action</span>
+            <div className="flex items-center justify-between pt-2 text-[10px] font-mono text-[#8a90a0]">
+              <span>Rows 1-5: Yard Alpha</span>
+              <span>Rows 6-10: Yard Beta</span>
             </div>
           </div>
 
-          {/* Right: Selected Node Detail */}
-          <div className="lg:col-span-5 bg-[#12151e] border border-[#2e3444] p-6 rounded-sm space-y-5">
-            <div className="flex items-center justify-between border-b border-[#222632] pb-3">
+          {/* Lateral Diagnostic Inspector (Right 5 Cols) */}
+          <div className="lg:col-span-5 bg-[#12151e] border border-[#222738] p-6 rounded-sm space-y-6">
+            <div className="flex items-center justify-between border-b border-[#222738] pb-3">
               <div>
-                <span className="text-[9px] font-mono text-[#8a90a0] block uppercase">SELECTED COLONY</span>
-                <h3 className="text-xl font-bold text-[#f4f4f6] font-sans">{activeNode.label}</h3>
+                <span className="text-[10px] font-mono text-[#8a90a0] block uppercase">{selectedHive.yard}</span>
+                <h3 className="text-xl font-mono font-bold text-white">Hive #{selectedHive.id.toString().padStart(3, "0")}</h3>
               </div>
 
-              <span
-                className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-sm border ${
-                  activeNode.status === "ACTION"
-                    ? "bg-[#da3633]/15 text-[#da3633] border-[#da3633]/40"
-                    : activeNode.status === "WATCH"
-                    ? "bg-[#f0b840]/15 text-[#f0b840] border-[#f0b840]/40"
-                    : "bg-[#2ea043]/15 text-[#2ea043] border-[#2ea043]/40"
-                }`}
-              >
-                {activeNode.status}
-              </span>
+              <div>
+                {selectedHive.status === "action" && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-[#da3633]/20 border border-[#da3633] text-[#da3633] text-xs font-mono font-bold uppercase">
+                    <AlertCircle className="w-3.5 h-3.5" />
+                    <span>Action Required</span>
+                  </span>
+                )}
+                {selectedHive.status === "watch" && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-[#f0b840]/20 border border-[#f0b840] text-[#f0b840] text-xs font-mono font-bold uppercase">
+                    <AlertTriangle className="w-3.5 h-3.5" />
+                    <span>Watch List</span>
+                  </span>
+                )}
+                {selectedHive.status === "nominal" && (
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-sm bg-[#2ea043]/20 border border-[#2ea043] text-[#2ea043] text-xs font-mono font-bold uppercase">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span>Nominal</span>
+                  </span>
+                )}
+              </div>
             </div>
 
-            {/* Metrics */}
+            {/* Diagnostic Readings Strip */}
             <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-              <div className="bg-[#0a0d14] border border-[#222632] p-3 rounded-sm space-y-1">
-                <span className="text-[#8a90a0] text-[10px] block uppercase">BROOD TEMP</span>
-                <span className="text-base font-bold text-[#f4f4f6]">{activeNode.temp}</span>
+              <div className="bg-[#0a0d14] p-3 rounded-sm border border-[#222738]">
+                <span className="text-[9px] text-[#8a90a0] block uppercase">BROOD TEMP</span>
+                <span className="text-base font-bold text-white">{selectedHive.temp.toFixed(2)}°C</span>
               </div>
-              <div className="bg-[#0a0d14] border border-[#222632] p-3 rounded-sm space-y-1">
-                <span className="text-[#8a90a0] text-[10px] block uppercase">ACOUSTIC PEAK</span>
-                <span className="text-base font-bold text-[#f0b840]">{activeNode.hz}</span>
+              <div className="bg-[#0a0d14] p-3 rounded-sm border border-[#222738]">
+                <span className="text-[9px] text-[#8a90a0] block uppercase">ACOUSTIC PEAK</span>
+                <span className="text-base font-bold text-[#f0b840]">{selectedHive.freq} Hz</span>
+              </div>
+              <div className="bg-[#0a0d14] p-3 rounded-sm border border-[#222738]">
+                <span className="text-[9px] text-[#8a90a0] block uppercase">CO2 LEVEL</span>
+                <span className="text-base font-bold text-white">{selectedHive.co2} ppm</span>
+              </div>
+              <div className="bg-[#0a0d14] p-3 rounded-sm border border-[#222738]">
+                <span className="text-[9px] text-[#8a90a0] block uppercase">TOTAL WEIGHT</span>
+                <span className="text-base font-bold text-white">{selectedHive.weight.toFixed(1)} kg</span>
               </div>
             </div>
 
-            {/* Diagnosis */}
-            <div className="bg-[#0a0d14] border border-[#222632] p-4 rounded-sm space-y-1">
-              <span className="text-[9px] font-mono text-[#8a90a0] uppercase block">DIAGNOSIS</span>
-              <p className="text-xs font-mono text-[#f4f4f6]">{activeNode.desc}</p>
+            {/* Diagnosis & Action Protocol */}
+            <div className="space-y-3 pt-2">
+              <div className="text-xs font-mono space-y-1">
+                <span className="text-[#8a90a0] uppercase block text-[10px]">DIAGNOSTIC EVIDENCE:</span>
+                <p className="text-white leading-relaxed">{selectedHive.anomaly}</p>
+              </div>
+
+              <div className="text-xs font-mono space-y-1 p-3 bg-[#0a0d14] border border-[#222738] rounded-sm">
+                <span className="text-[#f0b840] font-bold uppercase block text-[10px]">FIELD PROTOCOL:</span>
+                <p className="text-zinc-300 leading-relaxed">{selectedHive.actionProtocol}</p>
+              </div>
             </div>
 
-            {/* Recommended Action */}
-            <div className="bg-[#161922] border border-[#2e3444] p-4 rounded-sm space-y-1">
-              <span className="text-[9px] font-mono text-[#f0b840] uppercase font-bold block">RECOMMENDED BEEKEEPER ACTION</span>
-              <p className="text-xs font-mono text-[#f4f4f6]">{activeNode.action}</p>
-            </div>
-
-            <div className="text-[10px] font-mono text-[#8a90a0] text-center">
-              DEMO SIMULATION • GROUNDED IN VERIFIED HARDWARE TELEMETRY
-            </div>
           </div>
 
+        </div>
+
+        <div className="text-[10px] font-mono text-[#8a90a0] text-center">
+          SIMULATED FLEET FEED • 100-HIVE FIELD DATA
         </div>
 
       </div>

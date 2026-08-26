@@ -1,72 +1,71 @@
 "use client";
 
 import React from "react";
-import { Cpu, Layers, HardDrive, CheckCircle2, ShieldCheck, ArrowRight } from "lucide-react";
 
 export function Section03TheIntelligence() {
   return (
-    <section id="the-intelligence" className="py-28 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-[#222632]">
-      <div className="space-y-16">
+    <section id="the-intelligence" className="py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto border-t border-[#222738]">
+      <div className="space-y-12">
         
         {/* Section Header */}
         <div className="max-w-3xl space-y-4">
           <div className="text-[11px] font-mono tracking-widest text-[#8a90a0] uppercase">
-            03 - THE INTELLIGENCE
+            03 - EDGE COMPUTE
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#f4f4f6] font-sans uppercase">
-            Intelligence at the edge.
+            Local edge computation in remote yards.
           </h2>
 
           <p className="text-sm sm:text-base text-[#8a90a0] font-mono leading-relaxed">
-            Data is interpreted directly where the hive sits, rather than requiring continuous cloud connectivity. The system runs lightweight quantized neural models locally in remote out-yards.
+            Processing runs on-node and at the yard gateway. The system operates with zero internet access.
           </p>
         </div>
 
-        {/* 4-Stage Horizontal Pipeline (SENSE -> INTERPRET -> DETECT -> ACT) */}
+        {/* 4-Stage Horizontal Pipeline */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
             {
               step: "01",
               title: "SENSE",
               target: "SENSING LAYER",
-              desc: "Digital sensors sample brood temperature, acoustics, CO2, and weight continuously inside the hive.",
+              desc: "Sensors read temperature, acoustics, CO2, and hive weight at 1 Hz.",
               hardware: "TMP117 • INMP441 • SCD41",
             },
             {
               step: "02",
-              title: "INTERPRET",
-              target: "ON-NODE TINYML",
-              desc: "Nordic nRF52840 extracts 128-point FFT spectrum and runs 1D-CNN classification in 1.12 milliseconds.",
+              title: "PROCESS",
+              target: "ON-NODE MCU",
+              desc: "Nordic nRF52840 computes 128-point FFT and runs 1D-CNN classification in 1.12 ms.",
               hardware: "Arm Cortex-M4F @ 64MHz",
             },
             {
               step: "03",
-              title: "DETECT",
-              target: "GATEWAY FUSION",
-              desc: "Raspberry Pi CM4 runs statistical CUSUM thermal drift detection and multi-sensor neural fusion.",
+              title: "CORRELATE",
+              target: "YARD GATEWAY",
+              desc: "Raspberry Pi CM4 runs CUSUM drift and multi-sensor models over local SQLite.",
               hardware: "Debian 64-bit • TorchScript INT8",
             },
             {
               step: "04",
-              title: "ACT",
-              target: "FIELD DECISION",
-              desc: "The beekeeper receives a clear, calm notification specifying the exact anomaly and recommended action.",
-              hardware: "LoRaWAN IN865 • Field App HUD",
+              title: "ALERT",
+              target: "FIELD CONSOLE",
+              desc: "The beekeeper receives hive ID, diagnostic cause, and exact field protocol.",
+              hardware: "Sub-GHz LoRa • Field App",
             },
           ].map((s) => (
             <div
               key={s.step}
-              className="bg-[#12151e] border border-[#222632] p-6 rounded-sm space-y-4 flex flex-col justify-between"
+              className="bg-[#12151e] border border-[#222738] p-6 rounded-sm space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-2">
                 <div className="text-2xl font-mono font-bold text-[#f0b840]">{s.step}</div>
                 <div className="text-[10px] font-mono text-[#8a90a0] uppercase font-bold tracking-wider">{s.target}</div>
-                <h3 className="text-lg font-bold text-[#f4f4f6] font-sans">{s.title}</h3>
+                <h3 className="text-lg font-bold text-white font-sans">{s.title}</h3>
                 <p className="text-xs text-[#8a90a0] font-mono leading-relaxed">{s.desc}</p>
               </div>
 
-              <div className="pt-3 border-t border-[#1e2330] text-[10px] font-mono text-[#8a90a0]">
+              <div className="pt-3 border-t border-[#181c28] text-[10px] font-mono text-zinc-400">
                 {s.hardware}
               </div>
             </div>
@@ -74,31 +73,31 @@ export function Section03TheIntelligence() {
         </div>
 
         {/* Dual-Tier Architecture Comparison */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#12151e] border border-[#222632] p-6 sm:p-8 rounded-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#12151e] border border-[#222738] p-6 sm:p-8 rounded-sm">
           
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#f0b840]" />
-              <span className="text-xs font-mono font-bold text-[#f4f4f6] uppercase">TIER 1: FIELD NODE (TINYML)</span>
+              <span className="text-xs font-mono font-bold text-white uppercase">TIER 1: FIELD NODE (TINYML)</span>
             </div>
             <p className="text-xs font-mono text-[#8a90a0] leading-relaxed">
-              Executes lightweight 1D-CNN inference directly on the Nordic nRF52840 microcontroller. Classifies raw 24-bit audio frames into nominal, queen transition, and swarm roar states in 1.12 ms with 2.0µA sleep current.
+              Runs 1D-CNN inference directly on the Nordic nRF52840. Classifies audio frames into nominal, queenless, and pre-swarm states in 1.12 ms. Draws 2.0 µA in sleep.
             </p>
-            <div className="text-[10px] font-mono text-[#8a90a0]">
-              Latency: <strong className="text-[#f4f4f6]">1.12 ms</strong> • Memory: <strong className="text-[#f4f4f6]">48 KB SRAM</strong> • Power: <strong className="text-[#2ea043]">2.0µA Sleep</strong>
+            <div className="text-[10px] font-mono text-zinc-400">
+              Benchmark Latency: <strong className="text-white">1.12 ms</strong> • Memory: <strong className="text-white">48 KB SRAM</strong> • Power: <strong className="text-[#2ea043]">2.0 µA SoC Sleep</strong>
             </div>
           </div>
 
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#8a90a0]" />
-              <span className="text-xs font-mono font-bold text-[#f4f4f6] uppercase">TIER 2: CM4 GATEWAY (NEURAL FUSION)</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#06b6d4]" />
+              <span className="text-xs font-mono font-bold text-white uppercase">TIER 2: CM4 GATEWAY (LOCAL FUSION)</span>
             </div>
             <p className="text-xs font-mono text-[#8a90a0] leading-relaxed">
-              Consolidates multi-hive telemetry across the LoRa mesh. Runs quantized INT8 CNN-LSTM models and CUSUM drift algorithms over a local SQLite database, generating apiary-wide risk matrices without cloud round-trips.
+              Aggregates yard data over sub-GHz LoRa. Runs INT8 models and CUSUM drift calculations against local SQLite. Generates yard triage tables without cloud servers.
             </p>
-            <div className="text-[10px] font-mono text-[#8a90a0]">
-              Latency: <strong className="text-[#f4f4f6]">8.20 ms</strong> • Model: <strong className="text-[#f4f4f6]">INT8 TorchScript</strong> • OS: <strong className="text-[#f4f4f6]">Debian 64-bit OverlayFS</strong>
+            <div className="text-[10px] font-mono text-zinc-400">
+              Model Format: <strong className="text-white">INT8 TorchScript</strong> • Storage: <strong className="text-white">SQLite WAL</strong> • OS: <strong className="text-white">Debian 64-bit OverlayFS</strong>
             </div>
           </div>
 

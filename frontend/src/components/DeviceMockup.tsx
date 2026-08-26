@@ -10,11 +10,11 @@ import {
 import { DecryptedText, ShinyText } from "@/components/reactbits";
 
 interface DeviceMockupProps {
-  screen: "triage" | "fft" | "radar" | "nfc" | "provenance" | "mesh";
+  screen?: "triage" | "fft" | "radar" | "nfc" | "provenance" | "mesh";
   className?: string;
 }
 
-export function DeviceMockup({ screen, className = "" }: DeviceMockupProps) {
+export function DeviceMockup({ screen = "triage", className = "" }: DeviceMockupProps) {
   return (
     <div
       className={`relative w-[280px] sm:w-[320px] h-[580px] sm:h-[640px] bg-[#000000] border-[6px] border-[#262626] rounded-[48px] shadow-2xl overflow-hidden flex flex-col justify-between select-none ${className}`}

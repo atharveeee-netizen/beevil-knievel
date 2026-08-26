@@ -1068,25 +1068,25 @@ export default function MobileFieldAgritechApp() {
           ==================================================================== */}
       <div className={`w-full transition-all duration-300 relative flex flex-col ${
         viewMode === "PHONE_FRAME"
-          ? "max-w-[440px] h-[930px] max-h-[96vh] rounded-[48px] border-[8px] border-[#262626] shadow-[0_25px_80px_rgba(0,0,0,0.95),0_0_60px_rgba(245,158,11,0.2)] overflow-hidden bg-[#161616]"
-          : "max-w-4xl min-h-[850px] rounded-3xl border border-[#393939] shadow-2xl bg-[#161616] overflow-hidden"
+          ? "w-full min-h-screen md:min-h-0 md:max-w-[440px] md:h-[930px] md:max-h-[96vh] rounded-none md:rounded-[48px] border-0 md:border-[8px] md:border-[#262626] md:shadow-[0_25px_80px_rgba(0,0,0,0.95),0_0_60px_rgba(245,158,11,0.2)] overflow-hidden bg-[#161616]"
+          : "max-w-4xl min-h-[850px] rounded-none md:rounded-3xl border-0 md:border md:border-[#393939] shadow-2xl bg-[#161616] overflow-hidden"
       }`}>
 
         {/* ------------------------------------------------------------------
-            PHONE STATUS BAR (5G LoRa 915MHz • PDR 99.8% • Battery 98%)
+            PHONE STATUS BAR (LoRa 915MHz • PDR 99.8% • Battery 98%)
             ------------------------------------------------------------------ */}
         <div className="bg-[#262626]/95 backdrop-blur-md pt-3 px-6 pb-2.5 flex items-center justify-between text-[11px] font-mono font-bold text-[#c6c6c6] z-30 border-b border-[#393939] select-none">
           <div className="flex items-center gap-1.5">
             <span className="text-white font-extrabold text-xs">14:20</span>
             <span className="text-[9px] bg-amber-500/15 text-amber-400 border border-amber-500/30 px-1.5 py-0.2 rounded-md font-bold">
-              <ShinyText text="5G LoRa 915MHz" speed={3} className="text-[9px]" />
+              <ShinyText text="LoRa 915 MHz • Ch 0" speed={3} className="text-[9px]" />
             </span>
           </div>
 
           {/* Dynamic Island / Speaker Notch in Phone Frame Mode */}
           {viewMode === "PHONE_FRAME" && (
-            <div className="w-24 h-4 bg-black rounded-full flex items-center justify-center gap-1.5 px-2 border border-[#393939] shadow-inner">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#525252]" />
+            <div className="hidden md:flex w-24 h-4 bg-black rounded-full items-center justify-center gap-1.5 px-2 border border-[#393939] shadow-inner">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#8d8d8d]" />
               <span className="w-3 h-1 bg-[#393939] rounded-full" />
             </div>
           )}
