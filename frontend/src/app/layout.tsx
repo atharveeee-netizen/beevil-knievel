@@ -2,21 +2,21 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Beevil Knievel — Edge AI Hive Health & Pathology System",
+  title: "BEEVIL KNIEVEL — Cyber-Physical Apiculture & Edge AI Telemetry",
   description:
-    "Autonomous Edge-AI Environmental & Acoustic Health Monitoring System for Precision Apiculture. Powered by Antmicro CM4 Gateway, 16 Multi-Sensor Telemetry Fusion, and 96.84% Out-of-Sample Accuracy.",
+    "Autonomous Cyber-Physical Apiculture & Edge-AI Hive Health Telemetry Fusion Array. Antmicro CM4 Gateway, LoRaWAN IN865 Multi-Hop Mesh, and Cryptographic Honey Chain Ledger.",
   openGraph: {
-    title: "Beevil Knievel — Edge AI Hive Health & Pathology System",
+    title: "BEEVIL KNIEVEL — Cyber-Physical Apiculture & Edge AI Telemetry",
     description:
-      "Autonomous Edge-AI Environmental & Acoustic Health Monitoring System for Precision Apiculture. IEEE HardwAIre Challenge Master Standard.",
-    siteName: "Beevil Knievel",
+      "Autonomous Cyber-Physical Apiculture & Edge-AI Hive Health Telemetry Fusion Array. Antmicro CM4 Gateway, LoRaWAN IN865 Multi-Hop Mesh.",
+    siteName: "BEEVIL KNIEVEL",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Beevil Knievel — Edge AI Hive Health & Pathology System",
+    title: "BEEVIL KNIEVEL — Cyber-Physical Apiculture & Edge AI Telemetry",
     description:
-      "Autonomous Edge-AI Environmental & Acoustic Health Monitoring System for Precision Apiculture.",
+      "Autonomous Cyber-Physical Apiculture & Edge-AI Hive Health Telemetry Fusion Array.",
   },
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased dark">
-      <body className="min-h-full flex flex-col font-sans bg-[#090d16] text-slate-100 selection:bg-amber-500 selection:text-slate-950">
+      <body className="min-h-full flex flex-col font-sans bg-[#070a12] text-[#f8fafc] selection:bg-[#f59e0b] selection:text-[#070a12]">
         {children}
       </body>
     </html>

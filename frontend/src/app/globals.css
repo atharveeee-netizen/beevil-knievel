@@ -54,10 +54,11 @@
   --font-roobert: 'Roobert', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   
-  --color-canvas: #090d16;
-  --color-canvas-elevated: #0f172a;
-  --color-canvas-card: #131d31;
-  --color-border-subtle: rgba(51, 65, 85, 0.45);
+  --color-canvas: #070a12;
+  --color-canvas-elevated: #0b0f19;
+  --color-canvas-card: #0f172a;
+  --color-border-subtle: rgba(255, 255, 255, 0.1);
+  --color-border-slate: rgba(30, 41, 59, 0.8);
   --color-border-accent: rgba(245, 158, 11, 0.35);
   
   --color-amber-primary: #f59e0b;
@@ -67,17 +68,21 @@
   --color-emerald-glow: rgba(16, 185, 129, 0.15);
   --color-cyan-telemetry: #06b6d4;
   
+  --color-titanium-white: #f8fafc;
+  --color-brushed-zinc: #94a3b8;
+  
   --color-brand-yellow: #f59e0b;
   --color-device-yellow: #fbbf24;
-  --color-screen-black: #0c1220;
-  --color-screen-white: #e2e8f0;
+  --color-screen-black: #070a12;
+  --color-screen-white: #f8fafc;
 }
 
 :root {
-  --canvas-bg: #090d16;
-  --canvas-surface: #0f172a;
-  --canvas-card: #131d31;
-  --border-glass: rgba(51, 65, 85, 0.5);
+  --canvas-bg: #070a12;
+  --canvas-surface: #0b0f19;
+  --canvas-card: #0f172a;
+  --border-glass: rgba(255, 255, 255, 0.1);
+  --border-slate: rgba(30, 41, 59, 0.8);
   --border-active: rgba(245, 158, 11, 0.4);
   --amber-accent: #f59e0b;
   --amber-bright: #fbbf24;
@@ -91,7 +96,7 @@
 html {
   scroll-behavior: smooth;
   font-family: 'Roobert', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #090d16;
+  background-color: #070a12;
   color: #f8fafc;
   overflow-x: hidden;
   color-scheme: dark;
@@ -102,43 +107,43 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: #090d16;
+  background-color: #070a12;
   color: #f8fafc;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* ==========================================================================
-   Enterprise Industrial Glassmorphism & Canvas Utilities
+   Precision Industrial Obsidian Glass & Panels
    ========================================================================== */
 
 .glass-panel {
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(11, 15, 25, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(51, 65, 85, 0.55);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
 }
 
 .glass-panel-interactive {
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(11, 15, 25, 0.8);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(51, 65, 85, 0.55);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-interactive:hover {
-  background: rgba(19, 29, 49, 0.85);
-  border-color: rgba(245, 158, 11, 0.35);
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.7), 0 0 20px -4px rgba(245, 158, 11, 0.12);
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.8), 0 0 20px -4px rgba(245, 158, 11, 0.15);
   transform: translateY(-2px);
 }
 
 .industrial-card {
-  background: linear-gradient(180deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.85) 100%);
-  border: 1px solid rgba(51, 65, 85, 0.5);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.7) 0%, rgba(7, 10, 18, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.75rem;
   position: relative;
   overflow: hidden;
@@ -154,7 +159,16 @@ body {
   background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.4), transparent);
 }
 
-/* Precision Subtle Amber & Status Glows */
+/* Hairline Borders */
+.border-hairline {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.border-hairline-slate {
+  border: 1px solid rgba(30, 41, 59, 0.8);
+}
+
+/* Precision Amber & Hardware Status Accents */
 .glow-amber-sm {
   box-shadow: 0 0 15px -3px rgba(245, 158, 11, 0.25);
 }
@@ -187,46 +201,52 @@ body {
 }
 
 .radar-radial {
-  background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0) 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.08) 0%, rgba(7, 10, 18, 0) 70%);
 }
 
-/* Precision Typography & Numerical Readouts */
+/* Precision Typography & Numerical Telemetry Readouts */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1, "ss01" 1;
+  font-feature-settings: "tnum" 1, "ss01" 1, "zero" 1;
+}
+
+.telemetry-readout {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+  letter-spacing: -0.01em;
 }
 
 .text-gradient-amber {
-  background: linear-gradient(135deg, #ffffff 0%, #fbbf24 60%, #d97706 100%);
+  background: linear-gradient(135deg, #f8fafc 0%, #fbbf24 60%, #d97706 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-silver {
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 60%, #94a3b8 100%);
+  background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 60%, #94a3b8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* ==========================================================================
-   Enterprise Industrial Navigation & Action Buttons
+   Industrial Action Buttons & Controls
    ========================================================================== */
 
-/* Primary Command Action Button */
 .btn-command-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
-  color: #090d16;
+  background: #f59e0b;
+  color: #070a12;
   font-weight: 700;
   font-size: 0.875rem;
   letter-spacing: 0.025em;
   padding: 0.55rem 1.25rem;
   border-radius: 9999px;
-  border: 1px solid rgba(254, 243, 199, 0.3);
-  box-shadow: 0 4px 14px -2px rgba(245, 158, 11, 0.35), 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid #fbbf24;
+  box-shadow: 0 4px 14px -2px rgba(245, 158, 11, 0.35);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   cursor: pointer;
@@ -234,7 +254,7 @@ body {
 }
 
 .btn-command-primary:hover {
-  background: linear-gradient(135deg, #fde68a 0%, #fbbf24 50%, #f59e0b 100%);
+  background: #fbbf24;
   box-shadow: 0 6px 20px -2px rgba(245, 158, 11, 0.5), 0 0 12px rgba(251, 191, 36, 0.35);
   transform: translateY(-1px);
 }
@@ -244,19 +264,18 @@ body {
   box-shadow: 0 2px 8px -2px rgba(245, 158, 11, 0.3);
 }
 
-/* Secondary Matte Industrial Button */
 .btn-command-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: rgba(30, 41, 59, 0.8);
+  background: rgba(15, 23, 42, 0.85);
   color: #f8fafc;
   font-weight: 600;
   font-size: 0.875rem;
   padding: 0.55rem 1.25rem;
   border-radius: 9999px;
-  border: 1px solid rgba(51, 65, 85, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   transition: all 0.2s ease;
   text-decoration: none;
@@ -264,28 +283,28 @@ body {
 }
 
 .btn-command-secondary:hover {
-  background: rgba(51, 65, 85, 0.9);
+  background: rgba(30, 41, 59, 0.9);
   border-color: rgba(245, 158, 11, 0.4);
   color: #fbbf24;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   transform: translateY(-1px);
 }
 
-/* Upgraded Sleek Mappings for Existing System Buttons */
+/* Backward-compatible Industrial System Controls */
 .btn-header-download {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #090d16;
+  background: #f59e0b;
+  color: #070a12;
   padding: 0.55rem 1.4rem;
   border-radius: 9999px;
   font-weight: 700;
   font-size: 0.875rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  border: 1px solid rgba(254, 243, 199, 0.4);
+  border: 1px solid #fbbf24;
   box-shadow: 0 4px 16px -2px rgba(245, 158, 11, 0.35);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
@@ -293,13 +312,9 @@ body {
 }
 
 .btn-header-download:hover {
-  background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%);
+  background: #fbbf24;
   box-shadow: 0 6px 22px -2px rgba(245, 158, 11, 0.5);
   transform: translateY(-1px);
-}
-
-.btn-header-download:active {
-  transform: translateY(1px);
 }
 
 .btn-order-purple {
@@ -307,22 +322,23 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-  color: #ffffff;
+  background: #0f172a;
+  color: #f8fafc;
   padding: 0.65rem 1.6rem;
   border-radius: 9999px;
   font-weight: 700;
   font-size: 1rem;
-  border: 1px solid rgba(199, 210, 254, 0.3);
-  box-shadow: 0 4px 16px -2px rgba(79, 70, 229, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.5);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   cursor: pointer;
 }
 
 .btn-order-purple:hover {
-  background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
-  box-shadow: 0 6px 24px -2px rgba(79, 70, 229, 0.55);
+  background: #1e293b;
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
   transform: translateY(-1px);
 }
 
@@ -331,13 +347,13 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #090d16;
+  background: #f59e0b;
+  color: #070a12;
   padding: 0.55rem 1.4rem;
   border-radius: 9999px;
   font-weight: 700;
   font-size: 0.925rem;
-  border: 1px solid rgba(254, 243, 199, 0.3);
+  border: 1px solid #fbbf24;
   box-shadow: 0 4px 14px -2px rgba(245, 158, 11, 0.3);
   transition: all 0.2s ease;
   text-decoration: none;
@@ -345,7 +361,7 @@ body {
 }
 
 .btn-pill-yellow:hover {
-  background: linear-gradient(135deg, #fde68a 0%, #fbbf24 100%);
+  background: #fbbf24;
   box-shadow: 0 6px 20px -2px rgba(245, 158, 11, 0.45);
   transform: translateY(-1px);
 }
@@ -361,7 +377,7 @@ body {
   border-radius: 9999px;
   font-weight: 600;
   font-size: 0.925rem;
-  border: 1px solid rgba(51, 65, 85, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease;
@@ -381,23 +397,70 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
-  color: #ffffff;
+  background: rgba(15, 23, 42, 0.9);
+  color: #f8fafc;
   padding: 0.55rem 1.4rem;
   border-radius: 9999px;
   font-weight: 700;
   font-size: 0.925rem;
-  border: 1px solid rgba(153, 246, 228, 0.3);
-  box-shadow: 0 4px 14px -2px rgba(13, 148, 136, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.4);
   transition: all 0.2s ease;
   text-decoration: none;
   cursor: pointer;
 }
 
 .btn-pill-aqua-dark:hover {
-  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
-  box-shadow: 0 6px 20px -2px rgba(13, 148, 136, 0.5);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
   transform: translateY(-1px);
+}
+
+/* Legacy beewise class mappings */
+.btn-beewise-main {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #f59e0b;
+  color: #070a12;
+  font-weight: 700;
+  padding: 0.6rem 1.4rem;
+  border-radius: 9999px;
+  border: 1px solid #fbbf24;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-beewise-main:hover {
+  background: #fbbf24;
+  transform: translateY(-1px);
+}
+
+.btn-beewise-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #f8fafc;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-beewise-outline:hover {
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+  transform: translateY(-1px);
+}
+
+.btn-beewise-small {
+  padding: 0.45rem 1rem;
+  font-size: 0.8125rem;
 }
 
 /* ==========================================================================
@@ -405,17 +468,17 @@ body {
    ========================================================================== */
 
 .playdate-screen {
-  background-color: #0c1220;
-  color: #e2e8f0;
-  border: 1px solid rgba(51, 65, 85, 0.6);
-  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  background-color: #070a12;
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .playdate-scanlines {
   background-image: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.25) 0px,
-    rgba(0, 0, 0, 0.25) 1px,
+    rgba(0, 0, 0, 0.3) 0px,
+    rgba(0, 0, 0, 0.3) 1px,
     transparent 1px,
     transparent 2px
   );
@@ -427,33 +490,33 @@ body {
 }
 
 .playdate-dither-dark {
-  background-image: radial-gradient(rgba(148, 163, 184, 0.2) 1px, transparent 0);
+  background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 0);
   background-size: 4px 4px;
 }
 
 .playdate-dpad-btn {
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-  border: 1px solid rgba(51, 65, 85, 0.8);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(180deg, #1e293b 0%, #0b0f19 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   transition: all 0.1s ease;
 }
 
 .playdate-dpad-btn:active {
   transform: translateY(1px);
-  background: #0f172a;
+  background: #070a12;
 }
 
 .playdate-action-btn {
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  background: linear-gradient(180deg, #1e293b 0%, #0b0f19 100%);
   color: #f59e0b;
-  border: 1px solid rgba(51, 65, 85, 0.8);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
   transition: all 0.1s ease;
 }
 
 .playdate-action-btn:active {
   transform: translateY(2px);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 /* Perspective & 3D Helpers */
@@ -475,7 +538,7 @@ body {
 }
 
 /* ==========================================================================
-   Ultra-Sleek Enterprise Industrial Scrollbar
+   Ultra-Thin 6px Industrial Scrollbar
    ========================================================================== */
 
 ::-webkit-scrollbar {
@@ -484,22 +547,22 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #070a12;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #1e293b;
-  border-radius: 9999px;
-  border: 1px solid rgba(51, 65, 85, 0.3);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #f59e0b;
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 6px rgba(245, 158, 11, 0.4);
 }
 
 /* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1e293b #090d16;
+  scrollbar-color: #1e293b #070a12;
 }

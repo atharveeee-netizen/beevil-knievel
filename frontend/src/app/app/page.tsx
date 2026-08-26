@@ -13,9 +13,11 @@ import {
   Scan, CheckCircle2, Navigation, Mic, MicOff,
   Flame, HelpCircle, ChevronDown, CheckCheck,
   RefreshCw, MapPin, Gauge, ShieldAlert,
-  Play, Square, Info
+  Play, Square, Info, Sliders, BatteryCharging,
+  Wifi, Bluetooth, CheckSquare, Eye
 } from "lucide-react";
 import { PlaydateConsole } from "@/components/PlaydateConsole";
+import { SpotlightCard, DecryptedText, CountUp, ShinyText, StarBorder, TiltedCard } from "@/components/reactbits";
 
 /* ============================================================================
    TYPES & TELEMETRY DEFINITIONS
@@ -36,7 +38,7 @@ export interface FrameThermal {
 export interface GasPlume {
   scd41Co2Ppm: number;
   bme688VocKohm: number;
-  isopentylAcetateIndex: number; // Alarm pheromone level (0-100)
+  isopentylAcetateIndex: number; // Alarm pheromone index (0-100)
   humidityRh: number;
   pressureHpa: number;
   ventilationStatus: "OPTIMAL" | "FANNING_ACTIVE" | "ANOXIA_WARNING";
@@ -87,7 +89,7 @@ export interface HiveNode {
 }
 
 /* ============================================================================
-   100-HIVE FLEET GENERATOR (Yard Alpha 1-50, Yard Beta 51-100)
+   100-HIVE FLEET TELEMETRY GENERATOR (Yard Alpha 1-50, Yard Beta 51-100)
    ============================================================================ */
 
 function generateFleetTelemetry(): HiveNode[] {
@@ -105,7 +107,7 @@ function generateFleetTelemetry(): HiveNode[] {
     let deltaWeightKg = +(0.65 + ((id % 7) * 0.12)).toFixed(2);
     let tiltAngleDeg = 0.8 + ((id % 5) * 0.2);
     
-    // Thermal Profile
+    // Thermal Profile (TMP117 ±0.05°C)
     const frame1 = +(32.4 + ((id % 5) * 0.1)).toFixed(1);
     let frame2 = +(34.3 + ((id % 3) * 0.1)).toFixed(1);
     let frame3 = +(35.2 + ((id % 4) * 0.08)).toFixed(1);
@@ -114,7 +116,7 @@ function generateFleetTelemetry(): HiveNode[] {
     let cusumScore = +(0.15 + ((id % 5) * 0.05)).toFixed(2);
     let cusumDriftStatus: FrameThermal["cusumDriftStatus"] = "STABLE_HOMEOSTASIS";
 
-    // Gas Profile
+    // Gas Profile (SCD41 & BME688)
     let scd41Co2 = 1150 + ((id * 23) % 300);
     let bme688Voc = 145 + ((id * 11) % 40);
     let isopentylAcetate = 12 + (id % 8);
@@ -125,7 +127,7 @@ function generateFleetTelemetry(): HiveNode[] {
     let recommendedAction: string | undefined;
 
     // --- ANOMALOUS HIVES FOR TRIAGE ENGINE ---
-    // 1. Hive #042 (Yard Alpha): Swarm Risk
+    // 1. Hive #042 (Yard Alpha): Swarm Risk (485 Hz)
     if (id === 42) {
       status = "PRE_SWARM";
       peakFrequencyHz = 485;
@@ -140,10 +142,10 @@ function generateFleetTelemetry(): HiveNode[] {
       isopentylAcetate = 58;
       ventilationStatus = "FANNING_ACTIVE";
       deltaWeightKg = -0.15;
-      urgencyReason = "485 Hz queen piping detected + Brood pre-heating (+2.45°C CUSUM drift). Estimated swarm departure within 18 hours.";
+      urgencyReason = "485 Hz virgin queen piping detected + Brood pre-heating (+2.45°C CUSUM drift). Estimated swarm departure within 18 hours.";
       recommendedAction = "Perform immediate hive split or Demaree swarm manipulation. Inspect frames 2 & 4 for queen swarm cells.";
     }
-    // 2. Hive #015 (Yard Alpha): Queen Piping / Failure
+    // 2. Hive #015 (Yard Alpha): Queen Loss / Failure (285 Hz)
     else if (id === 15) {
       status = "QUEEN_FAILURE";
       peakFrequencyHz = 285;
@@ -160,7 +162,7 @@ function generateFleetTelemetry(): HiveNode[] {
       urgencyReason = "Queenless acoustic roar at 285 Hz with brood chill risk (33.1°C core). High alarm pheromone detected (74/100).";
       recommendedAction = "Verify queen presence or introduce mated caged queen. Check for emergency supersedure cups.";
     }
-    // 3. Hive #073 (Yard Beta): Varroa Mite Surge
+    // 3. Hive #073 (Yard Beta): Varroa Surge (5.4%)
     else if (id === 73) {
       status = "VARROA_SURGE";
       peakFrequencyHz = 340;
@@ -172,10 +174,10 @@ function generateFleetTelemetry(): HiveNode[] {
       bme688Voc = 82;
       isopentylAcetate = 44;
       deltaWeightKg = +0.18;
-      urgencyReason = "Varroa density critical at 5.4 mites/100 bees (threshold 3.0). High frequency grooming agitation (340 Hz).";
+      urgencyReason = "Varroa density critical at 5.4 mites/100 bees (economic injury threshold 3.0). High-frequency grooming agitation (340 Hz).";
       recommendedAction = "Apply immediate formic acid flash vapor or thymol treatment pad. Screen bottom board count in 48 hrs.";
     }
-    // 4. Hive #088 (Yard Beta): Tilt / Tamper Alert
+    // 4. Hive #088 (Yard Beta): Tilt / Tamper Alert (14.2°)
     else if (id === 88) {
       status = "TAMPER";
       peakFrequencyHz = 390;
@@ -272,7 +274,7 @@ function generate128PointFft(centerPeakHz: number, hiveStatus: HiveStatus): { fr
   return Array.from({ length: bins }, (_, i) => {
     const freqHz = Math.round(minFreq + i * freqStep);
     
-    // Background 1/f pink noise floor (-75 to -60 dB)
+    // Background pink noise floor (-75 to -60 dB)
     let magnitudeDb = -65 - 8 * Math.log10(freqHz / 100) + Math.sin(i * 0.4) * 2.5;
 
     // Queen Right Fundamental (220-250 Hz)
@@ -312,7 +314,7 @@ function generate128PointFft(centerPeakHz: number, hiveStatus: HiveStatus): { fr
 }
 
 /* ============================================================================
-   MAIN COMPONENT: MOBILE-FIRST FIELD AGRITECH APP
+   MAIN COMPONENT: ZERO-SLOP MOBILE FIELD APPLICATION
    ============================================================================ */
 
 export default function MobileFieldAgritechApp() {
@@ -334,16 +336,19 @@ export default function MobileFieldAgritechApp() {
   // Triage filter: show only anomalous or all
   const [triageFilter, setTriageFilter] = useState<"ANOMALOUS_ONLY" | "ALL">("ANOMALOUS_ONLY");
 
-  // Web Audio Synthesizer State
+  // Web Audio Synthesizer State (Harmonic Bee Tone Synthesizer)
   const [audioToneActive, setAudioToneActive] = useState<boolean>(false);
   const [activeToneFreq, setActiveToneFreq] = useState<number | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
-  const oscRef = useRef<OscillatorNode | null>(null);
+  const osc1Ref = useRef<OscillatorNode | null>(null);
+  const osc2Ref = useRef<OscillatorNode | null>(null);
+  const gainNodeRef = useRef<GainNode | null>(null);
 
   // Web Speech API Voice Synthesizer State
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
+  const [speechRate, setSpeechRate] = useState<number>(1.05);
 
-  // NFC & QR Scanner State
+  // NFC & Laser QR Scanner State
   const [isScanningNfc, setIsScanningNfc] = useState<boolean>(false);
   const [scannedHiveResult, setScannedHiveResult] = useState<HiveNode | null>(null);
   const [scanSuccessAnim, setScanSuccessAnim] = useState<boolean>(false);
@@ -351,7 +356,7 @@ export default function MobileFieldAgritechApp() {
   // Compass Navigation Modal State
   const [navTargetHive, setNavTargetHive] = useState<HiveNode | null>(null);
 
-  // Honey Chain Jar Modal
+  // Honey Chain Jar Certificate Modal State
   const [isJarCertOpen, setIsJarCertOpen] = useState<boolean>(false);
   const [isCopiedHash, setIsCopiedHash] = useState<boolean>(false);
 
@@ -359,7 +364,7 @@ export default function MobileFieldAgritechApp() {
   const [chatMessages, setChatMessages] = useState<Array<{ role: "user" | "gemma"; text: string; time: string }>>([
     {
       role: "gemma",
-      text: "⚡ HiveOS Edge Gemma-2B SLM online. I am monitoring all 100 hives across Yard Alpha and Beta. Hive #042 requires immediate swarm mitigation. Tap 'Read Voice Briefing' or speak any question.",
+      text: "⚡ HiveOS Edge Gemma-2B SLM online. Monitoring 100 hives across Yard Alpha & Yard Beta. 4 hives require immediate attention. Tap 'Voice Debrief' or select a protocol below for audible field instructions.",
       time: "14:20:00"
     }
   ]);
@@ -367,7 +372,7 @@ export default function MobileFieldAgritechApp() {
   const [isGemmaThinking, setIsGemmaThinking] = useState<boolean>(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  // Frame presentation toggle (Desktop Phone Frame Bezel vs Full Wide Screen)
+  // Frame presentation toggle (Desktop Phone Frame Bezel vs Full Canvas)
   const [viewMode, setViewMode] = useState<"PHONE_FRAME" | "FULL_WIDTH">("PHONE_FRAME");
 
   // Selected Hive object
@@ -391,66 +396,96 @@ export default function MobileFieldAgritechApp() {
     return generate128PointFft(selectedFreq, currentHive.status);
   }, [selectedFreq, currentHive.status]);
 
-  // Web Audio Tone Synthesis
+  // Stop audio synthesis helper
+  const stopAudio = useCallback(() => {
+    if (osc1Ref.current) {
+      try {
+        osc1Ref.current.stop();
+        osc1Ref.current.disconnect();
+      } catch {}
+      osc1Ref.current = null;
+    }
+    if (osc2Ref.current) {
+      try {
+        osc2Ref.current.stop();
+        osc2Ref.current.disconnect();
+      } catch {}
+      osc2Ref.current = null;
+    }
+    if (audioCtxRef.current) {
+      try {
+        audioCtxRef.current.close();
+      } catch {}
+      audioCtxRef.current = null;
+    }
+    setAudioToneActive(false);
+    setActiveToneFreq(null);
+  }, []);
+
+  // Web Audio Tone Synthesis (Fundamental + First Harmonic for realistic bee cluster sound)
   const toggleAudioTone = useCallback((freq?: number) => {
     const targetFreq = freq || currentHive.peakFrequencyHz;
     
-    if (audioToneActive) {
-      if (oscRef.current) {
-        try {
-          oscRef.current.stop();
-          oscRef.current.disconnect();
-        } catch {
-          // ignore
-        }
-      }
-      setAudioToneActive(false);
-      setActiveToneFreq(null);
+    if (audioToneActive && activeToneFreq === targetFreq) {
+      stopAudio();
     } else {
+      stopAudio();
       try {
         const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
         const ctx = new AudioCtx();
         audioCtxRef.current = ctx;
 
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
+        // Primary fundamental oscillator (Sawtooth for bee buzzing texture)
+        const osc1 = ctx.createOscillator();
+        osc1.type = "sawtooth";
+        osc1.frequency.setValueAtTime(targetFreq, ctx.currentTime);
 
-        osc.type = "sawtooth";
-        osc.frequency.setValueAtTime(targetFreq, ctx.currentTime);
-        gain.gain.setValueAtTime(0.09, ctx.currentTime);
+        // Secondary harmonic oscillator (Sine at 2x frequency for rich body)
+        const osc2 = ctx.createOscillator();
+        osc2.type = "sine";
+        osc2.frequency.setValueAtTime(targetFreq * 2, ctx.currentTime);
 
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
+        // Low-pass filter to smooth harsh highs
+        const filter = ctx.createBiquadFilter();
+        filter.type = "lowpass";
+        filter.frequency.setValueAtTime(1400, ctx.currentTime);
 
-        oscRef.current = osc;
+        const gainNode = ctx.createGain();
+        gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
+
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(ctx.destination);
+
+        osc1.start();
+        osc2.start();
+
+        osc1Ref.current = osc1;
+        osc2Ref.current = osc2;
+        gainNodeRef.current = gainNode;
         setAudioToneActive(true);
         setActiveToneFreq(targetFreq);
       } catch (err) {
         console.warn("Audio init failed:", err);
       }
     }
-  }, [audioToneActive, currentHive.peakFrequencyHz]);
+  }, [audioToneActive, activeToneFreq, currentHive.peakFrequencyHz, stopAudio]);
 
+  // Clean up audio & speech on unmount
   useEffect(() => {
     return () => {
-      if (oscRef.current) {
-        try {
-          oscRef.current.stop();
-        } catch {
-          // ignore
-        }
-      }
+      stopAudio();
       if (typeof window !== "undefined" && window.speechSynthesis) {
         window.speechSynthesis.cancel();
       }
     };
-  }, []);
+  }, [stopAudio]);
 
-  // Web Speech API Voice Debrief
+  // Web Speech API Voice Debriefing
   const speakText = (text: string) => {
     if (typeof window === "undefined" || !("speechSynthesis" in window)) {
-      alert("Web Speech API not supported on this browser.");
+      alert("Web Speech API is not supported on this browser.");
       return;
     }
 
@@ -462,7 +497,7 @@ export default function MobileFieldAgritechApp() {
 
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1.05;
+    utterance.rate = speechRate;
     utterance.pitch = 1.0;
     
     utterance.onstart = () => {
@@ -487,7 +522,7 @@ export default function MobileFieldAgritechApp() {
     }
   };
 
-  // Mark Hive Inspected Toggle
+  // Mark Hive Inspected Toggle (Glove Friendly 1-Tap Action)
   const toggleInspectHive = (id: number, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     setInspectedHiveIds((prev) => {
@@ -498,12 +533,13 @@ export default function MobileFieldAgritechApp() {
     });
   };
 
-  // Trigger NFC / QR Scan Simulation
+  // 1-Tap NFC & Laser QR Scanner Simulator (Instant 0.1s tag lock-on)
   const handleSimulateNfcScan = (targetHiveId?: number) => {
     setIsScanningNfc(true);
     setScannedHiveResult(null);
     setScanSuccessAnim(false);
 
+    // Instant 100ms (0.1s) tag lock-on
     setTimeout(() => {
       const matched = targetHiveId
         ? fleet.find((h) => h.id === targetHiveId) || fleet[0]
@@ -513,10 +549,10 @@ export default function MobileFieldAgritechApp() {
       setIsScanningNfc(false);
       setScanSuccessAnim(true);
       setSelectedHiveId(matched.id);
-    }, 1200);
+    }, 120);
   };
 
-  // Gemma Chat Dispatch
+  // SLM Gemma-2B Chat Dispatch
   const handleSendGemmaMessage = (customPrompt?: string) => {
     const query = customPrompt || chatInput;
     if (!query.trim()) return;
@@ -531,21 +567,23 @@ export default function MobileFieldAgritechApp() {
       const q = query.toLowerCase();
 
       if (q.includes("swarm") || q.includes("42") || q.includes("485")) {
-        reply = `🐝 **Swarm Mitigation Protocol for Hive #042**:\n1. **Diagnostic**: 485 Hz piping buzz detected + 36.8°C core brood nest pre-heating with positive CUSUM drift (+2.45).\n2. **Immediate Action**: Perform a Pagden / Demaree split or remove queen with 2 brood frames to a 5-frame nuc box.\n3. **Add Supers**: Place 2 drawn wax supers above queen excluder to alleviate congestion.`;
+        reply = `🐝 **Swarm Mitigation Protocol for Hive #042**:\n1. **Acoustic Signature**: 485 Hz virgin queen piping + brood nest pre-heating (+2.45°C CUSUM drift).\n2. **Immediate Action**: Perform a Pagden / Demaree split. Remove queen with 2 brood frames to a 5-frame nuc box.\n3. **Relief Supers**: Place 2 drawn wax supers above queen excluder to alleviate congestion immediately.`;
       } else if (q.includes("varroa") || q.includes("73") || q.includes("mite")) {
-        reply = `🔬 **Varroa Surge Protocol for Hive #073**:\n1. **Diagnostic**: 5.4 mites / 100 bees (threshold is 3.0%). Agitation buzz at 340 Hz.\n2. **Immediate Action**: Apply Formic Pro (2 strips) or Apivar amitraz strips if daytime temps allow.\n3. **Follow-up**: Re-test natural mite fall count on bottom inspection board in 48 hours.`;
+        reply = `🔬 **Varroa Surge Protocol for Hive #073**:\n1. **Diagnostic Load**: 5.4 mites / 100 bees (economic injury threshold is 3.0%). Agitation buzz at 340 Hz.\n2. **Immediate Action**: Apply Formic Pro (2 strips) or Apivar amitraz strips if ambient temp < 30°C.\n3. **Follow-up**: Re-test natural mite drop count on bottom sticky board in 48 hours.`;
       } else if (q.includes("queen") || q.includes("15") || q.includes("roar")) {
-        reply = `👑 **Queen Failure Protocol for Hive #015**:\n1. **Diagnostic**: 285 Hz queenless roar + brood nest cooling to 33.1°C with 74/100 alarm pheromone.\n2. **Immediate Action**: Inspect for emergency queen cells. Introduce a mated Italian/Carniolan queen in a candy-plugged introduction cage.`;
+        reply = `👑 **Queen Failure Protocol for Hive #015**:\n1. **Diagnostic**: 285 Hz queenless roar + brood nest chilling to 33.1°C with 74/100 alarm pheromone.\n2. **Immediate Action**: Inspect for emergency queen cells. Introduce a mated Italian/Carniolan queen in a candy-plugged cage.\n3. **Feed**: Supply 1:1 sugar syrup to stimulate nurse bee acceptance.`;
+      } else if (q.includes("tamper") || q.includes("88") || q.includes("tilt")) {
+        reply = `⚠️ **Tamper & Tilt Protocol for Hive #088**:\n1. **Diagnostic**: 14.2° stand displacement detected by onboard accelerometer + 390 Hz agitation vibration.\n2. **Immediate Action**: Relevel concrete hive stand base and secure heavy-duty ratchet strap.\n3. **Inspection**: Verify hive lid seal and entrance reducer alignment against predator intrusion.`;
       } else if (q.includes("debrief") || q.includes("summary") || q.includes("report")) {
-        reply = `📋 **Daily Apiary Field Summary**:\n- Total Active Fleet: 100 hives across Yard Alpha & Beta (100% online LoRa mesh).\n- Status: 96 Nominal, 4 Action Required (#042 Swarm, #015 Queen, #073 Varroa, #088 Tilt).\n- Daily Honey Flow: +48.2 kg total flux (+0.65 kg/hive avg).\n- Immediate Priority: Inspect Hive #042 in Yard Alpha first.`;
+        reply = `📋 **Daily Apiary Field Summary**:\n- Total Active Fleet: 100 hives across Yard Alpha & Yard Beta (100% online LoRa mesh).\n- Fleet Status: 96 Nominal, 4 Action Needed (#042 Swarm, #015 Queen, #073 Varroa, #088 Tilt).\n- Daily Honey Flow: +48.2 kg total flux (+0.65 kg/hive avg).\n- Priority Route: Start at Yard Alpha Node #042 immediately.`;
       } else {
-        reply = `⚡ **Gemma-2B On-Device AI**: Currently analyzing Hive #${currentHive.id} (${currentHive.apiaryZone}). Core Temp is ${currentHive.thermal.frame3CoreQueen}°C, Acoustic Peak is ${currentHive.peakFrequencyHz} Hz, and CO2 is ${currentHive.gas.scd41Co2Ppm} ppm. INT8 local engine executing at 8.2ms latency with 0 cloud dependencies.`;
+        reply = `⚡ **Gemma-2B On-Device AI**: Currently analyzing Hive #${currentHive.id} (${currentHive.apiaryZone}). Core Temperature is ${currentHive.thermal.frame3CoreQueen}°C, Peak Acoustic Tone is ${currentHive.peakFrequencyHz} Hz, and CO2 is ${currentHive.gas.scd41Co2Ppm} ppm. INT4 local engine executing at 8.2ms latency with zero cloud dependencies.`;
       }
 
       setChatMessages((prev) => [...prev, { role: "gemma", text: reply, time: new Date().toLocaleTimeString("en-US", { hour12: false }) }]);
       setIsGemmaThinking(false);
       setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
-    }, 400);
+    }, 280);
   };
 
   const copyBlockHash = (hash: string) => {
@@ -557,46 +595,59 @@ export default function MobileFieldAgritechApp() {
   };
 
   return (
-    <div className="min-h-screen bg-[#060911] text-slate-100 flex flex-col items-center justify-start selection:bg-amber-500/30 selection:text-amber-200 antialiased font-sans py-0 md:py-6 px-0 md:px-4">
+    <div className="min-h-screen bg-[#070a12] text-slate-100 flex flex-col items-center justify-start selection:bg-amber-500/30 selection:text-amber-200 antialiased font-sans py-0 md:py-6 px-0 md:px-4">
 
       {/* ====================================================================
-          TOP GLOBAL CONTROLS & DESKTOP TOOLBAR
+          TOP DESKTOP TOOLBAR & GLOBAL CONTROLS
           ==================================================================== */}
-      <header className="w-full max-w-5xl mb-2 sm:mb-4 px-3 sm:px-4 py-2 flex items-center justify-between border-b border-slate-800/60 text-xs font-mono text-slate-400">
+      <header className="w-full max-w-5xl mb-2 sm:mb-4 px-3 sm:px-4 py-2 flex items-center justify-between border-b border-slate-800/80 text-xs font-mono text-slate-400">
         <div className="flex items-center gap-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 bg-slate-900/90 hover:bg-amber-500 hover:text-slate-950 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-800 transition-all font-semibold"
+            className="inline-flex items-center gap-1.5 bg-[#0d1322] hover:bg-amber-500 hover:text-slate-950 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-800 transition-all font-semibold shadow-sm"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Landing Page</span>
           </Link>
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10b981]" />
             <span className="font-extrabold text-white text-sm tracking-tight font-sans">
-              HiveOS <span className="text-amber-400 text-xs font-mono px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">MOBILE FIELD EDITION</span>
+              Beevil Fleet <span className="text-amber-400 text-xs font-mono px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30">MOBILE FIELD APP</span>
             </span>
           </div>
         </div>
 
-        {/* Viewport Width Toggle & Quick Links */}
+        {/* Global Controls: Voice Stop Indicator & Frame Switcher */}
         <div className="flex items-center gap-2">
           {/* Hands-Free Voice Audio indicator if speaking */}
           {isSpeaking && (
             <button
               onClick={stopSpeech}
-              className="flex items-center gap-1.5 bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2.5 py-1 rounded-lg animate-pulse"
+              className="flex items-center gap-1.5 bg-rose-500/20 text-rose-300 border border-rose-500/40 px-3 py-1 rounded-xl animate-pulse font-bold shadow-md shadow-rose-500/20"
               title="Stop voice briefing"
             >
               <Square className="w-3 h-3 fill-current" />
-              <span className="text-[11px] font-bold">Speaking... (Stop)</span>
+              <span className="text-[11px]">Speaking... (Stop)</span>
             </button>
           )}
 
+          {/* Audio Synthesizer Global Mute Button */}
+          {audioToneActive && (
+            <button
+              onClick={() => stopAudio()}
+              className="flex items-center gap-1.5 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-xl animate-pulse font-bold shadow-md shadow-amber-500/20"
+              title="Mute active acoustic synthesizer"
+            >
+              <VolumeX className="w-3.5 h-3.5" />
+              <span className="text-[11px]">{activeToneFreq}Hz Mute</span>
+            </button>
+          )}
+
+          {/* Desktop Wide / Phone Frame Toggle */}
           <button
             onClick={() => setViewMode(viewMode === "PHONE_FRAME" ? "FULL_WIDTH" : "PHONE_FRAME")}
-            className="hidden md:flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 px-2.5 py-1 rounded-lg transition-all"
-            title="Toggle between Mobile Phone Frame container and Wide Field View"
+            className="hidden md:flex items-center gap-1.5 bg-[#0d1322] hover:bg-slate-800 text-slate-300 border border-slate-800 px-3 py-1.5 rounded-xl transition-all shadow-sm font-semibold"
+            title="Toggle between Mobile Phone Frame bezel and Wide Screen layout"
           >
             <Smartphone className="w-3.5 h-3.5 text-amber-400" />
             <span>{viewMode === "PHONE_FRAME" ? "Expand Canvas" : "Phone Frame"}</span>
@@ -609,34 +660,36 @@ export default function MobileFieldAgritechApp() {
           ==================================================================== */}
       <div className={`w-full transition-all duration-300 relative flex flex-col ${
         viewMode === "PHONE_FRAME"
-          ? "max-w-[430px] h-[920px] max-h-[96vh] rounded-[48px] border-[8px] border-slate-800/90 shadow-[0_25px_80px_rgba(0,0,0,0.8),0_0_40px_rgba(245,158,11,0.12)] overflow-hidden bg-[#090d16]"
-          : "max-w-4xl min-h-[850px] rounded-3xl border border-slate-800 shadow-2xl bg-[#090d16] overflow-hidden"
+          ? "max-w-[430px] h-[920px] max-h-[96vh] rounded-[48px] border-[8px] border-slate-800/95 shadow-[0_25px_80px_rgba(0,0,0,0.85),0_0_50px_rgba(245,158,11,0.12)] overflow-hidden bg-[#070a12]"
+          : "max-w-4xl min-h-[850px] rounded-3xl border border-slate-800 shadow-2xl bg-[#070a12] overflow-hidden"
       }`}>
 
         {/* ------------------------------------------------------------------
-            PHONE STATUS BAR (Time, Cellular, Wifi, Battery)
+            PHONE STATUS BAR (5G LoRa 915MHz, 98% Bat, PDR 99.8%)
             ------------------------------------------------------------------ */}
-        <div className="bg-[#090d16]/95 backdrop-blur-md pt-3 px-6 pb-2 flex items-center justify-between text-[11px] font-mono font-bold text-slate-400 z-30 border-b border-slate-800/40 select-none">
+        <div className="bg-[#090d16]/95 backdrop-blur-md pt-3 px-6 pb-2.5 flex items-center justify-between text-[11px] font-mono font-bold text-slate-400 z-30 border-b border-slate-800/60 select-none">
           <div className="flex items-center gap-1.5">
             <span className="text-white font-extrabold text-xs">14:20</span>
-            <span className="text-[9px] bg-amber-500/15 text-amber-400 border border-amber-500/30 px-1 rounded">LoRa 915M</span>
+            <span className="text-[9px] bg-amber-500/15 text-amber-400 border border-amber-500/30 px-1.5 py-0.2 rounded-md font-bold">
+              5G LoRa 915MHz
+            </span>
           </div>
 
           {/* Dynamic Island / Speaker Notch in Phone Frame Mode */}
           {viewMode === "PHONE_FRAME" && (
-            <div className="w-24 h-4 bg-slate-950 rounded-full flex items-center justify-center gap-1.5 px-2 border border-slate-800/50 shadow-inner">
+            <div className="w-24 h-4 bg-slate-950 rounded-full flex items-center justify-center gap-1.5 px-2 border border-slate-800/70 shadow-inner">
               <span className="w-1.5 h-1.5 rounded-full bg-slate-700" />
-              <span className="w-2.5 h-1 bg-slate-800 rounded-full" />
+              <span className="w-3 h-1 bg-slate-800 rounded-full" />
             </div>
           )}
 
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1 text-emerald-400">
+            <div className="flex items-center gap-1 text-emerald-400" title="Packet Delivery Ratio">
               <Radio className="w-3 h-3 animate-pulse" />
-              <span className="text-[10px]">99.8%</span>
+              <span className="text-[10px] font-bold">PDR 99.8%</span>
             </div>
-            <div className="flex items-center gap-0.5 text-slate-300">
-              <span className="text-[10px]">98%</span>
+            <div className="flex items-center gap-1 text-slate-300" title="LiFePO4 Battery Status">
+              <span className="text-[10px] font-bold">98%</span>
               <div className="w-4 h-2 border border-slate-400 rounded-sm p-0.5 flex items-center">
                 <div className="w-full h-full bg-emerald-400 rounded-2xs" />
               </div>
@@ -645,18 +698,18 @@ export default function MobileFieldAgritechApp() {
         </div>
 
         {/* ------------------------------------------------------------------
-            TOP MINI HEADER & YARD PILL SWITCHER
+            TOP MINI HEADER & QUICK VOICE BRIEFING TRIGGER
             ------------------------------------------------------------------ */}
-        <div className="bg-[#0f172a]/95 border-b border-slate-800/80 px-4 py-2.5 flex items-center justify-between z-20">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400">
+        <div className="bg-[#0d1322]/95 border-b border-slate-800/80 px-4 py-2.5 flex items-center justify-between z-20">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shadow-sm">
               <Activity className="w-4 h-4" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-white text-sm tracking-tight">Beevil Fleet</span>
                 <span className="text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.2 rounded-full font-bold">
-                  100 Nodes
+                  100 Hives Live
                 </span>
               </div>
               <p className="text-[10px] font-mono text-slate-400">
@@ -665,18 +718,18 @@ export default function MobileFieldAgritechApp() {
             </div>
           </div>
 
-          {/* Quick Voice Briefing Button */}
+          {/* Quick Hands-Free Voice Audio Debrief Button */}
           <button
             onClick={() => {
-              const summary = "Beevil Field Triage Audio Briefing: 96 hives nominal. 4 hives require immediate action. Hive 42 in Yard Alpha has swarm risk with 485 Hz piping buzz. Hive 15 shows queen failure and brood chill. Hive 73 in Yard Beta has 5.4 mites per 100 varroa surge. Hive 88 has 14 degree tilt alert.";
+              const summary = "Beevil Field Triage Audio Briefing: 96 hives nominal in full homeostasis. 4 hives require immediate action. In Yard Alpha: Hive 42 has critical pre-swarm risk with 485 Hz piping buzz. Hive 15 shows queen failure with 285 Hz roar. In Yard Beta: Hive 73 has a 5.4 percent Varroa mite surge. Hive 88 has a 14.2 degree tilt tamper alert.";
               speakText(summary);
             }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all border ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all border shadow-sm ${
               isSpeaking
                 ? "bg-amber-400 text-slate-950 border-amber-300 shadow-md shadow-amber-500/30 animate-pulse"
                 : "bg-slate-800/90 hover:bg-slate-700 text-amber-400 border-amber-500/30"
             }`}
-            title="Listen to Hands-Free Voice Audio Debrief"
+            title="Listen to Hands-Free Voice Audio Debrief (Web Speech API)"
           >
             {isSpeaking ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
             <span className="text-[11px]">{isSpeaking ? "Debriefing..." : "Voice Debrief"}</span>
@@ -695,7 +748,7 @@ export default function MobileFieldAgritechApp() {
             <div className="space-y-3.5 animate-in fade-in duration-150">
               
               {/* Executive Status Banner */}
-              <div className="bg-gradient-to-br from-[#1e293b] to-[#0f172a] border border-slate-700/80 rounded-2xl p-4 shadow-xl relative overflow-hidden">
+              <div className="bg-gradient-to-br from-[#111827] to-[#0b101b] border border-slate-700/80 rounded-2xl p-4 shadow-xl relative overflow-hidden">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold flex items-center gap-1.5">
                     <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />
@@ -707,25 +760,25 @@ export default function MobileFieldAgritechApp() {
                 </div>
 
                 <h2 className="text-lg font-extrabold text-white tracking-tight">
-                  All Clear: <span className="text-emerald-400">{nominalHives.length} Nominal</span> •{" "}
-                  <span className="text-rose-400">{anomalousHives.length} Action Needed</span>
+                  All Clear: <span className="text-emerald-400">96 Hives Nominal</span> •{" "}
+                  <span className="text-rose-400">4 Hives Action Needed</span>
                 </h2>
                 
-                <p className="text-xs text-slate-300 mt-1 font-mono">
-                  Zero manual tile hunting. Prioritized emergency feed for field beekeepers.
+                <p className="text-xs text-slate-300 mt-1 font-mono leading-relaxed">
+                  Farmer-First Exception Triage Feed: Zero manual tile hunting in the field.
                 </p>
 
-                {/* Progress bar */}
-                <div className="w-full bg-slate-900 rounded-full h-2 mt-3 overflow-hidden flex">
+                {/* Fleet Status Progress Bar */}
+                <div className="w-full bg-slate-900 rounded-full h-2.5 mt-3 overflow-hidden flex shadow-inner">
                   <div
                     className="bg-emerald-400 h-full transition-all duration-500"
                     style={{ width: `${(nominalHives.length / fleet.length) * 100}%` }}
-                    title="Nominal"
+                    title="Nominal Hives (96)"
                   />
                   <div
                     className="bg-amber-400 h-full transition-all duration-500"
                     style={{ width: `${(inspectedHiveIds.size / fleet.length) * 100}%` }}
-                    title="Inspected Action Items"
+                    title="Inspected Critical Items"
                   />
                   <div
                     className="bg-rose-500 h-full transition-all duration-500"
@@ -734,8 +787,8 @@ export default function MobileFieldAgritechApp() {
                   />
                 </div>
 
-                {/* Filter toggle */}
-                <div className="flex items-center gap-2 mt-3 pt-2 border-t border-slate-800/80">
+                {/* Filter toggle buttons */}
+                <div className="flex items-center gap-2 mt-3 pt-2.5 border-t border-slate-800/80">
                   <button
                     onClick={() => setTriageFilter("ANOMALOUS_ONLY")}
                     className={`flex-1 py-1.5 rounded-xl text-xs font-mono font-bold transition-all border text-center ${
@@ -763,7 +816,7 @@ export default function MobileFieldAgritechApp() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between px-1">
                   <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
-                    Priority Anomaly Cards
+                    Priority Anomaly Cards (Glove-Friendly)
                   </h3>
                   <span className="text-[10px] font-mono text-slate-500">Sorted by Severity</span>
                 </div>
@@ -786,7 +839,7 @@ export default function MobileFieldAgritechApp() {
                   } else if (hive.status === "VARROA_SURGE") {
                     badgeColor = "bg-rose-500/20 text-rose-300 border-rose-500/40";
                     cardBorder = "border-rose-500/40 hover:border-rose-400";
-                    badgeTitle = "🔬 VARROA LOAD (5.4 Mites)";
+                    badgeTitle = "🔬 VARROA LOAD (5.4%)";
                   } else if (hive.status === "TAMPER") {
                     badgeColor = "bg-purple-500/20 text-purple-300 border-purple-500/40";
                     cardBorder = "border-purple-500/40 hover:border-purple-400";
@@ -800,23 +853,25 @@ export default function MobileFieldAgritechApp() {
                         setSelectedHiveId(hive.id);
                         setIsInspectorOpen(true);
                       }}
-                      className={`bg-[#0f172a] border ${cardBorder} rounded-2xl p-4 shadow-xl transition-all cursor-pointer relative overflow-hidden group ${
-                        isInspected ? "opacity-75 border-emerald-500/40 bg-[#0f172a]/70" : ""
+                      className={`bg-[#0d1322] border ${cardBorder} rounded-2xl p-4 shadow-xl transition-all cursor-pointer relative overflow-hidden group ${
+                        isInspected ? "opacity-75 border-emerald-500/40 bg-[#0d1322]/70" : ""
                       }`}
                     >
                       {/* Top Row: Hive ID, Yard & Severity Badge */}
                       <div className="flex items-center justify-between gap-2 mb-2.5">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2.5">
                           <div className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center font-mono font-extrabold text-base text-amber-400 shadow-inner">
                             #{String(hive.id).padStart(3, "0")}
                           </div>
                           <div>
                             <div className="flex items-center gap-1.5">
                               <span className="font-extrabold text-white text-sm">{hive.yard}</span>
-                              <span className="text-[10px] font-mono text-slate-400">({hive.gpsDistanceMeters}m {hive.gpsBearingText})</span>
+                              <span className="text-[10px] font-mono text-amber-300 font-semibold">
+                                ({hive.gpsDistanceMeters}m {hive.gpsBearingText} {String(hive.gpsBearingDeg).padStart(3, "0")}°)
+                              </span>
                             </div>
                             <span className="text-[10px] font-mono text-slate-400">
-                              Synced {hive.lastPingSecAgo}s ago • Bat {hive.batteryPct}%
+                              Synced {hive.lastPingSecAgo}s ago • Bat {hive.batteryPct}% • RSSI {hive.rssi}dBm
                             </span>
                           </div>
                         </div>
@@ -827,13 +882,13 @@ export default function MobileFieldAgritechApp() {
                       </div>
 
                       {/* Diagnostic Urgency Text */}
-                      <div className="bg-[#090d16] rounded-xl p-3 border border-slate-800/80 mb-3 space-y-1">
+                      <div className="bg-[#070a12] rounded-xl p-3 border border-slate-800/80 mb-3 space-y-1.5">
                         <p className="text-xs font-mono text-slate-200 leading-relaxed">
                           {hive.urgencyReason}
                         </p>
                         {hive.recommendedAction && (
                           <div className="pt-1.5 border-t border-slate-800 text-[11px] font-mono text-amber-300 flex items-start gap-1.5">
-                            <span className="text-amber-400 font-bold">Action:</span>
+                            <span className="text-amber-400 font-bold">Protocol:</span>
                             <span>{hive.recommendedAction}</span>
                           </div>
                         )}
@@ -848,15 +903,15 @@ export default function MobileFieldAgritechApp() {
                           </span>
                         </div>
                         <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
-                          <span className="text-[9px] text-slate-500 block">Acoustics</span>
+                          <span className="text-[9px] text-slate-500 block">Acoustic Tone</span>
                           <span className="font-bold text-amber-400">{hive.peakFrequencyHz} Hz</span>
                         </div>
                         <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
-                          <span className="text-[9px] text-slate-500 block">CO2 Level</span>
+                          <span className="text-[9px] text-slate-500 block">SCD41 CO2</span>
                           <span className="font-bold text-purple-300">{hive.gas.scd41Co2Ppm} p</span>
                         </div>
                         <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
-                          <span className="text-[9px] text-slate-500 block">Honey Flux</span>
+                          <span className="text-[9px] text-slate-500 block">24h Flux</span>
                           <span className="font-bold text-white">{hive.deltaWeightKg > 0 ? `+${hive.deltaWeightKg}` : hive.deltaWeightKg} kg</span>
                         </div>
                       </div>
@@ -876,7 +931,7 @@ export default function MobileFieldAgritechApp() {
                           <span>{isInspected ? "Inspected" : "Mark Done"}</span>
                         </button>
 
-                        {/* 2. Listen to Acoustics (Web Audio API) */}
+                        {/* 2. Listen to Hz Acoustics (Web Audio API) */}
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -885,7 +940,7 @@ export default function MobileFieldAgritechApp() {
                           }}
                           className={`py-2.5 px-2 rounded-xl text-xs font-mono font-bold transition-all border flex items-center justify-center gap-1.5 shadow-sm ${
                             audioToneActive && activeToneFreq === hive.peakFrequencyHz
-                              ? "bg-rose-500 text-white border-rose-400 animate-pulse"
+                              ? "bg-rose-500 text-white border-rose-400 animate-pulse shadow-md shadow-rose-500/30"
                               : "bg-slate-800 hover:bg-slate-700 text-cyan-300 border-slate-700"
                           }`}
                         >
@@ -894,7 +949,7 @@ export default function MobileFieldAgritechApp() {
                           ) : (
                             <Volume2 className="w-3.5 h-3.5" />
                           )}
-                          <span>{audioToneActive && activeToneFreq === hive.peakFrequencyHz ? "Mute" : `${hive.peakFrequencyHz}Hz`}</span>
+                          <span>{audioToneActive && activeToneFreq === hive.peakFrequencyHz ? "Mute" : `Listen (${hive.peakFrequencyHz}Hz)`}</span>
                         </button>
 
                         {/* 3. Field Compass Navigate */}
@@ -914,7 +969,7 @@ export default function MobileFieldAgritechApp() {
                 })}
               </div>
 
-              {/* ALL 96 NOMINAL HIVES (Collapsible / Secondary List) */}
+              {/* ALL 96 NOMINAL HIVES (Collapsible View) */}
               {triageFilter === "ALL" && (
                 <div className="space-y-2 pt-2">
                   <div className="flex items-center justify-between px-1">
@@ -932,7 +987,7 @@ export default function MobileFieldAgritechApp() {
                           setSelectedHiveId(hive.id);
                           setIsInspectorOpen(true);
                         }}
-                        className="bg-[#0f172a] border border-slate-800 hover:border-emerald-500/40 rounded-xl p-2.5 transition-all cursor-pointer flex flex-col justify-between"
+                        className="bg-[#0d1322] border border-slate-800 hover:border-emerald-500/40 rounded-xl p-2.5 transition-all cursor-pointer flex flex-col justify-between shadow-sm"
                       >
                         <div className="flex items-center justify-between">
                           <span className="font-mono font-bold text-xs text-white">#{String(hive.id).padStart(3, "0")}</span>
@@ -966,7 +1021,7 @@ export default function MobileFieldAgritechApp() {
                   className={`p-3 rounded-2xl text-left border transition-all ${
                     selectedYard === "Yard Alpha"
                       ? "bg-amber-500/20 border-amber-500/60 shadow-lg shadow-amber-500/10"
-                      : "bg-[#0f172a] border-slate-800 text-slate-400 hover:bg-slate-800"
+                      : "bg-[#0d1322] border-slate-800 text-slate-400 hover:bg-slate-800"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -974,7 +1029,7 @@ export default function MobileFieldAgritechApp() {
                     <span className="text-[10px] font-mono bg-slate-900 px-1.5 py-0.5 rounded text-slate-300">50 Hives</span>
                   </div>
                   <div className="font-extrabold text-white text-sm mt-0.5">North Ridge Apiary</div>
-                  <div className="text-[10px] font-mono text-rose-400 mt-1">2 Action Items (#042, #015)</div>
+                  <div className="text-[10px] font-mono text-rose-400 mt-1">2 Action Items (#042 Swarm, #015 Queen)</div>
                 </button>
 
                 <button
@@ -982,7 +1037,7 @@ export default function MobileFieldAgritechApp() {
                   className={`p-3 rounded-2xl text-left border transition-all ${
                     selectedYard === "Yard Beta"
                       ? "bg-amber-500/20 border-amber-500/60 shadow-lg shadow-amber-500/10"
-                      : "bg-[#0f172a] border-slate-800 text-slate-400 hover:bg-slate-800"
+                      : "bg-[#0d1322] border-slate-800 text-slate-400 hover:bg-slate-800"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -990,12 +1045,12 @@ export default function MobileFieldAgritechApp() {
                     <span className="text-[10px] font-mono bg-slate-900 px-1.5 py-0.5 rounded text-slate-300">50 Hives</span>
                   </div>
                   <div className="font-extrabold text-white text-sm mt-0.5">Wildflower Valley</div>
-                  <div className="text-[10px] font-mono text-rose-400 mt-1">2 Action Items (#073, #088)</div>
+                  <div className="text-[10px] font-mono text-rose-400 mt-1">2 Action Items (#073 Varroa, #088 Tilt)</div>
                 </button>
               </div>
 
               {/* Gateway & Apiary Visual Card */}
-              <div className="bg-[#0f172a] border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+              <div className="bg-[#0d1322] border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
                 <div className="relative h-36 w-full">
                   <Image
                     src="/images/gateway_apiary.jpg"
@@ -1003,14 +1058,14 @@ export default function MobileFieldAgritechApp() {
                     fill
                     className="object-cover opacity-80"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d1322] via-[#0d1322]/40 to-transparent" />
                   
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono">
                     <div className="bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700 text-slate-200">
                       <span className="text-emerald-400 font-bold">● CM4 Gateway Online</span> (915MHz LoRa)
                     </div>
                     <div className="bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700 text-amber-300 font-bold">
-                      +24.8 kg 24h Flow
+                      {selectedYard === "Yard Alpha" ? "+24.8 kg 24h Flow" : "+23.4 kg 24h Flow"}
                     </div>
                   </div>
                 </div>
@@ -1018,7 +1073,7 @@ export default function MobileFieldAgritechApp() {
                 <div className="p-3.5 space-y-2 text-xs font-mono">
                   <div className="flex justify-between text-slate-400">
                     <span>Base Station: Antmicro Raspberry Pi CM4</span>
-                    <span className="text-cyan-300">RSSI -74 dBm</span>
+                    <span className="text-cyan-300">RSSI -74 dBm • SNR +12.1 dB</span>
                   </div>
                   <div className="flex justify-between text-slate-400">
                     <span>Active Hives in Yard:</span>
@@ -1035,18 +1090,18 @@ export default function MobileFieldAgritechApp() {
                   placeholder={`Search ${selectedYard} (e.g. #042, swarm, 485Hz)...`}
                   value={yardSearchQuery}
                   onChange={(e) => setYardSearchQuery(e.target.value)}
-                  className="w-full bg-[#0f172a] border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  className="w-full bg-[#0d1322] border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
                 />
               </div>
 
               {/* 50-Hive Interactive Matrix for Selected Yard */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-mono text-slate-400 px-1">
-                  <span>50-Hive Grid ({selectedYard})</span>
+                  <span>50-Hive Grid Cluster ({selectedYard})</span>
                   <span className="text-amber-400">Tap node for deep telemetry</span>
                 </div>
 
-                <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5 max-h-[380px] overflow-y-auto p-2 bg-[#090d16] rounded-2xl border border-slate-800 custom-scrollbar">
+                <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5 max-h-[380px] overflow-y-auto p-2 bg-[#070a12] rounded-2xl border border-slate-800 custom-scrollbar">
                   {fleet
                     .filter((h) => h.yard === selectedYard)
                     .filter((h) => {
@@ -1083,7 +1138,7 @@ export default function MobileFieldAgritechApp() {
                             setSelectedHiveId(hive.id);
                             setIsInspectorOpen(true);
                           }}
-                          className={`h-12 rounded-xl font-mono text-xs font-bold border flex flex-col items-center justify-center transition-all ${nodeStyle} hover:scale-105`}
+                          className={`h-12 rounded-xl font-mono text-xs font-bold border flex flex-col items-center justify-center transition-all ${nodeStyle} hover:scale-105 shadow-sm`}
                         >
                           <div className="flex items-center gap-1">
                             <span className={`w-1.5 h-1.5 rounded-full ${dotStyle}`} />
@@ -1100,23 +1155,23 @@ export default function MobileFieldAgritechApp() {
           )}
 
           {/* ================================================================
-              TAB 3: SCAN NFC & QR (Field Simulator)
+              TAB 3: SCAN NFC & QR (Field Simulator with instant 0.1s lock-on)
               ================================================================ */}
           {currentTab === "SCAN" && (
             <div className="space-y-4 animate-in fade-in duration-150">
               
-              <div className="bg-[#0f172a] border border-slate-800 rounded-3xl p-5 shadow-xl space-y-4 text-center">
+              <div className="bg-[#0d1322] border border-slate-800 rounded-3xl p-5 shadow-xl space-y-4 text-center">
                 <div className="space-y-1">
                   <span className="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-bold">
                     Field Hardware Scanner
                   </span>
                   <h2 className="text-lg font-extrabold text-white">Instant 1-Tap NFC & QR Reader</h2>
                   <p className="text-xs font-mono text-slate-400">
-                    Hold phone within 4cm of hive antenna or point camera at lid QR tag.
+                    Hold phone within 4cm of hive NTAG215 antenna or point camera at lid QR code.
                   </p>
                 </div>
 
-                {/* Simulated Camera Viewfinder */}
+                {/* Simulated Camera Viewfinder with Laser Scanner */}
                 <div className="relative w-full h-56 bg-slate-950 rounded-2xl border-2 border-dashed border-amber-500/40 flex flex-col items-center justify-center overflow-hidden shadow-inner">
                   
                   {/* Laser Scan Line Animation */}
@@ -1133,13 +1188,13 @@ export default function MobileFieldAgritechApp() {
                   {isScanningNfc ? (
                     <div className="flex flex-col items-center gap-2 text-amber-400 font-mono text-xs animate-pulse">
                       <Scan className="w-8 h-8 animate-spin" />
-                      <span>Reading NTAG215 RFID / Barcode...</span>
+                      <span>Reading NTAG215 RFID / Laser Tag (0.1s lock-on)...</span>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center gap-2 text-slate-400 font-mono text-xs">
                       <Scan className="w-8 h-8 text-amber-400/60" />
-                      <span>Viewfinder Ready</span>
-                      <span className="text-[10px] text-slate-500">Tap below to trigger field scan</span>
+                      <span className="font-bold text-slate-300">Scanner Ready (0.1s Fast Lock)</span>
+                      <span className="text-[10px] text-slate-500">Tap below to simulate instant hardware scan</span>
                     </div>
                   )}
                 </div>
@@ -1152,25 +1207,25 @@ export default function MobileFieldAgritechApp() {
                     className="w-full py-3.5 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-2xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2"
                   >
                     <Smartphone className="w-4 h-4" />
-                    <span>Simulate 1-Tap NFC Touch (Hive #042 Swarm)</span>
+                    <span>Simulate 1-Tap NFC Touch (Hive #042 Swarm Risk)</span>
                   </button>
 
                   <div className="grid grid-cols-3 gap-2">
                     <button
                       onClick={() => handleSimulateNfcScan(15)}
-                      className="py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] rounded-xl border border-slate-700"
+                      className="py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
                     >
                       Scan #015 (Queen)
                     </button>
                     <button
                       onClick={() => handleSimulateNfcScan(73)}
-                      className="py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] rounded-xl border border-slate-700"
+                      className="py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
                     >
                       Scan #073 (Varroa)
                     </button>
                     <button
                       onClick={() => handleSimulateNfcScan(88)}
-                      className="py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] rounded-xl border border-slate-700"
+                      className="py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
                     >
                       Scan #088 (Tamper)
                     </button>
@@ -1179,7 +1234,7 @@ export default function MobileFieldAgritechApp() {
 
                 {/* Scan Result Card */}
                 {scannedHiveResult && scanSuccessAnim && (
-                  <div className="bg-emerald-950/40 border border-emerald-500/60 rounded-2xl p-4 text-left space-y-3 animate-in zoom-in-95 duration-200">
+                  <div className="bg-emerald-950/40 border border-emerald-500/60 rounded-2xl p-4 text-left space-y-3 animate-in zoom-in-95 duration-150">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <CheckCircle2 className="w-5 h-5 text-emerald-400" />
@@ -1188,7 +1243,7 @@ export default function MobileFieldAgritechApp() {
                             RFID Tag Identified: Hive #{scannedHiveResult.id}
                           </span>
                           <p className="text-[10px] font-mono text-emerald-300">
-                            {scannedHiveResult.apiaryZone}
+                            {scannedHiveResult.apiaryZone} • NTAG215 UID: 04:8F:2A:BE:EF
                           </p>
                         </div>
                       </div>
@@ -1209,7 +1264,7 @@ export default function MobileFieldAgritechApp() {
                       className="w-full py-2.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20"
                     >
                       <Activity className="w-3.5 h-3.5" />
-                      <span>Open Deep Telemetry Inspector</span>
+                      <span>Open Deep Diagnostic Inspector</span>
                     </button>
                   </div>
                 )}
@@ -1226,7 +1281,7 @@ export default function MobileFieldAgritechApp() {
             <div className="space-y-4 animate-in fade-in duration-150">
               
               {/* Premium Honey Chain Jar Card */}
-              <div className="bg-[#0f172a] border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+              <div className="bg-[#0d1322] border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
                 <div className="relative h-44 w-full bg-slate-950">
                   <Image
                     src="/images/honey_chain_jar.jpg"
@@ -1234,7 +1289,7 @@ export default function MobileFieldAgritechApp() {
                     fill
                     className="object-cover opacity-90"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d1322] via-[#0d1322]/30 to-transparent" />
                   
                   <div className="absolute top-3 left-3 bg-amber-500/90 text-slate-950 font-mono font-extrabold text-[10px] px-2.5 py-0.5 rounded-full shadow-md">
                     USDA ORGANIC CERTIFIED
@@ -1249,7 +1304,7 @@ export default function MobileFieldAgritechApp() {
                 <div className="p-4 space-y-3 font-mono text-xs">
                   <div className="flex justify-between border-b border-slate-800 pb-2">
                     <span className="text-slate-400">Current Hive Node:</span>
-                    <span className="text-amber-400 font-bold">Hive #{currentHive.id}</span>
+                    <span className="text-amber-400 font-bold">Hive #{currentHive.id} ({currentHive.yard})</span>
                   </div>
                   <div className="flex justify-between border-b border-slate-800 pb-2">
                     <span className="text-slate-400">Batch Identifier:</span>
@@ -1297,21 +1352,21 @@ export default function MobileFieldAgritechApp() {
             <div className="space-y-4 animate-in fade-in duration-150">
               
               {/* Hands-Free Audio Briefing Hero Banner */}
-              <div className="bg-[#0f172a] border border-indigo-500/40 rounded-3xl p-4 shadow-xl space-y-3">
+              <div className="bg-[#0d1322] border border-indigo-500/40 rounded-3xl p-4 shadow-xl space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
                     <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
                       <Bot className="w-4 h-4" />
                     </div>
                     <div>
                       <h2 className="text-sm font-extrabold text-white">Gemma-2B Quantized SLM</h2>
-                      <p className="text-[10px] font-mono text-indigo-300">On-Device INT4 Engine (8.2ms)</p>
+                      <p className="text-[10px] font-mono text-indigo-300">On-Device INT4 Engine (8.2ms Latency)</p>
                     </div>
                   </div>
 
                   <button
                     onClick={() => {
-                      const debrief = `Gemma Edge Briefing for Hive ${currentHive.id}. Status is ${currentHive.status}. Brood temperature is ${currentHive.thermal.frame3CoreQueen} degrees Celsius. Acoustic dominant frequency is ${currentHive.peakFrequencyHz} Hertz. ${currentHive.urgencyReason || "Colony is in nominal balance."}`;
+                      const debrief = `Gemma Edge Briefing for Hive ${currentHive.id}. Status is ${currentHive.status}. Core brood temperature is ${currentHive.thermal.frame3CoreQueen} degrees Celsius. Acoustic dominant frequency is ${currentHive.peakFrequencyHz} Hertz. ${currentHive.urgencyReason || "Colony is in full homeostasis balance."}`;
                       speakText(debrief);
                     }}
                     className="flex items-center gap-1.5 bg-indigo-500 hover:bg-indigo-400 text-white px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all shadow-md shadow-indigo-500/20"
@@ -1328,11 +1383,12 @@ export default function MobileFieldAgritechApp() {
                     "Hive #042 Swarm Split",
                     "Hive #073 Varroa Protocol",
                     "Hive #015 Queen Status",
+                    "Hive #088 Tamper Protocol",
                   ].map((preset, idx) => (
                     <button
                       key={idx}
                       onClick={() => handleSendGemmaMessage(preset)}
-                      className="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg text-[10px] font-mono transition-all"
+                      className="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg text-[10px] font-mono transition-all font-semibold"
                     >
                       🎙️ {preset}
                     </button>
@@ -1341,7 +1397,7 @@ export default function MobileFieldAgritechApp() {
               </div>
 
               {/* Chat Stream Window */}
-              <div className="bg-[#090d16] border border-slate-800 rounded-3xl p-4 max-h-[360px] overflow-y-auto space-y-3 font-mono text-xs custom-scrollbar">
+              <div className="bg-[#070a12] border border-slate-800 rounded-3xl p-4 max-h-[360px] overflow-y-auto space-y-3 font-mono text-xs custom-scrollbar">
                 {chatMessages.map((msg, idx) => (
                   <div
                     key={idx}
@@ -1356,7 +1412,7 @@ export default function MobileFieldAgritechApp() {
                       className={`p-3 rounded-2xl max-w-[90%] whitespace-pre-wrap leading-relaxed ${
                         msg.role === "user"
                           ? "bg-amber-400 text-slate-950 font-semibold"
-                          : "bg-[#1e293b] border border-slate-700 text-slate-200"
+                          : "bg-[#111827] border border-slate-700 text-slate-200"
                       }`}
                     >
                       {msg.text}
@@ -1385,7 +1441,7 @@ export default function MobileFieldAgritechApp() {
                   placeholder="Ask Gemma about acoustics, splits, or CUSUM drift..."
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
-                  className="flex-1 bg-[#0f172a] border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                  className="flex-1 bg-[#0d1322] border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
                 />
                 <button
                   type="submit"
@@ -1444,27 +1500,27 @@ export default function MobileFieldAgritechApp() {
       </div>
 
       {/* ====================================================================
-          DEEP HIVE INSPECTOR BOTTOM-SHEET / MODAL
+          DEEP DIAGNOSTIC INSPECTOR BOTTOM-SHEET / MODAL
           ==================================================================== */}
       {isInspectorOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
-          <div className="bg-[#0f172a] border border-slate-700/80 rounded-t-[32px] sm:rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar p-4 sm:p-6 shadow-2xl space-y-4 relative text-slate-100">
+          <div className="bg-[#0d1322] border border-slate-700/80 rounded-t-[32px] sm:rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar p-4 sm:p-6 shadow-2xl space-y-4 relative text-slate-100">
             
             {/* Sheet Drag Handle & Close */}
             <div className="w-12 h-1.5 bg-slate-700 rounded-full mx-auto sm:hidden mb-2" />
             <button
               onClick={() => {
                 setIsInspectorOpen(false);
-                if (audioToneActive) toggleAudioTone();
+                stopAudio();
               }}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800/80"
+              className="absolute top-4 right-4 text-slate-400 hover:text-white p-1.5 rounded-xl bg-slate-800/80 border border-slate-700"
             >
               <X className="w-4 h-4" />
             </button>
 
             {/* Modal Header */}
             <div className="flex items-center gap-3 border-b border-slate-800 pb-3">
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-mono font-extrabold text-lg">
+              <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-mono font-extrabold text-lg shadow-inner">
                 #{String(currentHive.id).padStart(3, "0")}
               </div>
               <div>
@@ -1519,7 +1575,7 @@ export default function MobileFieldAgritechApp() {
                 INSPECTOR TAB: 128-PT FFT SPECTRUM VISUALIZER
                 -------------------------------------------------------------- */}
             {(inspectorSubTab === "OVERVIEW" || inspectorSubTab === "FFT") && (
-              <div className="bg-[#1e293b]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+              <div className="bg-[#111827]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Activity className="w-4 h-4 text-cyan-400" />
@@ -1527,9 +1583,9 @@ export default function MobileFieldAgritechApp() {
                   </div>
                   <button
                     onClick={() => toggleAudioTone(currentHive.peakFrequencyHz)}
-                    className={`px-3 py-1 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 border transition-all ${
+                    className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 border transition-all ${
                       audioToneActive
-                        ? "bg-rose-500 text-white border-rose-400 animate-pulse"
+                        ? "bg-rose-500 text-white border-rose-400 animate-pulse shadow-md shadow-rose-500/20"
                         : "bg-slate-800 text-cyan-300 border-slate-700"
                     }`}
                   >
@@ -1539,21 +1595,23 @@ export default function MobileFieldAgritechApp() {
                 </div>
 
                 {/* 128 FFT Bars */}
-                <div className="bg-[#090d16] p-3 rounded-xl border border-slate-800">
-                  <div className="flex justify-between text-[9px] font-mono text-slate-500 pb-1 border-b border-slate-800/60 mb-2">
-                    <span>50Hz</span>
-                    <span className="text-emerald-400">225Hz Nominal</span>
+                <div className="bg-[#070a12] p-3 rounded-xl border border-slate-800">
+                  <div className="flex justify-between text-[9px] font-mono text-slate-500 pb-1.5 border-b border-slate-800/60 mb-2">
+                    <span>50Hz (Base)</span>
+                    <span className="text-emerald-400 font-bold">225Hz Nominal</span>
+                    <span className="text-yellow-400 font-bold">285Hz Queenless</span>
                     <span className="text-rose-400 font-bold">485Hz Swarm</span>
-                    <span className="text-purple-400">900Hz Queen</span>
+                    <span className="text-purple-400">900Hz Chirp</span>
                     <span>1200Hz</span>
                   </div>
 
-                  <div className="h-28 flex items-end gap-[1.5px] w-full pt-1">
+                  <div className="h-32 flex items-end gap-[1.5px] w-full pt-1">
                     {fftSpectrum.map((bin, idx) => {
                       const heightPct = Math.max(8, Math.min(100, (bin.magnitudeDb + 85) * 1.5));
                       let barColor = "bg-slate-700 hover:bg-slate-500";
                       if (bin.freqHz >= 210 && bin.freqHz <= 260) barColor = "bg-emerald-400";
-                      if (bin.freqHz >= 310 && bin.freqHz <= 370) barColor = "bg-yellow-400";
+                      if (bin.freqHz >= 270 && bin.freqHz <= 310) barColor = "bg-yellow-400";
+                      if (bin.freqHz >= 320 && bin.freqHz <= 370) barColor = "bg-orange-400";
                       if (bin.freqHz >= 440 && bin.freqHz <= 530) barColor = "bg-amber-400";
                       if (bin.isPeak) barColor = "bg-cyan-400 ring-1 ring-white animate-pulse";
 
@@ -1563,12 +1621,16 @@ export default function MobileFieldAgritechApp() {
                           onClick={() => toggleAudioTone(bin.freqHz)}
                           className={`flex-1 rounded-t-xs transition-all cursor-pointer ${barColor}`}
                           style={{ height: `${heightPct}%` }}
-                          title={`${bin.freqHz} Hz | ${bin.magnitudeDb.toFixed(1)} dBV`}
+                          title={`${bin.freqHz} Hz | ${bin.magnitudeDb.toFixed(1)} dBV - Tap to synthesize`}
                         />
                       );
                     })}
                   </div>
                 </div>
+                <p className="text-[10px] font-mono text-slate-400 flex items-center justify-between">
+                  <span>Harmonic: <strong className="text-amber-400">{currentHive.dominantHarmonic}</strong></span>
+                  <span className="text-slate-500">Tap any bar to test tone</span>
+                </p>
               </div>
             )}
 
@@ -1576,38 +1638,47 @@ export default function MobileFieldAgritechApp() {
                 INSPECTOR TAB: 5-FRAME BROOD THERMAL GRADIENT (TMP117)
                 -------------------------------------------------------------- */}
             {(inspectorSubTab === "OVERVIEW" || inspectorSubTab === "THERMAL") && (
-              <div className="bg-[#1e293b]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+              <div className="bg-[#111827]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Thermometer className="w-4 h-4 text-amber-400" />
                     <h3 className="text-xs sm:text-sm font-extrabold text-white">5-Frame Brood Thermal Gradient (TMP117 ±0.05°C)</h3>
                   </div>
                   <span className="text-[10px] font-mono bg-slate-900 text-amber-300 px-2 py-0.5 rounded border border-slate-800 font-bold">
-                    CUSUM Drift: {currentHive.thermal.cusumScore}
+                    CUSUM Drift: {currentHive.thermal.cusumScore} ({currentHive.thermal.cusumDriftStatus.replace(/_/g, " ")})
                   </span>
                 </div>
 
+                {/* 5 Frames Visual Cross-Section */}
                 <div className="grid grid-cols-5 gap-1.5">
                   {[
-                    { label: "F1 Outer", temp: currentHive.thermal.frame1OuterLeft },
-                    { label: "F2 Brood", temp: currentHive.thermal.frame2BroodLeft },
-                    { label: "F3 Core", temp: currentHive.thermal.frame3CoreQueen, isCore: true },
-                    { label: "F4 Brood", temp: currentHive.thermal.frame4BroodRight },
-                    { label: "F5 Outer", temp: currentHive.thermal.frame5OuterRight },
-                  ].map((f, idx) => (
-                    <div
-                      key={idx}
-                      className={`p-2 rounded-xl text-center border flex flex-col justify-between ${
-                        f.isCore
-                          ? "bg-amber-500/20 border-amber-500/50 text-amber-300"
-                          : "bg-slate-900/80 border-slate-800 text-slate-200"
-                      }`}
-                    >
-                      <span className="text-[9px] font-mono text-slate-400">{f.label}</span>
-                      <span className="text-base font-extrabold font-mono py-0.5">{f.temp}°C</span>
-                      <span className="text-[8px] font-mono text-slate-500">{f.isCore ? "Queen Target" : "Honey Margin"}</span>
-                    </div>
-                  ))}
+                    { label: "Frame 1 (Outer Left)", temp: currentHive.thermal.frame1OuterLeft, isCore: false },
+                    { label: "Frame 2 (Brood Left)", temp: currentHive.thermal.frame2BroodLeft, isCore: false },
+                    { label: "Frame 3 (Core Queen)", temp: currentHive.thermal.frame3CoreQueen, isCore: true },
+                    { label: "Frame 4 (Brood Right)", temp: currentHive.thermal.frame4BroodRight, isCore: false },
+                    { label: "Frame 5 (Outer Right)", temp: currentHive.thermal.frame5OuterRight, isCore: false },
+                  ].map((f, idx) => {
+                    const isHot = f.temp >= 36.0;
+                    const isCold = f.temp <= 33.5;
+                    return (
+                      <div
+                        key={idx}
+                        className={`p-2.5 rounded-xl text-center border flex flex-col justify-between ${
+                          f.isCore
+                            ? "bg-amber-500/20 border-amber-500/50 text-amber-300 shadow-md shadow-amber-500/10"
+                            : isHot
+                            ? "bg-rose-500/15 border-rose-500/40 text-rose-300"
+                            : isCold
+                            ? "bg-cyan-500/15 border-cyan-500/40 text-cyan-300"
+                            : "bg-slate-900/80 border-slate-800 text-slate-200"
+                        }`}
+                      >
+                        <span className="text-[9px] font-mono text-slate-400 font-semibold">{f.label.split(" ")[0]} {f.label.split(" ")[1]}</span>
+                        <span className="text-base font-extrabold font-mono py-1">{f.temp}°C</span>
+                        <span className="text-[8px] font-mono text-slate-400">{f.isCore ? "Queen Cluster" : "Honey Margin"}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -1616,29 +1687,32 @@ export default function MobileFieldAgritechApp() {
                 INSPECTOR TAB: SCD41 CO2 & BME688 MOX AI GAS INDEX
                 -------------------------------------------------------------- */}
             {(inspectorSubTab === "OVERVIEW" || inspectorSubTab === "GAS") && (
-              <div className="bg-[#1e293b]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+              <div className="bg-[#111827]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Wind className="w-4 h-4 text-purple-400" />
-                    <h3 className="text-xs sm:text-sm font-extrabold text-white">SCD41 NDIR CO2 & BME688 MOX Gas Index</h3>
+                    <h3 className="text-xs sm:text-sm font-extrabold text-white">SCD41 Photoacoustic CO2 & BME688 Gas Index</h3>
                   </div>
                   <span className="text-[10px] font-mono bg-purple-950 text-purple-300 px-2 py-0.5 rounded border border-purple-800 font-bold">
-                    Vent: {currentHive.gas.ventilationStatus}
+                    Ventilation: {currentHive.gas.ventilationStatus}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-3 gap-2 text-xs font-mono">
-                  <div className="bg-[#090d16] p-3 rounded-xl border border-slate-800">
+                  <div className="bg-[#070a12] p-3 rounded-xl border border-slate-800">
                     <span className="text-slate-500 text-[10px] block">SCD41 CO2</span>
                     <span className="text-lg font-extrabold text-white">{currentHive.gas.scd41Co2Ppm} ppm</span>
+                    <span className="text-[9px] text-slate-400 block mt-0.5">Threshold: 2200 ppm</span>
                   </div>
-                  <div className="bg-[#090d16] p-3 rounded-xl border border-slate-800">
-                    <span className="text-slate-500 text-[10px] block">BME688 VOC</span>
+                  <div className="bg-[#070a12] p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-500 text-[10px] block">BME688 MOX VOC</span>
                     <span className="text-lg font-extrabold text-purple-300">{currentHive.gas.bme688VocKohm} kΩ</span>
+                    <span className="text-[9px] text-slate-400 block mt-0.5">Air Quality Index</span>
                   </div>
-                  <div className="bg-[#090d16] p-3 rounded-xl border border-slate-800">
+                  <div className="bg-[#070a12] p-3 rounded-xl border border-slate-800">
                     <span className="text-slate-500 text-[10px] block">Alarm Pheromone</span>
                     <span className="text-lg font-extrabold text-amber-400">{currentHive.gas.isopentylAcetateIndex} / 100</span>
+                    <span className="text-[9px] text-slate-400 block mt-0.5">Isopentyl Acetate</span>
                   </div>
                 </div>
               </div>
@@ -1648,7 +1722,7 @@ export default function MobileFieldAgritechApp() {
                 INSPECTOR TAB: HARDWARE ENCLOSURE EMBED
                 -------------------------------------------------------------- */}
             {inspectorSubTab === "OVERVIEW" && (
-              <div className="bg-[#1e293b]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+              <div className="bg-[#111827]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
                 <div className="flex items-center gap-2">
                   <Cpu className="w-4 h-4 text-amber-400" />
                   <h3 className="text-xs sm:text-sm font-extrabold text-white">Hardware Telemetry Node Enclosure</h3>
@@ -1661,7 +1735,7 @@ export default function MobileFieldAgritechApp() {
                     fill
                     className="object-cover opacity-90"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d1322] via-transparent to-transparent" />
                   
                   <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-[10px] font-mono bg-slate-950/80 px-2 py-1 rounded-lg border border-slate-800">
                     <span>IP67 Ruggedized Enclosure</span>
@@ -1672,10 +1746,10 @@ export default function MobileFieldAgritechApp() {
             )}
 
             {/* --------------------------------------------------------------
-                INSPECTOR TAB: PLAYDATE FIELD CONSOLE
+                INSPECTOR TAB: PLAYDATE RETRO FIELD CONSOLE
                 -------------------------------------------------------------- */}
             {inspectorSubTab === "PLAYDATE" && (
-              <div className="bg-[#1e293b]/70 border border-slate-700/80 rounded-2xl p-4 flex flex-col items-center justify-center space-y-3">
+              <div className="bg-[#111827]/70 border border-slate-700/80 rounded-2xl p-4 flex flex-col items-center justify-center space-y-3">
                 <div className="w-full flex items-center justify-between border-b border-slate-700 pb-2 text-xs font-mono">
                   <span className="text-amber-400 font-bold">Playdate Retro Field Console</span>
                   <span className="text-slate-400">Node #{currentHive.id}</span>
@@ -1696,11 +1770,11 @@ export default function MobileFieldAgritechApp() {
       )}
 
       {/* ====================================================================
-          FIELD COMPASS NAVIGATION MODAL
+          FIELD COMPASS NAVIGATION HUD MODAL
           ==================================================================== */}
       {navTargetHive && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#0f172a] border border-amber-500/50 rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center space-y-4 relative">
+          <div className="bg-[#0d1322] border border-amber-500/50 rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center space-y-4 relative text-slate-100">
             <button
               onClick={() => setNavTargetHive(null)}
               className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800/80"
@@ -1716,41 +1790,44 @@ export default function MobileFieldAgritechApp() {
               <p className="text-xs font-mono text-slate-400">{navTargetHive.apiaryZone}</p>
             </div>
 
-            {/* Big Compass Rose */}
-            <div className="relative w-40 h-40 mx-auto rounded-full border-4 border-slate-800 bg-[#090d16] flex items-center justify-center shadow-inner">
+            {/* Big Compass Rose with Live Needle */}
+            <div className="relative w-44 h-44 mx-auto rounded-full border-4 border-slate-800 bg-[#070a12] flex items-center justify-center shadow-inner">
+              {/* Radar pulse effect */}
+              <div className="absolute inset-4 rounded-full border border-amber-500/20 animate-ping" />
+              
               {/* Compass Needle */}
               <div
                 className="absolute inset-0 flex items-center justify-center transition-transform duration-500"
                 style={{ transform: `rotate(${navTargetHive.gpsBearingDeg}deg)` }}
               >
-                <div className="w-2 h-16 bg-gradient-to-t from-transparent to-amber-400 rounded-full shadow-[0_0_12px_#f59e0b]" />
+                <div className="w-2.5 h-18 bg-gradient-to-t from-transparent to-amber-400 rounded-full shadow-[0_0_15px_#f59e0b]" />
               </div>
-              <div className="w-6 h-6 rounded-full bg-amber-400 border-2 border-slate-950 z-10 flex items-center justify-center shadow-md">
-                <Navigation className="w-3 h-3 text-slate-950" />
+              <div className="w-7 h-7 rounded-full bg-amber-400 border-2 border-slate-950 z-10 flex items-center justify-center shadow-md">
+                <Navigation className="w-3.5 h-3.5 text-slate-950" />
               </div>
 
               {/* Cardinal Labels */}
-              <span className="absolute top-1 text-[9px] font-mono font-bold text-slate-500">N</span>
-              <span className="absolute right-1 text-[9px] font-mono font-bold text-slate-500">E</span>
-              <span className="absolute bottom-1 text-[9px] font-mono font-bold text-slate-500">S</span>
-              <span className="absolute left-1 text-[9px] font-mono font-bold text-slate-500">W</span>
+              <span className="absolute top-2 text-[10px] font-mono font-extrabold text-amber-400">N</span>
+              <span className="absolute right-2 text-[10px] font-mono font-bold text-slate-500">E</span>
+              <span className="absolute bottom-2 text-[10px] font-mono font-bold text-slate-500">S</span>
+              <span className="absolute left-2 text-[10px] font-mono font-bold text-slate-500">W</span>
             </div>
 
             {/* Distance Callout */}
-            <div className="bg-[#090d16] border border-slate-800 rounded-2xl p-3 font-mono text-xs space-y-1">
+            <div className="bg-[#070a12] border border-slate-800 rounded-2xl p-3 font-mono text-xs space-y-1">
               <div className="text-2xl font-extrabold text-amber-400">
                 {navTargetHive.gpsDistanceMeters} <span className="text-sm font-normal text-slate-400">meters</span>
               </div>
-              <p className="text-slate-400 text-[11px]">
+              <p className="text-slate-300 text-[12px] font-semibold">
                 Bearing: <span className="text-white font-bold">{navTargetHive.gpsBearingDeg}° ({navTargetHive.gpsBearingText})</span>
               </p>
             </div>
 
             <button
               onClick={() => setNavTargetHive(null)}
-              className="w-full py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all shadow-md shadow-amber-500/20"
+              className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all shadow-md shadow-amber-500/20"
             >
-              Close Compass
+              Close Compass HUD
             </button>
           </div>
         </div>
@@ -1761,7 +1838,7 @@ export default function MobileFieldAgritechApp() {
           ==================================================================== */}
       {isJarCertOpen && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#0f172a] border border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-slate-100 relative">
+          <div className="bg-[#0d1322] border border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-slate-100 relative">
             <button
               onClick={() => setIsJarCertOpen(false)}
               className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800/80"
@@ -1782,7 +1859,7 @@ export default function MobileFieldAgritechApp() {
               </p>
             </div>
 
-            <div className="bg-[#090d16] border border-slate-800 rounded-2xl p-4 space-y-3 font-mono text-xs">
+            <div className="bg-[#070a12] border border-slate-800 rounded-2xl p-4 space-y-3 font-mono text-xs">
               <div className="flex flex-col items-center justify-center p-4 bg-white rounded-2xl text-slate-950">
                 <QrCode className="w-32 h-32 text-slate-900" />
                 <span className="text-[10px] font-mono font-bold text-slate-700 mt-1">
@@ -1803,20 +1880,24 @@ export default function MobileFieldAgritechApp() {
                   <span className="text-slate-400">Purity:</span>
                   <span className="text-emerald-400 font-semibold">{currentHive.blockchain.purityPct}% Organic</span>
                 </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-400">Moisture:</span>
+                  <span className="text-cyan-300 font-semibold">{currentHive.blockchain.moisturePct}% H2O</span>
+                </div>
               </div>
             </div>
 
             <div className="flex gap-2">
               <button
                 onClick={() => window.print()}
-                className="flex-1 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20"
+                className="flex-1 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20"
               >
                 <Printer className="w-4 h-4" />
                 <span>Print Jar Label</span>
               </button>
               <button
                 onClick={() => setIsJarCertOpen(false)}
-                className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs rounded-xl border border-slate-700"
+                className="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs rounded-xl border border-slate-700 font-bold"
               >
                 Close
               </button>

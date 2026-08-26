@@ -18,14 +18,14 @@ export function Footer() {
               </span>
               <span className="inline-flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>All Gateways Operational</span>
+                <span>All 100 Mesh Nodes Operational</span>
               </span>
             </div>
             <p className="text-slate-400 text-xs leading-relaxed">
-              Autonomous Edge-AI Environmental &amp; Acoustic Health Monitoring System for Precision Apiculture. Fusing 16-parameter physical telemetry with on-device TinyML triage.
+              Autonomous Edge-AI Environmental &amp; Acoustic Health Monitoring System for Precision Apiculture. Fusing TI TMP117, Sensirion SCD41, Bosch BME688, TDK INMP441, and Avia HX711 with on-device Nordic nRF52840 TinyML triage and Antmicro CM4 6 TOPS Gateway inference.
             </p>
-            <p className="text-slate-500 text-[11px]">
-              &copy; {new Date().getFullYear()} Beevil Knievel Team. All rights reserved.
+            <p className="text-slate-500 text-[11px] font-mono">
+              &copy; {new Date().getFullYear()} Beevil Knievel Engineering Team. Grounded in Robu.in &bull; Amazon &bull; PCBPower Verified BOM.
             </p>
           </div>
 
@@ -35,7 +35,7 @@ export function Footer() {
               <span>IEEE HardwAIre Challenge Phase 2 Master Standard</span>
             </div>
             <p className="text-slate-400 text-[11px]">
-              Standardized on Antmicro CM4 Baseboard (Rev 1.0.5) &bull; 6 TOPS Edge NPU
+              Standardized on Antmicro CM4 Baseboard (Rev 1.0.5) &bull; Semtech SX1262 LoRaWAN IN865 (+22 dBm)
             </p>
             <p>
               <Link
@@ -56,27 +56,27 @@ export function Footer() {
           {/* Column 1 */}
           <div className="space-y-3">
             <div className="font-mono text-xs uppercase tracking-widest text-[#ffc833] font-bold">
-              System Architecture
+              BOM Silicon Stack
             </div>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link href="#the_system" className="text-slate-400 hover:text-white transition-colors">
-                  16-Sensor Node Array
+                  TI TMP117 ±0.05°C RTD
+                </Link>
+              </li>
+              <li>
+                <Link href="#the_system" className="text-slate-400 hover:text-white transition-colors">
+                  Sensirion SCD41 NDIR CO2
+                </Link>
+              </li>
+              <li>
+                <Link href="#the_system" className="text-slate-400 hover:text-white transition-colors">
+                  Bosch BME688 MOX Scanner
                 </Link>
               </li>
               <li>
                 <Link href="#the_specs" className="text-slate-400 hover:text-white transition-colors">
-                  Antmicro CM4 Gateway (6 TOPS)
-                </Link>
-              </li>
-              <li>
-                <Link href="#edge_ai" className="text-slate-400 hover:text-white transition-colors">
-                  BeevilFusionNetEdge (96.84%)
-                </Link>
-              </li>
-              <li>
-                <Link href="#the_specs" className="text-slate-400 hover:text-white transition-colors">
-                  TinyML 1D-CNN MCU (3.8 KB)
+                  Antmicro CM4 6 TOPS Hub
                 </Link>
               </li>
             </ul>
@@ -115,7 +115,7 @@ export function Footer() {
           {/* Column 3 */}
           <div className="space-y-3">
             <div className="font-mono text-xs uppercase tracking-widest text-[#ffc833] font-bold">
-              Research &amp; Data
+              Research &amp; Provenance
             </div>
             <ul className="space-y-2 text-xs">
               <li>
@@ -125,12 +125,12 @@ export function Footer() {
               </li>
               <li>
                 <Link href="#honey_chain" className="text-slate-400 hover:text-white transition-colors">
-                  SHA-256 Honey Chain
+                  SHA-256 Merkle Ledger
                 </Link>
               </li>
               <li>
-                <Link href="#education" className="text-slate-400 hover:text-white transition-colors">
-                  University Grants (15% Off)
+                <Link href="#edge_ai" className="text-slate-400 hover:text-white transition-colors">
+                  GroupKFold Validation
                 </Link>
               </li>
               <li>
@@ -144,12 +144,12 @@ export function Footer() {
           {/* Column 4 */}
           <div className="space-y-3">
             <div className="font-mono text-xs uppercase tracking-widest text-[#ffc833] font-bold">
-              Open Standards
+              Hardware Repositories
             </div>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link href="https://github.com/atharveeee-netizen/beevil-knievel" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
-                  GitHub Repository
+                  GitHub Project Core
                 </Link>
               </li>
               <li>
@@ -159,7 +159,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="https://github.com/antmicro/cm4-baseboard" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
-                  Antmicro CM4 Hardware
+                  Antmicro CM4 Baseboard
                 </Link>
               </li>
               <li>
@@ -175,4 +175,5 @@ export function Footer() {
     </footer>
   );
 }
+
 

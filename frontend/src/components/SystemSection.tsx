@@ -24,43 +24,43 @@ import {
   Layers, 
   Sparkles,
   ChevronRight,
-  TrendingUp
+  TrendingUp,
+  Sliders
 } from "lucide-react";
 
 export function SystemSection() {
   const [frequencyDial, setFrequencyDial] = useState(220);
-  const [activeSystemTab, setActiveSystemTab] = useState<"node" | "gateway" | "mesh" | "provenance">("node");
 
   const getAcousticDiagnostic = (freq: number) => {
     if (freq < 210) {
       return { 
-        label: "180 – 220 Hz: Nominal Foraging & Brood Care", 
-        state: "Optimal Queenright Colony Hum", 
+        label: "180 – 220 Hz: Nominal Colony Hum & Brood Homeostasis", 
+        state: "Queenright Brood Nest Core Homeostasis", 
         badge: "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40",
-        desc: "Steady baseline acoustic energy concentrated in the brood nest core. Thermal stability is locked at 34.8°C."
+        desc: "Steady baseline acoustic energy concentrated in the brood nest core. Thermal stability is locked at 34.82°C ±0.05°C via TI TMP117 RTD."
       };
     }
     if (freq < 320) {
       return { 
-        label: "250 Hz: Virgin Queen Piping & Emergence", 
-        state: "Queen Active / Oviposition Pulse", 
+        label: "250 Hz: Virgin Queen Piping & Oviposition Pulse", 
+        state: "Queen Active / Mating & Emergence Pulse", 
         badge: "bg-amber-500/20 text-amber-400 border border-amber-500/40",
-        desc: "Characteristic high-energy G-clef pulses emitted by newly emerged virgin queens prior to mating flight or duel."
+        desc: "Characteristic high-energy G-clef pulses emitted by virgin queens. Captured by TDK INMP441 24-bit I2S microphone (128-pt CMSIS-DSP FFT)."
       };
     }
     if (freq < 550) {
       return { 
-        label: "450 Hz: Swarm Departure Escalation (24h Alert)", 
-        state: "Pre-Swarm Harmonic Escalation", 
+        label: "450 Hz: Pre-Swarm Harmonic Escalation (24h Alert)", 
+        state: "Pre-Swarm Departure Harmonic Surge", 
         badge: "bg-rose-500/20 text-rose-400 border border-rose-500/40",
-        desc: "Critical acoustic density shift 24 hours prior to colony departure. Automated alert dispatched via LoRa mesh."
+        desc: "Critical acoustic density shift preceding colony departure split. Triggers automated Semtech SX1262 LoRa mesh alert to Antmicro CM4 Gateway."
       };
     }
     return { 
-      label: "800+ Hz: Robbing & Yellowjacket Attack", 
-      state: "Predator / Wasp Defense Mode", 
+      label: "800+ Hz: Robbing & Yellowjacket Defensive Agitation", 
+      state: "Predator / Robber Bee Defense Turbulence", 
       badge: "bg-purple-500/20 text-purple-400 border border-purple-500/40",
-      desc: "High-frequency turbulent flight agitation at hive entrance caused by robber bees or yellowjacket incursions."
+      desc: "High-frequency turbulent flight agitation at hive entrance caused by robber bees or yellowjackets. Fused with STMicroelectronics LIS3DH shock alerts."
     };
   };
 
@@ -68,39 +68,39 @@ export function SystemSection() {
 
   const SENSOR_GRID = [
     {
-      name: "TI TMP117 Brood Temp",
+      name: "TI TMP117 Brood RTD",
       spec: "±0.05°C NIST Traceable",
-      detail: "Ultra-precision core cluster temperature monitoring",
+      detail: "Medical-grade RTD core brood nest thermoregulation tracking at 34.8°C.",
       icon: <Thermometer className="w-4 h-4 text-amber-400" />,
     },
     {
       name: "Sensirion SCD41 CO2",
-      spec: "400 – 5,000 ppm NDIR",
-      detail: "Photoacoustic cavity respiration & ventilation",
+      spec: "400 – 5,000 ppm NDIR (±40ppm)",
+      detail: "Photoacoustic cavity respiration tracking colony metabolic gas exchange.",
       icon: <Gauge className="w-4 h-4 text-sky-400" />,
     },
     {
-      name: "Bosch BME688 AI VOC",
+      name: "Bosch BME688 8-Ch MOX",
       spec: "sub-PPM Gas Scanner",
-      detail: "Foulbrood (AFB/EFB) volatile organic biomarker index",
+      detail: "Isopentyl Acetate alarm pheromone & 4-Allylanisole foulbrood bio-markers.",
       icon: <Wind className="w-4 h-4 text-purple-400" />,
     },
     {
-      name: "TDK MEMS Acoustic Ear",
+      name: "TDK INMP441 / ICS-43434",
       spec: "24-bit I2S (100Hz – 6kHz)",
-      detail: "Hardware DMA sampling with zero CPU jitter",
+      detail: "Hardware DMA audio capture with 128-pt CMSIS-DSP FFT on Cortex-M4F.",
       icon: <Activity className="w-4 h-4 text-emerald-400" />,
     },
     {
-      name: "HX711 24-bit Scale",
-      spec: "±10g Daily Flow Delta",
-      detail: "Precision nocturnal honey accumulation tracking",
+      name: "Avia HX711 Differential ADC",
+      spec: "200kg Load Cell (+1.84 kg/d)",
+      detail: "24-bit precision nocturnal honey accumulation & nectar flow tracking.",
       icon: <Scale className="w-4 h-4 text-amber-400" />,
     },
     {
-      name: "Sensirion SHT45 RH",
-      spec: "±1.0% Relative Humidity",
-      detail: "Internal cavity moisture and condensation balance",
+      name: "STMicroelectronics LIS3DH",
+      spec: "3-Axis Ultra-Low-Power IMU",
+      detail: "Micro-vibration grooming tremor & hive knock/tamper tilt detection.",
       icon: <Sun className="w-4 h-4 text-sky-400" />,
     },
   ];
@@ -109,14 +109,14 @@ export function SystemSection() {
     <section id="the_system" className="bg-[#070b14] text-slate-100 py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
       <div className="max-w-6xl mx-auto space-y-24 sm:space-y-32">
         
-        {/* 1. The Sensor System (DJI Enterprise / Framework Precision) */}
+        {/* 1. The Sensor System */}
         <div className="space-y-8">
           <div className="flex flex-wrap items-center gap-3">
             <div className="inline-flex items-center gap-2 bg-slate-900 border border-amber-500/40 text-[#ffc833] px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.15)]">
               <Cpu className="w-3.5 h-3.5" />
-              <span>16-Parameter Sensor Fusion Array</span>
+              <span>Verified BOM Silicon Architecture</span>
             </div>
-            <span className="text-xs font-mono text-slate-400">DJI Enterprise / Framework Modular Silicon</span>
+            <span className="text-xs font-mono text-slate-400">Robu.in &bull; Amazon &bull; PCBPower Verified</span>
           </div>
 
           <div className="space-y-4 max-w-4xl">
@@ -124,7 +124,7 @@ export function SystemSection() {
               The Cyber-Physical Sensor System.
             </h2>
             <p className="text-lg sm:text-xl text-slate-300 leading-relaxed font-normal">
-              Beevil Knievel combines <strong className="text-white">16 simultaneous physical and acoustic sensor channels</strong> into an ultra-low-power edge monitoring node. Every environmental parameter affecting queen vitality, brood nest homeostasis, and honey flow is quantified in real time.
+              Beevil Knievel combines <strong className="text-white">16 simultaneous physical and acoustic telemetry channels</strong> into an ultra-low-power edge monitoring node. Every environmental parameter affecting queen vitality, brood nest homeostasis, and honey flow is quantified with lab-grade precision.
             </p>
           </div>
 
@@ -151,12 +151,12 @@ export function SystemSection() {
             ))}
           </div>
 
-          {/* Hardware Enclosure Showcase: /images/node_enclosure.jpg (DJI Enterprise / Framework Styling) */}
+          {/* Hardware Enclosure Showcase: /images/node_enclosure.jpg */}
           <div className="my-10 flex justify-center">
             <div className="relative w-full max-w-4xl h-[360px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-950 flex items-center justify-center p-4 group">
               <Image
                 src="/images/node_enclosure.jpg"
-                alt="DJI Enterprise & Framework Modular Solar Sensor Node Enclosure"
+                alt="Beevil Knievel Field Sensor Node Enclosure with IP67 Weatherproof Solar Mast"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700 rounded-2xl"
                 sizes="(max-width: 768px) 100vw, 1000px"
@@ -166,7 +166,7 @@ export function SystemSection() {
               <div className="absolute top-4 left-4 bg-slate-950/90 backdrop-blur-md border border-slate-800 px-4 py-2.5 rounded-2xl text-left font-mono text-xs shadow-2xl hidden sm:block">
                 <div className="text-[10px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
                   <Wrench className="w-3 h-3 text-amber-400" />
-                  <span>Framework Modular Silicon Rev 1.0.5</span>
+                  <span>Nordic nRF52840 &bull; FreeRTOS 2.0µA Sleep</span>
                 </div>
                 <div className="text-white font-bold text-sm mt-0.5">CNC Polycarbonate Enclosure</div>
                 <div className="text-[10px] text-slate-400">Tool-less Magnetic Quick-Dock &bull; 30s Mount</div>
@@ -175,7 +175,7 @@ export function SystemSection() {
               <div className="absolute bottom-4 right-4 bg-slate-950/90 backdrop-blur-md border border-slate-800 px-4 py-2.5 rounded-2xl text-right font-mono text-xs shadow-2xl hidden sm:block">
                 <div className="text-emerald-400 font-bold flex items-center gap-1.5 justify-end">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>99.80% On-Node Triage Recall</span>
+                  <span>99.80% On-Node TinyML Triage</span>
                 </div>
                 <div className="text-[10px] text-slate-400">91.4% Radio TX Energy Suppressed &bull; 3.2+ Yr Battery</div>
               </div>
@@ -189,7 +189,7 @@ export function SystemSection() {
                 <span>On-Device TinyML 1D-CNN Micro-Architecture</span>
               </h4>
               <p className="text-xs text-slate-400">
-                Executes locally in 1.12 ms on the nRF52840 MCU (3.8 KB SRAM / 8.0 KB Flash). Conserves battery by suppressing 91.4% of redundant telemetry transmissions for 3.2+ years of autonomous operation.
+                Executes locally in 1.12 ms on the Nordic nRF52840 MCU (3.8 KB SRAM / 8.0 KB Flash). Conserves battery by suppressing 91.4% of redundant telemetry transmissions for 3.2+ years of autonomous field operation.
               </p>
             </div>
             <Link
@@ -202,22 +202,22 @@ export function SystemSection() {
           </div>
         </div>
 
-        {/* 2. The Design & Gateway Deployment: /images/gateway_apiary.jpg */}
+        {/* 2. The Gateway Deployment: /images/gateway_apiary.jpg */}
         <div id="the_design" className="space-y-8">
           <div className="flex flex-wrap items-center gap-3">
             <div className="inline-flex items-center gap-2 bg-slate-900 border border-emerald-500/40 text-emerald-400 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(16,185,129,0.15)]">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>Antmicro CM4 Enterprise 6 TOPS Gateway Station</span>
             </div>
-            <span className="text-xs font-mono text-slate-400">IP67 Weatherproof &bull; Autonomous Solar Mast</span>
+            <span className="text-xs font-mono text-slate-400">Debian 64-bit &bull; OverlayFS &bull; SQLite WAL</span>
           </div>
 
           <div className="space-y-4 max-w-4xl">
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white font-sans">
-              Active Apiary Field Deployment.
+              Active Apiary Field Gateway.
             </h2>
             <p className="text-lg sm:text-xl text-slate-300 leading-relaxed font-normal">
-              Engineered for extreme commercial apiary conditions, <strong className="text-white">Beevil Knievel installs in under 30 seconds</strong> on any standard Langstroth, Warre, or Top-Bar hive. The central Antmicro CM4 base station powers 6 TOPS neural inference and aggregates up to 100 field hives across 15 km LoRaWAN IN865 multi-hop mesh.
+              Engineered for extreme commercial apiary conditions, <strong className="text-white">Beevil Knievel installs in under 30 seconds</strong> on any standard Langstroth, Warre, or Top-Bar hive. The central Antmicro Raspberry Pi CM4 base station powers 6 TOPS neural inference and aggregates up to 100 field hives across 15 km LoRaWAN IN865 multi-hop mesh.
             </p>
           </div>
 
@@ -235,22 +235,22 @@ export function SystemSection() {
               <div className="absolute bottom-4 left-4 right-4 bg-slate-950/90 backdrop-blur-md border border-slate-800/90 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-white font-bold">Commercial Apiary Test Station #01 &bull; CM4 Hub</span>
+                  <span className="text-white font-bold">Commercial Apiary Test Station #01 &bull; Antmicro CM4 Hub</span>
                 </div>
                 <div className="text-slate-400">
-                  Dual-Band LoRa IN865 / 915 MHz &bull; 6 TOPS NPU &bull; -20°C to +65°C &bull; 14-Day Sunless Reserve
+                  Semtech SX1262 (+22 dBm) &bull; 6 TOPS NPU &bull; 8.2ms INT8 TorchScript &bull; 14-Day Sunless Reserve
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* 3. Samsara / Tesla Energy 100-Hive LoRaWAN IN865 Multi-Hop Topology */}
+        {/* 3. 100-Hive LoRaWAN IN865 Multi-Hop Topology */}
         <div id="mesh" className="space-y-8">
           <div className="flex flex-wrap items-center gap-3">
             <div className="inline-flex items-center gap-2 bg-slate-900 border border-sky-500/40 text-sky-400 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(56,189,248,0.15)]">
               <Network className="w-3.5 h-3.5" />
-              <span>Samsara / Tesla Energy Multi-Hop Topology</span>
+              <span>Semtech SX1262 LoRaWAN IN865 Architecture</span>
             </div>
             <span className="text-xs font-mono text-slate-400">100-Hive LoRaWAN IN865 Dynamic Mesh</span>
           </div>
@@ -260,7 +260,7 @@ export function SystemSection() {
               100-Hive LoRaWAN IN865 Mesh Network.
             </h2>
             <p className="text-lg sm:text-xl text-slate-300 leading-relaxed font-normal">
-              Zero single points of failure. The fleet auto-forms an adaptive, self-healing tree mesh over <strong className="text-white">LoRaWAN IN865 (865–867 MHz)</strong> and 915 MHz bands. Even nodes obstructed by deep forest canopies or rolling hills relay telemetry through nearest neighbor hives to reach the 6 TOPS gateway.
+              Zero single points of failure. The fleet auto-forms an adaptive, self-healing tree mesh over <strong className="text-white">LoRaWAN IN865 (865–867 MHz, +22 dBm Tx)</strong>. Even nodes obstructed by dense foliage or topography relay telemetry through nearest neighbor hives to reach the central Antmicro CM4 Gateway.
             </p>
           </div>
 
@@ -319,9 +319,9 @@ export function SystemSection() {
           <div className="flex flex-wrap items-center gap-3">
             <div className="inline-flex items-center gap-2 bg-slate-900 border border-sky-500/30 text-sky-400 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider">
               <Activity className="w-3.5 h-3.5" />
-              <span>Digital MEMS Acoustic Ear</span>
+              <span>TDK INMP441 / ICS-43434 24-bit MEMS</span>
             </div>
-            <span className="text-xs font-mono text-slate-500">100 Hz to 6,000 Hz Sampling</span>
+            <span className="text-xs font-mono text-slate-500">100 Hz to 6,000 Hz Sampling (CMSIS-DSP FFT)</span>
           </div>
 
           <div className="space-y-4 max-w-4xl">
@@ -329,7 +329,7 @@ export function SystemSection() {
               The Acoustic Frequency Analyzer.
             </h2>
             <p className="text-lg sm:text-xl text-slate-300 leading-relaxed font-normal">
-              Why monitor hive acoustics? Because acoustic frequency shifts precede visual physical symptoms by up to 24 hours. Our <strong className="text-white">24-bit digital acoustic ear</strong> detects queen emergence piping, Varroa stress buzzing, and pre-swarm harmonic surges long before swarms leave the apiary.
+              Acoustic frequency shifts precede visual physical symptoms by up to 24 hours. Our <strong className="text-white">TDK INMP441 24-bit I2S microphone</strong> performs 128-point CMSIS-DSP FFT on the ARM Cortex-M4F MCU to detect queen emergence piping, Varroa grooming buzzes, and pre-swarm harmonic surges.
             </p>
           </div>
 
@@ -399,12 +399,12 @@ export function SystemSection() {
           </div>
         </div>
 
-        {/* 5. Stripe / Apple Wallet Honey Chain Cryptographic Provenance: /images/honey_chain_jar.jpg */}
+        {/* 5. Honey Chain Cryptographic Provenance: /images/honey_chain_jar.jpg */}
         <div id="honey_chain" className="space-y-8">
           <div className="flex flex-wrap items-center gap-3">
             <div className="inline-flex items-center gap-2 bg-slate-900 border border-amber-500/40 text-amber-300 px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.15)]">
               <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-              <span>Stripe / Apple Wallet Cryptographic Ledger</span>
+              <span>Honey Chain SHA-256 Merkle Provenance</span>
             </div>
             <span className="text-xs font-mono text-slate-400">Verifiable Honey Chain Batch Pass</span>
           </div>

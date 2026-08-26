@@ -38,8 +38,8 @@ const AI_DIAGNOSTICS: DiagnosticModel[] = [
     category: "Vital Colony Health",
     metric: "100.00%",
     metricLabel: "Queenless Recall",
-    description: "Detects queen loss, supersedure, or drone-laying emergencies within 2 hours by fusing brood thermal stability and queen piping harmonics.",
-    sensors: ["TI TMP117 (±0.05°C)", "TDK MEMS Mic (250Hz)"],
+    description: "Detects queen loss, supersedure, or drone-laying emergencies within 2 hours by fusing TI TMP117 (±0.05°C) brood core stability and TDK INMP441 250Hz queen piping harmonics.",
+    sensors: ["TI TMP117 (±0.05°C RTD)", "TDK INMP441 (250Hz FFT)"],
     icon: <Activity className="w-5 h-5 text-emerald-400" />,
     status: "CRITICAL",
   },
@@ -49,74 +49,74 @@ const AI_DIAGNOSTICS: DiagnosticModel[] = [
     category: "Parasitic Pathology",
     metric: "96.84%",
     metricLabel: "Out-of-Sample Acc",
-    description: "Analyzes micro-vibrational agitation and grooming wing-buzz perturbations to calculate colony mite load before economic injury thresholds.",
-    sensors: ["3-Axis IMU Jitter", "I2S Acoustic STFT"],
+    description: "Analyzes STMicroelectronics LIS3DH 3-axis micro-vibrational agitation and grooming wing-buzz perturbations to calculate colony mite load before economic injury thresholds.",
+    sensors: ["ST LIS3DH 3-Axis IMU", "TDK INMP441 24-bit I2S"],
     icon: <Bug className="w-5 h-5 text-rose-400" />,
     status: "CRITICAL",
   },
   {
     id: 3,
-    name: "Swarm Departure Forecast",
+    name: "Pre-Swarm Departure Forecast",
     category: "Behavioral Prediction",
     metric: "24 Hours",
     metricLabel: "Early Warning",
-    description: "Identifies the classic 450 Hz harmonic escalation and pre-swarm brood temperature ramp, giving beekeepers time to split colonies.",
-    sensors: ["Acoustic FFT (450Hz)", "Sensirion SHT45"],
+    description: "Identifies the classic 450 Hz harmonic escalation and pre-swarm brood core temperature ramp, allowing apiary managers to execute Demaree splits.",
+    sensors: ["128-pt CMSIS-DSP FFT", "TI TMP117 + Sensirion SHT45"],
     icon: <Zap className="w-5 h-5 text-amber-400" />,
     status: "PREDICTIVE",
   },
   {
     id: 4,
-    name: "Foulbrood (AFB / EFB) Odor",
+    name: "Foulbrood (AFB / EFB) Odor Markers",
     category: "Pathogen Biosecurity",
     metric: "sub-PPM",
-    metricLabel: "VOC Sensitivity",
-    description: "Bosch BME688 AI gas scanner detects Paenibacillus larvae volatile organic decomposition profiles weeks before visual frame rot.",
-    sensors: ["Bosch BME688 VOC", "Internal Humidity"],
+    metricLabel: "MOX Sensitivity",
+    description: "Bosch BME688 8-channel MOX gas sensor detects Paenibacillus larvae volatile 4-Allylanisole decomposition profiles weeks before visual frame rot.",
+    sensors: ["Bosch BME688 8-Ch MOX", "Sensirion SHT45 RH"],
     icon: <Skull className="w-5 h-5 text-purple-400" />,
     status: "CRITICAL",
   },
   {
     id: 5,
-    name: "Winter Cluster Thermal Stability",
+    name: "Winter Cluster Core Thermoregulation",
     category: "Overwintering",
     metric: "±0.05°C",
     metricLabel: "Sensor Precision",
     description: "Monitors core cluster temperature and honey mantle thermal boundary during sub-zero ambient freezes to prevent colony freeze-out.",
-    sensors: ["TMP117 Brood Temp", "Ambient Delta-T"],
+    sensors: ["TI TMP117 Core RTD", "Sensirion SHT45 Ambient"],
     icon: <ThermometerSnowflake className="w-5 h-5 text-sky-400" />,
     status: "CONTINUOUS",
   },
   {
     id: 6,
-    name: "Robbing & Wasp Invasion",
+    name: "Robbing & Yellowjacket Defense",
     category: "Colony Defense",
     metric: "< 5 ms",
     metricLabel: "Edge Latency",
-    description: "Detects high-energy acoustic turbulence and entrance fight frequencies during yellowjacket and robber bee attacks for instant push alerts.",
-    sensors: ["High-Freq Audio (800Hz+)", "IMU Shock"],
+    description: "Detects 800+ Hz acoustic turbulence and entrance fight frequencies during yellowjacket and robber bee attacks for instant LoRa push alerts.",
+    sensors: ["TDK INMP441 (800Hz+)", "ST LIS3DH Shock Alert"],
     icon: <ShieldAlert className="w-5 h-5 text-amber-400" />,
     status: "CRITICAL",
   },
   {
     id: 7,
-    name: "Starvation & Honey Depletion",
+    name: "Nectar Flow & Honey Depletion",
     category: "Resource Tracking",
-    metric: "Daily",
-    metricLabel: "Depletion Trend",
-    description: "Tracks thermal heat capacity dissipation and nocturnal foraging silence to alert apiary managers before emergency sugar feeding is required.",
-    sensors: ["Brood Thermal Gradient", "HX711 Scale Delta"],
+    metric: "+1.84 kg/d",
+    metricLabel: "Flow Delta",
+    description: "Avia HX711 24-bit differential ADC tracks diurnal foraging gains and nocturnal evaporation, predicting superseding honey flow vs starvation.",
+    sensors: ["Avia HX711 24-bit ADC", "200kg Aviation Load Cell"],
     icon: <TrendingDown className="w-5 h-5 text-amber-500" />,
     status: "PREDICTIVE",
   },
   {
     id: 8,
-    name: "Pesticide Exposure Spikes",
+    name: "Pesticide & Alarm Pheromone Spikes",
     category: "Environmental Toxins",
     metric: "Real-Time",
     metricLabel: "Anomaly Filter",
-    description: "Identifies acute neurotoxin exposure via sudden worker tremor spikes, erratic wing frequencies, and abnormal flight cessation.",
-    sensors: ["3-Axis Micro-Jitter", "Acoustic Spectrum"],
+    description: "Bosch BME688 MOX gas sensor detects Isopentyl Acetate alarm pheromone surges combined with sudden ST LIS3DH worker tremor spikes.",
+    sensors: ["Bosch BME688 (Isopentyl)", "ST LIS3DH Micro-Jitter"],
     icon: <Flame className="w-5 h-5 text-rose-500" />,
     status: "CRITICAL",
   },
@@ -169,12 +169,12 @@ export function EdgeAISection() {
                   <span>Tier 1: On-Node TinyML 1D-CNN</span>
                 </span>
                 <span className="text-[10px] font-mono bg-amber-500/10 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded">
-                  nRF52840 MCU
+                  Nordic nRF52840
                 </span>
               </div>
               <h3 className="text-lg font-bold text-white">Ultra-Low-Power Edge Triage</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Micro 1D-CNN model (3,955 INT8 parameters) fitting in <strong>3.8 KB SRAM / 8.0 KB Flash</strong>. Runs in 1.12 ms with <strong>99.80% triage recall</strong>, suppressing 91.4% of redundant radio transmissions for 3.2+ years of battery autonomy.
+                Micro 1D-CNN model (3,955 INT8 parameters) fitting in <strong>3.8 KB SRAM / 8.0 KB Flash</strong>. Runs in 1.12 ms with <strong>99.80% triage recall</strong> on ARM Cortex-M4F, suppressing 91.4% of redundant radio transmissions for 3.2+ years of battery autonomy.
               </p>
             </div>
             <div className="pt-2 border-t border-slate-800/80 flex justify-between text-[11px] font-mono text-slate-400">
@@ -197,11 +197,11 @@ export function EdgeAISection() {
               </div>
               <h3 className="text-lg font-bold text-white">Multi-Modal Sensor &amp; 2D STFT Fusion</h3>
               <p className="text-xs text-slate-400 leading-relaxed">
-                INT8 TorchScript neural network (18.90 MB) executing on the dedicated 6 TOPS edge NPU. Processes 2D STFT acoustic spectrograms (257x256) combined with 16 physical sensor channels at <strong>298 hives/sec throughput</strong> with <strong>96.84% accuracy</strong>.
+                INT8 TorchScript neural network (18.90 MB) executing on the dedicated 6 TOPS edge NPU (Debian 64-bit / SQLite WAL). Processes 2D STFT acoustic spectrograms (257x256) combined with 16 physical sensor channels at <strong>8.2 ms inference</strong> and <strong>298 hives/sec throughput</strong> with <strong>96.84% accuracy</strong>.
               </p>
             </div>
             <div className="pt-2 border-t border-slate-800/80 flex justify-between text-[11px] font-mono text-slate-400">
-              <span>Throughput: <strong className="text-white">298 hives/s</strong></span>
+              <span>Inference: <strong className="text-white">8.2 ms (INT8)</strong></span>
               <span>GroupKFold: <strong className="text-emerald-400">96.84% Acc</strong></span>
             </div>
           </div>
@@ -287,7 +287,7 @@ export function EdgeAISection() {
               <span>Out-of-Sample Validated on 1,050,000 Real Telemetry Records</span>
             </h4>
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Zero leakage guaranteed: hives in the test set were never seen during model training. Full TorchScript binary (18.90 MB) deployed on the Antmicro CM4 Gateway Hub.
+              Zero leakage guaranteed: hives in the test set were never seen during model training. Full TorchScript binary (18.90 MB, 8.2ms latency) deployed on the Antmicro CM4 Gateway Hub.
             </p>
           </div>
           <Link
