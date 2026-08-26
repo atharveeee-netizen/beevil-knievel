@@ -1,14 +1,19 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Radio, Activity, Thermometer, Zap, ShieldCheck,
   QrCode, Search, ArrowLeft, Sparkles, Volume2,
   VolumeX, Lock, Laptop, Cpu, Network,
   Wind, Layers, Compass, Printer, Bot, Send,
-  ChevronRight, Check, Copy, X,
-  TrendingUp, Award, Database
+  ChevronRight, Check, Copy, X, AlertTriangle,
+  TrendingUp, Award, Database, Smartphone,
+  Scan, CheckCircle2, Navigation, Mic, MicOff,
+  Flame, HelpCircle, ChevronDown, CheckCheck,
+  RefreshCw, MapPin, Gauge, ShieldAlert,
+  Play, Square, Info
 } from "lucide-react";
 import { PlaydateConsole } from "@/components/PlaydateConsole";
 
@@ -53,6 +58,7 @@ export interface BlockProof {
 
 export interface HiveNode {
   id: number;
+  yard: "Yard Alpha" | "Yard Beta";
   apiaryZone: string;
   status: HiveStatus;
   healthIndex: number;
@@ -72,20 +78,24 @@ export interface HiveNode {
   blockchain: BlockProof;
   firmware: string;
   lastPingSecAgo: number;
+  gpsDistanceMeters: number;
+  gpsBearingDeg: number;
+  gpsBearingText: string;
+  tiltAngleDeg: number;
+  urgencyReason?: string;
+  recommendedAction?: string;
 }
 
 /* ============================================================================
-   SIMULATED 100-HIVE FLEET TELEMETRY GENERATOR
+   100-HIVE FLEET GENERATOR (Yard Alpha 1-50, Yard Beta 51-100)
    ============================================================================ */
 
 function generateFleetTelemetry(): HiveNode[] {
-  const zones = ["Zone Alpha (North Ridge)", "Zone Beta (Wildflower Valley)", "Zone Gamma (Clover Fields)", "Zone Delta (Forest Edge)"];
-  
   return Array.from({ length: 100 }, (_, i) => {
     const id = i + 1;
-    const zone = zones[i % zones.length];
+    const yard: "Yard Alpha" | "Yard Beta" = id <= 50 ? "Yard Alpha" : "Yard Beta";
+    const yardName = id <= 50 ? "Yard Alpha (North Ridge)" : "Yard Beta (Wildflower Valley)";
     
-    // Predetermined realistic anomaly nodes
     let status: HiveStatus = "NOMINAL";
     let peakFrequencyHz = 225 + ((id * 7) % 25);
     let dominantHarmonic = "220-250 Hz (Nominal Colony Drone)";
@@ -93,6 +103,7 @@ function generateFleetTelemetry(): HiveNode[] {
     let varroaMites = +(1.1 + ((id % 4) * 0.3)).toFixed(1);
     const weightKg = +(43.5 + ((id % 15) * 0.7)).toFixed(1);
     let deltaWeightKg = +(0.65 + ((id % 7) * 0.12)).toFixed(2);
+    let tiltAngleDeg = 0.8 + ((id % 5) * 0.2);
     
     // Thermal Profile
     const frame1 = +(32.4 + ((id % 5) * 0.1)).toFixed(1);
@@ -110,13 +121,17 @@ function generateFleetTelemetry(): HiveNode[] {
     const humidity = 58 + (id % 9);
     let ventilationStatus: GasPlume["ventilationStatus"] = "OPTIMAL";
 
-    // Node 88, 14, 67: Pre-Swarm Anomaly
-    if (id === 88 || id === 14 || id === 67) {
+    let urgencyReason: string | undefined;
+    let recommendedAction: string | undefined;
+
+    // --- ANOMALOUS HIVES FOR TRIAGE ENGINE ---
+    // 1. Hive #042 (Yard Alpha): Swarm Risk
+    if (id === 42) {
       status = "PRE_SWARM";
       peakFrequencyHz = 485;
-      dominantHarmonic = "450-500 Hz (Swarm Piping & Wing Buzz)";
-      healthIndex = 76;
-      frame3 = 36.8; // Brood nest pre-heating
+      dominantHarmonic = "450-520 Hz (Virgin Queen Piping & Swarm Buzz)";
+      healthIndex = 72;
+      frame3 = 36.8;
       frame2 = 35.9;
       frame4 = 35.8;
       cusumScore = 2.45;
@@ -125,33 +140,52 @@ function generateFleetTelemetry(): HiveNode[] {
       isopentylAcetate = 58;
       ventilationStatus = "FANNING_ACTIVE";
       deltaWeightKg = -0.15;
+      urgencyReason = "485 Hz queen piping detected + Brood pre-heating (+2.45°C CUSUM drift). Estimated swarm departure within 18 hours.";
+      recommendedAction = "Perform immediate hive split or Demaree swarm manipulation. Inspect frames 2 & 4 for queen swarm cells.";
     }
-    // Node 42, 7, 93: Queen Failure / Orphan Hive
-    else if (id === 42 || id === 7 || id === 93) {
+    // 2. Hive #015 (Yard Alpha): Queen Piping / Failure
+    else if (id === 15) {
       status = "QUEEN_FAILURE";
       peakFrequencyHz = 285;
-      dominantHarmonic = "260-310 Hz (Queenless Roar / Warble)";
-      healthIndex = 68;
-      frame3 = 33.4; // Thermal decay in brood center
-      frame2 = 33.1;
-      frame4 = 33.0;
-      cusumScore = 1.92;
+      dominantHarmonic = "260-310 Hz (Queenless Roar & Agitation Warble)";
+      healthIndex = 64;
+      frame3 = 33.1;
+      frame2 = 32.8;
+      frame4 = 32.9;
+      cusumScore = 1.95;
       cusumDriftStatus = "BROOD_CHILL_RISK";
-      scd41Co2 = 920;
-      isopentylAcetate = 74; // Agitation scent
+      scd41Co2 = 910;
+      isopentylAcetate = 74;
       deltaWeightKg = 0.05;
+      urgencyReason = "Queenless acoustic roar at 285 Hz with brood chill risk (33.1°C core). High alarm pheromone detected (74/100).";
+      recommendedAction = "Verify queen presence or introduce mated caged queen. Check for emergency supersedure cups.";
     }
-    // Node 23, 51: Varroa Mite Surge
-    else if (id === 23 || id === 51) {
+    // 3. Hive #073 (Yard Beta): Varroa Mite Surge
+    else if (id === 73) {
       status = "VARROA_SURGE";
       peakFrequencyHz = 340;
-      dominantHarmonic = "320-370 Hz (Grooming Agitation & High Mite Stress)";
-      healthIndex = 61;
-      varroaMites = 5.2;
-      cusumScore = 1.35;
+      dominantHarmonic = "320-370 Hz (Grooming Agitation & DWV Viral Stress)";
+      healthIndex = 58;
+      varroaMites = 5.4;
+      cusumScore = 1.42;
       cusumDriftStatus = "THERMAL_DRIFT_ALERT";
-      bme688Voc = 85; // Odor shift due to DWV viral load
-      deltaWeightKg = +0.22;
+      bme688Voc = 82;
+      isopentylAcetate = 44;
+      deltaWeightKg = +0.18;
+      urgencyReason = "Varroa density critical at 5.4 mites/100 bees (threshold 3.0). High frequency grooming agitation (340 Hz).";
+      recommendedAction = "Apply immediate formic acid flash vapor or thymol treatment pad. Screen bottom board count in 48 hrs.";
+    }
+    // 4. Hive #088 (Yard Beta): Tilt / Tamper Alert
+    else if (id === 88) {
+      status = "TAMPER";
+      peakFrequencyHz = 390;
+      dominantHarmonic = "380-420 Hz (Physical Disturbance Vibration)";
+      healthIndex = 69;
+      tiltAngleDeg = 14.2;
+      isopentylAcetate = 68;
+      cusumScore = 1.15;
+      urgencyReason = "Accelerometer detects 14.2° tilt displacement (bear / wind gust tamper alert). Elevated cluster agitation.";
+      recommendedAction = "Physically realign hive stand and strap ratchet securely. Check outer lid seal and entrance reducer.";
     }
 
     const hops = id <= 25 ? 1 : id <= 70 ? 2 : 3;
@@ -161,9 +195,15 @@ function generateFleetTelemetry(): HiveNode[] {
       ? [`Node #${String(id).padStart(3, "0")}`, `Relay #${String((id * 3) % 25 + 1).padStart(3, "0")}`, "Antmicro CM4 Base Station"]
       : [`Node #${String(id).padStart(3, "0")}`, `Relay #${String(id + 4).padStart(3, "0")}`, `Relay #${String(12).padStart(3, "0")}`, "Antmicro CM4 Base Station"];
 
+    const gpsDistanceMeters = 8 + (id * 3.4) % 180;
+    const bearings = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+    const gpsBearingDeg = (id * 47) % 360;
+    const gpsBearingText = bearings[Math.floor(gpsBearingDeg / 45) % 8];
+
     return {
       id,
-      apiaryZone: zone,
+      yard,
+      apiaryZone: yardName,
       status,
       healthIndex,
       weightKg,
@@ -208,7 +248,13 @@ function generateFleetTelemetry(): HiveNode[] {
         moisturePct: +(16.8 + (id % 5) * 0.2).toFixed(1)
       },
       firmware: "v3.4.2-int8-edge",
-      lastPingSecAgo: (id % 12) + 1
+      lastPingSecAgo: (id % 12) + 1,
+      gpsDistanceMeters: Math.round(gpsDistanceMeters),
+      gpsBearingDeg,
+      gpsBearingText,
+      tiltAngleDeg: +tiltAngleDeg.toFixed(1),
+      urgencyReason,
+      recommendedAction
     };
   });
 }
@@ -226,7 +272,7 @@ function generate128PointFft(centerPeakHz: number, hiveStatus: HiveStatus): { fr
   return Array.from({ length: bins }, (_, i) => {
     const freqHz = Math.round(minFreq + i * freqStep);
     
-    // Background 1/f pink noise floor in decibels (-75 to -60 dB)
+    // Background 1/f pink noise floor (-75 to -60 dB)
     let magnitudeDb = -65 - 8 * Math.log10(freqHz / 100) + Math.sin(i * 0.4) * 2.5;
 
     // Queen Right Fundamental (220-250 Hz)
@@ -258,9 +304,7 @@ function generate128PointFft(centerPeakHz: number, hiveStatus: HiveStatus): { fr
       magnitudeDb += 10;
     }
 
-    // Clamp between -80 dB and -10 dB
     magnitudeDb = Math.max(-80, Math.min(-12, magnitudeDb));
-
     const isPeak = Math.abs(freqHz - centerPeakHz) < freqStep;
 
     return { freqHz, magnitudeDb, isPeak };
@@ -268,61 +312,100 @@ function generate128PointFft(centerPeakHz: number, hiveStatus: HiveStatus): { fr
 }
 
 /* ============================================================================
-   MAIN COMPONENT: HIVEOS FLEET COMMAND CENTER
+   MAIN COMPONENT: MOBILE-FIRST FIELD AGRITECH APP
    ============================================================================ */
 
-export default function HiveOSFleetCommandCenter() {
+export default function MobileFieldAgritechApp() {
   const [fleet] = useState<HiveNode[]>(generateFleetTelemetry);
-  const [selectedHiveId, setSelectedHiveId] = useState<number>(88); // Default to interesting Pre-Swarm node
-  const [activeFilter, setActiveFilter] = useState<string>("ALL");
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<"DIAGNOSTICS" | "FFT_AUDIO" | "THERMAL" | "GAS_PLUME" | "CHAIN_EXPLORER" | "GEMMA_AI" | "PLAYDATE">("DIAGNOSTICS");
-  const [audioToneActive, setAudioToneActive] = useState<boolean>(false);
-  const [customHarmonicFreq, setCustomHarmonicFreq] = useState<number | null>(null);
-  const [isQrCertModalOpen, setIsQrCertModalOpen] = useState<boolean>(false);
-  const [isCopiedHash, setIsCopiedHash] = useState<boolean>(false);
+  const [currentTab, setCurrentTab] = useState<"TRIAGE" | "YARDS" | "SCAN" | "PROVENANCE" | "ADVISOR">("TRIAGE");
   
-  // SLM Gemma-2B Conversation State
+  // Inspected state for field triage (Set of hive IDs)
+  const [inspectedHiveIds, setInspectedHiveIds] = useState<Set<number>>(new Set());
+  
+  // Selected Hive for Deep Inspector Modal/Sheet
+  const [selectedHiveId, setSelectedHiveId] = useState<number | null>(42);
+  const [isInspectorOpen, setIsInspectorOpen] = useState<boolean>(false);
+  const [inspectorSubTab, setInspectorSubTab] = useState<"OVERVIEW" | "FFT" | "THERMAL" | "GAS" | "CHAIN" | "PLAYDATE">("OVERVIEW");
+  
+  // Active Yard Filter for Yards Tab
+  const [selectedYard, setSelectedYard] = useState<"Yard Alpha" | "Yard Beta">("Yard Alpha");
+  const [yardSearchQuery, setYardSearchQuery] = useState<string>("");
+
+  // Triage filter: show only anomalous or all
+  const [triageFilter, setTriageFilter] = useState<"ANOMALOUS_ONLY" | "ALL">("ANOMALOUS_ONLY");
+
+  // Web Audio Synthesizer State
+  const [audioToneActive, setAudioToneActive] = useState<boolean>(false);
+  const [activeToneFreq, setActiveToneFreq] = useState<number | null>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const oscRef = useRef<OscillatorNode | null>(null);
+
+  // Web Speech API Voice Synthesizer State
+  const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
+
+  // NFC & QR Scanner State
+  const [isScanningNfc, setIsScanningNfc] = useState<boolean>(false);
+  const [scannedHiveResult, setScannedHiveResult] = useState<HiveNode | null>(null);
+  const [scanSuccessAnim, setScanSuccessAnim] = useState<boolean>(false);
+
+  // Compass Navigation Modal State
+  const [navTargetHive, setNavTargetHive] = useState<HiveNode | null>(null);
+
+  // Honey Chain Jar Modal
+  const [isJarCertOpen, setIsJarCertOpen] = useState<boolean>(false);
+  const [isCopiedHash, setIsCopiedHash] = useState<boolean>(false);
+
+  // SLM Gemma-2B Assistant State
   const [chatMessages, setChatMessages] = useState<Array<{ role: "user" | "gemma"; text: string; time: string }>>([
     {
       role: "gemma",
-      text: "⚡ HiveOS Edge Gemma-2B quantized SLM active. All 16 sensors synchronized. Node #088 shows elevated 485Hz harmonic piping and positive CUSUM thermal drift (+2.45). Swarm departure forecast: 18.5 hours. How can I assist with apiary mitigation?",
-      time: "14:08:12"
+      text: "⚡ HiveOS Edge Gemma-2B SLM online. I am monitoring all 100 hives across Yard Alpha and Beta. Hive #042 requires immediate swarm mitigation. Tap 'Read Voice Briefing' or speak any question.",
+      time: "14:20:00"
     }
   ]);
-  const [inputMessage, setInputMessage] = useState<string>("");
-  const [isStreamingGemma, setIsStreamingGemma] = useState<boolean>(false);
+  const [chatInput, setChatInput] = useState<string>("");
+  const [isGemmaThinking, setIsGemmaThinking] = useState<boolean>(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  // Audio Tone Generator (Web Audio API Synthesizer)
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const oscRef = useRef<OscillatorNode | null>(null);
-  const gainRef = useRef<GainNode | null>(null);
+  // Frame presentation toggle (Desktop Phone Frame Bezel vs Full Wide Screen)
+  const [viewMode, setViewMode] = useState<"PHONE_FRAME" | "FULL_WIDTH">("PHONE_FRAME");
 
+  // Selected Hive object
   const currentHive = useMemo(() => {
-    return fleet.find((h) => h.id === selectedHiveId) || fleet[0];
+    const id = selectedHiveId ?? 42;
+    return fleet.find((h) => h.id === id) || fleet[0];
   }, [fleet, selectedHiveId]);
 
-  const selectedHarmonicFreq = customHarmonicFreq ?? currentHive.peakFrequencyHz;
+  // Anomalous Hives count & list
+  const anomalousHives = useMemo(() => {
+    return fleet.filter((h) => h.status !== "NOMINAL");
+  }, [fleet]);
 
-  // Compute 128-pt FFT Spectrum for the selected Hive
+  const nominalHives = useMemo(() => {
+    return fleet.filter((h) => h.status === "NOMINAL");
+  }, [fleet]);
+
+  // 128-pt FFT Spectrum data for selected hive
+  const selectedFreq = activeToneFreq ?? currentHive.peakFrequencyHz;
   const fftSpectrum = useMemo(() => {
-    return generate128PointFft(selectedHarmonicFreq, currentHive.status);
-  }, [selectedHarmonicFreq, currentHive.status]);
+    return generate128PointFft(selectedFreq, currentHive.status);
+  }, [selectedFreq, currentHive.status]);
 
-  // Audio Synthesizer Control
-  const toggleAudioTone = (freq?: number) => {
-    const targetFreq = freq || selectedHarmonicFreq;
+  // Web Audio Tone Synthesis
+  const toggleAudioTone = useCallback((freq?: number) => {
+    const targetFreq = freq || currentHive.peakFrequencyHz;
+    
     if (audioToneActive) {
       if (oscRef.current) {
         try {
           oscRef.current.stop();
           oscRef.current.disconnect();
         } catch {
-          // ignore cleanup error
+          // ignore
         }
       }
       setAudioToneActive(false);
+      setActiveToneFreq(null);
     } else {
       try {
         const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -332,29 +415,22 @@ export default function HiveOSFleetCommandCenter() {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
 
-        osc.type = "sawtooth"; // Rich harmonic buzz typical of honeybees
+        osc.type = "sawtooth";
         osc.frequency.setValueAtTime(targetFreq, ctx.currentTime);
-
-        gain.gain.setValueAtTime(0.08, ctx.currentTime); // Safe volume
+        gain.gain.setValueAtTime(0.09, ctx.currentTime);
 
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start();
 
         oscRef.current = osc;
-        gainRef.current = gain;
         setAudioToneActive(true);
+        setActiveToneFreq(targetFreq);
       } catch (err) {
-        console.warn("Audio Context init error:", err);
+        console.warn("Audio init failed:", err);
       }
     }
-  };
-
-  useEffect(() => {
-    if (audioToneActive && oscRef.current && audioCtxRef.current) {
-      oscRef.current.frequency.setValueAtTime(selectedHarmonicFreq, audioCtxRef.current.currentTime);
-    }
-  }, [selectedHarmonicFreq, audioToneActive]);
+  }, [audioToneActive, currentHive.peakFrequencyHz]);
 
   useEffect(() => {
     return () => {
@@ -362,822 +438,835 @@ export default function HiveOSFleetCommandCenter() {
         try {
           oscRef.current.stop();
         } catch {
-          // ignore cleanup error
+          // ignore
         }
+      }
+      if (typeof window !== "undefined" && window.speechSynthesis) {
+        window.speechSynthesis.cancel();
       }
     };
   }, []);
 
-  // Filter and Search Logic for 100 Hives
-  const filteredFleet = useMemo(() => {
-    return fleet.filter((hive) => {
-      const matchesFilter =
-        activeFilter === "ALL" ||
-        (activeFilter === "NOMINAL" && hive.status === "NOMINAL") ||
-        (activeFilter === "PRE_SWARM" && hive.status === "PRE_SWARM") ||
-        (activeFilter === "QUEEN_FAILURE" && hive.status === "QUEEN_FAILURE") ||
-        (activeFilter === "VARROA_SURGE" && hive.status === "VARROA_SURGE") ||
-        (activeFilter === "TAMPER" && hive.status === "TAMPER");
+  // Web Speech API Voice Debrief
+  const speakText = (text: string) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      alert("Web Speech API not supported on this browser.");
+      return;
+    }
 
-      const q = searchQuery.trim().toLowerCase();
-      const matchesSearch =
-        q === "" ||
-        hive.id.toString().includes(q) ||
-        hive.apiaryZone.toLowerCase().includes(q) ||
-        hive.status.toLowerCase().includes(q) ||
-        hive.dominantHarmonic.toLowerCase().includes(q);
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
 
-      return matchesFilter && matchesSearch;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 1.05;
+    utterance.pitch = 1.0;
+    
+    utterance.onstart = () => {
+      setIsSpeaking(true);
+    };
+
+    utterance.onend = () => {
+      setIsSpeaking(false);
+    };
+
+    utterance.onerror = () => {
+      setIsSpeaking(false);
+    };
+
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const stopSpeech = () => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+    }
+  };
+
+  // Mark Hive Inspected Toggle
+  const toggleInspectHive = (id: number, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setInspectedHiveIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
     });
-  }, [fleet, activeFilter, searchQuery]);
+  };
 
-  // Aggregate Metrics for Fleet KPI Banner
-  const nominalCount = fleet.filter((h) => h.status === "NOMINAL").length;
-  const swarmCount = fleet.filter((h) => h.status === "PRE_SWARM").length;
-  const queenCount = fleet.filter((h) => h.status === "QUEEN_FAILURE").length;
-  const varroaCount = fleet.filter((h) => h.status === "VARROA_SURGE").length;
-  const totalDailyFlux = fleet.reduce((acc, h) => acc + h.deltaWeightKg, 0).toFixed(1);
-
-  // Gemma-2B Simulated Apicultural SLM Inference
-  const handleSendGemma = (customPrompt?: string) => {
-    const query = customPrompt || inputMessage;
-    if (!query.trim()) return;
-
-    const userTime = new Date().toLocaleTimeString("en-US", { hour12: false });
-    const newMsg = { role: "user" as const, text: query, time: userTime };
-    setChatMessages((prev) => [...prev, newMsg]);
-    if (!customPrompt) setInputMessage("");
-    setIsStreamingGemma(true);
+  // Trigger NFC / QR Scan Simulation
+  const handleSimulateNfcScan = (targetHiveId?: number) => {
+    setIsScanningNfc(true);
+    setScannedHiveResult(null);
+    setScanSuccessAnim(false);
 
     setTimeout(() => {
-      let gemmaResponse = "";
+      const matched = targetHiveId
+        ? fleet.find((h) => h.id === targetHiveId) || fleet[0]
+        : fleet[Math.floor(Math.random() * fleet.length)];
+      
+      setScannedHiveResult(matched);
+      setIsScanningNfc(false);
+      setScanSuccessAnim(true);
+      setSelectedHiveId(matched.id);
+    }, 1200);
+  };
+
+  // Gemma Chat Dispatch
+  const handleSendGemmaMessage = (customPrompt?: string) => {
+    const query = customPrompt || chatInput;
+    if (!query.trim()) return;
+
+    const time = new Date().toLocaleTimeString("en-US", { hour12: false });
+    setChatMessages((prev) => [...prev, { role: "user", text: query, time }]);
+    if (!customPrompt) setChatInput("");
+    setIsGemmaThinking(true);
+
+    setTimeout(() => {
+      let reply = "";
       const q = query.toLowerCase();
 
-      if (q.includes("swarm") || q.includes("450hz") || q.includes("485")) {
-        gemmaResponse = `🐝 [Gemma-2B On-Device Inference]: Hive #${String(currentHive.id).padStart(3, "0")} is displaying diagnostic pre-swarm telemetry. Acoustic signature shows a prominent 485 Hz primary peak (+32 dBV elevation over nominal 225 Hz drone). Concurrently, Core Brood Frame 3 has drifted to 36.8°C with a CUSUM score of +2.45, indicating cluster pre-heating before departure. CO2 is elevated at ${currentHive.gas.scd41Co2Ppm} ppm due to high fanning respiration.\n\nRecommended Action:\n1. Perform immediate split or Demaree swarm control.\n2. Verify queen cup / swarm cell development on frame 2 & 4.\n3. Expand brood chamber with 2 drawn supers.`;
-      } else if (q.includes("cusum") || q.includes("thermal") || q.includes("gradient")) {
-        gemmaResponse = `🌡️ [Gemma-2B On-Device Inference]: Analysis of the 5-point thermal gradient for Hive #${String(currentHive.id).padStart(3, "0")}:\n- Outer Frames (1 & 5): ${currentHive.thermal.frame1OuterLeft}°C / ${currentHive.thermal.frame5OuterRight}°C\n- Brood Nest (Frame 3 Core): ${currentHive.thermal.frame3CoreQueen}°C (Target: 34.5°C - 35.5°C)\n- CUSUM Statistical Drift: ${currentHive.thermal.cusumScore} (${currentHive.thermal.cusumDriftStatus.replace(/_/g, " ")})\n\nThe cumulative sum algorithm confirms ${currentHive.thermal.cusumScore > 1.5 ? "significant thermoregulatory anomaly requiring physical inspection." : "healthy homeostatic thermal stability maintained by nurse bees."}`;
-      } else if (q.includes("varroa") || q.includes("mite") || q.includes("treatment")) {
-        gemmaResponse = `🔬 [Gemma-2B On-Device Inference]: Varroa mite density for Hive #${String(currentHive.id).padStart(3, "0")} is currently ${currentHive.varroaMitesPer100} mites/100 bees (${currentHive.varroaMitesPer100 > 3 ? "CRITICAL THRESHOLD EXCEEDED" : "Within Economic Threshold"}).\nAcoustic agitation peak detected at ${currentHive.peakFrequencyHz} Hz. BME688 VOC resistance is ${currentHive.gas.bme688VocKohm} kΩ.\n\nAction: If >3.0%, apply formic acid vaporization or thymol pads while monitoring core brood temperature to prevent queen suppression.`;
-      } else if (q.includes("certificate") || q.includes("blockchain") || q.includes("hash")) {
-        gemmaResponse = `⛓️ [Gemma-2B On-Device Inference]: Sealed Blockchain Block #${currentHive.blockchain.blockNumber} with Merkle Root ${currentHive.blockchain.merkleRoot.substring(0, 12)}...\nOrganic certification ID: ${currentHive.blockchain.organicCertId}.\nPurity: ${currentHive.blockchain.purityPct}% ${currentHive.blockchain.floralSource}.\nClick "Print QR Certificate" to render the tamper-proof cryptographically signed batch certificate.`;
+      if (q.includes("swarm") || q.includes("42") || q.includes("485")) {
+        reply = `🐝 **Swarm Mitigation Protocol for Hive #042**:\n1. **Diagnostic**: 485 Hz piping buzz detected + 36.8°C core brood nest pre-heating with positive CUSUM drift (+2.45).\n2. **Immediate Action**: Perform a Pagden / Demaree split or remove queen with 2 brood frames to a 5-frame nuc box.\n3. **Add Supers**: Place 2 drawn wax supers above queen excluder to alleviate congestion.`;
+      } else if (q.includes("varroa") || q.includes("73") || q.includes("mite")) {
+        reply = `🔬 **Varroa Surge Protocol for Hive #073**:\n1. **Diagnostic**: 5.4 mites / 100 bees (threshold is 3.0%). Agitation buzz at 340 Hz.\n2. **Immediate Action**: Apply Formic Pro (2 strips) or Apivar amitraz strips if daytime temps allow.\n3. **Follow-up**: Re-test natural mite fall count on bottom inspection board in 48 hours.`;
+      } else if (q.includes("queen") || q.includes("15") || q.includes("roar")) {
+        reply = `👑 **Queen Failure Protocol for Hive #015**:\n1. **Diagnostic**: 285 Hz queenless roar + brood nest cooling to 33.1°C with 74/100 alarm pheromone.\n2. **Immediate Action**: Inspect for emergency queen cells. Introduce a mated Italian/Carniolan queen in a candy-plugged introduction cage.`;
+      } else if (q.includes("debrief") || q.includes("summary") || q.includes("report")) {
+        reply = `📋 **Daily Apiary Field Summary**:\n- Total Active Fleet: 100 hives across Yard Alpha & Beta (100% online LoRa mesh).\n- Status: 96 Nominal, 4 Action Required (#042 Swarm, #015 Queen, #073 Varroa, #088 Tilt).\n- Daily Honey Flow: +48.2 kg total flux (+0.65 kg/hive avg).\n- Immediate Priority: Inspect Hive #042 in Yard Alpha first.`;
       } else {
-        gemmaResponse = `⚡ [Gemma-2B Edge Engine]: Telemetry summary for Hive #${String(currentHive.id).padStart(3, "0")} (${currentHive.apiaryZone}):\n- Health Index: ${currentHive.healthIndex}%\n- Bio-Acoustic Peak: ${currentHive.peakFrequencyHz} Hz (${currentHive.dominantHarmonic})\n- Core Temp: ${currentHive.thermal.frame3CoreQueen}°C | CO2: ${currentHive.gas.scd41Co2Ppm} ppm\n- Daily Honey Flux: +${currentHive.deltaWeightKg} kg/day | LoRa Hops: ${currentHive.hops}\nStatus: ${currentHive.status.replace(/_/g, " ")}. All edge INT8 models executing nominally at 8.2ms latency.`;
+        reply = `⚡ **Gemma-2B On-Device AI**: Currently analyzing Hive #${currentHive.id} (${currentHive.apiaryZone}). Core Temp is ${currentHive.thermal.frame3CoreQueen}°C, Acoustic Peak is ${currentHive.peakFrequencyHz} Hz, and CO2 is ${currentHive.gas.scd41Co2Ppm} ppm. INT8 local engine executing at 8.2ms latency with 0 cloud dependencies.`;
       }
 
-      setChatMessages((prev) => [
-        ...prev,
-        {
-          role: "gemma",
-          text: gemmaResponse,
-          time: new Date().toLocaleTimeString("en-US", { hour12: false })
-        }
-      ]);
-      setIsStreamingGemma(false);
-      setTimeout(() => {
-        chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    }, 450);
+      setChatMessages((prev) => [...prev, { role: "gemma", text: reply, time: new Date().toLocaleTimeString("en-US", { hour12: false }) }]);
+      setIsGemmaThinking(false);
+      setTimeout(() => chatEndRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
+    }, 400);
   };
 
   const copyBlockHash = (hash: string) => {
-    navigator.clipboard.writeText(hash);
-    setIsCopiedHash(true);
-    setTimeout(() => setIsCopiedHash(false), 2000);
+    if (typeof navigator !== "undefined") {
+      navigator.clipboard.writeText(hash);
+      setIsCopiedHash(true);
+      setTimeout(() => setIsCopiedHash(false), 2000);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#090d16] text-slate-100 flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
-      
+    <div className="min-h-screen bg-[#060911] text-slate-100 flex flex-col items-center justify-start selection:bg-amber-500/30 selection:text-amber-200 antialiased font-sans py-0 md:py-6 px-0 md:px-4">
+
       {/* ====================================================================
-          TOP APPLICATION HEADER & ENTERPRISE COMMAND BAR
+          TOP GLOBAL CONTROLS & DESKTOP TOOLBAR
           ==================================================================== */}
-      <header className="bg-[#0f172a]/95 backdrop-blur-md border-b border-slate-800 px-4 sm:px-6 lg:px-8 py-3 sticky top-0 z-40 shadow-2xl">
-        <div className="max-w-[1720px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-          
-          {/* Brand & Breadcrumbs */}
-          <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-xs font-mono font-semibold bg-slate-800/80 hover:bg-amber-500 hover:text-slate-950 px-3 py-1.5 rounded-lg border border-slate-700/60 transition-all text-slate-300 shadow-sm"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Landing Page</span>
-            </Link>
-
-            <div className="h-4 w-px bg-slate-700 hidden sm:block" />
-
-            <div className="flex items-center gap-2.5">
-              <div className="relative flex items-center justify-center">
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping absolute" />
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-500 relative" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="font-extrabold text-base sm:text-lg tracking-tight text-white">
-                    HiveOS <span className="text-amber-400 font-mono text-xs px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">FLEET COMMAND CENTER</span>
-                  </span>
-                  <span className="text-[11px] font-mono text-cyan-400 bg-cyan-950/60 border border-cyan-800/50 px-2 py-0.5 rounded-full font-bold hidden lg:inline-flex items-center gap-1">
-                    <Zap className="w-3 h-3" /> INT8 Micro-Engine 8.2ms
-                  </span>
-                </div>
-              </div>
-            </div>
+      <header className="w-full max-w-5xl mb-2 sm:mb-4 px-3 sm:px-4 py-2 flex items-center justify-between border-b border-slate-800/60 text-xs font-mono text-slate-400">
+        <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 bg-slate-900/90 hover:bg-amber-500 hover:text-slate-950 text-slate-300 px-3 py-1.5 rounded-lg border border-slate-800 transition-all font-semibold"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Landing Page</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-extrabold text-white text-sm tracking-tight font-sans">
+              HiveOS <span className="text-amber-400 text-xs font-mono px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">MOBILE FIELD EDITION</span>
+            </span>
           </div>
+        </div>
 
-          {/* Quick Nav Switcher & Live Connection Status */}
-          <div className="flex items-center gap-2 sm:gap-4 w-full md:w-auto justify-end overflow-x-auto pb-1 md:pb-0 text-xs font-mono">
-            <div className="flex items-center gap-1.5 bg-slate-900/80 border border-slate-800 px-3 py-1 rounded-lg text-slate-400">
-              <Radio className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-              <span className="text-slate-200 font-bold">LoRaWAN Mesh 915MHz</span>
-              <span className="text-slate-500 hidden sm:inline">| Antmicro Gateway</span>
-            </div>
-
+        {/* Viewport Width Toggle & Quick Links */}
+        <div className="flex items-center gap-2">
+          {/* Hands-Free Voice Audio indicator if speaking */}
+          {isSpeaking && (
             <button
-              onClick={() => setIsQrCertModalOpen(true)}
-              className="flex items-center gap-1.5 bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 px-3 py-1 rounded-lg transition-all font-semibold"
+              onClick={stopSpeech}
+              className="flex items-center gap-1.5 bg-rose-500/20 text-rose-300 border border-rose-500/40 px-2.5 py-1 rounded-lg animate-pulse"
+              title="Stop voice briefing"
             >
-              <QrCode className="w-3.5 h-3.5" />
-              <span>Honey Chain Cert</span>
+              <Square className="w-3 h-3 fill-current" />
+              <span className="text-[11px] font-bold">Speaking... (Stop)</span>
             </button>
+          )}
 
-            <button
-              onClick={() => setActiveTab("PLAYDATE")}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-lg border transition-all font-semibold ${
-                activeTab === "PLAYDATE"
-                  ? "bg-amber-400 text-slate-950 border-amber-300 shadow-md shadow-amber-500/20"
-                  : "bg-slate-800/60 hover:bg-slate-700 text-slate-300 border-slate-700"
-              }`}
-            >
-              <Laptop className="w-3.5 h-3.5" />
-              <span>Playdate Unit</span>
-            </button>
-          </div>
-
+          <button
+            onClick={() => setViewMode(viewMode === "PHONE_FRAME" ? "FULL_WIDTH" : "PHONE_FRAME")}
+            className="hidden md:flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 px-2.5 py-1 rounded-lg transition-all"
+            title="Toggle between Mobile Phone Frame container and Wide Field View"
+          >
+            <Smartphone className="w-3.5 h-3.5 text-amber-400" />
+            <span>{viewMode === "PHONE_FRAME" ? "Expand Canvas" : "Phone Frame"}</span>
+          </button>
         </div>
       </header>
 
       {/* ====================================================================
-          EXECUTIVE FLEET KPI BANNER (Linear / Samsara Enterprise Style)
+          PHONE FRAME CONTAINER / FIELD APP WRAPPER
           ==================================================================== */}
-      <section className="bg-[#0f172a] border-b border-slate-800/80 py-4 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1720px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          
-          {/* Metric 1: Total Active Nodes */}
-          <div className="bg-[#1e293b]/70 border border-slate-700/60 rounded-2xl p-3.5 sm:p-4 relative overflow-hidden flex flex-col justify-between shadow-lg group hover:border-slate-600 transition-all">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-                  <Network className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-mono font-medium text-slate-400 uppercase tracking-wider">Active Fleet Mesh</span>
-              </div>
-              <span className="text-[10px] font-mono font-bold bg-emerald-500/15 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                100% ONLINE
-              </span>
+      <div className={`w-full transition-all duration-300 relative flex flex-col ${
+        viewMode === "PHONE_FRAME"
+          ? "max-w-[430px] h-[920px] max-h-[96vh] rounded-[48px] border-[8px] border-slate-800/90 shadow-[0_25px_80px_rgba(0,0,0,0.8),0_0_40px_rgba(245,158,11,0.12)] overflow-hidden bg-[#090d16]"
+          : "max-w-4xl min-h-[850px] rounded-3xl border border-slate-800 shadow-2xl bg-[#090d16] overflow-hidden"
+      }`}>
+
+        {/* ------------------------------------------------------------------
+            PHONE STATUS BAR (Time, Cellular, Wifi, Battery)
+            ------------------------------------------------------------------ */}
+        <div className="bg-[#090d16]/95 backdrop-blur-md pt-3 px-6 pb-2 flex items-center justify-between text-[11px] font-mono font-bold text-slate-400 z-30 border-b border-slate-800/40 select-none">
+          <div className="flex items-center gap-1.5">
+            <span className="text-white font-extrabold text-xs">14:20</span>
+            <span className="text-[9px] bg-amber-500/15 text-amber-400 border border-amber-500/30 px-1 rounded">LoRa 915M</span>
+          </div>
+
+          {/* Dynamic Island / Speaker Notch in Phone Frame Mode */}
+          {viewMode === "PHONE_FRAME" && (
+            <div className="w-24 h-4 bg-slate-950 rounded-full flex items-center justify-center gap-1.5 px-2 border border-slate-800/50 shadow-inner">
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-700" />
+              <span className="w-2.5 h-1 bg-slate-800 rounded-full" />
             </div>
-            <div className="mt-2.5">
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">100</span>
-                <span className="text-xs font-mono text-slate-400">/ 100 Nodes</span>
-              </div>
-              <div className="text-[11px] font-mono text-slate-400 mt-1 flex items-center gap-2">
-                <span className="text-cyan-400 font-semibold">99.8% PDR</span>
-                <span>• 3-Hop LoRa Tree</span>
-                <span className="text-slate-500">SF7/8 Dynamic ADR</span>
+          )}
+
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 text-emerald-400">
+              <Radio className="w-3 h-3 animate-pulse" />
+              <span className="text-[10px]">99.8%</span>
+            </div>
+            <div className="flex items-center gap-0.5 text-slate-300">
+              <span className="text-[10px]">98%</span>
+              <div className="w-4 h-2 border border-slate-400 rounded-sm p-0.5 flex items-center">
+                <div className="w-full h-full bg-emerald-400 rounded-2xs" />
               </div>
             </div>
           </div>
-
-          {/* Metric 2: Fleet Health Index */}
-          <div className="bg-[#1e293b]/70 border border-slate-700/60 rounded-2xl p-3.5 sm:p-4 relative overflow-hidden flex flex-col justify-between shadow-lg group hover:border-slate-600 transition-all">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-mono font-medium text-slate-400 uppercase tracking-wider">Fleet Health Index</span>
-              </div>
-              <span className="text-[10px] font-mono font-bold bg-emerald-500/15 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                97.0% NOMINAL
-              </span>
-            </div>
-            <div className="mt-2.5">
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 tracking-tight">97.0%</span>
-                <span className="text-xs font-mono text-slate-400">Apiary Score</span>
-              </div>
-              {/* Segmented bar */}
-              <div className="w-full bg-slate-900 rounded-full h-1.5 mt-2 flex overflow-hidden">
-                <div className="bg-emerald-400 h-full" style={{ width: `${nominalCount}%` }} title={`Nominal: ${nominalCount}`} />
-                <div className="bg-amber-400 h-full" style={{ width: `${swarmCount}%` }} title={`Pre-Swarm: ${swarmCount}`} />
-                <div className="bg-yellow-500 h-full" style={{ width: `${queenCount}%` }} title={`Queen Alert: ${queenCount}`} />
-                <div className="bg-rose-500 h-full" style={{ width: `${varroaCount}%` }} title={`Varroa Surge: ${varroaCount}`} />
-              </div>
-              <div className="text-[10px] font-mono text-slate-400 mt-1.5 flex justify-between">
-                <span>{nominalCount} Nominal</span>
-                <span className="text-amber-400">{swarmCount} Swarm</span>
-                <span className="text-rose-400">{varroaCount} Mite</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Metric 3: Daily Honey Flux */}
-          <div className="bg-[#1e293b]/70 border border-slate-700/60 rounded-2xl p-3.5 sm:p-4 relative overflow-hidden flex flex-col justify-between shadow-lg group hover:border-slate-600 transition-all">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                  <TrendingUp className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-mono font-medium text-slate-400 uppercase tracking-wider">Daily Honey Flux</span>
-              </div>
-              <span className="text-[10px] font-mono font-bold bg-amber-500/15 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/30">
-                +12.4% vs 7D AVG
-              </span>
-            </div>
-            <div className="mt-2.5">
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl sm:text-3xl font-extrabold text-amber-400 tracking-tight">+{totalDailyFlux} <span className="text-base text-amber-200">kg</span></span>
-                <span className="text-xs font-mono text-slate-400">/ 24 hrs</span>
-              </div>
-              <div className="text-[11px] font-mono text-slate-400 mt-1 flex items-center justify-between">
-                <span>Avg +0.65 kg/hive</span>
-                <span className="text-emerald-400 font-semibold">Est. 4.82t Harvest</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Metric 4: Edge AI INT8 Inference */}
-          <div className="bg-[#1e293b]/70 border border-slate-700/60 rounded-2xl p-3.5 sm:p-4 relative overflow-hidden flex flex-col justify-between shadow-lg group hover:border-slate-600 transition-all">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                  <Cpu className="w-4 h-4" />
-                </div>
-                <span className="text-xs font-mono font-medium text-slate-400 uppercase tracking-wider">Edge AI Runtime</span>
-              </div>
-              <span className="text-[10px] font-mono font-bold bg-indigo-500/15 text-indigo-300 px-2 py-0.5 rounded-full border border-indigo-500/30">
-                128-PT FFT ONNX
-              </span>
-            </div>
-            <div className="mt-2.5">
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl sm:text-3xl font-extrabold text-indigo-400 tracking-tight">8.2 <span className="text-base text-indigo-200">ms</span></span>
-                <span className="text-xs font-mono text-slate-400">INT8 Inference</span>
-              </div>
-              <div className="text-[11px] font-mono text-slate-400 mt-1 flex items-center justify-between">
-                <span className="text-slate-300 font-semibold">STM32U585 On-Device</span>
-                <span className="text-indigo-300">0 Cloud Calls</span>
-              </div>
-            </div>
-          </div>
-
         </div>
-      </section>
 
-      {/* ====================================================================
-          MAIN TWO-COLUMN WORKSPACE
-          Left: 100-Hive Responsive Matrix Grid (5 cols)
-          Right: Deep Diagnostic Inspector (7 cols)
-          ==================================================================== */}
-      <main className="flex-1 max-w-[1720px] w-full mx-auto p-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
-        {/* ==================================================================
-            LEFT COLUMN: 100-HIVE RESPONSIVE MATRIX GRID & ROUTE INSPECTOR
-            ================================================================== */}
-        <div className="lg:col-span-5 flex flex-col gap-4">
-          
-          {/* 100-Hive Matrix Container Card */}
-          <div className="bg-[#0f172a] border border-slate-800 rounded-3xl p-5 shadow-2xl flex flex-col">
-            
-            {/* Header & Stats Count */}
-            <div className="flex items-center justify-between mb-3.5">
-              <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-amber-500/15 text-amber-400 border border-amber-500/20">
-                  <Database className="w-4 h-4" />
-                </div>
-                <div>
-                  <h2 className="text-base font-extrabold text-white tracking-tight">100-Hive Telemetry Matrix</h2>
-                  <p className="text-[11px] font-mono text-slate-400">Live multi-hop LoRa sensor nodes</p>
-                </div>
+        {/* ------------------------------------------------------------------
+            TOP MINI HEADER & YARD PILL SWITCHER
+            ------------------------------------------------------------------ */}
+        <div className="bg-[#0f172a]/95 border-b border-slate-800/80 px-4 py-2.5 flex items-center justify-between z-20">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400">
+              <Activity className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-white text-sm tracking-tight">Beevil Fleet</span>
+                <span className="text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.2 rounded-full font-bold">
+                  100 Nodes
+                </span>
               </div>
-              <span className="text-xs font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg">
-                {filteredFleet.length} / 100 Visible
-              </span>
+              <p className="text-[10px] font-mono text-slate-400">
+                Active Yard: <span className="text-amber-300 font-semibold">{selectedYard}</span>
+              </p>
             </div>
-
-            {/* Instant Search Bar */}
-            <div className="relative mb-3">
-              <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                placeholder="Search Node ID (#088), Zone, Status, Harmonic..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#1e293b]/90 border border-slate-700/80 rounded-xl pl-9 pr-8 py-2 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-amber-400 focus:border-amber-400 transition-all"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-
-            {/* Multi-Parameter Filter Chips */}
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              {[
-                { key: "ALL", label: `All (${fleet.length})`, color: "border-slate-700" },
-                { key: "NOMINAL", label: `Nominal (${nominalCount})`, color: "border-emerald-500/40 text-emerald-400" },
-                { key: "PRE_SWARM", label: `Pre-Swarm (${swarmCount})`, color: "border-amber-500/40 text-amber-400" },
-                { key: "QUEEN_FAILURE", label: `Queen Alert (${queenCount})`, color: "border-yellow-500/40 text-yellow-400" },
-                { key: "VARROA_SURGE", label: `Varroa Surge (${varroaCount})`, color: "border-rose-500/40 text-rose-400" },
-                { key: "TAMPER", label: "Tamper (0)", color: "border-purple-500/40 text-purple-400" }
-              ].map((chip) => {
-                const isActive = activeFilter === chip.key;
-                return (
-                  <button
-                    key={chip.key}
-                    onClick={() => setActiveFilter(chip.key)}
-                    className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold transition-all border ${
-                      isActive
-                        ? "bg-amber-400 text-slate-950 border-amber-300 font-bold shadow-md shadow-amber-500/20"
-                        : "bg-[#1e293b]/60 text-slate-300 hover:bg-slate-800 border-slate-700/60"
-                    }`}
-                  >
-                    {chip.label}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* 100 Nodes Responsive Matrix Grid */}
-            <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5 max-h-[420px] overflow-y-auto p-2 bg-[#090d16]/90 rounded-2xl border border-slate-800/80 shadow-inner custom-scrollbar">
-              {filteredFleet.map((hive) => {
-                const isSelected = hive.id === selectedHiveId;
-                
-                // Color badges based on status
-                let stateClass = "bg-[#1e293b]/70 border-slate-700/60 text-slate-300 hover:border-slate-500";
-                let statusDot = "bg-emerald-400";
-                
-                if (hive.status === "PRE_SWARM") {
-                  stateClass = "bg-amber-500/20 border-amber-500/50 text-amber-300 hover:border-amber-400 animate-pulse";
-                  statusDot = "bg-amber-400";
-                } else if (hive.status === "QUEEN_FAILURE") {
-                  stateClass = "bg-yellow-500/20 border-yellow-500/50 text-yellow-300 hover:border-yellow-400";
-                  statusDot = "bg-yellow-400";
-                } else if (hive.status === "VARROA_SURGE") {
-                  stateClass = "bg-rose-500/20 border-rose-500/50 text-rose-300 hover:border-rose-400";
-                  statusDot = "bg-rose-400";
-                } else if (hive.status === "TAMPER") {
-                  stateClass = "bg-purple-500/20 border-purple-500/50 text-purple-300 hover:border-purple-400";
-                  statusDot = "bg-purple-400";
-                }
-
-                return (
-                  <button
-                    key={hive.id}
-                    onClick={() => {
-                      setSelectedHiveId(hive.id);
-                      setCustomHarmonicFreq(null);
-                    }}
-                    className={`h-12 rounded-xl font-mono text-xs font-bold border flex flex-col items-center justify-center relative transition-all duration-150 ${stateClass} ${
-                      isSelected
-                        ? "ring-2 ring-cyan-400 border-cyan-400 bg-cyan-950/40 text-cyan-200 scale-105 z-10 shadow-lg shadow-cyan-950"
-                        : "hover:scale-102"
-                    }`}
-                    title={`Hive #${hive.id} - ${hive.status} (${hive.thermal.frame3CoreQueen}°C, ${hive.peakFrequencyHz}Hz)`}
-                  >
-                    <div className="flex items-center gap-1">
-                      <span className={`w-1.5 h-1.5 rounded-full ${statusDot}`} />
-                      <span>#{String(hive.id).padStart(2, "0")}</span>
-                    </div>
-                    <span className="text-[9px] opacity-75 font-normal">{hive.thermal.frame3CoreQueen}°C</span>
-                  </button>
-                );
-              })}
-            </div>
-
           </div>
 
-          {/* Multi-Hop Mesh Topology Route Card */}
-          <div className="bg-[#0f172a] border border-slate-800 rounded-3xl p-5 shadow-2xl space-y-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Compass className="w-4 h-4 text-cyan-400" />
-                <h3 className="text-sm font-extrabold text-white">Mesh Network Telemetry</h3>
-              </div>
-              <span className="text-[10px] font-mono bg-cyan-950 text-cyan-300 border border-cyan-800 px-2 py-0.5 rounded-full font-bold">
-                {currentHive.hops}-Hop Relay
-              </span>
-            </div>
+          {/* Quick Voice Briefing Button */}
+          <button
+            onClick={() => {
+              const summary = "Beevil Field Triage Audio Briefing: 96 hives nominal. 4 hives require immediate action. Hive 42 in Yard Alpha has swarm risk with 485 Hz piping buzz. Hive 15 shows queen failure and brood chill. Hive 73 in Yard Beta has 5.4 mites per 100 varroa surge. Hive 88 has 14 degree tilt alert.";
+              speakText(summary);
+            }}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all border ${
+              isSpeaking
+                ? "bg-amber-400 text-slate-950 border-amber-300 shadow-md shadow-amber-500/30 animate-pulse"
+                : "bg-slate-800/90 hover:bg-slate-700 text-amber-400 border-amber-500/30"
+            }`}
+            title="Listen to Hands-Free Voice Audio Debrief"
+          >
+            {isSpeaking ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
+            <span className="text-[11px]">{isSpeaking ? "Debriefing..." : "Voice Debrief"}</span>
+          </button>
+        </div>
 
-            <div className="bg-[#1e293b]/80 border border-slate-700/60 rounded-2xl p-3.5 text-xs font-mono space-y-2">
-              <div className="text-slate-400 flex justify-between">
-                <span>Active Routing Path:</span>
-                <span className="text-amber-400 font-bold">Node #{String(currentHive.id).padStart(3, "0")}</span>
-              </div>
+        {/* ------------------------------------------------------------------
+            SCROLLABLE CONTENT CANVAS (TAB BASED)
+            ------------------------------------------------------------------ */}
+        <main className="flex-1 overflow-y-auto custom-scrollbar p-3.5 sm:p-4 pb-24 space-y-4">
+          
+          {/* ================================================================
+              TAB 1: TRIAGE FEED (Farmer-First Linear / Apple Health Style)
+              ================================================================ */}
+          {currentTab === "TRIAGE" && (
+            <div className="space-y-3.5 animate-in fade-in duration-150">
               
-              {/* Route Hop Flow */}
-              <div className="flex items-center gap-2 py-1 overflow-x-auto text-[11px]">
-                {currentHive.meshRoute.map((step, idx) => (
-                  <React.Fragment key={idx}>
-                    <span className="bg-slate-900 border border-slate-700 px-2 py-1 rounded-lg text-slate-200 whitespace-nowrap font-medium">
-                      {step}
-                    </span>
-                    {idx < currentHive.meshRoute.length - 1 && (
-                      <ChevronRight className="w-3.5 h-3.5 text-slate-500 flex-shrink-0" />
-                    )}
-                  </React.Fragment>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-700/50 text-[10px] text-slate-400">
-                <div>
-                  <span className="text-slate-500 block">RSSI Signal:</span>
-                  <span className="text-white font-bold">{currentHive.rssi} dBm</span>
+              {/* Executive Status Banner */}
+              <div className="bg-gradient-to-br from-[#1e293b] to-[#0f172a] border border-slate-700/80 rounded-2xl p-4 shadow-xl relative overflow-hidden">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-bold flex items-center gap-1.5">
+                    <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />
+                    Apiary Fleet Triage Engine
+                  </span>
+                  <span className="text-[10px] font-mono bg-amber-500/15 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-bold">
+                    {inspectedHiveIds.size} / {anomalousHives.length} Inspected
+                  </span>
                 </div>
-                <div>
-                  <span className="text-slate-500 block">SNR Ratio:</span>
-                  <span className="text-emerald-400 font-bold">+{currentHive.snr} dB</span>
-                </div>
-                <div>
-                  <span className="text-slate-500 block">ADR Config:</span>
-                  <span className="text-cyan-400 font-bold">SF7 / 125kHz</span>
-                </div>
-              </div>
-            </div>
-          </div>
 
-        </div>
-
-        {/* ==================================================================
-            RIGHT COLUMN: DEEP DIAGNOSTIC INSPECTOR (ENTERPRISE MULTI-PANEL)
-            ================================================================== */}
-        <div className="lg:col-span-7 flex flex-col gap-4">
-          
-          {/* Selected Hive Header Card */}
-          <div className="bg-[#0f172a] border border-slate-800 rounded-3xl p-5 shadow-2xl space-y-4">
-            
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-mono font-extrabold text-base">
-                  #{String(currentHive.id).padStart(3, "0")}
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-lg font-extrabold text-white">{currentHive.apiaryZone}</h2>
-                    <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${
-                      currentHive.status === "NOMINAL"
-                        ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
-                        : currentHive.status === "PRE_SWARM"
-                        ? "bg-amber-500/20 text-amber-300 border-amber-500/40 animate-pulse"
-                        : currentHive.status === "QUEEN_FAILURE"
-                        ? "bg-yellow-500/20 text-yellow-300 border-yellow-500/40"
-                        : "bg-rose-500/20 text-rose-300 border-rose-500/40"
-                    }`}>
-                      {currentHive.status.replace(/_/g, " ")}
-                    </span>
-                  </div>
-                  <p className="text-xs font-mono text-slate-400">
-                    Firmware: {currentHive.firmware} • Synced: {currentHive.lastPingSecAgo}s ago • Battery: {currentHive.batteryPct}% LiFePO4
-                  </p>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => toggleAudioTone()}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all border ${
-                    audioToneActive
-                      ? "bg-rose-500 text-white border-rose-400 animate-pulse"
-                      : "bg-slate-800 hover:bg-slate-700 text-cyan-400 border-slate-700"
-                  }`}
-                >
-                  {audioToneActive ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-                  <span>{audioToneActive ? "Mute Tone" : "Audio Tone"}</span>
-                </button>
-
-                <button
-                  onClick={() => setIsQrCertModalOpen(true)}
-                  className="flex items-center gap-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all"
-                >
-                  <Award className="w-3.5 h-3.5" />
-                  <span>Seal Cert</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Diagnostic Inspector Tabs */}
-            <div className="flex flex-wrap gap-2 text-xs font-mono border-b border-slate-800 pb-2">
-              {[
-                { id: "DIAGNOSTICS", label: "Executive Deep View", icon: Layers },
-                { id: "FFT_AUDIO", label: "128-pt FFT Bio-Acoustics", icon: Activity },
-                { id: "THERMAL", label: "5-Frame CUSUM Heatmap", icon: Thermometer },
-                { id: "GAS_PLUME", label: "SCD41/BME688 Plume", icon: Wind },
-                { id: "CHAIN_EXPLORER", label: "Honey Chain Ledger", icon: Lock },
-                { id: "GEMMA_AI", label: "Gemma-2B On-Device AI", icon: Bot },
-                { id: "PLAYDATE", label: "Playdate Field Unit", icon: Laptop },
-              ].map((tab) => {
-                const Icon = tab.icon;
-                const isActive = activeTab === tab.id;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all font-semibold ${
-                      isActive
-                        ? "bg-slate-800 text-amber-400 border border-amber-400/40 shadow-sm"
-                        : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/40"
-                    }`}
-                  >
-                    <Icon className="w-3.5 h-3.5" />
-                    <span>{tab.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* ================================================================
-                TAB CONTENT AREA
-                ================================================================ */}
-            
-            {/* TAB 1 & DEFAULT: EXECUTIVE DEEP VIEW (Combines Top Sensors) */}
-            {(activeTab === "DIAGNOSTICS" || activeTab === "FFT_AUDIO") && (
-              <div className="space-y-4">
+                <h2 className="text-lg font-extrabold text-white tracking-tight">
+                  All Clear: <span className="text-emerald-400">{nominalHives.length} Nominal</span> •{" "}
+                  <span className="text-rose-400">{anomalousHives.length} Action Needed</span>
+                </h2>
                 
-                {/* 128-PT FFT SPECTRUM ANALYZER (50 Hz - 1200 Hz) */}
-                <div className="bg-[#1e293b]/70 border border-slate-700/70 rounded-2xl p-4 shadow-lg space-y-3">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <Activity className="w-4 h-4 text-cyan-400" />
-                      <h3 className="text-sm font-extrabold text-white">128-Point FFT Bio-Acoustic Spectrum Analyzer</h3>
-                      <span className="text-[10px] font-mono text-cyan-300 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">
-                        50 Hz - 1200 Hz
-                      </span>
-                    </div>
-                    <div className="text-xs font-mono text-slate-400">
-                      Dominant Peak: <span className="text-amber-400 font-bold">{selectedHarmonicFreq} Hz</span>
-                    </div>
-                  </div>
-
-                  {/* Visual Spectrum Bars */}
-                  <div className="bg-[#090d16] p-3 rounded-xl border border-slate-800 relative">
-                    
-                    {/* Peak frequency marker tags overlaid */}
-                    <div className="flex justify-between text-[9px] font-mono text-slate-500 pb-1 border-b border-slate-800/60 mb-2">
-                      <span>50 Hz</span>
-                      <span className="text-emerald-400">100-150 Hz (Foraging)</span>
-                      <span className="text-amber-400 font-bold">220-250 Hz (Nominal)</span>
-                      <span className="text-rose-400 font-bold">450-520 Hz (Swarm Piping)</span>
-                      <span className="text-purple-400">900 Hz (Queen)</span>
-                      <span>1200 Hz</span>
-                    </div>
-
-                    {/* 128 Frequency Bars Canvas/SVG */}
-                    <div className="h-36 flex items-end gap-[1.5px] w-full pt-2">
-                      {fftSpectrum.map((bin, idx) => {
-                        const heightPct = Math.max(8, Math.min(100, (bin.magnitudeDb + 85) * 1.5));
-                        let barColor = "bg-slate-700 hover:bg-slate-500";
-                        if (bin.freqHz >= 100 && bin.freqHz <= 160) barColor = "bg-emerald-500/70";
-                        if (bin.freqHz >= 210 && bin.freqHz <= 260) barColor = "bg-emerald-400";
-                        if (bin.freqHz >= 310 && bin.freqHz <= 370) barColor = "bg-yellow-400";
-                        if (bin.freqHz >= 440 && bin.freqHz <= 530) barColor = "bg-amber-400";
-                        if (bin.freqHz >= 850 && bin.freqHz <= 950) barColor = "bg-purple-400";
-                        if (bin.isPeak) barColor = "bg-cyan-400 ring-1 ring-white animate-pulse";
-
-                        return (
-                          <div
-                            key={idx}
-                            onClick={() => {
-                              setCustomHarmonicFreq(bin.freqHz);
-                              toggleAudioTone(bin.freqHz);
-                            }}
-                            className={`flex-1 rounded-t-sm transition-all cursor-pointer ${barColor}`}
-                            style={{ height: `${heightPct}%` }}
-                            title={`${bin.freqHz} Hz | ${bin.magnitudeDb.toFixed(1)} dBV`}
-                          />
-                        );
-                      })}
-                    </div>
-
-                    <div className="flex justify-between items-center text-[10px] font-mono text-slate-400 pt-2 border-t border-slate-800/60 mt-1">
-                      <span>Interactive Scrubbing: Click any bar to synthesize acoustic frequency</span>
-                      <span className="text-cyan-400 font-semibold">INT8 128-pt FFT (8.2ms Edge Latency)</span>
-                    </div>
-                  </div>
-
-                  {/* Preset Harmonic Quick Buttons */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
-                    {[
-                      { freq: 225, label: "225 Hz: Nominal Queen-Right", color: "text-emerald-400 border-emerald-500/30" },
-                      { freq: 485, label: "485 Hz: Swarm Piping Buzz", color: "text-amber-400 border-amber-500/30" },
-                      { freq: 340, label: "340 Hz: Varroa Agitation", color: "text-rose-400 border-rose-500/30" },
-                      { freq: 285, label: "285 Hz: Queenless Roar", color: "text-yellow-400 border-yellow-500/30" },
-                    ].map((preset) => (
-                      <button
-                        key={preset.freq}
-                        onClick={() => {
-                          setCustomHarmonicFreq(preset.freq);
-                          if (audioToneActive) toggleAudioTone(preset.freq);
-                        }}
-                        className={`p-2 rounded-xl text-left bg-[#090d16] border text-[11px] font-mono font-semibold transition-all hover:bg-slate-800 ${preset.color} ${
-                          selectedHarmonicFreq === preset.freq ? "ring-1 ring-white bg-slate-800" : ""
-                        }`}
-                      >
-                        <span className="block font-bold">{preset.freq} Hz</span>
-                        <span className="text-[9px] text-slate-400">{preset.label.split(":")[1]}</span>
-                      </button>
-                    ))}
-                  </div>
-
-                </div>
-
-              </div>
-            )}
-
-            {/* TAB 2: 5-POINT FRAME THERMAL GRADIENT & CUSUM STATISTICAL DRIFT */}
-            {(activeTab === "DIAGNOSTICS" || activeTab === "THERMAL") && (
-              <div className="bg-[#1e293b]/70 border border-slate-700/70 rounded-2xl p-4 shadow-lg space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <Thermometer className="w-4 h-4 text-amber-400" />
-                    <h3 className="text-sm font-extrabold text-white">5-Point Frame Thermal Gradient & CUSUM Drift Detection</h3>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-mono">
-                    <span className="text-slate-400">CUSUM Drift Score:</span>
-                    <span className={`font-bold px-2 py-0.5 rounded border ${
-                      currentHive.thermal.cusumScore > 1.5
-                        ? "bg-rose-500/20 text-rose-300 border-rose-500/40"
-                        : "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
-                    }`}>
-                      {currentHive.thermal.cusumScore} ({currentHive.thermal.cusumDriftStatus.replace(/_/g, " ")})
-                    </span>
-                  </div>
-                </div>
-
-                {/* 5-Frame Hive Cross-Section Heatmap */}
-                <div className="grid grid-cols-5 gap-2">
-                  {[
-                    { frame: "Frame 1", label: "Outer Left Honey", temp: currentHive.thermal.frame1OuterLeft, ideal: "32.0 - 33.5°C" },
-                    { frame: "Frame 2", label: "Brood Margin", temp: currentHive.thermal.frame2BroodLeft, ideal: "34.0 - 34.8°C" },
-                    { frame: "Frame 3", label: "Core Brood Nest", temp: currentHive.thermal.frame3CoreQueen, ideal: "34.5 - 35.5°C (Target)", isCore: true },
-                    { frame: "Frame 4", label: "Brood Margin", temp: currentHive.thermal.frame4BroodRight, ideal: "34.0 - 34.8°C" },
-                    { frame: "Frame 5", label: "Outer Right Honey", temp: currentHive.thermal.frame5OuterRight, ideal: "32.0 - 33.5°C" },
-                  ].map((f, idx) => {
-                    // Compute heat color
-                    let tempColor = "from-emerald-950 to-emerald-900/60 border-emerald-500/40 text-emerald-300";
-                    if (f.temp > 35.8) tempColor = "from-amber-950 to-amber-900/60 border-amber-500/60 text-amber-300";
-                    if (f.temp > 36.5) tempColor = "from-rose-950 to-rose-900/60 border-rose-500/60 text-rose-300 animate-pulse";
-                    if (f.temp < 33.5 && f.isCore) tempColor = "from-cyan-950 to-cyan-900/60 border-cyan-500/60 text-cyan-300";
-
-                    return (
-                      <div
-                        key={idx}
-                        className={`bg-gradient-to-b ${tempColor} border rounded-xl p-3 flex flex-col justify-between text-center relative shadow-md`}
-                      >
-                        {f.isCore && (
-                          <span className="absolute -top-2 left-1/2 -translate-x-1/2 bg-amber-400 text-slate-950 font-mono text-[8px] font-extrabold px-1.5 py-0.2 rounded-full uppercase">
-                            Queen Core
-                          </span>
-                        )}
-                        <div className="text-[10px] font-mono text-slate-400 font-medium">{f.frame}</div>
-                        <div className="text-xl sm:text-2xl font-extrabold font-mono py-1">{f.temp}°C</div>
-                        <div className="text-[9px] text-slate-300 font-mono leading-tight">{f.label}</div>
-                        <div className="text-[8px] text-slate-400 font-mono mt-1 opacity-75">{f.ideal}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* CUSUM Statistical Explanation */}
-                <div className="bg-[#090d16] p-3 rounded-xl border border-slate-800 text-xs font-mono space-y-1.5">
-                  <div className="flex justify-between text-slate-400">
-                    <span className="text-slate-300 font-semibold">CUSUM Statistical Homeostasis Engine ($S_k$):</span>
-                    <span className="text-amber-400 font-bold">Alarm Threshold $h = 0.45\sigma$</span>
-                  </div>
-                  <p className="text-[11px] text-slate-400 leading-relaxed font-normal">
-                    Calculates cumulative thermal deviations across the 5 TMP117 probes. A drift score above 1.5 indicates disruption of nurse bee thermoregulation (brood cooling or pre-swarm hyperthermia).
-                  </p>
-                </div>
-
-              </div>
-            )}
-
-            {/* TAB 3: SCD41 NDIR CO2 & BME688 MULTI-GAS PLUME GAUGES */}
-            {(activeTab === "DIAGNOSTICS" || activeTab === "GAS_PLUME") && (
-              <div className="bg-[#1e293b]/70 border border-slate-700/70 rounded-2xl p-4 shadow-lg space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Wind className="w-4 h-4 text-purple-400" />
-                    <h3 className="text-sm font-extrabold text-white">SCD41 NDIR CO2 & BME688 Multi-Gas Plume Gauges</h3>
-                  </div>
-                  <span className="text-[10px] font-mono bg-purple-950 text-purple-300 border border-purple-800 px-2 py-0.5 rounded-full font-bold">
-                    Ventilation: {currentHive.gas.ventilationStatus}
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  
-                  {/* CO2 Meter */}
-                  <div className="bg-[#090d16] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
-                    <div className="flex justify-between items-center text-xs font-mono text-slate-400">
-                      <span>SCD41 NDIR CO2</span>
-                      <span className="text-slate-500">ppm</span>
-                    </div>
-                    <div className="my-2">
-                      <div className="text-2xl font-extrabold font-mono text-white">
-                        {currentHive.gas.scd41Co2Ppm} <span className="text-xs text-slate-400 font-normal">ppm</span>
-                      </div>
-                      <div className="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
-                        <div
-                          className={`h-full ${
-                            currentHive.gas.scd41Co2Ppm > 2000 ? "bg-rose-500" : currentHive.gas.scd41Co2Ppm > 1500 ? "bg-amber-400" : "bg-emerald-400"
-                          }`}
-                          style={{ width: `${Math.min(100, (currentHive.gas.scd41Co2Ppm / 3000) * 100)}%` }}
-                        />
-                      </div>
-                    </div>
-                    <span className="text-[10px] font-mono text-slate-400">
-                      Nominal: 800 - 1500 ppm
-                    </span>
-                  </div>
-
-                  {/* BME688 VOC Sensor */}
-                  <div className="bg-[#090d16] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
-                    <div className="flex justify-between items-center text-xs font-mono text-slate-400">
-                      <span>BME688 AI VOC</span>
-                      <span className="text-slate-500">kΩ Gas</span>
-                    </div>
-                    <div className="my-2">
-                      <div className="text-2xl font-extrabold font-mono text-purple-300">
-                        {currentHive.gas.bme688VocKohm} <span className="text-xs text-slate-400 font-normal">kΩ</span>
-                      </div>
-                      <div className="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
-                        <div
-                          className="h-full bg-purple-400"
-                          style={{ width: `${Math.min(100, (currentHive.gas.bme688VocKohm / 200) * 100)}%` }}
-                        />
-                      </div>
-                    </div>
-                    <span className="text-[10px] font-mono text-slate-400">
-                      Target Air Purity: &gt;120 kΩ
-                    </span>
-                  </div>
-
-                  {/* Alarm Pheromone Index */}
-                  <div className="bg-[#090d16] border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between">
-                    <div className="flex justify-between items-center text-xs font-mono text-slate-400">
-                      <span>Alarm Pheromone</span>
-                      <span className="text-slate-500">Isopentyl Acetate</span>
-                    </div>
-                    <div className="my-2">
-                      <div className="text-2xl font-extrabold font-mono text-amber-400">
-                        {currentHive.gas.isopentylAcetateIndex} <span className="text-xs text-slate-400 font-normal">/ 100</span>
-                      </div>
-                      <div className="w-full bg-slate-800 rounded-full h-1.5 mt-2 overflow-hidden">
-                        <div
-                          className={`h-full ${currentHive.gas.isopentylAcetateIndex > 50 ? "bg-rose-500" : "bg-emerald-400"}`}
-                          style={{ width: `${currentHive.gas.isopentylAcetateIndex}%` }}
-                        />
-                      </div>
-                    </div>
-                    <span className="text-[10px] font-mono text-slate-400">
-                      Low Agitation: &lt;25
-                    </span>
-                  </div>
-
-                </div>
-              </div>
-            )}
-
-            {/* TAB 4: HONEY CHAIN BLOCKCHAIN BLOCK EXPLORER */}
-            {(activeTab === "CHAIN_EXPLORER") && (
-              <div className="bg-[#1e293b]/70 border border-slate-700/70 rounded-2xl p-5 shadow-lg space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Lock className="w-4 h-4 text-amber-400" />
-                    <h3 className="text-sm font-extrabold text-white">Honey Chain Cryptographic Block Explorer</h3>
-                  </div>
-                  <span className="text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2.5 py-0.5 rounded-full font-bold">
-                    Block #{currentHive.blockchain.blockNumber} Sealed
-                  </span>
-                </div>
-
-                <p className="text-xs font-mono text-slate-400 leading-relaxed">
-                  Every 4 hours, multi-sensor telemetry vectors (TMP117 temperatures, 128-pt FFT acoustics, SCD41 CO2, and weight delta) are sealed onto the Honey Chain decentralized ledger with SHA-256 cryptographic proofs, guaranteeing 100% organic honey provenance.
+                <p className="text-xs text-slate-300 mt-1 font-mono">
+                  Zero manual tile hunting. Prioritized emergency feed for field beekeepers.
                 </p>
 
-                <div className="bg-[#090d16] rounded-2xl p-4 border border-slate-800 font-mono text-xs space-y-3">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-800 pb-2">
-                    <span className="text-slate-400">SHA-256 Block Hash:</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-amber-400 font-bold truncate max-w-[280px] sm:max-w-md">
-                        {currentHive.blockchain.blockHash}
+                {/* Progress bar */}
+                <div className="w-full bg-slate-900 rounded-full h-2 mt-3 overflow-hidden flex">
+                  <div
+                    className="bg-emerald-400 h-full transition-all duration-500"
+                    style={{ width: `${(nominalHives.length / fleet.length) * 100}%` }}
+                    title="Nominal"
+                  />
+                  <div
+                    className="bg-amber-400 h-full transition-all duration-500"
+                    style={{ width: `${(inspectedHiveIds.size / fleet.length) * 100}%` }}
+                    title="Inspected Action Items"
+                  />
+                  <div
+                    className="bg-rose-500 h-full transition-all duration-500"
+                    style={{ width: `${((anomalousHives.length - inspectedHiveIds.size) / fleet.length) * 100}%` }}
+                    title="Pending Anomalies"
+                  />
+                </div>
+
+                {/* Filter toggle */}
+                <div className="flex items-center gap-2 mt-3 pt-2 border-t border-slate-800/80">
+                  <button
+                    onClick={() => setTriageFilter("ANOMALOUS_ONLY")}
+                    className={`flex-1 py-1.5 rounded-xl text-xs font-mono font-bold transition-all border text-center ${
+                      triageFilter === "ANOMALOUS_ONLY"
+                        ? "bg-rose-500/20 text-rose-300 border-rose-500/50 shadow-sm"
+                        : "bg-slate-900/60 text-slate-400 border-slate-800"
+                    }`}
+                  >
+                    🚨 Action Items ({anomalousHives.length})
+                  </button>
+                  <button
+                    onClick={() => setTriageFilter("ALL")}
+                    className={`flex-1 py-1.5 rounded-xl text-xs font-mono font-bold transition-all border text-center ${
+                      triageFilter === "ALL"
+                        ? "bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-sm"
+                        : "bg-slate-900/60 text-slate-400 border-slate-800"
+                    }`}
+                  >
+                    All 100 Hives ({fleet.length})
+                  </button>
+                </div>
+              </div>
+
+              {/* ACTION REQUIRED GLOVE-FRIENDLY CARDS */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between px-1">
+                  <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+                    Priority Anomaly Cards
+                  </h3>
+                  <span className="text-[10px] font-mono text-slate-500">Sorted by Severity</span>
+                </div>
+
+                {anomalousHives.map((hive) => {
+                  const isInspected = inspectedHiveIds.has(hive.id);
+
+                  let badgeColor = "bg-rose-500/20 text-rose-300 border-rose-500/40";
+                  let cardBorder = "border-rose-500/40 hover:border-rose-400";
+                  let badgeTitle = hive.status.replace(/_/g, " ");
+
+                  if (hive.status === "PRE_SWARM") {
+                    badgeColor = "bg-amber-500/20 text-amber-300 border-amber-500/40";
+                    cardBorder = "border-amber-500/40 hover:border-amber-400";
+                    badgeTitle = "🚨 SWARM RISK (485 Hz)";
+                  } else if (hive.status === "QUEEN_FAILURE") {
+                    badgeColor = "bg-yellow-500/20 text-yellow-300 border-yellow-500/40";
+                    cardBorder = "border-yellow-500/40 hover:border-yellow-400";
+                    badgeTitle = "👑 QUEENLESS ROAR (285 Hz)";
+                  } else if (hive.status === "VARROA_SURGE") {
+                    badgeColor = "bg-rose-500/20 text-rose-300 border-rose-500/40";
+                    cardBorder = "border-rose-500/40 hover:border-rose-400";
+                    badgeTitle = "🔬 VARROA LOAD (5.4 Mites)";
+                  } else if (hive.status === "TAMPER") {
+                    badgeColor = "bg-purple-500/20 text-purple-300 border-purple-500/40";
+                    cardBorder = "border-purple-500/40 hover:border-purple-400";
+                    badgeTitle = "⚠️ 14.2° TILT TAMPER";
+                  }
+
+                  return (
+                    <div
+                      key={hive.id}
+                      onClick={() => {
+                        setSelectedHiveId(hive.id);
+                        setIsInspectorOpen(true);
+                      }}
+                      className={`bg-[#0f172a] border ${cardBorder} rounded-2xl p-4 shadow-xl transition-all cursor-pointer relative overflow-hidden group ${
+                        isInspected ? "opacity-75 border-emerald-500/40 bg-[#0f172a]/70" : ""
+                      }`}
+                    >
+                      {/* Top Row: Hive ID, Yard & Severity Badge */}
+                      <div className="flex items-center justify-between gap-2 mb-2.5">
+                        <div className="flex items-center gap-2">
+                          <div className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center font-mono font-extrabold text-base text-amber-400 shadow-inner">
+                            #{String(hive.id).padStart(3, "0")}
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-1.5">
+                              <span className="font-extrabold text-white text-sm">{hive.yard}</span>
+                              <span className="text-[10px] font-mono text-slate-400">({hive.gpsDistanceMeters}m {hive.gpsBearingText})</span>
+                            </div>
+                            <span className="text-[10px] font-mono text-slate-400">
+                              Synced {hive.lastPingSecAgo}s ago • Bat {hive.batteryPct}%
+                            </span>
+                          </div>
+                        </div>
+
+                        <span className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border ${badgeColor}`}>
+                          {badgeTitle}
+                        </span>
+                      </div>
+
+                      {/* Diagnostic Urgency Text */}
+                      <div className="bg-[#090d16] rounded-xl p-3 border border-slate-800/80 mb-3 space-y-1">
+                        <p className="text-xs font-mono text-slate-200 leading-relaxed">
+                          {hive.urgencyReason}
+                        </p>
+                        {hive.recommendedAction && (
+                          <div className="pt-1.5 border-t border-slate-800 text-[11px] font-mono text-amber-300 flex items-start gap-1.5">
+                            <span className="text-amber-400 font-bold">Action:</span>
+                            <span>{hive.recommendedAction}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Micro Metric Gauges */}
+                      <div className="grid grid-cols-4 gap-1.5 text-center text-xs font-mono mb-3">
+                        <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
+                          <span className="text-[9px] text-slate-500 block">Core Brood</span>
+                          <span className={`font-bold ${hive.thermal.frame3CoreQueen > 36 ? "text-amber-400" : hive.thermal.frame3CoreQueen < 33.5 ? "text-cyan-400" : "text-emerald-400"}`}>
+                            {hive.thermal.frame3CoreQueen}°C
+                          </span>
+                        </div>
+                        <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
+                          <span className="text-[9px] text-slate-500 block">Acoustics</span>
+                          <span className="font-bold text-amber-400">{hive.peakFrequencyHz} Hz</span>
+                        </div>
+                        <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
+                          <span className="text-[9px] text-slate-500 block">CO2 Level</span>
+                          <span className="font-bold text-purple-300">{hive.gas.scd41Co2Ppm} p</span>
+                        </div>
+                        <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
+                          <span className="text-[9px] text-slate-500 block">Honey Flux</span>
+                          <span className="font-bold text-white">{hive.deltaWeightKg > 0 ? `+${hive.deltaWeightKg}` : hive.deltaWeightKg} kg</span>
+                        </div>
+                      </div>
+
+                      {/* Glove-Friendly Big 1-Tap Action Buttons */}
+                      <div className="grid grid-cols-3 gap-2 pt-1">
+                        {/* 1. Mark Inspected Button */}
+                        <button
+                          onClick={(e) => toggleInspectHive(hive.id, e)}
+                          className={`py-2.5 px-2 rounded-xl text-xs font-mono font-bold transition-all border flex items-center justify-center gap-1.5 shadow-sm ${
+                            isInspected
+                              ? "bg-emerald-500 text-slate-950 border-emerald-400 shadow-emerald-500/20"
+                              : "bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700"
+                          }`}
+                        >
+                          {isInspected ? <CheckCheck className="w-3.5 h-3.5" /> : <Check className="w-3.5 h-3.5" />}
+                          <span>{isInspected ? "Inspected" : "Mark Done"}</span>
+                        </button>
+
+                        {/* 2. Listen to Acoustics (Web Audio API) */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedHiveId(hive.id);
+                            toggleAudioTone(hive.peakFrequencyHz);
+                          }}
+                          className={`py-2.5 px-2 rounded-xl text-xs font-mono font-bold transition-all border flex items-center justify-center gap-1.5 shadow-sm ${
+                            audioToneActive && activeToneFreq === hive.peakFrequencyHz
+                              ? "bg-rose-500 text-white border-rose-400 animate-pulse"
+                              : "bg-slate-800 hover:bg-slate-700 text-cyan-300 border-slate-700"
+                          }`}
+                        >
+                          {audioToneActive && activeToneFreq === hive.peakFrequencyHz ? (
+                            <VolumeX className="w-3.5 h-3.5" />
+                          ) : (
+                            <Volume2 className="w-3.5 h-3.5" />
+                          )}
+                          <span>{audioToneActive && activeToneFreq === hive.peakFrequencyHz ? "Mute" : `${hive.peakFrequencyHz}Hz`}</span>
+                        </button>
+
+                        {/* 3. Field Compass Navigate */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setNavTargetHive(hive);
+                          }}
+                          className="py-2.5 px-2 rounded-xl text-xs font-mono font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                        >
+                          <Navigation className="w-3.5 h-3.5" />
+                          <span>Navigate</span>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* ALL 96 NOMINAL HIVES (Collapsible / Secondary List) */}
+              {triageFilter === "ALL" && (
+                <div className="space-y-2 pt-2">
+                  <div className="flex items-center justify-between px-1">
+                    <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                      Nominal Fleet (96 Hives)
+                    </h3>
+                    <span className="text-[10px] font-mono text-slate-500">100% Homeostasis</span>
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {nominalHives.slice(0, 16).map((hive) => (
+                      <div
+                        key={hive.id}
+                        onClick={() => {
+                          setSelectedHiveId(hive.id);
+                          setIsInspectorOpen(true);
+                        }}
+                        className="bg-[#0f172a] border border-slate-800 hover:border-emerald-500/40 rounded-xl p-2.5 transition-all cursor-pointer flex flex-col justify-between"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-mono font-bold text-xs text-white">#{String(hive.id).padStart(3, "0")}</span>
+                          <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                        </div>
+                        <div className="text-[10px] font-mono text-slate-400 mt-1">
+                          <span>{hive.thermal.frame3CoreQueen}°C</span> • <span>{hive.peakFrequencyHz}Hz</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-[10px] font-mono text-center text-slate-500 pt-1">
+                    + 80 more nominal hives operating in baseline thermal homeostasis.
+                  </p>
+                </div>
+              )}
+
+            </div>
+          )}
+
+          {/* ================================================================
+              TAB 2: APIARY YARDS (Yard Alpha 50 Hives / Yard Beta 50 Hives)
+              ================================================================ */}
+          {currentTab === "YARDS" && (
+            <div className="space-y-4 animate-in fade-in duration-150">
+              
+              {/* Yard Switcher Tabs */}
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => setSelectedYard("Yard Alpha")}
+                  className={`p-3 rounded-2xl text-left border transition-all ${
+                    selectedYard === "Yard Alpha"
+                      ? "bg-amber-500/20 border-amber-500/60 shadow-lg shadow-amber-500/10"
+                      : "bg-[#0f172a] border-slate-800 text-slate-400 hover:bg-slate-800"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-amber-400 uppercase">Yard Alpha</span>
+                    <span className="text-[10px] font-mono bg-slate-900 px-1.5 py-0.5 rounded text-slate-300">50 Hives</span>
+                  </div>
+                  <div className="font-extrabold text-white text-sm mt-0.5">North Ridge Apiary</div>
+                  <div className="text-[10px] font-mono text-rose-400 mt-1">2 Action Items (#042, #015)</div>
+                </button>
+
+                <button
+                  onClick={() => setSelectedYard("Yard Beta")}
+                  className={`p-3 rounded-2xl text-left border transition-all ${
+                    selectedYard === "Yard Beta"
+                      ? "bg-amber-500/20 border-amber-500/60 shadow-lg shadow-amber-500/10"
+                      : "bg-[#0f172a] border-slate-800 text-slate-400 hover:bg-slate-800"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-amber-400 uppercase">Yard Beta</span>
+                    <span className="text-[10px] font-mono bg-slate-900 px-1.5 py-0.5 rounded text-slate-300">50 Hives</span>
+                  </div>
+                  <div className="font-extrabold text-white text-sm mt-0.5">Wildflower Valley</div>
+                  <div className="text-[10px] font-mono text-rose-400 mt-1">2 Action Items (#073, #088)</div>
+                </button>
+              </div>
+
+              {/* Gateway & Apiary Visual Card */}
+              <div className="bg-[#0f172a] border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+                <div className="relative h-36 w-full">
+                  <Image
+                    src="/images/gateway_apiary.jpg"
+                    alt="Apiary Yard Gateway"
+                    fill
+                    className="object-cover opacity-80"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/40 to-transparent" />
+                  
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono">
+                    <div className="bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700 text-slate-200">
+                      <span className="text-emerald-400 font-bold">● CM4 Gateway Online</span> (915MHz LoRa)
+                    </div>
+                    <div className="bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700 text-amber-300 font-bold">
+                      +24.8 kg 24h Flow
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-3.5 space-y-2 text-xs font-mono">
+                  <div className="flex justify-between text-slate-400">
+                    <span>Base Station: Antmicro Raspberry Pi CM4</span>
+                    <span className="text-cyan-300">RSSI -74 dBm</span>
+                  </div>
+                  <div className="flex justify-between text-slate-400">
+                    <span>Active Hives in Yard:</span>
+                    <span className="text-white font-bold">{selectedYard === "Yard Alpha" ? "Hives #001 - #050" : "Hives #051 - #100"}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Yard Search & Quick Filter */}
+              <div className="relative">
+                <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder={`Search ${selectedYard} (e.g. #042, swarm, 485Hz)...`}
+                  value={yardSearchQuery}
+                  onChange={(e) => setYardSearchQuery(e.target.value)}
+                  className="w-full bg-[#0f172a] border border-slate-800 rounded-xl pl-9 pr-3 py-2 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                />
+              </div>
+
+              {/* 50-Hive Interactive Matrix for Selected Yard */}
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs font-mono text-slate-400 px-1">
+                  <span>50-Hive Grid ({selectedYard})</span>
+                  <span className="text-amber-400">Tap node for deep telemetry</span>
+                </div>
+
+                <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5 max-h-[380px] overflow-y-auto p-2 bg-[#090d16] rounded-2xl border border-slate-800 custom-scrollbar">
+                  {fleet
+                    .filter((h) => h.yard === selectedYard)
+                    .filter((h) => {
+                      const q = yardSearchQuery.toLowerCase();
+                      if (!q) return true;
+                      return (
+                        h.id.toString().includes(q) ||
+                        h.status.toLowerCase().includes(q) ||
+                        h.dominantHarmonic.toLowerCase().includes(q)
+                      );
+                    })
+                    .map((hive) => {
+                      let nodeStyle = "bg-slate-900 border-slate-800 text-slate-300";
+                      let dotStyle = "bg-emerald-400";
+
+                      if (hive.status === "PRE_SWARM") {
+                        nodeStyle = "bg-amber-500/20 border-amber-500/60 text-amber-300 animate-pulse";
+                        dotStyle = "bg-amber-400";
+                      } else if (hive.status === "QUEEN_FAILURE") {
+                        nodeStyle = "bg-yellow-500/20 border-yellow-500/60 text-yellow-300";
+                        dotStyle = "bg-yellow-400";
+                      } else if (hive.status === "VARROA_SURGE") {
+                        nodeStyle = "bg-rose-500/20 border-rose-500/60 text-rose-300";
+                        dotStyle = "bg-rose-400";
+                      } else if (hive.status === "TAMPER") {
+                        nodeStyle = "bg-purple-500/20 border-purple-500/60 text-purple-300";
+                        dotStyle = "bg-purple-400";
+                      }
+
+                      return (
+                        <button
+                          key={hive.id}
+                          onClick={() => {
+                            setSelectedHiveId(hive.id);
+                            setIsInspectorOpen(true);
+                          }}
+                          className={`h-12 rounded-xl font-mono text-xs font-bold border flex flex-col items-center justify-center transition-all ${nodeStyle} hover:scale-105`}
+                        >
+                          <div className="flex items-center gap-1">
+                            <span className={`w-1.5 h-1.5 rounded-full ${dotStyle}`} />
+                            <span>#{String(hive.id).padStart(2, "0")}</span>
+                          </div>
+                          <span className="text-[9px] opacity-75">{hive.thermal.frame3CoreQueen}°C</span>
+                        </button>
+                      );
+                    })}
+                </div>
+              </div>
+
+            </div>
+          )}
+
+          {/* ================================================================
+              TAB 3: SCAN NFC & QR (Field Simulator)
+              ================================================================ */}
+          {currentTab === "SCAN" && (
+            <div className="space-y-4 animate-in fade-in duration-150">
+              
+              <div className="bg-[#0f172a] border border-slate-800 rounded-3xl p-5 shadow-xl space-y-4 text-center">
+                <div className="space-y-1">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-bold">
+                    Field Hardware Scanner
+                  </span>
+                  <h2 className="text-lg font-extrabold text-white">Instant 1-Tap NFC & QR Reader</h2>
+                  <p className="text-xs font-mono text-slate-400">
+                    Hold phone within 4cm of hive antenna or point camera at lid QR tag.
+                  </p>
+                </div>
+
+                {/* Simulated Camera Viewfinder */}
+                <div className="relative w-full h-56 bg-slate-950 rounded-2xl border-2 border-dashed border-amber-500/40 flex flex-col items-center justify-center overflow-hidden shadow-inner">
+                  
+                  {/* Laser Scan Line Animation */}
+                  {isScanningNfc && (
+                    <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent shadow-[0_0_15px_#f59e0b] animate-bounce" />
+                  )}
+
+                  {/* Reticle corners */}
+                  <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-amber-400" />
+                  <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-amber-400" />
+                  <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-amber-400" />
+                  <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-amber-400" />
+
+                  {isScanningNfc ? (
+                    <div className="flex flex-col items-center gap-2 text-amber-400 font-mono text-xs animate-pulse">
+                      <Scan className="w-8 h-8 animate-spin" />
+                      <span>Reading NTAG215 RFID / Barcode...</span>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center gap-2 text-slate-400 font-mono text-xs">
+                      <Scan className="w-8 h-8 text-amber-400/60" />
+                      <span>Viewfinder Ready</span>
+                      <span className="text-[10px] text-slate-500">Tap below to trigger field scan</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* 1-Tap Big NFC Scan Buttons */}
+                <div className="space-y-2">
+                  <button
+                    onClick={() => handleSimulateNfcScan(42)}
+                    disabled={isScanningNfc}
+                    className="w-full py-3.5 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-2xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2"
+                  >
+                    <Smartphone className="w-4 h-4" />
+                    <span>Simulate 1-Tap NFC Touch (Hive #042 Swarm)</span>
+                  </button>
+
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      onClick={() => handleSimulateNfcScan(15)}
+                      className="py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] rounded-xl border border-slate-700"
+                    >
+                      Scan #015 (Queen)
+                    </button>
+                    <button
+                      onClick={() => handleSimulateNfcScan(73)}
+                      className="py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] rounded-xl border border-slate-700"
+                    >
+                      Scan #073 (Varroa)
+                    </button>
+                    <button
+                      onClick={() => handleSimulateNfcScan(88)}
+                      className="py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] rounded-xl border border-slate-700"
+                    >
+                      Scan #088 (Tamper)
+                    </button>
+                  </div>
+                </div>
+
+                {/* Scan Result Card */}
+                {scannedHiveResult && scanSuccessAnim && (
+                  <div className="bg-emerald-950/40 border border-emerald-500/60 rounded-2xl p-4 text-left space-y-3 animate-in zoom-in-95 duration-200">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                        <div>
+                          <span className="font-extrabold text-white text-sm">
+                            RFID Tag Identified: Hive #{scannedHiveResult.id}
+                          </span>
+                          <p className="text-[10px] font-mono text-emerald-300">
+                            {scannedHiveResult.apiaryZone}
+                          </p>
+                        </div>
+                      </div>
+                      <span className="text-xs font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full">
+                        {scannedHiveResult.status}
                       </span>
+                    </div>
+
+                    <p className="text-xs font-mono text-slate-300">
+                      {scannedHiveResult.urgencyReason || "Nominal colony telemetry verified on-chain."}
+                    </p>
+
+                    <button
+                      onClick={() => {
+                        setSelectedHiveId(scannedHiveResult.id);
+                        setIsInspectorOpen(true);
+                      }}
+                      className="w-full py-2.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20"
+                    >
+                      <Activity className="w-3.5 h-3.5" />
+                      <span>Open Deep Telemetry Inspector</span>
+                    </button>
+                  </div>
+                )}
+
+              </div>
+
+            </div>
+          )}
+
+          {/* ================================================================
+              TAB 4: HONEY CHAIN PROVENANCE & PRINTABLE JAR QR
+              ================================================================ */}
+          {currentTab === "PROVENANCE" && (
+            <div className="space-y-4 animate-in fade-in duration-150">
+              
+              {/* Premium Honey Chain Jar Card */}
+              <div className="bg-[#0f172a] border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+                <div className="relative h-44 w-full bg-slate-950">
+                  <Image
+                    src="/images/honey_chain_jar.jpg"
+                    alt="Honey Chain Organic Jar"
+                    fill
+                    className="object-cover opacity-90"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/30 to-transparent" />
+                  
+                  <div className="absolute top-3 left-3 bg-amber-500/90 text-slate-950 font-mono font-extrabold text-[10px] px-2.5 py-0.5 rounded-full shadow-md">
+                    USDA ORGANIC CERTIFIED
+                  </div>
+
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono">
+                    <span className="text-white font-extrabold text-sm">Honey Chain Ledger</span>
+                    <span className="text-amber-300 font-bold">100% Raw Unpasteurized</span>
+                  </div>
+                </div>
+
+                <div className="p-4 space-y-3 font-mono text-xs">
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-slate-400">Current Hive Node:</span>
+                    <span className="text-amber-400 font-bold">Hive #{currentHive.id}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-slate-400">Batch Identifier:</span>
+                    <span className="text-emerald-400 font-semibold">{currentHive.blockchain.batchId}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-slate-400">Botanical Flora:</span>
+                    <span className="text-white">{currentHive.blockchain.floralSource}</span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-slate-400">Purity & Moisture:</span>
+                    <span className="text-cyan-300">{currentHive.blockchain.purityPct}% Purity • {currentHive.blockchain.moisturePct}% H2O</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400">SHA-256 Hash:</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-slate-300 truncate max-w-[140px] text-[10px]">{currentHive.blockchain.blockHash}</span>
                       <button
                         onClick={() => copyBlockHash(currentHive.blockchain.blockHash)}
                         className="p-1 text-slate-400 hover:text-white"
@@ -1188,167 +1277,414 @@ export default function HiveOSFleetCommandCenter() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px] pt-1">
-                    <div>
-                      <span className="text-slate-500 block">Merkle Root:</span>
-                      <span className="text-cyan-300">{currentHive.blockchain.merkleRoot}</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-500 block">Timestamp:</span>
-                      <span className="text-slate-300">{currentHive.blockchain.timestamp}</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-500 block">Batch Identifier:</span>
-                      <span className="text-emerald-400 font-bold">{currentHive.blockchain.batchId}</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-500 block">Botanical Source:</span>
-                      <span className="text-amber-300">{currentHive.blockchain.floralSource}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex justify-end gap-3 pt-2">
                   <button
-                    onClick={() => setIsQrCertModalOpen(true)}
-                    className="flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold px-4 py-2 rounded-xl text-xs transition-all shadow-lg shadow-amber-500/20"
+                    onClick={() => setIsJarCertOpen(true)}
+                    className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 mt-2"
                   >
                     <QrCode className="w-4 h-4" />
-                    <span>View & Print QR Verification Certificate</span>
+                    <span>View & Print Customer Jar QR Certificate</span>
                   </button>
                 </div>
               </div>
-            )}
 
-            {/* TAB 5: GEMMA-2B ON-DEVICE APICULTURAL ASSISTANT (CONVERSATIONAL SLM) */}
-            {(activeTab === "GEMMA_AI") && (
-              <div className="bg-[#1e293b]/70 border border-slate-700/70 rounded-2xl p-5 shadow-lg space-y-4">
+            </div>
+          )}
+
+          {/* ================================================================
+              TAB 5: HANDS-FREE VOICE AI ADVISOR & GEMMA-2B SLM
+              ================================================================ */}
+          {currentTab === "ADVISOR" && (
+            <div className="space-y-4 animate-in fade-in duration-150">
+              
+              {/* Hands-Free Audio Briefing Hero Banner */}
+              <div className="bg-[#0f172a] border border-indigo-500/40 rounded-3xl p-4 shadow-xl space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Bot className="w-4 h-4 text-indigo-400" />
-                    <h3 className="text-sm font-extrabold text-white">Gemma-2B-IT Quantized Apicultural SLM</h3>
+                    <div className="p-2 rounded-xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
+                      <Bot className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h2 className="text-sm font-extrabold text-white">Gemma-2B Quantized SLM</h2>
+                      <p className="text-[10px] font-mono text-indigo-300">On-Device INT4 Engine (8.2ms)</p>
+                    </div>
                   </div>
-                  <span className="text-[10px] font-mono bg-indigo-950 text-indigo-300 border border-indigo-800 px-2 py-0.5 rounded-full font-bold">
-                    WebGPU / INT4 Local Engine
-                  </span>
+
+                  <button
+                    onClick={() => {
+                      const debrief = `Gemma Edge Briefing for Hive ${currentHive.id}. Status is ${currentHive.status}. Brood temperature is ${currentHive.thermal.frame3CoreQueen} degrees Celsius. Acoustic dominant frequency is ${currentHive.peakFrequencyHz} Hertz. ${currentHive.urgencyReason || "Colony is in nominal balance."}`;
+                      speakText(debrief);
+                    }}
+                    className="flex items-center gap-1.5 bg-indigo-500 hover:bg-indigo-400 text-white px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all shadow-md shadow-indigo-500/20"
+                  >
+                    <Volume2 className="w-3.5 h-3.5" />
+                    <span>Read Aloud</span>
+                  </button>
                 </div>
 
-                {/* Context Pills */}
-                <div className="flex flex-wrap gap-1.5 text-[10px] font-mono">
-                  <span className="bg-slate-900 text-slate-300 px-2 py-0.5 rounded border border-slate-800">
-                    Target: Hive #{currentHive.id}
-                  </span>
-                  <span className="bg-slate-900 text-amber-400 px-2 py-0.5 rounded border border-slate-800">
-                    Acoustic: {currentHive.peakFrequencyHz} Hz
-                  </span>
-                  <span className="bg-slate-900 text-cyan-400 px-2 py-0.5 rounded border border-slate-800">
-                    CUSUM: +{currentHive.thermal.cusumScore}
-                  </span>
-                  <span className="bg-slate-900 text-purple-400 px-2 py-0.5 rounded border border-slate-800">
-                    CO2: {currentHive.gas.scd41Co2Ppm} ppm
-                  </span>
-                </div>
-
-                {/* Chat Stream Window */}
-                <div className="bg-[#090d16] border border-slate-800 rounded-2xl p-4 max-h-[300px] overflow-y-auto space-y-3 font-mono text-xs custom-scrollbar">
-                  {chatMessages.map((msg, idx) => (
-                    <div
-                      key={idx}
-                      className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
-                    >
-                      <div className="flex items-center gap-1.5 text-[9px] text-slate-500 mb-1">
-                        <span>{msg.role === "user" ? "Apiary Tech" : "Gemma-2B SLM"}</span>
-                        <span>•</span>
-                        <span>{msg.time}</span>
-                      </div>
-                      <div
-                        className={`p-3 rounded-2xl max-w-[90%] whitespace-pre-wrap leading-relaxed ${
-                          msg.role === "user"
-                            ? "bg-amber-400 text-slate-950 font-semibold"
-                            : "bg-[#1e293b] border border-slate-700 text-slate-200"
-                        }`}
-                      >
-                        {msg.text}
-                      </div>
-                    </div>
-                  ))}
-                  {isStreamingGemma && (
-                    <div className="flex items-center gap-2 text-indigo-400 text-xs font-mono py-2">
-                      <Zap className="w-3.5 h-3.5 animate-spin" />
-                      <span>Synthesizing edge response...</span>
-                    </div>
-                  )}
-                  <div ref={chatEndRef} />
-                </div>
-
-                {/* Prompt Suggestions */}
-                <div className="flex flex-wrap gap-1.5">
+                {/* Quick Audio Preset Buttons */}
+                <div className="flex flex-wrap gap-1.5 pt-1">
                   {[
-                    "Analyze Hive #88 acoustic anomaly",
-                    "Explain CUSUM brood drift reading",
-                    "Evaluate Varroa surge intervention",
-                    "Generate harvest batch seal",
+                    "Daily Apiary Debrief",
+                    "Hive #042 Swarm Split",
+                    "Hive #073 Varroa Protocol",
+                    "Hive #015 Queen Status",
                   ].map((preset, idx) => (
                     <button
                       key={idx}
-                      onClick={() => handleSendGemma(preset)}
-                      className="bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg text-[10px] font-mono transition-all"
+                      onClick={() => handleSendGemmaMessage(preset)}
+                      className="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg text-[10px] font-mono transition-all"
                     >
-                      💡 {preset}
+                      🎙️ {preset}
                     </button>
                   ))}
                 </div>
+              </div>
 
-                {/* Input Bar */}
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleSendGemma();
-                  }}
-                  className="flex gap-2"
-                >
-                  <input
-                    type="text"
-                    placeholder="Ask Gemma-2B about hive acoustics, CUSUM drift, or harvest forecast..."
-                    value={inputMessage}
-                    onChange={(e) => setInputMessage(e.target.value)}
-                    className="flex-1 bg-[#090d16] border border-slate-700 rounded-xl px-3.5 py-2 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-amber-400"
-                  />
-                  <button
-                    type="submit"
-                    disabled={isStreamingGemma || !inputMessage.trim()}
-                    className="bg-amber-400 hover:bg-amber-300 disabled:opacity-50 text-slate-950 font-mono font-extrabold px-4 py-2 rounded-xl text-xs transition-all flex items-center gap-1.5"
+              {/* Chat Stream Window */}
+              <div className="bg-[#090d16] border border-slate-800 rounded-3xl p-4 max-h-[360px] overflow-y-auto space-y-3 font-mono text-xs custom-scrollbar">
+                {chatMessages.map((msg, idx) => (
+                  <div
+                    key={idx}
+                    className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}
                   >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Inquire</span>
-                  </button>
-                </form>
+                    <div className="flex items-center gap-1.5 text-[9px] text-slate-500 mb-1">
+                      <span>{msg.role === "user" ? "Field Beekeeper" : "Gemma-2B Edge SLM"}</span>
+                      <span>•</span>
+                      <span>{msg.time}</span>
+                    </div>
+                    <div
+                      className={`p-3 rounded-2xl max-w-[90%] whitespace-pre-wrap leading-relaxed ${
+                        msg.role === "user"
+                          ? "bg-amber-400 text-slate-950 font-semibold"
+                          : "bg-[#1e293b] border border-slate-700 text-slate-200"
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                  </div>
+                ))}
+                {isGemmaThinking && (
+                  <div className="flex items-center gap-2 text-indigo-400 text-xs font-mono py-2">
+                    <Zap className="w-3.5 h-3.5 animate-spin" />
+                    <span>Gemma-2B synthesizing response...</span>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
 
+              {/* Chat Input Bar */}
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSendGemmaMessage();
+                }}
+                className="flex gap-2"
+              >
+                <input
+                  type="text"
+                  placeholder="Ask Gemma about acoustics, splits, or CUSUM drift..."
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  className="flex-1 bg-[#0f172a] border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+                />
+                <button
+                  type="submit"
+                  disabled={isGemmaThinking || !chatInput.trim()}
+                  className="bg-amber-400 hover:bg-amber-300 disabled:opacity-50 text-slate-950 font-mono font-extrabold px-4 py-2.5 rounded-xl text-xs transition-all flex items-center gap-1.5"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                </button>
+              </form>
+
+            </div>
+          )}
+
+        </main>
+
+        {/* ------------------------------------------------------------------
+            BOTTOM TAB NAVIGATION BAR (5 Tabs - Thumb Zone Ergonomics)
+            ------------------------------------------------------------------ */}
+        <nav className="absolute bottom-0 inset-x-0 bg-[#090d16]/95 backdrop-blur-lg border-t border-slate-800 px-2 py-2 flex items-center justify-around z-30 shadow-2xl select-none">
+          {[
+            { id: "TRIAGE", label: "Triage", icon: ShieldAlert, badge: anomalousHives.length },
+            { id: "YARDS", label: "Yards", icon: MapPin, badge: undefined },
+            { id: "SCAN", label: "Scan NFC", icon: Scan, badge: undefined },
+            { id: "PROVENANCE", label: "Honey Chain", icon: Lock, badge: undefined },
+            { id: "ADVISOR", label: "AI Advisor", icon: Bot, badge: undefined },
+          ].map((tab) => {
+            const Icon = tab.icon;
+            const isActive = currentTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setCurrentTab(tab.id as typeof currentTab)}
+                className={`flex-1 flex flex-col items-center justify-center py-1.5 px-1 rounded-2xl transition-all relative ${
+                  isActive
+                    ? "text-amber-400 font-extrabold scale-105"
+                    : "text-slate-500 hover:text-slate-300"
+                }`}
+              >
+                <div className="relative">
+                  <Icon className={`w-5 h-5 ${isActive ? "text-amber-400 stroke-[2.5]" : "stroke-[1.8]"}`} />
+                  {tab.badge !== undefined && tab.badge > 0 && (
+                    <span className="absolute -top-1.5 -right-2 bg-rose-500 text-white font-mono text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center border border-slate-900">
+                      {tab.badge}
+                    </span>
+                  )}
+                </div>
+                <span className="text-[10px] font-mono mt-1 tracking-tight">{tab.label}</span>
+                {isActive && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-0.5" />
+                )}
+              </button>
+            );
+          })}
+        </nav>
+
+      </div>
+
+      {/* ====================================================================
+          DEEP HIVE INSPECTOR BOTTOM-SHEET / MODAL
+          ==================================================================== */}
+      {isInspectorOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
+          <div className="bg-[#0f172a] border border-slate-700/80 rounded-t-[32px] sm:rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar p-4 sm:p-6 shadow-2xl space-y-4 relative text-slate-100">
+            
+            {/* Sheet Drag Handle & Close */}
+            <div className="w-12 h-1.5 bg-slate-700 rounded-full mx-auto sm:hidden mb-2" />
+            <button
+              onClick={() => {
+                setIsInspectorOpen(false);
+                if (audioToneActive) toggleAudioTone();
+              }}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800/80"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            {/* Modal Header */}
+            <div className="flex items-center gap-3 border-b border-slate-800 pb-3">
+              <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-mono font-extrabold text-lg">
+                #{String(currentHive.id).padStart(3, "0")}
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-base sm:text-lg font-extrabold text-white">{currentHive.apiaryZone}</h2>
+                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border ${
+                    currentHive.status === "NOMINAL"
+                      ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
+                      : currentHive.status === "PRE_SWARM"
+                      ? "bg-amber-500/20 text-amber-300 border-amber-500/40 animate-pulse"
+                      : "bg-rose-500/20 text-rose-300 border-rose-500/40"
+                  }`}>
+                    {currentHive.status.replace(/_/g, " ")}
+                  </span>
+                </div>
+                <p className="text-xs font-mono text-slate-400">
+                  Firmware {currentHive.firmware} • Battery {currentHive.batteryPct}% LiFePO4 • Weight {currentHive.weightKg} kg
+                </p>
+              </div>
+            </div>
+
+            {/* Inspector Sub-Tabs */}
+            <div className="flex flex-wrap gap-1.5 text-xs font-mono border-b border-slate-800 pb-2">
+              {[
+                { id: "OVERVIEW", label: "Full Telemetry", icon: Layers },
+                { id: "FFT", label: "128-pt FFT Audio", icon: Activity },
+                { id: "THERMAL", label: "5-Frame Thermal", icon: Thermometer },
+                { id: "GAS", label: "SCD41 CO2 & Gas", icon: Wind },
+                { id: "CHAIN", label: "Honey Chain", icon: Lock },
+                { id: "PLAYDATE", label: "Playdate Console", icon: Laptop },
+              ].map((tab) => {
+                const Icon = tab.icon;
+                const isActive = inspectorSubTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setInspectorSubTab(tab.id as typeof inspectorSubTab)}
+                    className={`px-3 py-1.5 rounded-xl flex items-center gap-1.5 font-semibold transition-all ${
+                      isActive
+                        ? "bg-amber-400 text-slate-950 font-bold shadow-md shadow-amber-500/20"
+                        : "bg-slate-800/80 text-slate-300 hover:bg-slate-700"
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* --------------------------------------------------------------
+                INSPECTOR TAB: 128-PT FFT SPECTRUM VISUALIZER
+                -------------------------------------------------------------- */}
+            {(inspectorSubTab === "OVERVIEW" || inspectorSubTab === "FFT") && (
+              <div className="bg-[#1e293b]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-cyan-400" />
+                    <h3 className="text-xs sm:text-sm font-extrabold text-white">128-Point FFT Bio-Acoustic Spectrum</h3>
+                  </div>
+                  <button
+                    onClick={() => toggleAudioTone(currentHive.peakFrequencyHz)}
+                    className={`px-3 py-1 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 border transition-all ${
+                      audioToneActive
+                        ? "bg-rose-500 text-white border-rose-400 animate-pulse"
+                        : "bg-slate-800 text-cyan-300 border-slate-700"
+                    }`}
+                  >
+                    {audioToneActive ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+                    <span>{audioToneActive ? "Mute Buzz" : `Synthesize ${currentHive.peakFrequencyHz}Hz`}</span>
+                  </button>
+                </div>
+
+                {/* 128 FFT Bars */}
+                <div className="bg-[#090d16] p-3 rounded-xl border border-slate-800">
+                  <div className="flex justify-between text-[9px] font-mono text-slate-500 pb-1 border-b border-slate-800/60 mb-2">
+                    <span>50Hz</span>
+                    <span className="text-emerald-400">225Hz Nominal</span>
+                    <span className="text-rose-400 font-bold">485Hz Swarm</span>
+                    <span className="text-purple-400">900Hz Queen</span>
+                    <span>1200Hz</span>
+                  </div>
+
+                  <div className="h-28 flex items-end gap-[1.5px] w-full pt-1">
+                    {fftSpectrum.map((bin, idx) => {
+                      const heightPct = Math.max(8, Math.min(100, (bin.magnitudeDb + 85) * 1.5));
+                      let barColor = "bg-slate-700 hover:bg-slate-500";
+                      if (bin.freqHz >= 210 && bin.freqHz <= 260) barColor = "bg-emerald-400";
+                      if (bin.freqHz >= 310 && bin.freqHz <= 370) barColor = "bg-yellow-400";
+                      if (bin.freqHz >= 440 && bin.freqHz <= 530) barColor = "bg-amber-400";
+                      if (bin.isPeak) barColor = "bg-cyan-400 ring-1 ring-white animate-pulse";
+
+                      return (
+                        <div
+                          key={idx}
+                          onClick={() => toggleAudioTone(bin.freqHz)}
+                          className={`flex-1 rounded-t-xs transition-all cursor-pointer ${barColor}`}
+                          style={{ height: `${heightPct}%` }}
+                          title={`${bin.freqHz} Hz | ${bin.magnitudeDb.toFixed(1)} dBV`}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             )}
 
-            {/* TAB 6: PLAYDATE FIELD CONSOLE INTEGRATION */}
-            {(activeTab === "PLAYDATE") && (
-              <div className="bg-[#1e293b]/70 border border-slate-700/70 rounded-2xl p-5 shadow-lg flex flex-col items-center justify-center space-y-4">
-                <div className="w-full flex items-center justify-between border-b border-slate-700 pb-3">
+            {/* --------------------------------------------------------------
+                INSPECTOR TAB: 5-FRAME BROOD THERMAL GRADIENT (TMP117)
+                -------------------------------------------------------------- */}
+            {(inspectorSubTab === "OVERVIEW" || inspectorSubTab === "THERMAL") && (
+              <div className="bg-[#1e293b]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+                <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                    <h3 className="text-sm font-extrabold text-white">Playdate Field Unit Simulator</h3>
+                    <Thermometer className="w-4 h-4 text-amber-400" />
+                    <h3 className="text-xs sm:text-sm font-extrabold text-white">5-Frame Brood Thermal Gradient (TMP117 ±0.05°C)</h3>
                   </div>
-                  <span className="text-xs font-mono text-amber-400 font-bold">
-                    Connected to HIVE #{String(currentHive.id).padStart(3, "0")}
+                  <span className="text-[10px] font-mono bg-slate-900 text-amber-300 px-2 py-0.5 rounded border border-slate-800 font-bold">
+                    CUSUM Drift: {currentHive.thermal.cusumScore}
                   </span>
                 </div>
 
-                <div className="scale-90 sm:scale-95 py-2">
+                <div className="grid grid-cols-5 gap-1.5">
+                  {[
+                    { label: "F1 Outer", temp: currentHive.thermal.frame1OuterLeft },
+                    { label: "F2 Brood", temp: currentHive.thermal.frame2BroodLeft },
+                    { label: "F3 Core", temp: currentHive.thermal.frame3CoreQueen, isCore: true },
+                    { label: "F4 Brood", temp: currentHive.thermal.frame4BroodRight },
+                    { label: "F5 Outer", temp: currentHive.thermal.frame5OuterRight },
+                  ].map((f, idx) => (
+                    <div
+                      key={idx}
+                      className={`p-2 rounded-xl text-center border flex flex-col justify-between ${
+                        f.isCore
+                          ? "bg-amber-500/20 border-amber-500/50 text-amber-300"
+                          : "bg-slate-900/80 border-slate-800 text-slate-200"
+                      }`}
+                    >
+                      <span className="text-[9px] font-mono text-slate-400">{f.label}</span>
+                      <span className="text-base font-extrabold font-mono py-0.5">{f.temp}°C</span>
+                      <span className="text-[8px] font-mono text-slate-500">{f.isCore ? "Queen Target" : "Honey Margin"}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* --------------------------------------------------------------
+                INSPECTOR TAB: SCD41 CO2 & BME688 MOX AI GAS INDEX
+                -------------------------------------------------------------- */}
+            {(inspectorSubTab === "OVERVIEW" || inspectorSubTab === "GAS") && (
+              <div className="bg-[#1e293b]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Wind className="w-4 h-4 text-purple-400" />
+                    <h3 className="text-xs sm:text-sm font-extrabold text-white">SCD41 NDIR CO2 & BME688 MOX Gas Index</h3>
+                  </div>
+                  <span className="text-[10px] font-mono bg-purple-950 text-purple-300 px-2 py-0.5 rounded border border-purple-800 font-bold">
+                    Vent: {currentHive.gas.ventilationStatus}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-2 text-xs font-mono">
+                  <div className="bg-[#090d16] p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-500 text-[10px] block">SCD41 CO2</span>
+                    <span className="text-lg font-extrabold text-white">{currentHive.gas.scd41Co2Ppm} ppm</span>
+                  </div>
+                  <div className="bg-[#090d16] p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-500 text-[10px] block">BME688 VOC</span>
+                    <span className="text-lg font-extrabold text-purple-300">{currentHive.gas.bme688VocKohm} kΩ</span>
+                  </div>
+                  <div className="bg-[#090d16] p-3 rounded-xl border border-slate-800">
+                    <span className="text-slate-500 text-[10px] block">Alarm Pheromone</span>
+                    <span className="text-lg font-extrabold text-amber-400">{currentHive.gas.isopentylAcetateIndex} / 100</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* --------------------------------------------------------------
+                INSPECTOR TAB: HARDWARE ENCLOSURE EMBED
+                -------------------------------------------------------------- */}
+            {inspectorSubTab === "OVERVIEW" && (
+              <div className="bg-[#1e293b]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <Cpu className="w-4 h-4 text-amber-400" />
+                  <h3 className="text-xs sm:text-sm font-extrabold text-white">Hardware Telemetry Node Enclosure</h3>
+                </div>
+
+                <div className="relative h-40 w-full rounded-xl overflow-hidden border border-slate-800">
+                  <Image
+                    src="/images/node_enclosure.jpg"
+                    alt="Beevil Hardware Node Enclosure"
+                    fill
+                    className="object-cover opacity-90"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-transparent to-transparent" />
+                  
+                  <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-[10px] font-mono bg-slate-950/80 px-2 py-1 rounded-lg border border-slate-800">
+                    <span>IP67 Ruggedized Enclosure</span>
+                    <span className="text-cyan-300">STM32U585 + SX1262 LoRa</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* --------------------------------------------------------------
+                INSPECTOR TAB: PLAYDATE FIELD CONSOLE
+                -------------------------------------------------------------- */}
+            {inspectorSubTab === "PLAYDATE" && (
+              <div className="bg-[#1e293b]/70 border border-slate-700/80 rounded-2xl p-4 flex flex-col items-center justify-center space-y-3">
+                <div className="w-full flex items-center justify-between border-b border-slate-700 pb-2 text-xs font-mono">
+                  <span className="text-amber-400 font-bold">Playdate Retro Field Console</span>
+                  <span className="text-slate-400">Node #{currentHive.id}</span>
+                </div>
+
+                <div className="scale-90 py-2">
                   <PlaydateConsole
                     initialHiveId={currentHive.id}
-                    onHiveChange={(id) => {
-                      setSelectedHiveId(id);
-                      setCustomHarmonicFreq(null);
-                    }}
-                    frequency={selectedHarmonicFreq}
-                    onFrequencyChange={(f) => setCustomHarmonicFreq(f)}
+                    frequency={currentHive.peakFrequencyHz}
                     compact
                   />
                 </div>
@@ -1356,94 +1692,135 @@ export default function HiveOSFleetCommandCenter() {
             )}
 
           </div>
-
         </div>
-
-      </main>
+      )}
 
       {/* ====================================================================
-          MODAL: HONEY CHAIN PRINTABLE QR CODE CERTIFICATE
+          FIELD COMPASS NAVIGATION MODAL
           ==================================================================== */}
-      {isQrCertModalOpen && (
+      {navTargetHive && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#0f172a] border border-amber-500/40 rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-5 text-slate-100 relative animate-in fade-in zoom-in-95 duration-200">
-            
+          <div className="bg-[#0f172a] border border-amber-500/50 rounded-3xl max-w-sm w-full p-6 shadow-2xl text-center space-y-4 relative">
             <button
-              onClick={() => setIsQrCertModalOpen(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800/60"
+              onClick={() => setNavTargetHive(null)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800/80"
             >
               <X className="w-4 h-4" />
             </button>
 
-            {/* Certificate Header */}
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2.5 py-0.5 rounded-full font-bold uppercase">
+                Field GPS Bearing HUD
+              </span>
+              <h2 className="text-lg font-extrabold text-white">Navigate to Hive #{navTargetHive.id}</h2>
+              <p className="text-xs font-mono text-slate-400">{navTargetHive.apiaryZone}</p>
+            </div>
+
+            {/* Big Compass Rose */}
+            <div className="relative w-40 h-40 mx-auto rounded-full border-4 border-slate-800 bg-[#090d16] flex items-center justify-center shadow-inner">
+              {/* Compass Needle */}
+              <div
+                className="absolute inset-0 flex items-center justify-center transition-transform duration-500"
+                style={{ transform: `rotate(${navTargetHive.gpsBearingDeg}deg)` }}
+              >
+                <div className="w-2 h-16 bg-gradient-to-t from-transparent to-amber-400 rounded-full shadow-[0_0_12px_#f59e0b]" />
+              </div>
+              <div className="w-6 h-6 rounded-full bg-amber-400 border-2 border-slate-950 z-10 flex items-center justify-center shadow-md">
+                <Navigation className="w-3 h-3 text-slate-950" />
+              </div>
+
+              {/* Cardinal Labels */}
+              <span className="absolute top-1 text-[9px] font-mono font-bold text-slate-500">N</span>
+              <span className="absolute right-1 text-[9px] font-mono font-bold text-slate-500">E</span>
+              <span className="absolute bottom-1 text-[9px] font-mono font-bold text-slate-500">S</span>
+              <span className="absolute left-1 text-[9px] font-mono font-bold text-slate-500">W</span>
+            </div>
+
+            {/* Distance Callout */}
+            <div className="bg-[#090d16] border border-slate-800 rounded-2xl p-3 font-mono text-xs space-y-1">
+              <div className="text-2xl font-extrabold text-amber-400">
+                {navTargetHive.gpsDistanceMeters} <span className="text-sm font-normal text-slate-400">meters</span>
+              </div>
+              <p className="text-slate-400 text-[11px]">
+                Bearing: <span className="text-white font-bold">{navTargetHive.gpsBearingDeg}° ({navTargetHive.gpsBearingText})</span>
+              </p>
+            </div>
+
+            <button
+              onClick={() => setNavTargetHive(null)}
+              className="w-full py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all shadow-md shadow-amber-500/20"
+            >
+              Close Compass
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ====================================================================
+          PRINTABLE HONEY CHAIN JAR QR CERTIFICATE MODAL
+          ==================================================================== */}
+      {isJarCertOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-[#0f172a] border border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-slate-100 relative">
+            <button
+              onClick={() => setIsJarCertOpen(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800/80"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
             <div className="text-center space-y-1">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-mono font-bold">
                 <Award className="w-3.5 h-3.5" />
                 <span>OFFICIAL HONEY CHAIN VERIFICATION</span>
               </div>
-              <h2 className="text-xl font-extrabold text-white tracking-tight pt-1">
-                Certificate of Organic Honey Provenance
+              <h2 className="text-lg font-extrabold text-white tracking-tight pt-1">
+                Organic Honey Batch Certificate
               </h2>
               <p className="text-xs font-mono text-slate-400">
                 Tamper-Proof Telemetry Cryptographically Sealed On-Chain
               </p>
             </div>
 
-            {/* Certificate Body Card */}
-            <div className="bg-[#090d16] border border-slate-800 rounded-2xl p-5 space-y-4 font-mono text-xs">
-              
-              {/* QR Code SVG / Visual */}
-              <div className="flex flex-col items-center justify-center p-4 bg-white rounded-2xl text-slate-950 shadow-inner">
+            <div className="bg-[#090d16] border border-slate-800 rounded-2xl p-4 space-y-3 font-mono text-xs">
+              <div className="flex flex-col items-center justify-center p-4 bg-white rounded-2xl text-slate-950">
                 <QrCode className="w-32 h-32 text-slate-900" />
-                <span className="text-[10px] font-mono font-bold text-slate-700 mt-1 tracking-wider">
+                <span className="text-[10px] font-mono font-bold text-slate-700 mt-1">
                   SCAN TO VERIFY SHA-256 HASH
                 </span>
               </div>
 
-              {/* Certificate Details */}
-              <div className="space-y-2 border-t border-slate-800 pt-3">
+              <div className="space-y-1.5 border-t border-slate-800 pt-2 text-[11px]">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Batch ID:</span>
                   <span className="text-amber-400 font-bold">{currentHive.blockchain.batchId}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Apiary Node:</span>
-                  <span className="text-white font-bold">Hive #{currentHive.id} ({currentHive.apiaryZone})</span>
+                  <span className="text-slate-400">Flora:</span>
+                  <span className="text-white">{currentHive.blockchain.floralSource}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-400">Floral Source:</span>
-                  <span className="text-emerald-400 font-semibold">{currentHive.blockchain.floralSource}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400">Purity & Moisture:</span>
-                  <span className="text-cyan-300">{currentHive.blockchain.purityPct}% Purity • {currentHive.blockchain.moisturePct}% H2O</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400">Block Seal Hash:</span>
-                  <span className="text-slate-300 truncate max-w-[200px]">{currentHive.blockchain.blockHash}</span>
+                  <span className="text-slate-400">Purity:</span>
+                  <span className="text-emerald-400 font-semibold">{currentHive.blockchain.purityPct}% Organic</span>
                 </div>
               </div>
-
             </div>
 
-            {/* Print & Action Buttons */}
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <button
                 onClick={() => window.print()}
-                className="flex-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold py-2.5 rounded-xl text-xs transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
+                className="flex-1 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20"
               >
                 <Printer className="w-4 h-4" />
-                <span>Print Certificate</span>
+                <span>Print Jar Label</span>
               </button>
-              
               <button
-                onClick={() => setIsQrCertModalOpen(false)}
-                className="bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono font-semibold px-4 py-2.5 rounded-xl text-xs transition-all border border-slate-700"
+                onClick={() => setIsJarCertOpen(false)}
+                className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs rounded-xl border border-slate-700"
               >
                 Close
               </button>
             </div>
-
           </div>
         </div>
       )}
@@ -1451,4 +1828,3 @@ export default function HiveOSFleetCommandCenter() {
     </div>
   );
 }
-

@@ -15,7 +15,9 @@ import {
   Database,
   ArrowUpRight,
   Terminal,
-  Hexagon
+  Hexagon,
+  Laptop,
+  Sparkles
 } from "lucide-react";
 
 export function Navbar() {
@@ -37,15 +39,14 @@ export function Navbar() {
   }, []);
 
   const SEARCH_DATABASE = [
-    { title: "HiveOS Interactive 100-Hive Command Console", category: "Command Console", href: "/app", icon: Terminal },
-    { title: "System Architecture & 16-Sensor Fusion Specs", category: "Hardware Platform", href: "/#the_system", icon: Layers },
-    { title: "100-Hive Multi-Hop LoRaWAN Mesh Topology", category: "Network Layer", href: "/#mesh", icon: Radio },
+    { title: "HiveOS Interactive 100-Hive Command Center", category: "Command Center", href: "/app", icon: Terminal },
+    { title: "System Architecture & 16-Sensor Fusion Array", category: "Hardware Platform", href: "/#the_system", icon: Layers },
+    { title: "100-Hive LoRaWAN IN865 Multi-Hop Topology", category: "Network Layer", href: "/#mesh", icon: Radio },
     { title: "BeevilFusionNetEdge (96.84% Edge AI Accuracy)", category: "Edge AI / ML", href: "/#edge_ai", icon: Cpu },
-    { title: "Honey Chain Cryptographic Provenance (SHA-256)", category: "Ledger / Crypto", href: "/#honey_chain", icon: ShieldCheck },
-    { title: "Antmicro CM4 Baseboard 6 TOPS Edge Gateway", category: "Gateway Hub", href: "/#gateway-package", icon: Database },
-    { title: "Solar COTS Sensor Node ($189 Spec)", category: "Edge Node", href: "/#all-for-just", icon: Activity },
-    { title: "Full Hardware Telemetry & Audio Acoustic Specs", category: "Specifications", href: "/#the_specs", icon: Layers },
-    { title: "Research SDK & Model Checkpoint Downloads", category: "Developer SDK", href: "/#sdk", icon: Terminal },
+    { title: "Honey Chain Cryptographic Ledger (SHA-256)", category: "Ledger / Crypto", href: "/#honey_chain", icon: ShieldCheck },
+    { title: "DJI Enterprise / Antmicro CM4 6 TOPS Gateway", category: "Gateway Hub", href: "/#the_design", icon: Database },
+    { title: "Framework Modular Solar Sensor Node Enclosure", category: "Hardware CAD", href: "/#the_system", icon: Activity },
+    { title: "Master Hardware, Mesh & Ledger Specifications", category: "Specifications", href: "/#the_specs", icon: Layers },
   ];
 
   const filteredResults = SEARCH_DATABASE.filter(
@@ -59,30 +60,30 @@ export function Navbar() {
       id="navbar"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#090d16]/90 backdrop-blur-xl border-b border-slate-800/80 shadow-2xl shadow-black/60"
-          : "bg-[#090d16]/65 backdrop-blur-md border-b border-slate-800/40"
+          ? "bg-[#070b14]/92 backdrop-blur-2xl border-b border-slate-800/80 shadow-2xl shadow-black/70"
+          : "bg-[#070b14]/70 backdrop-blur-md border-b border-slate-800/40"
       }`}
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3 xl:gap-6">
+      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3 xl:gap-6">
         
-        {/* Left: Brand + Live LoRa Status Badge */}
+        {/* Left: Brand + Live LoRaWAN IN865 Status Badge */}
         <div className="flex items-center gap-4 xl:gap-5 flex-shrink-0">
           <Link
             href="/"
             className="flex items-center gap-3 group focus:outline-none"
           >
-            {/* High-Tech Industrial Hexagon Brandmark */}
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-700/70 p-2 flex items-center justify-center relative overflow-hidden shadow-lg group-hover:border-amber-500/50 transition-colors">
-              <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            {/* Apple Pro / Linear Style Amber Gold Hexagon Brandmark */}
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 border border-amber-500/40 p-2 flex items-center justify-center relative overflow-hidden shadow-[0_0_15px_rgba(245,158,11,0.2)] group-hover:border-amber-400 transition-colors">
+              <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <Hexagon className="w-5 h-5 text-amber-400 stroke-[2.2] group-hover:scale-110 transition-transform" />
             </div>
             
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-lg sm:text-xl tracking-tight text-white group-hover:text-amber-300 transition-colors">
+                <span className="font-black text-lg sm:text-xl tracking-tight text-white group-hover:text-amber-300 transition-colors font-sans">
                   Beevil Knievel
                 </span>
-                <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-slate-800/90 text-amber-400 border border-slate-700">
+                <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider bg-slate-800/90 text-amber-400 border border-amber-500/30">
                   HIVE-OS v4.2
                 </span>
               </div>
@@ -92,15 +93,15 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Live LoRaWAN Mesh Status Badge */}
-          <div className="hidden 2xl:flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs font-mono">
+          {/* Live LoRaWAN IN865 Mesh Status Badge */}
+          <div className="hidden 2xl:flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-emerald-500/30 text-xs font-mono shadow-[0_0_12px_rgba(16,185,129,0.1)]">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_8px_#10b981]" />
             </span>
-            <span className="text-slate-300 font-semibold">LoRaWAN Mesh:</span>
+            <span className="text-slate-300 font-semibold">LoRaWAN IN865:</span>
             <span className="text-emerald-400 font-bold">100/100 Active</span>
-            <span className="text-slate-500 font-normal">| 915 MHz AES-256</span>
+            <span className="text-slate-500 font-normal">| AES-256 Vault</span>
           </div>
         </div>
 
@@ -139,11 +140,11 @@ export function Navbar() {
             href="/#the_specs" 
             className="px-3 py-2 rounded-lg hover:text-white hover:bg-slate-800/50 transition-all whitespace-nowrap hidden xl:inline-block"
           >
-            Specs
+            Hardware Specs
           </Link>
         </div>
 
-        {/* Right Side: Search + Sleek CTA */}
+        {/* Right Side: Search + High-Converting Primary CTA */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Universal Search Box */}
           <div className="relative hidden md:block">
@@ -171,7 +172,7 @@ export function Navbar() {
             {searchExpanded && searchQuery.length > 0 && (
               <div className="absolute top-full mt-2 right-0 w-84 bg-slate-900/95 backdrop-blur-2xl rounded-2xl shadow-2xl border border-slate-700/80 overflow-hidden z-50">
                 <div className="p-3 text-[11px] font-mono font-bold uppercase tracking-wider text-amber-400 border-b border-slate-800 flex justify-between bg-slate-950/60">
-                  <span>Telemetry & Architecture Index</span>
+                  <span>Telemetry &amp; Architecture Index</span>
                   <span>{filteredResults.length} found</span>
                 </div>
                 <div className="max-h-72 overflow-y-auto divide-y divide-slate-800/60">
@@ -206,15 +207,19 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Sleek CTA: Launch Command Center */}
+          {/* High-Converting Primary CTA: OPEN FIELD COMMAND APP (/app) with Live Pulse Badge */}
           <Link
             href="/app"
             id="launch-command-center-btn"
-            className="group relative inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 hover:from-amber-300 hover:to-amber-500 shadow-lg shadow-amber-500/20 hover:shadow-amber-500/35 active:scale-95 transition-all whitespace-nowrap"
-            title="Launch Interactive 100-Hive Command Center"
+            className="group relative inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-black px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-[#ffc833] text-slate-950 hover:from-amber-300 hover:to-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.35)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)] active:scale-95 transition-all whitespace-nowrap border border-amber-200/60 uppercase tracking-tight"
+            title="Open Interactive 100-Hive Field Command App"
           >
-            <Activity className="w-4 h-4 stroke-[2.5] text-slate-950 group-hover:animate-pulse" />
-            <span className="tracking-tight">Launch Command Center</span>
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-950 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-slate-950" />
+            </span>
+            <Laptop className="w-4 h-4 stroke-[2.5] text-slate-950 group-hover:rotate-12 transition-transform" />
+            <span>OPEN FIELD COMMAND APP</span>
             <ChevronRight className="w-3.5 h-3.5 stroke-[2.5] text-slate-950 group-hover:translate-x-0.5 transition-transform" />
           </Link>
 
@@ -233,16 +238,16 @@ export function Navbar() {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#090d16]/98 backdrop-blur-2xl border-t border-slate-800 px-6 py-6 space-y-4 shadow-2xl">
+        <div className="lg:hidden bg-[#070b14]/98 backdrop-blur-2xl border-t border-slate-800 px-6 py-6 space-y-4 shadow-2xl">
           
           {/* Mobile Live Status Badge */}
-          <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/90 border border-slate-800 font-mono text-xs">
+          <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/90 border border-emerald-500/30 font-mono text-xs">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
               </span>
-              <span className="text-slate-200 font-semibold">LoRaWAN Mesh Active</span>
+              <span className="text-slate-200 font-semibold">LoRaWAN IN865 Mesh</span>
             </div>
             <span className="text-emerald-400 font-bold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/60">
               100/100 NODES
@@ -272,10 +277,10 @@ export function Navbar() {
             >
               <div className="flex items-center gap-2.5">
                 <Terminal className="w-4 h-4 text-amber-400" />
-                <span>HiveOS Command Console</span>
+                <span>Field Command App</span>
               </div>
               <span className="text-[10px] font-mono uppercase bg-amber-400 text-slate-950 px-2 py-0.5 rounded font-black">
-                LAUNCH
+                OPEN (/app)
               </span>
             </Link>
 
@@ -311,7 +316,7 @@ export function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center gap-2.5 p-3 rounded-lg text-slate-200 hover:bg-slate-900 hover:text-white transition-colors"
             >
-              <ShieldCheck className="w-4 h-4 text-cyan-400" />
+              <ShieldCheck className="w-4 h-4 text-amber-400" />
               <span>Honey Chain Cryptography</span>
             </Link>
 
@@ -329,10 +334,10 @@ export function Navbar() {
             <Link
               href="/app"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-bold text-sm text-center shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-black text-sm text-center shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 uppercase tracking-tight"
             >
-              <Activity className="w-4 h-4" />
-              <span>Launch Command Center (/app)</span>
+              <Laptop className="w-4 h-4" />
+              <span>OPEN FIELD COMMAND APP (/app)</span>
             </Link>
           </div>
         </div>
@@ -340,4 +345,5 @@ export function Navbar() {
     </nav>
   );
 }
+
 
