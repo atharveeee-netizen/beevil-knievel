@@ -136,7 +136,7 @@ function generateFleetTelemetry(): HiveNode[] {
     let recommendedAction: string | undefined;
 
     // --- ANOMALOUS HIVES FOR TRIAGE ENGINE ---
-    // 1. Hive #042 (Yard Alpha): Swarm Risk (485 Hz)
+    // 1. Hive #042 (Yard Alpha): Swarm Risk (485 Hz virgin queen piping, +2.45°C brood surge, 2,480 ppm CO2)
     if (id === 42) {
       status = "PRE_SWARM";
       peakFrequencyHz = 485;
@@ -151,10 +151,10 @@ function generateFleetTelemetry(): HiveNode[] {
       isopentylAcetate = 58;
       ventilationStatus = "FANNING_ACTIVE";
       deltaWeightKg = -0.15;
-      urgencyReason = "485 Hz virgin queen piping detected + Brood pre-heating (+2.45°C CUSUM drift). Estimated swarm departure within 18 hours.";
+      urgencyReason = "Swarm Risk: 485 Hz virgin queen piping, +2.45°C brood surge, 2,480 ppm CO2. Estimated swarm departure within 18 hours.";
       recommendedAction = "Perform immediate hive split or Demaree swarm manipulation. Inspect frames 2 & 4 for queen swarm cells.";
     }
-    // 2. Hive #015 (Yard Alpha): Queen Loss / Failure (285 Hz)
+    // 2. Hive #015 (Yard Alpha): Queen Loss (285 Hz queenless roar, 33.1°C brood chill)
     else if (id === 15) {
       status = "QUEEN_FAILURE";
       peakFrequencyHz = 285;
@@ -168,10 +168,10 @@ function generateFleetTelemetry(): HiveNode[] {
       scd41Co2 = 910;
       isopentylAcetate = 74;
       deltaWeightKg = 0.05;
-      urgencyReason = "Queenless acoustic roar at 285 Hz with brood chill risk (33.1°C core). High alarm pheromone detected (74/100).";
+      urgencyReason = "Queen Loss: 285 Hz queenless roar, 33.1°C brood chill, 74/100 alarm pheromone. Brood nest unprotected.";
       recommendedAction = "Verify queen presence or introduce mated caged queen. Check for emergency supersedure cups.";
     }
-    // 3. Hive #073 (Yard Beta): Varroa Surge (5.4%)
+    // 3. Hive #073 (Yard Beta): Varroa Surge (5.4% mite load, 82 kΩ alarm pheromone)
     else if (id === 73) {
       status = "VARROA_SURGE";
       peakFrequencyHz = 340;
@@ -183,10 +183,10 @@ function generateFleetTelemetry(): HiveNode[] {
       bme688Voc = 82;
       isopentylAcetate = 44;
       deltaWeightKg = +0.18;
-      urgencyReason = "Varroa density critical at 5.4 mites/100 bees (economic injury threshold 3.0). High-frequency grooming agitation (340 Hz).";
+      urgencyReason = "Varroa Surge: 5.4% mite load (economic threshold 3.0%), 82 kΩ alarm pheromone, 340 Hz grooming agitation.";
       recommendedAction = "Apply immediate formic acid flash vapor or thymol treatment pad. Screen bottom board count in 48 hrs.";
     }
-    // 4. Hive #088 (Yard Beta): Tilt / Tamper Alert (14.2°)
+    // 4. Hive #088 (Yard Beta): Stand Tamper (14.2° tilt displacement)
     else if (id === 88) {
       status = "TAMPER";
       peakFrequencyHz = 390;
@@ -195,7 +195,7 @@ function generateFleetTelemetry(): HiveNode[] {
       tiltAngleDeg = 14.2;
       isopentylAcetate = 68;
       cusumScore = 1.15;
-      urgencyReason = "Accelerometer detects 14.2° tilt displacement (bear / wind gust tamper alert). Elevated cluster agitation.";
+      urgencyReason = "Stand Tamper: 14.2° tilt displacement (bear or wind gust tamper alert). Elevated cluster agitation.";
       recommendedAction = "Physically realign hive stand and strap ratchet securely. Check outer lid seal and entrance reducer.";
     }
 
@@ -1541,7 +1541,7 @@ export default function MobileFieldAgritechApp() {
             { id: "TRIAGE", label: "Triage", icon: ShieldAlert, badge: anomalousHives.length },
             { id: "YARDS", label: "Yards", icon: MapPin, badge: undefined },
             { id: "SCAN", label: "Scan NFC", icon: Scan, badge: undefined },
-            { id: "PROVENANCE", label: "Honey Chain", icon: Lock, badge: undefined },
+            { id: "PROVENANCE", label: "Provenance", icon: Lock, badge: undefined },
             { id: "ADVISOR", label: "AI Advisor", icon: Bot, badge: undefined },
           ].map((tab) => {
             const Icon = tab.icon;
@@ -1550,7 +1550,7 @@ export default function MobileFieldAgritechApp() {
               <button
                 key={tab.id}
                 onClick={() => setCurrentTab(tab.id as typeof currentTab)}
-                className={`flex-1 flex flex-col items-center justify-center py-1.5 px-1 rounded-2xl transition-all relative ${
+                className={`flex-1 min-h-[48px] flex flex-col items-center justify-center py-1.5 px-1 rounded-2xl transition-all relative active:scale-95 ${
                   isActive
                     ? "text-amber-400 font-extrabold scale-105"
                     : "text-slate-500 hover:text-slate-300"
