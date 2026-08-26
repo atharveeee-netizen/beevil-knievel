@@ -3,6 +3,7 @@
 import React from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
+import { AppExperienceSection } from "@/components/AppExperienceSection";
 import { HorizontalScrollGallery } from "@/components/HorizontalScrollGallery";
 import { SystemSection } from "@/components/SystemSection";
 import { EdgeAISection } from "@/components/EdgeAISection";
@@ -20,20 +21,23 @@ export default function Home() {
         {/* 2. Command Telemetry Hero & 16-Col Bento HUD */}
         <HeroSection />
 
-        {/* 3. Sticky 300vh Horizontal Parallax Hardware Stream (Powered by Motion) */}
+        {/* 3. Cal AI / Magic UI Mobile Experience & Feature Highlights */}
+        <AppExperienceSection />
+
+        {/* 4. Sticky 300vh Horizontal Parallax Hardware Stream (Motion) */}
         <HorizontalScrollGallery />
 
-        {/* 4. Exploded 3-Tier Hardware Architecture & Pinouts */}
+        {/* 5. Exploded 3-Tier Hardware Architecture & Pinouts */}
         <SystemSection />
 
-        {/* 5. Dual-Tier Edge AI & 8 Diagnostic Neural Classifiers */}
+        {/* 6. Dual-Tier Edge AI & 8 Diagnostic Neural Classifiers */}
         <EdgeAISection />
 
-        {/* 6. Engineering Specifications & Traceable Carbon Data Table */}
+        {/* 7. Engineering Specifications & Traceable Carbon Data Table */}
         <SpecsSection />
       </main>
 
-      {/* 7. IBM Carbon Enterprise Footer */}
+      {/* 8. IBM Carbon Enterprise Footer */}
       <Footer />
     </div>
   );
