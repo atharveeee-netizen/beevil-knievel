@@ -76,21 +76,21 @@ export function GallerySection() {
   return (
     <section
       id="gallery"
-      className="bg-[#1d1c18] text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-white/10"
+      className="bg-[#0b101b] text-slate-100 py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-slate-800"
     >
-      <div className="max-w-6xl mx-auto space-y-10">
-        <div className="text-center space-y-3 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-[#ffc833] text-[#312f28] px-4 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider">
+      <div className="max-w-6xl mx-auto space-y-12">
+        <div className="text-center space-y-4 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 bg-slate-900 border border-amber-500/30 text-[#ffc833] px-4 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider">
             <Eye className="w-3.5 h-3.5" />
             <span>Field Deployment &amp; Systems</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white font-sans">
             Hardware &amp; Apiary Gallery.
           </h2>
 
-          <p className="text-sm sm:text-base text-white/70">
-            Real field installations, solar sensor nodes, and gateway hubs operating in commercial apiaries.
+          <p className="text-base sm:text-lg text-slate-300">
+            Real field installations, solar sensor nodes, and gateway hubs operating in commercial production apiaries.
           </p>
         </div>
 
@@ -100,9 +100,9 @@ export function GallerySection() {
             <div
               key={idx}
               onClick={() => openLightbox(idx)}
-              className="bg-[#27272a] border border-white/10 rounded-2xl overflow-hidden shadow-lg cursor-pointer group select-none flex flex-col justify-between hover:border-[#ffc833]/60 transition-all"
+              className="bg-slate-950/80 border border-slate-800 rounded-3xl overflow-hidden shadow-xl cursor-pointer group select-none flex flex-col justify-between hover:border-amber-500/50 transition-all hover:bg-slate-900/80"
             >
-              <div className="relative h-56 sm:h-64 w-full bg-black/40 overflow-hidden">
+              <div className="relative h-56 sm:h-64 w-full bg-slate-950 overflow-hidden">
                 <Image
                   src={photo.src}
                   alt={photo.alt}
@@ -110,19 +110,19 @@ export function GallerySection() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
-                  <div className="flex items-center gap-2 bg-[#ffc833] text-[#312f28] px-4 py-2 rounded-full text-xs font-bold shadow-lg">
+                <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                  <div className="flex items-center gap-2 bg-[#ffc833] text-slate-950 px-4 py-2 rounded-xl text-xs font-bold shadow-lg">
                     <Maximize2 className="w-3.5 h-3.5" />
                     <span>View High-Res</span>
                   </div>
                 </div>
               </div>
 
-              <div className="p-4 space-y-1 bg-[#212223] border-t border-white/10">
-                <h3 className="text-sm font-bold text-white group-hover:text-[#ffc833] transition-colors truncate">
+              <div className="p-5 space-y-1.5 bg-slate-950/90 border-t border-slate-800">
+                <h3 className="text-sm font-bold text-white group-hover:text-[#ffc833] transition-colors truncate font-sans">
                   {photo.title}
                 </h3>
-                <p className="text-xs text-white/60 line-clamp-2 leading-relaxed">
+                <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
                   {photo.caption}
                 </p>
               </div>
@@ -133,10 +133,10 @@ export function GallerySection() {
 
       {/* Interactive Lightbox Modal */}
       {lightboxIndex !== null && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4">
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
+            className="absolute top-6 right-6 p-3 bg-slate-800/80 hover:bg-slate-700 text-white rounded-full transition-colors z-50 cursor-pointer"
             aria-label="Close"
           >
             <X className="w-6 h-6" />
@@ -144,7 +144,7 @@ export function GallerySection() {
 
           <button
             onClick={prevPhoto}
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 p-3 bg-slate-800/80 hover:bg-slate-700 text-white rounded-full transition-colors z-50 cursor-pointer"
             aria-label="Previous image"
           >
             <ChevronLeft className="w-6 h-6" />
@@ -156,7 +156,7 @@ export function GallerySection() {
                 src={SECURE_HARDWARE_PHOTOS[lightboxIndex].src}
                 alt={SECURE_HARDWARE_PHOTOS[lightboxIndex].alt}
                 fill
-                className="object-contain"
+                className="object-contain rounded-2xl"
                 sizes="100vw"
                 priority
               />
@@ -165,7 +165,7 @@ export function GallerySection() {
               <div className="text-base font-bold text-[#ffc833]">
                 {SECURE_HARDWARE_PHOTOS[lightboxIndex].title}
               </div>
-              <p className="text-xs font-mono text-white/80 max-w-2xl">
+              <p className="text-xs font-mono text-slate-300 max-w-2xl">
                 {SECURE_HARDWARE_PHOTOS[lightboxIndex].caption} ({lightboxIndex + 1} / {SECURE_HARDWARE_PHOTOS.length})
               </p>
             </div>
@@ -173,7 +173,7 @@ export function GallerySection() {
 
           <button
             onClick={nextPhoto}
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors z-50"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 p-3 bg-slate-800/80 hover:bg-slate-700 text-white rounded-full transition-colors z-50 cursor-pointer"
             aria-label="Next image"
           >
             <ChevronRight className="w-6 h-6" />
@@ -183,3 +183,4 @@ export function GallerySection() {
     </section>
   );
 }
+

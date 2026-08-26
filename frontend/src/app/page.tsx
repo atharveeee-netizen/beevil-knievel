@@ -17,7 +17,7 @@ import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#7a8085] text-white">
+    <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100">
       {/* Top Sticky Navbar with Universal Search */}
       <Navbar />
 
