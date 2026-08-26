@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Activity, Thermometer, Radio, Volume2 } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 export function ProductHero() {
   return (
@@ -12,7 +13,7 @@ export function ProductHero() {
       {/* Top Header Block */}
       <div className="space-y-6 max-w-3xl pt-8 sm:pt-12">
         <div className="text-[11px] font-mono tracking-widest text-[#f0b840] uppercase font-semibold">
-          BEEVIL KNIEVEL / EDGE INTELLIGENCE FOR APICULTURE
+          BEEVIL KNIEVEL / EDGE INTELLIGENCE FOR COMMERCIAL APICULTURE
         </div>
 
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-[#f4f4f6] font-sans leading-[1.05] uppercase">
@@ -20,8 +21,24 @@ export function ProductHero() {
         </h1>
 
         <p className="text-base sm:text-xl text-[#8a90a0] font-mono max-w-2xl leading-relaxed">
-          Continuous hive intelligence built for the field - from low-power sensing and LoRa telemetry to local edge AI.
+          Continuous edge intelligence for commercial apiaries. Detect swarms, queen loss, and colony distress <span className="text-[#f4f4f6] font-semibold">72 hours before failure</span> - without cracking propolis seals.
         </p>
+
+        {/* Physical Engineering Badges */}
+        <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px] text-[#8a90a0]">
+          <span className="px-2.5 py-1 rounded-sm bg-[#12151e] border border-[#222632] text-[#f4f4f6]">
+            IP67 Solar Node
+          </span>
+          <span className="px-2.5 py-1 rounded-sm bg-[#12151e] border border-[#222632] text-[#f4f4f6]">
+            Antmicro CM4 Hub
+          </span>
+          <span className="px-2.5 py-1 rounded-sm bg-[#12151e] border border-[#222632] text-[#f4f4f6]">
+            15km LoRa Mesh
+          </span>
+          <span className="px-2.5 py-1 rounded-sm bg-[#12151e] border border-[#2ea043]/40 text-[#2ea043]">
+            Verified Field BOM
+          </span>
+        </div>
 
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -46,7 +63,7 @@ export function ProductHero() {
       {/* Hero Product Visual Composition (Quiet, Industrial, Natural) */}
       <div className="mt-14 relative w-full h-[360px] sm:h-[480px] md:h-[540px] rounded-sm overflow-hidden border border-[#222632] bg-[#12151e]">
         <Image
-          src="/images/hardware/beevil_hero_apiary.jpg"
+          src={getAssetPath("/images/hardware/beevil_hero_apiary.jpg")}
           alt="Beevil Knievel autonomous field node deployed in production apiary"
           fill
           priority

@@ -214,7 +214,7 @@ export function BeforeFailureTimelineSection() {
             <div className="text-xs font-mono text-zinc-400 border-t border-white/5 pt-3 flex justify-between items-center">
               <span>Operational Outcome:</span>
               <strong className="text-emerald-400 flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Colonly Absconding Prevented ($750 Saved)
+                <CheckCircle2 className="w-3.5 h-3.5" /> Colony Swarm Absconding Prevented ($750 Saved)
               </strong>
             </div>
           </div>

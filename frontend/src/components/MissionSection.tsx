@@ -76,7 +76,7 @@ export function MissionSection() {
                 <span>Sub-Second Edge AI</span>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed">
-                Instant 3.35 ms on-premise inference with 96.84% accuracy and 100% queenless recall.
+                Instant 1.12 ms on-node TinyML triage and 8.20 ms INT8 gateway neural fusion with 96.84% accuracy.
               </p>
             </div>
           </div>

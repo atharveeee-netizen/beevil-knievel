@@ -64,7 +64,7 @@ export default function Header() {
             href="#problem-solution"
             className="text-[15px] text-black font-normal hover:text-[#65bd60] transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-0.5 after:bg-[#65bd60] after:transition-all"
           >
-            Problem vs Solution
+            Field Realities vs Edge AI
           </Link>
           <Link
             href="#technology"
@@ -154,7 +154,7 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-[17px] font-medium text-black py-2 border-b border-[#E5E5E0] hover:text-[#65bd60]"
             >
-              Problem vs Solution
+              Field Realities vs Edge AI
             </Link>
             <Link
               href="#technology"

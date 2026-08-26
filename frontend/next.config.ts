@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isProd ? "/beevil-knievel" : "",
+  },
 };
 
 export default nextConfig;

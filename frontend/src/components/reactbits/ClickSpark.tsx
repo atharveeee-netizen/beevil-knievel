@@ -22,6 +22,10 @@ export function ClickSpark({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
     const container = containerRef.current;
     if (!container) return;
 

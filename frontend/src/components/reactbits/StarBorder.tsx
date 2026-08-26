@@ -19,7 +19,7 @@ export function StarBorder({
   return (
     <div className={`relative inline-block overflow-hidden rounded-2xl p-[1.5px] ${className}`} {...props}>
       <div
-        className="absolute inset-0 animate-spin"
+        className="absolute inset-0 animate-spin motion-reduce:animate-none"
         style={{
           background: `conic-gradient(from 0deg, transparent 0 340deg, ${color} 360deg)`,
           filter: "blur(1px)",

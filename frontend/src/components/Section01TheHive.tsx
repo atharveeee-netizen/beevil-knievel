@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { getAssetPath } from "@/lib/utils";
 
 export function Section01TheHive() {
   return (
@@ -37,7 +38,7 @@ export function Section01TheHive() {
         {/* Right Macro Biological / Hardware Imagery */}
         <div className="lg:col-span-6 relative h-[380px] sm:h-[460px] rounded-sm overflow-hidden border border-[#222632] bg-[#12151e]">
           <Image
-            src="/images/hardware/beevil_detect_macro.jpg"
+            src={getAssetPath("/images/hardware/beevil_detect_macro.jpg")}
             alt="Honeybee colony acoustic and thermal observation inside the brood chamber"
             fill
             className="object-cover object-center filter brightness-95"

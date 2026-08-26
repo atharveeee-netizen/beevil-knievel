@@ -64,35 +64,35 @@ export default function TextMediaSection() {
   return (
     <section className="w-full bg-[#EDECEC] py-12 md:py-16">
       <div className="beewise-container space-y-6 md:space-y-8">
-        {/* Growers */}
+        {/* Commercial Orchard Growers */}
         <TextMediaBlock
-          title="Growers"
-          subtitle="Get guaranteed quality, competitive pricing, and peace of mind."
+          title="Commercial Growers"
+          subtitle="Verify true pollination density and frame coverage without interrupting foraging flights or breaking propolis seals."
           buttonText="Learn more"
-          buttonLink="https://beewise.ag/growers"
+          buttonLink="https://github.com/atharveeee-netizen/beevil-knievel"
           imageSrc="/images/beewise/grower-tractor.webp"
-          imageAlt="Almond grower on tractor"
+          imageAlt="Commercial orchard grower"
         />
 
-        {/* Beekeepers */}
+        {/* Commercial Beekeepers */}
         <TextMediaBlock
-          title="Beekeepers"
-          subtitle="Experience an AI and robotics enabled hive for simplified workflows and better returns."
-          buttonText="Learn more"
-          buttonLink="https://beewise.ag/beekeepers"
+          title="Commercial Apiaries"
+          subtitle="Eliminate lifting 40kg brood boxes in 38°C heat with automated 285 Hz queenless detection and 72-hour pre-swarm warnings."
+          buttonText="Explore technology"
+          buttonLink="/app"
           imageSrc="/images/beewise/beekeepers-beehome.webp"
-          imageAlt="Beekeepers with open BeeHome"
+          imageAlt="Beekeepers inspecting apiary"
           isReversed
         />
 
-        {/* Bees for Buildings */}
+        {/* Research & Conservation */}
         <TextMediaBlock
-          title="Bees for Buildings"
-          subtitle="Bring measurable engagement and nature impact to your campus or property."
-          buttonText="Learn more"
-          buttonLink="https://beesforbuildings.com/"
+          title="Research &amp; Biosecurity"
+          subtitle="Continuous 16-channel NIST-calibrated physical telemetry and cryptographic provenance for entomology research."
+          buttonText="View dataset"
+          buttonLink="https://github.com/atharveeee-netizen/beevil-knievel"
           imageSrc="/images/beewise/bees-for-buildings.png"
-          imageAlt="Bees for Buildings smart hive installation"
+          imageAlt="Apiary research telemetry station"
         />
       </div>
     </section>

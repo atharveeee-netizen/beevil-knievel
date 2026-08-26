@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { getAssetPath } from "@/lib/utils";
 import {
   Radio, Activity, Thermometer, Zap, ShieldCheck,
   QrCode, Search, ArrowLeft, Sparkles, Volume2,
@@ -1878,7 +1879,7 @@ export default function MobileFieldAgritechApp() {
               <div className="bg-[#262626] border border-[#393939] rounded-2xl overflow-hidden shadow-xl">
                 <div className="relative h-36 w-full">
                   <Image
-                    src="/images/gateway_apiary.jpg"
+                    src={getAssetPath("/images/gateway_apiary.jpg")}
                     alt="Apiary Yard Gateway"
                     fill
                     className="object-cover opacity-80"
@@ -2134,7 +2135,7 @@ export default function MobileFieldAgritechApp() {
               <div className="bg-[#262626] border border-[#393939] rounded-3xl overflow-hidden shadow-xl">
                 <div className="relative h-44 w-full bg-[#161616]">
                   <Image
-                    src="/images/honey_chain_jar.jpg"
+                    src={getAssetPath("/images/honey_chain_jar.jpg")}
                     alt="Honey Chain Organic Jar"
                     fill
                     className="object-cover opacity-90"
@@ -2651,7 +2652,7 @@ export default function MobileFieldAgritechApp() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="relative h-36 rounded-xl overflow-hidden border border-[#393939]">
                     <Image
-                      src="/images/node_enclosure.jpg"
+                      src={getAssetPath("/images/node_enclosure.jpg")}
                       alt="Beevil Hardware Node Enclosure"
                       fill
                       className="object-cover opacity-90"
@@ -2665,7 +2666,7 @@ export default function MobileFieldAgritechApp() {
 
                   <div className="relative h-36 rounded-xl overflow-hidden border border-[#393939]">
                     <Image
-                      src="/images/hardware/beevil_hardware_node.jpg"
+                      src={getAssetPath("/images/hardware/beevil_hardware_node.jpg")}
                       alt="Beevil PCB Architecture"
                       fill
                       className="object-cover opacity-90"

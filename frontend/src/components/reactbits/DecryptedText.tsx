@@ -20,6 +20,11 @@ export function DecryptedText({
   const [displayText, setDisplayText] = useState<string>(text);
 
   useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisplayText(text);
+      return;
+    }
+
     let iteration = 0;
     const totalSteps = text.length;
 

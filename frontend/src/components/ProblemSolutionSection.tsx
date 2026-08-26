@@ -10,7 +10,7 @@ export default function ProblemSolutionSection() {
             System Benchmark &amp; Clinical Audit
           </span>
           <h2 className="text-[30px] sm:text-[38px] md:text-[46px] font-normal text-black leading-[1.2]">
-            The Problem vs. The BEEVIL Solution
+            Apiary Realities vs. The BEEVIL Autonomous Platform
           </h2>
         </div>
 
@@ -24,10 +24,10 @@ export default function ProblemSolutionSection() {
                 The Status Quo Failure
               </div>
               <h3 className="text-[24px] sm:text-[28px] md:text-[32px] font-medium leading-[1.25] text-white">
-                Bees are dying. 40% colony collapse rates are the new normal.
+                Bees are dying. 40% annual colony collapse rates are the new commercial reality.
               </h3>
               <p className="text-[#DCDAD9] text-[16px] sm:text-[18px] font-light leading-relaxed">
-                Traditional monitoring relies on manual inspections (weeks apart) and audio-only AI that fails in the field (43% accuracy).
+                Traditional management relies on manual frame inspections every 14 days in sweltering heat, or cloud-dependent audio apps that fail in remote out-yards (43% field accuracy).
               </p>
             </div>
 

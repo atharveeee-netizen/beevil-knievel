@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Cpu, Layers, Radio, ShieldCheck, Database, HardDrive } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 export function Section07TheHardware() {
   return (
@@ -32,7 +33,7 @@ export function Section07TheHardware() {
           <div className="bg-[#12151e] border border-[#222632] rounded-sm overflow-hidden flex flex-col justify-between">
             <div className="relative h-60 w-full bg-[#0a0d14]">
               <Image
-                src="/images/node_enclosure.jpg"
+                src={getAssetPath("/images/node_enclosure.jpg")}
                 alt="Solar Field Sensor Node Enclosure"
                 fill
                 className="object-cover filter brightness-95"
@@ -59,7 +60,7 @@ export function Section07TheHardware() {
           <div className="bg-[#12151e] border border-[#222632] rounded-sm overflow-hidden flex flex-col justify-between">
             <div className="relative h-60 w-full bg-[#0a0d14]">
               <Image
-                src="/images/gateway_apiary.jpg"
+                src={getAssetPath("/images/gateway_apiary.jpg")}
                 alt="Central Apiary Gateway Station"
                 fill
                 className="object-cover filter brightness-95"
@@ -86,7 +87,7 @@ export function Section07TheHardware() {
           <div className="bg-[#12151e] border border-[#222632] rounded-sm overflow-hidden flex flex-col justify-between">
             <div className="relative h-60 w-full bg-[#0a0d14]">
               <Image
-                src="/images/hardware/cm4-baseboard-render.png"
+                src={getAssetPath("/images/hardware/cm4-baseboard-render.png")}
                 alt="Antmicro CM4 Baseboard PCB"
                 fill
                 className="object-contain p-4 filter brightness-95"
@@ -123,6 +124,16 @@ export function Section07TheHardware() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+            <a
+              href="https://github.com/atharveeee-netizen/beevil-knievel/blob/main/hardware/BOM.md"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#0a0d14] hover:bg-[#1a1e2a] border border-[#2e3444] text-[#f4f4f6] text-xs font-mono uppercase tracking-wider rounded-sm transition-colors"
+            >
+              <span>Verified BOM &amp; Schematics</span>
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#2ea043]" />
+            </a>
+
             <a
               href="https://github.com/atharveeee-netizen/beevil-knievel"
               target="_blank"

@@ -35,7 +35,7 @@ export function SystemSection() {
   const [frequencyDial, setFrequencyDial] = useState(220);
 
   const getAcousticDiagnostic = (freq: number) => {
-    if (freq < 210) {
+    if (freq < 235) {
       return { 
         label: "180 - 220 Hz: Nominal Colony Hum & Brood Homeostasis", 
         state: "Queenright Brood Nest Core Homeostasis", 
@@ -43,20 +43,28 @@ export function SystemSection() {
         desc: "Steady baseline acoustic energy concentrated in the brood nest core. Thermal stability is locked at 34.82°C ±0.05°C via TI TMP117 RTD. Eliminates intrusive 40kg brood box lifting in 38°C summer heat."
       };
     }
-    if (freq < 320) {
+    if (freq < 270) {
       return { 
         label: "250 Hz: Virgin Queen Piping & Oviposition Pulse", 
         state: "Queen Active / Mating & Emergence Pulse", 
         badge: "bg-amber-500/20 text-amber-400 border border-amber-500/40",
-        desc: "Characteristic high-energy G-clef pulses emitted by virgin queens. Detect supersedure or queen loss weeks before the colony dwindles, captured by TDK INMP441 24-bit I2S microphone (128-pt CMSIS-DSP FFT)."
+        desc: "Characteristic high-energy G-clef pulses emitted by virgin queens. Detect supersedure weeks before colony dwindles, captured by TDK INMP441 24-bit I2S microphone (128-pt CMSIS-DSP FFT)."
       };
     }
-    if (freq < 550) {
+    if (freq < 360) {
       return { 
-        label: "450 Hz: Pre-Swarm Harmonic Escalation (72h Alert)", 
-        state: "Pre-Swarm Departure Harmonic Surge", 
+        label: "285 Hz: Queenless Roar & Brood Nest Agitation", 
+        state: "Queenless Colony Roar (Emergency State)", 
         badge: "bg-rose-500/20 text-rose-400 border border-rose-500/40",
-        desc: "Critical acoustic density shift preceding colony departure split. Catches swarms 72 hours before 20,000 bees flee for the tree canopy. Triggers automated Semtech SX1262 LoRa mesh alert to Central Gateway."
+        desc: "Distinct 285 Hz warble signaling sudden absence of 9-ODA queen pheromone. Fused with TI TMP117 brood nest chill detection (<33.5°C) to direct immediate mated queen introduction."
+      };
+    }
+    if (freq < 580) {
+      return { 
+        label: "450 - 485 Hz: Pre-Swarm Harmonic Escalation (72h Alert)", 
+        state: "Pre-Swarm Departure Harmonic Surge", 
+        badge: "bg-orange-500/20 text-orange-400 border border-orange-500/40",
+        desc: "Critical acoustic density shift preceding colony departure. Catches swarms 72 hours before 20,000 bees flee for the tree canopy, enabling timely Demaree vertical splits."
       };
     }
     return { 

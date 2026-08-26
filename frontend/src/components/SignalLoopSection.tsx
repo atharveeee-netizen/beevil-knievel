@@ -34,7 +34,7 @@ const HIVE_SIGNALS: SignalDetail[] = [
     name: "Bio-Acoustic Frequency",
     sensor: "TDK INMP441 (24-bit I2S MEMS Microphone)",
     nominal: "200 - 240 Hz steady worker hum",
-    anomaly: "250 Hz pulsed piping (Virgin Queen) or 450 - 550 Hz high-energy escalation (Swarm swarm-roar)",
+    anomaly: "285 Hz queenless roar, 250 Hz virgin queen piping, or 450 - 485 Hz pre-swarm harmonic surge",
     earlyWarning: "Captures acoustic energy density shifts preceding swarms before 20,000 bees depart for the tree canopy.",
     leadTime: "24 - 72 Hours",
     icon: Volume2,

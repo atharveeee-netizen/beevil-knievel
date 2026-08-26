@@ -44,9 +44,9 @@ export default function DualColumnSection() {
           </div>
 
           <p className="text-black text-[24px] sm:text-[32px] md:text-[42px] font-light leading-[1.3] uppercase tracking-wide">
-            Using the BeeHome<span className="text-[0.6em] align-top">™</span> results in{" "}
-            <strong className="font-semibold">70% lower bee colony loss </strong>
-            and healthier hives
+            Deploying the Beevil Knievel<span className="text-[0.6em] align-top">™</span> platform results in{" "}
+            <strong className="font-semibold">70% lower colony mortality </strong>
+            and zero undetected queen losses
           </p>
         </div>
       </div>

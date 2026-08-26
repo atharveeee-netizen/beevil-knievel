@@ -22,6 +22,9 @@ export function Magnet({
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (disabled || !magnetRef.current) return;
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
 
     const { left, top, width, height } = magnetRef.current.getBoundingClientRect();
     const centerX = left + width / 2;
