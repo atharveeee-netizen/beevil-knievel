@@ -33,7 +33,7 @@ export function OrderAccessoriesSection() {
 
             <div className="space-y-3 text-base sm:text-lg text-slate-300 leading-relaxed">
               <p>
-                <strong className="text-white">Includes full multi-sensor fusion suite</strong> – TI TMP117 brood temperature (±0.05°C), Sensirion SCD41 CO2, BME688 VOC gas analyzer, and TDK high-frequency digital MEMS acoustic ear.
+                <strong className="text-white">Includes full multi-sensor fusion suite</strong> - TI TMP117 brood temperature (±0.05°C), Sensirion SCD41 CO2, BME688 VOC gas analyzer, and TDK high-frequency digital MEMS acoustic ear.
               </p>
               <p className="text-slate-400 text-sm">
                 Includes weatherproof universal magnetic hive mount and 2W monocrystalline solar harvesting lid with 14-day battery reserve.

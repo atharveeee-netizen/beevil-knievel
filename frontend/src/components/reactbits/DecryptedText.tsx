@@ -12,7 +12,7 @@ interface DecryptedTextProps {
 
 export function DecryptedText({
   text,
-  speed = 40,
+  speed = 35,
   maxIterations = 10,
   className = "",
   characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+",
@@ -21,6 +21,8 @@ export function DecryptedText({
 
   useEffect(() => {
     let iteration = 0;
+    const totalSteps = text.length;
+
     const interval = setInterval(() => {
       setDisplayText(
         text
@@ -35,14 +37,14 @@ export function DecryptedText({
           .join("")
       );
 
-      if (iteration >= text.length) {
+      if (iteration >= totalSteps) {
         clearInterval(interval);
       }
-      iteration += 1 / maxIterations;
+      iteration += 1;
     }, speed);
 
     return () => clearInterval(interval);
-  }, [text, speed, maxIterations, characters]);
+  }, [text, speed, characters]);
 
   return <span className={className}>{displayText}</span>;
 }

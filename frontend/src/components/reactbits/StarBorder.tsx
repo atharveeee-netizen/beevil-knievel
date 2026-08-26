@@ -5,22 +5,28 @@ import React from "react";
 interface StarBorderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
+  innerClassName?: string;
   color?: string;
 }
 
 export function StarBorder({
   children,
   className = "",
+  innerClassName = "p-4",
   color = "#f59e0b",
   ...props
 }: StarBorderProps) {
   return (
-    <div className={`relative inline-block overflow-hidden rounded-xl p-[1.5px] ${className}`} {...props}>
+    <div className={`relative inline-block overflow-hidden rounded-2xl p-[1.5px] ${className}`} {...props}>
       <div
-        className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0_340deg,#f59e0b_360deg)] animate-spin"
-        style={{ filter: "blur(1px)", animationDuration: "6s" }}
+        className="absolute inset-0 animate-spin"
+        style={{
+          background: `conic-gradient(from 0deg, transparent 0 340deg, ${color} 360deg)`,
+          filter: "blur(1px)",
+          animationDuration: "6s",
+        }}
       />
-      <div className="relative rounded-xl bg-[#090d16] p-4 text-white z-10">
+      <div className={`relative rounded-2xl bg-[#090d16] text-white z-10 ${innerClassName}`}>
         {children}
       </div>
     </div>

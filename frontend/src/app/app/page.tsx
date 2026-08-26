@@ -17,7 +17,16 @@ import {
   Wifi, Bluetooth, CheckSquare, Eye
 } from "lucide-react";
 import { PlaydateConsole } from "@/components/PlaydateConsole";
-import { SpotlightCard, DecryptedText, CountUp, ShinyText, StarBorder, TiltedCard } from "@/components/reactbits";
+import {
+  SpotlightCard,
+  DecryptedText,
+  CountUp,
+  ShinyText,
+  StarBorder,
+  TiltedCard,
+  ClickSpark,
+  Magnet
+} from "@/components/reactbits";
 
 /* ============================================================================
    TYPES & TELEMETRY DEFINITIONS
@@ -671,7 +680,7 @@ export default function MobileFieldAgritechApp() {
           <div className="flex items-center gap-1.5">
             <span className="text-white font-extrabold text-xs">14:20</span>
             <span className="text-[9px] bg-amber-500/15 text-amber-400 border border-amber-500/30 px-1.5 py-0.2 rounded-md font-bold">
-              5G LoRa 915MHz
+              <ShinyText text="5G LoRa 915MHz" speed={3} className="text-[9px]" />
             </span>
           </div>
 
@@ -686,10 +695,10 @@ export default function MobileFieldAgritechApp() {
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1 text-emerald-400" title="Packet Delivery Ratio">
               <Radio className="w-3 h-3 animate-pulse" />
-              <span className="text-[10px] font-bold">PDR 99.8%</span>
+              <ShinyText text="PDR 99.8%" speed={4} className="text-[10px] font-bold text-emerald-400" />
             </div>
             <div className="flex items-center gap-1 text-slate-300" title="LiFePO4 Battery Status">
-              <span className="text-[10px] font-bold">98%</span>
+              <span className="text-[10px] font-bold"><CountUp to={98} suffix="%" duration={1.2} /></span>
               <div className="w-4 h-2 border border-slate-400 rounded-sm p-0.5 flex items-center">
                 <div className="w-full h-full bg-emerald-400 rounded-2xs" />
               </div>
@@ -709,7 +718,7 @@ export default function MobileFieldAgritechApp() {
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-white text-sm tracking-tight">Beevil Fleet</span>
                 <span className="text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.2 rounded-full font-bold">
-                  100 Hives Live
+                  <CountUp to={100} duration={1.5} /> Hives Live
                 </span>
               </div>
               <p className="text-[10px] font-mono text-slate-400">
@@ -719,21 +728,23 @@ export default function MobileFieldAgritechApp() {
           </div>
 
           {/* Quick Hands-Free Voice Audio Debrief Button */}
-          <button
-            onClick={() => {
-              const summary = "Beevil Field Triage Audio Briefing: 96 hives nominal in full homeostasis. 4 hives require immediate action. In Yard Alpha: Hive 42 has critical pre-swarm risk with 485 Hz piping buzz. Hive 15 shows queen failure with 285 Hz roar. In Yard Beta: Hive 73 has a 5.4 percent Varroa mite surge. Hive 88 has a 14.2 degree tilt tamper alert.";
-              speakText(summary);
-            }}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all border shadow-sm ${
-              isSpeaking
-                ? "bg-amber-400 text-slate-950 border-amber-300 shadow-md shadow-amber-500/30 animate-pulse"
-                : "bg-slate-800/90 hover:bg-slate-700 text-amber-400 border-amber-500/30"
-            }`}
-            title="Listen to Hands-Free Voice Audio Debrief (Web Speech API)"
-          >
-            {isSpeaking ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
-            <span className="text-[11px]">{isSpeaking ? "Debriefing..." : "Voice Debrief"}</span>
-          </button>
+          <ClickSpark sparkColor="#f59e0b" sparkCount={8} sparkRadius={22}>
+            <button
+              onClick={() => {
+                const summary = "Beevil Field Triage Audio Briefing: 96 hives nominal in full homeostasis. 4 hives require immediate action. In Yard Alpha: Hive 42 has critical pre-swarm risk with 485 Hz piping buzz. Hive 15 shows queen failure with 285 Hz roar. In Yard Beta: Hive 73 has a 5.4 percent Varroa mite surge. Hive 88 has a 14.2 degree tilt tamper alert.";
+                speakText(summary);
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all border shadow-sm ${
+                isSpeaking
+                  ? "bg-amber-400 text-slate-950 border-amber-300 shadow-md shadow-amber-500/30 animate-pulse"
+                  : "bg-slate-800/90 hover:bg-slate-700 text-amber-400 border-amber-500/30"
+              }`}
+              title="Listen to Hands-Free Voice Audio Debrief (Web Speech API)"
+            >
+              {isSpeaking ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
+              <span className="text-[11px]">{isSpeaking ? "Debriefing..." : "Voice Debrief"}</span>
+            </button>
+          </ClickSpark>
         </div>
 
         {/* ------------------------------------------------------------------
@@ -755,13 +766,13 @@ export default function MobileFieldAgritechApp() {
                     Apiary Fleet Triage Engine
                   </span>
                   <span className="text-[10px] font-mono bg-amber-500/15 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-bold">
-                    {inspectedHiveIds.size} / {anomalousHives.length} Inspected
+                    <CountUp to={inspectedHiveIds.size} duration={0.8} /> / <CountUp to={anomalousHives.length} duration={0.8} /> Inspected
                   </span>
                 </div>
 
                 <h2 className="text-lg font-extrabold text-white tracking-tight">
-                  All Clear: <span className="text-emerald-400">96 Hives Nominal</span> •{" "}
-                  <span className="text-rose-400">4 Hives Action Needed</span>
+                  All Clear: <span className="text-emerald-400"><CountUp to={nominalHives.length} duration={1.2} /> Hives Nominal</span> •{" "}
+                  <span className="text-rose-400"><CountUp to={anomalousHives.length} duration={1.2} /> Hives Action Needed</span>
                 </h2>
                 
                 <p className="text-xs text-slate-300 mt-1 font-mono leading-relaxed">
@@ -797,7 +808,7 @@ export default function MobileFieldAgritechApp() {
                         : "bg-slate-900/60 text-slate-400 border-slate-800"
                     }`}
                   >
-                    🚨 Action Items ({anomalousHives.length})
+                    🚨 Action Items (<CountUp to={anomalousHives.length} duration={0.8} />)
                   </button>
                   <button
                     onClick={() => setTriageFilter("ALL")}
@@ -807,7 +818,7 @@ export default function MobileFieldAgritechApp() {
                         : "bg-slate-900/60 text-slate-400 border-slate-800"
                     }`}
                   >
-                    All 100 Hives ({fleet.length})
+                    All 100 Hives (<CountUp to={fleet.length} duration={0.8} />)
                   </button>
                 </div>
               </div>
@@ -823,38 +834,44 @@ export default function MobileFieldAgritechApp() {
 
                 {anomalousHives.map((hive) => {
                   const isInspected = inspectedHiveIds.has(hive.id);
+                  const isPreSwarm = hive.status === "PRE_SWARM";
 
                   let badgeColor = "bg-rose-500/20 text-rose-300 border-rose-500/40";
                   let cardBorder = "border-rose-500/40 hover:border-rose-400";
                   let badgeTitle = hive.status.replace(/_/g, " ");
+                  let spotlightColor = "rgba(244, 63, 94, 0.25)";
 
                   if (hive.status === "PRE_SWARM") {
                     badgeColor = "bg-amber-500/20 text-amber-300 border-amber-500/40";
                     cardBorder = "border-amber-500/40 hover:border-amber-400";
                     badgeTitle = "🚨 SWARM RISK (485 Hz)";
+                    spotlightColor = "rgba(245, 158, 11, 0.35)";
                   } else if (hive.status === "QUEEN_FAILURE") {
                     badgeColor = "bg-yellow-500/20 text-yellow-300 border-yellow-500/40";
                     cardBorder = "border-yellow-500/40 hover:border-yellow-400";
                     badgeTitle = "👑 QUEENLESS ROAR (285 Hz)";
+                    spotlightColor = "rgba(234, 179, 8, 0.25)";
                   } else if (hive.status === "VARROA_SURGE") {
                     badgeColor = "bg-rose-500/20 text-rose-300 border-rose-500/40";
                     cardBorder = "border-rose-500/40 hover:border-rose-400";
                     badgeTitle = "🔬 VARROA LOAD (5.4%)";
+                    spotlightColor = "rgba(244, 63, 94, 0.25)";
                   } else if (hive.status === "TAMPER") {
                     badgeColor = "bg-purple-500/20 text-purple-300 border-purple-500/40";
                     cardBorder = "border-purple-500/40 hover:border-purple-400";
                     badgeTitle = "⚠️ 14.2° TILT TAMPER";
+                    spotlightColor = "rgba(168, 85, 247, 0.25)";
                   }
 
-                  return (
-                    <div
-                      key={hive.id}
+                  const cardInner = (
+                    <SpotlightCard
+                      spotlightColor={spotlightColor}
                       onClick={() => {
                         setSelectedHiveId(hive.id);
                         setIsInspectorOpen(true);
                       }}
-                      className={`bg-[#0d1322] border ${cardBorder} rounded-2xl p-4 shadow-xl transition-all cursor-pointer relative overflow-hidden group ${
-                        isInspected ? "opacity-75 border-emerald-500/40 bg-[#0d1322]/70" : ""
+                      className={`!bg-[#0d1322] border ${cardBorder} !rounded-2xl !p-4 shadow-xl transition-all cursor-pointer relative overflow-hidden group ${
+                        isInspected ? "opacity-75 border-emerald-500/40 !bg-[#0d1322]/70" : ""
                       }`}
                     >
                       {/* Top Row: Hive ID, Yard & Severity Badge */}
@@ -867,11 +884,11 @@ export default function MobileFieldAgritechApp() {
                             <div className="flex items-center gap-1.5">
                               <span className="font-extrabold text-white text-sm">{hive.yard}</span>
                               <span className="text-[10px] font-mono text-amber-300 font-semibold">
-                                ({hive.gpsDistanceMeters}m {hive.gpsBearingText} {String(hive.gpsBearingDeg).padStart(3, "0")}°)
+                                (<CountUp to={hive.gpsDistanceMeters} duration={1} />m {hive.gpsBearingText} {String(hive.gpsBearingDeg).padStart(3, "0")}°)
                               </span>
                             </div>
                             <span className="text-[10px] font-mono text-slate-400">
-                              Synced {hive.lastPingSecAgo}s ago • Bat {hive.batteryPct}% • RSSI {hive.rssi}dBm
+                              Synced {hive.lastPingSecAgo}s ago • Bat <CountUp to={hive.batteryPct} suffix="%" duration={1} /> • RSSI {hive.rssi}dBm
                             </span>
                           </div>
                         </div>
@@ -899,37 +916,45 @@ export default function MobileFieldAgritechApp() {
                         <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
                           <span className="text-[9px] text-slate-500 block">Core Brood</span>
                           <span className={`font-bold ${hive.thermal.frame3CoreQueen > 36 ? "text-amber-400" : hive.thermal.frame3CoreQueen < 33.5 ? "text-cyan-400" : "text-emerald-400"}`}>
-                            {hive.thermal.frame3CoreQueen}°C
+                            <CountUp to={hive.thermal.frame3CoreQueen} decimals={1} suffix="°C" duration={1.2} />
                           </span>
                         </div>
                         <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
                           <span className="text-[9px] text-slate-500 block">Acoustic Tone</span>
-                          <span className="font-bold text-amber-400">{hive.peakFrequencyHz} Hz</span>
+                          <span className="font-bold text-amber-400">
+                            <CountUp to={hive.peakFrequencyHz} suffix=" Hz" duration={1.2} />
+                          </span>
                         </div>
                         <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
                           <span className="text-[9px] text-slate-500 block">SCD41 CO2</span>
-                          <span className="font-bold text-purple-300">{hive.gas.scd41Co2Ppm} p</span>
+                          <span className="font-bold text-purple-300">
+                            <CountUp to={hive.gas.scd41Co2Ppm} suffix=" p" duration={1.2} />
+                          </span>
                         </div>
                         <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
                           <span className="text-[9px] text-slate-500 block">24h Flux</span>
-                          <span className="font-bold text-white">{hive.deltaWeightKg > 0 ? `+${hive.deltaWeightKg}` : hive.deltaWeightKg} kg</span>
+                          <span className="font-bold text-white">
+                            <CountUp to={Math.abs(hive.deltaWeightKg)} decimals={2} prefix={hive.deltaWeightKg >= 0 ? "+" : "-"} suffix=" kg" duration={1.2} />
+                          </span>
                         </div>
                       </div>
 
                       {/* Glove-Friendly Big 1-Tap Action Buttons */}
                       <div className="grid grid-cols-3 gap-2 pt-1">
-                        {/* 1. Mark Inspected Button */}
-                        <button
-                          onClick={(e) => toggleInspectHive(hive.id, e)}
-                          className={`py-2.5 px-2 rounded-xl text-xs font-mono font-bold transition-all border flex items-center justify-center gap-1.5 shadow-sm ${
-                            isInspected
-                              ? "bg-emerald-500 text-slate-950 border-emerald-400 shadow-emerald-500/20"
-                              : "bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700"
-                          }`}
-                        >
-                          {isInspected ? <CheckCheck className="w-3.5 h-3.5" /> : <Check className="w-3.5 h-3.5" />}
-                          <span>{isInspected ? "Inspected" : "Mark Done"}</span>
-                        </button>
+                        {/* 1. Mark Inspected Button with ClickSpark */}
+                        <ClickSpark sparkColor="#10b981" sparkCount={10} sparkRadius={28}>
+                          <button
+                            onClick={(e) => toggleInspectHive(hive.id, e)}
+                            className={`w-full py-2.5 px-2 rounded-xl text-xs font-mono font-bold transition-all border flex items-center justify-center gap-1.5 shadow-sm ${
+                              isInspected
+                                ? "bg-emerald-500 text-slate-950 border-emerald-400 shadow-emerald-500/20"
+                                : "bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700"
+                            }`}
+                          >
+                            {isInspected ? <CheckCheck className="w-3.5 h-3.5" /> : <Check className="w-3.5 h-3.5" />}
+                            <span>{isInspected ? "Inspected" : "Mark Done"}</span>
+                          </button>
+                        </ClickSpark>
 
                         {/* 2. Listen to Hz Acoustics (Web Audio API) */}
                         <button
@@ -964,8 +989,18 @@ export default function MobileFieldAgritechApp() {
                           <span>Navigate</span>
                         </button>
                       </div>
-                    </div>
+                    </SpotlightCard>
                   );
+
+                  if (isPreSwarm) {
+                    return (
+                      <StarBorder key={hive.id} color="#f59e0b" className="w-full !block !p-[2px] !rounded-2xl" innerClassName="!p-0 !bg-transparent !rounded-2xl">
+                        {cardInner}
+                      </StarBorder>
+                    );
+                  }
+
+                  return <div key={hive.id}>{cardInner}</div>;
                 })}
               </div>
 
@@ -1026,7 +1061,9 @@ export default function MobileFieldAgritechApp() {
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-bold text-amber-400 uppercase">Yard Alpha</span>
-                    <span className="text-[10px] font-mono bg-slate-900 px-1.5 py-0.5 rounded text-slate-300">50 Hives</span>
+                    <span className="text-[10px] font-mono bg-slate-900 px-1.5 py-0.5 rounded text-slate-300">
+                      <CountUp to={50} duration={1} /> Hives
+                    </span>
                   </div>
                   <div className="font-extrabold text-white text-sm mt-0.5">North Ridge Apiary</div>
                   <div className="text-[10px] font-mono text-rose-400 mt-1">2 Action Items (#042 Swarm, #015 Queen)</div>
@@ -1042,7 +1079,9 @@ export default function MobileFieldAgritechApp() {
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-bold text-amber-400 uppercase">Yard Beta</span>
-                    <span className="text-[10px] font-mono bg-slate-900 px-1.5 py-0.5 rounded text-slate-300">50 Hives</span>
+                    <span className="text-[10px] font-mono bg-slate-900 px-1.5 py-0.5 rounded text-slate-300">
+                      <CountUp to={50} duration={1} /> Hives
+                    </span>
                   </div>
                   <div className="font-extrabold text-white text-sm mt-0.5">Wildflower Valley</div>
                   <div className="text-[10px] font-mono text-rose-400 mt-1">2 Action Items (#073 Varroa, #088 Tilt)</div>
@@ -1065,7 +1104,11 @@ export default function MobileFieldAgritechApp() {
                       <span className="text-emerald-400 font-bold">● CM4 Gateway Online</span> (915MHz LoRa)
                     </div>
                     <div className="bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700 text-amber-300 font-bold">
-                      {selectedYard === "Yard Alpha" ? "+24.8 kg 24h Flow" : "+23.4 kg 24h Flow"}
+                      {selectedYard === "Yard Alpha" ? (
+                        <>+<CountUp to={24.8} decimals={1} duration={1.2} /> kg 24h Flow</>
+                      ) : (
+                        <>+<CountUp to={23.4} decimals={1} duration={1.2} /> kg 24h Flow</>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1199,36 +1242,44 @@ export default function MobileFieldAgritechApp() {
                   )}
                 </div>
 
-                {/* 1-Tap Big NFC Scan Buttons */}
+                {/* 1-Tap Big NFC Scan Buttons with ClickSpark */}
                 <div className="space-y-2">
-                  <button
-                    onClick={() => handleSimulateNfcScan(42)}
-                    disabled={isScanningNfc}
-                    className="w-full py-3.5 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-2xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2"
-                  >
-                    <Smartphone className="w-4 h-4" />
-                    <span>Simulate 1-Tap NFC Touch (Hive #042 Swarm Risk)</span>
-                  </button>
+                  <ClickSpark sparkColor="#f59e0b" sparkSize={6} sparkRadius={35} sparkCount={12}>
+                    <button
+                      onClick={() => handleSimulateNfcScan(42)}
+                      disabled={isScanningNfc}
+                      className="w-full py-3.5 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-2xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2"
+                    >
+                      <Smartphone className="w-4 h-4" />
+                      <span>Simulate 1-Tap NFC Touch (Hive #042 Swarm Risk)</span>
+                    </button>
+                  </ClickSpark>
 
                   <div className="grid grid-cols-3 gap-2">
-                    <button
-                      onClick={() => handleSimulateNfcScan(15)}
-                      className="py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
-                    >
-                      Scan #015 (Queen)
-                    </button>
-                    <button
-                      onClick={() => handleSimulateNfcScan(73)}
-                      className="py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
-                    >
-                      Scan #073 (Varroa)
-                    </button>
-                    <button
-                      onClick={() => handleSimulateNfcScan(88)}
-                      className="py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
-                    >
-                      Scan #088 (Tamper)
-                    </button>
+                    <ClickSpark sparkColor="#eab308" sparkRadius={25}>
+                      <button
+                        onClick={() => handleSimulateNfcScan(15)}
+                        className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
+                      >
+                        Scan #015 (Queen)
+                      </button>
+                    </ClickSpark>
+                    <ClickSpark sparkColor="#f43f5e" sparkRadius={25}>
+                      <button
+                        onClick={() => handleSimulateNfcScan(73)}
+                        className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
+                      >
+                        Scan #073 (Varroa)
+                      </button>
+                    </ClickSpark>
+                    <ClickSpark sparkColor="#a855f7" sparkRadius={25}>
+                      <button
+                        onClick={() => handleSimulateNfcScan(88)}
+                        className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
+                      >
+                        Scan #088 (Tamper)
+                      </button>
+                    </ClickSpark>
                   </div>
                 </div>
 
@@ -1243,7 +1294,7 @@ export default function MobileFieldAgritechApp() {
                             RFID Tag Identified: Hive #{scannedHiveResult.id}
                           </span>
                           <p className="text-[10px] font-mono text-emerald-300">
-                            {scannedHiveResult.apiaryZone} • NTAG215 UID: 04:8F:2A:BE:EF
+                            {scannedHiveResult.apiaryZone} • NTAG215 UID: <DecryptedText text="04:8F:2A:BE:EF:6C:80" speed={30} className="text-emerald-300 font-bold" />
                           </p>
                         </div>
                       </div>
@@ -1252,20 +1303,33 @@ export default function MobileFieldAgritechApp() {
                       </span>
                     </div>
 
+                    <div className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800 space-y-1 text-[11px] font-mono">
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Hardware Hash:</span>
+                        <DecryptedText text={`0xBE88F5-${scannedHiveResult.id.toString(16).padStart(4, "0")}-STM32U585`} speed={25} className="text-cyan-300" />
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-400">Merkle Root:</span>
+                        <DecryptedText text={scannedHiveResult.blockchain.merkleRoot} speed={25} className="text-amber-300" />
+                      </div>
+                    </div>
+
                     <p className="text-xs font-mono text-slate-300">
                       {scannedHiveResult.urgencyReason || "Nominal colony telemetry verified on-chain."}
                     </p>
 
-                    <button
-                      onClick={() => {
-                        setSelectedHiveId(scannedHiveResult.id);
-                        setIsInspectorOpen(true);
-                      }}
-                      className="w-full py-2.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20"
-                    >
-                      <Activity className="w-3.5 h-3.5" />
-                      <span>Open Deep Diagnostic Inspector</span>
-                    </button>
+                    <ClickSpark sparkColor="#10b981" sparkRadius={30}>
+                      <button
+                        onClick={() => {
+                          setSelectedHiveId(scannedHiveResult.id);
+                          setIsInspectorOpen(true);
+                        }}
+                        className="w-full py-2.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20"
+                      >
+                        <Activity className="w-3.5 h-3.5" />
+                        <span>Open Deep Diagnostic Inspector</span>
+                      </button>
+                    </ClickSpark>
                   </div>
                 )}
 
@@ -1292,7 +1356,7 @@ export default function MobileFieldAgritechApp() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0d1322] via-[#0d1322]/30 to-transparent" />
                   
                   <div className="absolute top-3 left-3 bg-amber-500/90 text-slate-950 font-mono font-extrabold text-[10px] px-2.5 py-0.5 rounded-full shadow-md">
-                    USDA ORGANIC CERTIFIED
+                    <ShinyText text="USDA ORGANIC CERTIFIED" speed={3} className="text-slate-950 font-bold" />
                   </div>
 
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono">
@@ -1308,7 +1372,7 @@ export default function MobileFieldAgritechApp() {
                   </div>
                   <div className="flex justify-between border-b border-slate-800 pb-2">
                     <span className="text-slate-400">Batch Identifier:</span>
-                    <span className="text-emerald-400 font-semibold">{currentHive.blockchain.batchId}</span>
+                    <ShinyText text={currentHive.blockchain.batchId} speed={4} className="text-emerald-400 font-bold" />
                   </div>
                   <div className="flex justify-between border-b border-slate-800 pb-2">
                     <span className="text-slate-400">Botanical Flora:</span>
@@ -1316,12 +1380,22 @@ export default function MobileFieldAgritechApp() {
                   </div>
                   <div className="flex justify-between border-b border-slate-800 pb-2">
                     <span className="text-slate-400">Purity & Moisture:</span>
-                    <span className="text-cyan-300">{currentHive.blockchain.purityPct}% Purity • {currentHive.blockchain.moisturePct}% H2O</span>
+                    <span className="text-cyan-300">
+                      <CountUp to={currentHive.blockchain.purityPct} decimals={1} suffix="% Purity" duration={1.2} /> • <CountUp to={currentHive.blockchain.moisturePct} decimals={1} suffix="% H2O" duration={1.2} />
+                    </span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2 items-center">
+                    <span className="text-slate-400">SHA-256 Merkle Root:</span>
+                    <DecryptedText text={currentHive.blockchain.merkleRoot} speed={25} className="text-amber-400 font-mono text-[11px]" />
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2 items-center">
+                    <span className="text-slate-400">Hardware SE Hash:</span>
+                    <DecryptedText text={`0xBE88F5-${currentHive.id.toString(16).padStart(4, "0")}-STM32U585-ATECC608A`} speed={25} className="text-cyan-300 font-mono text-[11px]" />
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-slate-400">SHA-256 Hash:</span>
+                    <span className="text-slate-400">Block Hash:</span>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-slate-300 truncate max-w-[140px] text-[10px]">{currentHive.blockchain.blockHash}</span>
+                      <DecryptedText text={currentHive.blockchain.blockHash} speed={20} className="text-slate-300 truncate max-w-[140px] text-[10px]" />
                       <button
                         onClick={() => copyBlockHash(currentHive.blockchain.blockHash)}
                         className="p-1 text-slate-400 hover:text-white"
@@ -1332,13 +1406,15 @@ export default function MobileFieldAgritechApp() {
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => setIsJarCertOpen(true)}
-                    className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 mt-2"
-                  >
-                    <QrCode className="w-4 h-4" />
-                    <span>View & Print Customer Jar QR Certificate</span>
-                  </button>
+                  <ClickSpark sparkColor="#f59e0b" sparkRadius={30}>
+                    <button
+                      onClick={() => setIsJarCertOpen(true)}
+                      className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 mt-2"
+                    >
+                      <QrCode className="w-4 h-4" />
+                      <span>View & Print Customer Jar QR Certificate</span>
+                    </button>
+                  </ClickSpark>
                 </div>
               </div>
 
@@ -1480,14 +1556,16 @@ export default function MobileFieldAgritechApp() {
                     : "text-slate-500 hover:text-slate-300"
                 }`}
               >
-                <div className="relative">
-                  <Icon className={`w-5 h-5 ${isActive ? "text-amber-400 stroke-[2.5]" : "stroke-[1.8]"}`} />
-                  {tab.badge !== undefined && tab.badge > 0 && (
-                    <span className="absolute -top-1.5 -right-2 bg-rose-500 text-white font-mono text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center border border-slate-900">
-                      {tab.badge}
-                    </span>
-                  )}
-                </div>
+                <Magnet magnetStrength={3} padding={25} className="flex items-center justify-center">
+                  <div className="relative">
+                    <Icon className={`w-5 h-5 ${isActive ? "text-amber-400 stroke-[2.5]" : "stroke-[1.8]"}`} />
+                    {tab.badge !== undefined && tab.badge > 0 && (
+                      <span className="absolute -top-1.5 -right-2 bg-rose-500 text-white font-mono text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center border border-slate-900">
+                        <CountUp to={tab.badge} duration={0.8} />
+                      </span>
+                    )}
+                  </div>
+                </Magnet>
                 <span className="text-[10px] font-mono mt-1 tracking-tight">{tab.label}</span>
                 {isActive && (
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-0.5" />
@@ -1719,6 +1797,55 @@ export default function MobileFieldAgritechApp() {
             )}
 
             {/* --------------------------------------------------------------
+                INSPECTOR TAB: HONEY CHAIN IMMUTABLE PROOF
+                -------------------------------------------------------------- */}
+            {(inspectorSubTab === "OVERVIEW" || inspectorSubTab === "CHAIN") && (
+              <div className="bg-[#111827]/70 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Lock className="w-4 h-4 text-amber-400" />
+                    <h3 className="text-xs sm:text-sm font-extrabold text-white">Honey Chain Cryptographic Proof</h3>
+                  </div>
+                  <span className="text-[10px] font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/40 font-bold">
+                    <ShinyText text="SEALED ON-CHAIN" speed={3} className="text-emerald-300 font-bold" />
+                  </span>
+                </div>
+
+                <div className="bg-[#070a12] p-3 rounded-xl border border-slate-800 space-y-2 text-xs font-mono">
+                  <div className="flex justify-between border-b border-slate-800 pb-1.5 items-center">
+                    <span className="text-slate-400">SHA-256 Merkle Root:</span>
+                    <DecryptedText text={currentHive.blockchain.merkleRoot} speed={20} className="text-amber-400 font-bold font-mono" />
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-1.5 items-center">
+                    <span className="text-slate-400">Hardware SE Hash:</span>
+                    <DecryptedText text={`0xBE88F5-${currentHive.id.toString(16).padStart(4, "0")}-STM32U585-ATECC608A`} speed={20} className="text-cyan-300 font-bold font-mono" />
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-1.5 items-center">
+                    <span className="text-slate-400">Block Number:</span>
+                    <span className="text-white font-bold">#<CountUp to={currentHive.blockchain.blockNumber} duration={1} /></span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-1.5 items-center">
+                    <span className="text-slate-400">Batch ID:</span>
+                    <ShinyText text={currentHive.blockchain.batchId} speed={4} className="text-emerald-400 font-bold" />
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-400">Block Hash:</span>
+                    <div className="flex items-center gap-1.5">
+                      <DecryptedText text={currentHive.blockchain.blockHash} speed={15} className="text-slate-300 truncate max-w-[180px] text-[10px]" />
+                      <button
+                        onClick={() => copyBlockHash(currentHive.blockchain.blockHash)}
+                        className="p-1 text-slate-400 hover:text-white"
+                        title="Copy Hash"
+                      >
+                        {isCopiedHash ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* --------------------------------------------------------------
                 INSPECTOR TAB: HARDWARE ENCLOSURE EMBED
                 -------------------------------------------------------------- */}
             {inspectorSubTab === "OVERVIEW" && (
@@ -1816,7 +1943,7 @@ export default function MobileFieldAgritechApp() {
             {/* Distance Callout */}
             <div className="bg-[#070a12] border border-slate-800 rounded-2xl p-3 font-mono text-xs space-y-1">
               <div className="text-2xl font-extrabold text-amber-400">
-                {navTargetHive.gpsDistanceMeters} <span className="text-sm font-normal text-slate-400">meters</span>
+                <CountUp to={navTargetHive.gpsDistanceMeters} duration={1} /> <span className="text-sm font-normal text-slate-400">meters</span>
               </div>
               <p className="text-slate-300 text-[12px] font-semibold">
                 Bearing: <span className="text-white font-bold">{navTargetHive.gpsBearingDeg}° ({navTargetHive.gpsBearingText})</span>
@@ -1849,10 +1976,10 @@ export default function MobileFieldAgritechApp() {
             <div className="text-center space-y-1">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-mono font-bold">
                 <Award className="w-3.5 h-3.5" />
-                <span>OFFICIAL HONEY CHAIN VERIFICATION</span>
+                <ShinyText text="OFFICIAL HONEY CHAIN VERIFICATION" speed={3} className="text-amber-300 font-bold" />
               </div>
               <h2 className="text-lg font-extrabold text-white tracking-tight pt-1">
-                Organic Honey Batch Certificate
+                <ShinyText text="Organic Honey Batch Certificate" speed={4} className="text-white font-extrabold" />
               </h2>
               <p className="text-xs font-mono text-slate-400">
                 Tamper-Proof Telemetry Cryptographically Sealed On-Chain
@@ -1870,7 +1997,7 @@ export default function MobileFieldAgritechApp() {
               <div className="space-y-1.5 border-t border-slate-800 pt-2 text-[11px]">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Batch ID:</span>
-                  <span className="text-amber-400 font-bold">{currentHive.blockchain.batchId}</span>
+                  <ShinyText text={currentHive.blockchain.batchId} speed={4} className="text-amber-400 font-bold" />
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Flora:</span>
@@ -1878,23 +2005,41 @@ export default function MobileFieldAgritechApp() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Purity:</span>
-                  <span className="text-emerald-400 font-semibold">{currentHive.blockchain.purityPct}% Organic</span>
+                  <span className="text-emerald-400 font-semibold">
+                    <CountUp to={currentHive.blockchain.purityPct} decimals={1} suffix="% Organic" duration={1.2} />
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Moisture:</span>
-                  <span className="text-cyan-300 font-semibold">{currentHive.blockchain.moisturePct}% H2O</span>
+                  <span className="text-cyan-300 font-semibold">
+                    <CountUp to={currentHive.blockchain.moisturePct} decimals={1} suffix="% H2O" duration={1.2} />
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-400">SHA-256 Merkle Root:</span>
+                  <DecryptedText text={currentHive.blockchain.merkleRoot} speed={20} className="text-amber-300 font-mono text-[10px]" />
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-400">Hardware Hash:</span>
+                  <DecryptedText text={`0xBE88F5-${currentHive.id.toString(16).padStart(4, "0")}-STM32U585`} speed={20} className="text-cyan-300 font-mono text-[10px]" />
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-400">Block Hash:</span>
+                  <DecryptedText text={currentHive.blockchain.blockHash} speed={15} className="text-slate-300 truncate max-w-[180px] text-[10px]" />
                 </div>
               </div>
             </div>
 
             <div className="flex gap-2">
-              <button
-                onClick={() => window.print()}
-                className="flex-1 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20"
-              >
-                <Printer className="w-4 h-4" />
-                <span>Print Jar Label</span>
-              </button>
+              <ClickSpark sparkColor="#f59e0b" sparkRadius={30}>
+                <button
+                  onClick={() => window.print()}
+                  className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20"
+                >
+                  <Printer className="w-4 h-4" />
+                  <span>Print Jar Label</span>
+                </button>
+              </ClickSpark>
               <button
                 onClick={() => setIsJarCertOpen(false)}
                 className="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs rounded-xl border border-slate-700 font-bold"

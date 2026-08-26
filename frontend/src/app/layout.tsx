@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BEEVIL KNIEVEL — Cyber-Physical Apiculture & Edge AI Telemetry",
+  title: "BEEVIL KNIEVEL  -  Cyber-Physical Apiculture & Edge AI Telemetry",
   description:
     "Autonomous Cyber-Physical Apiculture & Edge-AI Hive Health Telemetry Fusion Array. Antmicro CM4 Gateway, LoRaWAN IN865 Multi-Hop Mesh, and Cryptographic Honey Chain Ledger.",
   openGraph: {
-    title: "BEEVIL KNIEVEL — Cyber-Physical Apiculture & Edge AI Telemetry",
+    title: "BEEVIL KNIEVEL  -  Cyber-Physical Apiculture & Edge AI Telemetry",
     description:
       "Autonomous Cyber-Physical Apiculture & Edge-AI Hive Health Telemetry Fusion Array. Antmicro CM4 Gateway, LoRaWAN IN865 Multi-Hop Mesh.",
     siteName: "BEEVIL KNIEVEL",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BEEVIL KNIEVEL — Cyber-Physical Apiculture & Edge AI Telemetry",
+    title: "BEEVIL KNIEVEL  -  Cyber-Physical Apiculture & Edge AI Telemetry",
     description:
       "Autonomous Cyber-Physical Apiculture & Edge-AI Hive Health Telemetry Fusion Array.",
   },

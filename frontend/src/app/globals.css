@@ -566,3 +566,37 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #1e293b #070a12;
 }
+
+/* ==========================================================================
+   ReactBits Keyframes & Animation Utilities
+   ========================================================================== */
+
+@keyframes shiny {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.animate-shiny {
+  animation: shiny linear infinite;
+}
+
+@keyframes fadeInBlur {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-blur {
+  animation: fadeInBlur 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

@@ -18,6 +18,12 @@ import {
   Hexagon,
   Laptop
 } from "lucide-react";
+import { 
+  ShinyText, 
+  DecryptedText, 
+  Magnet, 
+  ClickSpark 
+} from "@/components/reactbits";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -78,9 +84,11 @@ export function Navbar() {
             
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-base sm:text-lg tracking-wider text-[#f8fafc] group-hover:text-amber-400 transition-colors font-sans uppercase">
-                  BEEVIL KNIEVEL
-                </span>
+                <ShinyText 
+                  text="BEEVIL KNIEVEL" 
+                  speed={4} 
+                  className="font-extrabold text-base sm:text-lg tracking-wider text-[#f8fafc] group-hover:text-amber-400 transition-colors font-sans uppercase" 
+                />
                 <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase tracking-wider bg-[#0b0f19] text-amber-400 border border-amber-500/30 tabular-nums">
                   v4.2
                 </span>
@@ -91,16 +99,16 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Live Hardware Link Beacon: 'LoRaWAN IN865: 100/100 Active | AES-256' */}
+          {/* Live Hardware Link Beacon: 'LoRaWAN IN865: 100/100 Active | AES-256' with DecryptedText */}
           <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0b0f19] border border-white/10 text-xs font-mono tabular-nums shadow-inner">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500 shadow-[0_0_8px_#10b981]" />
             </span>
             <span className="text-[#94a3b8]">LoRaWAN IN865:</span>
-            <span className="text-emerald-400 font-bold">100/100 Active</span>
+            <DecryptedText text="100/100 Active" speed={35} className="text-emerald-400 font-bold" />
             <span className="text-slate-600">|</span>
-            <span className="text-[#94a3b8]">AES-256</span>
+            <DecryptedText text="AES-256" speed={40} className="text-[#94a3b8]" />
           </div>
         </div>
 
@@ -199,21 +207,25 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Primary CTA: 'Open Field App' (/app) */}
-          <Link
-            href="/app"
-            id="launch-command-center-btn"
-            className="group relative inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#f59e0b] text-[#070a12] hover:bg-[#fbbf24] shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_rgba(245,158,11,0.5)] active:scale-[0.98] transition-all whitespace-nowrap border border-amber-300/40"
-            title="Open Field App"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#070a12] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#070a12]" />
-            </span>
-            <Laptop className="w-4 h-4 stroke-[2.2] text-[#070a12]" />
-            <span>Open Field App</span>
-            <ChevronRight className="w-3.5 h-3.5 stroke-[2.5] text-[#070a12] group-hover:translate-x-0.5 transition-transform" />
-          </Link>
+          {/* Primary CTA: 'Open Field App' (/app) with ReactBits Magnet and ClickSpark */}
+          <Magnet padding={25} magnetStrength={2}>
+            <ClickSpark sparkColor="#f59e0b" sparkCount={8} sparkRadius={20}>
+              <Link
+                href="/app"
+                id="launch-command-center-btn"
+                className="group relative inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#f59e0b] text-[#070a12] hover:bg-[#fbbf24] shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_rgba(245,158,11,0.5)] active:scale-[0.98] transition-all whitespace-nowrap border border-amber-300/40"
+                title="Open Field App"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#070a12] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#070a12]" />
+                </span>
+                <Laptop className="w-4 h-4 stroke-[2.2] text-[#070a12]" />
+                <span>Open Field App</span>
+                <ChevronRight className="w-3.5 h-3.5 stroke-[2.5] text-[#070a12] group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </ClickSpark>
+          </Magnet>
 
           {/* Mobile Menu Toggle */}
           <div className="lg:hidden flex items-center">

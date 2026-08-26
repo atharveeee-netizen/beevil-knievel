@@ -29,7 +29,7 @@ export function MissionSection() {
               &ldquo;Over 2,000 years ago, Marcus Terentius Varro wrote that the survival of agriculture is bound to the murmur of the hive. We gave that murmur a voice.&rdquo;
             </blockquote>
             <div className="mt-4 text-xs font-mono font-bold tracking-widest text-[#ffc833] uppercase">
-              — Marcus Terentius Varro (116–27 BC) • De Re Rustica
+               -  Marcus Terentius Varro (116-27 BC) • De Re Rustica
             </div>
           </div>
         </div>

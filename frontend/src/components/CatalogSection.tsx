@@ -8,7 +8,7 @@ export function CatalogSection() {
   const MODEL_VARIATIONS = [
     {
       name: "Beevil Solo",
-      range: "1 – 4 Hives",
+      range: "1 - 4 Hives",
       badge: "Hobbyist & Backyard",
       description: "Direct Bluetooth 5.0 LE & Wi-Fi telemetry reporting directly to the HiveOS mobile app without needing an external base station.",
       features: [
@@ -21,7 +21,7 @@ export function CatalogSection() {
     },
     {
       name: "Beevil Apiary Pro",
-      range: "5 – 25 Hives",
+      range: "5 - 25 Hives",
       badge: "Commercial Apiary Standard",
       description: "Includes 1x Central Antmicro CM4 Base Station Gateway with up to 15km LoRaWAN range for complete apiary coverage.",
       features: [
@@ -35,7 +35,7 @@ export function CatalogSection() {
     },
     {
       name: "Beevil Pollination Grid",
-      range: "25 – 100+ Hives",
+      range: "25 - 100+ Hives",
       badge: "Industrial Orchard Fleet",
       description: "Multi-gateway mesh network designed for commercial migratory beekeeping, almond pollination contracts, and corporate research.",
       features: [
