@@ -28,7 +28,7 @@ export function Section04TheNetwork() {
           
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#222738] pb-4">
             <span className="text-xs font-mono text-[#f4f4f6] uppercase font-bold">MULTI-HOP RELAY TOPOLOGY</span>
-            <span className="text-xs font-mono text-[#f0b840]">15 KM SUB-GHZ LINE-OF-SIGHT</span>
+            <span className="text-xs font-mono text-[#f0b840]">SUB-GHZ 865/868/915 MHz • UP TO 15 KM LOS / 1.5 KM CANOPY MESH</span>
           </div>
 
           {/* Node Progression Sequence */}
@@ -77,10 +77,10 @@ export function Section04TheNetwork() {
             <div className="space-y-2">
               <div className="text-xs font-mono font-bold text-white flex items-center gap-2">
                 <Radio className="w-3.5 h-3.5 text-[#f0b840]" />
-                <span>No Cellular SIM Fees</span>
+                <span>Zero Cellular Blindspots</span>
               </div>
               <p className="text-xs font-mono text-[#8a90a0] leading-relaxed">
-                Runs on license-free 865/868/915 MHz bands. No SIM card per box. No monthly data bills.
+                Runs on license-free 865/868/915 MHz bands with zero cellular fees and full canopy penetration.
               </p>
             </div>
 

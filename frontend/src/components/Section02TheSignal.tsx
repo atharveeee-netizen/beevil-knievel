@@ -20,7 +20,7 @@ const SENSING_CHANNELS = [
     specs: "24-bit I2S MEMS (61 dBA SNR)",
     metric: "220 Hz",
     tolerance: "200 Hz - 550 Hz band",
-    meaning: "128-point FFT isolates 225 Hz colony hum, 285 Hz queenless roar, and 485 Hz swarm piping.",
+    meaning: "256-point CMSIS-DSP Real FFT (Δf = 7.81 Hz) isolates 225 Hz worker hum, 285 Hz queenless roar, and 485 Hz virgin piping.",
     icon: Volume2,
     accent: "#06b6d4",
   },

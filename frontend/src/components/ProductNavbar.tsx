@@ -35,24 +35,27 @@ export function ProductNavbar() {
         </Link>
 
         {/* Minimal Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-7 text-xs font-mono tracking-wider text-[#8a90a0]">
-          <Link href="#the-hive" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
+        <nav className="hidden md:flex items-center gap-6 text-xs font-mono tracking-wider text-[#8a90a0]">
+          <Link href="/#the-hive" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
             The Brood Nest
           </Link>
-          <Link href="#the-signal" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
+          <Link href="/#the-signal" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
             Sensors
           </Link>
-          <Link href="#the-intelligence" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
+          <Link href="/#the-intelligence" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
             Edge Compute
           </Link>
-          <Link href="#the-network" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
+          <Link href="/#the-network" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
             LoRa Mesh
           </Link>
-          <Link href="#the-fleet" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
+          <Link href="/#the-fleet" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
             100-Hive Fleet
           </Link>
-          <Link href="#the-hardware" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
-            Hardware Specs
+          <Link href="/#the-field" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
+            Field Tool
+          </Link>
+          <Link href="/#the-hardware" className="hover:text-white transition-colors uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#f0b840]">
+            Hardware
           </Link>
         </nav>
 
@@ -82,42 +85,49 @@ export function ProductNavbar() {
       {mobileMenuOpen && (
         <div className="md:hidden bg-[#0a0d14] border-b border-[#222738] px-6 py-6 space-y-4 text-xs font-mono">
           <Link
-            href="#the-hive"
+            href="/#the-hive"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8a90a0] hover:text-white uppercase py-1"
           >
             The Brood Nest
           </Link>
           <Link
-            href="#the-signal"
+            href="/#the-signal"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8a90a0] hover:text-white uppercase py-1"
           >
             Sensors
           </Link>
           <Link
-            href="#the-intelligence"
+            href="/#the-intelligence"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8a90a0] hover:text-white uppercase py-1"
           >
             Edge Compute
           </Link>
           <Link
-            href="#the-network"
+            href="/#the-network"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8a90a0] hover:text-white uppercase py-1"
           >
             LoRa Mesh
           </Link>
           <Link
-            href="#the-fleet"
+            href="/#the-fleet"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8a90a0] hover:text-white uppercase py-1"
           >
             100-Hive Fleet
           </Link>
           <Link
-            href="#the-hardware"
+            href="/#the-field"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block text-[#8a90a0] hover:text-white uppercase py-1"
+          >
+            Field Tool
+          </Link>
+          <Link
+            href="/#the-hardware"
             onClick={() => setMobileMenuOpen(false)}
             className="block text-[#8a90a0] hover:text-white uppercase py-1"
           >

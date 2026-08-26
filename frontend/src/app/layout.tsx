@@ -1,23 +1,28 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0a0d14",
+};
+
 export const metadata: Metadata = {
-  title: "BEEVIL KNIEVEL  -  Cyber-Physical Apiculture & Edge AI Telemetry",
+  title: "BEEVIL KNIEVEL - Sub-GHz Acoustic & Brood Telemetry for Commercial Apiaries",
   description:
-    "Autonomous Cyber-Physical Apiculture & Edge-AI Hive Health Telemetry Fusion Array. Antmicro CM4 Gateway, LoRaWAN IN865 Multi-Hop Mesh, and Cryptographic Honey Chain Ledger.",
-  openGraph: {
-    title: "BEEVIL KNIEVEL  -  Cyber-Physical Apiculture & Edge AI Telemetry",
-    description:
-      "Autonomous Cyber-Physical Apiculture & Edge-AI Hive Health Telemetry Fusion Array. Antmicro CM4 Gateway, LoRaWAN IN865 Multi-Hop Mesh.",
-    siteName: "BEEVIL KNIEVEL",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "BEEVIL KNIEVEL  -  Cyber-Physical Apiculture & Edge AI Telemetry",
-    description:
-      "Autonomous Cyber-Physical Apiculture & Edge-AI Hive Health Telemetry Fusion Array.",
-  },
+    "Sensors track brood temperature, acoustic FFT spectrum, and CO2 across 100+ hives. Continuous edge intelligence without cracking propolis seals.",
+  keywords: [
+    "Beevil Knievel",
+    "precision apiculture",
+    "hive telemetry",
+    "TinyML",
+    "brood thermometry",
+    "acoustic FFT",
+    "commercial beekeeping",
+    "LoRa mesh",
+  ],
+  authors: [{ name: "Beevil Knievel Team" }],
 };
 
 export default function RootLayout({
@@ -26,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased dark">
-      <body className="min-h-full flex flex-col font-sans bg-[#070a12] text-[#f8fafc] selection:bg-[#f59e0b] selection:text-[#070a12]">
+    <html lang="en" className="dark scroll-smooth">
+      <body className="bg-[#0a0d14] text-[#f4f4f6] font-sans antialiased min-h-screen selection:bg-[#f0b840]/30 selection:text-[#f0b840]">
         {children}
       </body>
     </html>

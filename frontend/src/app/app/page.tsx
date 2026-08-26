@@ -2326,11 +2326,11 @@ export default function MobileFieldAgritechApp() {
         <nav className="absolute bottom-0 inset-x-0 bg-[#262626]/95 backdrop-blur-lg border-t border-[#393939] px-1 py-1.5 flex items-center justify-around z-30 shadow-2xl select-none">
           {[
             { id: "TRIAGE", label: "Triage", icon: ShieldAlert, badge: anomalousHives.length },
-            { id: "CHECKLIST", label: "Checklist", icon: ListChecks, badge: undefined },
+            { id: "CHECKLIST", label: "Tasks", icon: ListChecks, badge: undefined },
             { id: "YARDS", label: "Yards", icon: MapPin, badge: undefined },
-            { id: "SCAN", label: "Scan NFC", icon: Scan, badge: undefined },
-            { id: "PROVENANCE", label: "Provenance", icon: Lock, badge: undefined },
-            { id: "ADVISOR", label: "AI Advisor", icon: Bot, badge: undefined },
+            { id: "SCAN", label: "NFC", icon: Scan, badge: undefined },
+            { id: "PROVENANCE", label: "Trace", icon: Lock, badge: undefined },
+            { id: "ADVISOR", label: "Advisor", icon: Bot, badge: undefined },
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = currentTab === tab.id;
@@ -2338,22 +2338,20 @@ export default function MobileFieldAgritechApp() {
               <button
                 key={tab.id}
                 onClick={() => setCurrentTab(tab.id as typeof currentTab)}
-                className={`flex-1 min-h-[48px] flex flex-col items-center justify-center py-1 px-1 rounded-xl transition-all relative active:scale-95 ${
+                className={`flex-1 min-h-[48px] flex flex-col items-center justify-center py-1 px-1 rounded-xl transition-all relative active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
                   isActive
-                    ? "text-amber-400 font-extrabold scale-105"
+                    ? "text-amber-400 font-extrabold"
                     : "text-[#c6c6c6] hover:text-white"
                 }`}
               >
-                <Magnet magnetStrength={3} padding={25} className="flex items-center justify-center">
-                  <div className="relative">
-                    <Icon className={`w-5 h-5 ${isActive ? "text-amber-400 stroke-[2.5]" : "stroke-[1.8]"}`} />
-                    {tab.badge !== undefined && tab.badge > 0 && (
-                      <span className="absolute -top-1.5 -right-2 bg-[#da1e28] text-white font-mono text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center border border-[#161616]">
-                        <CountUp to={tab.badge} duration={0.8} />
-                      </span>
-                    )}
-                  </div>
-                </Magnet>
+                <div className="relative">
+                  <Icon className={`w-5 h-5 ${isActive ? "text-amber-400 stroke-[2.5]" : "stroke-[1.8]"}`} />
+                  {tab.badge !== undefined && tab.badge > 0 && (
+                    <span className="absolute -top-1.5 -right-2 bg-[#da1e28] text-white font-mono text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center border border-[#161616]">
+                      {tab.badge}
+                    </span>
+                  )}
+                </div>
                 <span className="text-[9px] sm:text-[10px] font-mono mt-0.5 tracking-tight">{tab.label}</span>
                 {isActive && (
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-0.5" />

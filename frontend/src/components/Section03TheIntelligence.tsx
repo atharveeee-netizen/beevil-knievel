@@ -28,15 +28,15 @@ export function Section03TheIntelligence() {
             {
               step: "01",
               title: "SENSE",
-              target: "SENSING LAYER",
-              desc: "Sensors read temperature, acoustics, CO2, and hive weight at 1 Hz.",
+              target: "DUTY-CYCLED ACQUISITION",
+              desc: "10s acoustic analysis + 5-min telemetry cycle with interrupt-driven tilt wake.",
               hardware: "TMP117 • INMP441 • SCD41",
             },
             {
               step: "02",
               title: "PROCESS",
               target: "ON-NODE MCU",
-              desc: "Nordic nRF52840 computes 128-point FFT and runs 1D-CNN classification in 1.12 ms.",
+              desc: "Nordic nRF52840 computes 256-point Real FFT and runs 1D-CNN INT8 classification in 1.12 ms.",
               hardware: "Arm Cortex-M4F @ 64MHz",
             },
             {

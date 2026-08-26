@@ -619,6 +619,7 @@ body {
   .animate-shiny,
   .animate-spin,
   .animate-pulse,
+  .animate-ping,
   .animate-bounce,
   .animate-fade-in-blur {
     animation: none !important;
