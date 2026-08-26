@@ -112,35 +112,43 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Center: Direct Navigation Links */}
-        <div className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-medium text-[#94a3b8]">
+        {/* Center Desktop Navigation Links */}
+        <div className="hidden lg:flex items-center gap-1 xl:gap-2 text-xs font-mono font-semibold tracking-wider uppercase">
+          <Link 
+            href="/#the-signal" 
+            className="px-3 py-1.5 rounded-sm text-[#f8fafc]/90 hover:text-white hover:bg-slate-800/60 transition-all whitespace-nowrap"
+          >
+            Platform
+          </Link>
+
+          <Link 
+            href="/#the-timeline" 
+            className="px-3 py-1.5 rounded-sm text-[#f8fafc]/90 hover:text-white hover:bg-slate-800/60 transition-all whitespace-nowrap flex items-center gap-1.5"
+          >
+            <span>Timeline</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+          </Link>
+
+          <Link 
+            href="/#command-center" 
+            className="px-3 py-1.5 rounded-sm text-[#f8fafc]/90 hover:text-white hover:bg-slate-800/60 transition-all whitespace-nowrap flex items-center gap-1.5"
+          >
+            <span>100-Hive Matrix</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+          </Link>
+
           <Link 
             href="/#the_system" 
-            className="px-3.5 py-2 rounded-lg text-[#f8fafc]/90 hover:text-white hover:bg-slate-800/60 transition-all whitespace-nowrap"
+            className="px-3 py-1.5 rounded-sm text-[#f8fafc]/90 hover:text-white hover:bg-slate-800/60 transition-all whitespace-nowrap"
           >
-            System Architecture
-          </Link>
-
-          <Link 
-            href="/#edge_ai" 
-            className="px-3.5 py-2 rounded-lg text-[#f8fafc]/90 hover:text-white hover:bg-slate-800/60 transition-all whitespace-nowrap flex items-center gap-1.5"
-          >
-            <span>Edge AI</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-          </Link>
-
-          <Link 
-            href="/#mesh" 
-            className="px-3.5 py-2 rounded-lg text-[#f8fafc]/90 hover:text-white hover:bg-slate-800/60 transition-all whitespace-nowrap"
-          >
-            100-Hive Mesh
+            Hardware &amp; Mesh
           </Link>
 
           <Link 
             href="/#the_specs" 
-            className="px-3.5 py-2 rounded-lg text-[#f8fafc]/90 hover:text-white hover:bg-slate-800/60 transition-all whitespace-nowrap"
+            className="px-3 py-1.5 rounded-sm text-[#f8fafc]/90 hover:text-white hover:bg-slate-800/60 transition-all whitespace-nowrap"
           >
-            Specs
+            Specs &amp; BOM
           </Link>
         </div>
 

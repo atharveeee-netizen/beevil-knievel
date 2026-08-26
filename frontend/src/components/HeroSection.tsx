@@ -272,25 +272,25 @@ export function HeroSection() {
 
       <div className="relative z-10 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
         
-        {/* 1. Single Subtle Top Pill (Linear / Apple Pro Standard) */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0b0f19]/90 border border-white/10 text-xs font-mono tracking-wider text-[#94a3b8] mb-6 shadow-sm">
+        {/* 1. Single Subtle Top Pill (Master Prompt Standard) */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-sm bg-[#161616] border border-amber-500/30 text-xs font-mono tracking-wider text-[#94a3b8] mb-6 shadow-sm">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#f59e0b]" />
           </span>
-          <span className="text-[#f8fafc] font-semibold">HIVE-OS 4.2</span>
-          <span className="text-slate-600">•</span>
-          <span className="text-[#94a3b8] uppercase tracking-widest text-[11px]">FIELD TESTED ACROSS 100 LANGSTROTH HIVES IN 42°C HEAT</span>
+          <span className="text-white font-bold">BEEVIL KNIEVEL</span>
+          <span className="text-zinc-600">•</span>
+          <span className="text-[#f59e0b] uppercase tracking-widest text-[11px] font-bold">EDGE-AI COLONY INTELLIGENCE</span>
         </div>
 
         {/* 2. Master Headline */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#f8fafc] max-w-4xl leading-[1.08] mb-5 font-sans">
-          Know your apiary without cracking the propolis seal.
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#f8fafc] max-w-4xl leading-[1.08] mb-5 font-sans uppercase">
+          Know what your hives know.
         </h1>
 
         {/* 3. Crisp Subtitle */}
-        <p className="text-base sm:text-lg md:text-xl text-[#94a3b8] max-w-3xl leading-relaxed font-normal mb-8">
-          Continuous bio-acoustic FFT, brood thermoregulation, and 24-bit nectar flow tracking. Catch swarms 72 hours before they leave for the tree canopy, detect queen loss before the colony dwindles, and avoid back-breaking 40kg brood box lifting in 38°C summer heat.
+        <p className="text-base sm:text-lg md:text-xl text-[#94a3b8] max-w-3xl leading-relaxed font-mono mb-8">
+          Beevil Knievel is an edge-AI colony intelligence system that continuously monitors hive health, detects anomalies and helps beekeepers act before problems become visible.
         </p>
 
         {/* 4. Clean Action Bar */}
@@ -298,12 +298,11 @@ export function HeroSection() {
           <Magnet padding={25} magnetStrength={2} className="w-full sm:w-auto">
             <ClickSpark sparkColor="#f59e0b" sparkCount={8} sparkRadius={25}>
               <Link
-                href="/app"
-                id="hero-launch-field-app"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#f59e0b] hover:bg-[#fbbf24] text-[#070a12] font-bold text-sm tracking-wide shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.45)] transition-all whitespace-nowrap"
+                href="/#the-signal"
+                id="hero-explore-system"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-sm bg-[#f59e0b] hover:bg-[#fbbf24] text-[#070a12] font-bold text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.45)] transition-all whitespace-nowrap"
               >
-                <Laptop className="w-4 h-4 stroke-[2.2] text-[#070a12]" />
-                <span>Launch Field App</span>
+                <span>Explore the system</span>
                 <ChevronRight className="w-4 h-4 stroke-[2.5] text-[#070a12]" />
               </Link>
             </ClickSpark>
@@ -311,12 +310,12 @@ export function HeroSection() {
 
           <ClickSpark sparkColor="#94a3b8" sparkCount={6}>
             <Link
-              href="#the_system"
-              id="hero-system-architecture"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#0b0f19]/80 hover:bg-[#0f172a] border border-white/10 hover:border-white/20 text-[#f8fafc] font-semibold text-sm transition-all whitespace-nowrap"
+              href="/app"
+              id="hero-open-field-console"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-sm bg-[#161616] hover:bg-[#262626] border border-white/10 hover:border-white/20 text-[#f8fafc] font-bold text-xs uppercase tracking-wider transition-all whitespace-nowrap"
             >
-              <Layers className="w-4 h-4 text-[#94a3b8]" />
-              <span>System Architecture</span>
+              <Laptop className="w-4 h-4 text-[#94a3b8]" />
+              <span>Open field console</span>
             </Link>
           </ClickSpark>
         </div>
