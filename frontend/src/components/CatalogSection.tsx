@@ -53,7 +53,7 @@ export function CatalogSection() {
       id="catalog"
       className="bg-[#efefef] text-[#312f28] py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b-2 border-black/10"
     >
-      <div className="max-w-6xl mx-auto space-y-12">
+      <div id="mesh" className="max-w-6xl mx-auto space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl space-y-4">
           <div className="inline-flex items-center gap-2 bg-[#ffc833] text-[#312f28] px-3.5 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider">

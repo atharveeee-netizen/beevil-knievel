@@ -14,6 +14,7 @@ import {
   Terminal,
   Database,
   CheckCircle2,
+  Lock
 } from "lucide-react";
 
 interface SpecCard {
@@ -159,6 +160,19 @@ const ALL_SPECS: SpecCard[] = [
     ],
     highlight: "Zero Synthetic Data",
   },
+  {
+    id: "honey-chain-sw",
+    category: "SOFTWARE",
+    title: "Honey Chain & Cryptographic Provenance",
+    icon: <Lock className="w-5 h-5 text-[#ffc833]" />,
+    items: [
+      "Immutable on-chain batch verification for organic honey harvests",
+      "Tamper-proof SHA-256 telemetry sealing across 16 sensor channels",
+      "Consumer QR-code verification linking raw jars to exact hive telemetry logs",
+      "Zero-knowledge proof validation of Varroa-free organic honey production",
+    ],
+    highlight: "SHA-256 On-Chain Proof",
+  },
 ];
 
 export function SpecsSection() {
@@ -173,7 +187,7 @@ export function SpecsSection() {
       id="the_specs"
       className="bg-[#212223] text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t-2 border-white/10"
     >
-      <div className="max-w-6xl mx-auto space-y-12">
+      <div id="honey_chain" className="max-w-6xl mx-auto space-y-12">
         {/* Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-[#ffc833] text-[#312f28] px-4 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider">
@@ -201,7 +215,7 @@ export function SpecsSection() {
                     : "bg-white/10 text-white/70 hover:bg-white/20"
                 }`}
               >
-                {tab === "ALL" ? "All Features (10)" : `${tab} Features`}
+                {tab === "ALL" ? `All Features (${ALL_SPECS.length})` : `${tab} Features`}
               </button>
             ))}
           </div>

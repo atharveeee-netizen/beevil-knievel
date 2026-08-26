@@ -245,3 +245,68 @@ body {
 .animate-blobble {
   animation: blobble 5s infinite ease-in-out alternate;
 }
+
+/* Playdate 1-Bit Dither & LCD Screen Aesthetics */
+.playdate-screen {
+  background-color: var(--screen-black);
+  color: var(--screen-white);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6), inset 0 0 0 2px rgba(0, 0, 0, 0.4);
+}
+
+.playdate-scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+.playdate-dither-light {
+  background-image: radial-gradient(#312f28 1px, transparent 0);
+  background-size: 4px 4px;
+}
+
+.playdate-dither-dark {
+  background-image: radial-gradient(#b1afa8 1px, transparent 0);
+  background-size: 4px 4px;
+}
+
+/* Tactile Playdate Hardware Buttons */
+.playdate-dpad-btn {
+  background-color: #212223;
+  box-shadow: 0 3px 0 #111112, 0 4px 6px rgba(0, 0, 0, 0.4);
+  transition: all 0.05s ease-in-out;
+}
+.playdate-dpad-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #111112, 0 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.playdate-action-btn {
+  background-color: #312f28;
+  color: #ffc833;
+  box-shadow: 0 4px 0 #1a1915, 0 6px 10px rgba(0, 0, 0, 0.35);
+  transition: all 0.08s ease-in-out;
+}
+.playdate-action-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #1a1915, 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* Custom Scrollbar for 100-Hive Matrix */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #212223;
+}
+::-webkit-scrollbar-thumb {
+  background: #64676c;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffc833;
+}
