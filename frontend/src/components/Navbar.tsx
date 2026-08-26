@@ -65,7 +65,7 @@ export function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-[#070a12]/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl shadow-black/80"
-          : "bg-[#070a12]/75 backdrop-blur-md border-b border-white/10"
+          : "bg-[#070a12]/80 backdrop-blur-md border-b border-white/10"
       }`}
     >
       <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3 xl:gap-6">
@@ -82,7 +82,7 @@ export function Navbar() {
               <Hexagon className="w-5 h-5 text-amber-400 stroke-[2.2] group-hover:scale-105 transition-transform" />
             </div>
             
-            <div className="flex flex-col">
+            <div className="flex flex-col text-left">
               <div className="flex items-center gap-2">
                 <ShinyText 
                   text="BEEVIL KNIEVEL" 
@@ -207,21 +207,21 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Primary CTA: 'Open Field App' (/app) with ReactBits Magnet and ClickSpark */}
+          {/* Primary CTA: 'Launch Field App' (/app) with ReactBits Magnet and ClickSpark */}
           <Magnet padding={25} magnetStrength={2}>
             <ClickSpark sparkColor="#f59e0b" sparkCount={8} sparkRadius={20}>
               <Link
                 href="/app"
                 id="launch-command-center-btn"
                 className="group relative inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-bold px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-[#f59e0b] text-[#070a12] hover:bg-[#fbbf24] shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_rgba(245,158,11,0.5)] active:scale-[0.98] transition-all whitespace-nowrap border border-amber-300/40"
-                title="Open Field App"
+                title="Launch Field App"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#070a12] opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#070a12]" />
                 </span>
                 <Laptop className="w-4 h-4 stroke-[2.2] text-[#070a12]" />
-                <span>Open Field App</span>
+                <span>Launch Field App</span>
                 <ChevronRight className="w-3.5 h-3.5 stroke-[2.5] text-[#070a12] group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </ClickSpark>
@@ -281,7 +281,7 @@ export function Navbar() {
             >
               <div className="flex items-center gap-2.5">
                 <Terminal className="w-4 h-4 text-amber-400" />
-                <span>Open Field App</span>
+                <span>Launch Field App</span>
               </div>
               <span className="text-[10px] font-mono uppercase bg-[#f59e0b] text-[#070a12] px-2 py-0.5 rounded font-black">
                 LAUNCH
@@ -332,7 +332,7 @@ export function Navbar() {
               className="w-full py-3 rounded-xl bg-[#f59e0b] text-[#070a12] font-bold text-sm text-center shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 hover:bg-[#fbbf24] transition-colors"
             >
               <Laptop className="w-4 h-4 text-[#070a12]" />
-              <span>Open Field App</span>
+              <span>Launch Field App</span>
             </Link>
           </div>
         </div>
@@ -340,6 +340,3 @@ export function Navbar() {
     </nav>
   );
 }
-
-
-

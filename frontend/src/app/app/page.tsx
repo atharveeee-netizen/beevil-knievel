@@ -674,7 +674,7 @@ export default function MobileFieldAgritechApp() {
       }`}>
 
         {/* ------------------------------------------------------------------
-            PHONE STATUS BAR (5G LoRa 915MHz, 98% Bat, PDR 99.8%)
+            PHONE STATUS BAR (5G LoRa 915MHz • PDR 99.8% • Battery 98%)
             ------------------------------------------------------------------ */}
         <div className="bg-[#090d16]/95 backdrop-blur-md pt-3 px-6 pb-2.5 flex items-center justify-between text-[11px] font-mono font-bold text-slate-400 z-30 border-b border-slate-800/60 select-none">
           <div className="flex items-center gap-1.5">
@@ -698,7 +698,7 @@ export default function MobileFieldAgritechApp() {
               <ShinyText text="PDR 99.8%" speed={4} className="text-[10px] font-bold text-emerald-400" />
             </div>
             <div className="flex items-center gap-1 text-slate-300" title="LiFePO4 Battery Status">
-              <span className="text-[10px] font-bold"><CountUp to={98} suffix="%" duration={1.2} /></span>
+              <span className="text-[10px] font-bold">Battery <CountUp to={98} suffix="%" duration={1.2} /></span>
               <div className="w-4 h-2 border border-slate-400 rounded-sm p-0.5 flex items-center">
                 <div className="w-full h-full bg-emerald-400 rounded-2xs" />
               </div>
@@ -849,17 +849,17 @@ export default function MobileFieldAgritechApp() {
                   } else if (hive.status === "QUEEN_FAILURE") {
                     badgeColor = "bg-yellow-500/20 text-yellow-300 border-yellow-500/40";
                     cardBorder = "border-yellow-500/40 hover:border-yellow-400";
-                    badgeTitle = "👑 QUEENLESS ROAR (285 Hz)";
+                    badgeTitle = "👑 QUEEN LOSS (285 Hz)";
                     spotlightColor = "rgba(234, 179, 8, 0.25)";
                   } else if (hive.status === "VARROA_SURGE") {
                     badgeColor = "bg-rose-500/20 text-rose-300 border-rose-500/40";
                     cardBorder = "border-rose-500/40 hover:border-rose-400";
-                    badgeTitle = "🔬 VARROA LOAD (5.4%)";
+                    badgeTitle = "🔬 VARROA SURGE (5.4%)";
                     spotlightColor = "rgba(244, 63, 94, 0.25)";
                   } else if (hive.status === "TAMPER") {
                     badgeColor = "bg-purple-500/20 text-purple-300 border-purple-500/40";
                     cardBorder = "border-purple-500/40 hover:border-purple-400";
-                    badgeTitle = "⚠️ 14.2° TILT TAMPER";
+                    badgeTitle = "⚠️ STAND TAMPER (14.2°)";
                     spotlightColor = "rgba(168, 85, 247, 0.25)";
                   }
 
@@ -928,7 +928,7 @@ export default function MobileFieldAgritechApp() {
                         <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
                           <span className="text-[9px] text-slate-500 block">SCD41 CO2</span>
                           <span className="font-bold text-purple-300">
-                            <CountUp to={hive.gas.scd41Co2Ppm} suffix=" p" duration={1.2} />
+                            <CountUp to={hive.gas.scd41Co2Ppm} suffix=" ppm" duration={1.2} />
                           </span>
                         </div>
                         <div className="bg-slate-900/80 border border-slate-800 rounded-lg p-1.5">
@@ -945,14 +945,14 @@ export default function MobileFieldAgritechApp() {
                         <ClickSpark sparkColor="#10b981" sparkCount={10} sparkRadius={28}>
                           <button
                             onClick={(e) => toggleInspectHive(hive.id, e)}
-                            className={`w-full py-2.5 px-2 rounded-xl text-xs font-mono font-bold transition-all border flex items-center justify-center gap-1.5 shadow-sm ${
+                            className={`w-full min-h-[44px] py-2.5 px-2 rounded-xl text-xs font-mono font-bold transition-all border flex items-center justify-center gap-1.5 shadow-sm active:scale-95 ${
                               isInspected
                                 ? "bg-emerald-500 text-slate-950 border-emerald-400 shadow-emerald-500/20"
                                 : "bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700"
                             }`}
                           >
                             {isInspected ? <CheckCheck className="w-3.5 h-3.5" /> : <Check className="w-3.5 h-3.5" />}
-                            <span>{isInspected ? "Inspected" : "Mark Done"}</span>
+                            <span>{isInspected ? "Inspected" : "Mark Inspected"}</span>
                           </button>
                         </ClickSpark>
 
@@ -963,7 +963,7 @@ export default function MobileFieldAgritechApp() {
                             setSelectedHiveId(hive.id);
                             toggleAudioTone(hive.peakFrequencyHz);
                           }}
-                          className={`py-2.5 px-2 rounded-xl text-xs font-mono font-bold transition-all border flex items-center justify-center gap-1.5 shadow-sm ${
+                          className={`min-h-[44px] py-2.5 px-2 rounded-xl text-xs font-mono font-bold transition-all border flex items-center justify-center gap-1.5 shadow-sm active:scale-95 ${
                             audioToneActive && activeToneFreq === hive.peakFrequencyHz
                               ? "bg-rose-500 text-white border-rose-400 animate-pulse shadow-md shadow-rose-500/30"
                               : "bg-slate-800 hover:bg-slate-700 text-cyan-300 border-slate-700"
@@ -974,19 +974,19 @@ export default function MobileFieldAgritechApp() {
                           ) : (
                             <Volume2 className="w-3.5 h-3.5" />
                           )}
-                          <span>{audioToneActive && activeToneFreq === hive.peakFrequencyHz ? "Mute" : `Listen (${hive.peakFrequencyHz}Hz)`}</span>
+                          <span>{audioToneActive && activeToneFreq === hive.peakFrequencyHz ? "Mute" : `Listen (${hive.peakFrequencyHz} Hz)`}</span>
                         </button>
 
-                        {/* 3. Field Compass Navigate */}
+                        {/* 3. Field HUD Compass Navigate */}
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             setNavTargetHive(hive);
                           }}
-                          className="py-2.5 px-2 rounded-xl text-xs font-mono font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 transition-all flex items-center justify-center gap-1.5 shadow-sm"
+                          className="min-h-[44px] py-2.5 px-2 rounded-xl text-xs font-mono font-bold bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
                         >
                           <Navigation className="w-3.5 h-3.5" />
-                          <span>Navigate</span>
+                          <span>Navigate (HUD Compass)</span>
                         </button>
                       </div>
                     </SpotlightCard>
@@ -1248,7 +1248,7 @@ export default function MobileFieldAgritechApp() {
                     <button
                       onClick={() => handleSimulateNfcScan(42)}
                       disabled={isScanningNfc}
-                      className="w-full py-3.5 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-2xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2"
+                      className="w-full min-h-[48px] py-3.5 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-2xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 active:scale-95"
                     >
                       <Smartphone className="w-4 h-4" />
                       <span>Simulate 1-Tap NFC Touch (Hive #042 Swarm Risk)</span>
@@ -1259,7 +1259,7 @@ export default function MobileFieldAgritechApp() {
                     <ClickSpark sparkColor="#eab308" sparkRadius={25}>
                       <button
                         onClick={() => handleSimulateNfcScan(15)}
-                        className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
+                        className="w-full min-h-[44px] py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700 active:scale-95"
                       >
                         Scan #015 (Queen)
                       </button>
@@ -1267,7 +1267,7 @@ export default function MobileFieldAgritechApp() {
                     <ClickSpark sparkColor="#f43f5e" sparkRadius={25}>
                       <button
                         onClick={() => handleSimulateNfcScan(73)}
-                        className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
+                        className="w-full min-h-[44px] py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700 active:scale-95"
                       >
                         Scan #073 (Varroa)
                       </button>
@@ -1275,7 +1275,7 @@ export default function MobileFieldAgritechApp() {
                     <ClickSpark sparkColor="#a855f7" sparkRadius={25}>
                       <button
                         onClick={() => handleSimulateNfcScan(88)}
-                        className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700"
+                        className="w-full min-h-[44px] py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-mono text-[11px] font-bold rounded-xl border border-slate-700 active:scale-95"
                       >
                         Scan #088 (Tamper)
                       </button>
@@ -1324,7 +1324,7 @@ export default function MobileFieldAgritechApp() {
                           setSelectedHiveId(scannedHiveResult.id);
                           setIsInspectorOpen(true);
                         }}
-                        className="w-full py-2.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20"
+                        className="w-full min-h-[44px] py-2.5 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-500/20 active:scale-95"
                       >
                         <Activity className="w-3.5 h-3.5" />
                         <span>Open Deep Diagnostic Inspector</span>
@@ -1409,7 +1409,7 @@ export default function MobileFieldAgritechApp() {
                   <ClickSpark sparkColor="#f59e0b" sparkRadius={30}>
                     <button
                       onClick={() => setIsJarCertOpen(true)}
-                      className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 mt-2"
+                      className="w-full min-h-[48px] py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 mt-2 active:scale-95"
                     >
                       <QrCode className="w-4 h-4" />
                       <span>View & Print Customer Jar QR Certificate</span>
@@ -1445,7 +1445,7 @@ export default function MobileFieldAgritechApp() {
                       const debrief = `Gemma Edge Briefing for Hive ${currentHive.id}. Status is ${currentHive.status}. Core brood temperature is ${currentHive.thermal.frame3CoreQueen} degrees Celsius. Acoustic dominant frequency is ${currentHive.peakFrequencyHz} Hertz. ${currentHive.urgencyReason || "Colony is in full homeostasis balance."}`;
                       speakText(debrief);
                     }}
-                    className="flex items-center gap-1.5 bg-indigo-500 hover:bg-indigo-400 text-white px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all shadow-md shadow-indigo-500/20"
+                    className="flex items-center gap-1.5 bg-indigo-500 hover:bg-indigo-400 text-white px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition-all shadow-md shadow-indigo-500/20 active:scale-95"
                   >
                     <Volume2 className="w-3.5 h-3.5" />
                     <span>Read Aloud</span>
@@ -1464,7 +1464,7 @@ export default function MobileFieldAgritechApp() {
                     <button
                       key={idx}
                       onClick={() => handleSendGemmaMessage(preset)}
-                      className="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg text-[10px] font-mono transition-all font-semibold"
+                      className="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-2.5 py-1 rounded-lg text-[10px] font-mono transition-all font-semibold active:scale-95"
                     >
                       🎙️ {preset}
                     </button>
@@ -1522,7 +1522,7 @@ export default function MobileFieldAgritechApp() {
                 <button
                   type="submit"
                   disabled={isGemmaThinking || !chatInput.trim()}
-                  className="bg-amber-400 hover:bg-amber-300 disabled:opacity-50 text-slate-950 font-mono font-extrabold px-4 py-2.5 rounded-xl text-xs transition-all flex items-center gap-1.5"
+                  className="bg-amber-400 hover:bg-amber-300 disabled:opacity-50 text-slate-950 font-mono font-extrabold px-4 py-2.5 rounded-xl text-xs transition-all flex items-center gap-1.5 active:scale-95"
                 >
                   <Send className="w-3.5 h-3.5" />
                 </button>
@@ -1952,7 +1952,7 @@ export default function MobileFieldAgritechApp() {
 
             <button
               onClick={() => setNavTargetHive(null)}
-              className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all shadow-md shadow-amber-500/20"
+              className="w-full min-h-[44px] py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all shadow-md shadow-amber-500/20 active:scale-95"
             >
               Close Compass HUD
             </button>
@@ -1968,7 +1968,7 @@ export default function MobileFieldAgritechApp() {
           <div className="bg-[#0d1322] border border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 text-slate-100 relative">
             <button
               onClick={() => setIsJarCertOpen(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800/80"
+              className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800/80 active:scale-95"
             >
               <X className="w-4 h-4" />
             </button>
@@ -2034,7 +2034,7 @@ export default function MobileFieldAgritechApp() {
               <ClickSpark sparkColor="#f59e0b" sparkRadius={30}>
                 <button
                   onClick={() => window.print()}
-                  className="w-full py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20"
+                  className="w-full min-h-[48px] py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-mono font-extrabold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/20 active:scale-95"
                 >
                   <Printer className="w-4 h-4" />
                   <span>Print Jar Label</span>
@@ -2042,7 +2042,7 @@ export default function MobileFieldAgritechApp() {
               </ClickSpark>
               <button
                 onClick={() => setIsJarCertOpen(false)}
-                className="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs rounded-xl border border-slate-700 font-bold"
+                className="min-h-[48px] px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs rounded-xl border border-slate-700 font-bold active:scale-95"
               >
                 Close
               </button>
