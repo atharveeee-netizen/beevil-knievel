@@ -3,61 +3,37 @@
 import React from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
+import { HorizontalScrollGallery } from "@/components/HorizontalScrollGallery";
 import { SystemSection } from "@/components/SystemSection";
 import { EdgeAISection } from "@/components/EdgeAISection";
-import { CatalogSection } from "@/components/CatalogSection";
-import { DeveloperSection } from "@/components/DeveloperSection";
-import { EducationSection } from "@/components/EducationSection";
-import { OrderAccessoriesSection } from "@/components/OrderAccessoriesSection";
 import { SpecsSection } from "@/components/SpecsSection";
-import { GallerySection } from "@/components/GallerySection";
-import { MissionSection } from "@/components/MissionSection";
-import { NewsletterAndHelpSection } from "@/components/NewsletterAndHelpSection";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-[#070a12] text-[#f8fafc]">
-      {/* Top Sticky Navbar with Universal Search */}
+      {/* 1. Precision 48px Header with Live LoRa Link Status */}
       <Navbar />
 
-      {/* Main Page Sections */}
+      {/* Main Streamlined Narrative */}
       <main className="flex-grow">
-        {/* 1. Hero Section with Live Telemetry & Bento Grid */}
+        {/* 2. Command Telemetry Hero & 16-Col Bento HUD */}
         <HeroSection />
 
-        {/* 2. Hardware Architecture & Sensor Suite */}
+        {/* 3. Sticky 300vh Horizontal Parallax Hardware Stream (Powered by Motion) */}
+        <HorizontalScrollGallery />
+
+        {/* 4. Exploded 3-Tier Hardware Architecture & Pinouts */}
         <SystemSection />
 
-        {/* 3. Edge AI Intelligence & 8 Diagnostic Models */}
+        {/* 5. Dual-Tier Edge AI & 8 Diagnostic Neural Classifiers */}
         <EdgeAISection />
 
-        {/* 4. Model Variations by Hive Count (Catalog) */}
-        <CatalogSection />
-
-        {/* 5. Open Apiculture SDK & HiveOS App */}
-        <DeveloperSection />
-
-        {/* 6. University Research & Education Program */}
-        <EducationSection />
-
-        {/* 7. Hardware Packages & Antmicro CM4 Gateway */}
-        <OrderAccessoriesSection />
-
-        {/* 8. Master Hardware & Software Specifications */}
+        {/* 6. Engineering Specifications & Traceable Carbon Data Table */}
         <SpecsSection />
-
-        {/* 9. Hardware Gallery */}
-        <GallerySection />
-
-        {/* 10. Consolidated Mission & Marcus Varro 2,000-Year Heritage */}
-        <MissionSection />
-
-        {/* 11. Research Newsletter & Support Portal */}
-        <NewsletterAndHelpSection />
       </main>
 
-      {/* Site Footer */}
+      {/* 7. IBM Carbon Enterprise Footer */}
       <Footer />
     </div>
   );
