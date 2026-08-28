@@ -1,21 +1,36 @@
-# 🐝 Beevil Knievel — Autonomous 100-Hive Edge-AI Apiculture Platform
-> **Hardened Linux Edge Gateway (Raspberry Pi CM4) + 100-Hive LoRa Multi-Hop Mesh (`BeevilMesh`) + RAK WisBlock Field Nodes**  
-> **A Power-Loss Immune, 100% Offline, Zero-Cloud-Cost Cyber-Physical Ecosystem for Precision Apiculture & Carbon-Sink Conservation**
+# 🐝 Beevil Knievel — Autonomous Precision Apiculture Cyber-Physical Platform
+
+[![Deploy to GitHub Pages](https://github.com/atharveeee-netizen/beevil-knievel/actions/workflows/deploy.yml/badge.svg)](https://github.com/atharveeee-netizen/beevil-knievel/actions/workflows/deploy.yml)
+[![Live Website](https://img.shields.io/badge/Live_Portal-GitHub_Pages-ffc833?logo=github&logoColor=black)](https://atharveeee-netizen.github.io/beevil-knievel/)
+[![Playdate Console](https://img.shields.io/badge/Console-Playdate_Interactive-fbc651?logo=gamepad&logoColor=black)](https://atharveeee-netizen.github.io/beevil-knievel/playdate/)
+[![Hardware Target](https://img.shields.io/badge/Hardware-RAK4631_nRF52840_+_SX1262-2ea043)](firmware/beevil_rak4631_transmitter/)
+[![Mathematical Proofs](https://img.shields.io/badge/Physics_Proofs-13_Domains_v2.0-6c00ff)](docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+> **Autonomous Sub-GHz LoRa Mesh (`BeevilMesh`) + Hardened Linux Edge Gateway (Raspberry Pi CM4) + Nordic nRF52840 Field Nodes**  
+> *A 100% Offline, Zero-Cloud-Cost, Power-Loss Immune Cyber-Physical Ecosystem for Commercial Apiaries & Conservation.*
 
 ---
 
-## 📌 Executive Architecture & 2-Tier Hierarchy
+## 🌐 Live Web & Mobile Applications
+* 🎮 **Official Playdate Website**: [https://atharveeee-netizen.github.io/beevil-knievel/](https://atharveeee-netizen.github.io/beevil-knievel/)
+* 🕹️ **Interactive Standalone Playdate Console**: [https://atharveeee-netizen.github.io/beevil-knievel/playdate/](https://atharveeee-netizen.github.io/beevil-knievel/playdate/)
+* 📲 **HiveOS Mobile Field Console**: [https://atharveeee-netizen.github.io/beevil-knievel/app/](https://atharveeee-netizen.github.io/beevil-knievel/app/)
+* 📐 **Mathematical Derivations & Physics Proofs**: [`docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md`](docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md)
 
-**Beevil Knievel** is a 2-Tier Industrial Cyber-Physical System engineered to monitor 100+ beehives simultaneously. It replaces fragile single-board computers with ultra-low-power field nodes and a centralized, power-loss immune Linux Edge Gateway.
+---
+
+## 📌 Executive Cyber-Physical Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                    100 HIVE FIELD NODES (SOLAR POWERED)                     │
 │   [Hive 001] ──(Hop 1)──> [Hive 015] ──(Hop 2)──> [Hive 042] ──> [Gateway]  │
-│   • RAK4631 (Nordic nRF52840 MCU + SX1262 LoRa 865MHz + BLE 5.0)           │
-│   • FreeRTOS Firmware with ARM CMSIS-DSP 128-Point Hardware Audio FFT       │
-│   • Multi-Hop BeevilMesh Routing (Dynamic TTL + 32-Entry Ring Deduplication)│
-│   • 2.0 µA Ultra-Low Power Deep Sleep (3.2+ Years Solar Battery Autonomy)   │
+│   • RAK4631 (Nordic nRF52840 MCU @ 64MHz + Semtech SX1262 LoRa 865MHz)      │
+│   • FreeRTOS Firmware with ARM CMSIS-DSP 256-Point Real Hardware Audio FFT  │
+│   • Multi-Hop BeevilMesh Routing (Dynamic TTL + Ring Deduplication)         │
+│   • 2.0 µA Ultra-Low Power Deep Sleep (10+ Years Solar Battery Autonomy)   │
+│   • Direct nRF_TEMP Silicon Die & Analog ADC Voltage Reading                 │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │ (865.0625 MHz IN865 Sub-GHz LoRa)
                                        ▼
@@ -29,20 +44,21 @@
 │   │  🛡️ 1. Power-Loss Immune OverlayFS: Permanent Read-Only Root + WAL  │   │
 │   │  🤖 2. Local SLM Bee Advisor: Offline Conversational Q&A & Reports  │   │
 │   │  📶 3. mDNS Captive Portal: Auto-popups dashboard at beevil.local   │   │
-│   │  📈 4. Real-Time CUSUM Analytics: 14-Day early thermal decay filter │   │
+│   │  📈 4. Real-Time CUSUM Analytics: 72h early thermal decay detection│   │
 │   │  🔒 5. WireGuard P2P Mesh: Encrypted regional multi-apiary cluster  │   │
-│   │  🧠 6. 8.2ms INT8 TorchScript Engine: Multi-Modal Fusion Neural Net │   │
+│   │  🧠 6. 8.20ms INT8 TorchScript Engine: Multi-Modal Neural Network   │   │
 │   └─────────────────────────────────────────────────────────────────────┘   │
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │
-                     (Local Wi-Fi Hotspot or Farm LAN)
+                      (Local Wi-Fi Hotspot or Farm LAN)
                                        │
                                        ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                 BEEVIL KNIEVEL DASHBOARD / MOBILE APPLICATION               │
+│              BEEVIL KNIEVEL PLAYDATE DASHBOARD / FIELD APPLICATION          │
 │   • 100-Hive Health Matrix Grid (🟢 Healthy | 🟡 Warning | 🔴 Critical)    │
-│   • Sub-Second Emergency Alarms (Queen Loss, Swarm Departure, Tilt >15°)    │
-│   • Deep Bio-Acoustic Spectrograms & 5-Point Frame Thermal Cross-Sections   │
+│   • Sub-Second Emergency Alarms (Queen Loss, Swarm Departure, Tilt >5°)     │
+│   • Bio-Acoustic Spectrograms & 5-Point Frame Thermal Cross-Sections        │
+│   • Interactive Mechanical Crank & 1-Bit Retro Dithered LCD Telemetry       │
 │   • Zero Monthly SaaS Fees ($0.00 / month forever)                          │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -51,105 +67,69 @@
 
 ## ⚡ Production Model Registry & Edge Performance
 
-| Model Identifier | Target Processor | Input Modalities | Binary Format & Size | Inference Latency | Target Recall |
+| Model Identifier | Target Processor | Input Modalities | Binary Format & Size | Inference Latency | Target Accuracy / Recall |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **`BeevilFusionNetEdge`** | **Raspberry Pi CM4 (BCM2711 Quad-Core CPU)** | **Audio STFT + 16 Multi-Sensor Channels** | **18.90 MB** (`.pt` TorchScript INT8) | **8.20 ms** (ARM NEON SIMD) | **100.0% Queenless / 96.8% Acc** |
-| **`BeevilEvidential1DCNN`** | **Nordic nRF52840 MCU** | **20 Multi-Sensor Vectors** | **8.0 KB** (`.tflite` Micro) | **1.20 ms** (Cortex-M4F) | **99.8% Triage Recall** |
+| **`BeevilFusionNetEdge`** | **Raspberry Pi CM4 (BCM2711 Quad-Core)** | **Audio STFT + 16 Multi-Sensor Channels** | **18.90 MB** (`.pt` TorchScript INT8) | **8.20 ms** (ARM NEON SIMD) | **100.0% Queenless / 96.8% Acc** |
+| **`BeevilEvidential1DCNN`** | **Nordic nRF52840 MCU** | **20 Multi-Sensor Feature Vectors** | **8.0 KB** (`.tflite` Micro) | **1.12 ms** (Cortex-M4F) | **99.8% Triage Recall** |
 
 ---
 
-## 🐧 The 5 Linux Edge Superpowers
+## 📐 13 Master Mathematical Models & Physics Derivations
 
-1. **🛡️ Power-Loss Immune Read-Only OverlayFS (`gateway/setup_overlayfs.sh`):**  
-   The entire OS is mounted in permanent read-only mode using Linux OverlayFS. Telemetry writes are routed to an isolated SQLite Write-Ahead Logging (WAL) partition. You can violently disconnect power 10,000 times with **zero filesystem corruption**.
+All mathematical models and derivations are formally documented in [`docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md`](docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md):
 
-2. **🤖 Local SLM Conversational Bee Advisor (`gateway/local_llm_advisor.py`):**  
-   An on-premises lightweight language model synthesizes 100-hive telemetry into plain-English daily morning briefings and answers natural language beekeeper questions with **$0 cloud API costs**.
-
-3. **📶 mDNS Zero-Config Captive Portal (`gateway/setup_captive_portal.sh`):**  
-   When beekeepers connect their phone to the gateway's `Beevil-Apiary-Gateway` Wi-Fi, the dashboard automatically pops up on their screen without typing an IP address or installing an app.
-
-4. **📈 Real-Time CUSUM & Acoustic Wavelet Trend Analytics (`gateway/cusum_analytics.py`):**  
-   Two-sided Cumulative Sum control charts detect subtle $0.05^\circ\text{C}/\text{day}$ brood thermal decay and queen failure **7–14 days before full colony collapse**.
-
-5. **🔒 WireGuard P2P Multi-Apiary Regional Mesh (`gateway/setup_wireguard_mesh.sh`):**  
-   Multiple CM4 gateways across distant regional farms form an encrypted peer-to-peer mesh tunnel without third-party cloud brokers.
-
----
-
-## 🌐 `BeevilMesh` — 100-Hive LoRa Multi-Hop Protocol
-
-* **Frame Format:** 40-byte compact radio frame (8-byte routing header + 32-byte packed sensor payload).
-* **Multi-Hop Relay:** Hives located in deep valleys or behind tree lines relay packets across up to 4 hops to reach the Gateway.
-* **Zero-Storm Deduplication:** A 32-entry circular ring buffer drops duplicate broadcasts.
-* **Throughput:** Tested at **38.08 packets/second** (115× faster than required 100-hive airtime).
+1. **Sub-GHz LoRa RF Link Budget**: Friis path loss ($FSPL = 114.70\text{ dB}$ at $15\text{ km}$), noise floor ($-117.03\text{ dBm}$), and $+31.28\text{ dB}$ fade margin.
+2. **Duty-Cycled Energy Budget**: 3-Phase deterministic charge integration ($70.13\text{ mA}\cdot\text{s/cycle}$), continuous average draw of $I_{\text{avg}} = \mathbf{233.78\ \mu\text{A}}$.
+3. **Solar Equilibrium Proof**: $19.54\text{ minutes/day}$ of indirect cloudy daylight achieves perpetual battery autonomy ($10+\text{ year}$ lifespan).
+4. **CMSIS-DSP 256-pt Real FFT**: Sampling at $f_s = 2.0\text{ kHz}$ ($\Delta f = \mathbf{7.8125\text{ Hz/bin}}$) isolating $225\text{ Hz}$ worker hum, $285\text{ Hz}$ queenless roar, and $380\text{ Hz}$ piping.
+5. **Brood Nest Thermodynamics & CUSUM**: Spherical cluster radial heat conduction maintaining $+34.82^\circ\text{C} \pm 0.05^\circ\text{C}$ and 72-hour thermal collapse warning.
+6. **32-Byte Packed Wire Serialization**: Byte-aligned `#pragma pack(push, 1)` telemetry struct with CCITT-FALSE CRC16 checksum.
+7. **SHA-256 Merkle Provenance Tree**: Verification of honey harvest records against commercial adulteration.
+8. **Aerodynamic Fanning & CO2 Gas Transport**: Mass airflow balance ($\dot{Q}_{\text{vent}} = 32.4\text{ m}^3/\text{hr}$) and Fick's 2nd Law equilibrium ($C_{\text{eq}} = 1,808.9\text{ ppm}$).
+9. **24-Bit Differential Load Cell Mechanics**: Wheatstone bridge strain voltage and $5.96\text{ mg/count}$ quantization resolution with 2nd-order polynomial thermal compensation.
+10. **Dynamic Wind Tip-Over & 3D Inertial Tilt**: Critical wind velocity $v_{\text{crit}} = \mathbf{90.01\text{ km/hr}}$ and 3D Euler angle calculations.
+11. **Electrochemical Battery Impedance & Peukert's Law**: Winter sub-zero series resistance ($R_{\text{int}}(-15^\circ\text{C}) = 0.2142\ \Omega$) and pulse voltage drop ($\Delta V = 8.25\text{ mV}$).
+12. **Shannon-Hartley & Time-on-Air (ToA)**: Channel capacity ($29.51\text{ kbps}$) and exact on-air transmission time ($ToA = \mathbf{71.94\text{ ms}}$).
+13. **Acoustic Waveguide & Helmholtz Cavity**: Acoustic port resonance ($f_{\text{res}} = \mathbf{11.33\text{ kHz}} \gg 1.0\text{ kHz}$) ensuring flat biological frequency transfer.
 
 ---
 
-## 📁 Repository Directory Structure
+## 🔌 Hardware Wiring & Pin Mapping (RAK4631 / nRF52840)
 
-```text
-.
-├── gateway/                             # Raspberry Pi CM4 Linux Gateway Server Suite
-│   ├── server.py                        # FastAPI + SQLite WAL + WebSockets + 8.2ms AI Engine
-│   ├── lora_receiver.py                 # Semtech SX1262 LoRa SPI Packet Daemon
-│   ├── mesh_router.py                   # BeevilMesh Multi-Hop Topology & Deduplication Engine
-│   ├── local_llm_advisor.py             # On-Premises SLM Conversational Bee Advisor
-│   ├── cusum_analytics.py               # Real-Time CUSUM Statistical Trend Filter
-│   ├── telegram_notifier.py             # Zero-Twilio Automated Telegram Alert Bot
-│   ├── setup_gateway.sh                 # Master One-Click CM4 Debian Provisioning Script
-│   ├── setup_overlayfs.sh               # Hardened Read-Only OverlayFS Configuration
-│   ├── setup_wireguard_mesh.sh          # WireGuard P2P Multi-Apiary Mesh Setup
-│   ├── nginx/beevil.conf                # Nginx Reverse Proxy & Captive Portal Config
-│   └── systemd/                         # Linux systemd Service Definitions (*.service)
-├── firmware/                            # Field Node Transmitter Firmware
-│   └── sensor_node/src/
-│       ├── beevil_nrf52_freertos.c      # Nordic nRF52840 FreeRTOS C Firmware (CMSIS-DSP FFT)
-│       └── beevil_mesh_protocol.h       # BeevilMesh Multi-Hop C Header & Structs
-├── Cloud Model/                         # Production Edge AI Model & Training Pipelines
-│   ├── beevil_fusion_net_edge_torchscript.pt  # Primary 18.90 MB INT8 TorchScript Binary
-│   └── train_cloud_model_edge_optimized.py    # Multi-Modal ResNet Training Code
-├── TinyML Model/                        # Transmitter Node TinyML Model & C Headers
-│   ├── beevil_tinyml_firmware.h         # MCU C Header with INT8 Weights
-│   └── norm_params.json                 # Multi-Sensor Normalization Parameters
-├── tests/                               # Comprehensive Automated Verification Suite
-│   ├── simulate_100_hives.py            # 100-Hive Multi-Sensor Load & Anomaly Simulator
-│   └── test_full_gateway_pipeline.py    # End-to-End Automated Pipeline Test
-├── hardware/                            # Hardware Specifications & Antmicro CM4 Carrier
-│   └── antmicro_cm4_baseboard/          # Open-Source KiCad Schematics & Gerber Files
-└── docs/                                # Competition Dossiers & Research Specifications
-```
+| Hardware Function | Nordic nRF52840 Pin | WisBlock Signal | Description |
+|---|---|---|---|
+| **I2C SDA** | `P0.13` | `WB_I2C1_SDA` | Sensors: TMP117 (`0x48`), SCD41 (`0x62`), BME688 (`0x76`) |
+| **I2C SCL** | `P0.14` | `WB_I2C1_SCL` | 400 kHz Fast-Mode Clock |
+| **I2S Microphone Data** | `P0.28` | `I2S_SD` | TDK INMP441 24-bit Digital Audio Stream |
+| **I2S Bit Clock (SCK)** | `P0.29` | `I2S_SCK` | Audio Sampling Clock |
+| **I2S Word Select (WS)** | `P0.30` | `I2S_WS` | 16 kHz Frame Synchronization |
+| **Battery ADC Channel** | `P0.04` (AIN2) | `PIN_VBAT` | 12-bit SAADC with 1/2 Voltage Divider |
+| **Sensor Power Gate** | `P0.17` | `WB_IO2` | MOSFET 3.3V Power Disconnect in Deep Sleep |
+| **Green Status LED** | `P1.03` | `LED_GREEN` | Pulses during sensor acquisition |
+| **Blue LoRa TX LED** | `P1.04` | `LED_BLUE` | Pulses during LoRa packet transmission burst |
 
 ---
 
-## 🚀 Quickstart Deployment Guide
+## 🚀 Quickstart & Development
 
-### 1. Provision the Raspberry Pi CM4 Gateway
+### 1. Run the Frontend Locally:
 ```bash
-# 1. Clone repo onto CM4 (Debian 64-Bit)
-git clone https://github.com/your-username/beevil-knievel.git /home/pi/beevil-knievel
-
-# 2. Run the One-Click Master Provisioning Script
-cd /home/pi/beevil-knievel/gateway
-sudo bash setup_gateway.sh
-
-# 3. Enable Power-Loss Immune Read-Only Filesystem
-sudo bash setup_overlayfs.sh
-sudo reboot
+cd frontend
+npm install
+npm run dev
+# Open http://localhost:3000 (Homepage) or http://localhost:3000/playdate (Console)
 ```
 
-### 2. Verify 100-Hive Telemetry Pipeline
+### 2. Compile and Flash Transmitter Firmware:
 ```bash
-# Run the automated 100-hive verification test
-python3 tests/test_full_gateway_pipeline.py
-```
+# Compile RAK4631 Arduino Sketch
+arduino-cli compile --fqbn rakwireless:nrf52:WisCoreRAK4631Board firmware/beevil_rak4631_transmitter/
 
-### 3. Access the Live Dashboard
-* Connect your phone to Wi-Fi: **`Beevil-Apiary-Gateway`**
-* Open your browser to: **`http://beevil.local`** (or automatic captive portal popup)
+# Flash DFU Package over Serial (COM4/COM5)
+adafruit-nrfutil dfu serial -pkg firmware/build/beevil_rak4631_transmitter.ino.zip -p COM5 -b 115200 --singlebank
+```
 
 ---
 
-## 🏆 Competitions & Challenges
-* **PJMT National Green Earth Challenge (NGEC):** Categorized under *Sustainable Product Design* & *Pollinator Biodiversity*.
-* **Net Zero Challenge (NZC):** Categorized under *Nature-Based Carbon Sinks* & *Decarbonized Precision Agritech*.
+## 📜 License
+This project is licensed under the [MIT License](LICENSE).
