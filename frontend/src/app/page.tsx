@@ -1,52 +1,64 @@
 "use client";
 
 import React from "react";
-import { ProductNavbar } from "@/components/ProductNavbar";
-import { ProductHero } from "@/components/ProductHero";
-import { Section01TheHive } from "@/components/Section01TheHive";
-import { Section02TheSignal } from "@/components/Section02TheSignal";
-import { Section03TheIntelligence } from "@/components/Section03TheIntelligence";
-import { Section04TheNetwork } from "@/components/Section04TheNetwork";
-import { Section05TheFleet } from "@/components/Section05TheFleet";
-import { Section06TheField } from "@/components/Section06TheField";
-import { Section07TheHardware } from "@/components/Section07TheHardware";
-import { ProductFooter } from "@/components/ProductFooter";
+import { Navbar } from "@/components/Navbar";
+import { HeroSection } from "@/components/HeroSection";
+import { SystemSection } from "@/components/SystemSection";
+import { EdgeAISection } from "@/components/EdgeAISection";
+import { CatalogSection } from "@/components/CatalogSection";
+import { DeveloperSection } from "@/components/DeveloperSection";
+import { EducationSection } from "@/components/EducationSection";
+import { OrderAccessoriesSection } from "@/components/OrderAccessoriesSection";
+import { SpecsSection } from "@/components/SpecsSection";
+import { GallerySection } from "@/components/GallerySection";
+import { MissionSection } from "@/components/MissionSection";
+import { NewsletterAndHelpSection } from "@/components/NewsletterAndHelpSection";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0a0d14] text-[#f4f4f6] selection:bg-[#f0b840] selection:text-[#0a0d14]">
-      {/* Precision Product Header */}
-      <ProductNavbar />
+    <div className="min-h-screen flex flex-col bg-[#7a8085] text-white">
+      {/* Top Sticky Navbar with Universal Search */}
+      <Navbar />
 
-      {/* 7-Chapter World-Class Narrative */}
+      {/* Main Page Sections */}
       <main className="flex-grow">
-        {/* Hero: "KNOW WHAT'S HAPPENING INSIDE THE HIVE." */}
-        <ProductHero />
+        {/* 1. Hero Section with Live Telemetry */}
+        <HeroSection />
 
-        {/* 01 - THE HIVE: Biological Problem & Hidden Dynamics */}
-        <Section01TheHive />
+        {/* 2. The System, The Design, The Acoustic Ear */}
+        <SystemSection />
 
-        {/* 02 - THE SIGNAL: Scientific Sensing Channels */}
-        <Section02TheSignal />
+        {/* 3. Edge AI Intelligence (8 Core Diagnostic Models - Zero Game Cards) */}
+        <EdgeAISection />
 
-        {/* 03 - THE INTELLIGENCE: Edge-First Local Inference */}
-        <Section03TheIntelligence />
+        {/* 4. Model Variations by Hive Count (Catalog & Future Work) */}
+        <CatalogSection />
 
-        {/* 04 - THE NETWORK: BeevilMesh Self-Healing Radio */}
-        <Section04TheNetwork />
+        {/* 5. Open Apiculture SDK & HiveOS App */}
+        <DeveloperSection />
 
-        {/* 05 - THE FLEET: Many Hives. One Intelligence Layer (100-Node Map) */}
-        <Section05TheFleet />
+        {/* 6. University Research & Education Program (15% Off) */}
+        <EducationSection />
 
-        {/* 06 - THE FIELD: The Beekeeper Still Decides (Mobile Field Tool) */}
-        <Section06TheField />
+        {/* 7. Hardware Packages & Antmicro CM4 Gateway */}
+        <OrderAccessoriesSection />
 
-        {/* 07 - THE HARDWARE: Physical Hardware Breakdown & Open Engineering */}
-        <Section07TheHardware />
+        {/* 8. Master Hardware & Software Specifications */}
+        <SpecsSection />
+
+        {/* 9. Hardware Gallery (Images pulled from GitHub Repository) */}
+        <GallerySection />
+
+        {/* 10. Consolidated "Our Mission" & Marcus Varro 2,000-Year Heritage */}
+        <MissionSection />
+
+        {/* 11. Research Newsletter & Support Portal */}
+        <NewsletterAndHelpSection />
       </main>
 
-      {/* Quiet Minimal Footer */}
-      <ProductFooter />
+      {/* Site Footer */}
+      <Footer />
     </div>
   );
 }

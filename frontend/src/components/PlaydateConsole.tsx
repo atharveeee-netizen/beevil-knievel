@@ -151,22 +151,23 @@ export function PlaydateConsole({
 
   // Crank step rotation
   const handleCrankStep = useCallback((stepDegrees: number = 45) => {
-    setCrankAngle((prev) => (prev + stepDegrees) % 360);
-    
-    const nextFreq = currentFreq >= 500 ? 160 : currentFreq + 35;
-    setInternalFreq(nextFreq);
-    if (onFrequencyChange) {
-      onFrequencyChange(nextFreq);
-    }
+    setCrankAngle((prev) => {
+      const nextAngle = (prev + stepDegrees) % 360;
+      
+      const nextFreq = currentFreq >= 500 ? 160 : currentFreq + 35;
+      setInternalFreq(nextFreq);
+      if (onFrequencyChange) onFrequencyChange(nextFreq);
 
-    if (crankAngle + stepDegrees >= 360) {
-      const nextHive = (hiveId % 100) + 1;
-      setHiveId(nextHive);
-      if (onHiveChange) {
-        onHiveChange(nextHive);
+      // Every full 360 rotation advances hive
+      if (prev + stepDegrees >= 360) {
+        const nextHive = (hiveId % 100) + 1;
+        setHiveId(nextHive);
+        if (onHiveChange) onHiveChange(nextHive);
       }
-    }
-  }, [currentFreq, crankAngle, hiveId, onFrequencyChange, onHiveChange]);
+
+      return nextAngle;
+    });
+  }, [currentFreq, hiveId, onFrequencyChange, onHiveChange]);
 
   const handleNextHive = useCallback(() => {
     const next = (hiveId % 100) + 1;

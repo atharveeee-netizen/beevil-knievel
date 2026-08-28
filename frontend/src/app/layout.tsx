@@ -1,28 +1,23 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import "./globals.css";
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
-  themeColor: "#0a0d14",
-};
-
 export const metadata: Metadata = {
-  title: "BEEVIL KNIEVEL - Sub-GHz Acoustic & Brood Telemetry for Commercial Apiaries",
+  title: "Beevil Knievel — Edge AI Hive Health & Pathology System",
   description:
-    "Sensors track brood temperature, acoustic FFT spectrum, and CO2 across 100+ hives. Continuous edge intelligence without cracking propolis seals.",
-  keywords: [
-    "Beevil Knievel",
-    "precision apiculture",
-    "hive telemetry",
-    "TinyML",
-    "brood thermometry",
-    "acoustic FFT",
-    "commercial beekeeping",
-    "LoRa mesh",
-  ],
-  authors: [{ name: "Beevil Knievel Team" }],
+    "Autonomous Edge-AI Environmental & Acoustic Health Monitoring System for Precision Apiculture. Powered by Antmicro CM4 Gateway, 16 Multi-Sensor Telemetry Fusion, and 96.84% Out-of-Sample Accuracy.",
+  openGraph: {
+    title: "Beevil Knievel — Edge AI Hive Health & Pathology System",
+    description:
+      "Autonomous Edge-AI Environmental & Acoustic Health Monitoring System for Precision Apiculture. IEEE HardwAIre Challenge Master Standard.",
+    siteName: "Beevil Knievel",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Beevil Knievel — Edge AI Hive Health & Pathology System",
+    description:
+      "Autonomous Edge-AI Environmental & Acoustic Health Monitoring System for Precision Apiculture.",
+  },
 };
 
 export default function RootLayout({
@@ -31,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className="bg-[#0a0d14] text-[#f4f4f6] font-sans antialiased min-h-screen selection:bg-[#f0b840]/30 selection:text-[#f0b840]">
+    <html lang="en" className="h-full antialiased">
+      <body className="min-h-full flex flex-col font-sans bg-[#7a8085] text-white selection:bg-[#ffc833] selection:text-[#312f28]">
         {children}
       </body>
     </html>
