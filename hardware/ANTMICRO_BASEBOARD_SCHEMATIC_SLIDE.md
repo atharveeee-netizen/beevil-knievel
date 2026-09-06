@@ -1,7 +1,7 @@
 # 🖥️ ANTMICRO CM4 BASEBOARD CIRCUIT SCHEMATIC DIAGRAM
 ## Receiver Gateway Carrier Platform (PoE + M.2 NVMe + Mini-PCIe LoRaWAN Concentrator)
 
-![Antmicro CM4 Baseboard CAD Schematic Diagram](/C:/Users/25beevdt047/.gemini/antigravity/brain/03f2d722-c972-45f3-9c52-8b1fc32d541b/antmicro_schematic_board_1786785427114.jpg)
+![Antmicro CM4 Baseboard CAD Schematic Diagram](../docs/media/05-hardware/antmicro_cm4_baseboard_schematic.jpg)
 
 ---
 

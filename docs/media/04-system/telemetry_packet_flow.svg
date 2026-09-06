@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="100%" height="100%">
+  <rect width="1000" height="480" rx="16" fill="#090d13" stroke="#30363d" stroke-width="2"/>
+  
+  <rect x="30" y="24" width="170" height="28" rx="14" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="115" y="43" fill="#f59e0b" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">WIRE PROTOCOL</text>
+  <text x="30" y="82" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800">32-Byte Packed Binary Telemetry Wire Protocol</text>
+  <text x="30" y="108" fill="#8b949e" font-family="monospace" font-size="13">#pragma pack(push, 1) — Strict bit-aligned serialization with zero padding overhead.</text>
+
+  <!-- Byte Map Table -->
+  <g transform="translate(30, 140)">
+    <!-- Headers -->
+    <rect x="0" y="0" width="940" height="30" rx="6" fill="#161b22" stroke="#30363d"/>
+    <text x="20" y="20" fill="#8b949e" font-family="monospace" font-size="11" font-weight="bold">OFFSET</text>
+    <text x="90" y="20" fill="#8b949e" font-family="monospace" font-size="11" font-weight="bold">FIELD NAME</text>
+    <text x="320" y="20" fill="#8b949e" font-family="monospace" font-size="11" font-weight="bold">C TYPE</text>
+    <text x="440" y="20" fill="#8b949e" font-family="monospace" font-size="11" font-weight="bold">BYTES</text>
+    <text x="510" y="20" fill="#8b949e" font-family="monospace" font-size="11" font-weight="bold">PHYSICAL ENGINEERING RANGE &amp; RESOLUTION</text>
+
+    <!-- Rows -->
+    <g transform="translate(0, 35)">
+      <rect x="0" y="0" width="940" height="26" fill="#0d1117"/>
+      <text x="20" y="18" fill="#f59e0b" font-family="monospace" font-size="11">0x00</text>
+      <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">hive_id</text>
+      <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">uint16_t</text>
+      <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">2</text>
+      <text x="510" y="18" fill="#8b949e" font-family="sans-serif" font-size="11">Hive Node ID (0x0001 – 0x0064, capacity 100 hives)</text>
+    </g>
+
+    <g transform="translate(0, 65)">
+      <rect x="0" y="0" width="940" height="26" fill="#161b22"/>
+      <text x="20" y="18" fill="#f59e0b" font-family="monospace" font-size="11">0x02</text>
+      <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">brood_core_temp_c_x100</text>
+      <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">int16_t</text>
+      <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">2</text>
+      <text x="510" y="18" fill="#8b949e" font-family="sans-serif" font-size="11">Brood reference temperature (-40.00°C to +85.00°C, res 0.01°C)</text>
+    </g>
+
+    <g transform="translate(0, 95)">
+      <rect x="0" y="0" width="940" height="26" fill="#0d1117"/>
+      <text x="20" y="18" fill="#f59e0b" font-family="monospace" font-size="11">0x04</text>
+      <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">frame_temps_c_x100[5]</text>
+      <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">int16_t[5]</text>
+      <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">10</text>
+      <text x="510" y="18" fill="#8b949e" font-family="sans-serif" font-size="11">5-Point Frame Array (Left-Outer, Brood-L, Core, Brood-R, Right-Outer)</text>
+    </g>
+
+    <g transform="translate(0, 125)">
+      <rect x="0" y="0" width="940" height="26" fill="#161b22"/>
+      <text x="20" y="18" fill="#f59e0b" font-family="monospace" font-size="11">0x0E</text>
+      <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">humidity_pct_x100</text>
+      <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">uint16_t</text>
+      <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">2</text>
+      <text x="510" y="18" fill="#8b949e" font-family="sans-serif" font-size="11">Relative Humidity (0.00% to 100.00%, res 0.01% RH)</text>
+    </g>
+
+    <g transform="translate(0, 155)">
+      <rect x="0" y="0" width="940" height="26" fill="#0d1117"/>
+      <text x="20" y="18" fill="#f59e0b" font-family="monospace" font-size="11">0x10</text>
+      <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">voc_gas_kohm_x10</text>
+      <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">uint16_t</text>
+      <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">2</text>
+      <text x="510" y="18" fill="#8b949e" font-family="sans-serif" font-size="11">BME688 MOX gas sensor resistance (0 to 6553.5 kΩ, foulbrood check)</text>
+    </g>
+
+    <g transform="translate(0, 185)">
+      <rect x="0" y="0" width="940" height="26" fill="#161b22"/>
+      <text x="20" y="18" fill="#f59e0b" font-family="monospace" font-size="11">0x12</text>
+      <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">co2_ppm</text>
+      <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">uint16_t</text>
+      <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">2</text>
+      <text x="510" y="18" fill="#8b949e" font-family="sans-serif" font-size="11">SCD41 Photoacoustic NDIR CO2 (400 to 5000 ppm, fanning metric)</text>
+    </g>
+
+    <g transform="translate(0, 215)">
+      <rect x="0" y="0" width="940" height="26" fill="#0d1117"/>
+      <text x="20" y="18" fill="#f59e0b" font-family="monospace" font-size="11">0x14</text>
+      <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">weight_kg_x100</text>
+      <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">uint16_t</text>
+      <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">2</text>
+      <text x="510" y="18" fill="#8b949e" font-family="sans-serif" font-size="11">HX711 24-bit load cell net hive weight (0.00 to 655.35 kg, honey yield)</text>
+    </g>
+
+    <g transform="translate(0, 245)">
+      <rect x="0" y="0" width="940" height="26" fill="#161b22"/>
+      <text x="20" y="18" fill="#f59e0b" font-family="monospace" font-size="11">0x16</text>
+      <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">lux</text>
+      <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">uint16_t</text>
+      <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">2</text>
+      <text x="510" y="18" fill="#8b949e" font-family="sans-serif" font-size="11">Solar illuminance (0 to 65535 lux, foraging &amp; flight window correlation)</text>
+    </g>
+
+    <g transform="translate(0, 275)">
+      <rect x="0" y="0" width="940" height="26" fill="#0d1117"/>
+      <text x="20" y="18" fill="#ef4444" font-family="monospace" font-size="11">0x18</text>
+      <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">tilt_deg / alert_flags</text>
+      <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">uint8_t</text>
+      <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">1</text>
+      <text x="510" y="18" fill="#ef4444" font-family="sans-serif" font-size="11">Bit 7: CUSUM Drift | Bit 6: Pre-Swarm Buzz | Bit 5: Low SoC | Bits 0-4: Tilt Angle</text>
+    </g>
+
+    <g transform="translate(0, 305)">
+      <rect x="0" y="0" width="940" height="26" fill="#161b22"/>
+      <text x="20" y="18" fill="#10b981" font-family="monospace" font-size="11">0x19</text>
+      <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">fft_energy_bands[8]</text>
+      <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">uint8_t[8]</text>
+      <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">8</text>
+      <text x="510" y="18" fill="#10b981" font-family="sans-serif" font-size="11">8 Normalized Acoustic Energy Bands (0 to 255): 100-180, 180-240, 240-350, 350-500, >800Hz</text>
+    </g>
+  </g>
+</svg>

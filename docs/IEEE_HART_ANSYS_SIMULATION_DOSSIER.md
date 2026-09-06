@@ -287,11 +287,11 @@ OVERALL SIMULATION COMPLIANCE: 100% PASS (16 / 16 BENCHMARKS SATISFIED)
 
 ### 5.2 Generated Simulation Scripts & Automation Files
 All simulation automation scripts, APDL inputs, and numerical solvers are stored in the project workspace:
-- **HFSS PyAEDT Automation**: [`hardware/simulations/ansys_hfss_lora_antenna.py`](file:///C:/Users/25beevdt047/.gemini/antigravity/scratch/beevil-knievel/hardware/simulations/ansys_hfss_lora_antenna.py)
-- **Icepak PyAEDT Automation**: [`hardware/simulations/ansys_icepak_thermal_cfd.py`](file:///C:/Users/25beevdt047/.gemini/antigravity/scratch/beevil-knievel/hardware/simulations/ansys_icepak_thermal_cfd.py)
-- **Mechanical APDL & Dynamics**: [`hardware/simulations/ansys_mechanical_drop_and_modal.py`](file:///C:/Users/25beevdt047/.gemini/antigravity/scratch/beevil-knievel/hardware/simulations/ansys_mechanical_drop_and_modal.py)
-- **Maxwell EMI/EMC Solver**: [`hardware/simulations/ansys_maxwell_emc_shielding.py`](file:///C:/Users/25beevdt047/.gemini/antigravity/scratch/beevil-knievel/hardware/simulations/ansys_maxwell_emc_shielding.py)
-- **Master Validation Runner**: [`hardware/simulations/run_ansys_simulation_suite.py`](file:///C:/Users/25beevdt047/.gemini/antigravity/scratch/beevil-knievel/hardware/simulations/run_ansys_simulation_suite.py)
+- **HFSS PyAEDT Automation**: [`hardware/simulations/ansys_hfss_lora_antenna.py`](../hardware/simulations/ansys_hfss_lora_antenna.py)
+- **Icepak PyAEDT Automation**: [`hardware/simulations/ansys_icepak_thermal_cfd.py`](../hardware/simulations/ansys_icepak_thermal_cfd.py)
+- **Mechanical APDL & Dynamics**: [`hardware/simulations/ansys_mechanical_drop_and_modal.py`](../hardware/simulations/ansys_mechanical_drop_and_modal.py)
+- **Maxwell EMI/EMC Solver**: [`hardware/simulations/ansys_maxwell_emc_shielding.py`](../hardware/simulations/ansys_maxwell_emc_shielding.py)
+- **Master Validation Runner**: [`hardware/simulations/run_ansys_simulation_suite.py`](../hardware/simulations/run_ansys_simulation_suite.py)
 
 ---
 
@@ -300,13 +300,13 @@ All simulation automation scripts, APDL inputs, and numerical solvers are stored
 The simulated multi-physics parameters have been formally cross-checked against the production firmware and TinyML models in the Beevil Knievel repository:
 
 1. **RF Frequency Alignment**:
-   - Firmware radio configuration in [`firmware/main_node.cpp`](file:///C:/Users/25beevdt047/.gemini/antigravity/scratch/beevil-knievel/firmware/main_node.cpp#L30) sets `LORA_FREQ = 868.0` / `865.0 MHz` and `LORA_BW = 125.0 kHz`, matching the HFSS $S_{11} = -24.75\text{ dB}$ resonant notch.
+   - Firmware radio configuration in [`firmware/main_node.cpp`](../firmware/main_node.cpp) sets `LORA_FREQ = 868.0` / `865.0 MHz` and `LORA_BW = 125.0 kHz`, matching the HFSS $S_{11} = -24.75\text{ dB}$ resonant notch.
 2. **Acoustic Frequency Binning Alignment**:
-   - TinyML spectral extractor in [`TinyML Model/bee_acoustic_classifier.py`](file:///C:/Users/25beevdt047/.gemini/antigravity/scratch/beevil-knievel/TinyML%20Model/bee_acoustic_classifier.py#L20-L26) processes the $100 - 180\text{ Hz}$, $200 - 400\text{ Hz}$, and $450 - 750\text{ Hz}$ bands.
+   - TinyML spectral extractor in [`TinyML Model/bee_acoustic_classifier.py`](../TinyML%20Model/bee_acoustic_classifier.py) processes the $100 - 180\text{ Hz}$, $200 - 400\text{ Hz}$, and $450 - 750\text{ Hz}$ bands.
    - The ANSYS Mechanical modal analysis confirms the structural enclosure fundamental resonance occurs at **$775.4\text{ Hz}$** ($> 600\text{ Hz}$), preventing acoustic aliasing or structural false-positive triggers.
 3. **Thermal Power & Duty Cycle Alignment**:
-   - In [`firmware/main_node.cpp`](file:///C:/Users/25beevdt047/.gemini/antigravity/scratch/beevil-knievel/firmware/main_node.cpp#L151-L167), adaptive deep-sleep intervals ($300\text{s} - 600\text{s}$) limit inside-hive node energy dissipation to **$0.85\text{ mWh/day}$**, inducing negligible thermal footprint inside the brood nest ($\Delta T < 0.02^\circ\text{C}$).
-   - The gateway server in [`gateway/server.py`](file:///C:/Users/25beevdt047/.gemini/antigravity/scratch/beevil-knievel/gateway/server.py) operates comfortably within the $64.45^\circ\text{C}$ junction thermal envelope verified by ANSYS Icepak.
+   - In [`firmware/main_node.cpp`](../firmware/main_node.cpp), adaptive deep-sleep intervals ($300\text{s} - 600\text{s}$) limit inside-hive node energy dissipation to **$0.85\text{ mWh/day}$**, inducing negligible thermal footprint inside the brood nest ($\Delta T < 0.02^\circ\text{C}$).
+   - The gateway server in [`gateway/server.py`](../gateway/server.py) operates comfortably within the $64.45^\circ\text{C}$ junction thermal envelope verified by ANSYS Icepak.
 
 ---
 

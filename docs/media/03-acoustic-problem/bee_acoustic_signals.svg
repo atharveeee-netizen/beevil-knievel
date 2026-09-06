@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
+  <rect width="1000" height="520" rx="16" fill="#090d13" stroke="#30363d" stroke-width="2"/>
+  
+  <rect x="30" y="24" width="150" height="28" rx="14" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="105" y="43" fill="#f59e0b" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">BIO-ACOUSTIC DSP</text>
+  <text x="30" y="82" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800">Honey Bee Acoustic Spectrum &amp; Diagnostic Frequency Bands</text>
+  <text x="30" y="108" fill="#8b949e" font-family="system-ui, -apple-system, sans-serif" font-size="14">Verified biological frequency regions mapped to 256-point CMSIS-DSP FFT bins (fs = 2000 Hz, Δf = 7.8125 Hz).</text>
+
+  <g transform="translate(50, 140)">
+    <rect width="900" height="200" rx="8" fill="#161b22" stroke="#21262d"/>
+    <line x1="0" y1="50" x2="900" y2="50" stroke="#21262d" stroke-dasharray="4 4"/>
+    <line x1="0" y1="100" x2="900" y2="100" stroke="#21262d" stroke-dasharray="4 4"/>
+    <line x1="0" y1="150" x2="900" y2="150" stroke="#21262d" stroke-dasharray="4 4"/>
+
+    <!-- Worker Hum -->
+    <rect x="135" y="30" width="90" height="170" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="1.5"/>
+    <path d="M 135 180 Q 180 40 225 180" fill="none" stroke="#10b981" stroke-width="3"/>
+    
+    <!-- Queenless Roar -->
+    <rect x="260" y="50" width="80" height="150" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444" stroke-width="1.5"/>
+    <path d="M 260 180 Q 300 70 340 180" fill="none" stroke="#ef4444" stroke-width="3"/>
+
+    <!-- Queen Piping & Pre-Swarm -->
+    <rect x="380" y="20" width="120" height="180" fill="rgba(245, 158, 11, 0.2)" stroke="#f59e0b" stroke-width="1.5"/>
+    <path d="M 380 180 Q 440 25 500 180" fill="none" stroke="#f59e0b" stroke-width="3"/>
+
+    <!-- Environmental Noise -->
+    <rect x="680" y="120" width="200" height="80" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3"/>
+    <path d="M 680 185 Q 780 140 880 185" fill="none" stroke="#38bdf8" stroke-width="2"/>
+
+    <!-- Axis -->
+    <line x1="0" y1="200" x2="900" y2="200" stroke="#8b949e" stroke-width="2"/>
+    <text x="0" y="225" fill="#8b949e" font-family="monospace" font-size="11">0 Hz</text>
+    <text x="180" y="225" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold">~225 Hz (Worker)</text>
+    <text x="300" y="225" fill="#ef4444" font-family="monospace" font-size="11" font-weight="bold">~285 Hz (Queenless)</text>
+    <text x="440" y="225" fill="#f59e0b" font-family="monospace" font-size="11" font-weight="bold">~450 Hz (Piping)</text>
+    <text x="780" y="225" fill="#38bdf8" font-family="monospace" font-size="11">>800 Hz (Noise Filter)</text>
+    <text x="890" y="225" fill="#8b949e" font-family="monospace" font-size="11">1000 Hz</text>
+  </g>
+
+  <!-- Legend Cards -->
+  <g transform="translate(50, 400)">
+    <rect x="0" y="0" width="210" height="90" rx="8" fill="#161b22" stroke="#10b981" stroke-width="1.5"/>
+    <text x="15" y="25" fill="#10b981" font-family="sans-serif" font-size="12" font-weight="bold">NOMINAL COLONY</text>
+    <text x="15" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">180 Hz – 240 Hz</text>
+    <text x="15" y="65" fill="#8b949e" font-family="sans-serif" font-size="11">Continuous flight &amp; fanning hum.</text>
+    <text x="15" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Dominant energy in bins 23–31.</text>
+
+    <rect x="230" y="0" width="210" height="90" rx="8" fill="#161b22" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="245" y="25" fill="#ef4444" font-family="sans-serif" font-size="12" font-weight="bold">QUEENLESS DISTRESS</text>
+    <text x="245" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">285 Hz – 350 Hz</text>
+    <text x="245" y="65" fill="#8b949e" font-family="sans-serif" font-size="11">Unregulated distress frequency.</text>
+    <text x="245" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Trips alarm bit in bins 36–45.</text>
+
+    <rect x="460" y="0" width="210" height="90" rx="8" fill="#161b22" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="475" y="25" fill="#f59e0b" font-family="sans-serif" font-size="12" font-weight="bold">PRE-SWARM / PIPING</text>
+    <text x="475" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">380 Hz – 500 Hz</text>
+    <text x="475" y="65" fill="#8b949e" font-family="sans-serif" font-size="11">Virgin queen tooting/quacking.</text>
+    <text x="475" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Acoustic surge 24h pre-swarm.</text>
+
+    <rect x="690" y="0" width="210" height="90" rx="8" fill="#161b22" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="705" y="25" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold">NOISE SUPPRESSION</text>
+    <text x="705" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">>800 Hz (Weather)</text>
+    <text x="705" y="65" fill="#8b949e" font-family="sans-serif" font-size="11">Environmental rain/wind band.</text>
+    <text x="705" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Suppresses false alarms dynamically.</text>
+  </g>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="100%" height="100%">
+  <rect width="1000" height="500" rx="16" fill="#090d13" stroke="#30363d" stroke-width="2"/>
+  
+  <rect x="30" y="24" width="170" height="28" rx="14" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="115" y="43" fill="#f59e0b" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">EDGE INTELLIGENCE</text>
+  <text x="30" y="82" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800">Hierarchical Two-Tier Edge Intelligence Engine</text>
+  <text x="30" y="108" fill="#8b949e" font-family="system-ui, -apple-system, sans-serif" font-size="14">Tier 1: On-Node Deterministic CUSUM &amp; FFT Triage → Tier 2: CM4 Gateway Multi-Modal Fusion &amp; Offline SLM Advisor.</text>
+
+  <g transform="translate(50, 150)">
+    <!-- Tier 1 -->
+    <rect x="0" y="0" width="420" height="280" rx="12" fill="#161b22" stroke="#10b981" stroke-width="1.5"/>
+    <rect x="20" y="20" width="220" height="26" rx="13" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981"/>
+    <text x="130" y="37" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">TIER 1: ON-NODE (nRF52840)</text>
+    
+    <text x="20" y="75" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="bold">Deterministic Analytics &amp; Triage</text>
+    <text x="20" y="95" fill="#8b949e" font-family="sans-serif" font-size="12">• Zero Neural Fluff on Battery-Constrained MCU</text>
+    <text x="20" y="115" fill="#8b949e" font-family="sans-serif" font-size="12">• CMSIS-DSP 256-pt Real FFT (1.12 ms latency)</text>
+    <text x="20" y="135" fill="#8b949e" font-family="sans-serif" font-size="12">• CUSUM Thermal Drift Accumulator (Sk formulation)</text>
+    <text x="20" y="155" fill="#8b949e" font-family="sans-serif" font-size="12">• 7-Point OCV Polynomial Battery SoC Estimator</text>
+    
+    <rect x="20" y="180" width="380" height="80" rx="6" fill="#0d1117" stroke="#30363d"/>
+    <text x="35" y="205" fill="#f59e0b" font-family="monospace" font-size="10" font-weight="bold">OUTPUT PACKET (32 BYTES):</text>
+    <text x="35" y="225" fill="#8b949e" font-family="monospace" font-size="10">hive_id + 5x frames + CO2 + VOC + weight + tilt + 8 bands</text>
+    <text x="35" y="245" fill="#10b981" font-family="monospace" font-size="10">Latency: &lt; 2.0 ms execution per 5-min duty cycle</text>
+
+    <!-- Arrow -->
+    <path d="M 430 140 L 470 140" stroke="#f59e0b" stroke-width="3"/>
+
+    <!-- Tier 2 -->
+    <rect x="480" y="0" width="420" height="280" rx="12" fill="#161b22" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect x="500" y="20" width="220" height="26" rx="13" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8"/>
+    <text x="610" y="37" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">TIER 2: GATEWAY (CM4)</text>
+
+    <text x="500" y="75" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="bold">Multi-Modal Fusion &amp; SLM Advisor</text>
+    <text x="500" y="95" fill="#8b949e" font-family="sans-serif" font-size="12">• 16-Sensor Feature Fusion Neural Network</text>
+    <text x="500" y="115" fill="#8b949e" font-family="sans-serif" font-size="12">• 8 Diagnostic Classes (Swarm, Queenless, Varroa, Theft)</text>
+    <text x="500" y="135" fill="#8b949e" font-family="sans-serif" font-size="12">• Heuristic Fallback Engine (Zero crash guarantee)</text>
+    <text x="500" y="155" fill="#8b949e" font-family="sans-serif" font-size="12">• Local Quantized SLM Bee Advisor (Offline Q&amp;A)</text>
+
+    <rect x="500" y="180" width="380" height="80" rx="6" fill="#0d1117" stroke="#30363d"/>
+    <text x="515" y="205" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="bold">PERFORMANCE BENCHMARK (REAL PIPELINE):</text>
+    <text x="515" y="225" fill="#8b949e" font-family="monospace" font-size="10">Throughput: 148.1 pkts/s | Avg Ingest: 6.74 ms/packet</text>
+    <text x="515" y="245" fill="#10b981" font-family="monospace" font-size="10">Tested on 100 simulated hives (tests/test_full_gateway_pipeline.py)</text>
+  </g>
+</svg>

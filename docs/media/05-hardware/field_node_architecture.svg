@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" width="100%" height="100%">
+  <rect width="1000" height="560" rx="16" fill="#090d13" stroke="#30363d" stroke-width="2"/>
+  
+  <rect x="30" y="24" width="170" height="28" rx="14" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="115" y="43" fill="#f59e0b" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">HARDWARE MAPPING</text>
+  <text x="30" y="82" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800">RAK4631 / Nordic nRF52840 Field Node Electrical Interconnect</text>
+  <text x="30" y="108" fill="#8b949e" font-family="system-ui, -apple-system, sans-serif" font-size="14">WisBlock baseboard pin assignments, high-speed digital buses, and analog interfaces.</text>
+
+  <!-- Central MCU -->
+  <g transform="translate(350, 150)">
+    <rect width="300" height="360" rx="12" fill="#161b22" stroke="#f59e0b" stroke-width="2"/>
+    <rect x="20" y="20" width="260" height="30" rx="6" fill="#21262d"/>
+    <text x="150" y="40" fill="#f59e0b" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">RAK4631 CORE MODULE</text>
+    
+    <text x="150" y="80" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800" text-anchor="middle">Nordic nRF52840</text>
+    <text x="150" y="98" fill="#8b949e" font-family="monospace" font-size="11" text-anchor="middle">ARM Cortex-M4F @ 64MHz</text>
+    
+    <line x1="20" y1="115" x2="280" y2="115" stroke="#30363d"/>
+
+    <text x="30" y="140" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold">I2C BUS (Fast Mode 400kHz)</text>
+    <text x="30" y="158" fill="#8b949e" font-family="monospace" font-size="10">P0.13 (SDA) | P0.14 (SCL)</text>
+
+    <text x="30" y="185" fill="#10b981" font-family="monospace" font-size="11" font-weight="bold">I2S DIGITAL AUDIO (16kHz)</text>
+    <text x="30" y="203" fill="#8b949e" font-family="monospace" font-size="10">P0.28 (SD) | P0.29 (SCK) | P0.30 (WS)</text>
+
+    <text x="30" y="230" fill="#f59e0b" font-family="monospace" font-size="11" font-weight="bold">1-WIRE MULTI-DROP</text>
+    <text x="30" y="248" fill="#8b949e" font-family="monospace" font-size="10">P0.17 + 4.7kΩ Pullup Resistor</text>
+
+    <text x="30" y="275" fill="#c084fc" font-family="monospace" font-size="11" font-weight="bold">SAADC BATTERY DIVIDER</text>
+    <text x="30" y="293" fill="#8b949e" font-family="monospace" font-size="10">P0.04 (AIN2) + P0.29 Enable Gate</text>
+
+    <rect x="20" y="310" width="260" height="36" rx="6" fill="#0d1117" stroke="#f59e0b"/>
+    <text x="150" y="332" fill="#f59e0b" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Semtech SX1262 LoRa @ 865MHz</text>
+  </g>
+
+  <!-- Left: I2C Sensors -->
+  <g transform="translate(40, 150)">
+    <rect width="250" height="360" rx="12" fill="#161b22" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="125" y="30" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">I2C SENSOR PERIPHERALS</text>
+    
+    <g transform="translate(15, 50)">
+      <rect width="220" height="60" rx="6" fill="#0d1117" stroke="#30363d"/>
+      <text x="15" y="25" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">TI TMP117 High Precision</text>
+      <text x="15" y="45" fill="#8b949e" font-family="monospace" font-size="10">Addr: 0x48 | ±0.1°C NIST Traceable</text>
+    </g>
+
+    <g transform="translate(15, 125)">
+      <rect width="220" height="60" rx="6" fill="#0d1117" stroke="#30363d"/>
+      <text x="15" y="25" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">Sensirion SCD41 NDIR CO2</text>
+      <text x="15" y="45" fill="#8b949e" font-family="monospace" font-size="10">Addr: 0x62 | Photoacoustic Sensor</text>
+    </g>
+
+    <g transform="translate(15, 200)">
+      <rect width="220" height="60" rx="6" fill="#0d1117" stroke="#30363d"/>
+      <text x="15" y="25" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">Bosch BME688 Multi-Gas</text>
+      <text x="15" y="45" fill="#8b949e" font-family="monospace" font-size="10">Addr: 0x76 | VOC, Temp, Hum, Press</text>
+    </g>
+
+    <g transform="translate(15, 275)">
+      <rect width="220" height="65" rx="6" fill="#0d1117" stroke="#30363d"/>
+      <text x="15" y="25" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">ST LIS3DH + M5 HX711</text>
+      <text x="15" y="42" fill="#8b949e" font-family="monospace" font-size="10">LIS3DH: 0x18 | ±2g Knockdown</text>
+      <text x="15" y="56" fill="#8b949e" font-family="monospace" font-size="10">HX711: 0x26 | 24-bit Scale ADC</text>
+    </g>
+  </g>
+
+  <!-- Connective Lines Left -->
+  <path d="M 290 330 L 350 330" stroke="#38bdf8" stroke-width="2"/>
+
+  <!-- Right: Audio, 1-Wire & Power -->
+  <g transform="translate(710, 150)">
+    <rect width="250" height="360" rx="12" fill="#161b22" stroke="#10b981" stroke-width="1.5"/>
+    <text x="125" y="30" fill="#10b981" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">AUDIO, 1-WIRE &amp; POWER</text>
+    
+    <g transform="translate(15, 50)">
+      <rect width="220" height="60" rx="6" fill="#0d1117" stroke="#30363d"/>
+      <text x="15" y="25" fill="#10b981" font-family="sans-serif" font-size="12" font-weight="bold">TDK INMP441 Digital Mic</text>
+      <text x="15" y="45" fill="#8b949e" font-family="monospace" font-size="10">I2S Interface | 61 dB SNR MEMS</text>
+    </g>
+
+    <g transform="translate(15, 125)">
+      <rect width="220" height="65" rx="6" fill="#0d1117" stroke="#30363d"/>
+      <text x="15" y="25" fill="#f59e0b" font-family="sans-serif" font-size="12" font-weight="bold">5x Maxim DS18B20 Probes</text>
+      <text x="15" y="42" fill="#8b949e" font-family="monospace" font-size="10">1-Wire Digital Bus (P0.17)</text>
+      <text x="15" y="56" fill="#8b949e" font-family="monospace" font-size="10">Frame 1 to Frame 5 Thermal Grid</text>
+    </g>
+
+    <g transform="translate(15, 205)">
+      <rect width="220" height="70" rx="6" fill="#0d1117" stroke="#30363d"/>
+      <text x="15" y="25" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">Solar &amp; LiPo Energy System</text>
+      <text x="15" y="42" fill="#8b949e" font-family="monospace" font-size="10">6V 100mAh Solar Panel</text>
+      <text x="15" y="58" fill="#8b949e" font-family="monospace" font-size="10">3.7V 1000mAh 18650 / LiPo Cell</text>
+    </g>
+
+    <g transform="translate(15, 290)">
+      <rect width="220" height="50" rx="6" fill="#0d1117" stroke="#30363d"/>
+      <text x="15" y="22" fill="#8b949e" font-family="sans-serif" font-size="11" font-weight="bold">Sensor Power Gate MOSFET</text>
+      <text x="15" y="38" fill="#8b949e" font-family="monospace" font-size="10">WB_IO2 (P1.02) Disconnects in Sleep</text>
+    </g>
+  </g>
+
+  <!-- Connective Lines Right -->
+  <path d="M 650 330 L 710 330" stroke="#10b981" stroke-width="2"/>
+</svg>

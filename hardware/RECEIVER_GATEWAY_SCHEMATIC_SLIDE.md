@@ -1,7 +1,7 @@
 # 🖥️ BEEVIL KNIEVEL RECEIVER GATEWAY BASEBOARD SCHEMATIC
 ## High-Performance Edge Gateway (Orange Pi CM5 6 TOPS NPU + RAK2287 LoRaWAN Concentrator + PoE)
 
-![BEEVIL KNIEVEL Receiver Gateway Baseboard Schematic](/C:/Users/25beevdt047/.gemini/antigravity/brain/03f2d722-c972-45f3-9c52-8b1fc32d541b/beevil_receiver_schematic_board_1786785543199.jpg)
+![BEEVIL KNIEVEL Receiver Gateway Baseboard Schematic](../docs/media/05-hardware/receiver_gateway_baseboard_schematic.jpg)
 
 ---
 
