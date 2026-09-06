@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420">
+    
+    <defs>
+        <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#141820"/>
+            <stop offset="100%" stop-color="#0e1117"/>
+        </linearGradient>
+        <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e5a93b"/>
+            <stop offset="100%" stop-color="#f5c25d"/>
+        </linearGradient>
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#2a3b5c"/>
+            <stop offset="100%" stop-color="#1b253b"/>
+        </linearGradient>
+        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#8892b0"/>
+        </marker>
+        <marker id="arrowGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#e5a93b"/>
+        </marker>
+    </defs>
+    <style>
+        .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 16px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #8892b0; }
+        .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 13px; fill: #e5a93b; }
+        .box-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #ccd6f6; line-height: 1.4; }
+        .mono { font-family: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace; font-size: 10px; fill: #94a3b8; }
+        .tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 9px; fill: #0f172a; }
+    </style>
+
+    <rect width="960" height="420" fill="#0b0e14" rx="8"/>
+    
+    <text x="30" y="38" class="title">06 — HARDENED APIARY EDGE GATEWAY ARCHITECTURE</text>
+    <text x="30" y="58" class="subtitle">Raspberry Pi CM4 / Rockchip RK3588 with read-only OverlayFS, SQLite WAL, and local web engine</text>
+    
+    <!-- Baseboard Carrier -->
+    <rect x="30" y="85" width="900" height="305" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="8"/>
+    
+    <!-- Section 1: Radio Ingestion -->
+    <rect x="50" y="110" width="260" height="260" fill="#141820" stroke="#38bdf8" stroke-width="1.5" rx="6"/>
+    <text x="65" y="135" class="box-title" fill="#38bdf8">1. Multi-Channel RF Ingestion</text>
+    <text x="65" y="160" class="mono">• RAK2287 SX1302 Concentrator</text>
+    <text x="65" y="180" class="mono">• Mini-PCIe Carrier Slot (SPI Bus)</text>
+    <text x="65" y="200" class="mono">• 8 Concurrent LoRa Channels</text>
+    <text x="65" y="220" class="mono">• Demodulation: SF7–SF12 parallel</text>
+    <text x="65" y="240" class="mono">• Peak Packet Rate: 148 pkts/s</text>
+    <text x="65" y="260" class="mono">• Cyclic CRC-16 HW Verification</text>
+    <text x="65" y="285" class="box-title" fill="#34d399">Power Delivery</text>
+    <text x="65" y="305" class="mono">• 802.3af PoE (48V to 5V 5A DC-DC)</text>
+    <text x="65" y="325" class="mono">• Solar Buffer: 12V 10Ah LiFePO4</text>
+    <text x="65" y="345" class="mono">• Power Draw: 3.2W idle / 5.8W peak</text>
+
+    <!-- Arrow 1 -> 2 -->
+    <path d="M 310 240 L 340 240" stroke="#8892b0" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Section 2: Compute Core -->
+    <rect x="340" y="110" width="280" height="260" fill="#141820" stroke="#e5a93b" stroke-width="1.5" rx="6"/>
+    <text x="355" y="135" class="box-title">2. Edge Compute &amp; Hardening</text>
+    <text x="355" y="160" class="mono">• Broadcom BCM2711 Quad A72 @ 1.5 GHz</text>
+    <text x="355" y="180" class="mono">• 4GB LPDDR4 + 32GB eMMC Flash</text>
+    <text x="355" y="205" class="box-title" fill="#f43f5e">OS Hardening (OverlayFS)</text>
+    <text x="355" y="225" class="mono">• Rootfs: Read-Only Squashfs/Ext4</text>
+    <text x="355" y="245" class="mono">• RAM Disk TMPFS for Volatile Temp</text>
+    <text x="355" y="265" class="mono">• Zero SD Card Corruption on Outage</text>
+    <text x="355" y="290" class="box-title" fill="#38bdf8">Storage Architecture</text>
+    <text x="355" y="310" class="mono">• SQLite 3 with Write-Ahead Logging</text>
+    <text x="355" y="330" class="mono">• Sub-7ms Disk Commit Latency</text>
+    <text x="355" y="350" class="mono">• 100-Hive 90-Day Telemetry Ring</text>
+
+    <!-- Arrow 2 -> 3 -->
+    <path d="M 620 240 L 650 240" stroke="#8892b0" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Section 3: Analytics & Local Server -->
+    <rect x="650" y="110" width="260" height="260" fill="#141820" stroke="#34d399" stroke-width="1.5" rx="6"/>
+    <text x="665" y="135" class="box-title" fill="#34d399">3. Analytics &amp; Local Services</text>
+    <text x="665" y="160" class="mono">• FastAPI Asynchronous Engine</text>
+    <text x="665" y="180" class="mono">• CUSUM Change-Point Filter</text>
+    <text x="665" y="200" class="mono">• Evidential Neural Network (INT8)</text>
+    <text x="665" y="220" class="mono">• Server-Sent Events (SSE) Bus</text>
+    <text x="665" y="245" class="box-title" fill="#e5a93b">Served Interfaces</text>
+    <text x="665" y="265" class="mono">• Standalone Local Web GUI</text>
+    <text x="665" y="285" class="mono">• HiveOS PWA Mobile Service</text>
+    <text x="665" y="305" class="mono">• Playdate 1-bit Field Console</text>
+    <text x="665" y="325" class="mono">• JSON REST API (/api/v1/hives)</text>
+    <text x="665" y="345" class="mono" fill="#38bdf8">• Zero Cloud Dependency</text>
+</svg>

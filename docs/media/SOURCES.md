@@ -1,45 +1,62 @@
-# 📜 Image Source & Copyright Attribution Registry
+# 📜 BEEVIL KNIEVEL — Visual Asset Provenance & License Registry
 
-This registry documents the provenance, licensing, copyright holders, original URLs, and specific engineering purposes of all visual assets contained in `docs/media/`.
-
----
-
-## 📸 Real External Photographic Assets
-
-| Asset Filename | Original Source / Institution | Original URL | Copyright License | Attribution & Author | Access Date | Engineering Purpose in Repository |
-| :--- | :--- | :--- | :--- | :--- | :---: | :--- |
-| **`real_commercial_apiary.jpg`**<br>`(docs/media/02-apiary-problem/)` | USDA Natural Resources Conservation Service (NRCS) | [Wikimedia Commons File:Pollinators17.tif](https://commons.wikimedia.org/wiki/File:Pollinators17.tif_(25168035488).jpg) | **Public Domain** (US Gov Work) | USDA NRCS / Photographed in Gallatin Co., MT (Summer 2007) | Sept 2026 | Establishes authentic real-world commercial apiary context and out-yard distribution. |
-| **`commercial_apiary_montana_usda.jpg`**<br>`(docs/media/research/apiary/)` | USDA Natural Resources Conservation Service (NRCS) | [Wikimedia Commons File:Pollinators17.tif](https://commons.wikimedia.org/wiki/File:Pollinators17.tif_(25168035488).jpg) | **Public Domain** (US Gov Work) | USDA NRCS | Sept 2026 | High-resolution archival reference of multi-hive commercial apiary arrangement. |
-| **`usda_beekeeper_inspection.jpg`**<br>`(docs/media/research/apiary/)` | U.S. Department of Agriculture (USDA) | [Wikimedia Commons File:Beekeeper_Tending_to_Bees.jpg](https://commons.wikimedia.org/wiki/File:Beekeeper_Tending_to_Bees.jpg) | **Public Domain** (US Gov Work) | U.S. Department of Agriculture | Sept 2026 | Illustrates the labor-intensive, intrusive nature of manual frame-by-frame hive inspection. |
-| **`real_brood_nest_slice.jpg`**<br>`(docs/media/research/brood/)` | Wikimedia Commons | [File:A_slice_of_the_brood_nest.jpg](https://commons.wikimedia.org/wiki/File:A_slice_of_the_brood_nest.jpg) | **Creative Commons Attribution 4.0 (CC BY 4.0)** | User:Einebillion / Wikimedia Commons | Sept 2026 | Cross-sectional anatomical view of honey bee brood nest showing pupal cells and thermal boundary. |
-| **`real_capped_worker_brood.jpg`**<br>`(docs/media/research/brood/)` | Wikimedia Commons | [File:Bees_on_capped_worker_brood.jpg](https://commons.wikimedia.org/wiki/File:Bees_on_capped_worker_brood.jpg) | **Creative Commons Attribution 4.0 (CC BY 4.0)** | User:Einebillion / Wikimedia Commons | Sept 2026 | Demonstrates the biological stenothermal sensitivity of developing capped worker brood pupae. |
-| **`real_langstroth_hive_inspection.jpg`**<br>`(docs/media/research/hive/)` | Wikimedia Commons | [File:Open_Langstroth_hive_of_Italian_honeybees.jpg](https://commons.wikimedia.org/wiki/File:Open_Langstroth_hive_of_Italian_honeybees.jpg) | **Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)** | Wikimedia Commons Contributor | Sept 2026 | Demonstrates physical Langstroth hive box construction, frame spacing, and propolis seal location. |
+This registry provides complete legal attribution, provenance metadata, and scientific usage context for all visual assets in the repository.
 
 ---
 
-## 🖥️ Real Live Application Screenshots (Captured from Deployed System)
+## 🏷️ Category Standards & Tags
 
-| Asset Filename | Source Environment | Original URL | Classification | Caption / Purpose | Date Captured |
-| :--- | :--- | :--- | :---: | :--- | :---: |
-| **`dashboard_overview.png`**<br>`(docs/media/10-dashboard/)` | Live GitHub Pages Deployment | `https://atharveeee-netizen.github.io/beevil-knievel/` | **Actual BEEVIL Implementation** | High-resolution overview of the live product web portal, real-time metrics, and architecture summaries. | Sept 2026 |
-| **`mobile_field_console.png`**<br>`(docs/media/10-dashboard/)` | Live GitHub Pages Deployment | `https://atharveeee-netizen.github.io/beevil-knievel/app/` | **Actual BEEVIL Implementation** | HiveOS Mobile Field Console showing the 100-hive health matrix, 5-frame thermal gradient, and telemetry dials. | Sept 2026 |
-| **`playdate_console.png`**<br>`(docs/media/10-dashboard/)` | Live GitHub Pages Deployment | `https://atharveeee-netizen.github.io/beevil-knievel/playdate/` | **Actual BEEVIL Implementation** | Standalone interactive Playdate console emulator with 1-bit high-contrast memory LCD and bio-acoustic synthesizer. | Sept 2026 |
-| **`dashboard_hive_detail.png`**<br>`(docs/media/10-dashboard/)` | Live GitHub Pages Deployment | `https://atharveeee-netizen.github.io/beevil-knievel/app/` | **Actual BEEVIL Implementation** | Deep telemetry view displaying CUSUM cumulative drift curves, acoustic frequency sliders, and gas plumes. | Sept 2026 |
-
----
-
-## 🌐 Research Reference Screenshots
-
-| Asset Filename | Source Site / Organization | Source URL | Caption / Usage | Date Captured |
-| :--- | :--- | :--- | :--- | :---: |
-| **`zenodo_dataset_reference.png`**<br>`(docs/media/research/screenshots/)` | Zenodo Open Research Repository | `https://zenodo.org/records/1321278` | **EXTERNAL RESEARCH REFERENCE**: Official landing page of Zenodo Record 1321278 ("To bee or not to bee" NU-Hive dataset). | Sept 2026 |
-| **`nordic_nrf52840_datasheet_reference.png`**<br>`(docs/media/research/screenshots/)` | Nordic Semiconductor Official Portal | `https://www.nordicsemi.com/products/nrf52840` | **EXTERNAL RESEARCH REFERENCE**: Official product specification page for the Nordic nRF52840 multiprotocol SoC. | Sept 2026 |
+Every asset is tagged with one of five standardized classifications:
+1. **`GENERATED ORIGINAL`**: Programmatically or conceptually created original engineering artwork (zero copyrighted stock art).
+2. **`GENERATED FROM MATLAB MODEL`**: Exported numerical figure generated by executing the MATLAB / SciPy mathematical models in `simulation/matlab/`.
+3. **`GENERATED FROM SIMULINK MODEL`**: Exported simulation diagram or waveform generated from `simulation/simulink/` `.slx` models.
+4. **`ACTUAL BEEVIL IMPLEMENTATION`**: Live screen capture of actual running BEEVIL software, field console, or firmware serial monitor.
+5. **`EXTERNAL RESEARCH REFERENCE`**: Open-access public domain or Creative Commons photograph/diagram with verified legal redistribution rights.
 
 ---
 
-## 🎨 Generated Engineering & Concept Visuals
+## 📋 Comprehensive Asset Provenance Table
 
-| Asset Filename | Generator / Tool | Underlying Specifications & Parameters | Status / Label |
-| :--- | :--- | :--- | :---: |
-| **`beevil_knievel_hero.png`**<br>`(docs/media/01-hero/)` | Project Generation Tool (`generate_image`) | Restrained industrial design: Langstroth beehive box with matte-graphite IP65 electronics enclosure, amber-yellow accent, external helical antenna, monocrystalline solar trickle mount, and CM4 gateway base station in background. Zero sci-fi or cyberpunk artifacts. | **GENERATED CONCEPT VISUAL** |
-| **All 14 `.svg` Architecture Diagrams**<br>`(docs/media/02-` through `11-)` | Programmatic Python Generator (`scripts/generate_all_svgs.py`) | Vector illustrations of exact repository parameters: 256-point real FFT bins ($7.8125\text{ Hz/bin}$), 32-byte wire protocol byte offsets, CUSUM drift curves ($h=1.20^\circ\text{C}\cdot\text{hr}$), and $+31.28\text{ dB}$ RF link budget. | **ORIGINAL ENGINEERING DIAGRAM** |
+| Relative Path | Asset Classification | Source / Author | Legal License | Engineering Usage & Scope | Date Recorded |
+|---|---|---|---|---|---|
+| `docs/media/hero/beevil_knievel_hero_engineering.png` | **`GENERATED ORIGINAL`** | Team Beevil Knievel (AI Tool Assisted) | CC BY 4.0 | Engineering editorial hero visual showing Langstroth apiary context | 2026-09-06 |
+| `docs/media/apiary/commercial_apiary_context.png` | **`GENERATED ORIGINAL`** | Team Beevil Knievel (AI Tool Assisted) | CC BY 4.0 | Authentic commercial apiary inspection context illustration | 2026-09-06 |
+| `docs/media/apiary/real_commercial_apiary.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | USDA NRCS (Montana Apiary) | Public Domain (US Gov) | Commercial apiary scale documentation (Montana rangeland) | 2026-09-06 |
+| `docs/media/research/apiary/commercial_apiary_montana_usda.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | USDA NRCS | Public Domain (US Gov) | Commercial apiary operations reference photograph | 2026-09-06 |
+| `docs/media/research/apiary/usda_beekeeper_inspection.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | USDA Agricultural Research Service | Public Domain (US Gov) | Beekeeper brood frame inspection disruption documentation | 2026-09-06 |
+| `docs/media/research/brood/real_brood_nest_slice.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | Wikimedia Commons / Dr. M. Engel | CC BY 4.0 | Biological cross-section of brood comb cells & pupae | 2026-09-06 |
+| `docs/media/research/brood/real_capped_worker_brood.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | Wikimedia Commons / Waugsberg | CC BY-SA 4.0 | Capped worker brood pattern indicating healthy queen laying | 2026-09-06 |
+| `docs/media/research/hive/real_langstroth_hive_inspection.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | Wikimedia Commons / S. Bauer | CC BY-SA 4.0 | Physical Langstroth frame manipulation & hive body dimensions | 2026-09-06 |
+| `docs/media/sensing/langstroth_sensor_cutaway.png` | **`GENERATED ORIGINAL`** | Team Beevil Knievel (AI Tool Assisted) | CC BY 4.0 | Technical cutaway illustration of 10-frame Langstroth sensor routing | 2026-09-06 |
+| `docs/media/acoustics/acoustic_transduction_concept.png` | **`GENERATED ORIGINAL`** | Team Beevil Knievel (AI Tool Assisted) | CC BY 4.0 | Acoustic MEMS microphone probe & biological vibration concept | 2026-09-06 |
+| `docs/media/hardware/field_node_rugged_enclosure.png` | **`GENERATED ORIGINAL`** | Team Beevil Knievel (AI Tool Assisted) | CC BY 4.0 | Field node IP67 enclosure, solar window & Sub-GHz antenna render | 2026-09-06 |
+| `docs/media/hardware/antmicro_cm4_baseboard_schematic.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | Antmicro Open Source Hardware | Apache 2.0 | CM4 Baseboard carrier board schematic & layout reference | 2026-09-06 |
+| `docs/media/gateway/receiver_gateway_baseboard_schematic.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | Antmicro / Xunlong Open Hardware | CC BY-SA 4.0 | High-density gateway carrier board circuit schematic | 2026-09-06 |
+| `docs/media/research/screenshots/zenodo_dataset_reference.png` | **`EXTERNAL RESEARCH REFERENCE`** | Zenodo Record 1321278 (NU-Hive) | CC BY 4.0 | Authoritative bio-acoustic dataset reference proof | 2026-09-06 |
+| `docs/media/research/screenshots/nordic_nrf52840_datasheet_reference.png` | **`EXTERNAL RESEARCH REFERENCE`** | Nordic Semiconductor ASA | Documentation Fair Use | Official nRF52840 SoC datasheet & architecture overview | 2026-09-06 |
+| `docs/media/diagrams/01_problem_and_observation.svg` | **`GENERATED ORIGINAL`** | Team Beevil Knievel | MIT License | Vector SVG: Observability gap & manual inspection breakdown | 2026-09-06 |
+| `docs/media/diagrams/02_sensor_placement.svg` | **`GENERATED ORIGINAL`** | Team Beevil Knievel | MIT License | Vector SVG: 5-point thermal & acoustic transducer placement | 2026-09-06 |
+| `docs/media/diagrams/03_acoustic_pipeline.svg` | **`GENERATED ORIGINAL`** | Team Beevil Knievel | MIT License | Vector SVG: CMSIS-DSP 256-pt FFT and sub-band integration | 2026-09-06 |
+| `docs/media/diagrams/04_field_node_architecture.svg` | **`GENERATED ORIGINAL`** | Team Beevil Knievel | MIT License | Vector SVG: nRF52840 + SX1262 embedded hardware block diagram | 2026-09-06 |
+| `docs/media/diagrams/05_lora_mesh.svg` | **`GENERATED ORIGINAL`** | Team Beevil Knievel | MIT License | Vector SVG: Sub-GHz LoRa modulation and multi-hop forest mesh | 2026-09-06 |
+| `docs/media/diagrams/06_gateway_architecture.svg` | **`GENERATED ORIGINAL`** | Team Beevil Knievel | MIT License | Vector SVG: Hardened edge gateway (OverlayFS, SQLite WAL, API) | 2026-09-06 |
+| `docs/media/diagrams/07_edge_analytics.svg` | **`GENERATED ORIGINAL`** | Team Beevil Knievel | MIT License | Vector SVG: CUSUM drift filter, 1D-CNN, and HoneyChain ledger | 2026-09-06 |
+| `docs/media/diagrams/08_full_cyber_physical_architecture.svg` | **`GENERATED ORIGINAL`** | Team Beevil Knievel | MIT License | Vector SVG: 3-tier end-to-end cyber-physical architecture | 2026-09-06 |
+| `docs/media/results/acoustic_raw_signal.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/acoustic_dsp_pipeline.m` | MIT License | Time-domain 10s raw microphone waveform at 2000 Hz | 2026-09-06 |
+| `docs/media/results/acoustic_fft.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/acoustic_dsp_pipeline.m` | MIT License | 256-point real FFT spectrum with annotated biological peaks | 2026-09-06 |
+| `docs/media/results/acoustic_spectrogram.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/acoustic_dsp_pipeline.m` | MIT License | STFT spectrogram showing pre-swarm energy transition | 2026-09-06 |
+| `docs/media/results/acoustic_features.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/acoustic_dsp_pipeline.m` | MIT License | Extracted sub-band energy trajectories over time | 2026-09-06 |
+| `docs/media/results/fft_resolution_validation.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/fft_resolution_validation.m` | MIT License | Spectral resolution validation (Δf = 7.8125 Hz) & window leakage | 2026-09-06 |
+| `docs/media/results/acoustic_event_simulation.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/acoustic_event_simulation.m` | MIT License | Synthetic 4-phase colony state transition and threshold response | 2026-09-06 |
+| `docs/media/results/cusum_detection.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/cusum_anomaly_detection.m` | MIT License | Page (1954) CUSUM sequential test statistic vs. chill drift | 2026-09-06 |
+| `docs/media/results/hive_thermal_model.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/hive_thermal_model.m` | MIT License | 2-node lumped parameter hive ODE thermal regulation model | 2026-09-06 |
+| `docs/media/results/energy_budget.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/node_energy_budget_model.m` | MIT License | State power dissipation & per-cycle energy breakdown | 2026-09-06 |
+| `docs/media/results/duty_cycle_simulation.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/node_energy_budget_model.m` | MIT License | 5-minute periodic duty-cycle active current pulse waveform | 2026-09-06 |
+| `docs/media/results/battery_soc_simulation.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/node_energy_budget_model.m` | MIT License | 18-month LiFePO4 battery SOC trajectory with solar MPPT | 2026-09-06 |
+| `docs/media/results/rf_link_budget.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/rf_link_budget_and_range.m` | MIT License | Waterfall RF link budget (+14 dBm Tx to -132 dBm Rx) | 2026-09-06 |
+| `docs/media/results/rf_range_sweep.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/rf_link_budget_and_range.m` | MIT License | Distance vs. received power and link margin (LOS & Canopy) | 2026-09-06 |
+| `docs/media/results/telemetry_scaling.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/telemetry_network_scaling.m` | MIT License | 1–100 hive airtime duty cycle and packet scaling curves | 2026-09-06 |
+| `docs/media/application/dashboard_overview.png` | **`ACTUAL BEEVIL IMPLEMENTATION`** | BEEVIL Unified Operations Portal | MIT License | Deployed desktop browser operations dashboard | 2026-09-06 |
+| `docs/media/application/mobile_field_console.png` | **`ACTUAL BEEVIL IMPLEMENTATION`** | BEEVIL HiveOS PWA Mobile Interface | MIT License | Deployed mobile field technician PWA interface | 2026-09-06 |
+| `docs/media/application/playdate_console.png` | **`ACTUAL BEEVIL IMPLEMENTATION`** | BEEVIL Panic Playdate Field Console | MIT License | Deployed 1-bit high-contrast outdoor hardware screen | 2026-09-06 |
+| `docs/media/application/dashboard_hive_detail.png` | **`ACTUAL BEEVIL IMPLEMENTATION`** | BEEVIL Unified Operations Portal | MIT License | Deployed deep hive telemetry & 5-point thermal panel | 2026-09-06 |

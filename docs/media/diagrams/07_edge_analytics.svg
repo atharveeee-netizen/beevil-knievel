@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400">
+    
+    <defs>
+        <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#141820"/>
+            <stop offset="100%" stop-color="#0e1117"/>
+        </linearGradient>
+        <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e5a93b"/>
+            <stop offset="100%" stop-color="#f5c25d"/>
+        </linearGradient>
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#2a3b5c"/>
+            <stop offset="100%" stop-color="#1b253b"/>
+        </linearGradient>
+        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#8892b0"/>
+        </marker>
+        <marker id="arrowGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#e5a93b"/>
+        </marker>
+    </defs>
+    <style>
+        .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 16px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #8892b0; }
+        .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 13px; fill: #e5a93b; }
+        .box-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #ccd6f6; line-height: 1.4; }
+        .mono { font-family: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace; font-size: 10px; fill: #94a3b8; }
+        .tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 9px; fill: #0f172a; }
+    </style>
+
+    <rect width="960" height="400" fill="#0b0e14" rx="8"/>
+    
+    <text x="30" y="38" class="title">07 — EDGE-AI ARCHITECTURE &amp; ANOMALY DETECTION ENGINE</text>
+    <text x="30" y="58" class="subtitle">Multi-modal sensory fusion: 1D-CNN spectral classifier, CUSUM drift filter, and HoneyChain cryptographic provenance</text>
+    
+    <!-- Pipeline -->
+    <!-- Input Vector -->
+    <rect x="30" y="85" width="200" height="280" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
+    <text x="45" y="110" class="box-title">Fused Telemetry Vector</text>
+    <text x="45" y="135" class="mono">Vector X_t ∈ R^12:</text>
+    <text x="45" y="160" class="mono">• [0..3] Acoustic Sub-bands</text>
+    <text x="45" y="180" class="mono">• [4..8] 5-Pt Thermal Array</text>
+    <text x="45" y="200" class="mono">• [9] Hive Relative Humidity</text>
+    <text x="45" y="220" class="mono">• [10] CO2 Concentration</text>
+    <text x="45" y="240" class="mono">• [11] Net Hive Weight (kg)</text>
+    <text x="45" y="260" class="mono">• [12] Vibration Energy</text>
+    <text x="45" y="290" class="box-title" fill="#38bdf8">Temporal Stride</text>
+    <text x="45" y="315" class="mono">W = 12 steps (1 Hour Window)</text>
+    <text x="45" y="335" class="mono">Matrix: 12 x 12 Float32</text>
+
+    <path d="M 230 225 L 260 225" stroke="#8892b0" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Analytic Engine 1: CUSUM -->
+    <rect x="260" y="85" width="210" height="280" fill="url(#panelGrad)" stroke="#e5a93b" stroke-width="1.5" rx="6"/>
+    <text x="275" y="110" class="box-title">CUSUM Brood Filter</text>
+    <text x="275" y="135" class="mono">Page (1954) Derivation:</text>
+    <text x="275" y="160" class="mono">S_t^+ = max(0, S_{t-1}^+ +</text>
+    <text x="315" y="180" class="mono">(y_t - μ_0) - k)</text>
+    <text x="275" y="205" class="mono">S_t^- = max(0, S_{t-1}^- -</text>
+    <text x="315" y="225" class="mono">(y_t - μ_0) - k)</text>
+    <text x="275" y="255" class="box-title" fill="#f87171">Decision Boundary</text>
+    <text x="275" y="280" class="mono">If S_t^+ &gt; h_upper:</text>
+    <text x="275" y="300" class="mono" fill="#f87171">→ THERMAL_CHILL_ALERT</text>
+    <text x="275" y="325" class="mono">T_core drift &gt; 1.5°C detected</text>
+    <text x="275" y="345" class="mono">within 2 sample intervals</text>
+
+    <path d="M 470 225 L 500 225" stroke="#8892b0" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Analytic Engine 2: 1D-CNN -->
+    <rect x="500" y="85" width="210" height="280" fill="url(#panelGrad)" stroke="#38bdf8" stroke-width="1.5" rx="6"/>
+    <text x="515" y="110" class="box-title" fill="#38bdf8">Evidential 1D-CNN</text>
+    <text x="515" y="135" class="mono">Topology:</text>
+    <text x="515" y="155" class="mono">• Conv1D(filters=16, k=3)</text>
+    <text x="515" y="175" class="mono">• BatchNorm1d + ReLU</text>
+    <text x="515" y="195" class="mono">• MaxPool1d(stride=2)</text>
+    <text x="515" y="215" class="mono">• Conv1D(filters=32, k=3)</text>
+    <text x="515" y="235" class="mono">• GlobalAvgPool1d</text>
+    <text x="515" y="255" class="mono">• Dense(64) + Dropout(0.2)</text>
+    <text x="515" y="275" class="mono">• Dirichlet Evidential Head</text>
+    <text x="515" y="305" class="box-title" fill="#34d399">Inference Profile</text>
+    <text x="515" y="325" class="mono">Quantization: INT8</text>
+    <text x="515" y="345" class="mono">Binary Size: 75.4 KB | 4.8ms</text>
+
+    <path d="M 710 225 L 740 225" stroke="#8892b0" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Cryptographic Engine: HoneyChain -->
+    <rect x="740" y="85" width="190" height="280" fill="url(#panelGrad)" stroke="#34d399" stroke-width="1.5" rx="6"/>
+    <text x="755" y="110" class="box-title" fill="#34d399">HoneyChain Audit</text>
+    <text x="755" y="135" class="mono">Merkle Tree Ledger:</text>
+    <text x="755" y="160" class="mono">• SHA-256 State Hash</text>
+    <text x="755" y="180" class="mono">• Parent Hash Linkage</text>
+    <text x="755" y="200" class="mono">• Nonce + Proof-of-Check</text>
+    <text x="755" y="225" class="box-title" fill="#e5a93b">Harvest Cert</text>
+    <text x="755" y="250" class="mono">• Pure Floral Honey</text>
+    <text x="755" y="270" class="mono">• Zero Antibiotic Trace</text>
+    <text x="755" y="290" class="mono">• Proven Continuous</text>
+    <text x="755" y="310" class="mono">  Brood Thermoregulation</text>
+    <text x="755" y="335" class="mono" fill="#34d399">Cryptographic QR Code</text>
+</svg>

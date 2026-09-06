@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420">
+    
+    <defs>
+        <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#141820"/>
+            <stop offset="100%" stop-color="#0e1117"/>
+        </linearGradient>
+        <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e5a93b"/>
+            <stop offset="100%" stop-color="#f5c25d"/>
+        </linearGradient>
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#2a3b5c"/>
+            <stop offset="100%" stop-color="#1b253b"/>
+        </linearGradient>
+        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#8892b0"/>
+        </marker>
+        <marker id="arrowGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#e5a93b"/>
+        </marker>
+    </defs>
+    <style>
+        .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 16px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #8892b0; }
+        .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 13px; fill: #e5a93b; }
+        .box-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #ccd6f6; line-height: 1.4; }
+        .mono { font-family: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace; font-size: 10px; fill: #94a3b8; }
+        .tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 9px; fill: #0f172a; }
+    </style>
+
+    <rect width="960" height="420" fill="#0b0e14" rx="8"/>
+    
+    <text x="30" y="38" class="title">03 — ON-NODE ACOUSTIC DSP &amp; FEATURE EXTRACTION PIPELINE</text>
+    <text x="30" y="58" class="subtitle">ARM Cortex-M4 CMSIS-DSP 256-point real FFT with biologically partitioned frequency bins</text>
+    
+    <!-- Pipeline Blocks -->
+    <!-- Block 1: Microphone -->
+    <rect x="30" y="90" width="130" height="120" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
+    <text x="40" y="115" class="box-title">1. INMP441</text>
+    <text x="40" y="135" class="box-body">I2S Interface</text>
+    <text x="40" y="155" class="mono">fs = 2000 Hz</text>
+    <text x="40" y="175" class="mono">16-bit PCM</text>
+    <text x="40" y="195" class="mono">DMA Ping-Pong</text>
+
+    <path d="M 160 150 L 180 150" stroke="#8892b0" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Block 2: Windowing -->
+    <rect x="180" y="90" width="140" height="120" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
+    <text x="190" y="115" class="box-title">2. Windowing</text>
+    <text x="190" y="135" class="box-body">Hanning Window</text>
+    <text x="190" y="155" class="mono">w[n] = 0.5(1-cos)</text>
+    <text x="190" y="175" class="mono">N = 256 points</text>
+    <text x="190" y="195" class="mono">-32 dB Sidelobe</text>
+
+    <path d="M 320 150 L 340 150" stroke="#8892b0" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Block 3: CMSIS-DSP FFT -->
+    <rect x="340" y="90" width="150" height="120" fill="url(#panelGrad)" stroke="#e5a93b" stroke-width="1.5" rx="6"/>
+    <text x="350" y="115" class="box-title">3. CMSIS-DSP</text>
+    <text x="350" y="135" class="box-body">arm_rfft_fast_f32</text>
+    <text x="350" y="155" class="mono">256-pt Real FFT</text>
+    <text x="350" y="175" class="mono">Δf = 7.8125 Hz</text>
+    <text x="350" y="195" class="mono" fill="#34d399">Exec: 1.28 ms</text>
+
+    <path d="M 490 150 L 510 150" stroke="#8892b0" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Block 4: Magnitude -->
+    <rect x="510" y="90" width="140" height="120" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
+    <text x="520" y="115" class="box-title">4. Magnitude</text>
+    <text x="520" y="135" class="box-body">arm_cmplx_mag_f32</text>
+    <text x="520" y="155" class="mono">|X[k]| = √(Re²+Im²)</text>
+    <text x="520" y="175" class="mono">k = 0 .. 127</text>
+    <text x="520" y="195" class="mono">0 to 1000 Hz</text>
+
+    <path d="M 650 150 L 670 150" stroke="#8892b0" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+    <!-- Block 5: Sub-band Bins -->
+    <rect x="670" y="90" width="260" height="120" fill="url(#panelGrad)" stroke="#38bdf8" stroke-width="1.5" rx="6"/>
+    <text x="680" y="115" class="box-title" fill="#38bdf8">5. Sub-Band Energy Integration</text>
+    <text x="680" y="135" class="mono">E_fanning  = Σ |X[k]|² (100–180 Hz, k:13–23)</text>
+    <text x="680" y="155" class="mono">E_waggle   = Σ |X[k]|² (200–280 Hz, k:26–36)</text>
+    <text x="680" y="175" class="mono">E_preswarm = Σ |X[k]|² (300–400 Hz, k:38–51)</text>
+    <text x="680" y="195" class="mono">E_distress = Σ |X[k]|² (450–750 Hz, k:58–96)</text>
+
+    <!-- Bottom Biological Mapping Table -->
+    <rect x="30" y="230" width="900" height="160" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
+    <text x="45" y="255" class="box-title">Biological Signal Characterization &amp; Decision Logic</text>
+    
+    <!-- Table Header -->
+    <rect x="45" y="270" width="870" height="25" fill="#1e293b" rx="3"/>
+    <text x="55" y="287" class="mono" fill="#ffffff">Band Name</text>
+    <text x="180" y="287" class="mono" fill="#ffffff">Freq Range</text>
+    <text x="290" y="287" class="mono" fill="#ffffff">FFT Bins (k)</text>
+    <text x="410" y="287" class="mono" fill="#ffffff">Biological Phenomenon</text>
+    <text x="680" y="287" class="mono" fill="#ffffff">Diagnostic State Trigger</text>
+
+    <!-- Rows -->
+    <text x="55" y="315" class="mono" fill="#94a3b8">Thermal Fanning</text>
+    <text x="180" y="315" class="mono" fill="#94a3b8">100 – 180 Hz</text>
+    <text x="290" y="315" class="mono" fill="#94a3b8">k = 13 .. 23</text>
+    <text x="410" y="315" class="mono" fill="#cbd5e1">Larval heat evacuation / wing fanning</text>
+    <text x="680" y="315" class="mono" fill="#f59e0b">THERMAL_STRESS_WARNING</text>
+
+    <text x="55" y="338" class="mono" fill="#94a3b8">Forager Waggle</text>
+    <text x="180" y="338" class="mono" fill="#94a3b8">200 – 280 Hz</text>
+    <text x="290" y="338" class="mono" fill="#94a3b8">k = 26 .. 36</text>
+    <text x="410" y="338" class="mono" fill="#cbd5e1">Foraging communication &amp; nectar intake</text>
+    <text x="680" y="338" class="mono" fill="#34d399">NORMAL_FORAGING_STATE</text>
+
+    <text x="55" y="361" class="mono" fill="#94a3b8">Pre-Swarm Piping</text>
+    <text x="180" y="361" class="mono" fill="#94a3b8">300 – 400 Hz</text>
+    <text x="290" y="361" class="mono" fill="#94a3b8">k = 38 .. 51</text>
+    <text x="410" y="361" class="mono" fill="#cbd5e1">Virgin queen piping / colony preparation</text>
+    <text x="680" y="361" class="mono" fill="#ef4444">PRE_SWARM_EMERGENCY</text>
+
+    <text x="55" y="384" class="mono" fill="#94a3b8">Queenless Roar</text>
+    <text x="180" y="384" class="mono" fill="#94a3b8">450 – 750 Hz</text>
+    <text x="290" y="384" class="mono" fill="#94a3b8">k = 58 .. 96</text>
+    <text x="410" y="384" class="mono" fill="#cbd5e1">Disorganized buzzing post queen loss</text>
+    <text x="680" y="384" class="mono" fill="#f43f5e">QUEENLESS_DISTRESS</text>
+</svg>

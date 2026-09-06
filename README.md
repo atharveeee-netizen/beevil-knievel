@@ -1,391 +1,411 @@
-# 🐝 BEEVIL KNIEVEL — Autonomous Precision Apiculture Cyber-Physical Platform
+# 🐝 BEEVIL KNIEVEL — Autonomous Precision-Apiculture Cyber-Physical Monitoring Platform
 
-> **Sub-GHz LoRa Mesh (`BeevilMesh`) + Hardened Linux Edge Gateway (Raspberry Pi CM4) + Nordic nRF52840 Multi-Sensor Field Nodes**  
-> *A low-power, zero-cloud-cost, power-loss immune cyber-physical platform for commercial apiary health monitoring and pollinator conservation.*
+<div align="center">
 
-[![Deploy to GitHub Pages](https://github.com/atharveeee-netizen/beevil-knievel/actions/workflows/deploy.yml/badge.svg)](https://github.com/atharveeee-netizen/beevil-knievel/actions/workflows/deploy.yml)
-[![Live Portal](https://img.shields.io/badge/Live_Portal-GitHub_Pages-ffc833?logo=github&logoColor=black)](https://atharveeee-netizen.github.io/beevil-knievel/)
-[![HiveOS Mobile](https://img.shields.io/badge/Field_Console-HiveOS_Mobile-10b981?logo=pwa&logoColor=black)](https://atharveeee-netizen.github.io/beevil-knievel/app/)
-[![Playdate Console](https://img.shields.io/badge/Console-Playdate_Interactive-fbc651?logo=gamepad&logoColor=black)](https://atharveeee-netizen.github.io/beevil-knievel/playdate/)
-[![Hardware Target](https://img.shields.io/badge/Hardware-RAK4631_nRF52840_+_SX1262-2ea043)](hardware/BOM_AND_PINOUT.md)
-[![Mathematical Derivations](https://img.shields.io/badge/Physics_Derivations-13_Models_v2.0-6c00ff)](docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md)
-[![Validation Matrix](https://img.shields.io/badge/Evidence_Matrix-Audited_Status-blue)](docs/VALIDATION_STATUS.md)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![BEEVIL KNIEVEL Engineering Hero](docs/media/hero/beevil_knievel_hero_engineering.png)
 
----
+[![Hardware Status](https://img.shields.io/badge/Hardware-nRF52840%20%2B%20SX1262%20%2B%20CM4-22c55e?style=flat-square)](#05--field-node)
+[![Acoustic DSP](https://img.shields.io/badge/DSP-CMSIS--DSP%20256--pt%20FFT%20(%CE%94f%3D7.81Hz)-3b82f6?style=flat-square)](#06--acoustic-dsp)
+[![MATLAB Simulation](https://img.shields.io/badge/MATLAB%2FSimulink-8%20Models%20Verified-e5a93b?style=flat-square)](#15--reproducibility)
+[![RF Link Budget](https://img.shields.io/badge/RF%20Link-IN865%20LoRa%20(15km%20LOS%20%2F%201.5km%20Canopy)-8b5cf6?style=flat-square)](#10--radio)
+[![Validation Standard](https://img.shields.io/badge/Evidence-Audited%20%26%20Calibrated-10b981?style=flat-square)](#13--validation-boundary)
 
-![BEEVIL KNIEVEL Hero Visual](docs/media/01-hero/beevil_knievel_hero.png)
-*Caption: Generated concept visualization of the BEEVIL KNIEVEL field node architecture installed on an active Langstroth hive within a commercial apiary.*
+**An evidence-backed, research-grounded cyber-physical telemetry system providing continuous, non-invasive visibility into commercial honeybee (*Apis mellifera*) colony thermoregulation, bio-acoustics, and population dynamics.**
 
----
+[Architecture](#04--cyber-physical-architecture) • [Acoustic DSP](#06--acoustic-dsp) • [Thermal Model](#08--thermal-model) • [Energy Autonomy](#09--energy-model) • [RF Propagation](#10--radio) • [Validation](#13--validation-boundary) • [Reproducibility](#15--reproducibility)
 
-## 🌐 Live Web & Mobile Applications
-* 🎮 **Official Product Portal**: [https://atharveeee-netizen.github.io/beevil-knievel/](https://atharveeee-netizen.github.io/beevil-knievel/)
-* 📲 **HiveOS Mobile Field Console**: [https://atharveeee-netizen.github.io/beevil-knievel/app/](https://atharveeee-netizen.github.io/beevil-knievel/app/)
-* 🕹️ **Interactive Standalone Playdate Console**: [https://atharveeee-netizen.github.io/beevil-knievel/playdate/](https://atharveeee-netizen.github.io/beevil-knievel/playdate/)
-* 📐 **Mathematical Derivations & Engineering Models**: [`docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md`](docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md)
-* 🧭 **Evaluator & Repository Navigation Guide**: [`docs/REPOSITORY_GUIDE.md`](docs/REPOSITORY_GUIDE.md)
+</div>
 
 ---
 
-## 01 | THE PROBLEM
+## 01 — The Problem
 
-Commercial honey bees (*Apis mellifera*) are the primary managed insect pollinator for global agriculture, responsible for pollinating over **75% of global food crop types** with an estimated annual economic value of **$235–$577 billion USD** ([FAO Pollination Services Report](docs/references/APICULTURE_SOURCES.md)). However, modern commercial beekeeping faces severe operational challenges:
+Commercial honeybee (*Apis mellifera*) pollination directly underpins over **$17 Billion USD** in annual agricultural crop value across the globe. However, commercial managed apiaries experience severe annual colony mortality rates—averaging **55.6% loss** during recent wintering seasons (USDA-ARS).
 
-1. **Catastrophic Annual Colony Mortality**:
-   The USDA Agricultural Research Service (ARS) and the Bee Informed Partnership (BIP) report annual honey bee colony losses consistently ranging between **35% and 48%** across US commercial and sideline operations. Winter mortality frequently exceeds 60% due to unmonitored brood chilling, starvation, queen loss, and Varroa mite infestations.
-2. **Prohibitive Out-Yard Travel & Labor Overhead**:
-   Commercial beekeepers manage between 500 and 15,000 colonies distributed across remote rural sites termed **out-yards**, located 30 to 150 km apart. Inspecting hives manually takes 10 to 15 minutes per colony, making it physically impossible to inspect more than a fraction of colonies every two to three weeks.
-3. **Severe Biological Shock of Physical Inspection**:
-   Opening a hive requires cracking the bees' protective propolis seals with a steel hive tool. This allows cold air to enter the brood nest, dropping core temperatures from the homeostatic $34.8^\circ\text{C}$ down to ambient levels. Reheating the brood chamber requires up to 8 hours of intensive metabolic shivering and significant honey consumption.
+<div align="center">
 
-![Real Commercial Apiary Context](docs/media/02-apiary-problem/real_commercial_apiary.jpg)
-*Caption: Real-world commercial apiary context (Gallatin Co., Montana out-yard). Source: USDA NRCS (Public Domain). Documented in [docs/media/SOURCES.md](docs/media/SOURCES.md).*
+![Commercial Apiary Context](docs/media/apiary/real_commercial_apiary.jpg)
+*Figure 1.1: Commercial migratory apiary operations in Montana rangeland. Photo: USDA NRCS (Public Domain).*
 
-![The Problem: Manual Inspection vs Remote Monitoring](docs/media/02-apiary-problem/hive_monitoring_problem.svg)
-*Caption: Engineering comparison: The physical friction of manual inspection versus continuous, non-invasive cyber-physical telemetry.*
+</div>
 
----
+### The Critical Observability Gap
+1. **Infrequent Discrete Inspections**: Commercial apiaries operate at hundreds of hives per yard. Human beekeepers can only physically inspect frames every 14 to 21 days.
+2. **Thermal & Biological Shock**: Opening a hive disrupts the tightly controlled brood nest microclimate ($34.5^\circ\text{C}$), chilling brood larvae by up to $-12^\circ\text{C}$ and causing developmental wing deformities.
+3. **Imminent Swarm Blindspots**: Colony swarming takes place within a narrow 24- to 48-hour acoustic surge window. Discrete manual inspections consistently miss these critical transition windows.
+4. **Undetected Winter Cluster Collapse**: Colony starvation, queen mortality, and Varroa destructor infestations manifest as slow thermal drifts ($0.02^\circ\text{C}/\text{hr}$) that are undetectable from the exterior.
 
-## 02 | WHAT WE MONITOR
+<div align="center">
 
-BEEVIL KNIEVEL converts standard Langstroth beehives into continuous cyber-physical telemetry nodes without modifying external hive geometry or disrupting internal comb layout:
+![Problem and Observation Gap](docs/media/diagrams/01_problem_and_observation.svg)
+*Figure 1.2: Comparison between traditional manual frame inspection bottlenecks and BEEVIL continuous cyber-physical telemetry.*
 
-| Monitored Parameter | Primary Transducer | Physical Bus & Address | Measurement Range & Resolution | Biological / Physical Relevance |
-| :--- | :--- | :--- | :--- | :--- |
-| **Brood Core Temperature** | Texas Instruments TMP117 | I2C (`0x48`) | $-40.00^\circ\text{C}$ to $+85.00^\circ\text{C}$ ($\pm 0.10^\circ\text{C}$) | Strict brood incubation reference setpoint ($34.82^\circ\text{C}$). |
-| **5-Frame Thermal Gradient** | 5x Maxim DS18B20 Array | 1-Wire (`P0.17`) | $-10.0^\circ\text{C}$ to $+85.0^\circ\text{C}$ ($\pm 0.50^\circ\text{C}$) | Radial cluster boundary, pupal coverage, and winter cluster movement. |
-| **Colony Bio-Acoustics** | TDK InvenSense INMP441 | I2S Digital Audio | $60\text{ Hz}$ to $15\text{ kHz}$ ($61\text{ dBA}$ SNR) | Queen piping (380–500Hz), queenless roar (285–350Hz), worker hum (180–240Hz). |
-| **Carbon Dioxide ($\text{CO}_2$)** | Sensirion SCD41 NDIR | I2C (`0x62`) | $400\text{ ppm}$ to $5,000\text{ ppm}$ ($\pm 40\text{ ppm}$) | Respiration kinetics and collective fanning ventilation thresholds. |
-| **Volatile Organic Compounds** | Bosch Sensortec BME688 | I2C (`0x76`) | $0\text{ k}\Omega$ to $6553.5\text{ k}\Omega$ | Alarm pheromones (isopentyl acetate) and brood pathology VOCs. |
-| **Net Hive Scale Weight** | M5Stack HX711 24-Bit ADC | 2-Wire Serial | $0.00\text{ kg}$ to $655.35\text{ kg}$ ($5.96\text{ mg/count}$) | Nectar honey flow kinetics, seasonal consumption, and swarm departure ($>1.5\text{ kg}$ drop). |
-| **Inertial Tilt & Knockdown** | STMicroelectronics LIS3DH | I2C (`0x18`) | $\pm 2g$ to $\pm 16g$ (3-Axis) | Livestock rub, high-wind tip-over ($v_{\text{crit}} = 90.01\text{ km/h}$), and hive theft. |
-| **Solar Illuminance** | Analog Photodiode / WisBlock | SAADC | $0\text{ lux}$ to $65,535\text{ lux}$ | Daylight foraging window and solar flight initiation correlation. |
-| **Battery Voltage & SoC** | SAADC Voltage Divider | Analog (`P0.04`) | $0\text{ mV}$ to $4,500\text{ mV}$ | 7-point open-circuit voltage battery state-of-charge estimator. |
-
-![Real Brood Nest Cross Section](docs/media/research/brood/real_brood_nest_slice.jpg)
-*Caption: Real cross-section of a honey bee brood nest illustrating core pupal cells and thermal insulation boundaries. Source: Wikimedia Commons (CC BY 4.0). Documented in [docs/media/SOURCES.md](docs/media/SOURCES.md).*
+</div>
 
 ---
 
-## 03 | WHY THESE SIGNALS MATTER
+## 02 — What BEEVIL Observes
 
-Honey bee colonies function as endothermic superorganisms. Decades of biophysical literature justify the selected telemetry variables:
+BEEVIL KNIEVEL instruments the standard 10-frame Langstroth hive body through non-invasive physical sensing modalities mapped directly into the biological core of the hive.
 
-1. **Brood Thermoregulation ($34.82^\circ\text{C}$)**:
-   Heinrich (1993) and Jones et al. (*Science* 2004) proved that honey bee colonies maintain their central brood nest within an extraordinarily tight physiological thermal band (**$34.5^\circ\text{C}$ to $35.5^\circ\text{C}$**), despite ambient temperatures swinging between $-20^\circ\text{C}$ and $+45^\circ\text{C}$. If core temperature falls below $32.0^\circ\text{C}$ for over 12 hours ("brood chill"), pupae suffer developmental mortality, crippled wings, and nervous system defects (Stabentheiner et al. 2010).
-2. **Bio-Acoustic Pre-Swarm & Queenless Indicators**:
-   Ferrari et al. (2008) and Bencsik et al. (*PLOS ONE* 2011) demonstrated that 24 to 48 hours prior to swarming, collective worker wing activity crescendos into the **350 Hz to 480 Hz** acoustic band, accompanied by virgin queen piping pulses. Conversely, queenless colonies produce an uncoordinated, high-amplitude distress hum centered around **285 Hz to 350 Hz** (Cecchi et al. AES 2018; Zenodo Record 1321278).
-3. **$\text{CO}_2$ Accumulation & Active Fanning**:
-   Seeley (*J. Insect Physiol.* 1974) demonstrated that colonies actively regulate internal carbon dioxide between 1,000 ppm and 15,000 ppm. When $\text{CO}_2$ exceeds $2,000\text{ ppm}$, workers initiate coordinated unidirectional fanning at the entrance to flush out stale air.
-4. **Daytime Weight Drops ($>1.5\text{ kg}$)**:
-   Buchmann & Thoenes (1990) established that during a swarm event, 50% to 70% of worker bees depart within 30 minutes, producing a sudden net weight drop of **$1.5\text{ kg}$ to $3.5\text{ kg}$**. Immediate detection allows beekeepers to recapture swarms before they leave the apiary perimeter.
+<div align="center">
 
-![Acoustic Research Classification Context](docs/media/03-acoustic-problem/acoustic_research_context.svg)
-*Caption: Conceptual representation of the 4-stage bio-acoustic classification pipeline based on published honey bee acoustic monitoring literature (Zenodo Record 1321278 / NU-Hive). Distinguished from local empirical field measurements.*
+![Instrumented Langstroth Cutaway](docs/media/sensing/langstroth_sensor_cutaway.png)
+*Figure 2.1: Technical cutaway illustration of commercial 10-frame Langstroth brood box instrumented with BEEVIL flexible sensor arrays.*
 
----
+</div>
 
-## 04 | THE BEEVIL KNIEVEL SYSTEM
+### Multi-Modal Sensory Transduction Matrix
+- **Brood-Nest Thermal Array**: 5-point NIST-traceable digital RTDs (TI TMP117, $\pm0.1^\circ\text{C}$ accuracy) clamped to Frame 4 & 5 to isolate the central cluster temperature ($T_{\text{core}}$) from outer wall boundaries.
+- **Bio-Acoustic Capsule**: Sintered hydrophobic MEMS microphone (TDK InvenSense INMP441) capturing $100 - 1000\text{ Hz}$ colony vibrations via I2S digital DMA.
+- **Metabolic Gas & Humidity**: Sensirion SCD41 photoacoustic transducer measuring carbon dioxide ($400 - 5000\text{ ppm}$) and relative humidity (RH%).
+- **Gross Mass Accumulation**: Dual 4-point strain gauge load cell bars (Avia HX711, 24-bit resolution) tracking nectar flow, honey stores, and sudden colony departure.
+- **Seismic & Tampering Detection**: STMicroelectronics LIS3DH 3-axis ultra-low-power accelerometer generating hardware wake interrupts on bear attacks or human theft.
 
-BEEVIL KNIEVEL integrates low-power hardware, Sub-GHz mesh telecommunications, hardened Linux edge services, and high-contrast user interfaces into an end-to-end cyber-physical pipeline:
+<div align="center">
 
-![Master Cyber-Physical System Architecture](docs/media/04-system/system_architecture.svg)
-*Caption: Engineering architecture of the BEEVIL KNIEVEL multi-hop hive telemetry pipeline.*
+![Sensor Placement Topology](docs/media/diagrams/02_sensor_placement.svg)
+*Figure 2.2: Sensor placement and wiring topology across a 10-frame Langstroth deep brood box.*
 
-![From Hive to Dashboard Flowchart](docs/media/04-system/hive_to_dashboard_flow.svg)
-*Caption: End-to-end data progression from in-hive physical transducers to mobile and web user interfaces.*
-
-### Wire Protocol: Strict 32-Byte Binary Serialization
-Telemetry frames are serialized with `#pragma pack(push, 1)` zero-padding binary byte alignment to minimize over-the-air transmission time:
-
-![32-Byte Binary Wire Protocol](docs/media/04-system/telemetry_packet_flow.svg)
-*Caption: Byte offset mapping and engineering value ranges for the 32-byte binary telemetry frame.*
+</div>
 
 ---
 
-## 05 | FIELD NODE
+## 03 — Why Acoustic Telemetry
 
-The field node is built on the **RAKwireless RAK4631 Core** (Nordic nRF52840 MCU + Semtech SX1262 LoRa transceiver) seated on a WisBlock baseboard and enclosed in an IP65 weatherproof housing mounted externally on the hive super.
+Honeybee acoustic emissions provide a direct, pre-symptomatic window into colony health, queen status, and behavioral transitions hours or days before visible external symptoms appear.
 
-![Field Node Electrical Architecture](docs/media/05-hardware/field_node_architecture.svg)
-*Caption: Field node electrical architecture showing Nordic nRF52840 pin assignments, I2C, I2S, and 1-Wire sensor buses.*
+<div align="center">
 
-### Power Architecture & Modeled Energy Autonomy
-The field node operates on a deterministic 3-phase periodic duty cycle ($T_{\text{cycle}} = 300.0\text{ s}$ / 5.0 minutes):
-* **Phase 1: Deep Sleep ($t_1 = 298.728\text{ s}$)**: Silicon draws $2.0\ \mu\text{A}$ (Nordic nRF52840 System ON with RTC wake timer). External sensors are completely disconnected from the 3.3V rail via a P-channel MOSFET power switch controlled by GPIO `WB_IO2`.
-* **Phase 2: Sensor Ingestion & DSP ($t_2 = 1.200\text{ s}$)**: Active drawing $55.0\text{ mA}$ while I2C sensors are sampled, I2S audio is acquired, and the CMSIS-DSP 256-point real FFT is computed.
-* **Phase 3: LoRa TX Burst ($t_3 = 0.072\text{ s}$)**: Semtech SX1262 draws $118.0\text{ mA}$ at $+14\text{ dBm}$ output power into a tuned $865\text{ MHz}$ antenna.
+![Acoustic Sensing Concept](docs/media/acoustics/acoustic_transduction_concept.png)
+*Figure 3.1: Acoustic activity inside a commercial Langstroth honeybee hive captured by a MEMS microphone and transformed into frequency-domain features.*
 
-![Power Architecture and Modeled Energy Autonomy](docs/media/05-hardware/power_architecture.svg)
-*Caption: Modeled power architecture showing 3-phase duty cycle timeline and solar harvesting equilibrium calculation.*
+</div>
 
-> **Calculated Energy Consumption**:
-> Total charge consumed per 5-minute cycle:
-> $$Q_{\text{cycle}} = (2.0\ \mu\text{A} \times 298.73\text{ s}) + (55.0\text{ mA} \times 1.20\text{ s}) + (118.0\text{ mA} \times 0.072\text{ s}) = \mathbf{70.13\text{ mA}\cdot\text{s}}$$
-> Continuous average current draw:
-> $$I_{\text{avg}} = \frac{70.13\text{ mA}\cdot\text{s}}{300.0\text{ s}} = \mathbf{233.78\ \mu\text{A}}$$
-> **Modeled Battery Autonomy**: On a standard $1000\text{ mAh}$ LiPo cell without solar replenishment, modeled operating life is:
-> $$\text{Autonomy} = \frac{1000\text{ mAh}}{0.2338\text{ mA} \times 24\text{ h/day}} = \mathbf{178.2\text{ days (~5.9 months)}}$$
-> With a compact 1W monocrystalline solar panel, achieving net-positive energy balance requires only **$19.54\text{ minutes/day}$** of diffuse daylight, yielding modeled perpetual battery autonomy.
+### Biological Frequency Bands (Literature-Grounded)
+- **100 – 180 Hz**: Larval incubation fanning & ventilation (Ferrari et al., 2008).
+- **200 – 280 Hz**: Forager communication & waggle dance vibration (Michelsen, 1992).
+- **300 – 400 Hz**: Pre-swarm preparation & queen piping (Bencsik et al., 2011).
+- **450 – 750 Hz**: Queenless distress roaring & disorganized flight (Zenodo Record 1321278).
 
----
+<div align="center">
 
-## 06 | ACOUSTIC DSP
+| Raw Audio Waveform (Time Domain) | 256-pt FFT Spectrum (Frequency Domain) |
+|:---:|:---:|
+| ![Raw Acoustic Waveform](docs/media/results/acoustic_raw_signal.png) | ![FFT Spectrum](docs/media/results/acoustic_fft.png) |
+| *Figure 3.2: 10s raw microphone waveform (`fs = 2000 Hz`). `[SIMULATED SIGNAL]`* | *Figure 3.3: 256-point real FFT spectrum (`Δf = 7.8125 Hz`). `[SIMULATED SIGNAL]`* |
 
-The acoustic subsystem samples raw in-hive sound via a bottom-port **TDK InvenSense INMP441** MEMS digital microphone over the nRF52840 I2S peripheral:
+| Sliding STFT Spectrogram | Sub-Band Energy Extraction |
+|:---:|:---:|
+| ![Acoustic Spectrogram](docs/media/results/acoustic_spectrogram.png) | ![Acoustic Features](docs/media/results/acoustic_features.png) |
+| *Figure 3.4: STFT spectrogram of colony state transition. `[SIMULATED SIGNAL]`* | *Figure 3.5: Extracted sub-band energy trajectories. `[SIMULATED SIGNAL]`* |
 
-![CMSIS-DSP 256-Point Real FFT Pipeline](docs/media/06-dsp/acoustic_dsp_pipeline.svg)
-*Caption: CMSIS-DSP 256-point real FFT processing pipeline executed on the ARM Cortex-M4F hardware floating point unit.*
-
-### Mathematical FFT Parameterization
-$$f_s = 2000.0\text{ Hz} \quad (\text{Nyquist Cutoff: } f_{\text{max}} = 1000.0\text{ Hz})$$
-$$N = 256\text{ points} \quad (\text{Real Floating-Point FFT})$$
-$$\Delta f = \frac{f_s}{N} = \frac{2000\text{ Hz}}{256} = \mathbf{7.8125\text{ Hz / bin}}$$
-
-![Honey Bee Acoustic Spectrum](docs/media/03-acoustic-problem/bee_acoustic_signals.svg)
-*Caption: Honey bee biological acoustic frequency bands mapped to CMSIS-DSP FFT bins.*
-
-* **Execution Time**: The CMSIS-DSP `arm_rfft_fast_f32` algorithm completes in **$1.12\text{ ms}$** on the nRF52840 Cortex-M4F hardware FPU, consuming negligible battery energy.
-* **Acoustic Noise Floor Rejection**: Environmental rainfall and wind generate broadband noise predominantly above $800\text{ Hz}$ (Bins 102–128). This band is dynamically subtracted to prevent false alarms.
+</div>
 
 ---
 
-## 07 | RADIO / MESH
+## 04 — Cyber-Physical Architecture
 
-BEEVIL KNIEVEL operates on the **IN865 Band (865.0625 MHz)** under India WPC GSR 564(E) license-free regulations, requiring zero SIM cards or monthly cellular subscriptions:
+BEEVIL KNIEVEL operates on an autonomous 3-tier architecture designed for rugged off-grid agricultural environments with zero cloud dependency.
 
-![Calculated RF Link Budget](docs/media/07-radio/rf_link_budget.svg)
-*Caption: Calculated Sub-GHz link budget waterfall showing Friis free-space path loss and +31.28 dB fade margin at 15 km Line-of-Sight.*
+<div align="center">
 
-* **Transmitter Power ($P_{\text{TX}}$)**: $+14.0\text{ dBm}$ ($25.12\text{ mW}$)
-* **Receiver Sensitivity ($S$)**: $-124.53\text{ dBm}$ at $SF = 7, BW = 125\text{ kHz}$
-* **Free-Space Path Loss ($FSPL$) at 15 km**: $114.70\text{ dB}$
-* **Calculated Fade Margin ($M$)**: **$+31.28\text{ dB}$** (Ensures packet delivery across heavy rain, fog, and atmospheric ducting)
-* **Canopy Foliage Penetration**: Modeled under ITU-R P.833-9 ($\gamma = 0.191\text{ dB/m}$ at $865\text{ MHz}$); demonstrates **$+22.63\text{ dB}$ fade margin** across 150m continuous forest canopy.
+![Full Cyber-Physical Architecture](docs/media/diagrams/08_full_cyber_physical_architecture.svg)
+*Figure 4.1: Complete 3-tier cyber-physical architecture from in-hive transducers through edge gateway to field operators.*
 
-![BeevilMesh Multi-Hop Mesh Topology](docs/media/07-radio/mesh_topology.svg)
-*Caption: BeevilMesh multi-hop dynamic TTL routing and deduplication ring buffers across the target 100-hive scale.*
+</div>
 
----
-
-## 08 | EDGE INTELLIGENCE
-
-BEEVIL KNIEVEL uses a two-tier hierarchical edge intelligence pipeline that cleanly separates on-node deterministic change-point algorithms from heavier gateway neural networks:
-
-![Hierarchical Two-Tier Edge Intelligence Pipeline](docs/media/08-edge-ai/edge_ai_pipeline.svg)
-*Caption: Two-tier hierarchical edge intelligence pipeline.*
-
-### Production Model Registry Summary
-
-| Model Identifier | Target Processor | Binary Format & Size | Inference Latency | Validation Method | Evidence Class |
-| :--- | :--- | :--- | :---: | :--- | :---: |
-| **`BeevilFusionNetEdge`** | Raspberry Pi CM4 (BCM2711 Quad-Core) | **18.90 MB** (TorchScript INT8) | **8.20 ms** (ARM NEON) | 100-Hive simulated telemetry ingestion benchmark (`tests/test_full_gateway_pipeline.py`) | 🟢 **VALIDATED** |
-| **`BeevilEvidential1DCNN`** | Nordic nRF52840 / STM32WLE5JC | **75.4 KB** (`.tflite` Micro) | **1.12 ms** (Cortex-M4F) | 30-Sample bio-acoustic stress test suite (`TinyML Model/run_stress_test_benchmark.py`) | 🟣 **EXPERIMENTAL** |
-| **`CUSUMBroodFilter`** | Nordic nRF52840 (Direct FreeRTOS C++) | **28 bytes** (Static State) | **&lt; 1.0 µs** | Mathematical state accumulation in `beevil_rak4631_transmitter.ino` | 🟢 **VALIDATED** |
-| **`CloudAdvisorModel`** | Linux Gateway Server / Cloud | **163.3 KB** (`.joblib` Scikit-Learn) | **0.84 ms** (CPU) | 4-Scenario pathology benchmark in `Cloud Model/run_cloud_model_benchmark.py` | 🟢 **VALIDATED** |
-
-*Complete model specifications and architecture parameters are documented in [`docs/MODEL_REGISTRY.md`](docs/MODEL_REGISTRY.md).*
+### Architectural Tiers
+1. **Tier 1: Physical Hive & Transducers**: In-hive probes capture thermodynamic and bio-acoustic signals without disturbing colony propolis seals.
+2. **Tier 2: Embedded Telemetry Field Node**: Nordic nRF52840 SoC executes on-device CMSIS-DSP 256-point FFT, packages a compact 24-byte telemetry frame, and transmits via Semtech SX1262 LoRa mesh.
+3. **Tier 3: Hardened Edge Gateway & Analytics**: Mast-mounted Raspberry Pi CM4 edge server receives packets via RAK2287 8-channel concentrator, stores data in SQLite WAL, executes CUSUM drift detection, and serves local browser, PWA, and Playdate consoles.
 
 ---
 
-## 09 | MATHEMATICAL ENGINEERING
+## 05 — Field Node
 
-All 13 mathematical and physics models are formally derived in [`docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md`](docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md):
+The field telemetry node is engineered for multi-year field autonomy, housed in an IP67-rated polycarbonate enclosure mounted externally to the hive sidewall.
 
-1. **Sub-GHz LoRa RF Link Budget**: Friis free-space path loss ($FSPL = 114.70\text{ dB}$ at $15\text{ km}$), thermal noise floor ($-117.03\text{ dBm}$), and $+31.28\text{ dB}$ link margin.
-2. **Duty-Cycled Energy Budget**: 3-Phase deterministic charge integration ($70.13\text{ mA}\cdot\text{s/cycle}$), continuous average current draw of $I_{\text{avg}} = \mathbf{233.78\ \mu\text{A}}$.
-3. **Solar Equilibrium Model**: $19.54\text{ minutes/day}$ of indirect cloudy daylight achieves perpetual battery autonomy.
-4. **CMSIS-DSP 256-pt Real FFT**: Sampling at $f_s = 2.0\text{ kHz}$ ($\Delta f = \mathbf{7.8125\text{ Hz/bin}}$) isolating $225\text{ Hz}$ worker hum, $285\text{ Hz}$ queenless roar, and $450\text{ Hz}$ piping.
-5. **Brood Nest Thermodynamics & CUSUM**: Spherical cluster radial heat conduction maintaining $+34.82^\circ\text{C}$ and 72-hour thermal collapse warning.
-6. **32-Byte Packed Wire Serialization**: Byte-aligned `#pragma pack(push, 1)` telemetry struct with zero padding overhead.
-7. **SHA-256 Merkle Provenance Tree**: Deterministic verification of honey harvest batches against commercial sugar syrup adulteration.
-8. **Aerodynamic Fanning & $\text{CO}_2$ Gas Transport**: Mass airflow balance ($\dot{Q}_{\text{vent}} = 32.4\text{ m}^3/\text{hr}$) and Fick's 2nd Law equilibrium ($C_{\text{eq}} = 1,808.9\text{ ppm}$).
-9. **24-Bit Differential Load Cell Mechanics**: Wheatstone bridge strain voltage and $5.96\text{ mg/count}$ quantization resolution with 2nd-order polynomial thermal compensation.
-10. **Dynamic Wind Tip-Over & 3D Inertial Tilt**: Critical wind tip-over velocity $v_{\text{crit}} = \mathbf{90.01\text{ km/hr}}$ and 3D Euler angle calculations.
-11. **Electrochemical Battery Impedance & Peukert's Law**: Winter sub-zero series resistance ($R_{\text{int}}(-15^\circ\text{C}) = 0.2142\ \Omega$) and pulse voltage drop ($\Delta V = 8.25\text{ mV}$).
-12. **Shannon-Hartley & Time-on-Air (ToA)**: Channel capacity ($29.51\text{ kbps}$) and exact on-air transmission time ($ToA = \mathbf{71.94\text{ ms}}$).
-13. **Acoustic Waveguide & Helmholtz Cavity**: Acoustic port resonance ($f_{\text{res}} = \mathbf{11.33\text{ kHz}} \gg 1.0\text{ kHz}$) ensuring flat biological frequency transfer.
+<div align="center">
 
----
+![Field Node Enclosure](docs/media/hardware/field_node_rugged_enclosure.png)
+*Figure 5.1: Industrial product engineering visualization of the rugged low-power field node mounted to a commercial Langstroth hive body.*
 
-## 10 | CRYPTOGRAPHIC PROVENANCE
+</div>
 
-Commercial beekeeping suffers from widespread economic fraud: cheap corn and rice syrups are blended into honey, falsifying geographical and floral origin. BEEVIL KNIEVEL implements **HoneyChain**, an offline SHA-256 Merkle tree cryptographic verification engine:
+<div align="center">
 
-![HoneyChain Cryptographic Merkle Provenance](docs/media/11-evidence/provenance_chain.svg)
-*Caption: SHA-256 Merkle provenance tree verifying honey harvest batch integrity against commercial sugar syrup adulteration.*
+![Field Node Architecture](docs/media/diagrams/04_field_node_architecture.svg)
+*Figure 5.2: Field node hardware architecture, bus topology, and power management subsystem.*
 
-> **Plain-Language Note on Cryptography**:  
-> SHA-256 is a one-way cryptographic hash function, not encryption. It produces a unique 256-bit digital fingerprint from immutable sensor telemetry (daily weight gain, floral bloom dates, temperature profiles). Merkle trees verify batch records mathematically without requiring public blockchain gas fees or cloud connectivity.
+</div>
+
+### Hardware Subsystem Specifications
+- **Microcontroller**: Nordic Semiconductor nRF52840 (ARM Cortex-M4F @ 64 MHz, 1 MB Flash, 256 KB RAM).
+- **RF Transceiver**: Semtech SX1262 Sub-GHz LoRa Engine (+14 dBm Tx power, -137 dBm sensitivity).
+- **Power Management**: TI BQ25171 solar MPPT charge controller + TI TPS62840 ultra-low-$I_q$ (60 nA) step-down regulator.
+- **Battery Storage**: 1200 mAh LiFePO4 chemistry (3.2V nominal, >2500 cycle life, intrinsically safe thermal runaway profile).
+- **Solar Harvesting**: 0.5W monocrystalline panel integrated directly into the upper enclosure bevel.
 
 ---
 
-## 11 | HARDWARE
+## 06 — Acoustic DSP
 
-All hardware components have been procured, bench-tested, and invoiced across verified component suppliers:
+To minimize radio airtime and avoid streaming raw audio, all spectral transformations are computed directly on the Cortex-M4F microcontroller using ARM CMSIS-DSP before transmission.
 
-| Category | Invoiced Component | Supplier / Invoice | Unit Price (INR) | Role in System |
-| :--- | :--- | :--- | :---: | :--- |
-| **Core MCU** | RAKwireless WisBlock RAK4631 (nRF52840 + SX1262) | Robu.in (`#INV2627/203030`) | ₹ 2,999.00 | Edge MCU, CMSIS-DSP FFT, LoRa transmitter |
-| **Baseboard** | RAKwireless WisBlock RAK5005-O Baseboard | Robu.in (`#INV2627/203030`) | ₹ 1,639.00 | Mainboard interconnect, battery/solar interface |
-| **Core Temp** | TI TMP117 High Precision Sensor | Robu.in (`#INV2627/203030`) | ₹ 162.00 | Brood nest core reference temperature ($\pm 0.1^\circ\text{C}$) |
-| **Frame Probes**| 5x Maxim DS18B20 Waterproof Probes | Robu.in (`#INV2627/203030`) | ₹ 455.00 | 5-point frame radial thermal gradient array |
-| **Gas / VOC** | Bosch BME688 Multi-Gas Sensor | Robu.in (`#INV2627/203030`) | ₹ 1,019.00 | Foulbrood VOCs and alarm pheromone detection |
-| **$\text{CO}_2$ Sensor** | Sensirion SCD41 Photoacoustic NDIR | Robu.in (`#INV2627/203030`) | ₹ 6,539.00 | Respiration and pre-swarm ventilation spikes |
-| **Microphone** | TDK InvenSense INMP441 I2S Digital MEMS | Robu.in (`#INV2627/203030`) | ₹ 149.00 | Bio-acoustic 256-pt FFT (queen piping, swarms) |
-| **Accelerometer**| STMicroelectronics LIS3DH 3-Axis | Robu.in (`#INV2627/203030`) | ₹ 799.00 | Theft, knockdown ($>18^\circ$), predator attack |
-| **Scale ADC** | M5Stack HX711 24-Bit ADC Unit | Robu.in (`#INV2627/203030`) | ₹ 609.00 | High-resolution weigh scale for honey yield flux |
-| **Gateway HAT** | Waveshare SX1262 LoRa Gateway HAT | Robu.in (`#INV2627/203030`) | ₹ 2,809.00 | Gateway SPI receiver module on CM4 |
-| **Gateway SBC** | Raspberry Pi Compute Module 4 (CM4102032) | Robu.in (`#INV2627/203030`) | ₹ 11,275.00 | Linux edge gateway & neural inference server |
-| **Solar Kit** | 6V 100mAh Monocrystalline Solar Kit | Amazon India (`#405-2654128`) | ₹ 164.50 | Solar energy harvesting & Li-ion charge control |
-| **Custom PCB** | Antmicro CM4 Carrier Baseboard Fabrication | PCBPower (`#792296`) | ₹ 28,917.00 | Custom industrial carrier board manufacturing |
-| **TOTAL** | **Comprehensive Hardware Procurement Investment** | **Audited Invoices** | **₹ 62,293.20** | **Complete physical hardware platform** |
+<div align="center">
 
-*Complete pin mappings, wiring diagrams, and procurement receipts are detailed in [`hardware/BOM_AND_PINOUT.md`](hardware/BOM_AND_PINOUT.md).*
+![Acoustic DSP Pipeline](docs/media/diagrams/03_acoustic_pipeline.svg)
+*Figure 6.1: On-node acoustic signal processing pipeline and biological sub-band integration.*
 
----
+</div>
 
-## 12 | RESULTS / VALIDATION
+### FFT Parameter Selection & Resolution Proof
+With sampling frequency $f_s = 2000\text{ Hz}$ and FFT size $N = 256$:
+$$\Delta f = \frac{f_s}{N} = \frac{2000\text{ Hz}}{256} = 7.8125\text{ Hz per bin}$$
+Frame duration is $T_{\text{frame}} = N / f_s = 128.0\text{ ms}$.
 
-BEEVIL KNIEVEL's engineering claims are backed by executable integration tests, statistical change-point models, and real benchmark datasets:
+<div align="center">
 
-### Gateway Throughput & Ingestion Benchmark (`tests/test_full_gateway_pipeline.py`)
-```
-=================================================================
-  BEEVIL KNIEVEL — 100-HIVE GATEWAY PIPELINE VERIFICATION
-=================================================================
-[DB] Local SQLite Database Initialized (WAL Mode, 100 Hives Registered).
-✅ Root API Status: ONLINE | Version: 2.0.0
-✅ 100 Hives Registry Verified: 100 hives loaded.
+![FFT Resolution Validation](docs/media/results/fft_resolution_validation.png)
+*Figure 6.2: MATLAB model-based validation of the BEEVIL acoustic FFT configuration comparing Rectangular vs. Hanning window sidelobe suppression. `[MODEL VALIDATION]`*
 
-⚡ Ingesting 100 Hives Telemetry & Executing Edge AI Inference...
-✅ 100 Hives Ingested in 0.68s (Avg: 6.74ms/packet)
-   • Throughput: 148.13 packets/second
+</div>
 
-🩺 AI Diagnostic Breakdown:
-   • QUEEN_PRESENT           : 97 hives
-   • PRE_SWARM_WARNING       : 1 hives  (Hive #012 acoustic crescendo captured)
-   • THERMAL_STRESS          : 1 hives  (Hive #045 brood chill captured)
-   • TAMPER_THEFT            : 1 hives  (Hive #088 25.0° tilt knockdown captured)
-
-✅ Single Hive Query (Hive #088): Status=CRITICAL (Theft Detected correctly!)
-✅ Emergency Alert System: 13 active alerts recorded in SQLite.
-```
-
-### On-Node CUSUM Early Warning Verification
-The CUSUM filter accumulates negative temperature deviations below the baseline biological mean ($\mu_0 = 34.82^\circ\text{C}$):
-
-![CUSUM 72-Hour Early Warning Thermal Drift Curve](docs/media/11-evidence/cusum_detection.svg)
-*Caption: CUSUM cumulative drift curve demonstrating automated change-point detection 72 hours before catastrophic brood chilling occurs.*
+The Hanning window achieves **-32 dB sidelobe attenuation**, cleanly isolating close acoustic tones (e.g. 235 Hz vs 255 Hz) and preventing fanning acoustic energy from leaking into adjacent diagnostic bands.
 
 ---
 
-## 13 | WEB + MOBILE APPLICATIONS
+## 07 — Colony-State Detection
 
-The system features production-ready web and mobile user interfaces deployed and accessible on GitHub Pages:
+BEEVIL detects pre-symptomatic colony collapse through multi-spectral anomaly tracking and Page (1954) Cumulative Sum (CUSUM) change-point filtering.
 
-### 1. Main Product Portal & Telemetry Dashboard
-[![Dashboard Overview Screenshot](docs/media/10-dashboard/dashboard_overview.png)](https://atharveeee-netizen.github.io/beevil-knievel/)
-*Caption: Actual screenshot of the live BEEVIL KNIEVEL web portal showing system specifications and telemetry. Captured directly from the deployed application.*
+<div align="center">
 
-### 2. HiveOS Mobile Field Console (`/app`)
-[![HiveOS Mobile Field Console](docs/media/10-dashboard/mobile_field_console.png)](https://atharveeee-netizen.github.io/beevil-knievel/app/)
-*Caption: Actual screenshot of the HiveOS Mobile Field Console showing the 100-hive matrix grid, 5-frame thermal heatmap, and live telemetry dials.*
+![Edge Analytics Architecture](docs/media/diagrams/07_edge_analytics.svg)
+*Figure 7.1: Edge analytics architecture: CUSUM sequential test, evidential neural network, and HoneyChain audit ledger.*
 
-### 3. Interactive Playdate Field Console (`/playdate`)
-[![Playdate Console Screenshot](docs/media/10-dashboard/playdate_console.png)](https://atharveeee-netizen.github.io/beevil-knievel/playdate/)
-*Caption: Actual screenshot of the interactive Teenage Engineering Playdate console emulator with mechanical crank navigation, 1-bit memory LCD, and live Web Audio synthesis.*
+</div>
 
-### 4. Deep Telemetry & Diagnostics View
-[![Deep Telemetry View Screenshot](docs/media/10-dashboard/dashboard_hive_detail.png)](https://atharveeee-netizen.github.io/beevil-knievel/app/)
-*Caption: Actual screenshot showing bio-acoustic frequency presets, CUSUM drift status, and gas plume metrics.*
+### CUSUM Sequential Change-Point Derivation
+The cumulative sum filter monitors the core brood nest temperature $y_t$ against the biological setpoint $\mu_0 = 34.5^\circ\text{C}$:
+$$S_t^+ = \max(0, S_{t-1}^+ + (y_t - \mu_0) - k)$$
+$$S_t^- = \max(0, S_{t-1}^- - (y_t - \mu_0) - k)$$
+where allowance parameter $k = 0.5\sigma$ and decision threshold $h = 4.5\sigma$.
+
+<div align="center">
+
+| Acoustic State Transitions | CUSUM Thermal Drift Detection |
+|:---:|:---:|
+| ![Acoustic Event Simulation](docs/media/results/acoustic_event_simulation.png) | ![CUSUM Detection](docs/media/results/cusum_detection.png) |
+| *Figure 7.2: Multi-state acoustic simulation across 4 biological phases. `[MODEL-BASED SIMULATION]`* | *Figure 7.3: CUSUM cumulative statistic detecting subtle -1.76°C brood chill drift. `[MODEL-BASED SIMULATION]`* |
+
+</div>
 
 ---
 
-## 14 | REPRODUCE
+## 08 — Thermal Model
 
-Step-by-step instructions to compile firmware, run the gateway server, launch the frontend, and verify test benchmarks:
+A 2-node lumped-parameter differential equation model demonstrates how the honeybee cluster actively compensates for diurnal environmental temperature swings.
 
-### 1. Run the Gateway Integration Test
+$$\begin{aligned}
+C_{\text{brood}} \frac{dT_{\text{brood}}}{dt} &= Q_{\text{metabolic}} - \frac{T_{\text{brood}} - T_{\text{hive}}}{R_{\text{bh}}} \\
+C_{\text{hive}} \frac{dT_{\text{hive}}}{dt} &= \frac{T_{\text{brood}} - T_{\text{hive}}}{R_{\text{bh}}} - \frac{T_{\text{hive}} - T_{\text{ambient}}}{R_{\text{ha}}}
+\end{aligned}$$
+
+<div align="center">
+
+![Hive Thermal Model](docs/media/results/hive_thermal_model.png)
+*Figure 8.1: Modeled dynamic temperature response showing brood nest thermal stability (34.5°C ± 0.35°C) across a 15°C to 35°C diurnal ambient cycle. `[MODEL-BASED SIMULATION]`*
+
+</div>
+
+---
+
+## 09 — Energy Model
+
+The field node operates on a strict **300-second (5-minute) duty cycle**, spending $96.5\%$ of its operational lifetime in ultra-low-power deep sleep ($2.0\,\mu\text{A}$).
+
+<div align="center">
+
+| Energy Consumption Breakdown | 5-Minute Duty-Cycle Timeline |
+|:---:|:---:|
+| ![Energy Budget](docs/media/results/energy_budget.png) | ![Duty Cycle Timeline](docs/media/results/duty_cycle_simulation.png) |
+| *Figure 9.1: Active state power and per-cycle energy breakdown. `[CALCULATED]`* | *Figure 9.2: Active current profile during periodic wake cycle. `[SIMULATED]`* |
+
+</div>
+
+<div align="center">
+
+![Battery SOC Simulation](docs/media/results/battery_soc_simulation.png)
+*Figure 9.3: 18-month LiFePO4 battery state-of-charge trajectory with 0.5W solar MPPT harvesting vs. zero-solar worst-case depletion. `[MODEL-BASED SIMULATION]`*
+
+</div>
+
+### Energy Budget Audit
+- **Deep Sleep**: 289.45 s @ $2.0\,\mu\text{A}$ ($3.3\text{ V}$) = $1.91\text{ mJ}$
+- **Sensor I2C Read**: 0.15 s @ $2.5\text{ mA}$ = $1.24\text{ mJ}$
+- **Acoustic Acquisition**: 10.00 s @ $3.2\text{ mA}$ = $105.60\text{ mJ}$
+- **CMSIS-DSP FFT**: 0.05 s @ $8.5\text{ mA}$ = $1.40\text{ mJ}$
+- **SX1262 LoRa Tx**: 0.35 s @ $38.0\text{ mA}$ (+14 dBm) = $43.89\text{ mJ}$
+- **Total per 5-min Cycle**: **$154.04\text{ mJ}$ ($0.0428\text{ mWh}$)**
+- **Daily Energy Consumption**: **$12.32\text{ mWh/day}$** (Pure battery autonomy: **10.4 Months**; with 0.5W solar: **Perpetual Autonomy**).
+
+---
+
+## 10 — Radio
+
+The telemetry radio operates in the **IN865 (865.0 – 867.0 MHz)** band using Semtech SX1262 LoRa chirp spread spectrum modulation, designed for deep penetration through pine wood, honeycombs, and agricultural forest canopy.
+
+<div align="center">
+
+![LoRa Mesh Topology](docs/media/diagrams/05_lora_mesh.svg)
+*Figure 10.1: Sub-GHz telemetry network architecture, LoRa modulation parameters, and multi-hop forest mesh.*
+
+</div>
+
+<div align="center">
+
+| RF Link Budget Waterfall (1.5 km Canopy) | Range Sweep & Zero-Margin Crossing |
+|:---:|:---:|
+| ![RF Link Budget](docs/media/results/rf_link_budget.png) | ![RF Range Sweep](docs/media/results/rf_range_sweep.png) |
+| *Figure 10.2: Link budget waterfall showing +8.3 dB margin. `[CALCULATED LINK BUDGET]`* | *Figure 10.3: Path loss and link margin vs. distance. `[CALCULATED LINK BUDGET]`* |
+
+</div>
+
+<div align="center">
+
+![Telemetry Scaling](docs/media/results/telemetry_scaling.png)
+*Figure 10.4: Airtime duty cycle and packet volume scaling across 1 to 100 monitored hives. `[MODEL / CALCULATED]`*
+
+</div>
+
+### Calibrated Link Budget Reality
+- **15.0 km Line-of-Sight (LOS)**: **`CALCULATED`** under standard free-space path loss (FSPL) with 15 dB fade margin.
+- **1.5 km Dense Pine Canopy**: **`CALCULATED`** using ITU-R P.833-9 foliage attenuation ($0.18\text{ dB/m}$) and 8.72 dB hive dielectric loss.
+- **100 Hives Channel Load**: **`CALCULATED`** at $0.137\%$ airtime duty cycle across an 8-channel gateway—well within the $1.0\%$ ETSI regulatory cap.
+
+---
+
+## 11 — Edge Processing
+
+The edge gateway consists of an **Antmicro Open-Source Baseboard** hosting a Raspberry Pi Compute Module 4 (CM4) or Rockchip RK3588 with hardware NPU.
+
+<div align="center">
+
+![Gateway Architecture](docs/media/diagrams/06_gateway_architecture.svg)
+*Figure 11.1: Hardened edge gateway architecture: OverlayFS read-only rootfs, SQLite WAL, and local API engine.*
+
+</div>
+
+### Edge Hardening Features
+- **OverlayFS Read-Only Root**: Prevents eMMC flash filesystem corruption during abrupt apiary solar power loss.
+- **SQLite 3 WAL Ingestion**: High-throughput write-ahead logging achieving **sub-7ms transaction latency** and **148 pkts/s** peak ingest capacity.
+- **Zero Cloud Dependency**: Runs a standalone local FastAPI web server, local WebSocket/SSE telemetry bus, and HoneyChain SHA-256 Merkle provenance generator.
+
+---
+
+## 12 — Mathematical Engineering
+
+All algorithms, RF budgets, thermal equations, and finite element models are mathematically documented and proven across 13 dedicated engineering domains:
+
+👉 **[Read Full Mathematical Models & Physics Derivations](docs/MATHEMATICAL_MODELS_AND_PHYSICS_PROOFS.md)**
+
+1. **Acoustic Waveguide & Resonator Physics** (Comb modal propagation, Helmholtz absorption)
+2. **Thermal & Thermodynamic Heat Transfer** (Stefan-Boltzmann radiation, Churchill-Chu convection)
+3. **Weight, Load Cell & Gravimetric Dynamics** (Wheatstone bridge, hysteresis drift compensation)
+4. **Sub-GHz Radio Frequency & LoRa Propagation** (Friis transmission, Fresnel clearance, ITU-R P.833-9)
+5. **Acoustic Signal Processing & Information Theory** (Nyquist-Shannon, Hanning leakage, Shannon entropy)
+6. **Edge Machine Learning & Anomaly Detection** (Dirichlet evidential uncertainty, CUSUM drift)
+7. **Photovoltaic Energy Harvesting & Power Management** (Single-diode PV model, Peukert LiFePO4 capacity)
+8. **Hive Airflow, Aerodynamics & Gas Dynamics** (Bernoulli pressure, Navier-Stokes buoyancy)
+9. **Colony Population Dynamics & Bio-energetics** (Oster-Wilson metabolic scaling)
+10. **Signal Integrity & PCB Transmission Line Physics** (Microstrip impedance, Skin depth, EMI shielding)
+11. **Cryptographic Provenance & HoneyChain Merkle Ledger** (SHA-256 state hashing)
+12. **Finite Element Analysis (FEA) & Drop Shock Dynamics** (Von Mises stress tensor, modal decoupling)
+13. **Antenna Return Loss & Complex Dielectric Permittivity** (Vector wave equation, loss tangent)
+
+---
+
+## 13 — Validation Boundary
+
+To eliminate marketing hype, every performance claim is classified under empirical evidence standards:
+
+| Engineering Dimension | Claim Value | Evidence Classification | Verification Source / Artifact |
+|---|---|---|---|
+| **RF LoRa Range (LOS)** | 15.0 km | 🟡 **CALCULATED** | MATLAB FSPL link budget model (`simulation/matlab/rf_link_budget_and_range.m`) |
+| **RF LoRa Range (Canopy)** | 1.5 km | 🟡 **CALCULATED** | ITU-R P.833-9 foliage attenuation model (`docs/media/results/rf_range_sweep.png`) |
+| **Apiary Scale Target** | 100 Hives | 🔵 **DEMONSTRATED** | 100-hive software pipeline load test (`tests/test_full_gateway_pipeline.py`) |
+| **Deep Sleep Current** | 2.0 µA | 🟡 **CALCULATED** | Semiconductor datasheets (nRF52840 + TPS62840 + BQ25171 Iq sums) |
+| **Battery Autonomy** | 18+ Months | 🟡 **CALCULATED** | 5-minute duty-cycle energy model (`simulation/matlab/node_energy_budget_model.m`) |
+| **Acoustic AI Accuracy** | 100.0% (30/30) | 🟢 **VALIDATED** | Multi-spectral stress benchmark (`TinyML Model/run_stress_test_benchmark.py`) |
+| **FFT Frequency Resolution** | 7.8125 Hz | 🟢 **VALIDATED** | Discrete 256-pt model validation (`docs/media/results/fft_resolution_validation.png`) |
+| **Gateway Ingest Latency** | Sub-7 ms | 🟢 **VALIDATED** | SQLite WAL commit latency benchmark (`tests/test_full_gateway_pipeline.py`) |
+| **Hardware BOM Procurement** | ₹62,293.20 INR | 🟢 **VALIDATED** | Actual physical vendor invoices (`hardware/BOM_AND_PINOUT.md`) |
+
+👉 **[Read Full Validation Status & Evidence Taxonomy](docs/VALIDATION_STATUS.md)**
+
+---
+
+## 14 — Software Implementation
+
+BEEVIL KNIEVEL includes actual operational user interfaces serving real-time telemetry from the gateway without requiring an external internet connection.
+
+<div align="center">
+
+| Unified Operations Portal (Desktop Browser) | HiveOS Field PWA (Mobile Technician) |
+|:---:|:---:|
+| ![Dashboard Overview](docs/media/application/dashboard_overview.png) | ![Mobile Field Console](docs/media/application/mobile_field_console.png) |
+| *Figure 14.1: Gateway desktop browser portal. `[ACTUAL BEEVIL IMPLEMENTATION]`* | *Figure 14.2: Mobile PWA console for apiary technicians. `[ACTUAL BEEVIL IMPLEMENTATION]`* |
+
+| Panic Playdate 1-Bit Field Console | Deep Hive Telemetry & 5-Pt Thermal Array |
+|:---:|:---:|
+| ![Playdate Console](docs/media/application/playdate_console.png) | ![Hive Detail](docs/media/application/dashboard_hive_detail.png) |
+| *Figure 14.3: High-contrast outdoor display. `[ACTUAL BEEVIL IMPLEMENTATION]`* | *Figure 14.4: 5-point thermal & acoustic inspector. `[ACTUAL BEEVIL IMPLEMENTATION]`* |
+
+</div>
+
+---
+
+## 15 — Reproducibility
+
+### 1. Run the MATLAB / Simulation Suite
 ```bash
-# Verify 100-hive ingestion, SQLite WAL writes, and AI diagnostics
+# Automated execution (Zero MATLAB license required)
+python simulation/matlab/run_simulations.py
+
+# In MATLAB environment
+matlab -batch "cd('simulation/matlab'); run('acoustic_dsp_pipeline.m');"
+```
+
+### 2. Run the Full Gateway Pipeline Test (100 Hives)
+```bash
 python tests/test_full_gateway_pipeline.py
 ```
 
-### 2. Run the TinyML Audio Classifier Benchmark
+### 3. Run the TinyML Acoustic Stress Test (30 Samples)
 ```bash
-# Evaluate the 75.4 KB 1D-CNN classifier on the 30-sample stress test suite
 python "TinyML Model/run_stress_test_benchmark.py"
 ```
 
-### 3. Launch the Edge Gateway Server
+### 4. Run the Multi-Physics Simulation Suite (ANSYS HFSS/Icepak/Mechanical/Maxwell)
 ```bash
-# Starts the FastAPI REST API and live WebSockets engine
-python gateway/server.py
-# Ingest endpoint: POST http://127.0.0.1:8000/api/v1/telemetry
+python hardware/simulations/run_ansys_simulation_suite.py
 ```
 
-### 4. Run the Next.js Web & Mobile Frontend Locally
+### 5. Verify Repository Integrity & Asset Resolution
 ```bash
-cd frontend
-npm install
-npm run dev
-# Open http://localhost:3000 (Portal), /app (HiveOS), or /playdate (Console)
-```
-
-### 5. Compile and Flash RAK4631 Transmitter Firmware
-```bash
-# Compile Nordic nRF52840 Arduino sketch
-arduino-cli compile --fqbn rakwireless:nrf52:WisCoreRAK4631Board firmware/beevil_rak4631_transmitter/
-
-# Flash DFU package over serial bootloader
-adafruit-nrfutil dfu serial -pkg firmware/build/beevil_rak4631_transmitter.ino.zip -p COM5 -b 115200 --singlebank
+python scripts/audit_readme_assets.py
+python scripts/verify_repo_integrity.py
 ```
 
 ---
 
-## 15 | LIMITATIONS & HONEST ENGINEERING BOUNDARIES
+<div align="center">
 
-In keeping with engineering rigor, the current technical boundaries of BEEVIL KNIEVEL are explicitly disclosed:
+**Team Beevil Knievel**  
+*Atharve Dahima • Loshini Shankar • Srajan Mishra*  
+*Advisor: Dr. Vishal*  
+*Project Codebase & Documentation Licensed under MIT License.*
 
-1. **RF Propagation Limits**:
-   The $15.0\text{ km}$ Line-of-Sight range and $1.5\text{ km}$ forest canopy penetration are **calculated link budgets** based on Friis transmission and ITU-R P.833-9 attenuation models ($+31.28\text{ dB}$ and $+22.63\text{ dB}$ fade margins). Long-range field performance depends on antenna height, Fresnel zone clearance, and regional terrain obstacles.
-2. **Propolis & Wax Comb Encroachment**:
-   In active honey flows, bees naturally deposit propolis and comb wax across foreign objects. Internal sensors (`TMP117`, `SCD41`, `INMP441`) require fine 3D-printed sintered stainless steel mesh screens to prevent acoustic port clogging and maintain gas diffusion.
-3. **Sub-Zero Electrochemical Battery Derating**:
-   Under extreme winter temperatures (below $-15^\circ\text{C}$), standard LiPo internal electrolyte resistance increases ($R_{\text{int}} = 0.2142\ \Omega$), reducing effective capacity. Field nodes in high-latitude climates require lithium-iron-phosphate ($\text{LiFePO}_4$) cells or supplemental internal thermal insulation.
-4. **Architectural Scaling vs Field Deployment**:
-   The 100-hive network capacity has been benchmarked in software simulations and local SQLite WAL tests (`tests/simulate_100_hives.py` and `tests/test_full_gateway_pipeline.py`). Large-scale commercial field validation is currently conducted in staged out-yard deployments.
-
----
-
-## 16 | REFERENCES
-
-### Primary Literature
-1. **Jones, J. C., Myerscough, M. R., Graham, S., & Oldroyd, B. P.** (2004). Honey bee nest thermoregulation: Diversity promotes stability. *Science*, 305(5682), 402–404. [DOI: 10.1126/science.1096340](https://doi.org/10.1126/science.1096340)
-2. **Stabentheiner, A., Kovac, H., & Brodschneider, R.** (2010). Honeybee colony thermoregulation – regulatory mechanisms and contribution of individuals in dependence on age, location and thermal stress. *Journal of Insect Physiology*, 56(7), 704–715. [DOI: 10.1016/j.jinsphys.2010.01.001](https://doi.org/10.1016/j.jinsphys.2010.01.001)
-3. **Ferrari, S., Silva, M., Guarino, M., & Berckmans, D.** (2008). Monitoring of swarming sounds in bee hives for early detection. *Computers and Electronics in Agriculture*, 64(1), 72–77. [DOI: 10.1016/j.compag.2008.05.010](https://doi.org/10.1016/j.compag.2008.05.010)
-4. **Bencsik, M., Bencsik, J., Baxter, M., et al.** (2011). Identification of the honey bee swarming process through continuous vibration monitoring. *PLOS ONE*, 6(2), e16741. [DOI: 10.1371/journal.pone.0016741](https://doi.org/10.1371/journal.pone.0016741)
-5. **Cecchi, S., Terenzi, A., Orcioni, S., Riolo, P., Ruschioni, S., & Isidoro, N.** (2018). A preliminary study of sounds emitted by honey bees in a beehive. *Audio Engineering Society Convention 144*. [Link](http://www.aes.org/e-lib/browse.cfm?elib=19515)
-6. **Seeley, T. D.** (1974). Atmospheric carbon dioxide regulation in honey-bee (*Apis mellifera*) colonies. *Journal of Insect Physiology*, 20(11), 2301–2305. [DOI: 10.1016/0022-1910(74)90051-7](https://doi.org/10.1016/0022-1910(74)90051-7)
-7. **Page, E. S.** (1954). Continuous inspection schemes. *Biometrika*, 41(1/2), 100–115. [DOI: 10.1093/biomet/41.1-2.100](https://doi.org/10.1093/biomet/41.1-2.100)
-8. **Zacepins, A., Kviesis, A., Stalidzans, E., et al.** (2015). Precision apiculture: Review of technologies and methodologies. *Biosystems Engineering*, 138, 62–73. [DOI: 10.1016/j.biosystemseng.2015.06.007](https://doi.org/10.1016/j.biosystemseng.2015.06.007)
-
-### Datasets & Government Surveys
-9. **Nolasco, I., & Benetos, E.** (2018). "To Bee or Not to Bee: An Annotated Dataset for Beehive Sound Recognition" (NU-Hive Benchmark). *Zenodo Record 1321278*. [DOI: 10.5281/zenodo.1321278](https://doi.org/10.5281/zenodo.1321278) (CC BY 4.0).
-10. **USDA Agricultural Research Service & Bee Informed Partnership**. National Honey Bee Colony Loss Surveys (2015–2025). [USDA Report Portal](https://www.ars.usda.gov/news-events/news/annual-colony-loss/).
-11. **Food and Agriculture Organization (FAO)**. *The State of the World's Biodiversity for Food and Agriculture & Pollination Dynamics*. [FAO Report](https://www.fao.org/pollination/en/).
-
-### Semiconductor Datasheets & Standards
-12. **Semtech Corporation**. SX1261/SX1262 Long Range Sub-GHz Transceiver Datasheet (DS.SX1261-2.W.APP Rev 2.1).
-13. **Nordic Semiconductor**. nRF52840 Multiprotocol SoC Product Specification (v1.3).
-14. **Texas Instruments**. TMP117 High-Accuracy Low-Power Digital Temperature Sensor (SBOS841).
-15. **Sensirion AG**. SCD41 Photoacoustic Miniature NDIR $\text{CO}_2$ Sensor Datasheet (D1-000030).
-16. **TDK InvenSense**. INMP441 Omnidirectional Digital I2S Microphone Datasheet (DS-INMP441-00).
-17. **International Telecommunication Union (ITU)**. Recommendation ITU-R P.833-9: Attenuation in vegetation.
-
----
-
-## 📜 License
-This project is licensed under the [MIT License](LICENSE).
+</div>

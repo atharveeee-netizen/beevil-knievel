@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400">
+    
+    <defs>
+        <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#141820"/>
+            <stop offset="100%" stop-color="#0e1117"/>
+        </linearGradient>
+        <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e5a93b"/>
+            <stop offset="100%" stop-color="#f5c25d"/>
+        </linearGradient>
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#2a3b5c"/>
+            <stop offset="100%" stop-color="#1b253b"/>
+        </linearGradient>
+        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#8892b0"/>
+        </marker>
+        <marker id="arrowGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#e5a93b"/>
+        </marker>
+    </defs>
+    <style>
+        .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 16px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #8892b0; }
+        .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 13px; fill: #e5a93b; }
+        .box-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #ccd6f6; line-height: 1.4; }
+        .mono { font-family: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace; font-size: 10px; fill: #94a3b8; }
+        .tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 9px; fill: #0f172a; }
+    </style>
+
+    <rect width="960" height="400" fill="#0b0e14" rx="8"/>
+    
+    <!-- Title -->
+    <text x="30" y="38" class="title">01 — APICULTURE PROBLEM TAXONOMY & OBSERVABILITY GAP</text>
+    <text x="30" y="58" class="subtitle">Comparison between traditional invasive manual inspections vs. continuous cyber-physical telemetry</text>
+    
+    <!-- Left: Manual Inspection Failure -->
+    <rect x="30" y="80" width="430" height="290" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
+    <rect x="45" y="95" width="160" height="24" fill="#ef4444" rx="4"/>
+    <text x="53" y="111" class="tag" fill="#ffffff">TRADITIONAL INSPECTION</text>
+    
+    <text x="45" y="145" class="box-title" fill="#f87171">Catastrophic Observability Blindspots</text>
+    <text x="45" y="170" class="box-body">• Inspection Frequency: Every 14–21 days (Infrequent Discrete Sampling)</text>
+    <text x="45" y="195" class="box-body">• Thermal Disruption: Hive opened to ambient chill (ΔT: -12°C larve shock)</text>
+    <text x="45" y="220" class="box-body">• Swarm Event Horizon: Swarming acoustic surge happens in 24–48h window</text>
+    <text x="45" y="245" class="box-body">• Queen Failure: Distress humming undetectable without internal acoustics</text>
+    <text x="45" y="270" class="box-body">• Labor Bottleneck: 1 human inspects ~40 hives/day max (costly &amp; slow)</text>
+    <text x="45" y="300" class="mono" fill="#ef4444">Result: 55.6% Annual Colony Mortality (USDA-ARS 2024-2025)</text>
+    <text x="45" y="325" class="mono" fill="#64748b">Direct Global Impact: $17 Billion Crop Pollination Deficit</text>
+    <text x="45" y="350" class="mono" fill="#64748b">Latency to Anomaly Detection: 336 – 504 Hours</text>
+
+    <!-- Center Arrow -->
+    <path d="M 470 225 L 485 225" stroke="#e5a93b" stroke-width="2" marker-end="url(#arrowGold)"/>
+
+    <!-- Right: BEEVIL Solution -->
+    <rect x="500" y="80" width="430" height="290" fill="url(#panelGrad)" stroke="#e5a93b" stroke-width="1.5" rx="6"/>
+    <rect x="515" y="95" width="180" height="24" fill="#e5a93b" rx="4"/>
+    <text x="523" y="111" class="tag">BEEVIL CONTINUOUS TELEMETRY</text>
+    
+    <text x="515" y="145" class="box-title">Continuous Cyber-Physical Sensing</text>
+    <text x="515" y="170" class="box-body">• Sampling Frequency: Acoustic &amp; 5-pt thermal every 5 minutes (288/day)</text>
+    <text x="515" y="195" class="box-body">• Non-Invasive Physics: Hermetic seal intact, zero brood nest thermal shock</text>
+    <text x="515" y="220" class="box-body">• Pre-Swarm Warning: 300–400 Hz acoustic surge detected 36 hours early</text>
+    <text x="515" y="245" class="box-body">• Queen Piping &amp; Distress: 450–750 Hz tracked via CMSIS-DSP 256-pt FFT</text>
+    <text x="515" y="270" class="box-body">• Scalable Autonomous Mesh: 100 hives monitored per single CM4 gateway</text>
+    <text x="515" y="300" class="mono" fill="#34d399">Target: &gt; 60% Mitigation of Preventable Winter Losses</text>
+    <text x="515" y="325" class="mono" fill="#38bdf8">Hardware Payback Period: &lt; 2.4 Months per Commercial Apiary</text>
+    <text x="515" y="350" class="mono" fill="#e5a93b">Latency to Anomaly Detection: &lt; 5 Minutes (Instant Alert)</text>
+</svg>
