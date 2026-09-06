@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ansys_workbench_project version="2026.1">
+  <project_header>
+    <simulation_id>8</simulation_id>
+    <project_name>Simulation_8_High_Wind_Storm_Load</project_name>
+    <product>ANSYS Workbench 2026 R1</product>
+    <module>Static_Structural</module>
+    <status>SOLVED_AND_VERIFIED</status>
+  </project_header>
+</ansys_workbench_project>
