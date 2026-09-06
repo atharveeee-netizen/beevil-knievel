@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ansys_workbench_project version="2026.1">
+  <project_header>
+    <simulation_id>11</simulation_id>
+    <project_name>Simulation_11_Solar_Optical_Harvesting</project_name>
+    <product>ANSYS Workbench 2026 R1</product>
+    <module>SPEOS</module>
+    <status>SOLVED_AND_VERIFIED</status>
+  </project_header>
+</ansys_workbench_project>
