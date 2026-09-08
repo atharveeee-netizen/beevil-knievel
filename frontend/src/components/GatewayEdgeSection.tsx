@@ -1,5 +1,5 @@
 import React from "react";
-import { HardDrive, Server, Database, ShieldCheck, Terminal, Layers } from "lucide-react";
+import { Server, Database, ShieldCheck, Terminal } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 
 export function GatewayEdgeSection() {

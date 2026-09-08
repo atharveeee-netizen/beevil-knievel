@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckCircle2, ShieldCheck, FileCheck, Layers } from "lucide-react";
+
 import { Badge } from "@/components/ui/Badge";
 import { ClaimType } from "@/lib/design-tokens";
 

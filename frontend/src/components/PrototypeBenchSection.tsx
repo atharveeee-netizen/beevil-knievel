@@ -1,5 +1,5 @@
 import React from "react";
-import { Cpu, Terminal, FileText, CheckCircle2, ShieldCheck, Download, ExternalLink } from "lucide-react";
+import { FileText, CheckCircle2, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 
 export function PrototypeBenchSection() {

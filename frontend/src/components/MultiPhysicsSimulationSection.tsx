@@ -1,5 +1,5 @@
 import React from "react";
-import { Layers, ShieldCheck, CheckCircle2, Wind, Thermometer, Radio, Zap } from "lucide-react";
+
 import { Badge } from "@/components/ui/Badge";
 
 export function MultiPhysicsSimulationSection() {

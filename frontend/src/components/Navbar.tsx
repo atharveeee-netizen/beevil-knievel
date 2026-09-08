@@ -4,14 +4,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
-  Radio, 
   Smartphone, 
   Cpu, 
   FileText, 
   Menu, 
   X, 
-  ShieldCheck,
-  Activity,
   Layers
 } from "lucide-react";
 import { StatusDot } from "@/components/ui/StatusDot";

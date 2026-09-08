@@ -2,8 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, Cpu, Radio, ShieldCheck, Activity, Terminal, ExternalLink } from "lucide-react";
+import { ArrowRight, Cpu, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { StatusDot } from "@/components/ui/StatusDot";
 

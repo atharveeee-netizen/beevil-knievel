@@ -1,5 +1,5 @@
 import React from "react";
-import { Terminal, Download, FileCode, CheckCircle2, Copy, BookOpen, Layers } from "lucide-react";
+import { Terminal } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 
 export function TechnicalDocsSection() {
