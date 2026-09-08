@@ -1,37 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 560" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 560" width="100%" height="100%">
     
     <defs>
         <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#070a12"/>
-            <stop offset="50%" stop-color="#0b101c"/>
-            <stop offset="100%" stop-color="#0e1526"/>
-        </linearGradient>
-        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#131c2e"/>
-            <stop offset="100%" stop-color="#0b111e"/>
-        </linearGradient>
-        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="0%" stop-color="#070a14"/>
+            <stop offset="50%" stop-color="#0b111e"/>
             <stop offset="100%" stop-color="#0f172a"/>
         </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#111a2d"/>
+            <stop offset="100%" stop-color="#0c1220"/>
+        </linearGradient>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a253c"/>
+            <stop offset="100%" stop-color="#0f182b"/>
+        </linearGradient>
         <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="0%" stop-color="#d97706"/>
             <stop offset="100%" stop-color="#fbbf24"/>
         </linearGradient>
         <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="0%" stop-color="#0284c7"/>
             <stop offset="100%" stop-color="#38bdf8"/>
         </linearGradient>
         <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="0%" stop-color="#059669"/>
             <stop offset="100%" stop-color="#34d399"/>
         </linearGradient>
         <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ef4444"/>
-            <stop offset="100%" stop-color="#f87171"/>
+            <stop offset="0%" stop-color="#e11d48"/>
+            <stop offset="100%" stop-color="#fb7185"/>
         </linearGradient>
         <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#8b5cf6"/>
+            <stop offset="0%" stop-color="#7c3aed"/>
             <stop offset="100%" stop-color="#a78bfa"/>
         </linearGradient>
         
@@ -39,136 +39,133 @@
             <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
         </marker>
         <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
         </marker>
         <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
         </marker>
         <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444"/>
-        </marker>
-        <marker id="arrMuted" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fb7185"/>
         </marker>
 
         <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
-            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.3"/>
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.35"/>
         </pattern>
     </defs>
     <style>
-        .headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
-        .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
-        .sec-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.3px; }
-        .body-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
-        .body-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 10px; fill: #94a3b8; }
-        .mono-sm { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; }
-        .mono-xs { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 8.5px; }
-        .badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
+        .headline { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.3px; }
+        .body-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #94a3b8; line-height: 1.4; }
+        .mono-sm { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 8.5px; }
+        .badge { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
     </style>
 
-    <rect width="1060" height="560" fill="url(#bgGrad)" rx="10"/>
-    <rect width="1060" height="560" fill="url(#grid)" rx="10"/>
+    <rect width="1080" height="560" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1080" height="560" fill="url(#grid)" rx="10"/>
     
     <!-- Header -->
     <rect x="25" y="20" width="205" height="24" rx="12" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.2"/>
     <text x="127" y="36" class="badge" fill="#34d399" text-anchor="middle">CYBER-PHYSICAL HIERARCHY</text>
     <text x="25" y="66" class="headline">08 - FULL 3-TIER CYBER-PHYSICAL SYSTEM HIERARCHY &amp; INTEGRATION</text>
-    <text x="25" y="84" class="subhead">End-to-end integration: In-hive physical transducers ➔ RAK4631 field node ➔ Sub-GHz LoRa mesh ➔ Raspberry Pi 3B+ edge gateway</text>
+    <text x="25" y="84" class="subhead">End-to-end integration: In-hive physical transducers -> RAK4631 field node -> Sub-GHz LoRa mesh -> Raspberry Pi 3B+ edge gateway</text>
 
     <!-- 3 Master Pillar Cards -->
     <!-- Pillar 1: Physical Hive & Transducers -->
     <g transform="translate(25, 105)">
-        <rect width="310" height="385" rx="10" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
-        <rect x="15" y="15" width="190" height="22" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
-        <text x="110" y="30" class="badge" fill="#38bdf8" text-anchor="middle">TIER 1: PHYSICAL HIVE TRANSDUCTION</text>
+        <rect width="320" height="385" rx="10" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
+        <rect x="15" y="15" width="200" height="22" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+        <text x="115" y="30" class="badge" fill="#38bdf8" text-anchor="middle">TIER 1: PHYSICAL HIVE TRANSDUCTION</text>
 
         <!-- Hive Environment Box -->
         <g transform="translate(15, 52)">
-            <rect width="280" height="100" rx="6" fill="#0b101c" stroke="#1e293b"/>
+            <rect width="290" height="100" rx="6" fill="#0b101c" stroke="#1e293b"/>
             <text x="12" y="20" class="body-title" fill="#f8fafc">Langstroth Hive Microclimate</text>
-            <text x="12" y="36" class="mono-xs" fill="#cbd5e1">• Apis mellifera colony (15k - 50k bees)</text>
-            <text x="12" y="52" class="mono-xs" fill="#fbbf24">• Brood Nest Thermal Target: 34.5°C ± 0.1°C</text>
-            <text x="12" y="68" class="mono-xs" fill="#38bdf8">• Bio-Acoustic Emissions: 100 - 1000 Hz</text>
-            <text x="12" y="84" class="mono-xs" fill="#34d399">• Comb Metabolism: 400 - 5000 ppm CO2</text>
+            <text x="12" y="36" class="mono-xs" fill="#cbd5e1">- Apis mellifera colony (15k - 50k bees)</text>
+            <text x="12" y="52" class="mono-xs" fill="#fbbf24">- Brood Nest Thermal Target: 34.5 deg C +- 0.1 deg C</text>
+            <text x="12" y="68" class="mono-xs" fill="#38bdf8">- Bio-Acoustic Emissions: 100 - 1000 Hz</text>
+            <text x="12" y="84" class="mono-xs" fill="#34d399">- Comb Metabolism: 400 - 5000 ppm CO2</text>
         </g>
 
         <!-- Transducer Suite List -->
         <g transform="translate(15, 162)">
             <text x="0" y="15" class="badge" fill="#fbbf24">INSTALLED TRANSDUCERS:</text>
-            <rect y="24" width="280" height="180" rx="6" fill="#0f172a" stroke="#1e293b"/>
-            <text x="12" y="44" class="mono-xs" fill="#f87171">1. TI TMP117: Frame 4 Core RTD (±0.1°C)</text>
-            <text x="12" y="62" class="mono-xs" fill="#f59e0b">2. 4x DS18B20: Frame Gradient Array</text>
-            <text x="12" y="80" class="mono-xs" fill="#38bdf8">3. TDK INMP441: 24-bit I2S MEMS Mic</text>
-            <text x="12" y="98" class="mono-xs" fill="#a78bfa">4. Sensirion SCD41: Photoacoustic CO2</text>
-            <text x="12" y="116" class="mono-xs" fill="#a78bfa">5. Bosch BME688: VOC Gas &amp; RH%</text>
-            <text x="12" y="134" class="mono-xs" fill="#cbd5e1">6. Avia HX711: 24-Bit Scale (0 - 60 kg)</text>
-            <text x="12" y="152" class="mono-xs" fill="#cbd5e1">7. ST LIS3DH: 3-Axis Tamper Wake</text>
-            <text x="12" y="170" class="mono-xs" fill="#34d399">Preserves 9.5 mm Langstroth Bee-Space</text>
+            <rect y="24" width="290" height="180" rx="6" fill="#0f172a" stroke="#1e293b"/>
+            <text x="12" y="44" class="mono-xs" fill="#f87171">1. 5x TI TMP117: NIST Brood Core Array (+-0.1 deg C)</text>
+            <text x="12" y="62" class="mono-xs" fill="#38bdf8">2. TDK INMP441: 24-bit I2S MEMS Microphone</text>
+            <text x="12" y="80" class="mono-xs" fill="#a78bfa">3. Sensirion SCD41: Photoacoustic NDIR CO2</text>
+            <text x="12" y="98" class="mono-xs" fill="#a78bfa">4. Bosch BME688: Metal-Oxide VOC Gas &amp; RH%</text>
+            <text x="12" y="116" class="mono-xs" fill="#cbd5e1">5. Dual Avia HX711: 24-Bit Scale (0 - 60 kg)</text>
+            <text x="12" y="134" class="mono-xs" fill="#cbd5e1">6. ST LIS3DH: 3-Axis Tamper / Bear Strike Wake</text>
+            <text x="12" y="152" class="mono-xs" fill="#34d399">7. Preserves 9.5 mm Langstroth Bee-Space</text>
+            <text x="12" y="170" class="mono-xs" fill="#38bdf8">Zero Chemical / Mechanical Disruption</text>
         </g>
 
-        <path d="M 310 220 L 350 220" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
+        <path d="M 320 220 L 360 220" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
     </g>
 
     <!-- Pillar 2: Embedded Field Node (RAK4631) -->
-    <g transform="translate(360, 105)">
+    <g transform="translate(370, 105)">
         <rect width="340" height="385" rx="10" fill="url(#cardGradHighlight)" stroke="#f59e0b" stroke-width="2"/>
-        <rect x="15" y="15" width="200" height="22" rx="4" fill="rgba(245, 158, 11, 0.2)"/>
-        <text x="115" y="30" class="badge" fill="#fbbf24" text-anchor="middle">TIER 2: RAK4631 EMBEDDED NODE</text>
+        <rect x="15" y="15" width="210" height="22" rx="4" fill="rgba(245, 158, 11, 0.2)"/>
+        <text x="120" y="30" class="badge" fill="#fbbf24" text-anchor="middle">TIER 2: RAK4631 EMBEDDED NODE</text>
 
         <!-- MCU & Edge Processing -->
         <g transform="translate(15, 52)">
             <rect width="310" height="145" rx="6" fill="#0b101c" stroke="#1e293b"/>
             <text x="12" y="20" class="body-title" fill="#fbbf24">Nordic nRF52840 SoC + SX1262 LoRa</text>
-            <text x="12" y="38" class="mono-xs" fill="#cbd5e1">• ARM Cortex-M4F @ 64 MHz (FPU+DSP)</text>
-            <text x="12" y="54" class="mono-xs" fill="#38bdf8">• CMSIS-DSP 256-pt Real FFT (1.28 ms)</text>
-            <text x="12" y="70" class="mono-xs" fill="#34d399">• CUSUM Change-Point Filter (h=4.5σ)</text>
-            <text x="12" y="86" class="mono-xs" fill="#fbbf24">• Quantized TinyML Feature Extractor</text>
-            <text x="12" y="102" class="mono-xs" fill="#cbd5e1">• Strict 24-Byte Binary Frame Packing</text>
-            <text x="12" y="118" class="mono-xs" fill="#34d399">• Sleep Current: 2.0 uA @ 3.3V (TPS62840)</text>
-            <text x="12" y="134" class="mono-xs" fill="#38bdf8">• Solar MPPT: 0.5W PV + TI BQ25171</text>
+            <text x="12" y="38" class="mono-xs" fill="#cbd5e1">- ARM Cortex-M4F @ 64 MHz (Hardware FPU+DSP)</text>
+            <text x="12" y="54" class="mono-xs" fill="#38bdf8">- CMSIS-DSP 256-pt Real FFT (1.28 ms execution)</text>
+            <text x="12" y="70" class="mono-xs" fill="#34d399">- CUSUM Change-Point Filter (h = 4.5*sigma)</text>
+            <text x="12" y="86" class="mono-xs" fill="#fbbf24">- Quantized TinyML Feature Extractor (INT8)</text>
+            <text x="12" y="102" class="mono-xs" fill="#cbd5e1">- Strict 24-Byte Binary Frame Packing</text>
+            <text x="12" y="118" class="mono-xs" fill="#34d399">- Deep Sleep: 2.0 uA @ 3.3V (TPS62840 Buck)</text>
+            <text x="12" y="134" class="mono-xs" fill="#38bdf8">- Solar MPPT: 0.5W PV + TI BQ25171 PMIC</text>
         </g>
 
         <!-- LoRa Mesh Uplink Specs -->
         <g transform="translate(15, 207)">
             <text x="0" y="15" class="badge" fill="#fbbf24">SUB-GHz WIRELESS MESH UPLINK:</text>
             <rect y="24" width="310" height="135" rx="6" fill="#0f172a" stroke="#1e293b"/>
-            <text x="12" y="44" class="mono-xs" fill="#38bdf8">• Band: IN865 (865.0625 MHz, SF7, 125 kHz)</text>
-            <text x="12" y="62" class="mono-xs" fill="#cbd5e1">• Tx Power: +14 dBm (25 mW EIRP)</text>
-            <text x="12" y="80" class="mono-xs" fill="#34d399">• Link Budget: 151 dB Margin</text>
-            <text x="12" y="98" class="mono-xs" fill="#cbd5e1">• Multi-Hop Regenerative Mesh Protocol</text>
-            <text x="12" y="116" class="mono-xs" fill="#34d399">• Range: 1,500,000 cm (15km LOS) / 150,000 cm Canopy</text>
+            <text x="12" y="44" class="mono-xs" fill="#38bdf8">- Band: IN865 (865.0625 MHz, SF7, 125 kHz BW)</text>
+            <text x="12" y="62" class="mono-xs" fill="#cbd5e1">- Tx Power: +14 dBm (25 mW EIRP)</text>
+            <text x="12" y="80" class="mono-xs" fill="#34d399">- Link Budget: 151 dB Net Fade Margin (+26 dB)</text>
+            <text x="12" y="98" class="mono-xs" fill="#cbd5e1">- Multi-Hop Regenerative Mesh Protocol</text>
+            <text x="12" y="116" class="mono-xs" fill="#34d399">- Range: 1,500,000 cm (15km LOS) / 150,000 cm Canopy</text>
         </g>
 
-        <path d="M 340 220 L 375 220" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
+        <path d="M 340 220 L 380 220" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
     </g>
 
     <!-- Pillar 3: Edge Gateway (Raspberry Pi 3B+) -->
-    <g transform="translate(725, 105)">
-        <rect width="310" height="385" rx="10" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.5"/>
+    <g transform="translate(735, 105)">
+        <rect width="320" height="385" rx="10" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.5"/>
         <rect x="15" y="15" width="220" height="22" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
         <text x="125" y="30" class="badge" fill="#34d399" text-anchor="middle">TIER 3: PI 3B+ EDGE GATEWAY</text>
 
         <!-- Gateway Hardware & OS -->
         <g transform="translate(15, 52)">
-            <rect width="280" height="130" rx="6" fill="#0b101c" stroke="#1e293b"/>
+            <rect width="290" height="130" rx="6" fill="#0b101c" stroke="#1e293b"/>
             <text x="12" y="20" class="body-title" fill="#34d399">Raspberry Pi 3B+ &amp; Waveshare HAT</text>
-            <text x="12" y="38" class="mono-xs" fill="#cbd5e1">• Quad-Core BCM2837B0 @ 1.4 GHz</text>
-            <text x="12" y="54" class="mono-xs" fill="#38bdf8">• Waveshare SX1262 LoRa HAT (Hardware SPI)</text>
-            <text x="12" y="70" class="mono-xs" fill="#34d399">• OverlayFS Read-Only Root (Power Safe)</text>
-            <text x="12" y="86" class="mono-xs" fill="#cbd5e1">• SQLite 3 WAL Database (&lt;7ms commit)</text>
-            <text x="12" y="102" class="mono-xs" fill="#fbbf24">• FastAPI Asynchronous Telemetry Server</text>
-            <text x="12" y="118" class="mono-xs" fill="#34d399">• Local Diagnostic Advisory Engine</text>
+            <text x="12" y="38" class="mono-xs" fill="#cbd5e1">- Quad-Core BCM2837B0 @ 1.4 GHz</text>
+            <text x="12" y="54" class="mono-xs" fill="#38bdf8">- Waveshare SX1262 LoRa HAT (Hardware SPI0)</text>
+            <text x="12" y="70" class="mono-xs" fill="#34d399">- OverlayFS Read-Only Root (Power Outage Safe)</text>
+            <text x="12" y="86" class="mono-xs" fill="#cbd5e1">- SQLite 3 WAL Database (&lt;7ms commit latency)</text>
+            <text x="12" y="102" class="mono-xs" fill="#fbbf24">- FastAPI Asynchronous Telemetry Server</text>
+            <text x="12" y="118" class="mono-xs" fill="#34d399">- Local Diagnostic Advisory Engine</text>
         </g>
 
         <!-- Served Client Presentation -->
         <g transform="translate(15, 192)">
             <text x="0" y="15" class="badge" fill="#34d399">OPERATOR PRESENTATION INTERFACES:</text>
-            <rect y="24" width="280" height="150" rx="6" fill="#0f172a" stroke="#1e293b"/>
-            <text x="12" y="44" class="body-bold" fill="#f8fafc">🖥️ Desktop Browser Portal (Next.js)</text>
-            <text x="24" y="58" class="mono-xs" fill="#94a3b8">Real-time WebSocket &amp; SSE telemetry</text>
-            <text x="12" y="76" class="body-bold" fill="#f8fafc">📱 HiveOS Field Technician PWA</text>
-            <text x="24" y="90" class="mono-xs" fill="#94a3b8">Offline-first out-yard service tool</text>
-            <text x="12" y="108" class="body-bold" fill="#f8fafc">🕹️ Panic Playdate 1-Bit Console</text>
+            <rect y="24" width="290" height="150" rx="6" fill="#0f172a" stroke="#1e293b"/>
+            <text x="12" y="44" class="body-title" fill="#f8fafc">Desktop Browser Portal (Next.js)</text>
+            <text x="24" y="58" class="mono-xs" fill="#94a3b8">Real-time WebSocket &amp; SSE telemetry maps</text>
+            <text x="12" y="76" class="body-title" fill="#f8fafc">HiveOS Field Technician PWA</text>
+            <text x="24" y="90" class="mono-xs" fill="#94a3b8">Offline-first out-yard inspection tool</text>
+            <text x="12" y="108" class="body-title" fill="#f8fafc">Panic Playdate 1-Bit Console</text>
             <text x="24" y="122" class="mono-xs" fill="#94a3b8">Transflective sunlight-readable UI</text>
             <text x="12" y="138" class="mono-xs" fill="#34d399">100% Autonomous (Zero Cloud Dependency)</text>
         </g>
@@ -176,7 +173,7 @@
 
     <!-- Bottom Metric Bar -->
     <g transform="translate(25, 502)">
-        <rect width="1010" height="40" rx="6" fill="#0d1424" stroke="#1e293b"/>
+        <rect width="1030" height="40" rx="6" fill="#0d1424" stroke="#1e293b"/>
         <text x="25" y="24" class="mono-xs" fill="#94a3b8">END-TO-END TELEMETRY BUDGET:</text>
         <text x="220" y="24" class="mono-xs" fill="#34d399">Energy: 0.0428 mWh / 5-min cycle (12.32 mWh/day)</text>
         <text x="580" y="24" class="mono-xs" fill="#38bdf8">Ingest Latency: &lt; 7 ms</text>

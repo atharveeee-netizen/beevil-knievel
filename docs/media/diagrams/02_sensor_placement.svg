@@ -1,37 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 560" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 580" width="100%" height="100%">
     
     <defs>
         <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#070a12"/>
-            <stop offset="50%" stop-color="#0b101c"/>
-            <stop offset="100%" stop-color="#0e1526"/>
-        </linearGradient>
-        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#131c2e"/>
-            <stop offset="100%" stop-color="#0b111e"/>
-        </linearGradient>
-        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="0%" stop-color="#070a14"/>
+            <stop offset="50%" stop-color="#0b111e"/>
             <stop offset="100%" stop-color="#0f172a"/>
         </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#111a2d"/>
+            <stop offset="100%" stop-color="#0c1220"/>
+        </linearGradient>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a253c"/>
+            <stop offset="100%" stop-color="#0f182b"/>
+        </linearGradient>
         <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="0%" stop-color="#d97706"/>
             <stop offset="100%" stop-color="#fbbf24"/>
         </linearGradient>
         <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="0%" stop-color="#0284c7"/>
             <stop offset="100%" stop-color="#38bdf8"/>
         </linearGradient>
         <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="0%" stop-color="#059669"/>
             <stop offset="100%" stop-color="#34d399"/>
         </linearGradient>
         <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ef4444"/>
-            <stop offset="100%" stop-color="#f87171"/>
+            <stop offset="0%" stop-color="#e11d48"/>
+            <stop offset="100%" stop-color="#fb7185"/>
         </linearGradient>
         <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#8b5cf6"/>
+            <stop offset="0%" stop-color="#7c3aed"/>
             <stop offset="100%" stop-color="#a78bfa"/>
         </linearGradient>
         
@@ -39,163 +39,184 @@
             <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
         </marker>
         <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
         </marker>
         <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
         </marker>
         <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444"/>
-        </marker>
-        <marker id="arrMuted" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fb7185"/>
         </marker>
 
         <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
-            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.3"/>
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.35"/>
         </pattern>
     </defs>
     <style>
-        .headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
-        .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
-        .sec-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.3px; }
-        .body-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
-        .body-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 10px; fill: #94a3b8; }
-        .mono-sm { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; }
-        .mono-xs { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 8.5px; }
-        .badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
+        .headline { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.3px; }
+        .body-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #94a3b8; line-height: 1.4; }
+        .mono-sm { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 8.5px; }
+        .badge { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
     </style>
 
-    <rect width="1060" height="560" fill="url(#bgGrad)" rx="10"/>
-    <rect width="1060" height="560" fill="url(#grid)" rx="10"/>
+    <rect width="1120" height="580" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1120" height="580" fill="url(#grid)" rx="10"/>
     
     <!-- Header -->
-    <rect x="25" y="20" width="185" height="24" rx="12" fill="rgba(6, 182, 212, 0.15)" stroke="#06b6d4" stroke-width="1.2"/>
-    <text x="117" y="36" class="badge" fill="#38bdf8" text-anchor="middle">TRANSDUCTION TOPOLOGY</text>
+    <rect x="25" y="20" width="195" height="24" rx="12" fill="rgba(6, 182, 212, 0.15)" stroke="#06b6d4" stroke-width="1.2"/>
+    <text x="122" y="36" class="badge" fill="#38bdf8" text-anchor="middle">TRANSDUCTION TOPOLOGY</text>
     <text x="25" y="66" class="headline">02 - 10-FRAME LANGSTROTH MECHANICAL TRANSDUCTION TOPOLOGY</text>
     <text x="25" y="84" class="subhead">Spatial placement of 5-point NIST thermal probes, I2S bio-acoustics, NDIR CO2, multi-gas VOC, and 24-bit scale</text>
 
     <!-- Main Brood Box Frame Cross Section -->
     <g transform="translate(25, 105)">
         <!-- Outer Hive Body -->
-        <rect width="530" height="390" rx="8" fill="#0d131f" stroke="#334155" stroke-width="2"/>
+        <rect width="550" height="400" rx="8" fill="#0c1322" stroke="#334155" stroke-width="2"/>
         <!-- Box Title & Dimensions -->
         <text x="18" y="24" class="body-title" fill="#f8fafc">10-FRAME LANGSTROTH DEEP BROOD BOX (465 x 375 x 240 mm)</text>
         <text x="18" y="38" class="mono-xs" fill="#64748b">Pine Wood Shell (Dielectric Constant: 1.8 - 2.2) | 9.5 mm Strict Bee-Space Preserved</text>
 
-        <!-- Top Inner Cover Space & Upper Gas Sensors -->
-        <rect x="20" y="48" width="490" height="30" rx="4" fill="#141d2e" stroke="#1e293b"/>
-        <!-- SCD41 & BME688 Sensors -->
-        <circle cx="265" cy="63" r="8" fill="#8b5cf6" stroke="#ffffff" stroke-width="1.5"/>
-        <text x="282" y="67" class="mono-xs" fill="#c4b5fd">Sensirion SCD41 (NDIR CO2: 400 - 5000 ppm) + Bosch BME688 (VOC Gas / RH%)</text>
+        <!-- Top Headspace / Crown Board Sensor Area -->
+        <rect x="18" y="48" width="514" height="34" rx="4" fill="#131d30" stroke="#1e293b"/>
+        <!-- SCD41 & BME688 Sensors Badge -->
+        <circle cx="45" cy="65" r="8" fill="#8b5cf6" stroke="#ffffff" stroke-width="1.5"/>
+        <text x="45" y="68" class="badge" fill="#ffffff" text-anchor="middle">G</text>
+        <text x="62" y="69" class="mono-xs" fill="#c4b5fd">Sensirion SCD41 (Photoacoustic NDIR CO2) + Bosch BME688 (VOC / RH%)</text>
 
-        <!-- 10 Hive Frames (Frame 1 to 10) -->
-        <!-- Coordinates: each frame width 34, gap 14 -->
-        <!-- F1 to F3: Outer Honey/Pollen Frames -->
-        <g transform="translate(20, 90)">
-            <!-- Frame 1 -->
-            <rect x="0" y="0" width="36" height="270" rx="3" fill="#1e293b" stroke="#475569"/>
-            <text x="18" y="135" class="mono-xs" fill="#94a3b8" text-anchor="middle">F1</text>
-            
+        <!-- 10 Hive Frames Area -->
+        <!-- Each frame width: 36px, gap: 14px -> (36+14)*10 = 500px total width -->
+        <g transform="translate(25, 96)">
+            <!-- Frame 1 (Wall Honey) -->
+            <rect x="0" y="0" width="36" height="250" rx="3" fill="#1e293b" stroke="#334155"/>
+            <text x="18" y="20" class="badge" fill="#94a3b8" text-anchor="middle">F1</text>
+
             <!-- Frame 2 -->
-            <rect x="48" y="0" width="36" height="270" rx="3" fill="#1e293b" stroke="#475569"/>
-            <text x="66" y="135" class="mono-xs" fill="#94a3b8" text-anchor="middle">F2</text>
-            
-            <!-- Frame 3 -->
-            <rect x="96" y="0" width="36" height="270" rx="3" fill="#1e293b" stroke="#475569"/>
-            <text x="114" y="135" class="mono-xs" fill="#94a3b8" text-anchor="middle">F3</text>
-            <!-- DS18B20 Probe 2 -->
-            <circle cx="114" cy="170" r="6" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+            <rect x="50" y="0" width="36" height="250" rx="3" fill="#1e293b" stroke="#334155"/>
+            <text x="68" y="20" class="badge" fill="#94a3b8" text-anchor="middle">F2</text>
 
-            <!-- Frame 4 (BROOD CORE WITH PRIMARY PROBE) -->
-            <rect x="144" y="0" width="44" height="270" rx="4" fill="#291e0f" stroke="#f59e0b" stroke-width="2"/>
-            <rect x="146" y="2" width="40" height="266" rx="3" fill="none" stroke="#f59e0b" stroke-width="0.5" stroke-dasharray="2 2"/>
-            <text x="166" y="28" class="badge" fill="#fbbf24" text-anchor="middle">CORE</text>
-            <text x="166" y="44" class="mono-xs" fill="#f59e0b" text-anchor="middle">F4</text>
-            
-            <!-- TMP117 Sensor (Brood Center Target 34.5°C) -->
-            <circle cx="166" cy="115" r="8" fill="#ef4444" stroke="#ffffff" stroke-width="2"/>
-            <text x="166" y="136" class="mono-xs" fill="#fca5a5" text-anchor="middle">T_core</text>
+            <!-- Frame 3 (Peripheral Brood Left - TMP117 #3) -->
+            <rect x="100" y="0" width="36" height="250" rx="3" fill="#1e293b" stroke="#475569"/>
+            <text x="118" y="20" class="badge" fill="#94a3b8" text-anchor="middle">F3</text>
+            <!-- Probe T3 Icon -->
+            <circle cx="118" cy="140" r="10" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+            <text x="118" y="144" class="badge" fill="#000000" text-anchor="middle">T3</text>
+
+            <!-- Frame 4 (BROOD CORE LEFT - TMP117 #1 + INMP441) -->
+            <rect x="150" y="0" width="44" height="250" rx="4" fill="#291e0f" stroke="#f59e0b" stroke-width="2"/>
+            <rect x="152" y="2" width="40" height="246" rx="3" fill="none" stroke="#f59e0b" stroke-width="0.5" stroke-dasharray="3 3"/>
+            <text x="172" y="20" class="badge" fill="#fbbf24" text-anchor="middle">F4</text>
+            <text x="172" y="34" class="mono-xs" fill="#fbbf24" text-anchor="middle">CORE</text>
+
+            <!-- TMP117 #1 (Brood Core Center Target 34.5 deg C) -->
+            <circle cx="172" cy="90" r="12" fill="#ef4444" stroke="#ffffff" stroke-width="2"/>
+            <text x="172" y="94" class="badge" fill="#ffffff" text-anchor="middle">T1</text>
 
             <!-- INMP441 Acoustic MEMS Microphone -->
-            <circle cx="166" cy="205" r="8" fill="#06b6d4" stroke="#ffffff" stroke-width="2"/>
-            <text x="166" y="226" class="mono-xs" fill="#67e8f9" text-anchor="middle">MIC</text>
+            <circle cx="172" cy="180" r="12" fill="#06b6d4" stroke="#ffffff" stroke-width="2"/>
+            <text x="172" y="184" class="badge" fill="#ffffff" text-anchor="middle">MIC</text>
 
-            <!-- Frame 5 (BROOD CENTER) -->
-            <rect x="200" y="0" width="44" height="270" rx="4" fill="#291e0f" stroke="#f59e0b" stroke-width="2"/>
-            <text x="222" y="28" class="badge" fill="#fbbf24" text-anchor="middle">CORE</text>
-            <text x="222" y="44" class="mono-xs" fill="#f59e0b" text-anchor="middle">F5</text>
-            <!-- DS18B20 Probe 1 (Brood reference) -->
-            <circle cx="222" cy="140" r="6" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
-            <text x="222" y="160" class="mono-xs" fill="#fde68a" text-anchor="middle">T_brd</text>
+            <!-- Frame 5 (BROOD CORE RIGHT - TMP117 #2) -->
+            <rect x="206" y="0" width="44" height="250" rx="4" fill="#291e0f" stroke="#f59e0b" stroke-width="2"/>
+            <rect x="208" y="2" width="40" height="246" rx="3" fill="none" stroke="#f59e0b" stroke-width="0.5" stroke-dasharray="3 3"/>
+            <text x="228" y="20" class="badge" fill="#fbbf24" text-anchor="middle">F5</text>
+            <text x="228" y="34" class="mono-xs" fill="#fbbf24" text-anchor="middle">CORE</text>
 
-            <!-- Frame 6 -->
-            <rect x="256" y="0" width="36" height="270" rx="3" fill="#1e293b" stroke="#475569"/>
-            <text x="274" y="135" class="mono-xs" fill="#94a3b8" text-anchor="middle">F6</text>
-            <!-- DS18B20 Probe 3 -->
-            <circle cx="274" cy="170" r="6" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+            <!-- TMP117 #2 (Queen Cluster / Secondary Core) -->
+            <circle cx="228" cy="120" r="12" fill="#ef4444" stroke="#ffffff" stroke-width="2"/>
+            <text x="228" y="124" class="badge" fill="#ffffff" text-anchor="middle">T2</text>
+
+            <!-- Frame 6 (Peripheral Brood Right - TMP117 #4) -->
+            <rect x="262" y="0" width="36" height="250" rx="3" fill="#1e293b" stroke="#475569"/>
+            <text x="280" y="20" class="badge" fill="#94a3b8" text-anchor="middle">F6</text>
+            <!-- Probe T4 Icon -->
+            <circle cx="280" cy="140" r="10" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5"/>
+            <text x="280" y="144" class="badge" fill="#000000" text-anchor="middle">T4</text>
 
             <!-- Frame 7 -->
-            <rect x="304" y="0" width="36" height="270" rx="3" fill="#1e293b" stroke="#475569"/>
-            <text x="322" y="135" class="mono-xs" fill="#94a3b8" text-anchor="middle">F7</text>
+            <rect x="310" y="0" width="36" height="250" rx="3" fill="#1e293b" stroke="#334155"/>
+            <text x="328" y="20" class="badge" fill="#94a3b8" text-anchor="middle">F7</text>
 
             <!-- Frame 8 -->
-            <rect x="352" y="0" width="36" height="270" rx="3" fill="#1e293b" stroke="#475569"/>
-            <text x="370" y="135" class="mono-xs" fill="#94a3b8" text-anchor="middle">F8</text>
+            <rect x="358" y="0" width="36" height="250" rx="3" fill="#1e293b" stroke="#334155"/>
+            <text x="376" y="20" class="badge" fill="#94a3b8" text-anchor="middle">F8</text>
 
             <!-- Frame 9 -->
-            <rect x="400" y="0" width="36" height="270" rx="3" fill="#1e293b" stroke="#475569"/>
-            <text x="418" y="135" class="mono-xs" fill="#94a3b8" text-anchor="middle">F9</text>
+            <rect x="406" y="0" width="36" height="250" rx="3" fill="#1e293b" stroke="#334155"/>
+            <text x="424" y="20" class="badge" fill="#94a3b8" text-anchor="middle">F9</text>
 
-            <!-- Frame 10 (Outer Wall Boundary) -->
-            <rect x="448" y="0" width="36" height="270" rx="3" fill="#1e293b" stroke="#475569"/>
-            <text x="466" y="135" class="mono-xs" fill="#94a3b8" text-anchor="middle">F10</text>
-            <!-- DS18B20 Probe 4 (Wall Ambient Boundary) -->
-            <circle cx="466" cy="180" r="6" fill="#10b981" stroke="#ffffff" stroke-width="1.5"/>
-            <text x="466" y="200" class="mono-xs" fill="#6ee7b7" text-anchor="middle">T_amb</text>
+            <!-- Frame 10 (Outer Boundary Wall - TMP117 #5) -->
+            <rect x="454" y="0" width="36" height="250" rx="3" fill="#1e293b" stroke="#475569"/>
+            <text x="472" y="20" class="badge" fill="#94a3b8" text-anchor="middle">F10</text>
+            <!-- Probe T5 Icon -->
+            <circle cx="472" cy="170" r="10" fill="#10b981" stroke="#ffffff" stroke-width="1.5"/>
+            <text x="472" y="174" class="badge" fill="#000000" text-anchor="middle">T5</text>
         </g>
 
-        <!-- Bottom Hive Base Scale -->
-        <rect x="20" y="365" width="490" height="16" rx="3" fill="#1e293b" stroke="#f43f5e" stroke-width="1.5"/>
-        <text x="265" y="377" class="mono-xs" fill="#fda4af" text-anchor="middle">Dual Avia HX711 24-Bit ADC + 4-Point Strain Gauge Scale Platform (0 - 60 kg)</text>
+        <!-- Floor Scale Platform (Dual HX711 + Load Cells) -->
+        <rect x="18" y="360" width="514" height="26" rx="4" fill="#1e1824" stroke="#f43f5e" stroke-width="1.5"/>
+        <circle cx="35" cy="373" r="6" fill="#f43f5e"/>
+        <text x="48" y="377" class="mono-xs" fill="#fda4af">Dual Avia HX711 24-Bit ADC + 4-Point Load Cell Bar (Nectar Flow Tare: 0 - 60 kg)</text>
     </g>
 
-    <!-- Right Side: Clean Transducer Spec Cards (NO CLIPPING, PERFECT READABILITY) -->
-    <g transform="translate(575, 105)">
+    <!-- Callout Index Bar Below Hive -->
+    <g transform="translate(25, 515)">
+        <rect width="550" height="48" rx="6" fill="#0d1424" stroke="#1e293b"/>
+        <circle cx="20" cy="24" r="7" fill="#ef4444"/>
+        <text x="32" y="28" class="mono-xs" fill="#fca5a5">T1: T_core (34.5 deg C)</text>
+        
+        <circle cx="160" cy="24" r="7" fill="#ef4444"/>
+        <text x="172" y="28" class="mono-xs" fill="#fca5a5">T2: T_queen</text>
+
+        <circle cx="250" cy="24" r="7" fill="#f59e0b"/>
+        <text x="262" y="28" class="mono-xs" fill="#fde68a">T3, T4: T_peri (F3/F6)</text>
+
+        <circle cx="380" cy="24" r="7" fill="#10b981"/>
+        <text x="392" y="28" class="mono-xs" fill="#6ee7b7">T5: T_wall (F10)</text>
+
+        <circle cx="485" cy="24" r="7" fill="#06b6d4"/>
+        <text x="497" y="28" class="mono-xs" fill="#67e8f9">MIC: INMP441</text>
+    </g>
+
+    <!-- Right Side: Clean Transducer Spec Cards (Precise & Surgical Depth) -->
+    <g transform="translate(595, 105)">
         <!-- Card 1: 5-Point Thermal Array -->
-        <rect width="460" height="118" rx="8" fill="url(#cardGrad)" stroke="#f59e0b" stroke-width="1.2"/>
-        <rect x="14" y="12" width="160" height="20" rx="4" fill="rgba(245, 158, 11, 0.15)"/>
-        <text x="94" y="26" class="badge" fill="#fbbf24" text-anchor="middle">5-POINT THERMAL ARRAY</text>
-        <circle cx="190" cy="22" r="5" fill="#ef4444"/>
-        <text x="202" y="25" class="mono-xs" fill="#fca5a5">NIST TI TMP117 (±0.1°C)</text>
-        <text x="14" y="50" class="body-desc">• Core Brood Sensor (Frame 4): TI TMP117 NIST RTD via I2C (0x48), 0.0078°C resolution.</text>
-        <text x="14" y="68" class="body-desc">• Peripheral Gradient Array: 4x Maxim DS18B20 on 1-Wire bus (P0.17 with 4.7kΩ pullup).</text>
-        <text x="14" y="86" class="body-desc">• Biological Setpoint: Core strictly maintained at 34.5°C; alert latched on ΔT &gt; 1.5°C drift.</text>
-        <text x="14" y="104" class="mono-xs" fill="#34d399">Physical Form: Flexible FPC ribbon clamped to top-bar; zero comb destruction.</text>
+        <rect width="500" height="125" rx="8" fill="url(#cardGrad)" stroke="#f59e0b" stroke-width="1.2"/>
+        <rect x="14" y="12" width="180" height="20" rx="4" fill="rgba(245, 158, 11, 0.15)"/>
+        <text x="104" y="26" class="badge" fill="#fbbf24" text-anchor="middle">5-POINT THERMAL ARRAY</text>
+        <circle cx="210" cy="22" r="5" fill="#ef4444"/>
+        <text x="222" y="26" class="mono-xs" fill="#fca5a5">TI TMP117 NIST RTDs (+-0.1 deg C)</text>
+        <text x="14" y="52" class="body-desc">- Transducer: TI TMP117 NIST-traceable precision RTDs across 30 deg C to 45 deg C target.</text>
+        <text x="14" y="70" class="body-desc">- Bus Addressing: I2C addresses 0x48 - 0x4B; 0.0078 deg C resolution, 15 ms read latency.</text>
+        <text x="14" y="88" class="body-desc">- Biological Setpoint: Core strictly maintained at 34.5 deg C; delta-T > 1.5 deg C triggers CUSUM brood alarm.</text>
+        <text x="14" y="108" class="mono-xs" fill="#34d399">Physical Form: Flexible FPC ribbon clamped to top-bar; preserves strict 9.5 mm bee-space.</text>
 
         <!-- Card 2: Bio-Acoustic Capsule -->
-        <g transform="translate(0, 130)">
-            <rect width="460" height="118" rx="8" fill="url(#cardGrad)" stroke="#06b6d4" stroke-width="1.2"/>
-            <rect x="14" y="12" width="160" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
-            <text x="94" y="26" class="badge" fill="#38bdf8" text-anchor="middle">BIO-ACOUSTIC CAPSULE</text>
-            <circle cx="190" cy="22" r="5" fill="#06b6d4"/>
-            <text x="202" y="25" class="mono-xs" fill="#67e8f9">InvenSense INMP441 MEMS</text>
-            <text x="14" y="50" class="body-desc">• Transducer: Omnidirectional 24-bit I2S digital MEMS, 61 dBA SNR, -26 dBFS sensitivity.</text>
-            <text x="14" y="68" class="body-desc">• Protective Barrier: Sintered hydrophobic PTFE membrane resists hive propolis and beeswax.</text>
-            <text x="14" y="86" class="body-desc">• In-Hive Placement: Lower 1/3 of Frame 4 brood face (direct colony acoustic emission field).</text>
-            <text x="14" y="104" class="mono-xs" fill="#38bdf8">Processing: 2000 Hz sample rate, 256-pt FFT real-time transform directly on Cortex-M4.</text>
+        <g transform="translate(0, 138)">
+            <rect width="500" height="125" rx="8" fill="url(#cardGrad)" stroke="#06b6d4" stroke-width="1.2"/>
+            <rect x="14" y="12" width="180" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+            <text x="104" y="26" class="badge" fill="#38bdf8" text-anchor="middle">BIO-ACOUSTIC CAPSULE</text>
+            <circle cx="210" cy="22" r="5" fill="#06b6d4"/>
+            <text x="222" y="26" class="mono-xs" fill="#67e8f9">TDK InvenSense INMP441 MEMS</text>
+            <text x="14" y="52" class="body-desc">- Transducer: Omnidirectional 24-bit I2S digital MEMS, 61 dBA SNR, -26 dBFS sensitivity.</text>
+            <text x="14" y="70" class="body-desc">- Protective Barrier: Sintered hydrophobic PTFE membrane resists hive propolis and beeswax.</text>
+            <text x="14" y="88" class="body-desc">- In-Hive Placement: Lower 1/3 of Frame 4 brood face (direct colony acoustic emission field).</text>
+            <text x="14" y="108" class="mono-xs" fill="#38bdf8">Edge DSP: 2000 Hz sample rate, 256-pt FFT real-time transform directly on Cortex-M4F.</text>
         </g>
 
-        <!-- Card 3: Metabolic & Tamper Sensors -->
-        <g transform="translate(0, 260)">
-            <rect width="460" height="130" rx="8" fill="url(#cardGrad)" stroke="#8b5cf6" stroke-width="1.2"/>
-            <rect x="14" y="12" width="190" height="20" rx="4" fill="rgba(139, 92, 246, 0.15)"/>
-            <text x="109" y="26" class="badge" fill="#c4b5fd" text-anchor="middle">METABOLIC &amp; SECURITY SUITE</text>
-            <text x="14" y="50" class="body-desc">• Sensirion SCD41: True photoacoustic NDIR CO2 (400 - 5000 ppm, ±40 ppm accuracy).</text>
-            <text x="14" y="68" class="body-desc">• Bosch BME688: Metal-oxide VOC gas sensor tracking alarm pheromones &amp; foulbrood.</text>
-            <text x="14" y="86" class="body-desc">• ST LIS3DH 3-Axis Accelerometer: Hardware interrupt wake (P0.02) on hive bear attack/theft.</text>
-            <text x="14" y="104" class="body-desc">• M5Stack HX711: 24-bit dual load cell tare tracking nectar flow &amp; honey accumulation (±10g).</text>
-            <text x="14" y="120" class="mono-xs" fill="#fbbf24">Enclosure: IP67 UV-stabilized polycarbonate mounted to hive external sidewall.</text>
+        <!-- Card 3: Metabolic & Security Suite -->
+        <g transform="translate(0, 276)">
+            <rect width="500" height="135" rx="8" fill="url(#cardGrad)" stroke="#8b5cf6" stroke-width="1.2"/>
+            <rect x="14" y="12" width="200" height="20" rx="4" fill="rgba(139, 92, 246, 0.15)"/>
+            <text x="114" y="26" class="badge" fill="#c4b5fd" text-anchor="middle">METABOLIC &amp; TAMPER SUITE</text>
+            <text x="14" y="52" class="body-desc">- Sensirion SCD41: True photoacoustic NDIR CO2 (400 - 5000 ppm, +-40 ppm accuracy).</text>
+            <text x="14" y="70" class="body-desc">- Bosch BME688: Metal-oxide VOC gas sensor tracking alarm pheromones and relative humidity.</text>
+            <text x="14" y="88" class="body-desc">- ST LIS3DH 3-Axis Accelerometer: Hardware interrupt wake (P0.02) on bear attack or theft.</text>
+            <text x="14" y="106" class="body-desc">- Dual Avia HX711: 24-bit dual load cell tare tracking nectar flow and honey stores (0 - 60 kg).</text>
+            <text x="14" y="124" class="mono-xs" fill="#fbbf24">Enclosure: IP67 UV-stabilized polycarbonate mounted to hive external sidewall.</text>
         </g>
     </g>
 </svg>

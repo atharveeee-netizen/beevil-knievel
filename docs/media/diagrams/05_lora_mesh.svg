@@ -1,37 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 560" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 560" width="100%" height="100%">
     
     <defs>
         <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#070a12"/>
-            <stop offset="50%" stop-color="#0b101c"/>
-            <stop offset="100%" stop-color="#0e1526"/>
-        </linearGradient>
-        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#131c2e"/>
-            <stop offset="100%" stop-color="#0b111e"/>
-        </linearGradient>
-        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="0%" stop-color="#070a14"/>
+            <stop offset="50%" stop-color="#0b111e"/>
             <stop offset="100%" stop-color="#0f172a"/>
         </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#111a2d"/>
+            <stop offset="100%" stop-color="#0c1220"/>
+        </linearGradient>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a253c"/>
+            <stop offset="100%" stop-color="#0f182b"/>
+        </linearGradient>
         <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="0%" stop-color="#d97706"/>
             <stop offset="100%" stop-color="#fbbf24"/>
         </linearGradient>
         <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="0%" stop-color="#0284c7"/>
             <stop offset="100%" stop-color="#38bdf8"/>
         </linearGradient>
         <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="0%" stop-color="#059669"/>
             <stop offset="100%" stop-color="#34d399"/>
         </linearGradient>
         <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ef4444"/>
-            <stop offset="100%" stop-color="#f87171"/>
+            <stop offset="0%" stop-color="#e11d48"/>
+            <stop offset="100%" stop-color="#fb7185"/>
         </linearGradient>
         <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#8b5cf6"/>
+            <stop offset="0%" stop-color="#7c3aed"/>
             <stop offset="100%" stop-color="#a78bfa"/>
         </linearGradient>
         
@@ -39,35 +39,32 @@
             <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
         </marker>
         <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
         </marker>
         <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
         </marker>
         <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444"/>
-        </marker>
-        <marker id="arrMuted" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fb7185"/>
         </marker>
 
         <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
-            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.3"/>
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.35"/>
         </pattern>
     </defs>
     <style>
-        .headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
-        .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
-        .sec-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.3px; }
-        .body-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
-        .body-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 10px; fill: #94a3b8; }
-        .mono-sm { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; }
-        .mono-xs { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 8.5px; }
-        .badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
+        .headline { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.3px; }
+        .body-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #94a3b8; line-height: 1.4; }
+        .mono-sm { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 8.5px; }
+        .badge { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
     </style>
 
-    <rect width="1060" height="560" fill="url(#bgGrad)" rx="10"/>
-    <rect width="1060" height="560" fill="url(#grid)" rx="10"/>
+    <rect width="1080" height="560" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1080" height="560" fill="url(#grid)" rx="10"/>
     
     <!-- Header -->
     <rect x="25" y="20" width="175" height="24" rx="12" fill="rgba(139, 92, 246, 0.15)" stroke="#8b5cf6" stroke-width="1.2"/>
@@ -77,20 +74,20 @@
 
     <!-- Left Column: RF Parameter Cascade & Link Budget Waterfall -->
     <g transform="translate(25, 105)">
-        <rect width="450" height="385" rx="10" fill="url(#cardGrad)" stroke="#8b5cf6" stroke-width="1.5"/>
+        <rect width="460" height="385" rx="10" fill="url(#cardGrad)" stroke="#8b5cf6" stroke-width="1.5"/>
         <rect x="16" y="14" width="200" height="22" rx="4" fill="rgba(139, 92, 246, 0.15)"/>
         <text x="116" y="29" class="badge" fill="#c4b5fd" text-anchor="middle">LoRa PHY &amp; LINK WATERFALL</text>
 
         <!-- Parameter Table -->
         <g transform="translate(16, 48)">
-            <rect width="418" height="120" rx="6" fill="#0b101c" stroke="#1e293b"/>
-            <text x="12" y="20" class="mono-xs" fill="#38bdf8">• Carrier Frequency: 865.0625 MHz (India WPC Band)</text>
-            <text x="12" y="36" class="mono-xs" fill="#cbd5e1">• Bandwidth (BW): 125.0 kHz | Coding Rate (CR): 4/5</text>
-            <text x="12" y="52" class="mono-xs" fill="#cbd5e1">• Spreading Factor: SF7 (Adaptive SF7 - SF10)</text>
-            <text x="12" y="68" class="mono-xs" fill="#fbbf24">• Transmit Power: +14 dBm (25 mW EIRP)</text>
-            <text x="12" y="84" class="mono-xs" fill="#34d399">• Rx Sensitivity: -137 dBm (SX1262 LoRa Engine)</text>
-            <text x="12" y="100" class="mono-xs" fill="#cbd5e1">• Packet On-Air Time: 350 ms / 24-Byte Binary Frame</text>
-            <text x="12" y="114" class="mono-xs" fill="#38bdf8">• Duty Cycle: 0.116% (Strictly below 1.0% regulatory cap)</text>
+            <rect width="428" height="120" rx="6" fill="#0b101c" stroke="#1e293b"/>
+            <text x="12" y="20" class="mono-xs" fill="#38bdf8">- Carrier Frequency: 865.0625 MHz (India WPC Band)</text>
+            <text x="12" y="36" class="mono-xs" fill="#cbd5e1">- Bandwidth (BW): 125.0 kHz | Coding Rate (CR): 4/5</text>
+            <text x="12" y="52" class="mono-xs" fill="#cbd5e1">- Spreading Factor: SF7 (Adaptive SF7 - SF10)</text>
+            <text x="12" y="68" class="mono-xs" fill="#fbbf24">- Transmit Power: +14 dBm (25 mW EIRP)</text>
+            <text x="12" y="84" class="mono-xs" fill="#34d399">- Rx Sensitivity: -137 dBm (SX1262 LoRa Engine)</text>
+            <text x="12" y="100" class="mono-xs" fill="#cbd5e1">- Packet On-Air Time: 350 ms / 24-Byte Binary Frame</text>
+            <text x="12" y="114" class="mono-xs" fill="#38bdf8">- Duty Cycle: 0.116% (Strictly below 1.0% regulatory cap)</text>
         </g>
 
         <!-- Link Budget Waterfall Graphic -->
@@ -98,39 +95,39 @@
             <text x="0" y="15" class="badge" fill="#fbbf24">LINK BUDGET WATERFALL (1.5 km PINE CANOPY):</text>
             
             <!-- Stage 1: Tx Power -->
-            <rect x="0" y="25" width="418" height="24" rx="4" fill="#0f172a"/>
+            <rect x="0" y="25" width="428" height="24" rx="4" fill="#0f172a"/>
             <text x="10" y="41" class="mono-xs" fill="#f1f5f9">Tx Power Output (+14.0 dBm)</text>
-            <rect x="250" y="29" width="60" height="16" rx="3" fill="#10b981"/>
-            <text x="280" y="41" class="mono-xs" fill="#ffffff" text-anchor="middle">+14 dBm</text>
+            <rect x="260" y="29" width="65" height="16" rx="3" fill="#10b981"/>
+            <text x="292" y="41" class="mono-xs" fill="#ffffff" text-anchor="middle">+14 dBm</text>
 
             <!-- Stage 2: Free Space Path Loss -->
-            <rect x="0" y="53" width="418" height="24" rx="4" fill="#0f172a"/>
+            <rect x="0" y="53" width="428" height="24" rx="4" fill="#0f172a"/>
             <text x="10" y="69" class="mono-xs" fill="#f1f5f9">Free-Space Loss (FSPL 1.5 km @ 865 MHz)</text>
-            <rect x="250" y="57" width="95" height="16" rx="3" fill="#f43f5e"/>
-            <text x="297" y="69" class="mono-xs" fill="#ffffff" text-anchor="middle">-94.7 dB</text>
+            <rect x="260" y="57" width="95" height="16" rx="3" fill="#f43f5e"/>
+            <text x="307" y="69" class="mono-xs" fill="#ffffff" text-anchor="middle">-94.7 dB</text>
 
             <!-- Stage 3: Canopy Attenuation (ITU-R P.833-9) -->
-            <rect x="0" y="81" width="418" height="24" rx="4" fill="#0f172a"/>
+            <rect x="0" y="81" width="428" height="24" rx="4" fill="#0f172a"/>
             <text x="10" y="97" class="mono-xs" fill="#f1f5f9">Canopy Foliage Loss (0.18 dB/m x 120m)</text>
-            <rect x="250" y="85" width="75" height="16" rx="3" fill="#f43f5e"/>
-            <text x="287" y="97" class="mono-xs" fill="#ffffff" text-anchor="middle">-21.6 dB</text>
+            <rect x="260" y="85" width="75" height="16" rx="3" fill="#f43f5e"/>
+            <text x="297" y="97" class="mono-xs" fill="#ffffff" text-anchor="middle">-21.6 dB</text>
 
             <!-- Stage 4: Hive Box Dielectric Loss -->
-            <rect x="0" y="109" width="418" height="24" rx="4" fill="#0f172a"/>
+            <rect x="0" y="109" width="428" height="24" rx="4" fill="#0f172a"/>
             <text x="10" y="125" class="mono-xs" fill="#f1f5f9">Hive Box Dielectric &amp; Comb Loss</text>
-            <rect x="250" y="113" width="55" height="16" rx="3" fill="#f43f5e"/>
-            <text x="277" y="125" class="mono-xs" fill="#ffffff" text-anchor="middle">-8.7 dB</text>
+            <rect x="260" y="113" width="55" height="16" rx="3" fill="#f43f5e"/>
+            <text x="287" y="125" class="mono-xs" fill="#ffffff" text-anchor="middle">-8.7 dB</text>
 
             <!-- Result: Link Margin -->
-            <rect x="0" y="137" width="418" height="30" rx="4" fill="#141d2e" stroke="#10b981" stroke-width="1.2"/>
+            <rect x="0" y="137" width="428" height="30" rx="4" fill="#141d2e" stroke="#10b981" stroke-width="1.2"/>
             <text x="10" y="156" class="body-title" fill="#34d399">Calculated Rx Level: -111.0 dBm</text>
-            <text x="260" y="156" class="badge" fill="#34d399">NET FADE MARGIN: +26.0 dB (ROBUST)</text>
+            <text x="250" y="156" class="badge" fill="#34d399">NET FADE MARGIN: +26.0 dB (ROBUST)</text>
         </g>
     </g>
 
     <!-- Right Column: Mesh Network Topology Graphic -->
-    <g transform="translate(505, 105)">
-        <rect width="530" height="385" rx="10" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
+    <g transform="translate(515, 105)">
+        <rect width="540" height="385" rx="10" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
         <rect x="16" y="14" width="230" height="22" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
         <text x="131" y="29" class="badge" fill="#38bdf8" text-anchor="middle">MULTI-HOP REGENERATIVE MESH</text>
 
@@ -173,17 +170,17 @@
 
             <!-- High-Power Long Range Backhaul to Gateway -->
             <path d="M 282 140 L 415 140" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrCyan)"/>
-            <text x="345" y="130" class="mono-xs" fill="#38bdf8" text-anchor="middle">Backhaul Uplink</text>
-            <text x="345" y="158" class="mono-xs" fill="#34d399" text-anchor="middle">1.5 km (Canopy)</text>
+            <text x="348" y="130" class="mono-xs" fill="#38bdf8" text-anchor="middle">Backhaul Uplink</text>
+            <text x="348" y="158" class="mono-xs" fill="#34d399" text-anchor="middle">1.5 km (Canopy)</text>
 
             <!-- EDGE GATEWAY MAST (RASPBERRY PI 3B+ + SX1262 HAT) -->
-            <rect x="420" y="90" width="85" height="100" rx="6" fill="#0d1b2a" stroke="#38bdf8" stroke-width="2"/>
-            <rect x="425" y="96" width="75" height="18" rx="3" fill="rgba(6, 182, 212, 0.2)"/>
-            <text x="462" y="109" class="badge" fill="#38bdf8" text-anchor="middle">GATEWAY</text>
-            <text x="462" y="128" class="mono-xs" fill="#ffffff" text-anchor="middle">Raspberry</text>
-            <text x="462" y="140" class="mono-xs" fill="#ffffff" text-anchor="middle">Pi 3B+</text>
-            <text x="462" y="156" class="mono-xs" fill="#fbbf24" text-anchor="middle">SX1262 HAT</text>
-            <text x="462" y="172" class="mono-xs" fill="#34d399" text-anchor="middle">10m Mast</text>
+            <rect x="420" y="90" width="95" height="100" rx="6" fill="#0d1b2a" stroke="#38bdf8" stroke-width="2"/>
+            <rect x="425" y="96" width="85" height="18" rx="3" fill="rgba(6, 182, 212, 0.2)"/>
+            <text x="467" y="109" class="badge" fill="#38bdf8" text-anchor="middle">GATEWAY</text>
+            <text x="467" y="128" class="mono-xs" fill="#ffffff" text-anchor="middle">Raspberry</text>
+            <text x="467" y="140" class="mono-xs" fill="#ffffff" text-anchor="middle">Pi 3B+</text>
+            <text x="467" y="156" class="mono-xs" fill="#fbbf24" text-anchor="middle">SX1262 HAT</text>
+            <text x="467" y="172" class="mono-xs" fill="#34d399" text-anchor="middle">10m Mast</text>
         </g>
 
         <!-- 24-Byte Binary Frame Layout -->
@@ -191,44 +188,44 @@
             <text x="0" y="15" class="badge" fill="#38bdf8">24-BYTE PACKED BINARY TELEMETRY FRAME STRUCTURE:</text>
             <g transform="translate(0, 24)">
                 <!-- Bytes 0-1 -->
-                <rect x="0" y="0" width="48" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="24" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">HDR</text>
-                <text x="24" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+                <rect x="0" y="0" width="50" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="25" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">HDR</text>
+                <text x="25" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
                 
                 <!-- Bytes 2-3 -->
-                <rect x="48" y="0" width="48" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="72" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">NodeID</text>
-                <text x="72" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+                <rect x="50" y="0" width="50" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="75" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">NodeID</text>
+                <text x="75" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
 
                 <!-- Bytes 4-7 -->
-                <rect x="96" y="0" width="55" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="123" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">Time</text>
-                <text x="123" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">4B</text>
+                <rect x="100" y="0" width="55" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="127" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">Time</text>
+                <text x="127" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">4B</text>
 
                 <!-- Bytes 8-17: 5x Temps -->
-                <rect x="151" y="0" width="130" height="34" fill="#291e0f" stroke="#f59e0b"/>
-                <text x="216" y="15" class="mono-xs" fill="#fbbf24" text-anchor="middle">5x Temp Array (TMP117+DS18)</text>
-                <text x="216" y="27" class="mono-xs" fill="#f59e0b" text-anchor="middle">10 Bytes (int16 x 5)</text>
+                <rect x="155" y="0" width="145" height="34" fill="#291e0f" stroke="#f59e0b"/>
+                <text x="227" y="15" class="mono-xs" fill="#fbbf24" text-anchor="middle">5x Temp Array (TMP117)</text>
+                <text x="227" y="27" class="mono-xs" fill="#f59e0b" text-anchor="middle">10 Bytes (int16 x 5)</text>
 
                 <!-- Bytes 18-19: CO2 -->
-                <rect x="281" y="0" width="46" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="304" y="15" class="mono-xs" fill="#a78bfa" text-anchor="middle">CO2</text>
-                <text x="304" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+                <rect x="300" y="0" width="48" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="324" y="15" class="mono-xs" fill="#a78bfa" text-anchor="middle">CO2</text>
+                <text x="324" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
 
                 <!-- Byte 20: Acoustic Alert -->
-                <rect x="327" y="0" width="55" height="34" fill="#0f291e" stroke="#10b981"/>
-                <text x="354" y="15" class="mono-xs" fill="#34d399" text-anchor="middle">AI-Alert</text>
-                <text x="354" y="27" class="mono-xs" fill="#10b981" text-anchor="middle">1B</text>
+                <rect x="348" y="0" width="55" height="34" fill="#0f291e" stroke="#10b981"/>
+                <text x="375" y="15" class="mono-xs" fill="#34d399" text-anchor="middle">AI-Alert</text>
+                <text x="375" y="27" class="mono-xs" fill="#10b981" text-anchor="middle">1B</text>
 
                 <!-- Byte 21: Batt -->
-                <rect x="382" y="0" width="46" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="405" y="15" class="mono-xs" fill="#cbd5e1" text-anchor="middle">Batt</text>
-                <text x="405" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">1B</text>
+                <rect x="403" y="0" width="45" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="425" y="15" class="mono-xs" fill="#cbd5e1" text-anchor="middle">Batt</text>
+                <text x="425" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">1B</text>
 
                 <!-- Bytes 22-23: CRC16 -->
-                <rect x="428" y="0" width="60" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="458" y="15" class="mono-xs" fill="#f87171" text-anchor="middle">CRC16</text>
-                <text x="458" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+                <rect x="448" y="0" width="55" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="475" y="15" class="mono-xs" fill="#f87171" text-anchor="middle">CRC16</text>
+                <text x="475" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
             </g>
             <text x="0" y="76" class="mono-xs" fill="#94a3b8">Zero IP Overhead | Strict Packing | Zero Fragmentation Across LoRa PHY Frame</text>
         </g>
@@ -236,7 +233,7 @@
 
     <!-- Bottom Stat Bar -->
     <g transform="translate(25, 502)">
-        <rect width="1010" height="40" rx="6" fill="#0d1424" stroke="#1e293b"/>
+        <rect width="1030" height="40" rx="6" fill="#0d1424" stroke="#1e293b"/>
         <text x="25" y="24" class="mono-xs" fill="#94a3b8">NETWORK CAPACITY:</text>
         <text x="170" y="24" class="mono-xs" fill="#38bdf8">100 Hives Scalability Validated</text>
         <text x="410" y="24" class="mono-xs" fill="#34d399">Airtime Load: 0.137% across 1 Gateway</text>

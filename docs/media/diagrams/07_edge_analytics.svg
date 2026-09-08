@@ -1,37 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 540" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 550" width="100%" height="100%">
     
     <defs>
         <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#070a12"/>
-            <stop offset="50%" stop-color="#0b101c"/>
-            <stop offset="100%" stop-color="#0e1526"/>
-        </linearGradient>
-        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#131c2e"/>
-            <stop offset="100%" stop-color="#0b111e"/>
-        </linearGradient>
-        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="0%" stop-color="#070a14"/>
+            <stop offset="50%" stop-color="#0b111e"/>
             <stop offset="100%" stop-color="#0f172a"/>
         </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#111a2d"/>
+            <stop offset="100%" stop-color="#0c1220"/>
+        </linearGradient>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a253c"/>
+            <stop offset="100%" stop-color="#0f182b"/>
+        </linearGradient>
         <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="0%" stop-color="#d97706"/>
             <stop offset="100%" stop-color="#fbbf24"/>
         </linearGradient>
         <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="0%" stop-color="#0284c7"/>
             <stop offset="100%" stop-color="#38bdf8"/>
         </linearGradient>
         <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="0%" stop-color="#059669"/>
             <stop offset="100%" stop-color="#34d399"/>
         </linearGradient>
         <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ef4444"/>
-            <stop offset="100%" stop-color="#f87171"/>
+            <stop offset="0%" stop-color="#e11d48"/>
+            <stop offset="100%" stop-color="#fb7185"/>
         </linearGradient>
         <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#8b5cf6"/>
+            <stop offset="0%" stop-color="#7c3aed"/>
             <stop offset="100%" stop-color="#a78bfa"/>
         </linearGradient>
         
@@ -39,35 +39,32 @@
             <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
         </marker>
         <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
         </marker>
         <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
         </marker>
         <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444"/>
-        </marker>
-        <marker id="arrMuted" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fb7185"/>
         </marker>
 
         <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
-            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.3"/>
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.35"/>
         </pattern>
     </defs>
     <style>
-        .headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
-        .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
-        .sec-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.3px; }
-        .body-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
-        .body-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 10px; fill: #94a3b8; }
-        .mono-sm { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; }
-        .mono-xs { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 8.5px; }
-        .badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
+        .headline { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.3px; }
+        .body-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #94a3b8; line-height: 1.4; }
+        .mono-sm { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 8.5px; }
+        .badge { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
     </style>
 
-    <rect width="1060" height="540" fill="url(#bgGrad)" rx="10"/>
-    <rect width="1060" height="540" fill="url(#grid)" rx="10"/>
+    <rect width="1080" height="550" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1080" height="550" fill="url(#grid)" rx="10"/>
     
     <!-- Header -->
     <rect x="25" y="20" width="185" height="24" rx="12" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
@@ -78,85 +75,85 @@
     <!-- 4 Structured Sequential Flow Cards -->
     <g transform="translate(25, 105)">
         <!-- Card 1: Fused Telemetry Vector -->
-        <rect x="0" y="0" width="230" height="380" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
-        <rect x="14" y="14" width="160" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
-        <text x="94" y="28" class="badge" fill="#38bdf8" text-anchor="middle">FUSED INPUT VECTOR</text>
+        <rect x="0" y="0" width="235" height="380" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
+        <rect x="14" y="14" width="165" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+        <text x="96" y="28" class="badge" fill="#38bdf8" text-anchor="middle">FUSED INPUT VECTOR</text>
         <text x="14" y="55" class="body-title">State Vector Xt in R^12</text>
         
         <g transform="translate(14, 70)">
-            <rect width="202" height="200" rx="5" fill="#0b101c" stroke="#1e293b"/>
+            <rect width="207" height="200" rx="5" fill="#0b101c" stroke="#1e293b"/>
             <text x="10" y="22" class="mono-xs" fill="#38bdf8">[0..3] Acoustic Sub-Bands:</text>
             <text x="18" y="38" class="mono-xs" fill="#94a3b8"> E_fan, E_wag, E_swm, E_dst</text>
             <text x="10" y="58" class="mono-xs" fill="#fbbf24">[4..8] 5-Point Thermal:</text>
-            <text x="18" y="74" class="mono-xs" fill="#94a3b8"> T_core (TMP117), 4x DS18</text>
+            <text x="18" y="74" class="mono-xs" fill="#94a3b8"> 5x TI TMP117 (Core/Per/Wall)</text>
             <text x="10" y="94" class="mono-xs" fill="#a78bfa">[9] Hive CO2 (SCD41 NDIR)</text>
-            <text x="10" y="112" class="mono-xs" fill="#a78bfa">[10] VOC Gas / RH% (BME688)</text>
-            <text x="10" y="130" class="mono-xs" fill="#f87171">[11] Gross Weight (HX711)</text>
-            <text x="10" y="148" class="mono-xs" fill="#f87171">[12] Vibration / Tilt (LIS3DH)</text>
-            <text x="10" y="172" class="mono-xs" fill="#34d399">Sample Period: 300s (5-min)</text>
-            <text x="10" y="188" class="mono-xs" fill="#64748b">History: 12 Steps (1h Window)</text>
+            <text x="10" y="112" class="mono-xs" fill="#a78bfa">[10] Relative Humidity (RH%)</text>
+            <text x="10" y="130" class="mono-xs" fill="#f87171">[11] Gross Weight Tare (HX711)</text>
+            <text x="10" y="155" class="mono-xs" fill="#34d399">Sampling Interval: 300s (5-min)</text>
+            <text x="10" y="172" class="mono-xs" fill="#64748b">History: 12 Steps (1h Window)</text>
+            <text x="10" y="188" class="mono-xs" fill="#cbd5e1">Matrix: 12 x 12 Float32</text>
         </g>
         
-        <rect x="14" y="285" width="202" height="80" rx="5" fill="#0d1424"/>
-        <text x="24" y="305" class="badge" fill="#38bdf8">TEMPORAL SHAPE</text>
-        <text x="24" y="324" class="mono-xs" fill="#cbd5e1">Matrix: 12 x 12 Float32</text>
-        <text x="24" y="340" class="mono-xs" fill="#94a3b8">Packed Payload: 24 Bytes</text>
-        <text x="24" y="356" class="mono-xs" fill="#34d399">Compression: 99.7% vs raw</text>
+        <rect x="14" y="285" width="207" height="80" rx="5" fill="#0d1424"/>
+        <text x="24" y="305" class="badge" fill="#38bdf8">TRANSMISSION BUDGET</text>
+        <text x="24" y="324" class="mono-xs" fill="#cbd5e1">Raw Audio: 40,000 B / 10s</text>
+        <text x="24" y="340" class="mono-xs" fill="#fbbf24">Packed Payload: 24 Bytes</text>
+        <text x="24" y="356" class="mono-xs" fill="#34d399">Compression: 99.7% Ratio</text>
 
-        <path d="M 230 190 L 255 190" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
+        <path d="M 235 190 L 260 190" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
 
         <!-- Card 2: Page CUSUM Sequential Drift Filter -->
-        <rect x="260" y="0" width="245" height="380" rx="8" fill="url(#cardGradHighlight)" stroke="#f59e0b" stroke-width="2"/>
-        <rect x="274" y="14" width="160" height="20" rx="4" fill="rgba(245, 158, 11, 0.2)"/>
-        <text x="354" y="28" class="badge" fill="#fbbf24" text-anchor="middle">PAGE CUSUM FILTER</text>
-        <text x="274" y="55" class="body-title">Brood Drift Sequential Test</text>
+        <rect x="265" y="0" width="250" height="380" rx="8" fill="url(#cardGradHighlight)" stroke="#f59e0b" stroke-width="2"/>
+        <rect x="279" y="14" width="165" height="20" rx="4" fill="rgba(245, 158, 11, 0.2)"/>
+        <text x="361" y="28" class="badge" fill="#fbbf24" text-anchor="middle">PAGE CUSUM FILTER</text>
+        <text x="279" y="55" class="body-title">Brood Drift Sequential Test</text>
 
-        <g transform="translate(274, 70)">
-            <rect width="217" height="150" rx="5" fill="#0b101c" stroke="#1e293b"/>
-            <text x="10" y="20" class="mono-xs" fill="#fbbf24">Mathematical Formulation:</text>
+        <g transform="translate(279, 70)">
+            <rect width="222" height="150" rx="5" fill="#0b101c" stroke="#1e293b"/>
+            <text x="10" y="20" class="badge" fill="#fbbf24">DERIVATION (PAGE, 1954):</text>
             <text x="10" y="42" class="mono-xs" fill="#ffffff">S_t+ = max(0, S_t-1+ +</text>
-            <text x="25" y="58" class="mono-xs" fill="#ffffff">       (y_t - μ_0) - k)</text>
+            <text x="25" y="58" class="mono-xs" fill="#ffffff">       (y_t - mu_0) - k)</text>
             <text x="10" y="80" class="mono-xs" fill="#ffffff">S_t- = max(0, S_t-1- -</text>
-            <text x="25" y="96" class="mono-xs" fill="#ffffff">       (y_t - μ_0) - k)</text>
-            <text x="10" y="120" class="mono-xs" fill="#94a3b8">μ_0 = 34.5°C (Biological Target)</text>
-            <text x="10" y="136" class="mono-xs" fill="#38bdf8">k = 0.5σ (Allowance Parameter)</text>
+            <text x="25" y="96" class="mono-xs" fill="#ffffff">       (y_t - mu_0) - k)</text>
+            <text x="10" y="120" class="mono-xs" fill="#94a3b8">mu_0 = 34.5 deg C (Target)</text>
+            <text x="10" y="136" class="mono-xs" fill="#38bdf8">k = 0.5*sigma (Allowance)</text>
         </g>
 
-        <g transform="translate(274, 230)">
-            <rect width="217" height="135" rx="5" fill="#0d1829" stroke="#f59e0b" stroke-width="0.8"/>
+        <g transform="translate(279, 230)">
+            <rect width="222" height="135" rx="5" fill="#0d1829" stroke="#f59e0b" stroke-width="0.8"/>
             <text x="10" y="20" class="badge" fill="#f87171">DECISION BOUNDARY:</text>
-            <text x="10" y="38" class="mono-xs" fill="#cbd5e1">Threshold: h = 4.5σ</text>
-            <text x="10" y="54" class="mono-xs" fill="#f87171">If S_t- &gt; h ➔ BROOD_CHILL</text>
-            <text x="10" y="70" class="mono-xs" fill="#fbbf24">If S_t+ &gt; h ➔ HEAT_STUPOR</text>
+            <text x="10" y="38" class="mono-xs" fill="#cbd5e1">Threshold: h = 4.5*sigma</text>
+            <text x="10" y="54" class="mono-xs" fill="#f87171">If S_t- > h -> BROOD_CHILL</text>
+            <text x="10" y="70" class="mono-xs" fill="#fbbf24">If S_t+ > h -> HEAT_STRESS</text>
             <text x="10" y="92" class="mono-xs" fill="#34d399">Zero False-Positive Target</text>
             <text x="10" y="108" class="mono-xs" fill="#94a3b8">Latency: &lt; 2 intervals (10 min)</text>
             <text x="10" y="124" class="mono-xs" fill="#38bdf8">Runs on RAK4631 Cortex-M4F</text>
         </g>
 
-        <path d="M 505 190 L 530 190" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
+        <path d="M 515 190 L 540 190" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
 
         <!-- Card 3: Evidential 1D-CNN / TinyML Classifier -->
-        <rect x="535" y="0" width="245" height="380" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.5"/>
-        <rect x="549" y="14" width="180" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
-        <text x="639" y="28" class="badge" fill="#34d399" text-anchor="middle">EVIDENTIAL 1D-CNN</text>
-        <text x="549" y="55" class="body-title">Dirichlet Uncertainty Engine</text>
+        <rect x="545" y="0" width="250" height="380" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.5"/>
+        <rect x="559" y="14" width="180" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="649" y="28" class="badge" fill="#34d399" text-anchor="middle">EVIDENTIAL 1D-CNN</text>
+        <text x="559" y="55" class="body-title">Dirichlet Uncertainty Engine</text>
 
-        <g transform="translate(549, 70)">
-            <rect width="217" height="185" rx="5" fill="#0b101c" stroke="#1e293b"/>
+        <g transform="translate(559, 70)">
+            <rect width="222" height="185" rx="5" fill="#0b101c" stroke="#1e293b"/>
             <text x="10" y="20" class="badge" fill="#34d399">NETWORK ARCHITECTURE:</text>
-            <text x="10" y="38" class="mono-xs" fill="#cbd5e1">• Conv1D (Filters: 16, k=3, s=1)</text>
+            <text x="10" y="38" class="mono-xs" fill="#cbd5e1">- Conv1D (Filters: 16, k=3, s=1)</text>
             <text x="10" y="54" class="mono-xs" fill="#94a3b8">  BatchNorm1d + ReLU Activation</text>
-            <text x="10" y="70" class="mono-xs" fill="#cbd5e1">• MaxPool1d (kernel=2, stride=2)</text>
-            <text x="10" y="86" class="mono-xs" fill="#cbd5e1">• Conv1D (Filters: 32, k=3, s=1)</text>
-            <text x="10" y="102" class="mono-xs" fill="#cbd5e1">• AdaptiveAvgPool1d(1)</text>
-            <text x="10" y="118" class="mono-xs" fill="#cbd5e1">• Dense(64) + Dropout(0.2)</text>
-            <text x="10" y="134" class="mono-xs" fill="#fbbf24">• Dirichlet Evidential Head</text>
-            <text x="10" y="152" class="mono-xs" fill="#38bdf8">Uncertainty: u = K / Σ α_k</text>
+            <text x="10" y="70" class="mono-xs" fill="#cbd5e1">- MaxPool1d (kernel=2, stride=2)</text>
+            <text x="10" y="86" class="mono-xs" fill="#cbd5e1">- Conv1D (Filters: 32, k=3, s=1)</text>
+            <text x="10" y="102" class="mono-xs" fill="#cbd5e1">- AdaptiveAvgPool1d(1)</text>
+            <text x="10" y="118" class="mono-xs" fill="#cbd5e1">- Dense(64) + Dropout(0.2)</text>
+            <text x="10" y="134" class="mono-xs" fill="#fbbf24">- Dirichlet Evidential Head</text>
+            <text x="10" y="152" class="mono-xs" fill="#38bdf8">Uncertainty: u = K / sum(alpha_k)</text>
             <text x="10" y="168" class="mono-xs" fill="#34d399">Quantization: INT8 Quantized</text>
         </g>
 
-        <g transform="translate(549, 265)">
-            <rect width="217" height="100" rx="5" fill="#0d1424"/>
+        <g transform="translate(559, 265)">
+            <rect width="222" height="100" rx="5" fill="#0d1424"/>
             <text x="10" y="20" class="badge" fill="#fbbf24">RUNTIME PROFILE:</text>
             <text x="10" y="38" class="mono-xs" fill="#cbd5e1">Model Binary: 75.4 KB Flash</text>
             <text x="10" y="54" class="mono-xs" fill="#cbd5e1">Inference Time: 4.8 ms</text>
@@ -164,16 +161,16 @@
             <text x="10" y="86" class="mono-xs" fill="#f87171">Output: 1-Byte Quantized Alert</text>
         </g>
 
-        <path d="M 780 190 L 805 190" stroke="#10b981" stroke-width="2" marker-end="url(#arrEmerald)"/>
+        <path d="M 795 190 L 820 190" stroke="#10b981" stroke-width="2" marker-end="url(#arrEmerald)"/>
 
-        <!-- Card 4: Automated Agronomic Advisory Flow -->
-        <rect x="810" y="0" width="200" height="380" rx="8" fill="url(#cardGrad)" stroke="#a78bfa" stroke-width="1.5"/>
-        <rect x="824" y="14" width="170" height="20" rx="4" fill="rgba(167, 139, 250, 0.15)"/>
-        <text x="909" y="28" class="badge" fill="#c4b5fd" text-anchor="middle">DIAGNOSTIC ADVISOR</text>
-        <text x="824" y="55" class="body-title">Raspberry Pi 3B+ Engine</text>
+        <!-- Card 4: Automated Diagnostic Advisory Flow & HoneyChain -->
+        <rect x="825" y="0" width="205" height="380" rx="8" fill="url(#cardGrad)" stroke="#a78bfa" stroke-width="1.5"/>
+        <rect x="839" y="14" width="175" height="20" rx="4" fill="rgba(167, 139, 250, 0.15)"/>
+        <text x="926" y="28" class="badge" fill="#c4b5fd" text-anchor="middle">DIAGNOSTIC ADVISOR</text>
+        <text x="839" y="55" class="body-title">Raspberry Pi 3B+ Engine</text>
 
-        <g transform="translate(824, 70)">
-            <rect width="172" height="155" rx="5" fill="#0b101c" stroke="#1e293b"/>
+        <g transform="translate(839, 70)">
+            <rect width="177" height="155" rx="5" fill="#0b101c" stroke="#1e293b"/>
             <text x="10" y="20" class="badge" fill="#c4b5fd">LIVE DISPATCH:</text>
             <text x="10" y="40" class="mono-xs" fill="#fbbf24">Alert 0x01:</text>
             <text x="10" y="54" class="mono-xs" fill="#94a3b8">"Normal Foraging"</text>
@@ -184,20 +181,20 @@
             <text x="10" y="142" class="mono-xs" fill="#38bdf8">SMS / Telegram / PWA</text>
         </g>
 
-        <g transform="translate(824, 235)">
-            <rect width="172" height="130" rx="5" fill="#131b2e" stroke="#8b5cf6" stroke-width="0.8"/>
+        <g transform="translate(839, 235)">
+            <rect width="177" height="130" rx="5" fill="#131b2e" stroke="#8b5cf6" stroke-width="0.8"/>
             <text x="10" y="20" class="badge" fill="#c4b5fd">HONEYCHAIN LEDGER:</text>
-            <text x="10" y="38" class="mono-xs" fill="#cbd5e1">• SHA-256 Merkle Block</text>
-            <text x="10" y="54" class="mono-xs" fill="#cbd5e1">• Nonce Proof-of-Check</text>
-            <text x="10" y="70" class="mono-xs" fill="#34d399">• Organic Honey Cert</text>
-            <text x="10" y="86" class="mono-xs" fill="#cbd5e1">• Verified Thermal Log</text>
-            <text x="10" y="102" class="mono-xs" fill="#94a3b8">• Consumer QR Provenance</text>
+            <text x="10" y="38" class="mono-xs" fill="#cbd5e1">- SHA-256 Merkle Block</text>
+            <text x="10" y="54" class="mono-xs" fill="#cbd5e1">- Nonce Proof-of-Check</text>
+            <text x="10" y="70" class="mono-xs" fill="#34d399">- Organic Honey Cert</text>
+            <text x="10" y="86" class="mono-xs" fill="#cbd5e1">- Verified Thermal Log</text>
+            <text x="10" y="102" class="mono-xs" fill="#94a3b8">- Consumer QR Code</text>
         </g>
     </g>
 
     <!-- Bottom Stat Bar -->
     <g transform="translate(25, 495)">
-        <rect width="1010" height="36" rx="6" fill="#0d1424" stroke="#1e293b"/>
+        <rect width="1030" height="36" rx="6" fill="#0d1424" stroke="#1e293b"/>
         <text x="25" y="22" class="mono-xs" fill="#94a3b8">COMPUTATIONAL EFFICIENCY:</text>
         <text x="190" y="22" class="mono-xs" fill="#34d399">On-Device Execution: 4.8 ms / cycle</text>
         <text x="450" y="22" class="mono-xs" fill="#fbbf24">Energy: 0.0408 mJ for Inference</text>
