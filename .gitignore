@@ -23,3 +23,21 @@ node_modules/
 
 # Local Dev Server Logs
 server.log
+
+# Ansys Solver Files
+*.rth
+*.DSP
+*.dat
+*.err
+*.gst
+*.mntr
+*.nlh
+*.aapresults
+*.cmdb
+*.asol
+*.page
+*.efld
+
+# Large Audio Files
+ml_models/datasets/sample_bee_audio/zenodo_*.wav
+TinyML Model/datasets/sample_bee_audio/zenodo_*.wav
