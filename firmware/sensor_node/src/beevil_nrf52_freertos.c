@@ -21,26 +21,14 @@
 // ARM CMSIS-DSP Math Header for 128-pt Hardware Audio FFT
 #include "arm_math.h"
 
+// System Configuration
+#include "config.h"
+
 // ----------------------------------------------------------------------------
 // HARDWARE CONSTANTS & PIN DEFINITIONS (RAK4631 / RAK19009)
 // ----------------------------------------------------------------------------
-#define LORA_FREQUENCY_HZ        865062500  // 865.0625 MHz (IN865 Standard)
-#define LORA_TX_POWER_DBM        14         // +14 dBm (25 mW)
-#define LORA_SPREADING_FACTOR    7          // SF7 (Fastest airtime, ~60ms)
-#define LORA_BANDWIDTH_KHZ       125        // 125 kHz
-#define LORA_CODING_RATE         1          // 4/5
-
-#define AUDIO_SAMPLE_RATE_HZ     16000      // 16 kHz I2S Acoustic Sampling
-#define AUDIO_FFT_POINTS         128        // 128-point Real FFT
 #define NUM_FFT_BANDS            8          // 8 Discrete Energy Sub-bands
 #define NUM_FRAME_TEMP_PROBES    5          // 5x DS18B20 1-Wire Probes
-
-#define I2C_ADDR_TMP117          0x48       // Medical Brood Probe
-#define I2C_ADDR_BME688          0x76       // Bosch VOC Gas & Pressure
-#define I2C_ADDR_SCD41           0x62       // Sensirion NDIR CO2
-#define I2C_ADDR_VEML7700        0x10       // Solar Lux
-#define I2C_ADDR_LIS3DH          0x18       // 3-Axis Tilt & Accelerometer
-#define I2C_ADDR_HX711           0x26       // M5Stack Scale ADC
 
 // ----------------------------------------------------------------------------
 // TELEMETRY BINARY PACKET STRUCT (32 BYTES TOTAL — ZERO FRAGMENTATION)
@@ -67,8 +55,8 @@ static TaskHandle_t xSensorTaskHandle  = NULL;
 static TaskHandle_t xAudioFFTTaskHandle = NULL;
 static TaskHandle_t xLoRaTxTaskHandle   = NULL;
 
-static float32_t g_audio_pcm_samples[AUDIO_FFT_POINTS * 2];
-static float32_t g_fft_output_mag[AUDIO_FFT_POINTS / 2];
+static float32_t g_audio_pcm_samples[CONFIG_AUDIO_FFT_POINTS * 2];
+static float32_t g_fft_output_mag[CONFIG_AUDIO_FFT_POINTS / 2];
 static arm_rfft_fast_instance_f32 g_fft_instance;
 
 static beevil_lora_payload_t g_current_payload;
@@ -78,10 +66,10 @@ static beevil_lora_payload_t g_current_payload;
 // ----------------------------------------------------------------------------
 void beevil_hardware_init(void) {
     // 1. Initialize ARM CMSIS-DSP FFT Engine
-    arm_rfft_fast_init_f32(&g_fft_instance, AUDIO_FFT_POINTS);
+    arm_rfft_fast_init_f32(&g_fft_instance, CONFIG_AUDIO_FFT_POINTS);
 
     // 2. Set default payload headers
-    g_current_payload.hive_id = 1; // Default Hive #001 (Configurable via BLE/Flash)
+    g_current_payload.hive_id = CONFIG_HIVE_NODE_ID;
     memset(g_current_payload.frame_temps_c_x100, 0, sizeof(g_current_payload.frame_temps_c_x100));
 }
 
@@ -89,13 +77,13 @@ void beevil_hardware_init(void) {
 // TASK 1: AUDIO SAMPLING & HARDWARE FFT (ARM CMSIS-DSP ACCELERATED)
 // ----------------------------------------------------------------------------
 void vAudioFFTTask(void *pvParameters) {
-    float32_t fft_complex_out[AUDIO_FFT_POINTS];
+    float32_t fft_complex_out[CONFIG_AUDIO_FFT_POINTS];
 
     for (;;) {
         // 1. Capture 128 PCM audio samples from INMP441 MEMS microphone via I2S
         // (Simulated with realistic 250Hz queen fundamental and harmonics)
-        for (int i = 0; i < AUDIO_FFT_POINTS; i++) {
-            float32_t t = (float32_t)i / (float32_t)AUDIO_SAMPLE_RATE_HZ;
+        for (int i = 0; i < CONFIG_AUDIO_FFT_POINTS; i++) {
+            float32_t t = (float32_t)i / (float32_t)CONFIG_AUDIO_SAMPLE_RATE_HZ;
             // Bio-acoustic composition: 180Hz fanning + 250Hz queen tone + ambient noise
             g_audio_pcm_samples[i] = 0.5f * sinf(2.0f * PI * 180.0f * t) +
                                      0.7f * sinf(2.0f * PI * 250.0f * t) +
@@ -106,10 +94,10 @@ void vAudioFFTTask(void *pvParameters) {
         arm_rfft_fast_f32(&g_fft_instance, g_audio_pcm_samples, fft_complex_out, 0);
 
         // 3. Compute Magnitude Spectrum
-        arm_cmplx_mag_f32(fft_complex_out, g_fft_output_mag, AUDIO_FFT_POINTS / 2);
+        arm_cmplx_mag_f32(fft_complex_out, g_fft_output_mag, CONFIG_AUDIO_FFT_POINTS / 2);
 
         // 4. Aggregate into 8 Discrete Sub-Bands (60Hz to 15kHz)
-        int bins_per_band = (AUDIO_FFT_POINTS / 2) / NUM_FFT_BANDS; // 64 / 8 = 8 bins
+        int bins_per_band = (CONFIG_AUDIO_FFT_POINTS / 2) / NUM_FFT_BANDS; // 64 / 8 = 8 bins
         for (int b = 0; b < NUM_FFT_BANDS; b++) {
             float32_t band_energy = 0.0f;
             for (int k = 0; k < bins_per_band; k++) {
@@ -160,7 +148,7 @@ void vSensorAcquisitionTask(void *pvParameters) {
         xTaskNotifyGive(xLoRaTxTaskHandle);
 
         // Sleep for 300 seconds (5-minute reporting cycle)
-        vTaskDelay(pdMS_TO_TICKS(300000));
+        vTaskDelay(pdMS_TO_TICKS(CONFIG_TELEMETRY_INTERVAL_MS));
     }
 }
 

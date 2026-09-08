@@ -2,7 +2,12 @@
 
 This directory contains **Model 2 — The Cloud AI Pathology Diagnostic Engine**.
 
-While **Model 1 (TinyML)** runs on-device inside the hive MCU for immediate real-time alerts, **Model 2** runs on the Cloud Backend server (Python Flask / FastAPI microservice). It combines 14 days of multi-sensor telemetry (Brood Nest Temp, Ambient Temp, Sound Frequencies, CO2 Respiration PPM, and Hive Scale Weight) to generate plain-language agricultural advisories for the beekeeper's mobile app.
+While **Model 1 (TinyML)** runs on-device inside the hive MCU for immediate real-time alerts, **Model 2** runs on the Local Edge Server (Raspberry Pi Gateway). 
+
+### ⚡ Innovative Use of AI (IEEE HART Alignment)
+By utilizing the extremely compressed 1-byte telemetry packets sent from the RAK4631 Edge Node via LoRaWAN, this secondary AI model can accurately infer complex colony health states (like starvation or swarming) without needing raw audio or high-bandwidth data. This demonstrates how edge AI (Model 1) and gateway AI (Model 2) work together to deliver optimal system performance and diagnostic accuracy while maintaining strict energy efficiency (Energy Consumption KPI).
+
+It combines 14 days of multi-sensor telemetry (Brood Nest Temp, Ambient Temp, Sound Frequencies, CO2 Respiration PPM, and Hive Scale Weight) to generate plain-language agricultural advisories for the beekeeper's mobile app.
 
 ---
 

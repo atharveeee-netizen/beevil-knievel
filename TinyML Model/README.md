@@ -4,6 +4,18 @@ This directory contains the official on-device **TinyML Model** designed for the
 
 ---
 
+## ⚡ Innovative Use of AI (IEEE HART Alignment)
+
+**Goal:** *Demonstrate the impact of AI in delivering optimal performance within the device itself.*
+
+By running this 1D-CNN directly on the RAK4631 Edge Node (TinyML), the system **analyzes the data locally instead of streaming it**. 
+
+*Note: Due to the lack of publicly available, annotated, high-frequency acoustic datasets for honeybee swarming, the current TinyML model acts as a structural proof-of-concept and simulation framework. It demonstrates the architecture and edge-compression capabilities, awaiting future real-world data collection.*
+
+A raw 10-second audio clip would require continuous, heavy LoRaWAN transmission, drastically reducing battery life. Instead, this TinyML model acts as an intelligent data compressor, reducing the complex audio into a **single 1-byte telemetry payload** (e.g., `0x01` for Active, `0x03` for Missing Queen). This reduces the RF payload by **>99%**, directly optimizing the system's **Energy Consumption KPI** and enabling the node's multi-year battery autonomy.
+
+---
+
 ## 📊 Microcontroller Memory Budget Allocation (nRF52840)
 
 | Memory Type | Component | Size | % of nRF52840 Capacity |
