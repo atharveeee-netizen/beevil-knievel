@@ -2,7 +2,7 @@
 # =============================================================================
 # BEEVIL KNIEVEL — WIREGUARD P2P REGIONAL APIARY MESH SETUP
 # =============================================================================
-# Connects multiple CM4 Gateways across distant farm locations into an
+# Connects multiple Raspberry Pi 3B+ Gateways across distant farm locations into an
 # encrypted, zero-cloud peer-to-peer mesh network.
 # =============================================================================
 

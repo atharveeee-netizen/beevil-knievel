@@ -225,7 +225,7 @@ export function EdgeAISection() {
               <span>Out-of-Sample Validated on Real Beehive Audio &amp; Telemetry</span>
             </h4>
             <p className="text-xs text-white/70">
-              Zero leakage guaranteed: hives in the test set were never seen during model training. Full TorchScript binary (18.90 MB) deployed on Antmicro CM4 Gateway.
+              Zero leakage guaranteed: hives in the test set were never seen during model training. Full TorchScript binary (18.90 MB) deployed on Raspberry Pi 3B+ Gateway.
             </p>
           </div>
           <Link

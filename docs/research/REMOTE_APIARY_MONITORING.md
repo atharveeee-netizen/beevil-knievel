@@ -23,7 +23,7 @@ In complex topography (e.g., hives located behind hillocks, farm sheds, or deep 
 
 ---
 
-## 4. Hardened Edge Gateway (Raspberry Pi CM4)
+## 4. Hardened Edge Gateway (Raspberry Pi 3B+)
 The apiary gateway sits atop a central mast or honey storage shed, powered via PoE or solar backup:
 - **OverlayFS Power-Loss Immunity**: Employs a permanent read-only root filesystem with ephemeral tmpfs overlays, completely eliminating SD-card/eMMC corruption during sudden farm power cuts.
 - **SQLite WAL High-Throughput Ingestion**: Written in asynchronous Python (FastAPI + uvicorn), capable of ingesting over **$148\text{ packets/second}$** with sub-7ms query latency.

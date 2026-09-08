@@ -1,12 +1,12 @@
 # Beevil Knievel — High-Precision 75.4 KB TinyML 1D-CNN Model Architecture
 
-This directory contains the official on-device **TinyML Model** designed for the **STM32WLE5JC Microcontroller (Wio-E5 node)** for real-time acoustic swarm prediction, queenless distress detection, and environmental noise suppression.
+This directory contains the official on-device **TinyML Model** designed for the **nRF52840 Microcontroller (RAK4631 node)** for real-time acoustic swarm prediction, queenless distress detection, and environmental noise suppression.
 
 ---
 
-## 📊 Microcontroller Memory Budget Allocation (STM32WLE5JC)
+## 📊 Microcontroller Memory Budget Allocation (nRF52840)
 
-| Memory Type | Component | Size | % of STM32 Capacity |
+| Memory Type | Component | Size | % of nRF52840 Capacity |
 | :--- | :--- | :--- | :--- |
 | **Flash Memory** (256 KB Total) | **TinyML 1D-CNN Model** | **75.4 KB** | **29.5%** |
 | | 14-Day Offline Telemetry Cache | 80.6 KB | 31.5% |

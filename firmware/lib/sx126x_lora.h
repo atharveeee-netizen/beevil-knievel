@@ -1,7 +1,7 @@
 /**
  * ============================================================================
  * BEEVIL KNIEVEL — SX126x Sub-GHz LoRaWAN Radio Driver Header
- * Optimized for STM32WLE5JC (Seeed Wio-E5 @ 868MHz)
+ * Optimized for nRF52840 (Seeed RAK4631 @ 868MHz)
  * ============================================================================
  */
 
@@ -23,7 +23,7 @@ typedef struct {
 } LoRa_Config;
 
 /**
- * Initializes SX126x internal transceiver inside STM32WLE5JC
+ * Initializes SX126x internal transceiver inside nRF52840
  */
 int SX126x_Init(const LoRa_Config* config);
 

@@ -20,17 +20,17 @@ Commercial honeybee pollination underpins over $17 Billion in annual crop produc
 The system comprises an autonomous inside-hive **Transmitter Node** and a self-built **Custom Gateway Receiver**:
 
 ### A. Inside-Hive Sensor Node (Transmitter)
-* **MCU & Wireless**: Seeed Studio Wio-E5 Mini (STM32WLE5JC ARM Cortex-M4 @ 48MHz with integrated SX126x 868MHz LoRa radio).
+* **MCU & Wireless**: Seeed Studio RAK4631 Mini (nRF52840 ARM Cortex-M4 @ 48MHz with integrated SX126x 868MHz LoRa radio).
 * **Sensors**: 3x DS18B20 1-Wire digital temperature probes (2 Brood-nest + 1 Ambient) + 1x ICS-43434 I2S Digital MEMS Microphone.
 * **Power System**: 1000mAh 3.7V LiPo + 1W Solar Panel + TPS73033 ultra-low quiescent LDO (~25nA $I_Q$).
 
 ### B. On-Device Model 1 (MCU Micro-FFT Classifier)
-Model 1 runs directly on the STM32WLE5JC MCU. It samples audio via I2S, executes a Real FFT (Fast Fourier Transform) focusing on the **200 Hz – 400 Hz acoustic energy band**, and calculates the brood vs. ambient temperature differential ($\Delta T$). 
+Model 1 runs directly on the nRF52840 MCU. It samples audio via I2S, executes a Real FFT (Fast Fourier Transform) focusing on the **200 Hz – 400 Hz acoustic energy band**, and calculates the brood vs. ambient temperature differential ($\Delta T$). 
 * **State Decision**: Classifies state as `Healthy` or `Distressed`. 
 * **Energy Duty Cycle**: The node stays in ultra-deep sleep (~1.5 $\mu\text{A}$) for 15-minute intervals. The 868MHz radio *only* powers on when a `Distressed` state is triggered or during a single daily heartbeat packet, consuming just **0.85 mWh/day**.
 
 ### C. Custom Gateway Receiver & Model 2 (Diagnostic Advisory Engine)
-Complying with IEEE Phase 2 rules forbidding COTS readers, we engineered a custom Wio-E5 Receiver Unit. Upon receiving an 868MHz LoRa alert, **Model 2** (Gateway Advisory Engine) analyzes the alert parameters and outputs plain-language diagnostic advice to the beekeeper's mobile dashboard (e.g., *"Warning: High 340Hz acoustic energy with dropping brood Delta-T indicates imminent swarming or queen loss within 24 hours"*).
+Complying with IEEE Phase 2 rules forbidding COTS readers, we engineered a custom RAK4631 Receiver Unit. Upon receiving an 868MHz LoRa alert, **Model 2** (Gateway Advisory Engine) analyzes the alert parameters and outputs plain-language diagnostic advice to the beekeeper's mobile dashboard (e.g., *"Warning: High 340Hz acoustic energy with dropping brood Delta-T indicates imminent swarming or queen loss within 24 hours"*).
 
 ---
 

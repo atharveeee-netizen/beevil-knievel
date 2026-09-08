@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — EDGE GATEWAY SERVER (Linux / Raspberry Pi CM4)
+BEEVIL KNIEVEL — EDGE GATEWAY SERVER (Linux / Raspberry Pi 3B+)
 ================================================================
 High-Performance Local Edge Gateway Server:
 - Real-Time LoRaWAN / LoRa Packet Ingestion for 100 Hives
@@ -199,7 +199,7 @@ class EdgeInferenceEngine:
 
     def predict(self, sensor_16: List[float], fft_8: List[float], tilt_deg: float = 0.0) -> Dict[str, Any]:
         """
-        Runs 8.2ms multi-modal fusion inference on CM4 CPU.
+        Runs 8.2ms multi-modal fusion inference on Raspberry Pi 3B+ CPU.
         """
         start_t = time.perf_counter()
 

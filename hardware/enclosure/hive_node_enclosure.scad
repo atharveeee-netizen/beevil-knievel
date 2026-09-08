@@ -1,7 +1,7 @@
 // ============================================================================
 // BEEVIL KNIEVEL — 3D Printable IP67 Hexagonal Hive Node Enclosure
 // Compatible with OpenSCAD / FreeCAD -> Export STL for 3D Printing
-// Fits: Wio-E5 Mini, 1000mAh LiPo, 1W Solar Panel (60x55mm), ICS-43434 Mic Port
+// Fits: RAK4631, 1000mAh LiPo, 1W Solar Panel (60x55mm), ICS-43434 Mic Port
 // ============================================================================
 
 $fn = 60;

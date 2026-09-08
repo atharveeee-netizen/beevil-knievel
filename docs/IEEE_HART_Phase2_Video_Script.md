@@ -11,15 +11,15 @@
 * **Speaker**: "Welcome! Commercial honeybees pollinate $17 Billion worth of crops, yet beekeepers lose over half their hives every year because manual inspections every two weeks are too slow. Meet Beevil Knievel — an ultra-low-cost, long-range Edge AI telemetry system that catches colony collapse before it happens."
 
 ### Scene 2: The Hardware & Sensor Node (0:45 - 1:45)
-* **Visual**: Close-up of the assembled Wio-E5 Mini node, 3x DS18B20 1-Wire sensors, ICS-43434 MEMS mic, 1W solar panel, and NanoVNA H4 antenna tuning.
-* **Speaker**: "Our sensor node sits inside the hive brood nest. Powered by the STM32WLE5JC chip with integrated 868MHz LoRa radio, it consumes just 1.5 microamps in deep sleep. We use 3 digital temperature probes for brood-nest Delta-T monitoring and an I2S MEMS mic to listen to hive acoustics. The entire node BOM costs just $18.74 USD and weighs only 67 grams."
+* **Visual**: Close-up of the assembled RAK4631 Mini node, 3x DS18B20 1-Wire sensors, ICS-43434 MEMS mic, 1W solar panel, and NanoVNA H4 antenna tuning.
+* **Speaker**: "Our sensor node sits inside the hive brood nest. Powered by the nRF52840 chip with integrated 868MHz LoRa radio, it consumes just 1.5 microamps in deep sleep. We use 3 digital temperature probes for brood-nest Delta-T monitoring and an I2S MEMS mic to listen to hive acoustics. The entire node BOM costs just $18.74 USD and weighs only 67 grams."
 
 ### Scene 3: Edge AI & Dual-Model System (1:45 - 2:45)
 * **Visual**: Screen recording of Python acoustic classifier (`bee_acoustic_classifier.py`), FFT spectrogram in 200-400Hz swarming band, and C++ firmware (`main_node.cpp`).
-* **Speaker**: "Our architecture splits AI into two models. Model 1 runs directly on the STM32 MCU. Every 15 minutes, it wakes up, processes acoustic audio FFT in the 200 to 400 Hertz swarming band, checks thermal drift, and classifies hive health. To save battery, the radio stays off when healthy and only transmits 12-byte telemetry packets when a Distressed state is detected."
+* **Speaker**: "Our architecture splits AI into two models. Model 1 runs directly on the nRF52840 MCU. Every 15 minutes, it wakes up, processes acoustic audio FFT in the 200 to 400 Hertz swarming band, checks thermal drift, and classifies hive health. To save battery, the radio stays off when healthy and only transmits 12-byte telemetry packets when a Distressed state is detected."
 
 ### Scene 4: Custom Gateway Receiver & Dashboard (2:45 - 3:45)
-* **Visual**: Demonstration of the custom Wio-E5 Receiver Unit (`receiver_gateway.cpp`), OLED display, and live web dashboard (`app.html`).
+* **Visual**: Demonstration of the custom RAK4631 Receiver Unit (`receiver_gateway.cpp`), OLED display, and live web dashboard (`app.html`).
 * **Speaker**: "In compliance with IEEE Phase 2 rules requiring a self-built reader, we designed our own custom LoRa gateway receiver. When an alert arrives, Model 2 analyzes the parameters and outputs plain-language advisory warnings to the beekeeper's mobile PWA app, giving actionable advice like swarming risk or queen loss."
 
 ### Scene 5: KPIs & Conclusion (3:45 - 4:30)

@@ -8,7 +8,7 @@ This registry documents all machine learning models, statistical change-point fi
 
 ### Model 1: `BeevilFusionNetEdge` (Gateway Multi-Modal Neural Network)
 * **Purpose**: Classifies overall hive health into 8 diagnostic states using multi-sensor environmental telemetry fused with 8-band acoustic FFT energy.
-* **Target Hardware**: Raspberry Pi Compute Module 4 (CM4) — Broadcom BCM2711 Quad-Core Cortex-A72 @ 1.5 GHz.
+* **Target Hardware**: Raspberry Pi Compute Module 4 (Raspberry Pi 3B+) — Broadcom BCM2711 Quad-Core Cortex-A72 @ 1.5 GHz.
 * **Input Modalities (16 Channels)**:
   - Brood Core Temperature (°C, TMP117)
   - 5-Frame Thermal Gradient (°C, DS18B20 Array)
@@ -38,7 +38,7 @@ This registry documents all machine learning models, statistical change-point fi
 
 ### Model 2: `BeevilEvidential1DCNN` (On-Node TinyML Spectral Classifier)
 * **Purpose**: On-device real-time acoustic swarm prediction, queenless distress detection, and environmental noise filtering.
-* **Target Hardware**: Nordic nRF52840 / STM32WLE5JC (ARM Cortex-M4F @ 64 MHz).
+* **Target Hardware**: Nordic nRF52840 / nRF52840 (ARM Cortex-M4F @ 64 MHz).
 * **Input**: 4-Channel Multi-Spectral Energy Vector:
   - Channel 1 (100 Hz – 180 Hz): Fanning and ventilation hum.
   - Channel 2 (200 Hz – 400 Hz): Worker flight baseline and queen piping.

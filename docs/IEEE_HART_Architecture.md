@@ -8,7 +8,7 @@
 The Transmitter is an ultra-low-power, deep-sleep edge node physically installed inside each beehive. Its primary goal is to gather multivariable thermodynamic and acoustic telemetry and transmit it to the Gateway via long-range LoRaWAN.
 
 ### 1.1 Hardware Specifications
-*   **Microcontroller:** STM32WLE5CCU6 (Wio-E5) with integrated SX126x Radio.
+*   **Microcontroller:** nRF52840 (RAK4631) with integrated SX126x Radio.
 *   **Sensing Payload:**
     *   **DS18B20 (x3):** 2 Brood Core probes, 1 Ambient temperature probe.
     *   **ICS-43432:** I2S MEMS Microphone for acoustic FFT sensing.
@@ -34,7 +34,7 @@ graph TD
     H -- Yes --> I[Compress to 20-Byte Packet]
     H -- No --> J[Fallback: Mask Dead Sensors & Send Error Flag]
     
-    I --> K[Fire LoRa Radio via Wio-E5]
+    I --> K[Fire LoRa Radio via RAK4631]
     J --> K
     K --> A
 ```
@@ -56,7 +56,7 @@ The Receiver Gateway is a dual-chip architecture stationed on the farmer's prope
 
 ### 2.1 Hardware Specifications
 *   **Base Board:** Charles Hallard Open-Source `LoRa-E5-Breakout` layout.
-*   **Receptor (Chip A):** STM32WLE5JC (Wio-E5). Operates in perpetual `RX_CONTINUOUS` mode, acting as a raw RF antenna array for 868MHz/915MHz traffic.
+*   **Receptor (Chip A):** nRF52840 (RAK4631). Operates in perpetual `RX_CONTINUOUS` mode, acting as a raw RF antenna array for 868MHz/915MHz traffic.
 *   **Backhaul Extension (Chip B):** Pluggable 4-pin UART Header populated with an **ESP32 Wi-Fi Module**.
 *   **Power Delivery:** Continuous Main AC-to-DC Wall Adapter (24/7 Uptime).
 
@@ -64,7 +64,7 @@ The Receiver Gateway is a dual-chip architecture stationed on the farmer's prope
 ```mermaid
 sequenceDiagram
     participant HN as Hive Nodes
-    participant STM as Gateway Wio-E5 (Receptor)
+    participant STM as Gateway RAK4631 (Receptor)
     participant ESP as Gateway ESP32 (Backhaul)
     participant AWS as AWS Cloud
     

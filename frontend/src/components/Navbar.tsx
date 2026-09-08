@@ -29,7 +29,7 @@ export function Navbar() {
     { title: "Edge AI (BeevilFusionNetEdge 96.84% Out-of-Sample Acc)", category: "Edge AI", href: "/#edge_ai" },
     { title: "Honey Chain (Cryptographic SHA-256 Provenance)", category: "Provenance", href: "/#honey_chain" },
     { title: "Download HiveOS App & Research SDK", category: "Download", href: "/#sdk" },
-    { title: "Antmicro CM4 Baseboard 6 TOPS Gateway Hub", category: "Hardware", href: "/#gateway-package" },
+    { title: "Raspberry Pi 3B+ 6 TOPS Gateway Hub", category: "Hardware", href: "/#gateway-package" },
     { title: "Off-Shore COTS Solar Sensor Node ($189)", category: "Hardware", href: "/#all-for-just" },
     { title: "Hardware Specifications & Benchmarks", category: "Specs", href: "/#the_specs" },
     { title: "Apiary Field Photo Gallery", category: "Gallery", href: "/#gallery" },

@@ -41,7 +41,7 @@ export default function Home() {
         {/* 6. University Research & Education Program (15% Off) */}
         <EducationSection />
 
-        {/* 7. Hardware Packages & Antmicro CM4 Gateway */}
+        {/* 7. Hardware Packages & Raspberry Pi 3B+ Gateway */}
         <OrderAccessoriesSection />
 
         {/* 8. Master Hardware & Software Specifications */}

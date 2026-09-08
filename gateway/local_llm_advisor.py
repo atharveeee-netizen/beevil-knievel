@@ -1,5 +1,5 @@
 """
-BEEVIL ADVISOR — ON-PREMISES CONVERSATIONAL EDGE AI (Linux / CM4)
+BEEVIL ADVISOR — ON-PREMISES CONVERSATIONAL EDGE AI (Linux / Raspberry Pi 3B+)
 ==================================================================
 Local Small Language Model (SLM) / Rule-Augmented Intelligence:
 - Analyzes 100-hive multi-modal time-series telemetry.

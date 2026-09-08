@@ -58,7 +58,7 @@
     <!-- Gateway Mast -->
     <rect x="800" y="180" width="110" height="80" fill="#1e293b" stroke="#38bdf8" stroke-width="2" rx="6"/>
     <text x="810" y="205" class="mono" fill="#38bdf8">EDGE GATEWAY</text>
-    <text x="810" y="225" class="mono" fill="#ffffff">CM4 Mast (10m)</text>
+    <text x="810" y="225" class="mono" fill="#ffffff">Gateway Mast (10m)</text>
     <text x="810" y="245" class="mono" fill="#94a3b8">SX1302 8-Ch</text>
 
     <!-- Repeater Node (Edge of Apiary) -->

@@ -80,7 +80,7 @@
     <rect x="660" y="85" width="270" height="365" fill="url(#panelGrad)" stroke="#38bdf8" stroke-width="1.5" rx="6"/>
     <rect x="675" y="100" width="180" height="24" fill="#38bdf8" rx="3"/>
     <text x="683" y="116" class="tag" fill="#ffffff">TIER 3: EDGE GATEWAY &amp; OPS</text>
-    <text x="675" y="150" class="box-title" fill="#38bdf8">Raspberry Pi CM4 Edge Server</text>
+    <text x="675" y="150" class="box-title" fill="#38bdf8">Raspberry Pi 3B+ Edge Server</text>
     <text x="675" y="175" class="box-body">• RAK2287 8-Ch LoRaWAN Concentrator</text>
     <text x="675" y="195" class="box-body">• Read-Only OverlayFS OS Hardening</text>
     <text x="675" y="215" class="box-body">• SQLite 3 WAL Database (Sub-7ms latency)</text>

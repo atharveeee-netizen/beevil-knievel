@@ -267,7 +267,7 @@ function generateFleetTelemetry(): HiveNode[] {
       
       triageTitle = "Hive #088: Stand Tamper & 14.2° Tilt Alert";
       triageSeverity = "PHYSICAL TILT DISPLACEMENT";
-      urgencyReason = "STM32 onboard accelerometer registered 14.2° stand tilt displacement from horizontal baseline. 390 Hz impact shock vibration detected. Suspected bear, wildlife, or strong wind gust disturbance.";
+      urgencyReason = "nRF52840 onboard accelerometer registered 14.2° stand tilt displacement from horizontal baseline. 390 Hz impact shock vibration detected. Suspected bear, wildlife, or strong wind gust disturbance.";
       fftDiagnosis = "390 Hz Impact Shock Vibration & Defensive Cluster Buzz";
       thermalDiagnosis = "1.15 CUSUM drift from top cover draft air leakage";
       gasDiagnosis = "68/100 Isopentyl Acetate alarm pheromone spike";
@@ -279,10 +279,10 @@ function generateFleetTelemetry(): HiveNode[] {
 
     const hops = id <= 25 ? 1 : id <= 70 ? 2 : 3;
     const meshRoute = hops === 1
-      ? [`Node #${String(id).padStart(3, "0")}`, "Antmicro CM4 Base Station"]
+      ? [`Node #${String(id).padStart(3, "0")}`, "Raspberry Pi 3B+ Base Station"]
       : hops === 2
-      ? [`Node #${String(id).padStart(3, "0")}`, `Relay #${String((id * 3) % 25 + 1).padStart(3, "0")}`, "Antmicro CM4 Base Station"]
-      : [`Node #${String(id).padStart(3, "0")}`, `Relay #${String(id + 4).padStart(3, "0")}`, `Relay #${String(12).padStart(3, "0")}`, "Antmicro CM4 Base Station"];
+      ? [`Node #${String(id).padStart(3, "0")}`, `Relay #${String((id * 3) % 25 + 1).padStart(3, "0")}`, "Raspberry Pi 3B+ Base Station"]
+      : [`Node #${String(id).padStart(3, "0")}`, `Relay #${String(id + 4).padStart(3, "0")}`, `Relay #${String(12).padStart(3, "0")}`, "Raspberry Pi 3B+ Base Station"];
 
     const gpsDistanceMeters = 8 + (id * 3.4) % 180;
     const bearings = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
@@ -1888,7 +1888,7 @@ export default function MobileFieldAgritechApp() {
                   
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono">
                     <div className="bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-[#525252] text-[#f4f4f4]">
-                      <span className="text-[#42be65] font-bold">● CM4 Gateway Online</span> (915MHz LoRa)
+                      <span className="text-[#42be65] font-bold">● Raspberry Pi 3B+ Gateway Online</span> (915MHz LoRa)
                     </div>
                     <div className="bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-[#525252] text-amber-300 font-bold">
                       {selectedYard === "Yard Alpha" ? (
@@ -1902,7 +1902,7 @@ export default function MobileFieldAgritechApp() {
 
                 <div className="p-3.5 space-y-2 text-xs font-mono">
                   <div className="flex justify-between text-[#c6c6c6]">
-                    <span>Base Station: Antmicro Raspberry Pi CM4</span>
+                    <span>Base Station: Raspberry Pi 3B+</span>
                     <span className="text-cyan-300">RSSI -74 dBm • SNR +12.1 dB</span>
                   </div>
                   <div className="flex justify-between text-[#c6c6c6]">
@@ -2093,7 +2093,7 @@ export default function MobileFieldAgritechApp() {
                     <div className="bg-[#161616] p-2.5 rounded-xl border border-[#393939] space-y-1 text-[11px] font-mono">
                       <div className="flex justify-between">
                         <span className="text-[#8d8d8d]">Hardware Hash:</span>
-                        <DecryptedText text={`0xBE88F5-${scannedHiveResult.id.toString(16).padStart(4, "0")}-STM32U585`} speed={25} className="text-cyan-300" />
+                        <DecryptedText text={`0xBE88F5-${scannedHiveResult.id.toString(16).padStart(4, "0")}-nRF52840`} speed={25} className="text-cyan-300" />
                       </div>
                       <div className="flex justify-between">
                         <span className="text-[#8d8d8d]">Merkle Root:</span>
@@ -2177,7 +2177,7 @@ export default function MobileFieldAgritechApp() {
                   </div>
                   <div className="flex justify-between border-b border-[#393939] pb-2 items-center">
                     <span className="text-[#c6c6c6]">Hardware SE Hash:</span>
-                    <DecryptedText text={`0xBE88F5-${currentHive.id.toString(16).padStart(4, "0")}-STM32U585-ATECC608A`} speed={25} className="text-cyan-300 font-mono text-[11px]" />
+                    <DecryptedText text={`0xBE88F5-${currentHive.id.toString(16).padStart(4, "0")}-nRF52840-ATECC608A`} speed={25} className="text-cyan-300 font-mono text-[11px]" />
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-[#c6c6c6]">Block Hash:</span>
@@ -2605,7 +2605,7 @@ export default function MobileFieldAgritechApp() {
                   </div>
                   <div className="flex justify-between border-b border-[#393939] pb-1.5 items-center">
                     <span className="text-[#c6c6c6]">Hardware SE Hash:</span>
-                    <DecryptedText text={`0xBE88F5-${currentHive.id.toString(16).padStart(4, "0")}-STM32U585-ATECC608A`} speed={20} className="text-cyan-300 font-bold font-mono" />
+                    <DecryptedText text={`0xBE88F5-${currentHive.id.toString(16).padStart(4, "0")}-nRF52840-ATECC608A`} speed={20} className="text-cyan-300 font-bold font-mono" />
                   </div>
                   <div className="flex justify-between border-b border-[#393939] pb-1.5 items-center">
                     <span className="text-[#c6c6c6]">Block Number:</span>
@@ -2658,7 +2658,7 @@ export default function MobileFieldAgritechApp() {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#161616] via-transparent to-transparent" />
                     <div className="absolute bottom-2 left-2.5 right-2.5 text-[10px] font-mono bg-black/80 px-2 py-1 rounded border border-[#525252] flex justify-between">
                       <span>IP67 Telemetry Node</span>
-                      <span className="text-amber-400 font-bold">STM32U585</span>
+                      <span className="text-amber-400 font-bold">nRF52840</span>
                     </div>
                   </div>
 
@@ -2680,7 +2680,7 @@ export default function MobileFieldAgritechApp() {
                 <div className="bg-[#262626] p-3 rounded-xl border border-[#393939] space-y-1 text-[11px] font-mono text-[#c6c6c6]">
                   <div className="flex justify-between">
                     <span>Edge Processing:</span>
-                    <span className="text-white font-bold">STM32U585 Arm Cortex-M33 (160MHz)</span>
+                    <span className="text-white font-bold">nRF52840 Arm Cortex-M33 (160MHz)</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Mesh Network:</span>
@@ -2843,7 +2843,7 @@ export default function MobileFieldAgritechApp() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-[#c6c6c6]">Hardware Hash:</span>
-                  <DecryptedText text={`0xBE88F5-${currentHive.id.toString(16).padStart(4, "0")}-STM32U585`} speed={20} className="text-cyan-300 font-mono text-[10px]" />
+                  <DecryptedText text={`0xBE88F5-${currentHive.id.toString(16).padStart(4, "0")}-nRF52840`} speed={20} className="text-cyan-300 font-mono text-[10px]" />
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-[#c6c6c6]">Block Hash:</span>

@@ -4,7 +4,7 @@
   <rect x="30" y="24" width="170" height="28" rx="14" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.5"/>
   <text x="115" y="43" fill="#f59e0b" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">EDGE INTELLIGENCE</text>
   <text x="30" y="82" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800">Hierarchical Two-Tier Edge Intelligence Engine</text>
-  <text x="30" y="108" fill="#8b949e" font-family="system-ui, -apple-system, sans-serif" font-size="14">Tier 1: On-Node Deterministic CUSUM &amp; FFT Triage → Tier 2: CM4 Gateway Multi-Modal Fusion &amp; Offline SLM Advisor.</text>
+  <text x="30" y="108" fill="#8b949e" font-family="system-ui, -apple-system, sans-serif" font-size="14">Tier 1: On-Node Deterministic CUSUM &amp; FFT Triage → Tier 2: Raspberry Pi 3B+ Gateway Multi-Modal Fusion &amp; Offline SLM Advisor.</text>
 
   <g transform="translate(50, 150)">
     <!-- Tier 1 -->
@@ -29,7 +29,7 @@
     <!-- Tier 2 -->
     <rect x="480" y="0" width="420" height="280" rx="12" fill="#161b22" stroke="#38bdf8" stroke-width="1.5"/>
     <rect x="500" y="20" width="220" height="26" rx="13" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8"/>
-    <text x="610" y="37" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">TIER 2: GATEWAY (CM4)</text>
+    <text x="610" y="37" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">TIER 2: GATEWAY (Pi 3B+)</text>
 
     <text x="500" y="75" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="bold">Multi-Modal Fusion &amp; SLM Advisor</text>
     <text x="500" y="95" fill="#8b949e" font-family="sans-serif" font-size="12">• 16-Sensor Feature Fusion Neural Network</text>

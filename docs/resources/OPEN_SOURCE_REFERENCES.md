@@ -17,7 +17,7 @@
 ## ⚡ Open-Source Firmware & Protocol Libraries
 
 1. **RadioLib Sub-GHz LoRa C++ Protocol Library**
-   * **Usage**: Hardware abstraction driver for SX126x / STM32WL sub-GHz radios.
+   * **Usage**: Hardware abstraction driver for SX126x / nRF52840WL sub-GHz radios.
 
 2. **DallasTemperature 1-Wire C++ Library**
    * **Usage**: Reading multi-drop digital temperature sensors on a single GPIO bus.

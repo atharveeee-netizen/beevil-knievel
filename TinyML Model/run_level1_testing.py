@@ -17,8 +17,8 @@ def run_level1_benchmark():
     print(f"  BEEVIL KNIEVEL — HIGH-PRECISION 75.4 KB TinyML EVALUATION      ")
     print("=================================================================")
     print(f"  * Model Architecture: 1D-CNN + 4-Band Spectral Feature Extractor")
-    print(f"  * Flash Footprint:    {MODEL_FLASH_FOOTPRINT_KB} KB / 256 KB (Wio-E5)")
-    print(f"  * SRAM Footprint:     {MODEL_RAM_FOOTPRINT_KB} KB / 64 KB (Wio-E5)")
+    print(f"  * Flash Footprint:    {MODEL_FLASH_FOOTPRINT_KB} KB / 256 KB (RAK4631)")
+    print(f"  * SRAM Footprint:     {MODEL_RAM_FOOTPRINT_KB} KB / 64 KB (RAK4631)")
     print("=================================================================")
 
     dataset_dir = os.path.join(os.path.dirname(__file__), "datasets", "sample_bee_audio")

@@ -1,4 +1,4 @@
-# 🚀 BEEVIL KNIEVEL — MASTER CM4 LINUX EDGE GATEWAY DEPLOYMENT GUIDE
+# 🚀 BEEVIL KNIEVEL — MASTER Raspberry Pi 3B+ LINUX EDGE GATEWAY DEPLOYMENT GUIDE
 **Raspberry Pi Compute Module 4 (2GB RAM / 32GB eMMC) Hardened Linux Reference Manual**
 
 ---
@@ -7,8 +7,8 @@
 
 | Parameter | Specification |
 |---|---|
-| **Baseboard Carrier** | Antmicro CM4 Baseboard (Rev 1.0.5) with 48V PoE & MagJack |
-| **Compute Module** | Raspberry Pi CM4 (BCM2711 Quad-Core 64-bit Cortex-A72 @ 1.5 GHz) |
+| **Baseboard Carrier** | Raspberry Pi 3B+ (Rev 1.0.5) with 48V PoE & MagJack |
+| **Compute Module** | Raspberry Pi 3B+ (BCM2711 Quad-Core 64-bit Cortex-A72 @ 1.5 GHz) |
 | **Memory (RAM)** | 2 GB LPDDR4-3200 (System uses ~425 MB; **1.6 GB free headroom**) |
 | **Storage (eMMC)** | 32 GB eMMC 5.1 (System uses ~4.8 GB; **27 GB free for 20+ years of logs**) |
 | **Operating System** | Raspberry Pi OS 64-Bit Lite (Debian Bookworm) + Hardened Read-Only OverlayFS |
@@ -19,9 +19,9 @@
 
 ## 2. Step-by-Step Gateway Provisioning
 
-### Step 2.1: Flash Debian 64-Bit OS onto CM4 eMMC
+### Step 2.1: Flash Debian 64-Bit OS onto Raspberry Pi 3B+ eMMC
 1. Put the Antmicro Baseboard in USB boot mode (connect `rpiboot` jumper).
-2. Connect micro-USB cable from your PC to the CM4 carrier.
+2. Connect micro-USB cable from your PC to the Raspberry Pi 3B+ carrier.
 3. Run `rpiboot` on your PC to mount the 32GB eMMC as a mass storage drive.
 4. Use **Raspberry Pi Imager** to flash **Raspberry Pi OS Lite (64-bit, Debian Bookworm)**.
 5. In Imager settings:
@@ -32,10 +32,10 @@
 ---
 
 ### Step 2.2: Clone Repository & Run Master Setup Script
-Boot the CM4 on the Antmicro carrier and SSH into it:
+Boot the Raspberry Pi 3B+ on the Antmicro carrier and SSH into it:
 
 ```bash
-# 1. SSH into the CM4
+# 1. SSH into the Raspberry Pi 3B+
 ssh pi@beevil-gateway.local
 
 # 2. Clone the repository
@@ -87,7 +87,7 @@ sudo journalctl -u beevil-gateway -f
 
 ## 4. Verifying the 100-Hive Pipeline
 
-Run the automated verification suite on the CM4:
+Run the automated verification suite on the Raspberry Pi 3B+:
 
 ```bash
 cd /home/pi/beevil-knievel

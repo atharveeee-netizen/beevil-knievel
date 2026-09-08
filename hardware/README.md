@@ -4,29 +4,20 @@ This directory contains the hardware engineering files and reference specificati
 
 ---
 
-## 1. Receiver & Edge AI Gateway: Antmicro CM4 Baseboard (Rev 1.0.5)
+## 1. Receiver & Edge AI Gateway: Raspberry Pi 3B+
 
-The central edge gateway runs on the **Antmicro Raspberry Pi CM4 Baseboard**, a high-performance open-source hardware design developed by [Antmicro](https://antmicro.com) and hosted on the [Antmicro Open Hardware Portal](https://github.com/antmicro/cm4-baseboard).
+The central edge gateway runs on the **Raspberry Pi 3B+**, a reliable and ubiquitous single-board computer providing enough compute for edge ML workloads.
 
-- **Chassis / Board:** Antmicro CM4 Baseboard Rev. 1.0.5
-- **Compute:** Raspberry Pi Compute Module 4 (CM4) Quad-Core Cortex-A72 @ 1.5GHz
-- **Accelerators:** Dual Edge TPU / NPU via M.2 PCIe Gen2 interface (up to 8 TOPS total edge acceleration)
-- **Interfaces:** Gigabit Ethernet (PoE-ready), Dual USB, Dual MIPI CSI camera interfaces, NVMe / MicroSD storage
-- **Design Files:** Complete KiCad schematics, PCB layout, layer stackups, and mechanical files located in [`antmicro_cm4_baseboard/`](./antmicro_cm4_baseboard/)
+- **Chassis / Board:** Raspberry Pi 3B+
+- **Compute:** Broadcom BCM2837B0, Cortex-A53 (ARMv8) 64-bit SoC @ 1.4GHz, 1GB LPDDR2 SDRAM
+- **Interfaces:** Gigabit Ethernet over USB 2.0 (maximum throughput 300 Mbps), 4 × USB 2.0 ports, CSI camera port
+- **LoRa Module:** Waveshare SX1262 LoRa HAT for Raspberry Pi
 
 ```
 hardware/
-├── antmicro_cm4_baseboard/           # Official Antmicro CM4 Baseboard (KiCad PCB, Schematics, Docs)
-│   ├── cm4-baseboard.kicad_pcb       # 6-layer high-density PCB layout
-│   ├── cm4-baseboard.kicad_sch       # Top-level schematic
-│   ├── compute-module.kicad_sch      # CM4 connector interfaces
-│   ├── ethernet.kicad_sch            # Gigabit Ethernet subsystem
-│   ├── nvme-micro-sd.kicad_sch       # Storage subsystem
-│   ├── peripherals.kicad_sch         # I/O & communication buses
-│   ├── supply.kicad_sch              # Power management circuitry
-│   ├── usb.kicad_sch                 # USB host/device controllers
-│   └── doc/                          # Hardware documentation & pinouts
-└── antmicro_schematic_board.jpg      # High-resolution board diagram
+├── BOM_AND_PINOUT.md                 # Complete Bill of Materials and wiring specs
+├── enclosure/                        # 3D printable enclosure files for the node
+│   └── hive_node_enclosure.scad      # OpenSCAD parametric enclosure design
 ```
 
 ---
@@ -36,5 +27,5 @@ hardware/
 The field transmitter node deployed on individual hives utilizes an **off-shore commercial-off-the-shelf (COTS) solar sensor transmitter node**. 
 
 - **Transmitter Architecture:** Factory-integrated, ultra-low power offshore transmitter with built-in multi-sensor telemetry and integrated solar energy harvesting.
-- **Protocol:** Standardized sub-GHz radio / LoRa link transmitting acoustic feature vectors, hive temperature, humidity, and vibration telemetry directly to the Antmicro CM4 gateway.
+- **Protocol:** Standardized sub-GHz radio / LoRa link transmitting acoustic feature vectors, hive temperature, humidity, and vibration telemetry directly to the Raspberry Pi 3B+ gateway.
 - **Maintenance-Free:** Factory-encapsulated weatherproof IP67 enclosure with integrated solar harvesting — zero custom PCB fabrication required for hive deployment.

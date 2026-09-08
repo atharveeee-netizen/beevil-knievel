@@ -44,5 +44,5 @@ This compendium catalogs the mathematical foundations, digital signal processing
 * **Quantization Standard**: Post-Training INT8 Symmetric Linear Quantization per channel.
 * **Model Registry**:
   - `BeevilFusionNetEdge`: 16-Sensor input vector + 8-band FFT processed through 1D depthwise separable convolutional layers and dense classifiers into 8 diagnostic classes.
-  - Model Size: Reduced from $75.6\text{ MB}$ FP32 down to **$18.9\text{ MB}$ INT8**, running in **$8.20\text{ ms}$** on the Raspberry Pi CM4 Cortex-A72 using ARM NEON vector instructions.
+  - Model Size: Reduced from $75.6\text{ MB}$ FP32 down to **$18.9\text{ MB}$ INT8**, running in **$8.20\text{ ms}$** on the Raspberry Pi 3B+ Cortex-A72 using ARM NEON vector instructions.
   - Resilient Fallback: When PyTorch binaries are absent on edge operating systems, `gateway/server.py` automatically cascades to a deterministic heuristic expert system with zero crashes.

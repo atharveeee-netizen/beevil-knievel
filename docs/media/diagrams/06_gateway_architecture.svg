@@ -32,7 +32,7 @@
     <rect width="960" height="420" fill="#0b0e14" rx="8"/>
     
     <text x="30" y="38" class="title">06 — HARDENED APIARY EDGE GATEWAY ARCHITECTURE</text>
-    <text x="30" y="58" class="subtitle">Raspberry Pi CM4 / Rockchip RK3588 with read-only OverlayFS, SQLite WAL, and local web engine</text>
+    <text x="30" y="58" class="subtitle">Raspberry Pi 3B+ / Rockchip RK3588 with read-only OverlayFS, SQLite WAL, and local web engine</text>
     
     <!-- Baseboard Carrier -->
     <rect x="30" y="85" width="900" height="305" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="8"/>

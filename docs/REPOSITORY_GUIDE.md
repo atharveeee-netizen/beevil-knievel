@@ -44,16 +44,16 @@ beevil-knievel/
 │       └── research/                         # Public domain & CC-BY real apiary and brood frame photos
 ├── firmware/
 │   ├── beevil_rak4631_transmitter/           # Primary Nordic nRF52840 + SX1262 Arduino/FreeRTOS sketch
-│   ├── main_node.cpp                         # STM32WLE5JC / Wio-E5 secondary node firmware
+│   ├── main_node.cpp                         # nRF52840 / RAK4631 secondary node firmware
 │   └── receiver_gateway.cpp                  # Direct serial LoRa receiver sketch
 ├── hardware/
 │   ├── BOM_AND_PINOUT.md                     # Invoiced procurement Bill of Materials & pin connections
-│   ├── antmicro_schematic_board.jpg          # Hardware schematic slide for Antmicro CM4 baseboard
+│   ├── antmicro_schematic_board.jpg          # Hardware schematic slide for Raspberry Pi 3B+ baseboard
 │   └── antmicro_cm4_baseboard/               # Carrier board documentation & open-source design files
 ├── gateway/
 │   ├── server.py                             # High-throughput FastAPI edge server with SQLite WAL ingest
 │   ├── cusum_analytics.py                    # Gateway statistical change-point detection daemon
-│   ├── lora_receiver.py                      # Sub-GHz LoRa radio daemon for Raspberry Pi CM4
+│   ├── lora_receiver.py                      # Sub-GHz LoRa radio daemon for Raspberry Pi 3B+
 │   ├── mesh_router.py                        # Multi-hop packet routing and deduplication engine
 │   └── setup_overlayfs.sh                    # Linux script configuring power-loss immune read-only root
 ├── TinyML Model/

@@ -18,7 +18,7 @@ export function Footer() {
           </div>
 
           <div className="space-y-1 text-left md:text-right">
-            <p>IEEE HardwAIre Challenge Master Standard • Standardized on Antmicro CM4 Baseboard (Rev 1.0.5)</p>
+            <p>IEEE HardwAIre Challenge Master Standard • Standardized on Raspberry Pi 3B+</p>
             <p>
               <Link
                 href="https://github.com/atharveeee-netizen/beevil-knievel"
@@ -47,7 +47,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="#the_specs" className="hover:text-[#ffc833] transition-colors">
-                  Antmicro CM4 Gateway
+                  Raspberry Pi 3B+ Gateway
                 </Link>
               </li>
               <li>
@@ -138,8 +138,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="https://github.com/antmicro/cm4-baseboard" target="_blank" rel="noopener noreferrer" className="hover:text-[#ffc833] transition-colors">
-                  Antmicro CM4 Hardware
+                <Link href="https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/" target="_blank" rel="noopener noreferrer" className="hover:text-[#ffc833] transition-colors">
+                  Raspberry Pi 3B+ Hardware
                 </Link>
               </li>
               <li>

@@ -338,12 +338,12 @@ Commercial honeybee (*Apis mellifera*) pollination services directly sustain **3
 
 ### 8.1 Ultra-Low-Power Energy Budget & Autonomous Lifespan
 - **Active Wake Phase (2.5 seconds)**: Samples $3\times$ DS18B20 1-Wire sensors ($1.2\text{ mA}$ for $750\text{ ms}$), captures 1000-sample audio window on ICS-43434 I2S microphone ($2.5\text{ mA}$ for $125\text{ ms}$), executes on-device FFT/TinyML inference ($4.8\text{ mA}$ for $45\text{ ms}$ on ARM Cortex-M4 @ 48 MHz), and fires LoRa packet ($20\text{ mA}$ @ $+14\text{ dBm}$ for $65\text{ ms}$).
-- **Deep-Sleep Phase ($15\text{ minutes}$)**: Powers down peripherals, sets STM32WLE5 to `STOP2 / Standby` mode with RTC wake timer: **$1.5\,\mu\text{A}$ quiescent current**.
+- **Deep-Sleep Phase ($15\text{ minutes}$)**: Powers down peripherals, sets nRF52840 to `STOP2 / Standby` mode with RTC wake timer: **$1.5\,\mu\text{A}$ quiescent current**.
 - **Daily Energy Consumption**: **$0.85\text{ mWh/day}$**.
 - **Battery Autonomy**: 1000 mAh 3.7V LiPo ($3700\text{ mWh}$) yields **$> 18\text{ months}$** runtime with zero solar input; infinite runtime ($> 5\text{ years}$) with integrated 1W solar trickle panel.
 
 ### 8.2 Power-Loss Brownout Immunity & Flash Store-and-Forward Caching
-- **Brownout Reset (BOR)**: STM32WLE5 internal BOR Level 3 ($V_{\text{BOR}} = 2.4\text{ V}$) ensures graceful flash commit and brownout recovery without NVRAM corruption.
+- **Brownout Reset (BOR)**: nRF52840 internal BOR Level 3 ($V_{\text{BOR}} = 2.4\text{ V}$) ensures graceful flash commit and brownout recovery without NVRAM corruption.
 - **Store-and-Forward NOR Flash Queue**: If LoRa packet transmission fails (e.g. gateway temporarily offline or RF shadowing), packets are automatically compressed into 20-byte packed binary structs and appended to the internal Flash memory circular queue (capacity: **$4,096\text{ packets}$** = 42 days of offline buffering).
 - **Auto-Flush Burst**: Upon gateway beacon re-acquisition, the node flushes queued packets using adaptive exponential backoff to avoid channel contention.
 

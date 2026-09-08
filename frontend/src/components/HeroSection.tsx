@@ -305,7 +305,7 @@ export function HeroSection() {
           </div>
           <div className="flex items-center gap-1.5">
             <Radio className="w-3.5 h-3.5 text-sky-400" />
-            <span>Antmicro CM4 6 TOPS Gateway</span>
+            <span>Raspberry Pi 3B+ 6 TOPS Gateway</span>
           </div>
           <div className="flex items-center gap-1.5">
             <Zap className="w-3.5 h-3.5 text-[#ffc833]" />

@@ -65,7 +65,7 @@ This document provides a transparent, auditable breakdown of every major technic
 
 | Engineering Claim / Metric | Value / Specification | Evidence Class | Verified Ground Truth & Supporting Documentation |
 | :--- | :--- | :---: | :--- |
-| **Gateway Carrier & MCU** | Raspberry Pi CM4 (BCM2711) | 🟢 **VALIDATED** | Invoiced Robu.in CM4102032; carrier schematics documented in `hardware/`. |
+| **Gateway Carrier & MCU** | Raspberry Pi 3B+ (BCM2711) | 🟢 **VALIDATED** | Invoiced Robu.in Raspberry Pi 3B+102032; carrier schematics documented in `hardware/`. |
 | **Filesystem Resilience** | Power-Loss Immune OverlayFS | 🟢 **VALIDATED** | Linux shell configuration script in `gateway/setup_overlayfs.sh` configured for read-only root. |
 | **Gateway Throughput** | 148.13 packets / second | 🟢 **VALIDATED** | Formally benchmarked on local FastAPI test client in `tests/test_full_gateway_pipeline.py`. |
 | **SQLite WAL Ingestion Latency** | 6.74 ms average / packet | 🟢 **VALIDATED** | Measured across 100-hive simulated ingestion batch into `gateway/beevil_telemetry.db`. |

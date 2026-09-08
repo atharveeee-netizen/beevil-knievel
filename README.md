@@ -4,7 +4,7 @@
 
 ![BEEVIL KNIEVEL Engineering Hero](docs/media/hero/beevil_knievel_hero_engineering.png)
 
-[![Hardware Status](https://img.shields.io/badge/Hardware-nRF52840%20%2B%20SX1262%20%2B%20CM4-22c55e?style=flat-square)](#05--field-node)
+[![Hardware Status](https://img.shields.io/badge/Hardware-nRF52840%20%2B%20SX1262%20%2B%20Raspberry Pi 3B+-22c55e?style=flat-square)](#05--field-node)
 [![Acoustic DSP](https://img.shields.io/badge/DSP-CMSIS--DSP%20256--pt%20FFT%20(%CE%94f%3D7.81Hz)-3b82f6?style=flat-square)](#06--acoustic-dsp)
 [![MATLAB Simulation](https://img.shields.io/badge/MATLAB%2FSimulink-8%20Models%20Verified-e5a93b?style=flat-square)](#15--reproducibility)
 [![RF Link Budget](https://img.shields.io/badge/RF%20Link-IN865%20LoRa%20(15km%20LOS%20%2F%201.5km%20Canopy)-8b5cf6?style=flat-square)](#10--radio)
@@ -58,7 +58,7 @@ BEEVIL KNIEVEL instruments the standard 10-frame Langstroth hive body through no
 ### Multi-Modal Sensory Transduction Matrix
 - **Brood-Nest Thermal Array**: 5-point NIST-traceable digital RTDs (TI TMP117, $\pm0.1^\circ\text{C}$ accuracy) clamped to Frame 4 & 5 to isolate the central cluster temperature ($T_{\text{core}}$) from outer wall boundaries.
 - **Bio-Acoustic Capsule**: Sintered hydrophobic MEMS microphone (TDK InvenSense INMP441) capturing $100 - 1000\text{ Hz}$ colony vibrations via I2S digital DMA.
-- **Metabolic Gas & Humidity**: Sensirion SCD41 photoacoustic transducer measuring carbon dioxide ($400 - 5000\text{ ppm}$) and relative humidity (RH%).
+- **Metabolic Gas & Humidity**: Sensirion SCD41 photoacoustic transducer measuring carbon dioxide ($400 - 5000\text{ ppm}$) and BME688 tracking relative humidity (RH%) and VOCs.
 - **Gross Mass Accumulation**: Dual 4-point strain gauge load cell bars (Avia HX711, 24-bit resolution) tracking nectar flow, honey stores, and sudden colony departure.
 - **Seismic & Tampering Detection**: STMicroelectronics LIS3DH 3-axis ultra-low-power accelerometer generating hardware wake interrupts on bear attacks or human theft.
 
@@ -118,7 +118,7 @@ BEEVIL KNIEVEL operates on an autonomous 3-tier architecture designed for rugged
 ### Architectural Tiers
 1. **Tier 1: Physical Hive & Transducers**: In-hive probes capture thermodynamic and bio-acoustic signals without disturbing colony propolis seals.
 2. **Tier 2: Embedded Telemetry Field Node**: Nordic nRF52840 SoC executes on-device CMSIS-DSP 256-point FFT, packages a compact 24-byte telemetry frame, and transmits via Semtech SX1262 LoRa mesh.
-3. **Tier 3: Hardened Edge Gateway & Analytics**: Mast-mounted Raspberry Pi CM4 edge server receives packets via RAK2287 8-channel concentrator, stores data in SQLite WAL, executes CUSUM drift detection, and serves local browser, PWA, and Playdate consoles.
+3. **Tier 3: Hardened Edge Gateway & Analytics**: Mast-mounted Raspberry Pi 3B+ edge server receives packets via RAK2287 8-channel concentrator, stores data in SQLite WAL, executes CUSUM drift detection, and serves local browser, PWA, and Playdate consoles.
 
 ---
 
@@ -141,7 +141,7 @@ The field telemetry node is engineered for multi-year field autonomy, housed in 
 </div>
 
 ### Hardware Subsystem Specifications
-- **Microcontroller**: Nordic Semiconductor nRF52840 (ARM Cortex-M4F @ 64 MHz, 1 MB Flash, 256 KB RAM).
+- **Microcontroller**: RAKwireless WisBlock RAK4631 (Nordic nRF52840 MCU @ 64 MHz, 1 MB Flash, 256 KB RAM).
 - **RF Transceiver**: Semtech SX1262 Sub-GHz LoRa Engine (+14 dBm Tx power, -137 dBm sensitivity).
 - **Power Management**: TI BQ25171 solar MPPT charge controller + TI TPS62840 ultra-low-$I_q$ (60 nA) step-down regulator.
 - **Battery Storage**: 1200 mAh LiFePO4 chemistry (3.2V nominal, >2500 cycle life, intrinsically safe thermal runaway profile).
@@ -289,7 +289,7 @@ The telemetry radio operates in the **IN865 (865.0 – 867.0 MHz)** band using S
 
 ## 11 — Edge Processing
 
-The edge gateway consists of an **Antmicro Open-Source Baseboard** hosting a Raspberry Pi Compute Module 4 (CM4) or Rockchip RK3588 with hardware NPU.
+The edge gateway consists of an **Antmicro Open-Source Baseboard** hosting a Raspberry Pi Compute Module 4 (Raspberry Pi 3B+) or Rockchip RK3588 with hardware NPU.
 
 <div align="center">
 

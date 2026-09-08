@@ -19,8 +19,8 @@ def run_real_zenodo_benchmark():
     print("=================================================================================")
     print(f"  * Dataset Source:     Zenodo Public Research Archive (DOI: 10.5281/zenodo.1321278)")
     print(f"  * Model Architecture: 1D-CNN + 4-Band Spectral Feature Extractor")
-    print(f"  * Flash Footprint:    {MODEL_FLASH_FOOTPRINT_KB} KB / 256 KB (Wio-E5)")
-    print(f"  * SRAM Footprint:     {MODEL_RAM_FOOTPRINT_KB} KB / 64 KB (Wio-E5)")
+    print(f"  * Flash Footprint:    {MODEL_FLASH_FOOTPRINT_KB} KB / 256 KB (RAK4631)")
+    print(f"  * SRAM Footprint:     {MODEL_RAM_FOOTPRINT_KB} KB / 64 KB (RAK4631)")
     print("=================================================================================")
 
     print("\n[STEP 1] Verifying 14 Real Zenodo Audio Dataset Recordings...")

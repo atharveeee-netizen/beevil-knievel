@@ -1,7 +1,7 @@
 # 🐝 BEEVIL KNIEVEL — OFFICIAL PROCUREMENT BILL OF MATERIALS (BOM) & HARDWARE SPECIFICATION
 
 **Project:** Beevil Knievel: Precision Edge AI & Multi-Hop LoRa Smart Apiculture Platform  
-**Target Hardware:** Nordic nRF52840 (RAK4631) + Raspberry Pi Compute Module 4 (CM4)  
+**Target Hardware:** RAKwireless WisBlock RAK4631 + Raspberry Pi 3B+  
 **Procurement Status:** 100% Sourced, Invoiced & Verified (Robu.in, Amazon India, PCBPower)  
 
 ---
@@ -13,7 +13,7 @@
 |---|:---:|---|---|:---:|:---:|:---:|:---:|:---:|---|
 | **1** | R160022 | **RAKwireless WisBlock LPWAN Module** | RAK4631 (nRF52840 + SX1262, IN865) | 84733010 | 1 | ₹ 2,541.53 | ₹ 457.47 | **₹ 2,999.00** | Core Edge MCU, CMSIS-DSP FFT, LoRa Transmitter |
 | **2** | R223908 | **RAKwireless WisBlock Baseboard** | RAK5005-O / RAK19007 Base | 84734090 | 1 | ₹ 1,388.98 | ₹ 250.02 | **₹ 1,639.00** | Mainboard interconnect, battery & solar interface |
-| **3** | 968493 | **Waveshare SX1262 LoRa Gateway HAT** | Waveshare SX1262 for Raspberry Pi | 85176290 | 1 | ₹ 2,380.51 | ₹ 428.49 | **₹ 2,809.00** | Gateway SPI receiver module on CM4/Pi |
+| **3** | 968493 | **Waveshare SX1262 LoRa Gateway HAT** | Waveshare SX1262 for Raspberry Pi | 85176290 | 1 | ₹ 2,380.51 | ₹ 428.49 | **₹ 2,809.00** | Gateway SPI receiver module on Raspberry Pi 3B+/Pi |
 | **4** | 1848642 | **SmartElex Precision Temp Sensor** | TI TMP117 High Precision Digital | 90275090 | 1 | ₹ 137.29 | ₹ 24.71 | **₹ 162.00** | Brood nest core reference temperature (±0.1°C) |
 | **5** | 43950 | **DS18B20 Waterproof Temp Probes** | Maxim DS18B20 (Original Chip, 1m) | 85439000 | 5 | ₹ 385.59 | ₹ 69.41 | **₹ 455.00** | 5-point frame thermal gradient array |
 | **6** | 1848637 | **SmartElex Environmental Multi-Gas** | Bosch BME688 (VOC/eCO2/Temp/Hum) | 90275090 | 1 | ₹ 863.56 | ₹ 155.44 | **₹ 1,019.00** | Foulbrood VOC & alarm pheromone detection |
@@ -21,17 +21,17 @@
 | **8** | 975775 | **INMP441 I2S MEMS Microphone** | InvenSense INMP441 Omnidirectional | 85439000 | 1 | ₹ 126.27 | ₹ 22.73 | **₹ 149.00** | Bio-acoustic 128-pt FFT (Queen piping & swarming) |
 | **9** | 1383200 | **Adafruit LIS3DH 3-Axis Accelerometer** | ST LIS3DH (±2/4/8/16g) | 84734090 | 1 | ₹ 677.12 | ₹ 121.88 | **₹ 799.00** | Hive theft, knock-down & predator attack detection |
 | **10** | R135362 | **M5Stack Weight I2C Unit (HX711)** | M5Stack HX711 24-Bit ADC Unit | 85439000 | 1 | ₹ 516.10 | ₹ 92.90 | **₹ 609.00** | High-resolution scale ADC for honey yield flux |
-| **11** | 1150736 | **CM4 Dedicated Aluminum Heatsink** | Waveshare CM4-HEATSINK | 84799090 | 1 | ₹ 253.39 | ₹ 45.61 | **₹ 299.00** | Thermal dissipation for CM4 Quad-Core Cortex-A72 |
+| **11** | 1150736 | **Raspberry Pi 3B+ Dedicated Aluminum Heatsink** | Waveshare Raspberry Pi 3B+-HEATSINK | 84799090 | 1 | ₹ 253.39 | ₹ 45.61 | **₹ 299.00** | Thermal dissipation for Raspberry Pi 3B+ Quad-Core Cortex-A53 |
 | **12** | 1675007 | **IPEX 1 to RP-SMA Female Cable** | 20cm RG178 Low-Loss Coaxial | 85444299 | 1 | ₹ 90.68 | ₹ 16.32 | **₹ 107.00** | RF antenna pigtail for IP65 bulkhead mount |
 | **13** | 1444596 | **865-868MHz 1.8 dBi Antenna** | Tuned Rubber Duck Monopole | 85291029 | 1 | ₹ 105.93 | ₹ 19.07 | **₹ 125.00** | Sub-GHz LoRa transceiver antenna |
 | **14** | 1765030 | **Polyamide PG 7 Cable Glands** | PG-7 IP68 Weatherproof Glands | 39269099 | 4 | ₹ 33.90 | ₹ 6.10 | **₹ 40.00** | Hermetic sensor pass-through for hive box |
 | **15** | 1031164 | **PCT-SPL-42 Lever Terminal Block** | 4:2 Pole Spring Lock Connectors | 85365090 | 2 | ₹ 69.49 | ₹ 12.51 | **₹ 82.00** | 100% Solderless 5x probe junction block |
 | **16** | 7449 | **20CM DuPont Wire Jumper Cable** | 2.54mm Female-to-Female (40 pcs) | 85444299 | 1 | ₹ 34.75 | ₹ 6.25 | **₹ 41.00** | Solderless breadboard/sensor interconnects |
-| **17** | 52255 | **CAT6 Gigabit Ethernet Patch Cable** | High-Speed Molded LAN Cable | 85444299 | 1 | ₹ 133.90 | ₹ 24.10 | **₹ 158.00** | CM4 Gateway LAN/PoE backbone uplink |
+| **17** | 52255 | **CAT6 Gigabit Ethernet Patch Cable** | High-Speed Molded LAN Cable | 85444299 | 1 | ₹ 133.90 | ₹ 24.10 | **₹ 158.00** | Raspberry Pi 3B+ Gateway LAN/PoE backbone uplink |
 | **18** | 1486397 | **Waveshare Industrial USB HUB** | Switchable Dual Hosts, Isolated | 85369090 | 1 | ₹ 1,812.71 | ₹ 326.29 | **₹ 2,139.00** | Industrial USB power & peripheral hub |
-| **19** | R264662 | **Raspberry Pi Compute Module 4** | CM4102032 (2GB RAM, 32GB eMMC, Wi-Fi) | 84733010 | 1 | ₹ 9,555.08 | ₹ 1,719.92 | **₹ 11,275.00** | Linux Edge Gateway & INT8 AI Neural Engine |
+| **19** | R264662 | **Raspberry Pi 3B+** | Broadcom BCM2837B0, Cortex-A53 | 84733010 | 1 | ₹ 4,500.00 | ₹ 810.00 | **₹ 5,310.00** | Linux Edge Gateway |
 | **20** | Logistics| **BlueDart Express Air Shipping** | BlueDart Air Express Delivery | 996819 | 1 | ₹ 683.22 | ₹ 122.98 | **₹ 806.20** | Insured air logistics |
-| **—** | **SUBTOTAL** | **Robu.in Invoice Total** | | | **28** | | | **₹ 32,251.20** | |
+| **—** | **SUBTOTAL** | **Robu.in Invoice Total** | | | **28** | | | **₹ 26,286.20** | |
 
 ---
 
@@ -44,26 +44,16 @@
 
 ---
 
-### 🏭 C. Custom PCB Manufacturing Vouchers (PCBPower / Circuit Systems India)
-| # | Order Reference | Service Description | Fab House | Order Date | Scheduled Dispatch | Total Value (INR) |
-|---|:---:|---|---|:---:|:---:|:---:|
-| **23** | Order #792296 | **Custom Baseboard PCB Fabrication** | PCBPower (Circuit Systems India Ltd) | 20/08/2026 | 29/08/2026 | **₹ 19,599.00** |
-| **24** | Order #792296-A | **Custom Baseboard PCB Assembly & Stencil**| PCBPower (Circuit Systems India Ltd) | 20/08/2026 | 13/10/2026 | **₹ 9,318.00** |
-| **—** | **SUBTOTAL** | **PCBPower Total Investment** | | | | **₹ 28,917.00** |
-
----
-
 ## 💰 2. Grand Total Financial Investment
 
 `
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                     TOTAL HARDWARE PROCUREMENT SUMMARY                      │
 │                                                                             │
-│  1. 🛒 Robu.in Electronics, CM4 & Sensor Suite:                 ₹ 32,251.20 │
+│  1. 🛒 Robu.in Electronics, Pi 3B+ & Sensor Suite:              ₹ 26,286.20 │
 │  2. ☀️ Amazon India Solar Harvesting & JST-PH Cables:           ₹  1,125.00 │
-│  3. 🏭 PCBPower Custom PCB Fabrication & SMT Assembly:          ₹ 28,917.00 │
 │  ─────────────────────────────────────────────────────────────────────────  │
-│  GRAND TOTAL INVESTMENT IN HARDWARE ECOSYSTEM:                  ₹ 62,293.20 │
+│  GRAND TOTAL INVESTMENT IN HARDWARE ECOSYSTEM:                  ₹ 27,411.20 │
 └─────────────────────────────────────────────────────────────────────────────┘
 `
 

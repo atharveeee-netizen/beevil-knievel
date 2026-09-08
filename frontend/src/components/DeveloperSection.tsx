@@ -64,7 +64,7 @@ export function DeveloperSection() {
           </h2>
 
           <p className="text-xl sm:text-2xl leading-relaxed font-medium max-w-3xl">
-            Monitor all your colonies in real-time with the <strong>HiveOS App</strong>. Streams live acoustic spectrograms, brood temperatures, and swarm alerts directly from your Antmicro CM4 Gateway to macOS, Windows, Linux, iOS, and Android.
+            Monitor all your colonies in real-time with the <strong>HiveOS App</strong>. Streams live acoustic spectrograms, brood temperatures, and swarm alerts directly from your Raspberry Pi 3B+ Gateway to macOS, Windows, Linux, iOS, and Android.
           </p>
 
           <div className="pt-2">

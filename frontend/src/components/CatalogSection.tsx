@@ -23,9 +23,9 @@ export function CatalogSection() {
       name: "Beevil Apiary Pro",
       range: "5 – 25 Hives",
       badge: "Commercial Apiary Standard",
-      description: "Includes 1x Central Antmicro CM4 Base Station Gateway with up to 15km LoRaWAN range for complete apiary coverage.",
+      description: "Includes 1x Central Raspberry Pi 3B+ Base Station Gateway with up to 15km LoRaWAN range for complete apiary coverage.",
       features: [
-        "1x Antmicro CM4 Edge Gateway",
+        "1x Raspberry Pi 3B+ Edge Gateway",
         "Multi-Node Sub-GHz LoRa Mesh",
         "Full 96.84% Edge AI Net Execution",
         "24/7 Remote Telemetry & Cloud Backup",

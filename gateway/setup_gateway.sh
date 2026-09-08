@@ -1,8 +1,8 @@
 #!/bin/bash
 # =============================================================================
-# BEEVIL KNIEVEL — MASTER CM4 LINUX EDGE GATEWAY PROVISIONING SCRIPT
+# BEEVIL KNIEVEL — MASTER LINUX EDGE GATEWAY PROVISIONING SCRIPT
 # =============================================================================
-# Run on Raspberry Pi Compute Module 4 (Debian 64-Bit Bookworm)
+# Run on Raspberry Pi 3B+ (Debian 64-Bit Bookworm)
 # Usage: sudo bash setup_gateway.sh
 # =============================================================================
 

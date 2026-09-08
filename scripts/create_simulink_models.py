@@ -96,7 +96,7 @@ blocks_cps = """
             <Block BlockType="SubSystem" Name="Semtech_SX1262_LoRa">
                 <P Name="Description">Modulator SF10, 125 kHz BW, +14 dBm Tx, ITU-R P.833-9 channel</P>
             </Block>
-            <Block BlockType="SubSystem" Name="Edge_Gateway_CM4">
+            <Block BlockType="SubSystem" Name="Edge_Gateway_Raspberry Pi 3B+">
                 <P Name="Description">RAK2287 concentrator, SQLite WAL, CUSUM drift detection, HoneyChain</P>
             </Block>
 """

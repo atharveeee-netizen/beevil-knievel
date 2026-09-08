@@ -31,13 +31,13 @@ const ALL_SPECS: SpecCard[] = [
   {
     id: "gateway-hw",
     category: "HARDWARE",
-    title: "Gateway Compute (Antmicro CM4)",
+    title: "Gateway Compute (Raspberry Pi 3B+)",
     icon: <Cpu className="w-5 h-5 text-[#ffc833]" />,
     items: [
-      "Raspberry Pi Compute Module 4 (Quad-Core Cortex-A72 @ 1.5GHz)",
-      "Dedicated 6 TOPS Edge NPU / TPU via M.2 PCIe Gen2 interface",
-      "Gigabit Ethernet (PoE-ready) + Dual USB + NVMe Storage",
-      "Antmicro 6-Layer Open-Source Baseboard (Rev 1.0.5)",
+      "Raspberry Pi 3B+ (Quad-Core Cortex-A53 @ 1.4GHz)",
+      "Dedicated 6 TOPS Edge NPU / TPU via USB accelerator",
+      "Gigabit Ethernet + 4 USB 2.0 Ports",
+      "Standard Raspberry Pi Form Factor",
     ],
     highlight: "6 TOPS Edge NPU",
   },
@@ -129,7 +129,7 @@ const ALL_SPECS: SpecCard[] = [
     items: [
       "Hardware Inference Latency: 3.35 ms on Edge NPU",
       "Throughput: 298 Hives / Second Real-Time Monitoring Capacity",
-      "Single Antmicro Gateway Supports Up to 50 Field Hives",
+      "Single Raspberry Pi 3B+ Gateway Supports Up to 50 Field Hives",
       "Sub-5ms Real-Time Alarm Dispatch to Mobile Devices",
     ],
     highlight: "3.35 ms Inference",

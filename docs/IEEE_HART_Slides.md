@@ -7,7 +7,7 @@
 ## 🛜 Slide 1: Transmitter (Hive Node)
 
 **Hardware Core**
-*   **Controller:** STM32WLE5CCU6 (Wio-E5) + Integrated SX126x Radio.
+*   **Controller:** nRF52840 (RAK4631) + Integrated SX126x Radio.
 *   **Sensors:** DS18B20 (Temperature), ICS-43432 (Acoustics), BME680 (Gas/VOC), HX711 (Weight).
 *   **Power:** TP4056 + TPS7A02 LDO (Powered via Solar + LiPo).
 
@@ -37,12 +37,12 @@ graph LR
 
 **Hardware Architecture**
 *   **Base PCB:** Charles Hallard Open-Source `LoRa-E5-Breakout`.
-*   **Main Receptor:** Wio-E5 Chip set to `RX_CONTINUOUS` to catch fleet packets.
+*   **Main Receptor:** RAK4631 Chip set to `RX_CONTINUOUS` to catch fleet packets.
 *   **Backhaul Carrier:** Custom 4-pin UART Header populated with ESP32 Wi-Fi module.
 
 **Dual-Chip Handoff Algorithm**
-*   **Step 1 [Demodulation]:** Wio-E5 catches 868MHz packet over the air.
-*   **Step 2 [Serial Bridge]:** Wio-E5 blasts payload via physical UART TX wire.
+*   **Step 1 [Demodulation]:** RAK4631 catches 868MHz packet over the air.
+*   **Step 2 [Serial Bridge]:** RAK4631 blasts payload via physical UART TX wire.
 *   **Step 3 [Cloud Bridge]:** ESP32 catches payload on RX wire $\rightarrow$ Converts to JSON $\rightarrow$ Executes AWS HTTP POST.
 
 **Architecture Fallbacks**
@@ -51,7 +51,7 @@ graph LR
 
 ```mermaid
 graph LR
-    Hive((Hive Node)) -.->|LoRa RF| E5[Wio-E5 Receptor]
+    Hive((Hive Node)) -.->|LoRa RF| E5[RAK4631 Receptor]
     E5 -->|UART Serial Handoff| ESP32[ESP32 Wi-Fi]
     ESP32 -->|Encrypted HTTPS| AWS[(AWS Cloud)]
 ```

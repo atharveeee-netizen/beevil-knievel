@@ -17,7 +17,7 @@ This compendium indexes the official component datasheets, manufacturer technica
 | **LIS3DH** | Ultra-Low Power 3-Axis Accelerometer | STMicroelectronics | DocID17530 (Rev 2) | I2C (Addr: `0x18`) | 1.71V – 3.6V | ±2g/±4g/±8g/±16g, 2 µA low-power mode, tilt interrupt |
 | **HX711** | 24-Bit Differential ADC for Weigh Scales | Avia Semiconductor | AV0011-DS (Rev 1.0) | 2-Wire Serial Clock/Data | 2.6V – 5.5V | 24-bit differential input, on-chip low-noise PGA |
 | **DS18B20** | 1-Wire Digital Thermometer Probes | Maxim / Analog Devices | 19-6714 (Rev 6) | 1-Wire Single Bus | 3.0V – 5.5V | ±0.5°C (-10°C to +85°C), 64-bit unique factory ROM ID |
-| **CM4** | Raspberry Pi Compute Module 4 | Raspberry Pi Ltd | CM4 Datasheet (Release 8) | Carrier Board Hirose | 5.0V DC | BCM2711 Quad Cortex-A72 @ 1.5GHz, 2GB RAM, 32GB eMMC |
+| **Raspberry Pi 3B+** | Raspberry Pi Compute Module 4 | Raspberry Pi Ltd | Raspberry Pi 3B+ Datasheet (Release 8) | Carrier Board Hirose | 5.0V DC | BCM2711 Quad Cortex-A72 @ 1.5GHz, 2GB RAM, 32GB eMMC |
 
 ---
 

@@ -84,7 +84,7 @@ def generate_01_problem():
     <text x="515" y="195" class="box-body">• Non-Invasive Physics: Hermetic seal intact, zero brood nest thermal shock</text>
     <text x="515" y="220" class="box-body">• Pre-Swarm Warning: 300–400 Hz acoustic surge detected 36 hours early</text>
     <text x="515" y="245" class="box-body">• Queen Piping &amp; Distress: 450–750 Hz tracked via CMSIS-DSP 256-pt FFT</text>
-    <text x="515" y="270" class="box-body">• Scalable Autonomous Mesh: 100 hives monitored per single CM4 gateway</text>
+    <text x="515" y="270" class="box-body">• Scalable Autonomous Mesh: 100 hives monitored per single Raspberry Pi 3B+ gateway</text>
     <text x="515" y="300" class="mono" fill="#34d399">Target: &gt; 60% Mitigation of Preventable Winter Losses</text>
     <text x="515" y="325" class="mono" fill="#38bdf8">Hardware Payback Period: &lt; 2.4 Months per Commercial Apiary</text>
     <text x="515" y="350" class="mono" fill="#e5a93b">Latency to Anomaly Detection: &lt; 5 Minutes (Instant Alert)</text>
@@ -397,7 +397,7 @@ def generate_05_lora_mesh():
     <!-- Gateway Mast -->
     <rect x="800" y="180" width="110" height="80" fill="#1e293b" stroke="#38bdf8" stroke-width="2" rx="6"/>
     <text x="810" y="205" class="mono" fill="#38bdf8">EDGE GATEWAY</text>
-    <text x="810" y="225" class="mono" fill="#ffffff">CM4 Mast (10m)</text>
+    <text x="810" y="225" class="mono" fill="#ffffff">Gateway Mast (10m)</text>
     <text x="810" y="245" class="mono" fill="#94a3b8">SX1302 8-Ch</text>
 
     <!-- Repeater Node (Edge of Apiary) -->
@@ -439,7 +439,7 @@ def generate_06_gateway():
     <rect width="960" height="420" fill="#0b0e14" rx="8"/>
     
     <text x="30" y="38" class="title">06 — HARDENED APIARY EDGE GATEWAY ARCHITECTURE</text>
-    <text x="30" y="58" class="subtitle">Raspberry Pi CM4 / Rockchip RK3588 with read-only OverlayFS, SQLite WAL, and local web engine</text>
+    <text x="30" y="58" class="subtitle">Raspberry Pi 3B+ / Rockchip RK3588 with read-only OverlayFS, SQLite WAL, and local web engine</text>
     
     <!-- Baseboard Carrier -->
     <rect x="30" y="85" width="900" height="305" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="8"/>
@@ -626,7 +626,7 @@ def generate_08_cyber_physical():
     <rect x="660" y="85" width="270" height="365" fill="url(#panelGrad)" stroke="#38bdf8" stroke-width="1.5" rx="6"/>
     <rect x="675" y="100" width="180" height="24" fill="#38bdf8" rx="3"/>
     <text x="683" y="116" class="tag" fill="#ffffff">TIER 3: EDGE GATEWAY &amp; OPS</text>
-    <text x="675" y="150" class="box-title" fill="#38bdf8">Raspberry Pi CM4 Edge Server</text>
+    <text x="675" y="150" class="box-title" fill="#38bdf8">Raspberry Pi 3B+ Edge Server</text>
     <text x="675" y="175" class="box-body">• RAK2287 8-Ch LoRaWAN Concentrator</text>
     <text x="675" y="195" class="box-body">• Read-Only OverlayFS OS Hardening</text>
     <text x="675" y="215" class="box-body">• SQLite 3 WAL Database (Sub-7ms latency)</text>

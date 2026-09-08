@@ -1,7 +1,7 @@
 """
 BEEVIL KNIEVEL — LORAWAN / LORA SPI PACKET RECEIVER DAEMON
 ===========================================================
-Linux background daemon for Raspberry Pi CM4 + Waveshare SX1262 LoRa HAT.
+Linux background daemon for Raspberry Pi 3B+ + Waveshare SX1262 LoRa HAT.
 - Interfaces with Semtech SX1262 via SPI (/dev/spidev0.0) or UART.
 - Operates on 865.0625 MHz (India WPC De-licensed Band).
 - Unpacks 32-byte binary binary payloads from 100 field transmitter nodes.
@@ -97,7 +97,7 @@ def run_lora_listener():
     logger.info("📡 Starting Semtech SX1262 LoRa Packet Listener (865.0625 MHz)...")
     logger.info(f"Packet Struct Format: '{PAYLOAD_FORMAT}' ({PAYLOAD_SIZE} bytes)")
 
-    # Attempt to initialize hardware SPI on Linux Raspberry Pi CM4
+    # Attempt to initialize hardware SPI on Linux Raspberry Pi 3B+
     try:
         import spidev
         spi = spidev.SpiDev()

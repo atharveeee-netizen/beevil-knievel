@@ -1,7 +1,7 @@
 """
 BEEVIL CUSUM — STATISTICAL PROCESS CONTROL & WAVELET SIGNAL ANALYTICS
 =====================================================================
-Advanced Edge Signal Processing on Linux Raspberry Pi CM4:
+Advanced Edge Signal Processing on Linux Raspberry Pi 3B+:
 - Two-Sided CUSUM (Cumulative Sum) Anomaly Filter: Detects subtle 0.05°C/day
   thermal drift and insidious colony decay 14 days before collapse.
 - Moving-Window Variance & Spectral Entropy Tracking.

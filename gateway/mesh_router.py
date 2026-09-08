@@ -1,5 +1,5 @@
 """
-BEEVIL MESH — GATEWAY TOPOLOGY & MESH ROUTER (Python / Linux CM4)
+BEEVIL MESH — GATEWAY TOPOLOGY & MESH ROUTER (Python / Linux Raspberry Pi 3B+)
 ==================================================================
 Manages the 100-Hive LoRa Multi-Hop Mesh Network:
 - Ingests 40-byte BeevilMesh frames (8-byte header + 32-byte payload).
@@ -90,7 +90,7 @@ class BeevilMeshGatewayRouter:
         links = []
         
         # Gateway node
-        nodes.append({"id": 0, "label": "CM4 Gateway (Base Station)", "type": "GATEWAY", "hops": 0})
+        nodes.append({"id": 0, "label": "Raspberry Pi 3B+ Gateway (Base Station)", "type": "GATEWAY", "hops": 0})
 
         for hive_id, data in self.topology_graph.items():
             nodes.append({

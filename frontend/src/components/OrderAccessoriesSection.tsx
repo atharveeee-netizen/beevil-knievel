@@ -52,7 +52,7 @@ export function OrderAccessoriesSection() {
           </div>
         </div>
 
-        {/* 2. Antmicro CM4 Gateway */}
+        {/* 2. Raspberry Pi 3B+ Gateway */}
         <div id="gateway-package" className="pt-16 border-t border-white/20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="space-y-6 order-2 md:order-1">
             <div className="relative inline-block">
@@ -60,12 +60,12 @@ export function OrderAccessoriesSection() {
                 <span className="bg-[#ffc833] text-[#6c00ff] text-sm font-black px-2.5 py-1 rounded-md uppercase transform -rotate-6 shadow-sm">
                   And
                 </span>
-                <span>Antmicro CM4 Gateway</span>
+                <span>Raspberry Pi 3B+ Gateway</span>
               </h2>
             </div>
 
             <p className="text-lg sm:text-xl font-medium text-white/90 leading-relaxed">
-              The central 6 TOPS edge intelligence hub. Powered by the open-source Antmicro CM4 Baseboard, connecting up to 50 field nodes over LoRaWAN (15km radius) to run our master 96.84% accuracy Edge-AI model.
+              The central 6 TOPS edge intelligence hub. Powered by a standard Raspberry Pi 3B+, connecting up to 50 field nodes over LoRaWAN (15km radius) to run our master 96.84% accuracy Edge-AI model.
             </p>
 
             <div className="pt-2">
@@ -82,7 +82,7 @@ export function OrderAccessoriesSection() {
           <div className="relative w-full h-[280px] sm:h-[360px] rounded-2xl overflow-hidden bg-black/20 order-1 md:order-2">
             <Image
               src="/images/hardware/beevil_gateway_hub.jpg"
-              alt="Antmicro CM4 Base Station Gateway"
+              alt="Raspberry Pi 3B+ Base Station Gateway"
               fill
               className="object-cover rounded-xl hover:scale-105 transition-transform duration-500"
               sizes="(max-width: 768px) 100vw, 500px"

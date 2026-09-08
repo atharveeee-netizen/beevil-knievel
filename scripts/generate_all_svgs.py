@@ -248,7 +248,7 @@ save_svg("docs/media/04-system/system_architecture.svg", """<svg xmlns="http://w
   <rect x="30" y="24" width="170" height="28" rx="14" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.5"/>
   <text x="115" y="43" fill="#f59e0b" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">SYSTEM ARCHITECTURE</text>
   <text x="30" y="82" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800">Beevil Knievel Master Cyber-Physical Architecture</text>
-  <text x="30" y="108" fill="#8b949e" font-family="system-ui, -apple-system, sans-serif" font-size="14">Decentralized sensor nodes → Sub-GHz LoRa Mesh → Raspberry Pi CM4 hardened edge base station → P2P web &amp; mobile dashboards.</text>
+  <text x="30" y="108" fill="#8b949e" font-family="system-ui, -apple-system, sans-serif" font-size="14">Decentralized sensor nodes → Sub-GHz LoRa Mesh → Raspberry Pi 3B+ hardened edge base station → P2P web &amp; mobile dashboards.</text>
 
   <!-- Block 1: Field Nodes -->
   <g transform="translate(30, 140)">
@@ -295,11 +295,11 @@ save_svg("docs/media/04-system/system_architecture.svg", """<svg xmlns="http://w
   <g transform="translate(420, 140)">
     <rect width="330" height="440" rx="12" fill="#161b22" stroke="#38bdf8" stroke-width="1.5"/>
     <rect x="15" y="15" width="300" height="30" rx="6" fill="#21262d"/>
-    <text x="165" y="35" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">RASPBERRY PI CM4 LINUX EDGE GATEWAY</text>
+    <text x="165" y="35" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">RASPBERRY PI Raspberry Pi 3B+ LINUX EDGE GATEWAY</text>
 
     <!-- Hardware -->
     <rect x="20" y="60" width="290" height="60" rx="8" fill="#0d1117" stroke="#30363d"/>
-    <text x="35" y="84" fill="#f0f6fc" font-family="sans-serif" font-size="13" font-weight="bold">Antmicro CM4 Baseboard Carrier</text>
+    <text x="35" y="84" fill="#f0f6fc" font-family="sans-serif" font-size="13" font-weight="bold">Raspberry Pi 3B+</text>
     <text x="35" y="104" fill="#8b949e" font-family="monospace" font-size="11">BCM2711 Quad-A72 @ 1.5GHz | Waveshare SX1262 HAT</text>
 
     <!-- Gateway Daemons -->
@@ -414,10 +414,10 @@ save_svg("docs/media/04-system/hive_to_dashboard_flow.svg", """<svg xmlns="http:
     <!-- Arrow -->
     <path d="M 615 75 L 635 75" stroke="#f59e0b" stroke-width="2"/>
 
-    <!-- 5. CM4 GATEWAY -->
+    <!-- 5. Raspberry Pi 3B+ GATEWAY -->
     <rect x="640" y="0" width="130" height="150" rx="8" fill="#161b22" stroke="#38bdf8" stroke-width="1.5"/>
-    <text x="705" y="30" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">5. CM4 GATEWAY</text>
-    <text x="705" y="65" fill="#f0f6fc" font-family="sans-serif" font-size="11" text-anchor="middle">Raspberry Pi CM4</text>
+    <text x="705" y="30" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">5. Raspberry Pi 3B+ GATEWAY</text>
+    <text x="705" y="65" fill="#f0f6fc" font-family="sans-serif" font-size="11" text-anchor="middle">Raspberry Pi 3B+</text>
     <text x="705" y="85" fill="#8b949e" font-family="sans-serif" font-size="10" text-anchor="middle">SQLite WAL Ingest</text>
     <text x="705" y="105" fill="#8b949e" font-family="sans-serif" font-size="10" text-anchor="middle">Multi-Modal AI</text>
     <text x="705" y="125" fill="#8b949e" font-family="sans-serif" font-size="10" text-anchor="middle">FastAPI Engine</text>
@@ -876,7 +876,7 @@ save_svg("docs/media/07-radio/mesh_topology.svg", """<svg xmlns="http://www.w3.o
     <!-- Gateway -->
     <circle cx="780" cy="150" r="45" fill="#161b22" stroke="#38bdf8" stroke-width="3"/>
     <text x="780" y="145" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">BASE STATION</text>
-    <text x="780" y="165" fill="#f0f6fc" font-family="sans-serif" font-size="11" text-anchor="middle">CM4 Gateway</text>
+    <text x="780" y="165" fill="#f0f6fc" font-family="sans-serif" font-size="11" text-anchor="middle">Raspberry Pi 3B+ Gateway</text>
 
     <!-- Node 42 (Relay) -->
     <circle cx="520" cy="150" r="35" fill="#161b22" stroke="#f59e0b" stroke-width="2"/>
@@ -932,7 +932,7 @@ save_svg("docs/media/08-edge-ai/edge_ai_pipeline.svg", """<svg xmlns="http://www
   <rect x="30" y="24" width="170" height="28" rx="14" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.5"/>
   <text x="115" y="43" fill="#f59e0b" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">EDGE INTELLIGENCE</text>
   <text x="30" y="82" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800">Hierarchical Two-Tier Edge Intelligence Engine</text>
-  <text x="30" y="108" fill="#8b949e" font-family="system-ui, -apple-system, sans-serif" font-size="14">Tier 1: On-Node Deterministic CUSUM &amp; FFT Triage → Tier 2: CM4 Gateway Multi-Modal Fusion &amp; Offline SLM Advisor.</text>
+  <text x="30" y="108" fill="#8b949e" font-family="system-ui, -apple-system, sans-serif" font-size="14">Tier 1: On-Node Deterministic CUSUM &amp; FFT Triage → Tier 2: Raspberry Pi 3B+ Gateway Multi-Modal Fusion &amp; Offline SLM Advisor.</text>
 
   <g transform="translate(50, 150)">
     <!-- Tier 1 -->
@@ -957,7 +957,7 @@ save_svg("docs/media/08-edge-ai/edge_ai_pipeline.svg", """<svg xmlns="http://www
     <!-- Tier 2 -->
     <rect x="480" y="0" width="420" height="280" rx="12" fill="#161b22" stroke="#38bdf8" stroke-width="1.5"/>
     <rect x="500" y="20" width="220" height="26" rx="13" fill="rgba(56, 189, 248, 0.15)" stroke="#38bdf8"/>
-    <text x="610" y="37" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">TIER 2: GATEWAY (CM4)</text>
+    <text x="610" y="37" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">TIER 2: GATEWAY (Pi 3B+)</text>
 
     <text x="500" y="75" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="bold">Multi-Modal Fusion &amp; SLM Advisor</text>
     <text x="500" y="95" fill="#8b949e" font-family="sans-serif" font-size="12">• 16-Sensor Feature Fusion Neural Network</text>

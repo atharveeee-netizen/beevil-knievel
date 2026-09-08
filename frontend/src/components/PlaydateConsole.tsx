@@ -422,7 +422,7 @@ export function PlaydateConsole({
                   </div>
                   <div className="bg-black/45 p-1 rounded text-[8px] space-y-0.5">
                     <div className="text-[#ffc833]">
-                      Node #{String(hiveId).padStart(3, "0")} ➔ Relay #014 ➔ CM4 Gateway
+                      Node #{String(hiveId).padStart(3, "0")} ➔ Relay #014 ➔ Raspberry Pi 3B+ Gateway
                     </div>
                     <div className="flex justify-between text-[#efefef]/80 text-[7.5px]">
                       <span>RSSI: -82 dBm</span>
