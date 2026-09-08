@@ -45,7 +45,7 @@ Commercial apiaries manage hundreds of hives per yard, limiting human inspection
 \section{System Architecture \& Custom Hardware}
 As shown in Fig.~\ref{fig:architecture}, the system comprises an autonomous \textbf{Field Sensor Node} and a custom \textbf{Edge Gateway Reader}.
 
-\textbf{Custom Sensor Node Carrier PCB:} Designed by the team around the RAKwireless RAK4631 module (Nordic nRF52840 ARM Cortex-M4F @ 64~MHz, FPU, 1~MB Flash, 256~KB SRAM + Semtech SX1262 LoRa). The custom carrier features an active high-side P-FET switch on \texttt{P0.29}, cutting divider leakage during sleep to achieve zero draw. Switched rail \texttt{WB\_IO2} isolates sensor power, achieving a validated deep-sleep draw of only \textbf{18~$\mu\text{A}$} [MEASURED]. Solderless spring lever terminals interface to IP68 PG-7 glands, preventing propolis degradation.
+\textbf{Modular Sensor Node Platform:} Built around the RAKwireless RAK4631 core module (Nordic nRF52840 ARM Cortex-M4F @ 64~MHz, FPU, 1~MB Flash, 256~KB SRAM + Semtech SX1262 LoRa) mounted on a WisBlock modular baseboard. The architecture utilizes switched rail \texttt{WB\_IO2} to isolate peripheral sensors during sleep, achieving a validated deep-sleep draw of only \textbf{18~$\mu\text{A}$} [MEASURED]. Solderless spring lever terminals interface to IP68 PG-7 glands, eliminating in-field soldering and preventing propolis degradation.
 
 \textbf{Power Subsystem \& Battery Truth:} Resolving documentation ambiguities, the baseboard integrates a TP4054 linear CC/CV charger hardwired for \textbf{4.20V $\pm 1\%$ termination}. The canonical source is a single-cell \textbf{1S 3.7V Li-ion (NMC) / LiPo} (3.27V cutoff to 4.20V full) recharged via a 0.5W, 6V 100~mA monocrystalline solar panel. State-of-Charge (SoC) uses a 7-point OCV lookup with Arrhenius derating ($2.5\text{ mV}/^\circ\text{C}$). Daily energy consumption is \textbf{0.85~mWh/day} under a 15-min cadence.
 
@@ -87,7 +87,7 @@ With slack $k = 0.3^\circ\text{C}$ and threshold $h = 2.5^\circ\text{C}$, Model 
 
 \textbf{Model 2 (Edge Random Forest Advisory Engine):} The gateway hosts a Random Forest classifier trained on a 10-hr curated dataset (Zenodo Record 1321278). Ingesting 8-band FFT energies, $\Delta T$, and $\text{CO}_2$ slope, Model 2 identifies Queenless, Swarm, and Nominal states with \textbf{94.2\% validation accuracy} [VALIDATED].
 
-\textbf{AI Workflow Disclosure:} AI tools assisted with analytical modeling, firmware optimization, and test generation; all physical architecture, circuit design, and PCB routing were human-engineered by the team.
+\textbf{AI Workflow Disclosure:} AI tools assisted with analytical modeling, firmware optimization, and test generation; all physical architecture, component integration, and modular wiring were human-engineered by the team.
 
 \section{Simulation \& Bench Validation Results}
 \textbf{Multiphysics Simulations:} 
