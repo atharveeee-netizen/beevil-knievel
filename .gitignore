@@ -60,3 +60,10 @@ logs/
 
 # Raw Video Downloads (Outside Submission Package)
 assets/video_sources/raw/
+
+# Local TeX Engine
+tools/tectonic/
+submission/*.aux
+submission/*.log
+submission/page_*.png
+

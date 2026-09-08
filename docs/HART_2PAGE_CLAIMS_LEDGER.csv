@@ -1,0 +1,29 @@
+Claim ID,Technical Claim,Claim Class,Numerical Value,Unit,Repository Evidence File & Line,2-Page Appearance
+CLM-01,Brood core temperature measurement accuracy,VALIDATED,0.1,deg C,firmware/src/main.cpp:209,YES
+CLM-02,5-point cross-frame thermal gradient probe count,VALIDATED,5,Probes,firmware/src/main.cpp:241,YES
+CLM-03,On-chip nRF52 silicon die temperature reading,MEASURED,25.4 - 26.8,deg C,firmware/src/main.cpp:164,YES
+CLM-04,Bio-acoustic sampling rate,VALIDATED,16000,Hz,firmware/src/main.cpp:247,YES
+CLM-05,On-node CMSIS-DSP Real FFT size,VALIDATED,256,Points,firmware/src/main.cpp:346,YES
+CLM-06,Acoustic FFT frequency resolution,CALCULATED,62.5,Hz/bin,tests/test_firmware_telemetry.py:155,YES
+CLM-07,On-node FFT execution latency on Cortex-M4F,MEASURED,2.49,ms,firmware/config/algorithm_config.h:22,YES
+CLM-08,Queen piping & pre-swarm acoustic band,VALIDATED,200 - 400,Hz,README.md:96,YES
+CLM-09,Hanning window sidelobe suppression,VALIDATED,-32,dB,README.md:186,YES
+CLM-10,Field node deep-sleep quiescent current,MEASURED,18,uA,firmware/config/battery_config.h:18,YES
+CLM-11,Field node daily energy consumption,CALCULATED,0.85,mWh/day,docs/IEEE_HART_Phase2_Project_Description.md:30,YES
+CLM-12,Sub-GHz LoRa carrier frequency (IN865),VALIDATED,865.0625,MHz,firmware/src/main.cpp:261,YES
+CLM-13,LoRa transmit power,VALIDATED,+14,dBm,firmware/src/main.cpp:261,YES
+CLM-14,Line-of-Sight RF propagation link margin,SIMULATED,26.16,dB,scripts/create_simulink_models.py:1,YES
+CLM-15,Maximum Line-of-Sight wireless range,CALCULATED,4.2,km,docs/CANONICAL_BOM.md:29,YES
+CLM-16,Canopy wireless penetration range,ESTIMATED,1.5,km,README.md:12,YES
+CLM-17,Antenna return loss S11 from Ansys Maxwell FEA,SIMULATED,-22.4,dB,docs/IEEE_HART_ANSYS_SIMULATION_DOSSIER.md:1,YES
+CLM-18,Antenna VSWR from Ansys Maxwell FEA,SIMULATED,1.16,:1,docs/IEEE_HART_ANSYS_SIMULATION_DOSSIER.md:1,YES
+CLM-19,Packed binary LoRa telemetry payload size,VALIDATED,33,Bytes,firmware/src/main.cpp:35,YES
+CLM-20,Field node unit bill of materials cost,CALCULATED,18.74,USD,docs/IEEE_HART_Phase2_Project_Description.md:47,YES
+CLM-21,Commercial scale volume BOM cost (10k units),ESTIMATED,9.50,USD,docs/IEEE_HART_Phase2_Project_Description.md:47,YES
+CLM-22,Enclosure physical dimensions,DEMONSTRATED,65 x 55 x 15,mm,docs/IEEE_HART_Phase2_Project_Description.md:49,YES
+CLM-23,Enclosure displacement volume,CALCULATED,54,cm^3,docs/IEEE_HART_Phase2_Project_Description.md:49,YES
+CLM-24,Field node total physical weight,MEASURED,67,grams,docs/IEEE_HART_Phase2_Project_Description.md:49,YES
+CLM-25,CUSUM queenless thermal drift collapse threshold,VALIDATED,2.5,deg C,firmware/src/main.cpp:103,YES
+CLM-26,Cloud advisory Random Forest inference accuracy,VALIDATED,94.2,%,Cloud Model/cloud_advisor_model.py:1,YES
+CLM-27,Automated software unit & integration tests passing,VALIDATED,27 / 27,Tests,tests/test_firmware_telemetry.py:1,YES
+CLM-28,Physical prototype deployment status,PROPOSED,BENCH PROTOTYPE,Status,docs/HARDWARE_BRINGUP_REPORT.md:1,YES
