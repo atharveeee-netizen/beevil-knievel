@@ -22,12 +22,12 @@
       "evidence": "DEMONSTRATED"
     },
     "radio": {
-      "value": "Semtech SX1262 Sub-GHz LoRa Transceiver (+14 dBm ERP, -137 dBm sensitivity)",
+      "value": "Dual-Radio Hybrid: Semtech SX1262 Sub-GHz LoRa Transceiver (+14 dBm ERP, -137 dBm sensitivity) & Nordic nRF52840 2.4 GHz Multiprotocol Transceiver (BLE Mesh)",
       "source": "RAK4631 module spec, firmware/src/radio/lora_transceiver.cpp",
       "status": "IMPLEMENTED",
       "evidence": "DEMONSTRATED",
-      "band": "IN865 (865.0625 MHz, Channel 1, SF7, BW 125 kHz, CR 4/5)",
-      "topology": "Gateway-Centric Sub-GHz Star Network (Direct Node-to-Gateway; NOT mesh)",
+      "band": "IN865 (865.0625 MHz, Channel 1, SF7, BW 125 kHz, CR 4/5) & 2.4 GHz ISM (Bluetooth Mesh)",
+      "topology": "Dual-Radio Hybrid: 2.4 GHz BLE Mesh Local Inter-Hive Clustering + Sub-GHz LoRa Gateway-Centric Star Backhaul",
       "airtime_ms": 18.2,
       "link_budget_los_km": 4.2,
       "link_margin_db": 26.16

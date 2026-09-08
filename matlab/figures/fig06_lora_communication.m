@@ -14,14 +14,14 @@ ax = axes('Parent', fig, 'Position', [0, 0, 1, 1]);
 hold(ax, 'on'); axis(ax, [0 1 0 1]); axis(ax, 'off');
 
 % Header
-text(ax, 0.035, 0.965, 'FIGURE 06: WIRELESS COMMUNICATION & LORA PACKET MEMORY MAP', ...
+text(ax, 0.035, 0.965, 'FIGURE 06: DUAL-RADIO HYBRID TOPOLOGY & LORA PACKET MEMORY MAP', ...
     'FontName', style.font_family, 'FontSize', style.fs_title, 'FontWeight', 'bold', ...
     'Color', style.stroke_dark, 'VerticalAlignment', 'top');
-text(ax, 0.035, 0.935, 'Sub-GHz Star Network Topology, Indian ISM IN865 Regulatory Parameters & 33-Byte Binary Payload Structure', ...
+text(ax, 0.035, 0.935, 'Sub-GHz Star Network + BLE Mesh Clusters, IN865 Regulatory Parameters & 33-Byte Binary Payload Structure', ...
     'FontName', style.font_family, 'FontSize', style.fs_body, 'Color', style.stroke_med, 'VerticalAlignment', 'top');
 
 % Left Subsystem: Star Network Topology
-drawSubsystem(ax, [0.035, 0.09, 0.38, 0.82], 'Gateway-Centric Sub-GHz Star Network (NOT Mesh)', style);
+drawSubsystem(ax, [0.035, 0.09, 0.38, 0.82], 'Dual-Radio Hybrid (BLE Mesh + LoRa Star)', style);
 
 nodes = {
     'Hive Node 1', 0.050, 0.70;
@@ -34,15 +34,19 @@ for i = 1:4
     n_title = nodes{i, 1};
     nx = nodes{i, 2};
     ny = nodes{i, 3};
-    drawBlock(ax, [nx, ny, 0.135, 0.15], n_title, {'RAK4631 Sub-GHz', '865.0625 MHz SF7'}, style);
+    drawBlock(ax, [nx, ny, 0.135, 0.15], n_title, {'RAK4631 Dual-Radio', '865MHz LoRa + BLE Mesh'}, style);
     drawRadioLink(ax, [nx + 0.135, ny + 0.075], [0.245, 0.48], '', style);
+    if i < 4
+        % Inter-hive BLE Mesh cluster link
+        line(ax, [nx + 0.03, nx + 0.03], [ny - 0.04, ny], 'Color', style.accent_blue, 'LineStyle', ':', 'LineWidth', 1.2);
+    end
 end
 
 drawBlock(ax, [0.245, 0.35, 0.155, 0.26], sprintf('Central Gateway\nReader'), ...
     {'Raspberry Pi 3B+', 'Waveshare SX1262 HAT', 'Single Receiver in Apiary', 'Local SQLite WAL Store'}, style);
 drawEvidenceTag(ax, [0.31, 0.57, 0.08, 0.022], 'DEMONSTRATED', style);
 
-text(ax, 0.322, 0.22, sprintf('Direct Star Topology:\nZero relay hops\nZero ad-hoc routing\nAggregate Yard Duty\nCycle < 0.2%% [CALCULATED]'), ...
+text(ax, 0.322, 0.22, sprintf('Dual-Radio Architecture:\nBLE Mesh (Inter-Hive 2.4GHz)\nLoRa Star (Backhaul 865MHz)\nAggregate Yard Duty\nCycle < 0.2%% [CALCULATED]'), ...
     'FontName', style.font_family, 'FontSize', style.fs_tag, 'FontWeight', 'bold', ...
     'Color', style.stroke_med, 'HorizontalAlignment', 'center');
 

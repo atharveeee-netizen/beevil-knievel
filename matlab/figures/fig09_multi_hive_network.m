@@ -21,7 +21,7 @@ text(ax, 0.035, 0.935, '100-Node Commercial Apiary Star Network: Channel Capacit
     'FontName', style.font_family, 'FontSize', style.fs_body, 'Color', style.stroke_med, 'VerticalAlignment', 'top');
 
 % Left Subsystem: Apiary Layout
-drawSubsystem(ax, [0.035, 0.09, 0.45, 0.82], 'Apiary Layout (100 Hives, Single Gateway Reader)', style);
+drawSubsystem(ax, [0.035, 0.09, 0.45, 0.82], 'Apiary Layout (BLE Mesh Clusters + LoRa Backhaul)', style);
 
 for r = 0:4
     for c = 0:4
@@ -31,10 +31,14 @@ for r = 0:4
             'EdgeColor', style.stroke_light, 'LineWidth', 0.6);
         text(ax, hx + 0.018, hy + 0.024, sprintf('H%d', r*5+c+1), 'FontName', style.font_family, ...
             'FontSize', style.fs_tag - 2, 'Color', style.stroke_light, 'HorizontalAlignment', 'center');
+        if c < 4
+            line(ax, [hx + 0.036, hx + 0.050], [hy + 0.024, hy + 0.024], ...
+                'Color', style.accent_blue, 'LineStyle', ':', 'LineWidth', 0.8);
+        end
     end
 end
 
-text(ax, 0.18, 0.85, 'Commercial Apiary Yard (Hives 1 to 100)', ...
+text(ax, 0.18, 0.85, 'Commercial Apiary Yard (BLE Mesh Clusters)', ...
     'FontName', style.font_family, 'FontSize', style.fs_subhead, 'FontWeight', 'bold', ...
     'Color', style.stroke_dark, 'HorizontalAlignment', 'center');
 
@@ -42,14 +46,14 @@ drawBlock(ax, [0.34, 0.49, 0.13, 0.25], sprintf('Gateway\nReader'), ...
     {'RPi 3B+ & SX1262', 'Omni Whip Antenna', 'Local Storage', 'beevil.local'}, style);
 drawEvidenceTag(ax, [0.38, 0.70, 0.08, 0.022], 'DEMONSTRATED', style);
 
-drawRadioLink(ax, [0.305, 0.615], [0.34, 0.615], sprintf('Sub-GHz LoRa\n(865 MHz)'), style);
+drawRadioLink(ax, [0.305, 0.615], [0.34, 0.615], sprintf('Sub-GHz LoRa\n(865 MHz Backhaul)'), style);
 
 drawBlock(ax, [0.05, 0.13, 0.42, 0.26], 'Channel Capacity & Duty Cycle Proof', ...
     {'100 Hives transmitting at standard 15-minute telemetry interval.', ...
      'Packet airtime = 18.2 ms on channel (33-byte packed struct).', ...
      'Total on-air time per 15 min: 100 x 0.0182 s = 1.82 seconds.', ...
      'Aggregate Yard Duty Cycle = 1.82 s / 900 s = 0.202% (< 1.0% ISM regulatory limit).', ...
-     'Collision probability < 0.15% via uncoordinated ALOHA channel distribution.'}, style);
+     'BLE Mesh local cluster hops + uncoordinated ALOHA star uplink.'}, style);
 drawEvidenceTag(ax, [0.38, 0.35, 0.08, 0.022], 'CALCULATED', style);
 
 % Right Subsystem: Economics Comparison
@@ -69,7 +73,7 @@ rows = {
     'Sensor Node Hardware', 'Custom PCB ($180–$350)', 'Modular WisBlock ($18.74)';
     'Monthly Cellular Fee / Hive', '$4.00 – $7.00 / month', '$0.00 (Zero SIM cards)';
     '100-Hive 3-Yr Telecom Cost', '$14,400 – $25,200', '$0.00 Total';
-    'Network Topology', 'Cellular Tower Dependency', 'Autonomous Sub-GHz Star';
+    'Network Topology', 'Cellular Tower Dependency', 'Hybrid: BLE Mesh + LoRa Star';
     'Brood RTD Precision', '±0.5°C to ±1.0°C (Uncal)', '±0.1°C NIST (TMP117)';
     'Acoustic Feature Sampling', 'None or raw 2 kHz stream', '16 kHz I2S + CMSIS FFT';
     'Queenless Early Detection', 'Manual hive inspection', 'Page''s CUSUM (-0.02°C/hr)';
@@ -92,7 +96,7 @@ drawBlock(ax, [0.53, 0.13, 0.42, 0.26], 'Scientific & Industry Distinction', ...
     {'1 Academic Baseline: Ferrari et al. (2008) wired thermocouples (bulky, high-power).', ...
      '2 Commercial Competitors: BroodMinder (BLE logger requiring manual yard walk) &', ...
      'Arnia (Cellular hub with high initial cost and recurring monthly SaaS lock-in).', ...
-     'BEEVIL KNIEVEL bridges this gap with modular hardware, long-range LoRa & local edge AI.'}, style);
+     'BEEVIL KNIEVEL bridges this gap with modular hardware, BLE Mesh + LoRa & local edge AI.'}, style);
 drawEvidenceTag(ax, [0.86, 0.35, 0.08, 0.022], 'VALIDATED', style);
 
 drawLegend(ax, [0.18, 0.016, 0.64, 0.036], style);

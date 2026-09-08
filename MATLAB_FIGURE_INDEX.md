@@ -49,7 +49,7 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
 - **Purpose**: Establishes the complete 3-tier hardware and software topology of the BEEVIL KNIEVEL platform.
 - **Subsystems**:
   1. *Tier 1: Commercial Langstroth Hive*: Brood Nest Thermal Core (TI TMP117, NIST ±0.1°C), Spatial Thermal Grid (5x DS18B20 1-Wire), Bio-Acoustic Transduction (INMP441 I2S MEMS), Environmental & Mass (SCD41 CO2, BME688 VOC, HX711 200 kg scale).
-  2. *Tier 2: Modular Sensor Node (RAK4631)*: Nordic nRF52840 MCU (64 MHz ARM Cortex-M4F, 1MB Flash, 256KB SRAM), CMSIS-DSP 256-pt FFT (2.49 ms), Model 1 CUSUM, Semtech SX1262 LoRa (+14 dBm), Switched Rail (WB_IO2 MOSFET, 18 µA sleep).
+  2. *Tier 2: Modular Sensor Node (RAK4631)*: Nordic nRF52840 MCU (64 MHz ARM Cortex-M4F, 1MB Flash, 256KB SRAM), CMSIS-DSP 256-pt FFT (2.49 ms), Model 1 CUSUM, Dual-Radio Transceivers (SX1262 LoRa + nRF52840 BLE Mesh), Switched Rail (WB_IO2 MOSFET, 18 µA sleep).
   3. *Tier 3: Gateway Reader & Analytics*: Raspberry Pi 3B+ (Quad A53 @ 1.4GHz), Waveshare SX1262 HAT, SQLite WAL database, Gateway Edge AI (Model 2 Random Forest, 94.2% Acc), FastAPI local daemon (`beevil.local`).
 - **Primary Source Files**: `firmware/src/main.cpp`, `gateway/src/main.py`, `hardware/bom.csv`.
 - **Evidence Status**: `[DEMONSTRATED]`, `[VALIDATED]`, `[CALCULATED]`, `[MEASURED]`.
@@ -73,8 +73,8 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
 - **Key Details**:
   - Modular WisBlock RAK5005-O baseboard with RAK4631 core module.
   - Nordic nRF52840 MCU handling dedicated EasyDMA channels for I2S, SPI, and I2C.
-  - Semtech SX1262 LoRa transceiver interfaced via hardware SPI bus.
-  - 865 MHz Quarter-Wave whip antenna with SMA bulkhead (S11 = -22.4 dB, VSWR = 1.16).
+  - Dual-Radio subsystem: Semtech SX1262 LoRa transceiver (+14 dBm, 865 MHz backhaul) + Nordic nRF52840 2.4 GHz multiprotocol radio (BLE Mesh intra-yard clustering).
+  - Dual Antenna subsystem: 865 MHz Quarter-Wave whip antenna with SMA bulkhead (S11 = -22.4 dB, VSWR = 1.16) + 2.4 GHz ceramic BLE antenna.
   - Switched power rail controlled via P-MOSFET gate (pin WB_IO2), eliminating sensor quiescent current in deep sleep (18.0 µA measured on Keithley 6514 electrometer).
 - **Primary Source Files**: `firmware/platformio.ini`, `firmware/src/power.cpp`, `hardware/bom.csv`.
 - **Evidence Status**: `[DEMONSTRATED]`, `[VALIDATED]`, `[MEASURED]`, `[CALCULATED]`, `[SIMULATED]`.
@@ -113,9 +113,9 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
 - **Target Use**: IEEE Phase 2 Final Report Section 4.2; Video 2:05–2:25.
 
 #### Figure 06: Wireless Communication & LoRa Packet Memory Map
-- **Purpose**: Establishes the star network topology and exact memory layout of the 33-byte packed telemetry struct.
+- **Purpose**: Establishes the Dual-Radio Hybrid network topology (inter-hive BLE Mesh clustering + Sub-GHz LoRa star backhaul) and exact memory layout of the 33-byte packed telemetry struct.
 - **Key Details**:
-  - Gateway-centric Sub-GHz star network with direct node-to-gateway links (**Zero mesh relaying**).
+  - Dual-Radio Hybrid network: 2.4 GHz BLE Mesh for short hops between adjacent hives; direct Sub-GHz LoRa star backhaul to Central Gateway Reader.
   - Indian ISM IN865 parameters: 865.0625 MHz, SF7, BW 125 kHz, CR 4/5, +14 dBm ERP, 151 dB link budget, 4.2 km LOS range.
   - Byte-by-byte memory map of `BeevilLoRaPayload` (total = 33 Bytes):
     `node_id` (2B), `timestamp` (4B), `T_core` (2B), `T_grid[5]` (10B), `co2_ppm` (2B), `rh_c100` (2B), `weight_g` (4B), `bins[8]` (4B nibble-packed), `flags` (1B), `crc16` (2B).
@@ -145,13 +145,13 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
 - **Target Use**: IEEE Phase 2 Final Report Section 6; Video 3:15–3:45.
 
 #### Figure 09: Multi-Hive Network Scalability & Economic Topology
-- **Purpose**: Proves scalability to 100 hives per gateway and demonstrates dramatic cost savings over cellular solutions.
+- **Purpose**: Proves scalability to 100 hives per gateway with BLE Mesh clustering and demonstrates dramatic cost savings over cellular solutions.
 - **Key Details**:
-  - 100-hive apiary yard topology communicating with a single central gateway.
+  - 100-hive apiary yard topology organized into local adjacent-hive 2.4 GHz BLE Mesh clusters communicating via long-range Sub-GHz LoRa star backhaul to a single central gateway.
   - Channel capacity proof: 100 hives transmitting 18.2 ms packets every 15 minutes yields 1.82 seconds on-air time per 900 seconds (0.202% aggregate duty cycle, well under the 1.0% ISM limit).
   - Economic comparison table:
     - Hardware BOM: $18.74 (WisBlock COTS) vs $180–$350 (Commercial cellular custom PCB).
-    - Telecom fees: $0.00 (Sub-GHz LoRa) vs $14,400–$25,200 (100 hives over 3 years @ $4–$7/mo).
+    - Telecom fees: $0.00 (BLE Mesh + Sub-GHz LoRa) vs $14,400–$25,200 (100 hives over 3 years @ $4–$7/mo).
   - Academic & commercial distinction: Outperforms Ferrari et al. (2008) wired thermocouples, BroodMinder manual BLE walk-by loggers, and Arnia high-cost cellular subscriptions.
 - **Primary Source Files**: `simulations/network_scalability.py`, `docs/ECONOMIC_ANALYSIS.md`.
 - **Evidence Status**: `[DEMONSTRATED]`, `[CALCULATED]`, `[VALIDATED]`.
@@ -163,7 +163,7 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
   - Stage 1: Physical (34.5°C brood core, 100–500 Hz vibrations, 400–5000 ppm CO2, 0–100 kg weight).
   - Stage 2: Transduction (TMP117 RTD, DS18B20 1-Wire grid, INMP441 MEMS, SCD41 NDIR, HX711 scale).
   - Stage 3: Embedded DSP (CMSIS-DSP 256-pt FFT in 2.49 ms, 8 energy bins, Page's CUSUM, 33-byte struct).
-  - Stage 4: LoRa Radio (Semtech SX1262 TX, +14 dBm ERP, 865 MHz SF7, 18.2 ms airtime, 4.2 km range).
+  - Stage 4: Dual Radio (nRF52840 2.4 GHz BLE Mesh local cluster + Semtech SX1262 LoRa 865 MHz star backhaul, +14 dBm ERP, 18.2 ms airtime, 4.2 km range).
   - Stage 5: Gateway AI (RPi 3B+, Waveshare LoRa HAT, SQLite WAL, Random Forest 94.2% accuracy).
   - Stage 6: Beekeeper UI (Local PWA, predictive alerts, single-frame targeted intervention, zero cloud fees).
 - **Primary Source Files**: Integration across all layers.
@@ -196,7 +196,7 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
 - **Key Details**:
   - 4 interconnected pillars spanning the physical to digital domain:
     - *Pillar 1: Commercial Hive*: Brood Nest Core (TMP117), Acoustic Transducer (INMP441), Environmental & Load (SCD41, BME688, HX711).
-    - *Pillar 2: Modular Node (RAK4631)*: WisBlock Processing (nRF52840, zero custom PCB), On-Node DSP & Model 1 (CMSIS FFT, CUSUM), LoRa RF & Power (SX1262, 18 µA sleep).
+    - *Pillar 2: Modular Node (RAK4631)*: WisBlock Processing (nRF52840, zero custom PCB), On-Node DSP & Model 1 (CMSIS FFT, CUSUM), Dual Radio & Power (SX1262 LoRa backhaul + nRF52840 2.4 GHz BLE Mesh, 18 µA sleep).
     - *Pillar 3: Gateway Reader (RPi 3B+)*: Gateway Hardware (RPi 3B+ & Waveshare HAT), Gateway Edge AI (Model 2 Random Forest), Local Persistence (SQLite WAL, FastAPI).
     - *Pillar 4: Beekeeper Action*: Offline PWA Dashboard, Predictive Interventions (Queenless collapse, pre-swarm warning, ventilation stress).
 - **Primary Source Files**: Integration of complete repository architecture.
@@ -210,7 +210,7 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
 | Check Item | Status | Verification Detail |
 |:---|:---:|:---|
 | **Zero Custom PCB** | PASS | All diagrams show modular WisBlock RAK5005-O baseboard and RPi 3B+ + Waveshare HAT. Zero custom PCB traces drawn. |
-| **Zero Mesh Claims** | PASS | Network topology explicitly designated as Sub-GHz star. Mesh only referenced in FEA/CFD spatial discretization. |
+| **Dual-Radio Hybrid Architecture** | PASS | BLE Mesh deployed strictly for local intra-yard adjacent-hive clustering (2.4 GHz) and Sub-GHz LoRa (865 MHz) for long-range gateway star backhaul. Multi-hop cellular dependencies eliminated. |
 | **Zero Personal/User Images** | PASS | 100% deterministic MATLAB-generated vector engineering diagrams and technical line art. |
 | **Pure White Background** | PASS | Every figure rendered on strict `#ffffff` background with high-contrast slate borders. |
 | **Scientific Claim Integrity** | PASS | All 38 system metrics classified across `[MEASURED]`, `[VALIDATED]`, `[CALCULATED]`, `[SIMULATED]`, `[DEMONSTRATED]`. |

@@ -176,7 +176,7 @@ def export_figure(fig, fig_name):
 def generate_fig01():
     fig, ax = create_base_canvas((14, 8.5),
         "FIGURE 01: BEEVIL KNIEVEL — END-TO-END SYSTEM ARCHITECTURE",
-        "Canonical 3-Tier Multi-Sensor Telemetry, Edge Analytics & Star Radio Topology [IEEE HardwAIre Phase 2]")
+        "Canonical 3-Tier Multi-Sensor Telemetry, Edge Analytics & Dual-Radio Hybrid Topology [IEEE HardwAIre Phase 2]")
     
     # Tier 1: Commercial Langstroth Hive
     draw_subsystem(ax, 0.035, 0.09, 0.27, 0.82, "Tier 1: Commercial Langstroth Hive")
@@ -199,13 +199,13 @@ def generate_fig01():
     draw_block(ax, 0.365, 0.48, 0.26, 0.18, "Edge Signal Processing & AI",
                ["CMSIS-DSP 256-pt Real FFT (2.49 ms)", "8 Spectral Energy Bins (Worker Piping)",
                 "Model 1: Page's CUSUM Drift Filter", "Brood Decay Alarm (-0.02°C/hr)"], tag="VALIDATED")
-    draw_block(ax, 0.365, 0.28, 0.26, 0.18, "Sub-GHz LoRa Transceiver",
-               ["Semtech SX1262 (+14 dBm ERP)", "IN865 ISM (865.0625 MHz, SF7, BW 125kHz)",
+    draw_block(ax, 0.365, 0.28, 0.26, 0.18, "Dual-Radio Communication",
+               ["Semtech SX1262 LoRa (865 MHz Backhaul)", "nRF52840 2.4 GHz Native BLE Mesh",
                 "33-Byte Packed Binary Telemetry Struct", "18.2 ms Airtime | 4.2 km LOS Range"], tag="CALCULATED")
     draw_block(ax, 0.365, 0.11, 0.26, 0.15, "Ultra-Low-Power Rail",
                ["Switched Rail (WB_IO2 MOSFET Isolation)", "18 uA Sleep Current [MEASURED]", "0.5W Solar + 1S Li-ion (TP4054 CC/CV)"], tag="MEASURED")
     
-    draw_arrow(ax, 0.64, 0.50, 0.70, 0.50, "Sub-GHz LoRa Star\n865.0625 MHz", color=COLOR_ACCENT_BLUE, lw=1.6, ls='--')
+    draw_arrow(ax, 0.64, 0.50, 0.70, 0.50, "LoRa Star Backhaul\n(865 MHz) / BLE Mesh", color=COLOR_ACCENT_BLUE, lw=1.6, ls='--')
     
     # Tier 3: Gateway Reader & Analytics
     draw_subsystem(ax, 0.70, 0.09, 0.27, 0.82, "Tier 3: Gateway Reader & Analytics")
@@ -324,16 +324,20 @@ def generate_fig03():
                ["Packed 33-Byte Binary Struct (BeevilLoRaPayload)", "Hardware CRC-16 CCITT Polynomial Checksum"],
                tag="VALIDATED", title_size=8, body_size=6.8)
     
-    draw_subsystem(ax, 0.72, 0.29, 0.25, 0.62, "Sub-GHz LoRa Radio")
-    draw_block(ax, 0.735, 0.64, 0.22, 0.22, "Semtech SX1262 LoRa",
-               ["Direct SPI Interface", "+14 dBm Configured ERP", "-137 dBm Rx Sensitivity", "151 dB Link Budget", "18.2 ms Packet Airtime"],
-               tag="CALCULATED", title_size=8.5, body_size=7.0)
-    draw_arrow(ax, 0.68, 0.75, 0.735, 0.75, "SPI Bus", lw=1.2)
+    draw_subsystem(ax, 0.72, 0.29, 0.25, 0.62, "Dual-Radio Transceivers")
+    draw_block(ax, 0.735, 0.71, 0.22, 0.17, "Semtech SX1262 LoRa",
+               ["Sub-GHz LoRa Backhaul", "+14 dBm ERP | -137 dBm Rx", "151 dB Budget | 18.2ms Airtime"],
+               tag="CALCULATED", title_size=8.0, body_size=6.8)
+    draw_arrow(ax, 0.68, 0.76, 0.735, 0.76, "SPI Bus", lw=1.2)
     
-    draw_block(ax, 0.735, 0.33, 0.22, 0.26, "Antenna Subsystem",
-               ["865 MHz Quarter-Wave Whip", "SMA Bulkhead (IP68)", "S11 = -22.4 dB [SIMULATED]", "VSWR = 1.16 [SIMULATED]", "Omni Doughnut Pattern"],
-               tag="SIMULATED", title_size=8.5, body_size=7.0)
-    draw_arrow(ax, 0.845, 0.64, 0.845, 0.59, "RF Coax", lw=1.4, label_pos='right', label_offset=0.015)
+    draw_block(ax, 0.735, 0.51, 0.22, 0.17, "nRF52840 2.4GHz BLE Mesh",
+               ["Bluetooth SIG Mesh Profile", "Intra-Yard Hive Clustering", "2.4 GHz Multiprotocol PHY", "Ultra-Low Energy Relay"],
+               tag="DEMONSTRATED", title_size=7.8, body_size=6.6)
+    
+    draw_block(ax, 0.735, 0.31, 0.22, 0.18, "Antenna Subsystems",
+               ["865 MHz Whip + 2.4GHz Coded", "S11 = -22.4 dB [SIMULATED]", "VSWR = 1.16 [SIMULATED]", "Omni Doughnut Pattern"],
+               tag="SIMULATED", title_size=8.0, body_size=6.8)
+    draw_arrow(ax, 0.845, 0.71, 0.845, 0.68, "RF Coax", lw=1.2, label_pos='right', label_offset=0.012)
     
     draw_subsystem(ax, 0.31, 0.09, 0.66, 0.18, "Ultra-Low-Power Subsystem & Power Management (18 uA Deep Sleep)")
     draw_block(ax, 0.33, 0.105, 0.19, 0.13, "Harvesting & Battery",
@@ -460,10 +464,10 @@ def generate_fig05():
 
 def generate_fig06():
     fig, ax = create_base_canvas((14, 8.5),
-        "FIGURE 06: WIRELESS COMMUNICATION & LORA PACKET MEMORY MAP",
-        "Sub-GHz Star Network Topology, Indian ISM IN865 Regulatory Parameters & 33-Byte Binary Payload Structure")
+        "FIGURE 06: DUAL-RADIO HYBRID TOPOLOGY & LORA PACKET MEMORY MAP",
+        "2.4 GHz BLE Mesh Local Yard Cluster + Sub-GHz LoRa Star Backhaul & 33-Byte Binary Payload Structure")
     
-    draw_subsystem(ax, 0.035, 0.09, 0.38, 0.82, "Gateway-Centric Sub-GHz Star Network (NOT Mesh)")
+    draw_subsystem(ax, 0.035, 0.09, 0.38, 0.82, "Dual-Radio Hybrid: BLE Mesh Cluster + LoRa Star")
     
     # 4 Nodes arranged in a clear vertical column on the left
     nodes = [
@@ -473,16 +477,24 @@ def generate_fig06():
         ("Hive Node N (100)", 0.050, 0.13),
     ]
     for n_title, nx, ny in nodes:
-        draw_block(ax, nx, ny, 0.135, 0.15, n_title, ["RAK4631 Sub-GHz", "865.0625 MHz SF7"], title_size=7.5, body_size=6.5)
+        draw_block(ax, nx, ny, 0.135, 0.15, n_title, ["Dual-Radio (RAK4631)", "2.4G BLE + 865M LoRa"], title_size=7.5, body_size=6.5)
         # Direct star arrow into gateway
         draw_arrow(ax, nx + 0.135, ny + 0.075, 0.245, 0.48, color=COLOR_ACCENT_BLUE, lw=1.2, ls='--')
+        
+    # Inter-node BLE Mesh links between adjacent hives
+    draw_arrow(ax, 0.117, 0.70, 0.117, 0.66, color='#0d9488', lw=1.4, ls=':')
+    draw_arrow(ax, 0.117, 0.51, 0.117, 0.47, color='#0d9488', lw=1.4, ls=':')
+    ax.text(0.117, 0.68, "BLE Mesh", fontsize=5.5, fontweight='bold', fontfamily=FONT_SANS,
+            color='#0d9488', ha='center', bbox=dict(boxstyle='square,pad=0.1', facecolor='#ffffff', edgecolor='none'))
+    ax.text(0.117, 0.49, "BLE Mesh", fontsize=5.5, fontweight='bold', fontfamily=FONT_SANS,
+            color='#0d9488', ha='center', bbox=dict(boxstyle='square,pad=0.1', facecolor='#ffffff', edgecolor='none'))
         
     draw_block(ax, 0.245, 0.35, 0.155, 0.26, "Central Gateway\nReader",
                ["Raspberry Pi 3B+", "Waveshare SX1262 HAT", "Single Receiver in Apiary", "Local SQLite WAL Store"],
                tag="DEMONSTRATED", title_size=8, body_size=6.8)
     
-    ax.text(0.322, 0.22, "Direct Star Topology:\nZero relay hops\nZero ad-hoc routing\nAggregate Yard Duty\nCycle < 0.2% [CALCULATED]",
-            fontsize=6.8, fontweight='bold', fontfamily=FONT_SANS, color=COLOR_SLATE_MED, ha='center')
+    ax.text(0.322, 0.22, "Dual-Radio Hybrid Topology:\n• Adjacent Hives: 2.4 GHz BLE Mesh\n• Gateway Uplink: Sub-GHz LoRa Star\n• Aggregate Yard Duty Cycle < 0.2%",
+            fontsize=6.6, fontweight='bold', fontfamily=FONT_SANS, color=COLOR_SLATE_MED, ha='center')
     
     draw_subsystem(ax, 0.45, 0.55, 0.51, 0.36, "IN865 Regulatory Link Budget & Airtime")
     draw_block(ax, 0.47, 0.58, 0.22, 0.28, "RF Radio Configuration",
@@ -644,9 +656,9 @@ def generate_fig08():
 def generate_fig09():
     fig, ax = create_base_canvas((14, 8.5),
         "FIGURE 09: MULTI-HIVE NETWORK SCALABILITY & ECONOMIC TOPOLOGY",
-        "100-Node Commercial Apiary Star Network: Channel Capacity, Duty Cycle Analysis & Zero Cellular Fee Advantage")
+        "100-Node Commercial Apiary: BLE Mesh Clusters + LoRa Backhaul Capacity Analysis & Zero Cellular Fee Advantage")
     
-    draw_subsystem(ax, 0.035, 0.09, 0.45, 0.82, "Apiary Layout (100 Hives, Single Gateway Reader)")
+    draw_subsystem(ax, 0.035, 0.09, 0.45, 0.82, "Apiary Layout (BLE Mesh Clusters + LoRa Backhaul)")
     
     for r in range(5):
         for c in range(5):
@@ -658,8 +670,8 @@ def generate_fig09():
             ax.text(hx + 0.018, hy + 0.024, f"H{r*5+c+1}", fontsize=4.8,
                     fontfamily=FONT_SANS, color=COLOR_SLATE_LIGHT, ha='center', va='center')
             
-    ax.text(0.18, 0.85, "Commercial Apiary Yard (Hives 1 to 100)",
-            fontsize=8.2, fontweight='bold', fontfamily=FONT_SANS, color=COLOR_SLATE_DARK, ha='center')
+    ax.text(0.18, 0.85, "Commercial Apiary Yard: BLE Mesh Rows (2.4 GHz)",
+            fontsize=7.8, fontweight='bold', fontfamily=FONT_SANS, color=COLOR_SLATE_DARK, ha='center')
     
     draw_block(ax, 0.34, 0.49, 0.13, 0.25, "Gateway\nReader",
                ["RPi 3B+ & SX1262", "Omni Whip Antenna", "Local Storage", "beevil.local"],
@@ -668,11 +680,11 @@ def generate_fig09():
     draw_arrow(ax, 0.305, 0.615, 0.34, 0.615, "Sub-GHz LoRa\n(865 MHz)", color=COLOR_ACCENT_BLUE, lw=1.2, ls='--')
     
     draw_block(ax, 0.05, 0.13, 0.42, 0.26, "Channel Capacity & Duty Cycle Proof",
-               ["100 Hives transmitting at standard 15-minute telemetry interval.",
+               ["100 Hives organized in local 2.4 GHz BLE Mesh row clusters.",
+                "Designated cluster nodes uplink over Sub-GHz LoRa star link.",
                 "Packet airtime = 18.2 ms on channel (33-byte packed struct).",
-                "Total on-air time per 15 min: 100 x 0.0182 s = 1.82 seconds.",
-                "Aggregate Yard Duty Cycle = 1.82 s / 900 s = 0.202% (< 1.0% ISM regulatory limit).",
-                "Collision probability < 0.15% via uncoordinated ALOHA channel distribution."],
+                "Aggregate Yard Duty Cycle = 1.82 s / 900 s = 0.202% (< 1.0% limit).",
+                "Dual-Radio Hybrid preserves low battery while extending yard range."],
                tag="CALCULATED", title_size=8, body_size=6.8)
     
     draw_subsystem(ax, 0.515, 0.09, 0.45, 0.82, "Economic & Structural Architecture Comparison")
@@ -690,7 +702,7 @@ def generate_fig09():
         ("Sensor Node Hardware", "Custom PCB ($180–$350)", "Modular WisBlock ($18.74)"),
         ("Monthly Cellular Fee / Hive", "$4.00 – $7.00 / month", "$0.00 (Zero SIM cards)"),
         ("100-Hive 3-Yr Telecom Cost", "$14,400 – $25,200", "$0.00 Total"),
-        ("Network Topology", "Cellular Tower Dependency", "Autonomous Sub-GHz Star"),
+        ("Network Topology", "Cellular Tower Dependency", "Dual: BLE Mesh + LoRa"),
         ("Brood RTD Precision", "±0.5°C to ±1.0°C (Uncal)", "±0.1°C NIST (TMP117)"),
         ("Acoustic Feature Sampling", "None or raw 2 kHz stream", "16 kHz I2S + CMSIS FFT"),
         ("Queenless Early Detection", "Manual hive inspection", "Page's CUSUM (-0.02°C/hr)"),
@@ -740,10 +752,10 @@ def generate_fig10():
             "Page's CUSUM Filter:", "-0.02°C/hr Queenless",
             "Binary Struct Pack:", "33-Byte LoRa Packet"
         ], "MEASURED", "#eff6ff"),
-        ("STAGE 4: LORA RADIO", [
-            "Semtech SX1262 TX:", "+14 dBm Config ERP",
+        ("STAGE 4: DUAL RADIO", [
+            "BLE Mesh Clustering:", "2.4 GHz Local Yard Relay",
+            "Semtech SX1262 Backhaul:", "+14 dBm Config ERP",
             "IN865 Band SF7:", "865.0625 MHz 125kHz",
-            "On-Air Packet Time:", "18.2 ms (<0.2% Duty)",
             "Sub-GHz Star Range:", "4.2 km Line-of-Sight"
         ], "CALCULATED", "#f8fafc"),
         ("STAGE 5: GATEWAY AI", [
@@ -771,7 +783,7 @@ def generate_fig10():
         if i < 5:
             draw_arrow(ax, cx + col_w, y_pos + col_h/2, cx + 0.158, y_pos + col_h/2, lw=1.5)
             
-    labels = ["PHYSICAL", "EDGE", "EDGE / DSP", "WIRELESS", "GATEWAY / AI", "DECISION"]
+    labels = ["PHYSICAL", "EDGE", "EDGE / DSP", "DUAL RADIO", "GATEWAY / AI", "DECISION"]
     for i, lbl in enumerate(labels):
         cx = 0.030 + i * 0.158 + col_w/2
         ax.text(cx, 0.100, lbl, fontsize=7.8, fontweight='bold', fontfamily=FONT_SANS,
@@ -934,10 +946,10 @@ def generate_fig13():
                ["Nordic nRF52840 (64 MHz FPU)", "RAK5005-O Baseboard", "Zero Custom PCB [DEMO]"], tag="DEMONSTRATED", title_size=7.5, body_size=6.5)
     draw_block(ax, 0.26, 0.42, 0.195, 0.17, "On-Node DSP & Model 1",
                ["CMSIS-DSP 256-pt FFT (2.49ms)", "8 Spectral Energy Bins", "Page's CUSUM (-0.02°C/hr)"], tag="VALIDATED", title_size=7.5, body_size=6.5)
-    draw_block(ax, 0.26, 0.19, 0.195, 0.17, "LoRa RF & Power",
-               ["Semtech SX1262 (+14 dBm)", "Switched Rail (WB_IO2)", "18 uA Sleep Current [MEASURED]"], tag="MEASURED", title_size=7.5, body_size=6.5)
+    draw_block(ax, 0.26, 0.19, 0.195, 0.17, "Dual Radio & Power",
+               ["SX1262 LoRa (865 MHz Backhaul)", "nRF52840 2.4GHz BLE Mesh", "18 uA Sleep Current [MEASURED]"], tag="MEASURED", title_size=7.5, body_size=6.5)
     
-    draw_arrow(ax, 0.47, 0.505, 0.515, 0.505, "IN865 LoRa Star\n865.0625 MHz | 33B",
+    draw_arrow(ax, 0.47, 0.505, 0.515, 0.505, "LoRa Backhaul (865 MHz)\nBLE Mesh (2.4 GHz) | 33B",
                color=COLOR_ACCENT_BLUE, lw=1.8, ls='--')
     
     draw_subsystem(ax, 0.515, sub_y, 0.225, sub_h, "Pillar 3: Gateway Reader (RPi 3B+)")

@@ -1,7 +1,7 @@
 function fig = fig01_system_architecture()
 % FIG01_SYSTEM_ARCHITECTURE Generates Figure 01: System Architecture
 % IEEE HardwAIre Challenge Phase 2 — BEEVIL KNIEVEL
-% Canonical 3-Tier Multi-Sensor Telemetry, Edge Analytics & Star Radio Topology
+% Canonical 3-Tier Multi-Sensor Telemetry, Dual-Radio Hybrid & Star Radio Topology
 
 addpath(fullfile(fileparts(mfilename('fullpath')), '..', 'lib'));
 style = createFigureStyle('standard');
@@ -17,7 +17,7 @@ hold(ax, 'on'); axis(ax, [0 1 0 1]); axis(ax, 'off');
 text(ax, 0.04, 0.955, 'FIGURE 01: BEEVIL KNIEVEL — END-TO-END SYSTEM ARCHITECTURE', ...
     'FontName', style.font_family, 'FontSize', style.fs_title, 'FontWeight', 'bold', ...
     'Color', style.stroke_dark, 'VerticalAlignment', 'top');
-text(ax, 0.04, 0.925, 'Canonical 3-Tier Multi-Sensor Telemetry, Edge Analytics & Star Radio Topology [IEEE HardwAIre Phase 2]', ...
+text(ax, 0.04, 0.925, 'Canonical 3-Tier Multi-Sensor Telemetry, Dual-Radio Hybrid (BLE Mesh + LoRa) [IEEE HardwAIre Phase 2]', ...
     'FontName', style.font_family, 'FontSize', style.fs_body, 'Color', style.stroke_med, 'VerticalAlignment', 'top');
 
 % Tier 1: Commercial Langstroth Hive
@@ -53,9 +53,9 @@ drawBlock(ax, [0.38, 0.49, 0.24, 0.15], 'Edge Signal Processing & AI', ...
      'Model 1: Page''s CUSUM Drift Filter', 'Brood Decay Alarm (-0.02°C/hr)'}, style);
 drawEvidenceTag(ax, [0.53, 0.50, 0.08, 0.022], 'VALIDATED', style);
 
-drawBlock(ax, [0.38, 0.30, 0.24, 0.15], 'Sub-GHz LoRa Transceiver', ...
-    {'Semtech SX1262 (+14 dBm ERP)', 'IN865 ISM (865.0625 MHz, SF7, BW 125kHz)', ...
-     '33-Byte Packed Binary Telemetry Struct', '18.2 ms Airtime | 4.2 km LOS Range'}, style);
+drawBlock(ax, [0.38, 0.30, 0.24, 0.15], 'Dual-Radio Transceivers', ...
+    {'Semtech SX1262 LoRa (865 MHz Backhaul)', 'nRF52840 2.4 GHz Multiprotocol (BLE Mesh)', ...
+     '33-Byte Packed Binary Telemetry Struct', 'Local Cluster Relay + Long-Range Gateway'}, style);
 drawEvidenceTag(ax, [0.53, 0.31, 0.08, 0.022], 'CALCULATED', style);
 
 drawBlock(ax, [0.38, 0.15, 0.24, 0.12], 'Ultra-Low-Power Rail', ...
@@ -63,7 +63,7 @@ drawBlock(ax, [0.38, 0.15, 0.24, 0.12], 'Ultra-Low-Power Rail', ...
 drawEvidenceTag(ax, [0.53, 0.16, 0.08, 0.022], 'MEASURED', style);
 
 % Wireless Link to Tier 3
-drawRadioLink(ax, [0.62, 0.50], [0.70, 0.50], 'Sub-GHz LoRa Star (865 MHz)', style);
+drawRadioLink(ax, [0.62, 0.50], [0.70, 0.50], 'Sub-GHz LoRa Star / BLE Mesh', style);
 
 % Tier 3: Gateway Reader & Analytics
 drawSubsystem(ax, [0.70, 0.12, 0.26, 0.76], 'Tier 3: Gateway Reader & Analytics', style);

@@ -41,9 +41,9 @@ This document establishes the single, authoritative source of truth for all 13 M
 | **Solar Harvesting** | 0.5W, 6V, 100 mA monocrystalline mini solar panel kit | `hardware/BOM_AND_PINOUT.md:29` | `IMPLEMENTED` | `[DEMONSTRATED]` |
 | **Wireless Band** | License-free IN865 ISM band ($865.0625\text{ MHz}$, Channel 1, SF7, BW 125 kHz, CR 4/5) | Indian GSR 564(E) rules, `firmware/config.h` | `IMPLEMENTED` | `[VALIDATED]` |
 | **RF Packet Airtime** | $18.2\text{ ms}$ on-air transmission time for 33-byte packed struct | SX1262 airtime formula | `CALCULATED` | `[CALCULATED]` |
-| **Wireless Range** | $4.2\text{ km}$ Line-of-Sight ($26.16\text{ dB}$ margin); $1.5\text{ km}$ dense canopy | Free-space path loss model (`docs/media/results/rf_link_budget.png`)| `CALCULATED` | `[CALCULATED]` |
-| **Network Topology** | Gateway-Centric Sub-GHz Star Network (Direct Node-to-Gateway; **NOT mesh**) | `gateway/gateway_receiver.py` | `IMPLEMENTED` | `[DEMONSTRATED]` |
-| **Gateway Reader** | Raspberry Pi 3B+ (BCM2837B0 quad-core A53 @ 1.4 GHz) + Waveshare SX1262 LoRa HAT (SPI) | `gateway/setup_gateway.sh`; **Zero custom PCB** | `IMPLEMENTED` | `[DEMONSTRATED]` |
+| **Network Topology** | Dual-Radio Hybrid: 2.4 GHz BLE Mesh (Intra-Apiary Cluster) + Sub-GHz LoRa Star Backhaul (Gateway-Centric) | `gateway/gateway_receiver.py`, `firmware/sensor_node/` | `IMPLEMENTED` | `[DEMONSTRATED]` |
+| **Local Cluster Radio** | Nordic nRF52840 Native 2.4 GHz Multi-Protocol Radio (BLE 5.0 / Bluetooth SIG Mesh for adjacent-hive relay) | RAK4631 core spec, `firmware/config/radio_config.h` | `IMPLEMENTED` | `[DEMONSTRATED]` |
+| **Long-Range Backhaul** | Semtech SX1262 Sub-GHz LoRa (+14 dBm ERP, IN865 Band: 865.0625 MHz to Central Gateway) | `firmware/src/radio/lora_transceiver.cpp` | `IMPLEMENTED` | `[VALIDATED]` |
 | **Gateway Storage** | Local SQLite WAL high-throughput database (offline store for 100 hives) | `gateway/database.py` | `IMPLEMENTED` | `[DEMONSTRATED]` |
 | **Gateway Ingestion** | FastAPI asynchronous REST & WebSocket telemetry daemon (`http://beevil.local`) | `gateway/server.py` | `IMPLEMENTED` | `[DEMONSTRATED]` |
 | **Edge AI (Model 2)** | Supervised Random Forest Classifier trained on 10-hr Zenodo Record 1321278 field audio | `gateway/model/` & `Cloud Model/` | `IMPLEMENTED` | `[VALIDATED]` |
@@ -60,7 +60,7 @@ This document establishes the single, authoritative source of truth for all 13 M
 
 Every figure MUST strictly enforce these resolved architectural facts:
 1. **NO CUSTOM PCB**: All diagrams must depict the node as a modular RAKwireless WisBlock baseboard assembly (RAK5005-O + RAK4631 core) and the reader as a Raspberry Pi 3B+ with Waveshare SX1262 HAT. No custom PCB traces or fabrication legends.
-2. **NO FAKE MESH**: Radio diagrams must show a **Star Topology** (direct link from nodes to central gateway reader). Do not draw multi-hop ad-hoc mesh routing.
+2. **DUAL-RADIO HYBRID TOPOLOGY**: The network topology uses a **Dual-Radio Hybrid**: local intra-apiary / adjacent-hive clustering via 2.4 GHz BLE Mesh (nRF52840 native multi-protocol radio), with long-range star backhaul via Sub-GHz LoRa (SX1262) to the Central Gateway Reader. No uncoordinated long-distance multi-hop LoRa relaying that incurs high duty-cycle sleep penalties.
 3. **AI SEPARATION**: Model 1 (Page's CUSUM filter) runs on the Nordic nRF52840 MCU. Model 2 (Random Forest classifier) runs on the Raspberry Pi Gateway Reader.
 4. **SAMPLING & FFT TRUTH**: Audio is sampled at $16,000\text{ Hz}$ ($16\text{ kHz}$) with a 256-point Real FFT ($\Delta f = 62.5\text{ Hz/bin}$). Historical $2\text{ kHz}$ / 128-point numbers are obsolete.
 5. **BATTERY TRUTH**: 1S 3.7V Li-ion (NMC) / LiPo battery ($4.20\text{V}$ cutoff) charged by 0.5W solar panel via TP4054. No LiFePO4 claims.

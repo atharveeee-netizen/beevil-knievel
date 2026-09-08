@@ -68,16 +68,16 @@ drawBlock(ax, [0.33, 0.31, 0.35, 0.14], 'Protocol Serializer', ...
     {'Packed 33-Byte Binary Struct (BeevilLoRaPayload)', 'Hardware CRC-16 CCITT Polynomial Checksum'}, style);
 drawEvidenceTag(ax, [0.59, 0.41, 0.08, 0.022], 'VALIDATED', style);
 
-% Subsystem 3: Sub-GHz LoRa Radio
-drawSubsystem(ax, [0.72, 0.29, 0.25, 0.62], 'Sub-GHz LoRa Radio', style);
-drawBlock(ax, [0.735, 0.64, 0.22, 0.22], 'Semtech SX1262 LoRa', ...
-    {'Direct SPI Interface', '+14 dBm Configured ERP', '-137 dBm Rx Sensitivity', '151 dB Link Budget', '18.2 ms Packet Airtime'}, style);
+% Subsystem 3: Dual-Radio Transceivers
+drawSubsystem(ax, [0.72, 0.29, 0.25, 0.62], 'Dual-Radio Transceivers', style);
+drawBlock(ax, [0.735, 0.64, 0.22, 0.22], 'Dual Transceivers', ...
+    {'SX1262 LoRa (+14 dBm)', 'nRF52840 2.4GHz BLE Mesh', '-137 dBm Rx Sensitivity', '151 dB Link Budget', '18.2 ms LoRa Airtime'}, style);
 drawEvidenceTag(ax, [0.86, 0.82, 0.085, 0.022], 'CALCULATED', style);
 
-drawArrow(ax, [0.68, 0.75], [0.735, 0.75], 'SPI Bus', style);
+drawArrow(ax, [0.68, 0.75], [0.735, 0.75], 'SPI / 2.4G', style);
 
-drawBlock(ax, [0.735, 0.33, 0.22, 0.26], 'Antenna Subsystem', ...
-    {'865 MHz Quarter-Wave Whip', 'SMA Bulkhead (IP68)', 'S11 = -22.4 dB [SIMULATED]', 'VSWR = 1.16 [SIMULATED]', 'Omni Doughnut Pattern'}, style);
+drawBlock(ax, [0.735, 0.33, 0.22, 0.26], 'Dual Antennas', ...
+    {'865 MHz Sub-GHz Whip', '2.4 GHz Ceramic BLE Antenna', 'SMA Bulkhead (IP68)', 'S11 = -22.4 dB [SIMULATED]', 'VSWR = 1.16 [SIMULATED]'}, style);
 drawEvidenceTag(ax, [0.86, 0.55, 0.085, 0.022], 'SIMULATED', style);
 
 drawArrow(ax, [0.845, 0.64], [0.845, 0.59], 'RF Coax', style);

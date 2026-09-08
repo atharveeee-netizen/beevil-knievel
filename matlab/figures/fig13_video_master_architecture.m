@@ -49,11 +49,11 @@ drawBlock(ax, [0.26, 0.42, 0.195, 0.17], 'On-Node DSP & Model 1', ...
     {'CMSIS-DSP 256-pt FFT (2.49ms)', '8 Spectral Energy Bins', 'Page''s CUSUM (-0.02°C/hr)'}, style);
 drawEvidenceTag(ax, [0.375, 0.55, 0.075, 0.022], 'VALIDATED', style);
 
-drawBlock(ax, [0.26, 0.19, 0.195, 0.17], 'LoRa RF & Power', ...
-    {'Semtech SX1262 (+14 dBm)', 'Switched Rail (WB_IO2)', '18 uA Sleep Current [MEASURED]'}, style);
+drawBlock(ax, [0.26, 0.19, 0.195, 0.17], 'Dual Radio & Power', ...
+    {'SX1262 LoRa (865 MHz Backhaul)', 'nRF52840 2.4GHz BLE Mesh', '18 uA Sleep Current [MEASURED]'}, style);
 drawEvidenceTag(ax, [0.375, 0.32, 0.075, 0.022], 'MEASURED', style);
 
-drawRadioLink(ax, [0.47, 0.505], [0.515, 0.505], sprintf('IN865 LoRa Star\n865.0625 MHz | 33B'), style);
+drawRadioLink(ax, [0.47, 0.505], [0.515, 0.505], sprintf('LoRa Backhaul (865 MHz)\nBLE Mesh (2.4 GHz) | 33B'), style);
 
 % Pillar 3: Gateway Reader (RPi 3B+)
 drawSubsystem(ax, [0.515, sub_y, 0.225, sub_h], 'Pillar 3: Gateway Reader (RPi 3B+)', style);
