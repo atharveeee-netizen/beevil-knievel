@@ -81,14 +81,14 @@
 
     <!-- Pipeline Stages (5 Sequential Blocks with Connectors) -->
     <g transform="translate(25, 105)">
-        <!-- Stage 1: Audio DMA Ingestion -->
+        <!-- Stage 1: Audio DMA Ingestion & Decimation -->
         <rect x="0" y="0" width="185" height="150" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
         <rect x="12" y="12" width="161" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
-        <text x="92" y="26" class="badge" fill="#38bdf8" text-anchor="middle">1. I2S DMA BUFFER</text>
-        <text x="12" y="50" class="body-title">TDK INMP441 MEMS</text>
-        <text x="12" y="66" class="mono-xs" fill="#94a3b8">Sample Rate: fs = 2000 Hz</text>
-        <text x="12" y="80" class="mono-xs" fill="#94a3b8">Resolution: 16-bit PCM</text>
-        <text x="12" y="94" class="mono-xs" fill="#94a3b8">Buffer: Ping-Pong DMA</text>
+        <text x="92" y="26" class="badge" fill="#38bdf8" text-anchor="middle">1. I2S ACQ &amp; DECIMATION</text>
+        <text x="12" y="50" class="body-title">TDK INMP441 I2S MEMS</text>
+        <text x="12" y="66" class="mono-xs" fill="#38bdf8">Native Audio: 16 kHz / 24-bit</text>
+        <text x="12" y="80" class="mono-xs" fill="#34d399">8x Decimation Filter (CIC+FIR)</text>
+        <text x="12" y="94" class="mono-xs" fill="#cbd5e1">DSP Rate: fs = 2000 Hz (N=256)</text>
         <!-- Waveform icon -->
         <path d="M 16 128 Q 26 108 36 128 T 56 128 T 76 102 T 96 142 T 116 118 T 136 132 T 168 128" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
 

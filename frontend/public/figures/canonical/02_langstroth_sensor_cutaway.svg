@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 580" width="100%" height="100%">
+    
+    <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#070a14"/>
+            <stop offset="50%" stop-color="#0b111e"/>
+            <stop offset="100%" stop-color="#0f172a"/>
+        </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#111a2d"/>
+            <stop offset="100%" stop-color="#0c1220"/>
+        </linearGradient>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a253c"/>
+            <stop offset="100%" stop-color="#0f182b"/>
+        </linearGradient>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#d97706"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+        </linearGradient>
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#0284c7"/>
+            <stop offset="100%" stop-color="#38bdf8"/>
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#059669"/>
+            <stop offset="100%" stop-color="#34d399"/>
+        </linearGradient>
+        <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e11d48"/>
+            <stop offset="100%" stop-color="#fb7185"/>
+        </linearGradient>
+        <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+        
+        <marker id="arrCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+        </marker>
+        <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
+        </marker>
+        <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
+        </marker>
+        <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fb7185"/>
+        </marker>
+        <marker id="arrPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7"/>
+        </marker>
+        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#a855f7"/>
+        </linearGradient>
+
+        <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.35"/>
+        </pattern>
+    </defs>
+    <style>
+        .headline { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.3px; }
+        .body-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #94a3b8; line-height: 1.4; }
+        .mono-sm { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 8.5px; }
+        .badge { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
+    </style>
+
+    <rect width="1120" height="580" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1120" height="580" fill="url(#grid)" rx="10"/>
+
+    <!-- Header -->
+    <rect x="25" y="18" width="225" height="24" rx="12" fill="rgba(6, 182, 212, 0.15)" stroke="#06b6d4" stroke-width="1.2"/>
+    <text x="137" y="34" class="badge" fill="#38bdf8" text-anchor="middle">PHYSICAL SENSORY CUTAWAY</text>
+    <text x="25" y="64" class="headline">02A - INSTRUMENTED 10-FRAME LANGSTROTH HIVE MECHANICAL CUTAWAY</text>
+    <text x="25" y="82" class="subhead">Exact sensor placement, brood chamber geometry, hermetic pass-throughs, and external telemetry node</text>
+
+    <!-- Left: Hive Architectural Cutaway Drawing -->
+    <g transform="translate(25, 100)">
+        <rect width="520" height="425" rx="8" fill="#0b111e" stroke="#334155" stroke-width="1.5"/>
+
+        <!-- Outer Hive Stack Schematic -->
+        <!-- Telescoping Outer Cover (Metal Galvanized Cap) -->
+        <rect x="35" y="20" width="370" height="26" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1.2"/>
+        <text x="45" y="37" class="mono-xs" fill="#f8fafc">Galvanized Sheet Outer Telescoping Cover</text>
+
+        <!-- Inner Cover with Ventilation Notch & Center Port -->
+        <rect x="45" y="50" width="350" height="18" rx="2" fill="#2d2213" stroke="#78350f" stroke-width="1"/>
+        <text x="55" y="63" class="mono-xs" fill="#fbbf24">Inner Cover (Ventilation &amp; Harness Pass-Through)</text>
+
+        <!-- Shallow Honey Super Box -->
+        <rect x="45" y="72" width="350" height="60" rx="3" fill="#17120c" stroke="#b45309" stroke-width="1.2"/>
+        <text x="55" y="88" class="mono-xs" fill="#fde68a">Honey Super Box (Frames 1-10 Honey Storage)</text>
+        <line x1="55" y1="96" x2="385" y2="96" stroke="#451a03" stroke-width="1" stroke-dasharray="6 4"/>
+        <text x="55" y="112" class="mono-xs" fill="#94a3b8">Preserves 9.5 mm Inter-Frame Bee Space</text>
+
+        <!-- Deep Brood Chamber (465 x 375 x 240 mm) -->
+        <rect x="45" y="136" width="350" height="180" rx="4" fill="#1c160e" stroke="#d97706" stroke-width="1.5"/>
+        <text x="55" y="154" class="body-title" fill="#fbbf24">Deep Brood Chamber (Apis mellifera Nest)</text>
+
+        <!-- 10 Frames Representation -->
+        <g transform="translate(55, 164)">
+            <!-- Frames 1 to 10 lines -->
+            <rect x="0" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#475569"/>
+            <text x="14" y="70" class="mono-xs" fill="#64748b" text-anchor="middle">F1</text>
+            <circle cx="14" cy="95" r="4" fill="#38bdf8"/> <!-- DS18B20 1 -->
+
+            <rect x="33" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#475569"/>
+            <text x="47" y="70" class="mono-xs" fill="#64748b" text-anchor="middle">F2</text>
+            <circle cx="47" cy="95" r="4" fill="#38bdf8"/> <!-- DS18B20 2 -->
+
+            <!-- Frame 3 (Brood Nest Core Center) -->
+            <rect x="66" y="0" width="34" height="135" rx="2" fill="#2d1215" stroke="#ef4444" stroke-width="1.4"/>
+            <text x="83" y="45" class="mono-xs" fill="#fca5a5" text-anchor="middle">F3</text>
+            <text x="83" y="58" class="badge" fill="#ef4444" text-anchor="middle">CORE</text>
+            <!-- TMP117 Transducer at Center -->
+            <circle cx="83" cy="85" r="6" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+            <text x="83" y="110" class="mono-xs" fill="#f87171" text-anchor="middle">TMP117</text>
+            <text x="83" y="122" class="mono-xs" fill="#fca5a5" text-anchor="middle">34.5 C</text>
+
+            <!-- Frame 4 (Acoustic Capsule Location) -->
+            <rect x="105" y="0" width="34" height="135" rx="2" fill="#172235" stroke="#0284c7" stroke-width="1.4"/>
+            <text x="122" y="45" class="mono-xs" fill="#7dd3fc" text-anchor="middle">F4</text>
+            <text x="122" y="58" class="badge" fill="#38bdf8" text-anchor="middle">MIC</text>
+            <!-- INMP441 Microphone Probe Capsule -->
+            <circle cx="122" cy="85" r="6" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+            <text x="122" y="110" class="mono-xs" fill="#38bdf8" text-anchor="middle">INMP441</text>
+            <circle cx="122" cy="122" r="4" fill="#38bdf8"/> <!-- DS18B20 3 -->
+
+            <rect x="144" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#475569"/>
+            <text x="158" y="70" class="mono-xs" fill="#64748b" text-anchor="middle">F5</text>
+            <circle cx="158" cy="95" r="4" fill="#38bdf8"/> <!-- DS18B20 4 -->
+
+            <rect x="177" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#475569"/>
+            <text x="191" y="70" class="mono-xs" fill="#64748b" text-anchor="middle">F6</text>
+            <circle cx="191" cy="95" r="4" fill="#38bdf8"/> <!-- DS18B20 5 -->
+
+            <rect x="210" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#334155"/>
+            <text x="224" y="70" class="mono-xs" fill="#475569" text-anchor="middle">F7</text>
+
+            <rect x="243" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#334155"/>
+            <text x="257" y="70" class="mono-xs" fill="#475569" text-anchor="middle">F8</text>
+
+            <rect x="276" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#334155"/>
+            <text x="290" y="70" class="mono-xs" fill="#475569" text-anchor="middle">F9</text>
+
+            <rect x="309" y="0" width="21" height="135" rx="2" fill="#0d1117" stroke="#334155"/>
+            <text x="319" y="70" class="mono-xs" fill="#475569" text-anchor="middle">10</text>
+        </g>
+
+        <!-- SCD41 & BME688 In Upper Gas Crown Headspace -->
+        <rect x="240" y="142" width="145" height="18" rx="3" fill="#1e1533" stroke="#8b5cf6"/>
+        <text x="246" y="155" class="mono-xs" fill="#c4b5fd">SCD41 (CO2) + BME688</text>
+
+        <!-- Screen Bottom Board & Dual Shear Load Cell Scale -->
+        <rect x="45" y="320" width="350" height="28" rx="2" fill="#111827" stroke="#475569" stroke-width="1.2"/>
+        <text x="55" y="338" class="mono-xs" fill="#94a3b8">Screen Bottom Board + Varroa Mite Tray</text>
+
+        <rect x="40" y="352" width="360" height="34" rx="4" fill="#0f172a" stroke="#059669" stroke-width="1.4"/>
+        <circle cx="65" cy="369" r="6" fill="#059669"/>
+        <circle cx="375" cy="369" r="6" fill="#059669"/>
+        <text x="80" y="373" class="mono-xs" fill="#34d399">Dual-Shear Beam Load Cell Platform (HX711 24-Bit ADC Unit, 0-100 kg)</text>
+
+        <!-- External Enclosure Mounted to Sidewall -->
+        <g transform="translate(415, 145)">
+            <!-- Cable pass-through gland -->
+            <rect x="-10" y="40" width="12" height="18" fill="#334155" rx="2"/>
+            <path d="M -10 49 L 10 49" stroke="#38bdf8" stroke-width="2"/>
+            <rect x="10" y="10" width="85" height="130" rx="6" fill="#111a2e" stroke="#38bdf8" stroke-width="1.5"/>
+            <text x="52" y="30" class="badge" fill="#38bdf8" text-anchor="middle">IP67 NODE</text>
+            <text x="52" y="48" class="mono-xs" fill="#ffffff" text-anchor="middle">RAK4631</text>
+            <text x="52" y="62" class="mono-xs" fill="#94a3b8" text-anchor="middle">nRF52840</text>
+            <text x="52" y="74" class="mono-xs" fill="#94a3b8" text-anchor="middle">+ SX1262</text>
+            <!-- Solar Panel on Enclosure bracket -->
+            <rect x="18" y="85" width="68" height="40" rx="3" fill="#0d1b2a" stroke="#fbbf24" stroke-width="1.2"/>
+            <line x1="18" y1="98" x2="86" y2="98" stroke="#fbbf24" stroke-width="0.8"/>
+            <line x1="18" y1="112" x2="86" y2="112" stroke="#fbbf24" stroke-width="0.8"/>
+            <line x1="40" y1="85" x2="40" y2="125" stroke="#fbbf24" stroke-width="0.8"/>
+            <line x1="64" y1="85" x2="64" y2="125" stroke="#fbbf24" stroke-width="0.8"/>
+            <!-- Antenna -->
+            <line x1="52" y1="10" x2="52" y2="-30" stroke="#a855f7" stroke-width="2.5"/>
+            <circle cx="52" cy="-30" r="2.5" fill="#a855f7"/>
+            <text x="52" y="-35" class="mono-xs" fill="#c084fc" text-anchor="middle">865MHz</text>
+        </g>
+    </g>
+
+    <!-- Right: 4 Rigorous Engineering Callout Cards -->
+    <g transform="translate(565, 100)">
+        <!-- Card 1: Precision Core Brood Temperature -->
+        <rect width="530" height="98" rx="8" fill="url(#cardGrad)" stroke="#ef4444" stroke-width="1.2"/>
+        <rect x="14" y="10" width="180" height="20" rx="4" fill="rgba(239, 68, 68, 0.15)"/>
+        <text x="104" y="24" class="badge" fill="#f87171" text-anchor="middle">1. BROOD CORE THERMAL ARRAY</text>
+        <text x="205" y="24" class="mono-xs" fill="#fca5a5">TI TMP117 (+-0.1 deg C NIST) + 5x DS18B20</text>
+        <text x="14" y="46" class="body-desc">- Transducer: TI TMP117 (0x48) positioned at Frame 3 geometric center of active brood cluster.</text>
+        <text x="14" y="62" class="body-desc">- Lateral Array: 5x Maxim DS18B20 digital probes span Frame 1 (honey perimeter) to Frame 5.</text>
+        <text x="14" y="78" class="body-desc">- Biological Setpoint: Core brood strictly regulated at 34.5 deg C +- 1.0 deg C by worker clustering.</text>
+
+        <!-- Card 2: Bio-Acoustic Resonance & Transduction -->
+        <g transform="translate(0, 108)">
+            <rect width="530" height="98" rx="8" fill="url(#cardGrad)" stroke="#0284c7" stroke-width="1.2"/>
+            <rect x="14" y="10" width="180" height="20" rx="4" fill="rgba(2, 132, 199, 0.15)"/>
+            <text x="104" y="24" class="badge" fill="#38bdf8" text-anchor="middle">2. ACOUSTIC TRANSDUCTION</text>
+            <text x="205" y="24" class="mono-xs" fill="#7dd3fc">InvenSense INMP441 I2S MEMS (24-bit PCM)</text>
+            <text x="14" y="46" class="body-desc">- Acoustic Pickup: Suspended inside 9.5 mm inter-frame space between Brood Frames 3 and 4.</text>
+            <text x="14" y="62" class="body-desc">- Protective Capsule: Hydrophobic sintered PTFE membrane prevents propolis coating and wax sealing.</text>
+            <text x="14" y="78" class="body-desc">- DSP Sampling: fs = 2000 Hz, 24-bit resolution, 61 dBA SNR, CMSIS-DSP 256-pt complex FFT on-MCU.</text>
+        </g>
+
+        <!-- Card 3: Metabolic Respiration & Security -->
+        <g transform="translate(0, 216)">
+            <rect width="530" height="98" rx="8" fill="url(#cardGrad)" stroke="#8b5cf6" stroke-width="1.2"/>
+            <rect x="14" y="10" width="180" height="20" rx="4" fill="rgba(139, 92, 246, 0.15)"/>
+            <text x="104" y="24" class="badge" fill="#c084fc" text-anchor="middle">3. METABOLIC &amp; RESISTANCE</text>
+            <text x="205" y="24" class="mono-xs" fill="#ddd6fe">Sensirion SCD41 + BME688 + LIS3DH</text>
+            <text x="14" y="46" class="body-desc">- Respiration CO2: Sensirion SCD41 photoacoustic NDIR (400 - 5000 ppm +-40 ppm) in crown headspace.</text>
+            <text x="14" y="62" class="body-desc">- Volatiles &amp; Pheromones: Bosch BME688 MOX gas sensor detects European foulbrood VOC emissions.</text>
+            <text x="14" y="78" class="body-desc">- Anti-Theft: ST LIS3DH accelerometer triggers immediate LoRa emergency packet upon hive tip-over.</text>
+        </g>
+
+        <!-- Card 4: External Enclosure & Energy Autonomy -->
+        <g transform="translate(0, 324)">
+            <rect width="530" height="101" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.2"/>
+            <rect x="14" y="10" width="180" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+            <text x="104" y="24" class="badge" fill="#34d399" text-anchor="middle">4. ENCLOSURE &amp; SOLAR HARVEST</text>
+            <text x="205" y="24" class="mono-xs" fill="#a7f3d0">IP67 Weatherproof Chassis + MPPT</text>
+            <text x="14" y="46" class="body-desc">- Chassis: Polycarbonate enclosure with CNC silicone gasket and 2x IP68 PG-7 cable glands.</text>
+            <text x="14" y="62" class="body-desc">- Power: 3.7V 2000 mAh LiFePO4 cell + 6V 100mA monocrystalline solar panel; 18.4 uA sleep.</text>
+            <text x="14" y="78" class="body-desc">- Solderless Field Assembly: Lever spring terminal blocks for 100% screwless field maintenance.</text>
+        </g>
+    </g>
+
+    <!-- Bottom Stat Bar -->
+    <g transform="translate(25, 532)">
+        <rect width="1070" height="34" rx="6" fill="#0c1220" stroke="#1e293b"/>
+        <text x="20" y="22" class="mono-xs" fill="#94a3b8">BIOMECHANICAL STANDARDS:</text>
+        <text x="190" y="22" class="mono-xs" fill="#34d399">9.5 mm Bee-Space Preserved</text>
+        <text x="400" y="22" class="mono-xs" fill="#38bdf8">Propolis-Resistant PTFE Barrier</text>
+        <text x="630" y="22" class="mono-xs" fill="#fbbf24">Zero Thermal Shock (Hermetic Pass-Through)</text>
+        <text x="910" y="22" class="mono-xs" fill="#34d399">100% Solderless Terminal</text>
+    </g>
+</svg>

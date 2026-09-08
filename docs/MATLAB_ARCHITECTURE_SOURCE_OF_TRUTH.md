@@ -19,7 +19,7 @@ This document establishes the single, authoritative source of truth for all 13 M
 | **Transmitter Platform** | RAKwireless WisBlock Modular Baseboard (RAK5005-O / RAK19007); **Zero custom PCB** | `hardware/BOM_AND_PINOUT.md:13` | `IMPLEMENTED` | `[DEMONSTRATED]` |
 | **Wiring / Terminals** | Solderless 4:2 Pole Spring Lever Terminal Blocks + IP68 PG-7 Cable Glands | `hardware/BOM_AND_PINOUT.md:25-26` | `IMPLEMENTED` | `[DEMONSTRATED]` |
 | **Primary Temp Sensor** | Texas Instruments TMP117 Precision Digital RTD (I2C `0x48`, NIST-traceable $\pm 0.1^\circ\text{C}$) | `firmware/src/sensors/tmp117.cpp` | `IMPLEMENTED` | `[VALIDATED]` |
-| **Comb Placement** | Central Brood Nest Core (Frame 4 / Frame 5 boundary, $34.5^\circ\text{C} - 35.5^\circ\text{C}$ cluster) | `docs/media/sensing/langstroth_sensor_cutaway.png` | `IMPLEMENTED` | `[VALIDATED]` |
+| **Comb Placement** | Central Brood Nest Core (Frame 4 / Frame 5 boundary, $34.5^\circ\text{C} - 35.5^\circ\text{C}$ cluster) | `docs/media/diagrams/02_langstroth_sensor_cutaway.svg` | `IMPLEMENTED` | `[VALIDATED]` |
 | **Thermal Grid** | 5-Probe Stainless-Steel Maxim DS18B20 1-Wire Digital Array (Pin `P0.17`, $\pm 0.5^\circ\text{C}$) | `firmware/src/sensors/ds18b20_grid.cpp`, `hardware/BOM_AND_PINOUT.md:45` | `IMPLEMENTED` | `[VALIDATED]` |
 | **Silicon Die Temp** | On-chip Nordic nRF52840 internal TEMP peripheral ($25.4^\circ\text{C} - 26.8^\circ\text{C}$) | `firmware/src/sensors/internal_temp.cpp` | `IMPLEMENTED` | `[MEASURED]` |
 | **Microphone** | InvenSense INMP441 Omnidirectional I2S Digital MEMS with ePTFE Gore-Tex Vent | `firmware/src/dsp/i2s_mic.cpp`, `hardware/BOM_AND_PINOUT.md:19` | `IMPLEMENTED` | `[VALIDATED]` |

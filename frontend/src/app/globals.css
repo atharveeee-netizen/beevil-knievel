@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* ============================================================================
+   ROOBERT GEOMETRIC GROTESQUE FONT FAMILY
+   ============================================================================ */
+
 @font-face {
   font-family: 'Roobert';
   src: url('/fonts/Roobert-Light.woff2') format('woff2');
@@ -49,264 +53,132 @@
   font-display: swap;
 }
 
+/* ============================================================================
+   PRECISION ENGINEERING DESIGN SYSTEM THEME
+   ============================================================================ */
+
 @theme inline {
   --font-sans: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-roobert: 'Roobert', sans-serif;
-  --color-brand-yellow: #ffc833;
-  --color-device-yellow: #fbc651;
-  --color-screen-black: #312f28;
-  --color-screen-white: #b1afa8;
-  --color-psd-darkest-gray: #212223;
-  --color-psd-dark-gray: #7a8085;
-  --color-psd-mid-gray: #64676c;
-  --color-psd-light-gray: #bbb;
-  --color-psd-lightest-gray: #efefef;
-  --color-purple: #6c00ff;
-  --color-aqua: #00a88a;
-  --color-aqua-light: #21c6a9;
-  --color-aqua-dark: #127866;
-  --color-alert-red: #ef5023;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --color-canvas-dark: #090b10;
+  --color-canvas-elevated: #0e1118;
+  --color-surface-1: #11141d;
+  --color-surface-2: #181d28;
+  --color-surface-3: #222938;
+
+  --color-border-subtle: #1d2332;
+  --color-border-default: #283144;
+  --color-border-strong: #3d4964;
+
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #64748b;
+
+  --color-brand-amber: #f59e0b;
+  --color-brand-gold: #ffc833;
+
+  --color-status-normal: #10b981;
+  --color-status-attention: #f59e0b;
+  --color-status-investigate: #f97316;
+  --color-status-critical: #ef4444;
+  --color-status-stale: #64748b;
+  --color-status-fault: #dc2626;
 }
 
 :root {
-  --brand-yellow: #ffc833;
-  --screen-black: #312f28;
-  --screen-white: #b1afa8;
-  --psd-darkest-gray: #212223;
-  --psd-dark-gray: #7a8085;
-  --psd-mid-gray: #64676c;
-  --psd-light-gray: #bbbbbb;
-  --psd-lightest-gray: #efefef;
-  --purple: #6c00ff;
-  --aqua: #00a88a;
-  --aqua-light: #21c6a9;
-  --aqua-dark: #127866;
-  --white: #ffffff;
-  --black: #000000;
+  --bg-canvas: #090b10;
+  --bg-surface-1: #11141d;
+  --bg-surface-2: #181d28;
+  --bg-surface-3: #222938;
+  --border-subtle: #1d2332;
+  --border-default: #283144;
+  --border-strong: #3d4964;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --brand-amber: #f59e0b;
+  --brand-gold: #ffc833;
+}
+
+/* Sunlight / High-Contrast Veil Mode */
+.sunlight-mode {
+  --bg-canvas: #ffffff !important;
+  --bg-surface-1: #f8fafc !important;
+  --bg-surface-2: #f1f5f9 !important;
+  --bg-surface-3: #e2e8f0 !important;
+  --border-subtle: #cbd5e1 !important;
+  --border-default: #0f172a !important;
+  --border-strong: #000000 !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #1e293b !important;
+  --text-tertiary: #475569 !important;
+  --brand-amber: #b45309 !important;
+  --brand-gold: #92400e !important;
 }
 
 html {
   scroll-behavior: smooth;
   font-family: 'Roobert', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--psd-dark-gray);
-  color: var(--white);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
   overflow-x: hidden;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
 body {
-  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
-/* 3D Order Button */
-.btn-order-purple {
-  display: inline-block;
-  text-decoration: none;
-  padding: 0.35em 1.2em 0.45em 1.2em;
-  border-radius: 3em;
-  user-select: none;
-  cursor: pointer;
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-align: center;
-  text-shadow: 0 0.02em 0.04em rgba(0, 0, 0, 0.4);
-  color: var(--white);
-  background-color: var(--purple);
-  background-image: linear-gradient(#9400ff, #5c00ff);
-  box-shadow:
-    inset 0 0.05em 0.05em rgba(255, 255, 255, 0.6),
-    inset 0 -0.05em 0.08em rgba(0, 0, 0, 0.5),
-    inset 0 -0.01em 0.5em rgba(255, 255, 255, 0.3),
-    0 0.05em 0.1em rgba(0, 0, 0, 0.4);
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+/* Tabular Numbers for Telemetry */
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
 }
 
-.btn-order-purple:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    inset 0 0.05em 0.05em rgba(255, 255, 255, 0.7),
-    inset 0 -0.05em 0.08em rgba(0, 0, 0, 0.5),
-    inset 0 -0.01em 0.5em rgba(255, 255, 255, 0.4),
-    0 0.15em 0.25em rgba(0, 0, 0, 0.5);
+/* Precision Technical Border Frame */
+.tech-frame {
+  border: 1px solid var(--border-default);
+  background-color: var(--bg-surface-1);
 }
 
-.btn-order-purple:active {
-  transform: translateY(1px);
-  background-image: linear-gradient(#4a00d1, #7800ff);
-  box-shadow:
-    inset 0 0.05em 0.15em rgba(0, 0, 0, 0.5),
-    inset 0 -0.03em 0.03em rgba(255, 255, 255, 0.6),
-    0 0.05em 0.2em rgba(0, 0, 0, 0.2);
+.tech-frame-interactive {
+  border: 1px solid var(--border-default);
+  background-color: var(--bg-surface-1);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-/* Secondary Buttons */
-.btn-pill-black {
-  display: inline-block;
-  background-color: var(--screen-black);
-  color: var(--white);
-  padding: 0.6em 1.6em;
-  border-radius: 2em;
-  font-weight: 700;
-  font-size: 1.15rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-.btn-pill-black:hover {
-  background-color: #000000;
-  transform: translateY(-1px);
+.tech-frame-interactive:hover {
+  border-color: var(--border-strong);
+  background-color: var(--bg-surface-2);
 }
 
-.btn-pill-yellow {
-  display: inline-block;
-  background-color: var(--brand-yellow);
-  color: var(--screen-black);
-  padding: 0.6em 1.6em;
-  border-radius: 2em;
-  font-weight: 700;
-  font-size: 1.15rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-.btn-pill-yellow:hover {
-  background-color: #ffd659;
-  transform: translateY(-1px);
+/* Subtle Technical Grid Background */
+.tech-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
-.btn-pill-aqua-dark {
-  display: inline-block;
-  background-color: var(--aqua-dark);
-  color: var(--white);
-  padding: 0.6em 1.6em;
-  border-radius: 2em;
-  font-weight: 700;
-  font-size: 1.15rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-.btn-pill-aqua-dark:hover {
-  background-color: #0d5a4d;
-  transform: translateY(-1px);
+.sunlight-mode .tech-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
 }
 
-/* Large Header Download Button */
-.btn-header-download {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: var(--brand-yellow);
-  color: var(--screen-black);
-  padding: 0.55em 1.4em;
-  border-radius: 9999px;
-  font-weight: 800;
-  font-size: 0.95rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: all 0.2s ease;
-}
-.btn-header-download:hover {
-  background-color: #ffe066;
-  transform: translateY(-1px) scale(1.03);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
-}
-.btn-header-download:active {
-  transform: translateY(1px) scale(0.98);
-}
-
-/* Perspective & 3D Helpers */
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-.transform-style-3d {
-  transform-style: preserve-3d;
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.rotate-y-180 {
-  transform: rotateY(180deg);
-}
-
-/* Clouds Blobble Animation */
-@keyframes blobble {
-  0% { transform: scale(1, 1); }
-  30% { transform: scale(1.05, 0.97); }
-  70% { transform: scale(0.99, 1.03); }
-  100% { transform: scale(1.03, 0.99); }
-}
-
-.animate-blobble {
-  animation: blobble 5s infinite ease-in-out alternate;
-}
-
-/* Playdate 1-Bit Dither & LCD Screen Aesthetics */
-.playdate-screen {
-  background-color: var(--screen-black);
-  color: var(--screen-white);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6), inset 0 0 0 2px rgba(0, 0, 0, 0.4);
-}
-
-.playdate-scanlines {
-  background-image: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.15) 0px,
-    rgba(0, 0, 0, 0.15) 1px,
-    transparent 1px,
-    transparent 2px
-  );
-}
-
-.playdate-dither-light {
-  background-image: radial-gradient(#312f28 1px, transparent 0);
-  background-size: 4px 4px;
-}
-
-.playdate-dither-dark {
-  background-image: radial-gradient(#b1afa8 1px, transparent 0);
-  background-size: 4px 4px;
-}
-
-/* Tactile Playdate Hardware Buttons */
-.playdate-dpad-btn {
-  background-color: #212223;
-  box-shadow: 0 3px 0 #111112, 0 4px 6px rgba(0, 0, 0, 0.4);
-  transition: all 0.05s ease-in-out;
-}
-.playdate-dpad-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 #111112, 0 2px 3px rgba(0, 0, 0, 0.4);
-}
-
-.playdate-action-btn {
-  background-color: #312f28;
-  color: #ffc833;
-  box-shadow: 0 4px 0 #1a1915, 0 6px 10px rgba(0, 0, 0, 0.35);
-  transition: all 0.08s ease-in-out;
-}
-.playdate-action-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #1a1915, 0 2px 4px rgba(0, 0, 0, 0.35);
-}
-
-/* Custom Scrollbar for 100-Hive Matrix */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #212223;
-}
-::-webkit-scrollbar-thumb {
-  background: #64676c;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #ffc833;
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -84,20 +84,20 @@
 ### SCENE 03: Introduce BEEVIL KNIEVEL & Sensor Placement (01:00 – 01:25 | 25 seconds | 55 words)
 
 * **01:00 – 01:13 (13.0s)**
-  * **Visual**: Figure 2.1 — Technical CAD cutaway of Langstroth hive ([`docs/media/sensing/langstroth_sensor_cutaway.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/sensing/langstroth_sensor_cutaway.png)). 3D transparent rendering highlighting in-comb sensor integration between Frame 4 and 5.
+  * **Visual**: Figure 2.1 — Technical CAD cutaway of Langstroth hive ([`docs/figures/matlab/02_hive_sensor_layer.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/figures/matlab/02_hive_sensor_layer.png)). 3D transparent rendering highlighting in-comb sensor integration between Frame 4 and 5.
   * **On-Screen Text**: `BEEVIL KNIEVEL: BIOLOGICALLY-ALIGNED IN-HIVE TELEMETRY`
   * **Voiceover**: That is the engineering purpose of BEEVIL KNIEVEL. We measure the hive exactly where biological signals occur, without altering standard Langstroth comb geometry.
   * **Source / Status**: Repository Figure 2.1 / `[DEMONSTRATED]`
 
 * **01:13 – 01:25 (12.0s)**
   * **Visual**: Animated sensor pointer pins on CAD cutaway:
-    1. Primary Brood RTD (TMP117) clamped at Frame 4/5 center
+    1. Primary Brood Sensor (TI TMP117 precision digital temperature sensor) clamped at Frame 4/5 center
     2. 5-point spatial grid (DS18B20) along comb perimeter
     3. Acoustic port (INMP441) with Gore-Tex acoustic vent
     4. Top-bar gas chamber (SCD41 CO2 + BME688 VOC)
     5. Base scale (HX711) and accelerometer (LIS3DH).
-  * **On-Screen Text**: `CORE BROOD RTD (±0.1°C) | 5-PT THERMAL GRID | I2S ACOUSTICS | CO2 / VOC / WEIGHT`
-  * **Voiceover**: A high-precision RTD monitors the thirty-five-degree brood core. A five-probe grid tracks thermal dissipation, while acoustic and gas sensors monitor colony respiration and density.
+  * **On-Screen Text**: `CORE BROOD TEMP (±0.1°C) | 5-PT THERMAL GRID | I2S ACOUSTICS | CO2 / VOC / WEIGHT`
+  * **Voiceover**: A precision digital temperature sensor monitors the thirty-five-degree brood core. A five-probe grid tracks thermal dissipation, while acoustic and gas sensors monitor colony respiration and density.
   * **Source / Status**: `firmware/src/sensors/` / `[VALIDATED]`
 
 ---
@@ -105,14 +105,14 @@
 ### SCENE 04: Acoustic Intelligence & CMSIS-DSP (01:25 – 01:45 | 20 seconds | 45 words)
 
 * **01:25 – 01:35 (10.0s)**
-  * **Visual**: Figure 3.1 — Bio-Acoustic Transduction & CMSIS-DSP Pipeline ([`docs/media/diagrams/03_acoustic_pipeline.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/diagrams/03_acoustic_pipeline.png)). Signal flow: INMP441 I2S MEMS $\to$ 24-bit 16 kHz PCM $\to$ 256-pt Real FFT.
-  * **On-Screen Text**: `ACOUSTIC TRANSDUCTION: INMP441 I2S MEMS → 16 kHz PCM → 256-PT REAL FFT`
-  * **Voiceover**: Acoustic acquisition uses an omnidirectional I2S MEMS microphone protected by a Gore-Tex membrane. The embedded processor samples hive sound at sixteen kilohertz.
+  * **Visual**: Figure 3.1 — Bio-Acoustic Transduction & CMSIS-DSP Pipeline ([`docs/media/diagrams/03_acoustic_pipeline.svg`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/diagrams/03_acoustic_pipeline.svg)). Signal flow: INMP441 I2S MEMS $\to$ 24-bit 16 kHz PCM $\to$ 256-pt Real FFT.
+  * **On-Screen Text**: `ACOUSTIC TRANSDUCTION: INMP441 I2S MEMS → 16 kHz PCM → 8x Decimation → 2 kHz → 256-PT REAL FFT`
+  * **Voiceover**: Acoustic acquisition uses an omnidirectional I2S MEMS microphone protected by a Gore-Tex membrane. The embedded processor samples hive sound at sixteen kilohertz, decimating to two kilohertz for spectral analysis.
   * **Source / Status**: `firmware/src/dsp/` / `[VALIDATED]`
 
 * **01:35 – 01:45 (10.0s)**
   * **Visual**: Spectrum breakdown graphic with amber glow on 200–400 Hz worker piping (Bins 3–6); latency readout box `$2.49\text{ ms}$` on Cortex-M4F FPU.
-  * **On-Screen Text**: `RESOLUTION: Δf = 62.5 Hz/bin | WORKER PIPING: 200–400 Hz | FFT LATENCY: 2.49 ms [MEASURED]`
+  * **On-Screen Text**: `RESOLUTION: Δf = 7.8125 Hz/bin | WORKER PIPING: 200–400 Hz | FFT LATENCY: 2.49 ms [MEASURED]`
   * **Voiceover**: An on-node two-hundred-and-fifty-six-point FFT computes eight spectral energy bins in just two point four nine milliseconds on the floating-point unit, capturing worker piping between two and four hundred hertz.
   * **Source / Status**: Bench DWT cycle counter benchmark / `[MEASURED]`
 
@@ -121,20 +121,20 @@
 ### SCENE 05: Transmitter / Modular Sensor Node Platform (01:45 – 02:20 | 35 seconds | 75 words)
 
 * **01:45 – 01:58 (13.0s)**
-  * **Visual**: Rugged IP65 enclosure render ([`docs/media/hardware/field_node_rugged_enclosure.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/hardware/field_node_rugged_enclosure.png)) and modular WisBlock interconnect block diagram.
+  * **Visual**: Rugged IP65 enclosure render ([`docs/figures/matlab/03_sensor_node.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/figures/matlab/03_sensor_node.png)) and modular WisBlock interconnect block diagram.
   * **On-Screen Text**: `MODULAR NODE PLATFORM: RAKwireless WISBLOCK (nRF52840 + SX1262 LoRa)`
   * **Voiceover**: The node is built on a modular WisBlock platform hosting the RAK4631 core, pairing a sixty-four-megahertz Nordic nRF52840 MCU with a Semtech SX1262 LoRa transceiver.
   * **Source / Status**: Hardware BOM (`hardware/BOM_AND_PINOUT.md`) / `[DEMONSTRATED]`
 
 * **01:58 – 02:10 (12.0s)**
   * **Visual**: Close-up schematic of power management: Switched power rail `WB_IO2`, solderless 4:2 pole spring lever terminal blocks, and IP68 PG-7 weather glands.
-  * **On-Screen Text**: `SWITCHED RAIL POWER ISOLATION | SOLDERLESS LEVER TERMINALS | SLEEP: 18 μA [MEASURED]`
+  * **On-Screen Text**: `SWITCHED RAIL POWER ISOLATION | SOLDERLESS LEVER TERMINALS | SLEEP: 18 μA COMPLETE NODE [MEASURED] / 2.0 μA MCU [CALCULATED]`
   * **Voiceover**: Solderless spring-lock terminals connect all sensors through IP68 glands. During sleep, switched power rails isolate peripheral sensors, achieving a validated quiescent draw of only eighteen microamps.
   * **Source / Status**: Keithley 6514 electrometer bench test log / `[MEASURED]`
 
 * **02:10 – 02:20 (10.0s)**
   * **Visual**: Solar harvesting schematic: 0.5W, 6V solar panel recharging a 3.7V 1S Li-ion battery. Energy budget diagram showing $0.85\text{ mWh/day}$ daily consumption.
-  * **On-Screen Text**: `0.5W SOLAR + 3.7V 1S Li-ion | DAILY ENERGY: 0.85 mWh/day [CALCULATED] | 18+ MO. AUTONOMY`
+  * **On-Screen Text**: `0.5W SOLAR + 3.7V 1S Li-ion (18650) | DAILY ENERGY: 0.85 mWh/day [CALCULATED] | 18+ MO. AUTONOMY`
   * **Voiceover**: Powered by a 3.7-volt lithium-ion cell and small solar panel, the system consumes under one milliwatt-hour per day on a fifteen-minute cadence, providing indefinite autonomous operation.
   * **Source / Status**: `firmware/src/power/` & MATLAB energy model / `[CALCULATED]`
 
@@ -160,14 +160,14 @@
 
 * **02:50 – 03:03 (13.0s)**
   * **Visual**: Gateway hardware block diagram & baseboard schematic ([`docs/media/diagrams/06_gateway_architecture.svg`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/diagrams/06_gateway_architecture.svg)). Raspberry Pi 3B+ mated to Waveshare SX1262 LoRa HAT over SPI.
-  * **On-Screen Text**: `CUSTOM GATEWAY READER: RASPBERRY PI 3B+ & WAVESHARE SX1262 LoRa HAT`
-  * **Voiceover**: To satisfy competition requirements, our gateway reader is custom-built using a Raspberry Pi three-B-plus and a dedicated SX1262 LoRa HAT over SPI, avoiding closed commercial hubs.
+  * **On-Screen Text**: `ASSEMBLED GATEWAY READER: RASPBERRY PI 3B+ & WAVESHARE SX1262 LoRa HAT`
+  * **Voiceover**: To satisfy competition requirements, our gateway reader is custom-configured using an assembled Raspberry Pi three-B-plus and a dedicated SX1262 LoRa HAT over SPI, avoiding closed commercial hubs.
   * **Source / Status**: `gateway/` / `[DEMONSTRATED]`
 
 * **03:03 – 03:15 (12.0s)**
   * **Visual**: Software console & Edge AI architecture ([`docs/media/08-edge-ai/edge_ai_pipeline.svg`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/08-edge-ai/edge_ai_pipeline.svg)). Terminal showing SQLite WAL commit and Model 2 Random Forest inference output (`State: QUEENLESS, Conf: 94.2%`).
-  * **On-Screen Text**: `LOCAL SQLITE WAL DATABASE | MODEL 2 EDGE RANDOM FOREST | ACCURACY: 94.2% [VALIDATED]`
-  * **Voiceover**: The gateway decodes the frame, logs it to a local SQLite database for offline field resilience, and runs Model Two: a Random Forest classifier achieving ninety-four point two percent validation accuracy on curated hive acoustics.
+  * **On-Screen Text**: `LOCAL SQLITE WAL DATABASE | MODEL 2 EDGE RANDOM FOREST | OFFLINE BENCHMARK ACCURACY: 94.2% [VALIDATED]`
+  * **Voiceover**: The gateway decodes the frame, logs it to a local SQLite database for offline field resilience, and runs Model Two: a Random Forest classifier achieving ninety-four point two percent validation accuracy on curated benchmark acoustics.
   * **Source / Status**: `gateway/model/` & Zenodo Record 1321278 / `[VALIDATED]`
 
 ---
@@ -191,7 +191,7 @@
 ### SCENE 09: End-to-End Decision Pipeline Walkthrough (03:40 – 04:05 | 25 seconds | 56 words)
 
 * **03:40 – 04:05 (25.0s)**
-  * **Visual**: Full Cyber-Physical Hierarchy ([`docs/media/diagrams/08_full_cyber_physical_architecture.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/diagrams/08_full_cyber_physical_architecture.png)) transitioning to live dashboard views ([`docs/media/10-dashboard/dashboard_overview.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/10-dashboard/dashboard_overview.png) and [`dashboard_hive_detail.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/10-dashboard/dashboard_hive_detail.png)). Animated pulse tracing biological anomaly from comb RTD $\to$ MCU FFT $\to$ LoRa TX $\to$ Gateway SQLite/AI $\to$ Beekeeper Dashboard Alert.
+  * **Visual**: Full Cyber-Physical Hierarchy ([`docs/media/diagrams/08_full_cyber_physical_architecture.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/diagrams/08_full_cyber_physical_architecture.png)) transitioning to live dashboard views ([`docs/media/10-dashboard/dashboard_overview.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/10-dashboard/dashboard_overview.png) and [`dashboard_hive_detail.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/docs/media/10-dashboard/dashboard_hive_detail.png)). Animated pulse tracing biological anomaly from comb temperature sensor $\to$ MCU FFT $\to$ LoRa TX $\to$ Gateway SQLite/AI $\to$ Beekeeper Dashboard Alert.
   * **On-Screen Text**: `END-TO-END PIPELINE: IN-HIVE BIOLOGY → EDGE DSP → SUB-GHz → EDGE AI → ACTIONABLE ALERT`
   * **Voiceover**: Here is the complete engineering workflow. When a queen fails, brood temperature decays and nurse bee piping increases. The node detects the shift, computes spectral energies, and transmits the thirty-three-byte frame. The gateway classifies the colony state and notifies the beekeeper, transforming an invisible biological crisis into an immediate, targeted management decision.
   * **Source / Status**: Repository Figure 0.8 & Dashboard / `[DEMONSTRATED]`
@@ -219,12 +219,12 @@
 * **04:25 – 04:43 (18.0s)**
   * **Visual**: High-density engineering KPI split-screen. Left: Clean Table I from the Phase 2 report. Right: Live bench telemetry plot ([`submission/figures/bench_telemetry_plot.png`](file:///C:/Users/25beevdt047/.gemini/antigravity-ide/scratch/beevil-knievel/submission/figures/bench_telemetry_plot.png)).
   * **On-Screen Text**:
-    * `BROOD TEMP ACCURACY: ±0.1°C NIST-TRACEABLE [VALIDATED]`
+    * `BROOD TEMP ACCURACY: ±0.1°C FACTORY-CALIBRATED DIGITAL SENSOR [VALIDATED]`
     * `QUIESCENT SLEEP CURRENT: 18 μA (3.3V RAIL) [MEASURED]`
     * `ON-NODE FFT LATENCY: 2.49 ms (CORTEX-M4F) [MEASURED]`
     * `WIRELESS RANGE: 4.2 km LOS (26.16 dB MARGIN) [CALCULATED]`
     * `DAILY ENERGY BUDGET: 0.85 mWh/day [CALCULATED]`
-    * `GATEWAY AI ACCURACY: 94.2% RANDOM FOREST [VALIDATED]`
+    * `GATEWAY AI ACCURACY: 94.2% RANDOM FOREST (OFFLINE BENCHMARK) [VALIDATED]`
     * `PROTOTYPE BOM COST: $18.74 ($9.50 @ 10k UNITS) [CALCULATED]`
     * `FORM FACTOR & WEIGHT: 65 × 55 × 15 mm, 67g [DEMONSTRATED]`
     * `AUTOMATED SYSTEM TESTS: 27 / 27 PASSING [VALIDATED]`
@@ -275,9 +275,9 @@ Cellular platforms like Arnia offer remote telemetry, but require expensive hubs
 
 That is the engineering purpose of BEEVIL KNIEVEL. We measure the hive exactly where biological signals occur, without altering standard Langstroth comb geometry.
 
-A high-precision RTD monitors the thirty-five-degree brood core. A five-probe grid tracks thermal dissipation, while acoustic and gas sensors monitor colony respiration and density.
+A precision digital temperature sensor monitors the thirty-five-degree brood core. A five-probe grid tracks thermal dissipation, while acoustic and gas sensors monitor colony respiration and density.
 
-Acoustic acquisition uses an omnidirectional I2S MEMS microphone protected by a Gore-Tex membrane. The embedded processor samples hive sound at sixteen kilohertz.
+Acoustic acquisition uses an omnidirectional I2S MEMS microphone protected by a Gore-Tex membrane. The embedded processor samples hive sound at sixteen kilohertz, decimating to two kilohertz for spectral analysis.
 
 An on-node two-hundred-and-fifty-six-point FFT computes eight spectral energy bins in just two point four nine milliseconds on the floating-point unit, capturing worker piping between two and four hundred hertz.
 
@@ -291,9 +291,9 @@ Rather than running heavy neural networks on the low-power microcontroller, the 
 
 Validated sensor readings and spectral energy bands pack into a compact thirty-three-byte binary frame protected by CRC-sixteen, transmitting in just eighteen milliseconds.
 
-To satisfy competition requirements, our gateway reader is custom-built using a Raspberry Pi three-B-plus and a dedicated SX1262 LoRa HAT over SPI, avoiding closed commercial hubs.
+To satisfy competition requirements, our gateway reader is custom-configured using an assembled Raspberry Pi three-B-plus and a dedicated SX1262 LoRa HAT over SPI, avoiding closed commercial hubs.
 
-The gateway decodes the frame, logs it to a local SQLite database for offline field resilience, and runs Model Two: a Random Forest classifier achieving ninety-four point two percent validation accuracy on curated hive acoustics.
+The gateway decodes the frame, logs it to a local SQLite database for offline field resilience, and runs Model Two: a Random Forest classifier achieving ninety-four point two percent validation accuracy on curated benchmark acoustics.
 
 Field nodes communicate directly with the central gateway over the license-free IN865 band at eight hundred and sixty-five megahertz, forming a robust star network.
 
@@ -326,15 +326,15 @@ BEEVIL KNIEVEL: Sub-GHz acoustic and brood telemetry for commercial apiaries.
 | **02** | `00:41 - 00:50` | `2. COTS LOGGER: BROODMINDER \| TOP-BAR ONLY, SHORT-RANGE BLE, NO EDGE DSP` | Upper third title |
 | **02** | `00:50 - 01:00` | `3. COMMERCIAL TELEMETRY: ARNIA \| PROPRIETARY CLOUD, CELLULAR LOCK-IN ($$$)` | Upper third title |
 | **03** | `01:00 - 01:13` | `BEEVIL KNIEVEL: BIOLOGICALLY-ALIGNED IN-HIVE TELEMETRY` | Center banner |
-| **03** | `01:13 - 01:25` | `CORE BROOD RTD (±0.1°C) \| 5-PT THERMAL GRID \| I2S ACOUSTICS \| CO2 / VOC / WEIGHT` | Animated pointer pins |
-| **04** | `01:25 - 01:35` | `ACOUSTIC TRANSDUCTION: INMP441 I2S MEMS → 16 kHz PCM → 256-PT REAL FFT` | Upper pipeline bar |
+| **03** | `01:13 - 01:25` | `CORE BROOD TEMP (±0.1°C) \| 5-PT THERMAL GRID \| I2S ACOUSTICS \| CO2 / VOC / WEIGHT` | Animated pointer pins |
+| **04** | `01:25 - 01:35` | `ACOUSTIC TRANSDUCTION: INMP441 I2S MEMS → 16 kHz PCM → 8x Decimation → 2 kHz → 256-PT REAL FFT` | Upper pipeline bar |
 | **04** | `01:35 - 01:45` | `RESOLUTION: Δf = 62.5 Hz/bin \| WORKER PIPING: 200–400 Hz \| FFT LATENCY: 2.49 ms [MEASURED]` | Spectrum overlay box |
 | **05** | `01:45 - 01:58` | `MODULAR NODE PLATFORM: RAKwireless WISBLOCK (nRF52840 + SX1262 LoRa)` | Lower third hardware spec |
-| **05** | `01:58 - 02:10` | `SWITCHED RAIL POWER ISOLATION \| SOLDERLESS LEVER TERMINALS \| SLEEP: 18 μA [MEASURED]` | Power rail callout |
+| **05** | `01:58 - 02:10` | `SWITCHED RAIL POWER ISOLATION \| SOLDERLESS LEVER TERMINALS \| SLEEP: 18 μA COMPLETE NODE [MEASURED] / 2.0 μA MCU [CALCULATED]` | Power rail callout |
 | **05** | `02:10 - 02:20` | `0.5W SOLAR + 3.7V 1S Li-ion \| DAILY ENERGY: 0.85 mWh/day [CALCULATED] \| 18+ MO. AUTONOMY` | Energy badge |
 | **06** | `02:20 - 02:35` | `MODEL 1: ON-NODE PAGE'S CUSUM FILTER \| DETECTS ΔT = -0.02°C/hr QUEENLESS DRIFT` | Chart legend & equation |
 | **06** | `02:35 - 02:50` | `COMPACT 33-BYTE BINARY STRUCT \| CRC-16 CCITT \| AIRTIME: 18.2 ms [CALCULATED]` | Struct memory map |
-| **07** | `02:50 - 03:03` | `CUSTOM GATEWAY READER: RASPBERRY PI 3B+ & WAVESHARE SX1262 LoRa HAT` | Hardware badge |
+| **07** | `02:50 - 03:03` | `ASSEMBLED GATEWAY READER: RASPBERRY PI 3B+ & WAVESHARE SX1262 LoRa HAT` | Hardware badge |
 | **07** | `03:03 - 03:15` | `LOCAL SQLITE WAL DATABASE \| MODEL 2 EDGE RANDOM FOREST \| ACCURACY: 94.2% [VALIDATED]` | Terminal HUD overlay |
 | **08** | `03:15 - 03:28` | `NETWORK TOPOLOGY: GATEWAY-BASED SUB-GHz STAR \| LICENSE-FREE IN865 (865 MHz)` | Topology header |
 | **08** | `03:28 - 03:40` | `100 HIVES PER GATEWAY \| AGGREGATE DUTY CYCLE: < 0.2% \| ZERO-COLLISION CHANNEL` | Capacity metric card |
@@ -354,9 +354,9 @@ BEEVIL KNIEVEL: Sub-GHz acoustic and brood telemetry for commercial apiaries.
    - *Ferrari et al. (2008)*: Wired multi-thermocouple comb harness tethered to an external lab umbilical.
    - *BroodMinder*: Peripheral top-bar pod with short-range BLE radio cone.
    - *Arnia*: External scale and microphone tethered to a cellular solar mast with red "No Signal" indicator over rural apiary.
-3. **Scene 03 Hive Cutaway**: Use `docs/media/sensing/langstroth_sensor_cutaway.png` rendered from CAD. Highlight the exact slot between frames 4 and 5 where the brood nest clusters at 34.5°C–35.5°C.
+3. **Scene 03 Hive Cutaway**: Use `docs/figures/matlab/02_hive_sensor_layer.png` rendered from CAD. Highlight the exact slot between frames 4 and 5 where the brood nest clusters at 34.5°C–35.5°C.
 4. **Scene 04 DSP Motion Graphic**: Animate a continuous 16 kHz PCM audio stream entering a 256-point FIFO buffer, undergoing windowing, and popping into 8 discrete frequency columns. Highlight bins 3–6 (200–400 Hz) with an amber glow when indicating worker piping.
-5. **Scene 05 Modular Hardware Close-Ups**: Present clean 3D CAD and macro hardware graphics of the WisBlock baseboard assembly in the IP65 enclosure (`docs/media/hardware/field_node_rugged_enclosure.png`), emphasizing the RAK4631 stamp module, the switched rail isolation circuit, and the screwless lever spring terminals. **No custom PCB claims.**
+5. **Scene 05 Modular Hardware Close-Ups**: Present clean 3D CAD and macro hardware graphics of the WisBlock baseboard assembly in the IP65 enclosure (`docs/figures/matlab/03_sensor_node.png`), emphasizing the RAK4631 stamp module, the switched rail isolation circuit, and the screwless lever spring terminals. **No custom PCB claims.**
 6. **Scene 06 CUSUM & Payload Visualization**: Display a real Matplotlib plot of Page's CUSUM filter (`docs/media/results/cusum_detection.png`) with the cumulative sum curve $S_k$ accelerating as temperature drifts downward. Follow immediately with a horizontal memory-block diagram showing the 33 packed bytes and the CRC-16 checksum.
 7. **Scene 07 Reader & Console**: Show the physical Raspberry Pi 3B+ and Waveshare LoRa HAT stack schematic, accompanied by a clean screen recording of the FastAPI server receiving LoRa packets and updating the local SQLite table.
 8. **Scene 08 Star Topology**: Present a wide aerial graphic of a commercial bee yard showing 100 hive icons radiating LoRa pulses toward a single centrally placed mast antenna.
@@ -411,12 +411,12 @@ Every number spoken or shown in the video has been verified against the physical
 
 1. **$-12^\circ\text{C}$**: Thermal drop experienced by open brood during invasive manual inspection.
 2. **$14 - 21\text{ days}$**: Standard interval between human commercial apiary inspections.
-3. **$\pm 0.1^\circ\text{C}$**: NIST-traceable accuracy of Texas Instruments TMP117 RTD ($ -20^\circ\text{C}\text{ to }+50^\circ\text{C} $).
+3. **$\pm 0.1^\circ\text{C}$**: Factory-calibrated typical accuracy of Texas Instruments TMP117 digital temperature sensor ($ -20^\circ\text{C}\text{ to }+50^\circ\text{C} $).
 4. **$34.5^\circ\text{C} - 35.5^\circ\text{C}$**: Biologically regulated honeybee brood core temperature.
 5. **$5\text{ probes}$**: Spatial thermal array of Maxim DS18B20 sensors across perimeter frames.
 6. **$16,000\text{ Hz}$**: I2S acoustic sampling frequency ($24\text{-bit}$ PCM).
 7. **$256\text{ points}$**: Real FFT window length via ARM CMSIS-DSP.
-8. **$62.5\text{ Hz/bin}$**: Frequency resolution ($\Delta f = f_s / N = 16000 / 256$).
+8. **$62.5\text{ Hz/bin}$**: Frequency resolution: $\Delta f = 7.8125	ext{ Hz/bin}$ with 8x decimation (=2000	ext{ Hz}$, =256$), or .5	ext{ Hz/bin}$ wideband (=16000	ext{ Hz}$).
 9. **$200 - 400\text{ Hz}$**: Worker piping and pre-swarm diagnostic acoustic band (Bins 3–6).
 10. **$2.49\text{ ms}$**: On-node FFT execution latency on ARM Cortex-M4F hardware FPU.
 11. **$64\text{ MHz}$**: Nordic nRF52840 ARM Cortex-M4F processor clock frequency.
@@ -447,10 +447,20 @@ Every number spoken or shown in the video has been verified against the physical
 
 The video script adheres strictly to the **SYZYGY AI Truth Gate** and **IEEE AI Disclosure Guidelines**:
 
+### AI / ML Status & Provenance Ledger
+
+| Layer / Subsystem | Scientific Classification | Status | Provenance & Execution Context |
+|---|---|:---:|---|
+| **Edge DSP** | ARM CMSIS-DSP 256-pt Real FFT | 🟢 **IMPLEMENTED** | Cortex-M4F hardware FPU, 2.49 ms latency, 8 sub-band energy bins (`firmware/src/dsp/`) |
+| **Edge Anomaly Filter** | Page's (1954) CUSUM Filter | 🟢 **IMPLEMENTED** | On-device sequential change-point detection on brood temperature (`firmware/src/analytics/`) |
+| **TinyML Edge Model** | Structural Proof-of-Concept | 🟡 **PROTOTYPE** | Evaluated architecture for 1-byte state alert edge data compression; awaiting annotated swarm audio |
+| **Gateway Random Forest** | Supervised 4-Class Classifier | 🔵 **OFFLINE BENCHMARK** | 94.2% validation accuracy evaluated on curated Zenodo Record 1321278 benchmark audio |
+| **Real Hive Deployment** | Live Multi-Yard Colony Monitoring | ⚪ **PROPOSED (PHASE 3)** | USB bench evaluation prototype active; commercial apiary deployment is Phase 3 milestone |
+
 ### 1. Model 1 (On-Node Edge Change-Point Detection)
 * **What Model**: Page's (1954) Cumulative Sum (CUSUM) change-point detector (`firmware/src/analytics/cusum.cpp`).
 * **Where It Runs**: On the Nordic nRF52840 ARM Cortex-M4F microcontroller.
-* **Input**: 15-minute sampled brood core temperature $T_\text{core}$ from TMP117 RTD.
+* **Input**: 15-minute sampled brood core temperature $T_\text{core}$ from TMP117 digital temperature sensor.
 * **Output**: Binary alert flag (`QUEENLESS_TEMP_DRIFT_ALERT`), trip counter, and cumulative sum score $S_k$.
 * **Mathematical Formulation**:
   $$S_k = \max(0,\, S_{k-1} + (T_\text{baseline} - T_k - k))$$
@@ -481,7 +491,7 @@ The video script adheres strictly to the **SYZYGY AI Truth Gate** and **IEEE AI 
 | **Enclosure Size & Weight**| $65\times 55\times 15\text{ mm}$, $67\text{g}$ | `[DEMONSTRATED]` | Direct digital caliper and precision scale measurement of physical enclosure. |
 | **Transmitter Hardware** | Modular WisBlock RAK4631 | `[DEMONSTRATED]` | Team-integrated physical COTS baseboard assembly operating on bench. |
 | **Gateway Reader** | RPi 3B+ & SX1262 HAT | `[DEMONSTRATED]` | Physical gateway prototype decoding packets into SQLite database. |
-| **Brood Temp Accuracy** | $\pm 0.1^\circ\text{C}$ | `[VALIDATED]` | Factory NIST calibration certificate for Texas Instruments TMP117 RTD. |
+| **Brood Temp Accuracy** | $\pm 0.1^\circ\text{C}$ | `[VALIDATED]` | Factory calibration specification for Texas Instruments TMP117 digital temperature sensor. |
 | **Thermal Grid Precision**| $\pm 0.5^\circ\text{C}$, 12-bit | `[VALIDATED]` | Dallas/Maxim DS18B20 factory specification and lab ice-bath verification. |
 | **Acoustic Diagnostic Band**| $200 - 400\text{ Hz}$ | `[VALIDATED]` | Validated against published bio-acoustic literature and Zenodo Record 1321278. |
 | **Gateway AI Accuracy** | $94.2\%$ | `[VALIDATED]` | Evaluated against independent 20% test split on 10-hour Zenodo benchmark audio. |
@@ -514,7 +524,7 @@ Every visual, audio, and data asset referenced in the script is legally cleared 
 3. **Engineering Diagrams & Schematics**:
    - Figures 0.0, 0.8, 2.1, 3.1, 4.1, and 6.1: Original team-authored technical graphics generated deterministically via KiCad, Python, and Graphviz. Licensed under project **MIT License**.
 4. **Hardware & Bench Visuals**:
-   - CAD engineering cutaways and 3D enclosure renderings (`docs/media/sensing/langstroth_sensor_cutaway.png` and `docs/media/hardware/field_node_rugged_enclosure.png`). **Zero personal or user photos utilized.**
+   - CAD engineering cutaways and 3D enclosure renderings (`docs/figures/matlab/02_hive_sensor_layer.png` and `docs/figures/matlab/03_sensor_node.png`). **Zero personal or user photos utilized.**
 
 ---
 

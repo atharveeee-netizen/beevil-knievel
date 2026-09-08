@@ -1,60 +1,66 @@
-"use client";
-
 import React from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
-import { SystemSection } from "@/components/SystemSection";
-import { EdgeAISection } from "@/components/EdgeAISection";
-import { CatalogSection } from "@/components/CatalogSection";
-import { DeveloperSection } from "@/components/DeveloperSection";
-import { EducationSection } from "@/components/EducationSection";
-import { OrderAccessoriesSection } from "@/components/OrderAccessoriesSection";
-import { SpecsSection } from "@/components/SpecsSection";
-import { GallerySection } from "@/components/GallerySection";
-import { MissionSection } from "@/components/MissionSection";
-import { NewsletterAndHelpSection } from "@/components/NewsletterAndHelpSection";
+import { ProblemSection } from "@/components/ProblemSection";
+import { SensingMatrixSection } from "@/components/SensingMatrixSection";
+import { AcousticIntelligenceSection } from "@/components/AcousticIntelligenceSection";
+import { ThermalThermodynamicsSection } from "@/components/ThermalThermodynamicsSection";
+import { FieldNodeSection } from "@/components/FieldNodeSection";
+import { DualRadioNetworkSection } from "@/components/DualRadioNetworkSection";
+import { GatewayEdgeSection } from "@/components/GatewayEdgeSection";
+import { EdgeDiagnosticsSection } from "@/components/EdgeDiagnosticsSection";
+import { MultiPhysicsSimulationSection } from "@/components/MultiPhysicsSimulationSection";
+import { ValidationEvidenceSection } from "@/components/ValidationEvidenceSection";
+import { PrototypeBenchSection } from "@/components/PrototypeBenchSection";
+import { TechnicalDocsSection } from "@/components/TechnicalDocsSection";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#7a8085] text-white">
-      {/* Top Sticky Navbar with Universal Search */}
+    <div className="min-h-screen flex flex-col bg-[#090b10] text-[#f1f5f9] font-sans selection:bg-[#f59e0b] selection:text-[#090b10]">
+      {/* Top Technical Navigation */}
       <Navbar />
 
-      {/* Main Page Sections */}
+      {/* Main Narrative Pipeline: Problem -> Transduction -> DSP -> Radio -> Gateway -> Simulation -> Evidence */}
       <main className="flex-grow">
-        {/* 1. Hero Section with Live Telemetry */}
+        {/* 00. Hero Section & System Identification */}
         <HeroSection />
 
-        {/* 2. The System, The Design, The Acoustic Ear */}
-        <SystemSection />
+        {/* 01. Problem: Commercial Apiary Mortality & Observability Gap */}
+        <ProblemSection />
 
-        {/* 3. Edge AI Intelligence (8 Core Diagnostic Models - Zero Game Cards) */}
-        <EdgeAISection />
+        {/* 02. In-Hive Transducers: Multi-Modal Sensor Matrix & 10-Frame Cutaway */}
+        <SensingMatrixSection />
 
-        {/* 4. Model Variations by Hive Count (Catalog & Future Work) */}
-        <CatalogSection />
+        {/* 03. Acoustic DSP: CMSIS-DSP 256-pt Real FFT & Biological Sub-Bands */}
+        <AcousticIntelligenceSection />
 
-        {/* 5. Open Apiculture SDK & HiveOS App */}
-        <DeveloperSection />
+        {/* 04. Thermodynamics: 2-Node Lumped Model & CUSUM Brood Filter */}
+        <ThermalThermodynamicsSection />
 
-        {/* 6. University Research & Education Program (15% Off) */}
-        <EducationSection />
+        {/* 05. Field Node: RAK4631, SX1262, Power Gating & 300s Duty Cycle */}
+        <FieldNodeSection />
 
-        {/* 7. Hardware Packages & Raspberry Pi 3B+ Gateway */}
-        <OrderAccessoriesSection />
+        {/* 06. Dual-Radio: BLE Mesh Intra-Yard + LoRa Star Backhaul */}
+        <DualRadioNetworkSection />
 
-        {/* 8. Master Hardware & Software Specifications */}
-        <SpecsSection />
+        {/* 07. Edge Gateway: Raspberry Pi 3B+, SQLite WAL & OverlayFS Root */}
+        <GatewayEdgeSection />
 
-        {/* 9. Hardware Gallery (Images pulled from GitHub Repository) */}
-        <GallerySection />
+        {/* 08. Edge Diagnostics: 8-State Multi-Modal Decision Engine */}
+        <EdgeDiagnosticsSection />
 
-        {/* 10. Consolidated "Our Mission" & Marcus Varro 2,000-Year Heritage */}
-        <MissionSection />
+        {/* 09. Multi-Physics: 11 ANSYS FEA/CFD Simulation Domains */}
+        <MultiPhysicsSimulationSection />
 
-        {/* 11. Research Newsletter & Support Portal */}
-        <NewsletterAndHelpSection />
+        {/* 10. Engineering Validation Matrix & Claims Evidence Ledger */}
+        <ValidationEvidenceSection />
+
+        {/* 11. Hardware Bring-Up Report & Physical Bench Prototype Status */}
+        <PrototypeBenchSection />
+
+        {/* 12. Reproducibility Suite & 13 Canonical Figures Index */}
+        <TechnicalDocsSection />
       </main>
 
       {/* Site Footer */}
