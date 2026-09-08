@@ -1,114 +1,205 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" width="960" height="460">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 560" width="100%" height="100%">
     
     <defs>
-        <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#141820"/>
-            <stop offset="100%" stop-color="#0e1117"/>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#070a12"/>
+            <stop offset="50%" stop-color="#0b101c"/>
+            <stop offset="100%" stop-color="#0e1526"/>
         </linearGradient>
-        <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#e5a93b"/>
-            <stop offset="100%" stop-color="#f5c25d"/>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#131c2e"/>
+            <stop offset="100%" stop-color="#0b111e"/>
         </linearGradient>
-        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#2a3b5c"/>
-            <stop offset="100%" stop-color="#1b253b"/>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="100%" stop-color="#0f172a"/>
         </linearGradient>
-        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#8892b0"/>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+        </linearGradient>
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="100%" stop-color="#38bdf8"/>
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#34d399"/>
+        </linearGradient>
+        <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ef4444"/>
+            <stop offset="100%" stop-color="#f87171"/>
+        </linearGradient>
+        <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+        
+        <marker id="arrCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
         </marker>
-        <marker id="arrowGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#e5a93b"/>
+        <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
         </marker>
+        <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+        </marker>
+        <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444"/>
+        </marker>
+        <marker id="arrMuted" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+        </marker>
+
+        <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.3"/>
+        </pattern>
     </defs>
     <style>
-        .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 16px; fill: #ffffff; letter-spacing: 0.5px; }
-        .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #8892b0; }
-        .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 13px; fill: #e5a93b; }
-        .box-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #ccd6f6; line-height: 1.4; }
-        .mono { font-family: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace; font-size: 10px; fill: #94a3b8; }
-        .tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 9px; fill: #0f172a; }
+        .headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.3px; }
+        .body-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 10px; fill: #94a3b8; }
+        .mono-sm { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 8.5px; }
+        .badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
     </style>
 
-    <rect width="960" height="460" fill="#0b0e14" rx="8"/>
+    <rect width="1060" height="560" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1060" height="560" fill="url(#grid)" rx="10"/>
     
-    <text x="30" y="38" class="title">04 - TELEMETRY FIELD NODE EMBEDDED HARDWARE ARCHITECTURE</text>
-    <text x="30" y="58" class="subtitle">Nordic Semiconductor nRF52840 SoC + Semtech SX1262 LoRa Transceiver Subsystem</text>
-    
-    <!-- Central SoC -->
-    <rect x="330" y="90" width="300" height="240" fill="url(#panelGrad)" stroke="#e5a93b" stroke-width="2" rx="8"/>
-    <rect x="345" y="105" width="270" height="30" fill="#2d2315" rx="4"/>
-    <text x="355" y="125" class="box-title">NORDIC nRF52840 (RAK4630 Module)</text>
-    
-    <text x="350" y="155" class="box-body">• ARM Cortex-M4F @ 64 MHz (FPU + DSP)</text>
-    <text x="350" y="175" class="box-body">• 1024 KB Flash / 256 KB SRAM</text>
-    <text x="350" y="195" class="box-body">• System ON Sleep: 1.5 µA (RAM Retention)</text>
-    <text x="350" y="215" class="box-body">• Semtech SX1262 LoRa Engine (+22 dBm Tx)</text>
-    <text x="350" y="235" class="box-body">• Operating Frequency: 865-867 MHz (IN865)</text>
-    <text x="350" y="255" class="box-body">• Sensitivity: -137 dBm (SF12 / 125 kHz BW)</text>
-    <text x="350" y="275" class="mono" fill="#34d399">Link Budget: 159.0 dB | Payload: 24 Bytes</text>
-    <text x="350" y="295" class="mono" fill="#e5a93b">Firmware: FreeRTOS + CMSIS-DSP v1.14.4</text>
-    <text x="350" y="315" class="mono" fill="#38bdf8">Hardware RNG + AES-128 Hardware Enc</text>
+    <!-- Header -->
+    <rect x="25" y="20" width="175" height="24" rx="12" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
+    <text x="112" y="36" class="badge" fill="#fbbf24" text-anchor="middle">HARDWARE SCHEMATIC</text>
+    <text x="25" y="66" class="headline">04 - TELEMETRY FIELD NODE EMBEDDED HARDWARE SCHEMATIC &amp; BUS TOPOLOGY</text>
+    <text x="25" y="84" class="subhead">RAK4631 (Nordic nRF52840 SoC + Semtech SX1262 LoRa) with TI MPPT solar harvesting and multi-sensor bus routing</text>
 
-    <!-- Left: Sensory Interfaces -->
-    <rect x="30" y="90" width="260" height="340" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
-    <text x="45" y="115" class="box-title">Sensor Interfaces &amp; Peripherals</text>
+    <!-- Center Module: Nordic nRF52840 (RAK4631 WisBlock Core) -->
+    <g transform="translate(365, 110)">
+        <rect width="330" height="340" rx="10" fill="url(#cardGradHighlight)" stroke="#f59e0b" stroke-width="2"/>
+        <rect x="15" y="15" width="300" height="28" rx="4" fill="rgba(245, 158, 11, 0.2)"/>
+        <text x="165" y="33" class="card-title" fill="#fbbf24" text-anchor="middle">NORDIC nRF52840 + SX1262</text>
+        <text x="165" y="58" class="body-title" fill="#cbd5e1" text-anchor="middle">RAKwireless WisBlock RAK4631 Core</text>
 
-    <rect x="45" y="130" width="230" height="50" fill="#1e293b" rx="4"/>
-    <text x="55" y="148" class="mono" fill="#ffffff">TI TMP117 Array (x5)</text>
-    <text x="55" y="168" class="mono" fill="#94a3b8">I2C (0x48-0x4B) | P0.13/P0.14</text>
+        <!-- MCU Core Specs -->
+        <g transform="translate(20, 75)">
+            <rect width="290" height="125" rx="6" fill="#0b101c" stroke="#1e293b"/>
+            <text x="12" y="20" class="mono-xs" fill="#38bdf8">• CPU: ARM Cortex-M4F @ 64 MHz (FPU + DSP)</text>
+            <text x="12" y="36" class="mono-xs" fill="#cbd5e1">• Memory: 1024 KB Flash / 256 KB SRAM</text>
+            <text x="12" y="52" class="mono-xs" fill="#34d399">• Deep Sleep (System ON): 2.0 uA (RAM Retained)</text>
+            <text x="12" y="68" class="mono-xs" fill="#f59e0b">• RF: Semtech SX1262 Sub-GHz (+14 dBm Tx)</text>
+            <text x="12" y="84" class="mono-xs" fill="#cbd5e1">• Band: IN865 (865.0625 MHz, SF7, BW 125 kHz)</text>
+            <text x="12" y="100" class="mono-xs" fill="#cbd5e1">• Rx Sensitivity: -137 dBm | Link Budget: 151 dB</text>
+            <text x="12" y="116" class="mono-xs" fill="#a78bfa">• RTOS: FreeRTOS Tickless Idle + CMSIS-DSP</text>
+        </g>
 
-    <rect x="45" y="190" width="230" height="50" fill="#1e293b" rx="4"/>
-    <text x="55" y="208" class="mono" fill="#ffffff">TDK INMP441 Acoustic</text>
-    <text x="55" y="228" class="mono" fill="#94a3b8">I2S (SCK/SD/WS) | P0.26..P0.28</text>
+        <!-- Pinout Interface Headers -->
+        <g transform="translate(20, 215)">
+            <text x="0" y="15" class="badge" fill="#fbbf24">PIN INTERFACE TOPOLOGY:</text>
+            <text x="0" y="34" class="mono-xs" fill="#38bdf8">P0.13/P0.14: I2C (SDA/SCL @ 400kHz)</text>
+            <text x="0" y="50" class="mono-xs" fill="#38bdf8">P0.03/P0.04/P0.28: I2S Audio DMA</text>
+            <text x="0" y="66" class="mono-xs" fill="#f59e0b">P0.17: 1-Wire Thermal Array (4.7k pullup)</text>
+            <text x="0" y="82" class="mono-xs" fill="#34d399">P1.02 (WB_IO2): Switched 3V3 Rail Gate</text>
+            <text x="0" y="98" class="mono-xs" fill="#f43f5e">P0.05 (A0): VBAT Sense | P0.02: Tamper Wake</text>
+        </g>
 
-    <rect x="45" y="250" width="230" height="50" fill="#1e293b" rx="4"/>
-    <text x="55" y="268" class="mono" fill="#ffffff">Sensirion SCD41 (CO2/RH)</text>
-    <text x="55" y="288" class="mono" fill="#94a3b8">I2C (0x62) | Shared Bus</text>
+        <!-- RF Out Line (Bottom) -->
+        <path d="M 165 340 L 165 385" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
+        <rect x="70" y="390" width="190" height="35" rx="5" fill="#0d1424" stroke="#f59e0b" stroke-width="1.2"/>
+        <text x="165" y="405" class="mono-xs" fill="#fbbf24" text-anchor="middle">IPEX/U.FL to RP-SMA Female</text>
+        <text x="165" y="418" class="mono-xs" fill="#94a3b8" text-anchor="middle">Tuned 865MHz 1.8 dBi Antenna (50Ω)</text>
+    </g>
 
-    <rect x="45" y="310" width="230" height="50" fill="#1e293b" rx="4"/>
-    <text x="55" y="328" class="mono" fill="#ffffff">ST LIS3DH Accelerometer</text>
-    <text x="55" y="348" class="mono" fill="#94a3b8">SPI / INT1 Wake | P0.04</text>
+    <!-- Left Column: Sensor Interfaces (Direct Wiring to Pins) -->
+    <g transform="translate(25, 110)">
+        <text x="0" y="16" class="sec-title" fill="#38bdf8">IN-HIVE SENSORY TRANSDUCERS</text>
+        
+        <!-- I2C Bus Block -->
+        <g transform="translate(0, 30)">
+            <rect width="310" height="105" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.2"/>
+            <rect x="12" y="10" width="100" height="18" rx="3" fill="rgba(6, 182, 212, 0.15)"/>
+            <text x="62" y="23" class="badge" fill="#38bdf8" text-anchor="middle">SHARED I2C BUS</text>
+            <text x="125" y="23" class="mono-xs" fill="#64748b">SDA: P0.13 | SCL: P0.14</text>
+            <text x="12" y="45" class="mono-xs" fill="#cbd5e1">• TI TMP117 Brood Probe (0x48) [±0.1°C NIST]</text>
+            <text x="12" y="60" class="mono-xs" fill="#cbd5e1">• Sensirion SCD41 Photoacoustic CO2 (0x62)</text>
+            <text x="12" y="75" class="mono-xs" fill="#cbd5e1">• Bosch BME688 VOC &amp; Relative Humidity (0x76)</text>
+            <text x="12" y="90" class="mono-xs" fill="#cbd5e1">• ST LIS3DH 3-Axis Accelerometer (0x18)</text>
+            <path d="M 310 52 L 365 160" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3"/>
+        </g>
 
-    <rect x="45" y="370" width="230" height="50" fill="#1e293b" rx="4"/>
-    <text x="55" y="388" class="mono" fill="#ffffff">Avia HX711 Load Cell</text>
-    <text x="55" y="408" class="mono" fill="#94a3b8">Bit-bang 24-bit | P0.20/P0.21</text>
+        <!-- I2S Audio Bus Block -->
+        <g transform="translate(0, 150)">
+            <rect width="310" height="85" rx="8" fill="url(#cardGrad)" stroke="#06b6d4" stroke-width="1.2"/>
+            <rect x="12" y="10" width="90" height="18" rx="3" fill="rgba(6, 182, 212, 0.15)"/>
+            <text x="57" y="23" class="badge" fill="#38bdf8" text-anchor="middle">I2S AUDIO DMA</text>
+            <text x="115" y="23" class="mono-xs" fill="#64748b">SCK: P0.03 | WS: P0.04</text>
+            <text x="12" y="45" class="body-title">TDK InvenSense INMP441 MEMS</text>
+            <text x="12" y="60" class="mono-xs" fill="#94a3b8">24-bit PCM Audio @ 2000 Hz into Ping-Pong DMA</text>
+            <text x="12" y="74" class="mono-xs" fill="#34d399">Sintered PTFE Hydrophobic Screen (Propolis Safe)</text>
+            <path d="M 310 42 L 365 200" stroke="#06b6d4" stroke-width="1.5" stroke-dasharray="3 3"/>
+        </g>
 
-    <!-- Connections Left -> Center -->
-    <path d="M 275 155 L 330 155" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow)"/>
-    <path d="M 275 215 L 330 215" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow)"/>
-    <path d="M 275 275 L 330 275" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow)"/>
-    <path d="M 275 335 L 330 310" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <!-- 1-Wire & Scale Block -->
+        <g transform="translate(0, 250)">
+            <rect width="310" height="95" rx="8" fill="url(#cardGrad)" stroke="#f59e0b" stroke-width="1.2"/>
+            <rect x="12" y="10" width="130" height="18" rx="3" fill="rgba(245, 158, 11, 0.15)"/>
+            <text x="77" y="23" class="badge" fill="#fbbf24" text-anchor="middle">1-WIRE &amp; SCALE BUS</text>
+            <text x="12" y="45" class="mono-xs" fill="#cbd5e1">• 4x Maxim DS18B20 Probes (P0.17 + 4.7kΩ pullup)</text>
+            <text x="12" y="60" class="mono-xs" fill="#94a3b8">  Frame thermal dissipation gradient monitoring</text>
+            <text x="12" y="75" class="mono-xs" fill="#cbd5e1">• M5Stack HX711 24-Bit ADC (P0.20/P0.21)</text>
+            <text x="12" y="89" class="mono-xs" fill="#94a3b8">  Honey yield gravimetric tare (0 - 60 kg)</text>
+            <path d="M 310 48 L 365 240" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3 3"/>
+        </g>
+    </g>
 
-    <!-- Right: Power Subsystem -->
-    <rect x="670" y="90" width="260" height="340" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
-    <text x="685" y="115" class="box-title">Power Architecture &amp; Harvesting</text>
-    
-    <rect x="685" y="130" width="230" height="55" fill="#1e293b" rx="4"/>
-    <text x="695" y="148" class="mono" fill="#f59e0b">0.5W Monocrystalline PV</text>
-    <text x="695" y="168" class="mono" fill="#94a3b8">Voc = 6.0V | Isc = 110 mA</text>
+    <!-- Right Column: Solar Harvesting & Power Architecture -->
+    <g transform="translate(725, 110)">
+        <text x="0" y="16" class="sec-title" fill="#10b981">ENERGY HARVESTING &amp; PMIC</text>
 
-    <rect x="685" y="195" width="230" height="60" fill="#1e293b" rx="4"/>
-    <text x="695" y="213" class="mono" fill="#ffffff">TI BQ25171 MPPT PMIC</text>
-    <text x="695" y="231" class="mono" fill="#94a3b8">Solar Buck Charger (800 kHz)</text>
-    <text x="695" y="249" class="mono" fill="#34d399">Quiescent Current: 1.0 µA</text>
+        <!-- Solar PV & MPPT Charger -->
+        <g transform="translate(0, 30)">
+            <rect width="310" height="120" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.2"/>
+            <rect x="12" y="10" width="140" height="18" rx="3" fill="rgba(16, 185, 129, 0.15)"/>
+            <text x="82" y="23" class="badge" fill="#34d399" text-anchor="middle">SOLAR MPPT CHARGER</text>
+            <text x="12" y="45" class="body-title">0.5W Monocrystalline PV + TI BQ25171</text>
+            <text x="12" y="60" class="mono-xs" fill="#94a3b8">• Solar Input: 6.0V Voc, 100mA Isc (Enclosure bevel)</text>
+            <text x="12" y="75" class="mono-xs" fill="#34d399">• MPPT Efficiency: 92% | Iq = 1.0 uA</text>
+            <text x="12" y="90" class="mono-xs" fill="#cbd5e1">• Battery: 1000 mAh LiFePO4 (3.2V nominal)</text>
+            <text x="12" y="105" class="mono-xs" fill="#34d399">• Cycle Life: &gt; 2500 cycles (Thermal Runaway Safe)</text>
+            <path d="M 0 60 L -30 60" stroke="#10b981" stroke-width="1.5"/>
+        </g>
 
-    <rect x="685" y="265" width="230" height="60" fill="#1e293b" rx="4"/>
-    <text x="695" y="283" class="mono" fill="#ffffff">1200 mAh LiFePO4 Cell</text>
-    <text x="695" y="301" class="mono" fill="#94a3b8">Nominal: 3.2V (2.5V-3.65V)</text>
-    <text x="695" y="319" class="mono" fill="#34d399">Cycle Life: &gt; 2500 Cycles</text>
+        <!-- Power Regulation & Gating -->
+        <g transform="translate(0, 165)">
+            <rect width="310" height="125" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.2"/>
+            <rect x="12" y="10" width="130" height="18" rx="3" fill="rgba(6, 182, 212, 0.15)"/>
+            <text x="77" y="23" class="badge" fill="#38bdf8" text-anchor="middle">ULTRA-LOW-Iq BUCK</text>
+            <text x="12" y="45" class="body-title">TI TPS62840 (Iq = 60 nA)</text>
+            <text x="12" y="60" class="mono-xs" fill="#94a3b8">• 3.3V Main System Rail from 3.2V LiFePO4</text>
+            <text x="12" y="75" class="mono-xs" fill="#34d399">• Switched Power Gating via WB_IO2 (P1.02)</text>
+            <text x="12" y="90" class="mono-xs" fill="#cbd5e1">• Sensors completely unpowered during sleep</text>
+            <text x="12" y="105" class="mono-xs" fill="#fbbf24">• Total Sleep Current: 2.0 uA @ 3.3V (1.91 mJ/cycle)</text>
+            <path d="M 0 60 L -30 60" stroke="#38bdf8" stroke-width="1.5"/>
+        </g>
 
-    <rect x="685" y="335" width="230" height="85" fill="#1e293b" rx="4"/>
-    <text x="695" y="353" class="mono" fill="#ffffff">TPS62840 Low-Iq LDO</text>
-    <text x="695" y="371" class="mono" fill="#94a3b8">3.3V System Rail | Iq = 60 nA</text>
-    <text x="695" y="389" class="mono" fill="#e5a93b">Total Sleep Load: 2.0 µA</text>
-    <text x="695" y="407" class="mono" fill="#38bdf8">Calculated Autonomy: 18+ Months</text>
+        <!-- Battery Autonomy Callout -->
+        <g transform="translate(0, 305)">
+            <rect width="310" height="75" rx="8" fill="#0d1829" stroke="#1e293b"/>
+            <text x="15" y="25" class="badge" fill="#34d399">BATTERY AUTONOMY AUDIT</text>
+            <text x="15" y="44" class="mono-xs" fill="#f1f5f9">Per 5-min cycle: 0.0428 mWh (154.04 mJ)</text>
+            <text x="15" y="60" class="mono-xs" fill="#34d399">Pure Battery: 18.4 Months | Solar: Perpetual</text>
+        </g>
+    </g>
 
-    <!-- Connections Center -> Right -->
-    <path d="M 685 365 L 630 280" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrowGold)"/>
-
-    <!-- Bottom Pinout Callout -->
-    <rect x="330" y="350" width="300" height="80" fill="#1e293b" stroke="#334155" rx="4"/>
-    <text x="345" y="372" class="mono" fill="#ffffff">RF Front-End: 865 MHz IN865 Stub Antenna</text>
-    <text x="345" y="392" class="mono" fill="#94a3b8">U.FL / IPEX Coaxial to Enclosure Bulkhead</text>
-    <text x="345" y="412" class="mono" fill="#34d399">VSWR: 1.12 | S11: -24.75 dB | Loss: 0.15 dB</text>
+    <!-- Bottom Legend Bar -->
+    <g transform="translate(25, 495)">
+        <rect width="1010" height="42" rx="6" fill="#0d1424" stroke="#1e293b"/>
+        <text x="25" y="25" class="mono-xs" fill="#94a3b8">PHYSICAL SPECIFICATIONS:</text>
+        <text x="180" y="25" class="mono-xs" fill="#38bdf8">Dimensions: 65 x 55 x 15 mm</text>
+        <text x="360" y="25" class="mono-xs" fill="#38bdf8">Volume: 53.6 cm³</text>
+        <text x="490" y="25" class="mono-xs" fill="#38bdf8">Weight: 67.0 g (with battery)</text>
+        <text x="670" y="25" class="mono-xs" fill="#fbbf24">Unit BoM: $18.74 USD ($9.50 Volume)</text>
+        <text x="910" y="25" class="mono-xs" fill="#34d399">IP67 Enclosure</text>
+    </g>
 </svg>

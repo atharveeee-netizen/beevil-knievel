@@ -1,70 +1,176 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 540" width="100%" height="100%">
     
     <defs>
-        <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#141820"/>
-            <stop offset="100%" stop-color="#0e1117"/>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#070a12"/>
+            <stop offset="50%" stop-color="#0b101c"/>
+            <stop offset="100%" stop-color="#0e1526"/>
         </linearGradient>
-        <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#e5a93b"/>
-            <stop offset="100%" stop-color="#f5c25d"/>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#131c2e"/>
+            <stop offset="100%" stop-color="#0b111e"/>
         </linearGradient>
-        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#2a3b5c"/>
-            <stop offset="100%" stop-color="#1b253b"/>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="100%" stop-color="#0f172a"/>
         </linearGradient>
-        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#8892b0"/>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+        </linearGradient>
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="100%" stop-color="#38bdf8"/>
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#34d399"/>
+        </linearGradient>
+        <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ef4444"/>
+            <stop offset="100%" stop-color="#f87171"/>
+        </linearGradient>
+        <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+        
+        <marker id="arrCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
         </marker>
-        <marker id="arrowGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#e5a93b"/>
+        <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
         </marker>
+        <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+        </marker>
+        <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444"/>
+        </marker>
+        <marker id="arrMuted" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+        </marker>
+
+        <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.3"/>
+        </pattern>
     </defs>
     <style>
-        .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 16px; fill: #ffffff; letter-spacing: 0.5px; }
-        .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #8892b0; }
-        .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 13px; fill: #e5a93b; }
-        .box-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #ccd6f6; line-height: 1.4; }
-        .mono { font-family: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace; font-size: 10px; fill: #94a3b8; }
-        .tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 9px; fill: #0f172a; }
+        .headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.3px; }
+        .body-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 10px; fill: #94a3b8; }
+        .mono-sm { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 8.5px; }
+        .badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
     </style>
 
-    <rect width="960" height="400" fill="#0b0e14" rx="8"/>
+    <rect width="1060" height="540" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1060" height="540" fill="url(#grid)" rx="10"/>
     
-    <!-- Title -->
-    <text x="30" y="38" class="title">01 - APICULTURE PROBLEM TAXONOMY & OBSERVABILITY GAP</text>
-    <text x="30" y="58" class="subtitle">Comparison between traditional invasive manual inspections vs. continuous cyber-physical telemetry</text>
-    
-    <!-- Left: Manual Inspection Failure -->
-    <rect x="30" y="80" width="430" height="290" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
-    <rect x="45" y="95" width="160" height="24" fill="#ef4444" rx="4"/>
-    <text x="53" y="111" class="tag" fill="#ffffff">TRADITIONAL INSPECTION</text>
-    
-    <text x="45" y="145" class="box-title" fill="#f87171">Catastrophic Observability Blindspots</text>
-    <text x="45" y="170" class="box-body">• Inspection Frequency: Every 14-21 days (Infrequent Discrete Sampling)</text>
-    <text x="45" y="195" class="box-body">• Thermal Disruption: Hive opened to ambient chill (ΔT: -12°C larve shock)</text>
-    <text x="45" y="220" class="box-body">• Swarm Event Horizon: Swarming acoustic surge happens in 24-48h window</text>
-    <text x="45" y="245" class="box-body">• Queen Failure: Distress humming undetectable without internal acoustics</text>
-    <text x="45" y="270" class="box-body">• Labor Bottleneck: 1 human inspects ~40 hives/day max (costly &amp; slow)</text>
-    <text x="45" y="300" class="mono" fill="#ef4444">Result: 55.6% Annual Colony Mortality (USDA-ARS 2024-2025)</text>
-    <text x="45" y="325" class="mono" fill="#64748b">Direct Global Impact: $17 Billion Crop Pollination Deficit</text>
-    <text x="45" y="350" class="mono" fill="#64748b">Latency to Anomaly Detection: 336 - 504 Hours</text>
+    <!-- Header -->
+    <rect x="25" y="22" width="165" height="24" rx="12" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
+    <text x="107" y="38" class="badge" fill="#f59e0b" text-anchor="middle">PROBLEM OBSERVABILITY</text>
+    <text x="25" y="68" class="headline">01 - APICULTURE MORTALITY CRISIS &amp; CYBER-PHYSICAL TELEMETRY PARADIGM</text>
+    <text x="25" y="86" class="subhead">Quantitative operational comparison: Invasive discrete inspections vs. continuous multi-modal edge telemetry</text>
 
-    <!-- Center Arrow -->
-    <path d="M 470 225 L 485 225" stroke="#e5a93b" stroke-width="2" marker-end="url(#arrowGold)"/>
+    <!-- Left Card: Traditional Inspection (Red Theme) -->
+    <g transform="translate(25, 105)">
+        <rect width="490" height="350" rx="10" fill="url(#cardGrad)" stroke="#ef4444" stroke-width="1.5" stroke-opacity="0.8"/>
+        <rect x="18" y="16" width="180" height="22" rx="4" fill="rgba(239, 68, 68, 0.15)" stroke="#ef4444" stroke-width="1"/>
+        <text x="108" y="31" class="badge" fill="#f87171" text-anchor="middle">TRADITIONAL INSPECTION (MANUAL)</text>
+        <text x="210" y="32" class="mono-xs" fill="#94a3b8">Inspection Cadence: 14 - 21 Days</text>
 
-    <!-- Right: BEEVIL Solution -->
-    <rect x="500" y="80" width="430" height="290" fill="url(#panelGrad)" stroke="#e5a93b" stroke-width="1.5" rx="6"/>
-    <rect x="515" y="95" width="180" height="24" fill="#e5a93b" rx="4"/>
-    <text x="523" y="111" class="tag">BEEVIL CONTINUOUS TELEMETRY</text>
-    
-    <text x="515" y="145" class="box-title">Continuous Cyber-Physical Sensing</text>
-    <text x="515" y="170" class="box-body">• Sampling Frequency: Acoustic &amp; 5-pt thermal every 5 minutes (288/day)</text>
-    <text x="515" y="195" class="box-body">• Non-Invasive Physics: Hermetic seal intact, zero brood nest thermal shock</text>
-    <text x="515" y="220" class="box-body">• Pre-Swarm Warning: 300-400 Hz acoustic surge detected 36 hours early</text>
-    <text x="515" y="245" class="box-body">• Queen Piping &amp; Distress: 450-750 Hz tracked via CMSIS-DSP 256-pt FFT</text>
-    <text x="515" y="270" class="box-body">• Scalable Autonomous Mesh: 100 hives monitored per single Raspberry Pi 3B+ gateway</text>
-    <text x="515" y="300" class="mono" fill="#34d399">Target: &gt; 60% Mitigation of Preventable Winter Losses</text>
-    <text x="515" y="325" class="mono" fill="#38bdf8">Hardware Payback Period: &lt; 2.4 Months per Commercial Apiary</text>
-    <text x="515" y="350" class="mono" fill="#e5a93b">Latency to Anomaly Detection: &lt; 5 Minutes (Instant Alert)</text>
+        <!-- Timeline Graphic (Broken discrete sampling) -->
+        <g transform="translate(18, 52)">
+            <rect width="454" height="68" rx="6" fill="#0b0f19" stroke="#334155" stroke-width="1"/>
+            <text x="14" y="20" class="mono-xs" fill="#f87171">TEMPORAL OBSERVABILITY BLINDSPOT (504 HOURS DISCRETE GAP)</text>
+            <line x1="20" y1="42" x2="434" y2="42" stroke="#475569" stroke-width="2" stroke-dasharray="4 4"/>
+            <!-- Points of inspection -->
+            <circle cx="30" cy="42" r="6" fill="#ef4444"/>
+            <text x="30" y="58" class="mono-xs" fill="#cbd5e1" text-anchor="middle">Day 0</text>
+            <rect x="150" y="30" width="150" height="24" rx="4" fill="rgba(239, 68, 68, 0.25)" stroke="#ef4444" stroke-width="1"/>
+            <text x="225" y="46" class="mono-xs" fill="#fca5a5" text-anchor="middle">Catastrophic Collapse Window</text>
+            <circle cx="420" cy="42" r="6" fill="#ef4444"/>
+            <text x="420" y="58" class="mono-xs" fill="#cbd5e1" text-anchor="middle">Day 21 (Post-Mortem)</text>
+        </g>
+
+        <!-- Failure Points -->
+        <g transform="translate(18, 134)">
+            <rect x="0" y="0" width="454" height="48" rx="6" fill="#0f172a" stroke="#1e293b"/>
+            <circle cx="20" cy="24" r="10" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444"/>
+            <text x="20" y="28" class="badge" fill="#ef4444" text-anchor="middle">1</text>
+            <text x="38" y="20" class="body-title">Severe Brood Nest Thermal Disruption</text>
+            <text x="38" y="36" class="body-desc">Breaking propolis seal drops core temp from 34.5°C to ambient (-12°C shock; 8h to recover).</text>
+
+            <rect x="0" y="56" width="454" height="48" rx="6" fill="#0f172a" stroke="#1e293b"/>
+            <circle cx="20" cy="80" r="10" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444"/>
+            <text x="20" y="84" class="badge" fill="#ef4444" text-anchor="middle">2</text>
+            <text x="38" y="76" class="body-title">Swarm Event Horizon Missed</text>
+            <text x="38" y="92" class="body-desc">Acoustic pre-swarm preparation surges inside 24 - 48h; undetected without audio probes.</text>
+
+            <rect x="0" y="112" width="454" height="48" rx="6" fill="#0f172a" stroke="#1e293b"/>
+            <circle cx="20" cy="136" r="10" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444"/>
+            <text x="20" y="140" class="badge" fill="#ef4444" text-anchor="middle">3</text>
+            <text x="38" y="132" class="body-title">Commercial Labor Bottleneck</text>
+            <text x="38" y="148" class="body-desc">1 apiarist manually inspects max 40 hives/day across out-yards 50+ km away.</text>
+
+            <rect x="0" y="168" width="454" height="36" rx="6" fill="rgba(239, 68, 68, 0.1)" stroke="#ef4444" stroke-width="0.8"/>
+            <text x="14" y="190" class="mono-xs" fill="#fca5a5">IMPACT: 55.6% Annual Managed Colony Loss (USDA-ARS) | $17B Pollination Deficit</text>
+        </g>
+    </g>
+
+    <!-- Right Card: Beevil Telemetry (Gold/Green Theme) -->
+    <g transform="translate(545, 105)">
+        <rect width="490" height="350" rx="10" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.8"/>
+        <rect x="18" y="16" width="210" height="22" rx="4" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1"/>
+        <text x="123" y="31" class="badge" fill="#34d399" text-anchor="middle">BEEVIL CONTINUOUS TELEMETRY</text>
+        <text x="240" y="32" class="mono-xs" fill="#38bdf8">Duty Cycle: 5-Minute Ingestion (288/day)</text>
+
+        <!-- Timeline Graphic (Continuous stream) -->
+        <g transform="translate(18, 52)">
+            <rect width="454" height="68" rx="6" fill="#0b0f19" stroke="#1e293b" stroke-width="1"/>
+            <text x="14" y="20" class="mono-xs" fill="#34d399">CONTINUOUS EMBEDDED OBSERVABILITY (REAL-TIME TELEMETRY BUS)</text>
+            <line x1="20" y1="42" x2="434" y2="42" stroke="#10b981" stroke-width="2"/>
+            <!-- 5-min tick marks -->
+            <path d="M 40 37 L 40 47 M 80 37 L 80 47 M 120 37 L 120 47 M 160 37 L 160 47 M 200 37 L 200 47 M 240 37 L 240 47 M 280 37 L 280 47 M 320 37 L 320 47 M 360 37 L 360 47 M 400 37 L 400 47" stroke="#38bdf8" stroke-width="1.5"/>
+            <circle cx="240" cy="42" r="5" fill="#f59e0b"/>
+            <text x="240" y="58" class="mono-xs" fill="#fbbf24" text-anchor="middle">Acoustic Surge Detected</text>
+        </g>
+
+        <!-- Solution Points -->
+        <g transform="translate(18, 134)">
+            <rect x="0" y="0" width="454" height="48" rx="6" fill="#0f172a" stroke="#1e293b"/>
+            <circle cx="20" cy="24" r="10" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981"/>
+            <text x="20" y="28" class="badge" fill="#10b981" text-anchor="middle">A</text>
+            <text x="38" y="20" class="body-title">Non-Invasive Precision Core Sensing</text>
+            <text x="38" y="36" class="body-desc">5-point TI TMP117 array (±0.1°C) monitors 34.5°C brood nest without breaking propolis seals.</text>
+
+            <rect x="0" y="56" width="454" height="48" rx="6" fill="#0f172a" stroke="#1e293b"/>
+            <circle cx="20" cy="80" r="10" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981"/>
+            <text x="20" y="84" class="badge" fill="#10b981" text-anchor="middle">B</text>
+            <text x="38" y="76" class="body-title">On-Device TinyML Bio-Acoustics</text>
+            <text x="38" y="92" class="body-desc">Cortex-M4 CMSIS-DSP 256-pt FFT isolates 300 - 400 Hz swarming surge 36 hours prior to departure.</text>
+
+            <rect x="0" y="112" width="454" height="48" rx="6" fill="#0f172a" stroke="#1e293b"/>
+            <circle cx="20" cy="136" r="10" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981"/>
+            <text x="20" y="140" class="badge" fill="#10b981" text-anchor="middle">C</text>
+            <text x="38" y="132" class="body-title">Autonomous Sub-GHz LoRa Mesh</text>
+            <text x="38" y="148" class="body-desc">100 hives monitored per Raspberry Pi 3B+ edge gateway over 15.0 km LOS / 1.5 km dense forest canopy.</text>
+
+            <rect x="0" y="168" width="454" height="36" rx="6" fill="rgba(16, 185, 129, 0.1)" stroke="#10b981" stroke-width="0.8"/>
+            <text x="14" y="190" class="mono-xs" fill="#6ee7b7">RESULT: &gt; 60% Winter Loss Mitigation | &lt; 2.4-Month Payback | Instant Mobile Telemetry Alert</text>
+        </g>
+    </g>
+
+    <!-- Bottom Stat Bar -->
+    <g transform="translate(25, 470)">
+        <rect width="1010" height="50" rx="8" fill="#0d1524" stroke="#1e293b"/>
+        <text x="30" y="30" class="mono-xs" fill="#94a3b8">COMPARATIVE DELTA:</text>
+        <text x="170" y="30" class="mono-xs" fill="#f87171">Sampling Latency: 504h ➔ &lt; 5 min</text>
+        <text x="390" y="30" class="mono-xs" fill="#f87171">Thermal Shock: -12°C ➔ 0°C (Non-invasive)</text>
+        <text x="660" y="30" class="mono-xs" fill="#34d399">Detection Window: Post-Mortem ➔ 36h Predictive</text>
+        <text x="910" y="30" class="mono-xs" fill="#fbbf24">Payload Compression: 99.7%</text>
+    </g>
 </svg>

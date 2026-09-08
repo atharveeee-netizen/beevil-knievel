@@ -1,122 +1,219 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 540" width="100%" height="100%">
     
     <defs>
-        <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#141820"/>
-            <stop offset="100%" stop-color="#0e1117"/>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#070a12"/>
+            <stop offset="50%" stop-color="#0b101c"/>
+            <stop offset="100%" stop-color="#0e1526"/>
         </linearGradient>
-        <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#e5a93b"/>
-            <stop offset="100%" stop-color="#f5c25d"/>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#131c2e"/>
+            <stop offset="100%" stop-color="#0b111e"/>
         </linearGradient>
-        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#2a3b5c"/>
-            <stop offset="100%" stop-color="#1b253b"/>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="100%" stop-color="#0f172a"/>
         </linearGradient>
-        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#8892b0"/>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+        </linearGradient>
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="100%" stop-color="#38bdf8"/>
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#34d399"/>
+        </linearGradient>
+        <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ef4444"/>
+            <stop offset="100%" stop-color="#f87171"/>
+        </linearGradient>
+        <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+        
+        <marker id="arrCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
         </marker>
-        <marker id="arrowGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#e5a93b"/>
+        <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
         </marker>
+        <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+        </marker>
+        <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444"/>
+        </marker>
+        <marker id="arrMuted" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+        </marker>
+
+        <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.3"/>
+        </pattern>
     </defs>
     <style>
-        .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 16px; fill: #ffffff; letter-spacing: 0.5px; }
-        .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #8892b0; }
-        .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 13px; fill: #e5a93b; }
-        .box-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #ccd6f6; line-height: 1.4; }
-        .mono { font-family: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace; font-size: 10px; fill: #94a3b8; }
-        .tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 9px; fill: #0f172a; }
+        .headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.3px; }
+        .body-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 10px; fill: #94a3b8; }
+        .mono-sm { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 8.5px; }
+        .badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
     </style>
 
-    <rect width="960" height="420" fill="#0b0e14" rx="8"/>
+    <rect width="1060" height="540" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1060" height="540" fill="url(#grid)" rx="10"/>
     
-    <text x="30" y="38" class="title">03 - ON-NODE ACOUSTIC DSP &amp; FEATURE EXTRACTION PIPELINE</text>
-    <text x="30" y="58" class="subtitle">ARM Cortex-M4 CMSIS-DSP 256-point real FFT with biologically partitioned frequency bins</text>
-    
-    <!-- Pipeline Blocks -->
-    <!-- Block 1: Microphone -->
-    <rect x="30" y="90" width="130" height="120" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
-    <text x="40" y="115" class="box-title">1. INMP441</text>
-    <text x="40" y="135" class="box-body">I2S Interface</text>
-    <text x="40" y="155" class="mono">fs = 2000 Hz</text>
-    <text x="40" y="175" class="mono">16-bit PCM</text>
-    <text x="40" y="195" class="mono">DMA Ping-Pong</text>
+    <!-- Header -->
+    <rect x="25" y="20" width="165" height="24" rx="12" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
+    <text x="107" y="36" class="badge" fill="#fbbf24" text-anchor="middle">ON-NODE DSP PIPELINE</text>
+    <text x="25" y="66" class="headline">03 - ON-NODE BIO-ACOUSTIC DSP PIPELINE &amp; SPECTRAL FEATURE EXTRACTION</text>
+    <text x="25" y="84" class="subhead">ARM Cortex-M4 CMSIS-DSP 256-point real FFT, Hanning windowing, and biological frequency sub-band integration</text>
 
-    <path d="M 160 150 L 180 150" stroke="#8892b0" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <!-- Pipeline Stages (5 Sequential Blocks with Connectors) -->
+    <g transform="translate(25, 105)">
+        <!-- Stage 1: Audio DMA Ingestion -->
+        <rect x="0" y="0" width="180" height="145" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
+        <rect x="12" y="12" width="156" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+        <text x="90" y="26" class="badge" fill="#38bdf8" text-anchor="middle">1. I2S DMA BUFFER</text>
+        <text x="12" y="48" class="body-title">TDK INMP441 MEMS</text>
+        <text x="12" y="64" class="mono-xs" fill="#94a3b8">Sample Rate: fs = 2000 Hz</text>
+        <text x="12" y="78" class="mono-xs" fill="#94a3b8">Resolution: 16-bit PCM</text>
+        <text x="12" y="92" class="mono-xs" fill="#94a3b8">Buffer: Ping-Pong DMA</text>
+        <!-- Waveform icon -->
+        <path d="M 16 125 Q 26 105 36 125 T 56 125 T 76 100 T 96 140 T 116 115 T 136 130 T 164 125" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
 
-    <!-- Block 2: Windowing -->
-    <rect x="180" y="90" width="140" height="120" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
-    <text x="190" y="115" class="box-title">2. Windowing</text>
-    <text x="190" y="135" class="box-body">Hanning Window</text>
-    <text x="190" y="155" class="mono">w[n] = 0.5(1-cos)</text>
-    <text x="190" y="175" class="mono">N = 256 points</text>
-    <text x="190" y="195" class="mono">-32 dB Sidelobe</text>
+        <path d="M 185 72 L 205 72" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
 
-    <path d="M 320 150 L 340 150" stroke="#8892b0" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <!-- Stage 2: Hanning Window -->
+        <rect x="210" y="0" width="180" height="145" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.5"/>
+        <rect x="222" y="12" width="156" height="20" rx="4" fill="rgba(148, 163, 184, 0.15)"/>
+        <text x="300" y="26" class="badge" fill="#cbd5e1" text-anchor="middle">2. HANNING WINDOW</text>
+        <text x="222" y="48" class="body-title">Sidelobe Suppression</text>
+        <text x="222" y="64" class="mono-xs" fill="#94a3b8">w[n] = 0.5(1 - cos(2πn/N))</text>
+        <text x="222" y="78" class="mono-xs" fill="#94a3b8">Window Size: N = 256 pts</text>
+        <text x="222" y="92" class="mono-xs" fill="#f59e0b">Sidelobe Atten: -32 dB</text>
+        <!-- Bell curve icon -->
+        <path d="M 226 130 Q 300 100 374 130" fill="none" stroke="#f59e0b" stroke-width="2"/>
 
-    <!-- Block 3: CMSIS-DSP FFT -->
-    <rect x="340" y="90" width="150" height="120" fill="url(#panelGrad)" stroke="#e5a93b" stroke-width="1.5" rx="6"/>
-    <text x="350" y="115" class="box-title">3. CMSIS-DSP</text>
-    <text x="350" y="135" class="box-body">arm_rfft_fast_f32</text>
-    <text x="350" y="155" class="mono">256-pt Real FFT</text>
-    <text x="350" y="175" class="mono">Δf = 7.8125 Hz</text>
-    <text x="350" y="195" class="mono" fill="#34d399">Exec: 1.28 ms</text>
+        <path d="M 395 72 L 415 72" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
 
-    <path d="M 490 150 L 510 150" stroke="#8892b0" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <!-- Stage 3: CMSIS-DSP FFT Core -->
+        <rect x="420" y="0" width="190" height="145" rx="8" fill="url(#cardGradHighlight)" stroke="#f59e0b" stroke-width="2"/>
+        <rect x="432" y="12" width="166" height="20" rx="4" fill="rgba(245, 158, 11, 0.2)"/>
+        <text x="515" y="26" class="badge" fill="#fbbf24" text-anchor="middle">3. CMSIS-DSP FFT</text>
+        <text x="432" y="48" class="body-title">arm_rfft_fast_f32</text>
+        <text x="432" y="64" class="mono-xs" fill="#38bdf8">256-Point Real Radix-4</text>
+        <text x="432" y="78" class="mono-xs" fill="#34d399">Δf = 7.8125 Hz per bin</text>
+        <text x="432" y="92" class="mono-xs" fill="#cbd5e1">Execution: 1.28 ms @ 64MHz</text>
+        <rect x="432" y="112" width="166" height="20" rx="4" fill="#0b0f19"/>
+        <text x="515" y="126" class="mono-xs" fill="#fbbf24" text-anchor="middle">Flash Footprint: &lt; 8.2 KB</text>
 
-    <!-- Block 4: Magnitude -->
-    <rect x="510" y="90" width="140" height="120" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
-    <text x="520" y="115" class="box-title">4. Magnitude</text>
-    <text x="520" y="135" class="box-body">arm_cmplx_mag_f32</text>
-    <text x="520" y="155" class="mono">|X[k]| = √(Re²+Im²)</text>
-    <text x="520" y="175" class="mono">k = 0 .. 127</text>
-    <text x="520" y="195" class="mono">0 to 1000 Hz</text>
+        <path d="M 615 72 L 635 72" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
 
-    <path d="M 650 150 L 670 150" stroke="#8892b0" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <!-- Stage 4: Complex Magnitude -->
+        <rect x="640" y="0" width="180" height="145" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.5"/>
+        <rect x="652" y="12" width="156" height="20" rx="4" fill="rgba(148, 163, 184, 0.15)"/>
+        <text x="730" y="26" class="badge" fill="#cbd5e1" text-anchor="middle">4. COMPLEX MAGNITUDE</text>
+        <text x="652" y="48" class="body-title">arm_cmplx_mag_f32</text>
+        <text x="652" y="64" class="mono-xs" fill="#94a3b8">|X[k]| = √(Re[k]² + Im[k]²)</text>
+        <text x="652" y="78" class="mono-xs" fill="#94a3b8">k = 0 .. 127 (Nyquist)</text>
+        <text x="652" y="92" class="mono-xs" fill="#94a3b8">Spectrum: 0 to 1000 Hz</text>
+        <!-- Spectrum bars icon -->
+        <g transform="translate(654, 110)">
+            <rect x="10" y="8" width="6" height="18" fill="#38bdf8"/>
+            <rect x="22" y="2" width="6" height="24" fill="#38bdf8"/>
+            <rect x="34" y="14" width="6" height="12" fill="#38bdf8"/>
+            <rect x="46" y="0" width="6" height="26" fill="#fbbf24"/>
+            <rect x="58" y="6" width="6" height="20" fill="#fbbf24"/>
+            <rect x="70" y="16" width="6" height="10" fill="#34d399"/>
+            <rect x="82" y="18" width="6" height="8" fill="#34d399"/>
+            <rect x="94" y="4" width="6" height="22" fill="#f87171"/>
+            <rect x="106" y="10" width="6" height="16" fill="#f87171"/>
+            <rect x="118" y="20" width="6" height="6" fill="#64748b"/>
+        </g>
 
-    <!-- Block 5: Sub-band Bins -->
-    <rect x="670" y="90" width="260" height="120" fill="url(#panelGrad)" stroke="#38bdf8" stroke-width="1.5" rx="6"/>
-    <text x="680" y="115" class="box-title" fill="#38bdf8">5. Sub-Band Energy Integration</text>
-    <text x="680" y="135" class="mono">E_fanning  = Σ |X[k]|² (100-180 Hz, k:13-23)</text>
-    <text x="680" y="155" class="mono">E_waggle   = Σ |X[k]|² (200-280 Hz, k:26-36)</text>
-    <text x="680" y="175" class="mono">E_preswarm = Σ |X[k]|² (300-400 Hz, k:38-51)</text>
-    <text x="680" y="195" class="mono">E_distress = Σ |X[k]|² (450-750 Hz, k:58-96)</text>
+        <path d="M 825 72 L 845 72" stroke="#10b981" stroke-width="2" marker-end="url(#arrEmerald)"/>
 
-    <!-- Bottom Biological Mapping Table -->
-    <rect x="30" y="230" width="900" height="160" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
-    <text x="45" y="255" class="box-title">Biological Signal Characterization &amp; Decision Logic</text>
-    
-    <!-- Table Header -->
-    <rect x="45" y="270" width="870" height="25" fill="#1e293b" rx="3"/>
-    <text x="55" y="287" class="mono" fill="#ffffff">Band Name</text>
-    <text x="180" y="287" class="mono" fill="#ffffff">Freq Range</text>
-    <text x="290" y="287" class="mono" fill="#ffffff">FFT Bins (k)</text>
-    <text x="410" y="287" class="mono" fill="#ffffff">Biological Phenomenon</text>
-    <text x="680" y="287" class="mono" fill="#ffffff">Diagnostic State Trigger</text>
+        <!-- Stage 5: Sub-band Energy Integrals -->
+        <rect x="850" y="0" width="160" height="145" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.5"/>
+        <rect x="862" y="12" width="136" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="930" y="26" class="badge" fill="#34d399" text-anchor="middle">5. SUB-BAND INTEGRAL</text>
+        <text x="862" y="48" class="body-title">4 Biological Features</text>
+        <text x="862" y="66" class="mono-xs" fill="#38bdf8">E_fan : 100 - 180 Hz</text>
+        <text x="862" y="82" class="mono-xs" fill="#34d399">E_wag : 200 - 280 Hz</text>
+        <text x="862" y="98" class="mono-xs" fill="#fbbf24">E_swm : 300 - 400 Hz</text>
+        <text x="862" y="114" class="mono-xs" fill="#f87171">E_dist: 450 - 750 Hz</text>
+        <text x="862" y="132" class="mono-xs" fill="#6ee7b7">Compressed: 1 Byte Alert</text>
+    </g>
 
-    <!-- Rows -->
-    <text x="55" y="315" class="mono" fill="#94a3b8">Thermal Fanning</text>
-    <text x="180" y="315" class="mono" fill="#94a3b8">100 - 180 Hz</text>
-    <text x="290" y="315" class="mono" fill="#94a3b8">k = 13 .. 23</text>
-    <text x="410" y="315" class="mono" fill="#cbd5e1">Larval heat evacuation / wing fanning</text>
-    <text x="680" y="315" class="mono" fill="#f59e0b">THERMAL_STRESS_WARNING</text>
+    <!-- Biological Signal Mapping Table (Detailed & Surgical) -->
+    <g transform="translate(25, 275)">
+        <rect width="1010" height="235" rx="8" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.2"/>
+        
+        <!-- Table Header Bar -->
+        <rect x="15" y="15" width="980" height="32" rx="4" fill="#0f172a" stroke="#1e293b"/>
+        <text x="30" y="36" class="badge" fill="#38bdf8">BIOLOGICAL BAND</text>
+        <text x="180" y="36" class="badge" fill="#38bdf8">FREQUENCY RANGE</text>
+        <text x="320" y="36" class="badge" fill="#38bdf8">FFT BINS (Δf = 7.81 Hz)</text>
+        <text x="470" y="36" class="badge" fill="#38bdf8">BIOLOGICAL PHENOMENON &amp; COLONY MECHANISM</text>
+        <text x="820" y="36" class="badge" fill="#38bdf8">EDGE DECISION TRIGGER</text>
 
-    <text x="55" y="338" class="mono" fill="#94a3b8">Forager Waggle</text>
-    <text x="180" y="338" class="mono" fill="#94a3b8">200 - 280 Hz</text>
-    <text x="290" y="338" class="mono" fill="#94a3b8">k = 26 .. 36</text>
-    <text x="410" y="338" class="mono" fill="#cbd5e1">Foraging communication &amp; nectar intake</text>
-    <text x="680" y="338" class="mono" fill="#34d399">NORMAL_FORAGING_STATE</text>
+        <!-- Row 1: Fanning -->
+        <g transform="translate(15, 52)">
+            <rect width="980" height="38" rx="3" fill="#090d16"/>
+            <circle cx="20" cy="19" r="5" fill="#38bdf8"/>
+            <text x="35" y="23" class="body-title">Thermal Fanning</text>
+            <text x="165" y="23" class="mono-xs" fill="#cbd5e1">100 - 180 Hz</text>
+            <text x="305" y="23" class="mono-xs" fill="#94a3b8">Bins k = 13 .. 23 (11 bins)</text>
+            <text x="455" y="18" class="body-desc">Larval cooling &amp; metabolic air evacuation. Worker wings flap in synchronize</text>
+            <text x="455" y="31" class="body-desc">to exhaust excess hive heat when brood core exceeds 35.5°C.</text>
+            <rect x="805" y="8" width="165" height="22" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+            <text x="887" y="22" class="badge" fill="#38bdf8" text-anchor="middle">THERMAL_VENTILATION</text>
+        </g>
 
-    <text x="55" y="361" class="mono" fill="#94a3b8">Pre-Swarm Piping</text>
-    <text x="180" y="361" class="mono" fill="#94a3b8">300 - 400 Hz</text>
-    <text x="290" y="361" class="mono" fill="#94a3b8">k = 38 .. 51</text>
-    <text x="410" y="361" class="mono" fill="#cbd5e1">Virgin queen piping / colony preparation</text>
-    <text x="680" y="361" class="mono" fill="#ef4444">PRE_SWARM_EMERGENCY</text>
+        <!-- Row 2: Waggle Dance -->
+        <g transform="translate(15, 95)">
+            <rect width="980" height="38" rx="3" fill="#0b101c"/>
+            <circle cx="20" cy="19" r="5" fill="#34d399"/>
+            <text x="35" y="23" class="body-title">Forager Waggle</text>
+            <text x="165" y="23" class="mono-xs" fill="#cbd5e1">200 - 280 Hz</text>
+            <text x="305" y="23" class="mono-xs" fill="#94a3b8">Bins k = 26 .. 36 (11 bins)</text>
+            <text x="455" y="18" class="body-desc">Forager dorso-ventral abdominal vibration transmitting floral distance &amp; vector.</text>
+            <text x="455" y="31" class="body-desc">Direct indicator of active nectar flow and healthy colony workforce.</text>
+            <rect x="805" y="8" width="165" height="22" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+            <text x="887" y="22" class="badge" fill="#34d399" text-anchor="middle">FORAGING_ACTIVE</text>
+        </g>
 
-    <text x="55" y="384" class="mono" fill="#94a3b8">Queenless Roar</text>
-    <text x="180" y="384" class="mono" fill="#94a3b8">450 - 750 Hz</text>
-    <text x="290" y="384" class="mono" fill="#94a3b8">k = 58 .. 96</text>
-    <text x="410" y="384" class="mono" fill="#cbd5e1">Disorganized buzzing post queen loss</text>
-    <text x="680" y="384" class="mono" fill="#f43f5e">QUEENLESS_DISTRESS</text>
+        <!-- Row 3: Pre-Swarm Piping -->
+        <g transform="translate(15, 138)">
+            <rect width="980" height="42" rx="3" fill="rgba(245, 158, 11, 0.08)" stroke="#f59e0b" stroke-width="0.8"/>
+            <circle cx="20" cy="21" r="5" fill="#fbbf24"/>
+            <text x="35" y="25" class="body-title" fill="#fbbf24">Pre-Swarm Piping</text>
+            <text x="165" y="25" class="mono-xs" fill="#fbbf24">300 - 400 Hz</text>
+            <text x="305" y="25" class="mono-xs" fill="#fde68a">Bins k = 38 .. 51 (14 bins)</text>
+            <text x="455" y="18" class="body-desc">Virgin queen tooting &amp; flight muscle pre-heating across 15k+ worker swarm.</text>
+            <text x="455" y="32" class="body-desc">Energy surges 3.8x baseline 24 to 48 hours prior to catastrophic swarm departure.</text>
+            <rect x="805" y="10" width="165" height="22" rx="4" fill="rgba(245, 158, 11, 0.25)"/>
+            <text x="887" y="24" class="badge" fill="#fbbf24" text-anchor="middle">PRE_SWARM_WARNING</text>
+        </g>
+
+        <!-- Row 4: Queenless Roar -->
+        <g transform="translate(15, 185)">
+            <rect width="980" height="42" rx="3" fill="rgba(239, 68, 68, 0.08)" stroke="#ef4444" stroke-width="0.8"/>
+            <circle cx="20" cy="21" r="5" fill="#f87171"/>
+            <text x="35" y="25" class="body-title" fill="#f87171">Queenless Distress</text>
+            <text x="165" y="25" class="mono-xs" fill="#f87171">450 - 750 Hz</text>
+            <text x="305" y="25" class="mono-xs" fill="#fca5a5">Bins k = 58 .. 96 (39 bins)</text>
+            <text x="455" y="18" class="body-desc">Disorganized high-frequency colony roar triggered by pheromone withdrawal.</text>
+            <text x="455" y="32" class="body-desc">Accompanied by brood core chill (&gt; 1.5°C drop) due to cluster cohesion collapse.</text>
+            <rect x="805" y="10" width="165" height="22" rx="4" fill="rgba(239, 68, 68, 0.25)"/>
+            <text x="887" y="24" class="badge" fill="#f87171" text-anchor="middle">QUEENLESS_EMERGENCY</text>
+        </g>
+    </g>
 </svg>

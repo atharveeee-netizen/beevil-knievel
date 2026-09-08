@@ -1,92 +1,246 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 560" width="100%" height="100%">
     
     <defs>
-        <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#141820"/>
-            <stop offset="100%" stop-color="#0e1117"/>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#070a12"/>
+            <stop offset="50%" stop-color="#0b101c"/>
+            <stop offset="100%" stop-color="#0e1526"/>
         </linearGradient>
-        <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#e5a93b"/>
-            <stop offset="100%" stop-color="#f5c25d"/>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#131c2e"/>
+            <stop offset="100%" stop-color="#0b111e"/>
         </linearGradient>
-        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#2a3b5c"/>
-            <stop offset="100%" stop-color="#1b253b"/>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1e293b"/>
+            <stop offset="100%" stop-color="#0f172a"/>
         </linearGradient>
-        <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#8892b0"/>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f59e0b"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+        </linearGradient>
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#06b6d4"/>
+            <stop offset="100%" stop-color="#38bdf8"/>
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#34d399"/>
+        </linearGradient>
+        <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ef4444"/>
+            <stop offset="100%" stop-color="#f87171"/>
+        </linearGradient>
+        <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#8b5cf6"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+        
+        <marker id="arrCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
         </marker>
-        <marker id="arrowGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 10 5 L 0 9 z" fill="#e5a93b"/>
+        <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
         </marker>
+        <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981"/>
+        </marker>
+        <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444"/>
+        </marker>
+        <marker id="arrMuted" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b"/>
+        </marker>
+
+        <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.3"/>
+        </pattern>
     </defs>
     <style>
-        .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 16px; fill: #ffffff; letter-spacing: 0.5px; }
-        .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #8892b0; }
-        .box-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 13px; fill: #e5a93b; }
-        .box-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #ccd6f6; line-height: 1.4; }
-        .mono { font-family: "SF Mono", Menlo, Consolas, Monaco, "Liberation Mono", monospace; font-size: 10px; fill: #94a3b8; }
-        .tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 9px; fill: #0f172a; }
+        .headline { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.3px; }
+        .body-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-size: 10px; fill: #94a3b8; }
+        .mono-sm { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 8.5px; }
+        .badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
     </style>
 
-    <rect width="960" height="400" fill="#0b0e14" rx="8"/>
+    <rect width="1060" height="560" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1060" height="560" fill="url(#grid)" rx="10"/>
     
-    <text x="30" y="38" class="title">05 - SUB-GHz WIRELESS TELEMETRY &amp; MESH NETWORK TOPOLOGY</text>
-    <text x="30" y="58" class="subtitle">LoRa modulation parameter cascade, ITU-R P.833-9 foliage attenuation, and regenerative hops</text>
-    
-    <!-- Left: LoRa Modulation Parameters -->
-    <rect x="30" y="80" width="310" height="290" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
-    <text x="45" y="105" class="box-title">LoRa Physical Layer Configuration</text>
-    <text x="45" y="130" class="mono">• Carrier Frequency: 865.0 - 867.0 MHz</text>
-    <text x="45" y="150" class="mono">• Spreading Factor: SF10 (Adaptive SF7-SF12)</text>
-    <text x="45" y="170" class="mono">• Bandwidth (BW): 125.0 kHz</text>
-    <text x="45" y="190" class="mono">• Coding Rate (CR): 4/5 (Hamming Forward EC)</text>
-    <text x="45" y="210" class="mono">• Tx Output Power: +14.0 dBm (25 mW EIRP)</text>
-    <text x="45" y="230" class="mono">• Rx Sensitivity: -132.0 dBm (@ SF10)</text>
-    <text x="45" y="250" class="mono">• Preamble Length: 8 symbols (1.024 ms)</text>
-    <text x="45" y="270" class="mono">• Time-on-Air (ToA): 328.7 ms / 24B pkt</text>
-    <text x="45" y="295" class="box-title" fill="#34d399">Link Budget Margin</text>
-    <text x="45" y="320" class="mono">Total Path Budget: 146.0 dB</text>
-    <text x="45" y="340" class="mono">Fade Margin Reserved: 15.0 dB</text>
-    <text x="45" y="360" class="mono">Max Permissible Path Loss: 131.0 dB</text>
+    <!-- Header -->
+    <rect x="25" y="20" width="175" height="24" rx="12" fill="rgba(139, 92, 246, 0.15)" stroke="#8b5cf6" stroke-width="1.2"/>
+    <text x="112" y="36" class="badge" fill="#c4b5fd" text-anchor="middle">SUB-GHz RF PROPAGATION</text>
+    <text x="25" y="66" class="headline">05 - SUB-GHz WIRELESS TELEMETRY, ITU-R P.833-9 CANOPY ATTENUATION &amp; MESH</text>
+    <text x="25" y="84" class="subhead">Indian IN865 physical layer, link budget waterfall with pine canopy loss, and multi-hop regenerative routing</text>
 
-    <!-- Center: Physical Mesh Topology -->
-    <rect x="360" y="80" width="570" height="290" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
-    <text x="375" y="105" class="box-title">Multi-Hop Regenerative Forest Mesh</text>
-    
-    <!-- Nodes -->
-    <!-- Gateway Mast -->
-    <rect x="800" y="180" width="110" height="80" fill="#1e293b" stroke="#38bdf8" stroke-width="2" rx="6"/>
-    <text x="810" y="205" class="mono" fill="#38bdf8">EDGE GATEWAY</text>
-    <text x="810" y="225" class="mono" fill="#ffffff">Gateway Mast (10m)</text>
-    <text x="810" y="245" class="mono" fill="#94a3b8">SX1302 8-Ch</text>
+    <!-- Left Column: RF Parameter Cascade & Link Budget Waterfall -->
+    <g transform="translate(25, 105)">
+        <rect width="450" height="385" rx="10" fill="url(#cardGrad)" stroke="#8b5cf6" stroke-width="1.5"/>
+        <rect x="16" y="14" width="200" height="22" rx="4" fill="rgba(139, 92, 246, 0.15)"/>
+        <text x="116" y="29" class="badge" fill="#c4b5fd" text-anchor="middle">LoRa PHY &amp; LINK WATERFALL</text>
 
-    <!-- Repeater Node (Edge of Apiary) -->
-    <circle cx="660" cy="220" r="32" fill="#2d2315" stroke="#e5a93b" stroke-width="2"/>
-    <text x="640" y="215" class="mono" fill="#e5a93b">Node #01</text>
-    <text x="640" y="230" class="mono" fill="#94a3b8">(Relay)</text>
+        <!-- Parameter Table -->
+        <g transform="translate(16, 48)">
+            <rect width="418" height="120" rx="6" fill="#0b101c" stroke="#1e293b"/>
+            <text x="12" y="20" class="mono-xs" fill="#38bdf8">• Carrier Frequency: 865.0625 MHz (India WPC Band)</text>
+            <text x="12" y="36" class="mono-xs" fill="#cbd5e1">• Bandwidth (BW): 125.0 kHz | Coding Rate (CR): 4/5</text>
+            <text x="12" y="52" class="mono-xs" fill="#cbd5e1">• Spreading Factor: SF7 (Adaptive SF7 - SF10)</text>
+            <text x="12" y="68" class="mono-xs" fill="#fbbf24">• Transmit Power: +14 dBm (25 mW EIRP)</text>
+            <text x="12" y="84" class="mono-xs" fill="#34d399">• Rx Sensitivity: -137 dBm (SX1262 LoRa Engine)</text>
+            <text x="12" y="100" class="mono-xs" fill="#cbd5e1">• Packet On-Air Time: 350 ms / 24-Byte Binary Frame</text>
+            <text x="12" y="114" class="mono-xs" fill="#38bdf8">• Duty Cycle: 0.116% (Strictly below 1.0% regulatory cap)</text>
+        </g>
 
-    <!-- Outlying Hives -->
-    <circle cx="480" cy="150" r="28" fill="#141820" stroke="#475569" stroke-width="1.5"/>
-    <text x="460" y="155" class="mono" fill="#cbd5e1">Hive #04</text>
+        <!-- Link Budget Waterfall Graphic -->
+        <g transform="translate(16, 180)">
+            <text x="0" y="15" class="badge" fill="#fbbf24">LINK BUDGET WATERFALL (1.5 km PINE CANOPY):</text>
+            
+            <!-- Stage 1: Tx Power -->
+            <rect x="0" y="25" width="418" height="24" rx="4" fill="#0f172a"/>
+            <text x="10" y="41" class="mono-xs" fill="#f1f5f9">Tx Power Output (+14.0 dBm)</text>
+            <rect x="250" y="29" width="60" height="16" rx="3" fill="#10b981"/>
+            <text x="280" y="41" class="mono-xs" fill="#ffffff" text-anchor="middle">+14 dBm</text>
 
-    <circle cx="480" cy="290" r="28" fill="#141820" stroke="#475569" stroke-width="1.5"/>
-    <text x="460" y="295" class="mono" fill="#cbd5e1">Hive #12</text>
+            <!-- Stage 2: Free Space Path Loss -->
+            <rect x="0" y="53" width="418" height="24" rx="4" fill="#0f172a"/>
+            <text x="10" y="69" class="mono-xs" fill="#f1f5f9">Free-Space Loss (FSPL 1.5 km @ 865 MHz)</text>
+            <rect x="250" y="57" width="95" height="16" rx="3" fill="#f43f5e"/>
+            <text x="297" y="69" class="mono-xs" fill="#ffffff" text-anchor="middle">-94.7 dB</text>
 
-    <circle cx="390" cy="220" r="28" fill="#141820" stroke="#475569" stroke-width="1.5"/>
-    <text x="370" y="225" class="mono" fill="#cbd5e1">Hive #35</text>
+            <!-- Stage 3: Canopy Attenuation (ITU-R P.833-9) -->
+            <rect x="0" y="81" width="418" height="24" rx="4" fill="#0f172a"/>
+            <text x="10" y="97" class="mono-xs" fill="#f1f5f9">Canopy Foliage Loss (0.18 dB/m x 120m)</text>
+            <rect x="250" y="85" width="75" height="16" rx="3" fill="#f43f5e"/>
+            <text x="287" y="97" class="mono-xs" fill="#ffffff" text-anchor="middle">-21.6 dB</text>
 
-    <!-- Mesh Rays -->
-    <path d="M 418 220 L 628 220" stroke="#e5a93b" stroke-width="2" stroke-dasharray="4,2"/>
-    <text x="480" y="212" class="mono" fill="#e5a93b">Direct Hop (450m)</text>
+            <!-- Stage 4: Hive Box Dielectric Loss -->
+            <rect x="0" y="109" width="418" height="24" rx="4" fill="#0f172a"/>
+            <text x="10" y="125" class="mono-xs" fill="#f1f5f9">Hive Box Dielectric &amp; Comb Loss</text>
+            <rect x="250" y="113" width="55" height="16" rx="3" fill="#f43f5e"/>
+            <text x="277" y="125" class="mono-xs" fill="#ffffff" text-anchor="middle">-8.7 dB</text>
 
-    <path d="M 505 160 L 635 205" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="2,2"/>
-    <path d="M 505 280 L 635 235" stroke="#8892b0" stroke-width="1.5" stroke-dasharray="2,2"/>
-    
-    <path d="M 692 220 L 800 220" stroke="#38bdf8" stroke-width="2.5"/>
-    <text x="705" y="212" class="mono" fill="#38bdf8">Backhaul (1.2 km)</text>
+            <!-- Result: Link Margin -->
+            <rect x="0" y="137" width="418" height="30" rx="4" fill="#141d2e" stroke="#10b981" stroke-width="1.2"/>
+            <text x="10" y="156" class="body-title" fill="#34d399">Calculated Rx Level: -111.0 dBm</text>
+            <text x="260" y="156" class="badge" fill="#34d399">NET FADE MARGIN: +26.0 dB (ROBUST)</text>
+        </g>
+    </g>
 
-    <!-- Annotations -->
-    <rect x="375" y="330" width="540" height="30" fill="#1e293b" rx="4"/>
-    <text x="385" y="350" class="mono" fill="#34d399">• ITU-R P.833-9 Canopy Attenuation Modeled: 0.18 dB/m in dense pine forest</text>
+    <!-- Right Column: Mesh Network Topology Graphic -->
+    <g transform="translate(505, 105)">
+        <rect width="530" height="385" rx="10" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
+        <rect x="16" y="14" width="230" height="22" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+        <text x="131" y="29" class="badge" fill="#38bdf8" text-anchor="middle">MULTI-HOP REGENERATIVE MESH</text>
+
+        <!-- Network Diagram Area -->
+        <g transform="translate(20, 50)">
+            <!-- Background Pine Trees / Canopy graphic -->
+            <path d="M 120 180 L 140 130 L 160 180 Z M 220 170 L 240 110 L 260 170 Z M 300 190 L 320 140 L 340 190 Z" fill="#132320" opacity="0.6"/>
+
+            <!-- Peripheral Hive Nodes -->
+            <!-- Hive #35 -->
+            <circle cx="45" cy="80" r="24" fill="#0f172a" stroke="#8b5cf6" stroke-width="2"/>
+            <text x="45" y="80" class="badge" fill="#c4b5fd" text-anchor="middle">HIVE</text>
+            <text x="45" y="93" class="mono-xs" fill="#ffffff" text-anchor="middle">#035</text>
+
+            <!-- Hive #04 -->
+            <circle cx="70" cy="190" r="24" fill="#0f172a" stroke="#8b5cf6" stroke-width="2"/>
+            <text x="70" y="190" class="badge" fill="#c4b5fd" text-anchor="middle">HIVE</text>
+            <text x="70" y="203" class="mono-xs" fill="#ffffff" text-anchor="middle">#004</text>
+
+            <!-- Hive #12 -->
+            <circle cx="150" cy="270" r="24" fill="#0f172a" stroke="#8b5cf6" stroke-width="2"/>
+            <text x="150" y="270" class="badge" fill="#c4b5fd" text-anchor="middle">HIVE</text>
+            <text x="150" y="283" class="mono-xs" fill="#ffffff" text-anchor="middle">#012</text>
+
+            <!-- Central Cluster Relay: Node #01 -->
+            <circle cx="250" cy="140" r="32" fill="#291e0f" stroke="#f59e0b" stroke-width="2.5"/>
+            <text x="250" y="136" class="badge" fill="#fbbf24" text-anchor="middle">RELAY NODE</text>
+            <text x="250" y="149" class="mono-xs" fill="#ffffff" text-anchor="middle">HIVE #001</text>
+            <text x="250" y="161" class="mono-xs" fill="#34d399" text-anchor="middle">Hop Relay</text>
+
+            <!-- Hops to Relay -->
+            <path d="M 69 80 L 218 135" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrGold)"/>
+            <text x="135" y="98" class="mono-xs" fill="#94a3b8">Hop: 420m</text>
+
+            <path d="M 94 190 L 218 145" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrGold)"/>
+            <text x="140" y="180" class="mono-xs" fill="#94a3b8">Hop: 380m</text>
+
+            <path d="M 174 270 L 235 172" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrGold)"/>
+            <text x="215" y="235" class="mono-xs" fill="#94a3b8">Hop: 490m</text>
+
+            <!-- High-Power Long Range Backhaul to Gateway -->
+            <path d="M 282 140 L 415 140" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrCyan)"/>
+            <text x="345" y="130" class="mono-xs" fill="#38bdf8" text-anchor="middle">Backhaul Uplink</text>
+            <text x="345" y="158" class="mono-xs" fill="#34d399" text-anchor="middle">1.5 km (Canopy)</text>
+
+            <!-- EDGE GATEWAY MAST (RASPBERRY PI 3B+ + SX1262 HAT) -->
+            <rect x="420" y="90" width="85" height="100" rx="6" fill="#0d1b2a" stroke="#38bdf8" stroke-width="2"/>
+            <rect x="425" y="96" width="75" height="18" rx="3" fill="rgba(6, 182, 212, 0.2)"/>
+            <text x="462" y="109" class="badge" fill="#38bdf8" text-anchor="middle">GATEWAY</text>
+            <text x="462" y="128" class="mono-xs" fill="#ffffff" text-anchor="middle">Raspberry</text>
+            <text x="462" y="140" class="mono-xs" fill="#ffffff" text-anchor="middle">Pi 3B+</text>
+            <text x="462" y="156" class="mono-xs" fill="#fbbf24" text-anchor="middle">SX1262 HAT</text>
+            <text x="462" y="172" class="mono-xs" fill="#34d399" text-anchor="middle">10m Mast</text>
+        </g>
+
+        <!-- 24-Byte Binary Frame Layout -->
+        <g transform="translate(16, 290)">
+            <text x="0" y="15" class="badge" fill="#38bdf8">24-BYTE PACKED BINARY TELEMETRY FRAME STRUCTURE:</text>
+            <g transform="translate(0, 24)">
+                <!-- Bytes 0-1 -->
+                <rect x="0" y="0" width="48" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="24" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">HDR</text>
+                <text x="24" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+                
+                <!-- Bytes 2-3 -->
+                <rect x="48" y="0" width="48" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="72" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">NodeID</text>
+                <text x="72" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+
+                <!-- Bytes 4-7 -->
+                <rect x="96" y="0" width="55" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="123" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">Time</text>
+                <text x="123" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">4B</text>
+
+                <!-- Bytes 8-17: 5x Temps -->
+                <rect x="151" y="0" width="130" height="34" fill="#291e0f" stroke="#f59e0b"/>
+                <text x="216" y="15" class="mono-xs" fill="#fbbf24" text-anchor="middle">5x Temp Array (TMP117+DS18)</text>
+                <text x="216" y="27" class="mono-xs" fill="#f59e0b" text-anchor="middle">10 Bytes (int16 x 5)</text>
+
+                <!-- Bytes 18-19: CO2 -->
+                <rect x="281" y="0" width="46" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="304" y="15" class="mono-xs" fill="#a78bfa" text-anchor="middle">CO2</text>
+                <text x="304" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+
+                <!-- Byte 20: Acoustic Alert -->
+                <rect x="327" y="0" width="55" height="34" fill="#0f291e" stroke="#10b981"/>
+                <text x="354" y="15" class="mono-xs" fill="#34d399" text-anchor="middle">AI-Alert</text>
+                <text x="354" y="27" class="mono-xs" fill="#10b981" text-anchor="middle">1B</text>
+
+                <!-- Byte 21: Batt -->
+                <rect x="382" y="0" width="46" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="405" y="15" class="mono-xs" fill="#cbd5e1" text-anchor="middle">Batt</text>
+                <text x="405" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">1B</text>
+
+                <!-- Bytes 22-23: CRC16 -->
+                <rect x="428" y="0" width="60" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="458" y="15" class="mono-xs" fill="#f87171" text-anchor="middle">CRC16</text>
+                <text x="458" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+            </g>
+            <text x="0" y="76" class="mono-xs" fill="#94a3b8">Zero IP Overhead | Strict Packing | Zero Fragmentation Across LoRa PHY Frame</text>
+        </g>
+    </g>
+
+    <!-- Bottom Stat Bar -->
+    <g transform="translate(25, 502)">
+        <rect width="1010" height="40" rx="6" fill="#0d1424" stroke="#1e293b"/>
+        <text x="25" y="24" class="mono-xs" fill="#94a3b8">NETWORK CAPACITY:</text>
+        <text x="170" y="24" class="mono-xs" fill="#38bdf8">100 Hives Scalability Validated</text>
+        <text x="410" y="24" class="mono-xs" fill="#34d399">Airtime Load: 0.137% across 1 Gateway</text>
+        <text x="700" y="24" class="mono-xs" fill="#fbbf24">Maximum LOS Range: 1,500,000 cm (15.0 km)</text>
+        <text x="940" y="24" class="mono-xs" fill="#c4b5fd">Canopy: 150,000 cm</text>
+    </g>
 </svg>
