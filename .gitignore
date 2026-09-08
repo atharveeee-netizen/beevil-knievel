@@ -9,6 +9,7 @@ __pycache__/
 *.db-shm
 venv/
 .venv/
+.pytest_cache/
 
 # OS / Temporary
 .DS_Store
@@ -41,3 +42,9 @@ server.log
 # Large Audio Files
 ml_models/datasets/sample_bee_audio/zenodo_*.wav
 TinyML Model/datasets/sample_bee_audio/zenodo_*.wav
+
+# Firmware Local Build Output
+firmware/build/
+*.elf
+*.map
+

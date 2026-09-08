@@ -17,8 +17,9 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-INSTALL_DIR="/home/pi/beevil-knievel"
-mkdir -p $INSTALL_DIR
+TARGET_USER="${SUDO_USER:-$USER}"
+INSTALL_DIR="${BEEVIL_INSTALL_DIR:-/home/$TARGET_USER/beevil-knievel}"
+mkdir -p "$INSTALL_DIR"
 
 echo "📦 Step 1: Updating APT repositories and installing core packages..."
 apt-get update -y

@@ -1,0 +1,108 @@
+name: IEEE-HART Engineering CI & Verification Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python_and_ml_verification:
+    name: Python Tests & Model Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install fastapi uvicorn pydantic numpy scikit-learn joblib pytest
+
+      - name: Repository Hygiene Audit
+        run: |
+          echo "Checking for accidental tracked build artifacts..."
+          ILLEGAL_FILES=$(git ls-files | grep -E '\.elf$|\.map$|\.pyc$|\.pyo$|__pycache__' || true)
+          if [ -n "$ILLEGAL_FILES" ]; then
+            echo "❌ Repository Hygiene Violation: Found tracked build artifacts:"
+            echo "$ILLEGAL_FILES"
+            exit 1
+          fi
+          echo "✅ Repository hygiene audit passed: No forbidden binaries tracked."
+
+      - name: Execute Full Pytest Test Suite
+        run: |
+          echo "Running unit and gateway integration tests..."
+          pytest tests/ -v
+
+      - name: Execute Cloud Pathology Random Forest Benchmark
+        run: |
+          echo "Verifying Cloud Model 2 Pathology Diagnostics..."
+          python "Cloud Model/run_cloud_model_benchmark.py"
+
+      - name: Execute TinyML 30-Scenario Stress Test Benchmark
+        run: |
+          echo "Verifying TinyML Multi-Band Feature Classifier on Stress Suite..."
+          python "TinyML Model/run_stress_test_benchmark.py"
+
+      - name: Execute Level 1 Real Zenodo Acoustic Benchmark
+        run: |
+          echo "Verifying TinyML Model on Real Zenodo Research Audio..."
+          python "TinyML Model/run_level1_testing.py"
+
+  frontend_build_verification:
+    name: Frontend Static Build & Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 24.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Frontend Dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Compile Static Production Build
+        working-directory: frontend
+        run: npm run build
+
+  firmware_and_config_integrity:
+    name: Firmware Configuration & Platform Integrity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Validate Modular Firmware Configuration Headers
+        run: |
+          echo "Verifying presence of centralized firmware configuration headers..."
+          test -f "firmware/config/hardware_config.h" || { echo "❌ Missing hardware_config.h"; exit 1; }
+          test -f "firmware/config/radio_config.h" || { echo "❌ Missing radio_config.h"; exit 1; }
+          test -f "firmware/config/sensor_config.h" || { echo "❌ Missing sensor_config.h"; exit 1; }
+          test -f "firmware/config/battery_config.h" || { echo "❌ Missing battery_config.h"; exit 1; }
+          test -f "firmware/config/algorithm_config.h" || { echo "❌ Missing algorithm_config.h"; exit 1; }
+          echo "✅ All 5 modular firmware configuration headers verified."
+
+      - name: Validate Hardware Canonical Architecture Document
+        run: |
+          test -f "docs/HARDWARE_ARCHITECTURE.md" || { echo "❌ Missing HARDWARE_ARCHITECTURE.md"; exit 1; }
+          test -f "REPRODUCIBILITY.md" || { echo "❌ Missing REPRODUCIBILITY.md"; exit 1; }
+          test -f "LIMITATIONS.md" || { echo "❌ Missing LIMITATIONS.md"; exit 1; }
+          echo "✅ Architectural and scientific disclosure documents verified."

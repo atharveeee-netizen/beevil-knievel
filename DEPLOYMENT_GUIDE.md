@@ -1,85 +1,98 @@
-# 🚀 BEEVIL KNIEVEL - MASTER Raspberry Pi 3B+ LINUX EDGE GATEWAY DEPLOYMENT GUIDE
-**Raspberry Pi Compute Module 4 (2GB RAM / 32GB eMMC) Hardened Linux Reference Manual**
+# 🚀 BEEVIL KNIEVEL - Linux Edge Gateway Deployment & Provisioning Guide
+**Production Deployment Manual for Field Apiary Gateways**  
+*Canonical Target: Raspberry Pi 3B+ (Broadcom BCM2837B0) + Waveshare SX1262 LoRa HAT*  
+*Alternative Enterprise Tier: Raspberry Pi Compute Module 4 (CM4) + SX1302 Concentrator*  
+*Standard Version: 2.1.0 (IEEE-HART Release)*
 
 ---
 
 ## 1. System Specifications & Architecture
 
-| Parameter | Specification |
-|---|---|
-| **Baseboard Carrier** | Raspberry Pi 3B+ (Rev 1.0.5) with 48V PoE & MagJack |
-| **Compute Module** | Raspberry Pi 3B+ (BCM2711 Quad-Core 64-bit Cortex-A72 @ 1.5 GHz) |
-| **Memory (RAM)** | 2 GB LPDDR4-3200 (System uses ~425 MB; **1.6 GB free headroom**) |
-| **Storage (eMMC)** | 32 GB eMMC 5.1 (System uses ~4.8 GB; **27 GB free for 20+ years of logs**) |
-| **Operating System** | Raspberry Pi OS 64-Bit Lite (Debian Bookworm) + Hardened Read-Only OverlayFS |
-| **Radio HAT** | Waveshare SX1262 LoRa HAT (SPI interface on `/dev/spidev0.0` @ 865.0625 MHz) |
-| **AI Inference** | 18.90 MB INT8 TorchScript model (`BeevilFusionNetEdge`) @ **8.2 ms on CPU** |
+| Parameter | Primary Reference Gateway (Standard) | Optional Enterprise Gateway (High-Density) |
+|---|---|---|
+| **Form Factor** | **Raspberry Pi 3B+** Standard SBC | **Raspberry Pi Compute Module 4 (CM4)** |
+| **SoC / Processor** | **Broadcom BCM2837B0** (4x Cortex-A53 @ 1.4 GHz) | **Broadcom BCM2711** (4x Cortex-A72 @ 1.5 GHz) |
+| **System Memory** | 1 GB LPDDR2 SDRAM | 2 GB to 4 GB LPDDR4-3200 |
+| **System Storage** | 32 GB Industrial MicroSD (Class 10 / A1) | 32 GB Onboard eMMC 5.1 Flash |
+| **Operating System** | Raspberry Pi OS Lite 64-Bit (Debian 12 Bookworm) | Raspberry Pi OS Lite 64-Bit (Debian 12 Bookworm) |
+| **LoRa Radio Interface**| **Waveshare SX1262 LoRa HAT** (SPI0 on `/dev/spidev0.0`) | **RAK2287 SX1302 Concentrator** (8 Multi-SF Channels) |
+| **Edge Diagnostic Engine**| **Edge Multi-Modal Sensor Fusion Engine** (`gateway/server.py`) | **Edge Multi-Modal Sensor Fusion Engine** (`gateway/server.py`) |
+| **Database Engine** | SQLite 3.x in Write-Ahead Logging (WAL) Mode | SQLite 3.x in Write-Ahead Logging (WAL) Mode |
+| **Nominal Power Draw** | $4.5\text{ W}$ typical under active load | $8.5\text{ W}$ maximum under multi-channel load |
 
 ---
 
 ## 2. Step-by-Step Gateway Provisioning
 
-### Step 2.1: Flash Debian 64-Bit OS onto Raspberry Pi 3B+ eMMC
-1. Put the Antmicro Baseboard in USB boot mode (connect `rpiboot` jumper).
-2. Connect micro-USB cable from your PC to the Raspberry Pi 3B+ carrier.
-3. Run `rpiboot` on your PC to mount the 32GB eMMC as a mass storage drive.
-4. Use **Raspberry Pi Imager** to flash **Raspberry Pi OS Lite (64-bit, Debian Bookworm)**.
-5. In Imager settings:
-   - Set Hostname: `beevil-gateway`
-   - Enable SSH with password/public key.
-   - Set Username: `pi`
+### Step 2.1: Flash Debian 64-Bit OS
+1. Insert the 32 GB MicroSD card into your workstation (or connect CM4 via `rpiboot` if deploying the enterprise tier).
+2. Open **Raspberry Pi Imager** and select **Raspberry Pi OS Lite (64-bit, Debian Bookworm)**.
+3. In OS Customization settings:
+   - Hostname: `beevil-gateway`
+   - User Account: Create your target administrative user (e.g., `pi` or custom username).
+   - Enable SSH with password or public key authentication.
+   - Configure Wi-Fi credentials if deploying over wireless backhaul.
+4. Write the OS image and insert the card into your Raspberry Pi 3B+.
 
 ---
 
-### Step 2.2: Clone Repository & Run Master Setup Script
-Boot the Raspberry Pi 3B+ on the Antmicro carrier and SSH into it:
+### Step 2.2: Clone Repository & Run Automated Setup
+
+Connect the Waveshare SX1262 LoRa HAT to the 40-pin GPIO header, power on the gateway, and SSH into the system:
 
 ```bash
-# 1. SSH into the Raspberry Pi 3B+
+# 1. SSH into the gateway (replace with your gateway hostname or IP)
 ssh pi@beevil-gateway.local
 
-# 2. Clone the repository
-git clone https://github.com/your-username/beevil-knievel.git /home/pi/beevil-knievel
+# 2. Set the desired target installation path (configurable)
+export BEEVIL_DIR="${BEEVIL_DIR:-$HOME/beevil-knievel}"
 
-# 3. Execute the automated provisioning script
-cd /home/pi/beevil-knievel/gateway
-sudo bash setup_gateway.sh
+# 3. Clone the official repository
+git clone https://github.com/atharveeee-netizen/beevil-knievel.git "$BEEVIL_DIR"
+
+# 4. Execute the automated provisioning script
+cd "$BEEVIL_DIR/gateway"
+sudo BEEVIL_INSTALL_DIR="$BEEVIL_DIR" bash setup_gateway.sh
 ```
 
 **What `setup_gateway.sh` configures automatically:**
 * Enables hardware SPI (`/dev/spidev0.0`) and UART in `/boot/firmware/config.txt`.
-* Installs Python 3 venv, FastAPI, Uvicorn, PyTorch (ARM64 CPU), SQLite3, Nginx, and Hostapd.
-* Installs and starts all `systemd` daemon units (`beevil-gateway`, `beevil-lora`, `beevil-telegram`).
-* Configures Nginx reverse proxy on port 80.
+* Installs system dependencies: Python 3, `python3-venv`, `sqlite3`, `nginx`, `spitools`.
+* Creates Python isolated virtual environment in `$BEEVIL_DIR/venv`.
+* Installs Python packages: `fastapi`, `uvicorn`, `pydantic`, `numpy`, `scikit-learn`, `joblib`.
+* Installs and enables `systemd` daemon services:
+  - `beevil-gateway.service`: FastAPI REST & WebSocket Telemetry Server (Port 8000).
+  - `beevil-lora.service`: Semtech SX1262 SPI Packet Ingestion Daemon.
+* Configures Nginx reverse proxy on Port 80 forward to Port 8000.
 
 ---
 
-### Step 2.3: Enable Power-Loss Immune Read-Only OverlayFS
-To ensure the gateway never corrupts its filesystem if power is abruptly pulled in rural apiaries:
+### Step 2.3: Enable Power-Loss-Immune Read-Only OverlayFS
+
+Apiary gateways run unattended on solar-battery setups where brownouts can occur during cloudy periods. To prevent SD card filesystem corruption:
 
 ```bash
-cd /home/pi/beevil-knievel/gateway
+cd "$BEEVIL_DIR/gateway"
 sudo bash setup_overlayfs.sh
 sudo reboot
 ```
+
+*Note: Telemetry database writes are persisted via SQLite WAL mode to a dedicated persistent write-through mount (`/var/beevil_data/`).*
 
 ---
 
 ## 3. Managing Linux Background Services
 
-The entire platform runs under Linux `systemd`. Use standard systemctl commands to check status:
+All gateway tasks are supervised by Linux `systemd`. Use standard management commands:
 
 ```bash
-# Check FastAPI & AI Inference Server
+# Check FastAPI Telemetry Server Status
 sudo systemctl status beevil-gateway
 
-# Check LoRa SPI Packet Receiver
+# Check LoRa SPI Packet Receiver Status
 sudo systemctl status beevil-lora
 
-# Check Telegram Alert Bot
-sudo systemctl status beevil-telegram
-
-# View live real-time server logs
+# View Live Diagnostic Logs
 sudo journalctl -u beevil-gateway -f
 ```
 
@@ -87,41 +100,24 @@ sudo journalctl -u beevil-gateway -f
 
 ## 4. Verifying the 100-Hive Pipeline
 
-Run the automated verification suite on the Raspberry Pi 3B+:
+Run the automated integration verification suite directly on the gateway:
 
 ```bash
-cd /home/pi/beevil-knievel
-python3 tests/test_full_gateway_pipeline.py
+cd "$BEEVIL_DIR"
+pytest tests/ -v
 ```
 
 Expected output:
 ```text
-=================================================================
-  BEEVIL KNIEVEL - 100-HIVE GATEWAY PIPELINE VERIFICATION
-=================================================================
-[DB] Local SQLite Database Initialized (WAL Mode, 100 Hives Registered).
-✅ Root API Status: ONLINE | Version: 2.0.0
-✅ 100 Hives Registry Verified: 100 hives loaded.
-
-⚡ Ingesting 100 Hives Telemetry & Executing Edge AI Inference...
-✅ 100 Hives Ingested in 2.63s (Avg: 26.23ms/packet)
-   • Throughput: 38.08 packets/second
-
-🩺 AI Diagnostic Breakdown:
-   • QUEEN_PRESENT           : 99 hives
-   • TAMPER_THEFT            : 1 hives
-
-✅ Single Hive Query (Hive #088): Status=CRITICAL (Theft Detected correctly!)
-✅ Emergency Alert System: 1 active alerts recorded in SQLite.
-=================================================================
-🎉 ALL TESTS PASSED! 100% PRODUCTION READY FOR DEPLOYMENT!
-=================================================================
+============================= test session starts =============================
+tests/test_cloud_model.py::TestCloudModel::test_model_inference_execution PASSED
+tests/test_cloud_model.py::TestCloudModel::test_pathology_classes PASSED
+tests/test_cloud_model.py::TestCloudModel::test_required_fields_list PASSED
+tests/test_full_gateway_pipeline.py::test_root_endpoint PASSED
+tests/test_full_gateway_pipeline.py::test_hives_overview PASSED
+tests/test_full_gateway_pipeline.py::test_telemetry_ingest_nominal PASSED
+tests/test_full_gateway_pipeline.py::test_telemetry_ingest_anomalies PASSED
+tests/test_full_gateway_pipeline.py::test_telemetry_strict_validation PASSED
+tests/test_full_gateway_pipeline.py::test_hive_detail_and_alerts PASSED
+======================== 9 passed in 2.5s =========================
 ```
-
----
-
-## 5. Connecting from Smartphones & Laptops
-
-1. **Connect to Gateway Wi-Fi:** `Beevil-Apiary-Gateway`
-2. **Open Browser:** Navigate to `http://beevil.local`
-3. **Captive Portal:** The live 100-hive health grid and conversational AI advisor will automatically render on your screen with **zero internet connection required**!

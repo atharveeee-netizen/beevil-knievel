@@ -32,7 +32,7 @@ This compendium catalogs the mathematical foundations, digital signal processing
   - $T_k$: Current measured brood core temperature (°C).
   - $K$: Slack allowance ($K = 0.15^\circ\text{C}$), absorbing transient ambient cold drafts.
   - $h$: Decision threshold ($h = 1.20^\circ\text{C}\cdot\text{hr}$).
-* **Biological Rationale**: Simple moving averages fail to flag slow progressive colony death because daily diurnal swings mask the downward drift. CUSUM acts as an ideal mathematical integrator, accumulating persistent low-level thermal decline and tripping **72 hours before** catastrophic pupal death occurs.
+* **Biological Rationale**: Simple moving averages fail to flag slow progressive colony death because daily diurnal swings mask the downward drift. CUSUM acts as an ideal mathematical integrator, accumulating persistent low-level thermal decline with an evaluated **72-hour lead time in modeled progressive cluster detachment scenarios** before fatal hypothermia occurs.
 * **Relevance to BEEVIL KNIEVEL**: Runs directly inside `beevil_rak4631_transmitter.ino` and `gateway/cusum_analytics.py`.
 
 ---

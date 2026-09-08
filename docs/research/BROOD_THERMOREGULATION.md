@@ -39,4 +39,4 @@ $$S_k = \max\left(0, S_{k-1} + (34.82 - T_k) - 0.15\right)$$
 - **Slack Allowance ($K = 0.15^\circ\text{C}$)**: Absorbs brief cooling events (e.g., cold gusts entering the hive entrance).
 - **Alarm Threshold ($h = 1.20^\circ\text{C}\cdot\text{hr}$)**: When cumulative thermal deficit accumulates beyond $1.20^\circ\text{C}\cdot\text{hr}$, the node sets Bit 7 of the LoRa payload telemetry byte.
 
-This provides beekeepers with a verified **72-hour early warning window** to re-queen or merge failing colonies before irreversible brood mortality occurs.
+This provides an early warning window with a modeled lead time of up to **72 hours in evaluated synthetic progressive cooling scenarios**, allowing intervention before brood hypothermia ($< 30.0^\circ\text{C}$) becomes irreversible.

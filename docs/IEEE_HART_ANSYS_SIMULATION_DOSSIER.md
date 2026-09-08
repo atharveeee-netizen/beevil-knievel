@@ -9,29 +9,32 @@
 
 The **Beevil Knievel** Precision Apiculture Telemetry Node and Apiary Edge Gateway platform represents a mission-critical, ultra-low-power, extreme-environment IoT ecosystem designed to safeguard managed honeybee colonies from catastrophic colony collapse. Operating inside the biologically sensitive, high-moisture interior of a Langstroth beehive and subjected to extreme outdoor agricultural conditions ($45^\circ\text{C}$ ambient temperature, $1000\text{ W/m}^2$ direct solar radiation, rough field handling, and high-energy electromagnetic switching environments), the physical hardware must satisfy rigorous multi-physics engineering requirements.
 
-This dossier documents the complete specification, mathematical formulations, boundary conditions, material definitions, CAD setup procedures, and verification benchmarks across four primary ANSYS simulation disciplines:
+This dossier documents the complete specification, mathematical formulations, boundary conditions, material definitions, CAD setup procedures, and verification benchmarks across four primary ANSYS simulation disciplines. 
 
-| Discipline | Simulation Module | Target Physical Phenomenon | Key Performance Target | Achieved Simulated Result | Status |
+> [!NOTE]
+> **Evidence Taxonomy**: Every result is explicitly classified as `[SIMULATED]` (finite-element solver output), `[CALCULATED]` (analytical physics equation), `[DERIVED]` (link budget / derived engineering metric), or `[TARGET]` (design specification). Thermal CFD analyzes the high-stress 8.5W enterprise gateway tier (CM4 + SX1302) to establish that even worst-case thermal loads operate safely below threshold, ensuring the 4.5W primary reference gateway (Raspberry Pi 3B+ + SX1262) retains even greater thermal margin.
+
+| Discipline | Simulation Module | Target Physical Phenomenon | Key Performance Target `[TARGET]` | Achieved Computational Result | Evidence Status |
 |---|---|---|---|---|---|
-| **ANSYS HFSS** | 865 MHz IN865 Antenna & Hive Dielectric Penetration | Return loss, VSWR, 3D far-field gain, stratified biological attenuation (wood + honey + brood) | $S_{11} < -18\text{ dB}$, $\text{VSWR} < 1.28$, Range $> 4.2\text{ km}$ | **$S_{11} = -24.75\text{ dB}$**, **$\text{VSWR} = 1.12$**, **Range $= 5.11\text{ km}$** | **PASS** |
-| **ANSYS Icepak** | IP67 Gateway Baseboard Thermal CFD (Conjugate Heat Transfer) | 8.5W internal dissipation in sealed NEMA 4X enclosure under $45^\circ\text{C}$ amb + $1000\text{ W/m}^2$ solar flux | Silicon Junction $T_j < 70.0^\circ\text{C}$ (BCM2711 Limit: $85^\circ\text{C}$) | **$T_j = 64.45^\circ\text{C}$**, Enclosure $T_s = 58.44^\circ\text{C}$ | **PASS** |
-| **ANSYS Mechanical** | 1.5-Meter Drop Shock Dynamic Transient FEA | High-impact dynamic deceleration pulse, corner stress concentration on concrete | Von Mises $\sigma_{\text{vm}} < 65\text{ MPa}$ ($SF > 1.5$), Latch strain $< 2.5\%$ | **$\sigma_{\text{vm}} = 30.59\text{ MPa}$** (**$SF = 2.12$**), Strain $= 1.62\%$ | **PASS** |
-| **ANSYS Mechanical** | Modal Harmonic Vibration & Acoustic Decoupling | Structural eigenvalue analysis decoupling enclosure resonance from $100-500\text{ Hz}$ bee acoustics | $f_{n,1} > 600\text{ Hz}$, Acoustic Attenuation $> 30\text{ dB}$ | **$f_{n,1} = 775.4\text{ Hz}$**, **Attenuation $= 32.77\text{ dB}$** | **PASS** |
-| **ANSYS Maxwell** | MPPT SMPS EMI/EMC & RF Front-End Shielding | $1.2\text{ MHz}$ buck-boost switching noise, near-field $B$-field decay, Nickel-Silver shield can | Shielding Effectiveness $\text{SE} > 35\text{ dB}$, Noise floor $<-145\text{ dBm}$ | **$\text{SE}_{865} = 288.5\text{ dB}$**, **Coupled Noise $= -158.4\text{ dBm}$** | **PASS** |
+| **ANSYS HFSS** | 865 MHz IN865 Antenna & Hive Dielectric Penetration | Return loss, VSWR, 3D far-field gain, stratified biological attenuation (wood + honey + brood) | $S_{11} < -18\text{ dB}$, $\text{VSWR} < 1.28$, Range $> 4.2\text{ km}$ | **$S_{11} = -24.75\text{ dB}$** `[SIMULATED]`, **$\text{VSWR} = 1.12$** `[SIMULATED]`, **Range $= 5.11\text{ km}$** `[DERIVED link budget]` | **PASS** |
+| **ANSYS Icepak** | IP67 Gateway Baseboard Thermal CFD (Conjugate Heat Transfer) | 8.5W internal dissipation in sealed NEMA 4X enclosure under $45^\circ\text{C}$ amb + $1000\text{ W/m}^2$ solar flux | Silicon Junction $T_j < 70.0^\circ\text{C}$ (BCM2711 Limit: $85^\circ\text{C}$) | **$T_j = 64.45^\circ\text{C}$** `[SIMULATED]`, Enclosure $T_s = 58.44^\circ\text{C}$ `[SIMULATED]` | **PASS** |
+| **ANSYS Mechanical** | 1.5-Meter Drop Shock Dynamic Transient FEA | High-impact dynamic deceleration pulse, corner stress concentration on concrete | Von Mises $\sigma_{\text{vm}} < 65\text{ MPa}$ ($SF > 1.5$), Latch strain $< 2.5\%$ | **$\sigma_{\text{vm}} = 30.59\text{ MPa}$** (**$SF = 2.12$**) `[SIMULATED]`, Strain $= 1.62\%$ `[SIMULATED]` | **PASS** |
+| **ANSYS Mechanical** | Modal Harmonic Vibration & Acoustic Decoupling | Structural eigenvalue analysis decoupling enclosure resonance from $100-500\text{ Hz}$ bee acoustics | $f_{n,1} > 600\text{ Hz}$, Acoustic Attenuation $> 30\text{ dB}$ | **$f_{n,1} = 775.4\text{ Hz}$** `[SIMULATED]`, **Attenuation $= 32.77\text{ dB}$** `[SIMULATED]` | **PASS** |
+| **ANSYS Maxwell** | MPPT SMPS EMI/EMC & RF Front-End Shielding | $1.2\text{ MHz}$ buck-boost switching noise, near-field $B$-field decay, Nickel-Silver shield can | Shielding Effectiveness $\text{SE} > 35\text{ dB}$, Noise floor $<-145\text{ dBm}$ | **$\text{SE}_{865} = 288.5\text{ dB}$** `[CALCULATED ideal]`, **Coupled Noise $= -158.4\text{ dBm}$** `[SIMULATED]` *(Lab measurement ceiling $\approx 100\text{ dB}$)* | **PASS** |
 
 ```mermaid
 graph TD
-    subgraph "ANSYS Multi-Physics Simulation Suite"
-        A[Beevil Knievel Hardware System] --> B[ANSYS HFSS: RF & Electromagnetics]
-        A --> C[ANSYS Icepak: Thermal CFD & CHT]
-        A --> D[ANSYS Mechanical: FEA & Modal Dynamics]
-        A --> E[ANSYS Maxwell: Low-Freq EMI/EMC]
+    subgraph "ANSYS Multi-Physics Simulation Suite (Evidence Tagged)"
+        A[Beevil Knievel Hardware System] --> B["ANSYS HFSS [RF & Electromagnetics]"]
+        A --> C["ANSYS Icepak [Thermal CFD & CHT]"]
+        A --> D["ANSYS Mechanical [FEA & Modal Dynamics]"]
+        A --> E["ANSYS Maxwell [Low-Freq EMI/EMC]"]
         
-        B --> B1["IN865 S11: -24.75 dB | Range: 5.11 km"]
-        C --> C1["Gateway BCM2711 Tj: 64.45°C @ 45°C Amb"]
-        D --> D1["1.5m Drop Stress: 30.59 MPa (SF: 2.12)"]
-        D --> D2["1st Natural Freq: 775.4 Hz (Decoupled > 600 Hz)"]
-        E --> E1["Shielding SE: > 200 dB | LNA Noise: -158.4 dBm"]
+        B --> B1["IN865 S11: -24.75 dB [SIMULATED] | Range: 5.11 km [DERIVED]"]
+        C --> C1["Gateway Tj: 64.45°C @ 45°C Amb [SIMULATED] (8.5W Worst-Case)"]
+        D --> D1["1.5m Drop Stress: 30.59 MPa, SF: 2.12 [SIMULATED]"]
+        D --> D2["1st Natural Freq: 775.4 Hz [SIMULATED] (Decoupled > 600 Hz)"]
+        E --> E1["Ideal SE: > 200 dB [CALCULATED] | LNA Noise: -158.4 dBm [SIMULATED]"]
     end
 ```
 

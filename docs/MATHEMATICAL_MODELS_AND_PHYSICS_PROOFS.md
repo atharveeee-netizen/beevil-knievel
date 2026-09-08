@@ -269,7 +269,7 @@ Where:
 - $K = 0.15^\circ\text{C}$ (Allowable reference slack parameter)
 - Decision Threshold $H = 1.20^\circ\text{C}\cdot\text{hr}$
 
-If $S_t > H$, the firmware triggers an immediate **Queen Loss Warning Packet**, providing a **72-hour early warning** before irreversible larval chilling occurs.
+If $S_t > H$, the firmware triggers an immediate **Queen Loss / Thermal Anomaly Warning Packet**, providing a **72-hour warning horizon under modeled progressive cooling scenarios** before simulated irreversible larval chilling thresholds are breached.
 
 ---
 

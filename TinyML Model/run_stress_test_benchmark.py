@@ -1,8 +1,8 @@
 """
 =============================================================================
-BEEVIL KNIEVEL - High-Stress TinyML 1D-CNN Benchmark Suite (30 Test Cases)
-Pushes the 75.4 KB TinyML model to its limit across clean, noisy, edge-case,
-and multi-variable environmental audio stress conditions.
+BEEVIL KNIEVEL - High-Stress TinyML Feature Classifier Benchmark (30 Cases)
+Evaluates the 75.4 KB Multi-Band Acoustic Spectral Feature Classifier
+across clean, noisy, edge-case, and multi-variable environmental stress conditions.
 =============================================================================
 """
 
@@ -16,7 +16,7 @@ def run_stress_test():
     print("=================================================================================")
     print("      BEEVIL KNIEVEL - 30-SAMPLE EXTREME TinyML STRESS TEST SUITE               ")
     print("=================================================================================")
-    print(f"  * Model Architecture: 1D-CNN + 4-Band Spectral Feature Extractor")
+    print(f"  * Model Architecture: Multi-Band Acoustic Spectral Feature Classifier")
     print(f"  * Flash Footprint:    {MODEL_FLASH_FOOTPRINT_KB} KB / 256 KB (RAK4631)")
     print(f"  * SRAM Footprint:     {MODEL_RAM_FOOTPRINT_KB} KB / 64 KB (RAK4631)")
     print("=================================================================================")
@@ -101,8 +101,12 @@ def run_stress_test():
     print(f"   * Total Test Cases Executed: {total}")
     print(f"   * Passed Predictions:        {passed} / {total}")
     print(f"   * Model Accuracy Rate:       {accuracy:.1f}%")
-    print(f"   * Stress Test Status:        PASSED (100.0% Accuracy)")
+    status_str = "PASSED" if passed == total else "FAILED"
+    print(f"   * Stress Test Status:        {status_str} ({accuracy:.1f}% Accuracy)")
     print("=================================================================================\n")
+
+    if passed < total:
+        sys.exit(1)
 
 if __name__ == "__main__":
     run_stress_test()
