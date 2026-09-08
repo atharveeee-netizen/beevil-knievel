@@ -16,6 +16,8 @@ venv/
 Thumbs.db
 node_modules/
 .next/
+out/
+frontend/out/
 *.tmp
 
 # IDE / Editor Files
