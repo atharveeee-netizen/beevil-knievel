@@ -134,11 +134,15 @@ def run_audit():
         print("✅ All 14 scientific simulation figures verified in simulation/results/ and docs/media/results/.")
 
     # 5. Technical Vector Diagrams Verification
-    print("\n[4] Verifying 8 Precision Vector Diagrams (SVG)...")
+    print("\n[4] Verifying 12 Precision Publication Vector Diagrams (SVG)...")
     required_diagrams = [
+        "00_system_hero_architecture.svg",
         "01_problem_and_observation.svg",
+        "02_langstroth_sensor_cutaway.svg",
         "02_sensor_placement.svg",
+        "03_acoustic_transduction_schematic.svg",
         "03_acoustic_pipeline.svg",
+        "04_field_node_enclosure_schematic.svg",
         "04_field_node_architecture.svg",
         "05_lora_mesh.svg",
         "06_gateway_architecture.svg",
@@ -155,7 +159,7 @@ def run_audit():
         print(f"❌ MISSING VECTOR DIAGRAMS: {missing_diagrams}")
         all_passed = False
     else:
-        print("✅ All 8 precision vector diagrams verified in docs/media/diagrams/.")
+        print("✅ All 12 precision publication vector diagrams verified in docs/media/diagrams/.")
 
     # 6. Simulink Models Verification
     print("\n[5] Verifying 4 Simulink (.slx) Models...")

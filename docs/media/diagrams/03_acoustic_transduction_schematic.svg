@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 540" width="100%" height="100%">
+    
+    <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#070a14"/>
+            <stop offset="50%" stop-color="#0b111e"/>
+            <stop offset="100%" stop-color="#0f172a"/>
+        </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#111a2d"/>
+            <stop offset="100%" stop-color="#0c1220"/>
+        </linearGradient>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a253c"/>
+            <stop offset="100%" stop-color="#0f182b"/>
+        </linearGradient>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#d97706"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+        </linearGradient>
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#0284c7"/>
+            <stop offset="100%" stop-color="#38bdf8"/>
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#059669"/>
+            <stop offset="100%" stop-color="#34d399"/>
+        </linearGradient>
+        <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e11d48"/>
+            <stop offset="100%" stop-color="#fb7185"/>
+        </linearGradient>
+        <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+        
+        <marker id="arrCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+        </marker>
+        <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
+        </marker>
+        <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
+        </marker>
+        <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fb7185"/>
+        </marker>
+        <marker id="arrPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7"/>
+        </marker>
+        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#a855f7"/>
+        </linearGradient>
+
+        <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.35"/>
+        </pattern>
+    </defs>
+    <style>
+        .headline { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.3px; }
+        .body-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #94a3b8; line-height: 1.4; }
+        .mono-sm { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 8.5px; }
+        .badge { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
+    </style>
+
+    <rect width="1120" height="540" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1120" height="540" fill="url(#grid)" rx="10"/>
+
+    <!-- Header -->
+    <rect x="25" y="18" width="225" height="24" rx="12" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
+    <text x="137" y="34" class="badge" fill="#fbbf24" text-anchor="middle">BIO-ACOUSTIC TRANSDUCTION</text>
+    <text x="25" y="64" class="headline">03A - BIO-ACOUSTIC TRANSDUCTION, CAVITY IMPEDANCE &amp; SPECTRAL BANDS</text>
+    <text x="25" y="82" class="subhead">Physical pressure transduction, I2S 24-bit streaming, CMSIS-DSP 256-pt FFT, and biological frequency mapping</text>
+
+    <!-- Section 1: Physical Transduction & MEMS -->
+    <g transform="translate(25, 100)">
+        <rect width="330" height="380" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.4"/>
+        <rect x="12" y="12" width="170" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+        <text x="97" y="26" class="badge" fill="#38bdf8" text-anchor="middle">1. ACOUSTIC CAVITY</text>
+        <text x="12" y="50" class="body-title" fill="#ffffff">Brood Nest Acoustic Pickup</text>
+        <text x="12" y="64" class="mono-xs" fill="#94a3b8">9.5 mm Inter-Frame Resonator</text>
+
+        <rect x="12" y="76" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="94" class="mono-xs" fill="#fbbf24">Acoustic Excitation Sources</text>
+        <text x="20" y="108" class="body-desc">Thoracic flight muscle vibration (p_air) +</text>
+        <text x="20" y="120" class="body-desc">comb substrate dorso-ventral stridulation (v_comb).</text>
+
+        <rect x="12" y="134" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="152" class="mono-xs" fill="#38bdf8">Hydrophobic PTFE Membrane</text>
+        <text x="20" y="166" class="body-desc">Sintered porous acoustic barrier (0.2 um pore size);</text>
+        <text x="20" y="178" class="body-desc">blocks wax, honey, and propolis without attenuation.</text>
+
+        <rect x="12" y="192" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="210" class="mono-xs" fill="#34d399">InvenSense INMP441 MEMS</text>
+        <text x="20" y="224" class="body-desc">Omnidirectional capacitive silicon diaphragm;</text>
+        <text x="20" y="236" class="body-desc">integrated 24-bit Sigma-Delta ADC with 61 dBA SNR.</text>
+
+        <rect x="12" y="250" width="306" height="60" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="268" class="mono-xs" fill="#cbd5e1">I2S Bus Electrical Interface</text>
+        <text x="20" y="282" class="mono-xs" fill="#38bdf8">SCK / BCLK : 128 kHz (32-bit slot clock)</text>
+        <text x="20" y="294" class="mono-xs" fill="#38bdf8">WS / LRCLK : 2000 Hz (Sample Word Select)</text>
+        <text x="20" y="306" class="mono-xs" fill="#38bdf8">SD / DATA  : 24-bit PCM Two's Complement</text>
+
+        <!-- Waveform sketch -->
+        <path d="M 20 345 Q 35 325 50 345 T 80 345 T 110 320 T 140 365 T 170 335 T 200 350 T 240 330 T 280 345 T 310 345" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+        <text x="165" y="370" class="mono-xs" fill="#94a3b8" text-anchor="middle">Raw Time-Domain Audio (10s Continuous Capture)</text>
+    </g>
+
+    <path d="M 355 285 L 375 285" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
+
+    <!-- Section 2: On-Device CMSIS-DSP FFT Transform -->
+    <g transform="translate(375, 100)">
+        <rect width="330" height="380" rx="8" fill="url(#cardGradHighlight)" stroke="#f59e0b" stroke-width="1.6"/>
+        <rect x="12" y="12" width="170" height="20" rx="4" fill="rgba(245, 158, 11, 0.2)"/>
+        <text x="97" y="26" class="badge" fill="#fbbf24" text-anchor="middle">2. CMSIS-DSP FFT</text>
+        <text x="12" y="50" class="body-title" fill="#ffffff">ARM Cortex-M4F Transform</text>
+        <text x="12" y="64" class="mono-xs" fill="#94a3b8">Hardware Single-Precision FPU</text>
+
+        <rect x="12" y="76" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="94" class="mono-xs" fill="#fbbf24">Double DMA Ping-Pong Buffer</text>
+        <text x="20" y="108" class="body-desc">Seamless double-buffered DMA continuous fill;</text>
+        <text x="20" y="120" class="body-desc">2 x 256 samples (1024 bytes) zero CPU cycle loss.</text>
+
+        <rect x="12" y="134" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="152" class="mono-xs" fill="#38bdf8">Hanning Sidelobe Suppression</text>
+        <text x="20" y="166" class="body-desc">w[n] = 0.5(1 - cos(2pi*n / N)); N = 256 points;</text>
+        <text x="20" y="178" class="body-desc">-32 dB peak sidelobe suppression eliminates leakage.</text>
+
+        <rect x="12" y="192" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="210" class="mono-xs" fill="#34d399">arm_rfft_fast_f32 Engine</text>
+        <text x="20" y="224" class="body-desc">Radix-4 complex FFT: delta-f = 7.8125 Hz / bin;</text>
+        <text x="20" y="236" class="body-desc">1.28 ms execution latency @ 64 MHz (&lt; 0.1% CPU load).</text>
+
+        <rect x="12" y="250" width="306" height="60" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="268" class="mono-xs" fill="#cbd5e1">Feature Extraction &amp; Compression</text>
+        <text x="20" y="282" class="mono-xs" fill="#34d399">Integrate energy: E_k = sum(|X[i]|^2)</text>
+        <text x="20" y="294" class="mono-xs" fill="#fbbf24">Raw Audio (40 kB/s) -&gt; 8 Bytes / Cycle</text>
+        <text x="20" y="306" class="mono-xs" fill="#34d399">Net Edge Compression Ratio: 99.7%</text>
+
+        <!-- FFT Graph sketch -->
+        <g transform="translate(20, 335)">
+            <line x1="0" y1="20" x2="290" y2="20" stroke="#334155"/>
+            <rect x="25" y="10" width="6" height="10" fill="#38bdf8"/>
+            <rect x="40" y="4" width="6" height="16" fill="#38bdf8"/>
+            <rect x="55" y="8" width="6" height="12" fill="#38bdf8"/>
+            <rect x="85" y="0" width="8" height="20" fill="#fbbf24"/>
+            <rect x="100" y="2" width="8" height="18" fill="#fbbf24"/>
+            <rect x="140" y="6" width="8" height="14" fill="#f87171"/>
+            <rect x="155" y="12" width="8" height="8" fill="#f87171"/>
+            <text x="145" y="35" class="mono-xs" fill="#94a3b8" text-anchor="middle">256-Point Discrete Magnitude Spectrum</text>
+        </g>
+    </g>
+
+    <path d="M 705 285 L 725 285" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
+
+    <!-- Section 3: Biological Spectral Bands -->
+    <g transform="translate(725, 100)">
+        <rect width="370" height="380" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.4"/>
+        <rect x="12" y="12" width="180" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="102" y="26" class="badge" fill="#34d399" text-anchor="middle">3. BIOLOGICAL BANDS</text>
+        <text x="12" y="50" class="body-title" fill="#ffffff">Colony Diagnostic Mapping</text>
+        <text x="12" y="64" class="mono-xs" fill="#94a3b8">Sub-Band Boundaries (delta-f = 7.81 Hz)</text>
+
+        <!-- Band 1 -->
+        <rect x="12" y="76" width="346" height="60" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <circle cx="24" cy="94" r="5" fill="#38bdf8"/>
+        <text x="36" y="97" class="body-title" fill="#38bdf8">E_fan: 100 - 200 Hz (Bins 13 - 25)</text>
+        <text x="36" y="112" class="body-desc">Thermal ventilation fanning &amp; metabolic baseline.</text>
+        <text x="36" y="125" class="mono-xs" fill="#94a3b8">Active when brood core exceeds 35.5 deg C.</text>
+
+        <!-- Band 2 -->
+        <rect x="12" y="144" width="346" height="60" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <circle cx="24" cy="162" r="5" fill="#34d399"/>
+        <text x="36" y="165" class="body-title" fill="#34d399">E_wag: 200 - 300 Hz (Bins 26 - 38)</text>
+        <text x="36" y="180" class="body-desc">Forager waggle dance abdominal communication.</text>
+        <text x="36" y="193" class="mono-xs" fill="#94a3b8">Signals robust workforce &amp; active nectar flow.</text>
+
+        <!-- Band 3 -->
+        <rect x="12" y="212" width="346" height="64" rx="4" fill="rgba(245, 158, 11, 0.08)" stroke="#f59e0b" stroke-width="1"/>
+        <circle cx="24" cy="230" r="5" fill="#fbbf24"/>
+        <text x="36" y="233" class="body-title" fill="#fbbf24">E_swm: 300 - 500 Hz (Bins 39 - 64)</text>
+        <text x="36" y="248" class="body-desc">Pre-swarming acoustic energy surge &amp; queen piping.</text>
+        <text x="36" y="261" class="mono-xs" fill="#fde68a">Power surges 3.8x baseline 24-48h prior to swarm.</text>
+
+        <!-- Band 4 -->
+        <rect x="12" y="284" width="346" height="64" rx="4" fill="rgba(239, 68, 68, 0.08)" stroke="#ef4444" stroke-width="1"/>
+        <circle cx="24" cy="302" r="5" fill="#f87171"/>
+        <text x="36" y="305" class="body-title" fill="#f87171">E_dst: 500 - 1000 Hz (Bins 65 - 127)</text>
+        <text x="36" y="320" class="body-desc">Queenless roar, defense arousal, parasite friction.</text>
+        <text x="36" y="333" class="mono-xs" fill="#fca5a5">Triggers immediate CUSUM emergency alarm.</text>
+
+        <text x="12" y="365" class="mono-xs" fill="#34d399">Packed into 8-Byte Over-the-Air Payload</text>
+    </g>
+
+    <!-- Bottom Metric Bar -->
+    <g transform="translate(25, 492)">
+        <rect width="1070" height="34" rx="6" fill="#0c1220" stroke="#1e293b"/>
+        <text x="20" y="22" class="mono-xs" fill="#94a3b8">DSP VALIDATION METRICS:</text>
+        <text x="190" y="22" class="mono-xs" fill="#38bdf8">Sampling: fs = 2000 Hz</text>
+        <text x="360" y="22" class="mono-xs" fill="#34d399">Delta-f: 7.8125 Hz / bin</text>
+        <text x="560" y="22" class="mono-xs" fill="#fbbf24">Execution Latency: 1.28 ms @ 64MHz</text>
+        <text x="820" y="22" class="mono-xs" fill="#38bdf8">Memory Footprint: &lt; 8.2 KB RAM</text>
+    </g>
+</svg>

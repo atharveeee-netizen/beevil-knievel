@@ -1,6 +1,6 @@
 """
 BEEVIL KNIEVEL - Master Publication Vector Diagram Generator (IEEE / ACM / Enterprise Grade)
-Generates 8 high-density, surgical, publication-grade vector diagrams (SVG) in docs/media/diagrams/:
+Generates 12 high-density, surgical, publication-grade vector diagrams (SVG) in docs/media/diagrams/:
 1. 01_problem_and_observation.svg
 2. 02_sensor_placement.svg
 3. 03_acoustic_pipeline.svg
@@ -15,7 +15,7 @@ Design Standards:
 - Professional high-contrast dark theme (Apple Pro / Linear / DJI Enterprise level)
 - Universal font stacks: system-ui, -apple-system, Segoe UI, Roboto, SF Mono, JetBrains Mono
 - Strict hardware consistency: RAK4631 (nRF52840+SX1262), Raspberry Pi 3B+ + Waveshare SX1262 LoRa HAT
-- 5x TI TMP117 NIST RTDs (±0.1 deg C), INMP441 I2S MEMS, SCD41 CO2, BME688 VOC, HX711, LIS3DH
+- 5x TI TMP117 NIST RTDs (+-0.1 deg C), INMP441 I2S MEMS, SCD41 CO2, BME688 VOC, HX711, LIS3DH
 - Strict ASCII hyphen (-) usage (zero Unicode en-dashes or em-dashes)
 """
 
@@ -72,6 +72,13 @@ SHARED_DEFS = """
         <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
             <path d="M 0 1 L 10 5 L 0 9 z" fill="#fb7185"/>
         </marker>
+        <marker id="arrPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7"/>
+        </marker>
+        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#a855f7"/>
+        </linearGradient>
 
         <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
             <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.35"/>
@@ -1315,14 +1322,657 @@ def generate_08_full_architecture():
     print("Generated 08_full_cyber_physical_architecture.svg")
 
 
+
+# ==============================================================================
+# DIAGRAM 00: SYSTEM HERO ARCHITECTURE (IEEE-HART PUBLICATION HEADLINE)
+# ==============================================================================
+def generate_00_system_hero():
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 500" width="100%" height="100%">
+    {SHARED_DEFS}
+    <rect width="1120" height="500" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1120" height="500" fill="url(#grid)" rx="10"/>
+
+    <!-- Header Section -->
+    <rect x="25" y="18" width="220" height="24" rx="12" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
+    <text x="135" y="34" class="badge" fill="#fbbf24" text-anchor="middle">IEEE-HART SYSTEM SPECIFICATION</text>
+    <text x="25" y="64" class="headline">BEEVIL KNIEVEL - AUTONOMOUS PRECISION APICULTURE CYBER-PHYSICAL SYSTEM</text>
+    <text x="25" y="82" class="subhead">Multi-Modal Transduction, Cortex-M4 CMSIS-DSP, Sub-GHz Foliage-Penetrating LoRa Mesh &amp; Hardened Edge Gateway</text>
+
+    <!-- Pillar 1: Instrumented Hive Node -->
+    <g transform="translate(25, 100)">
+        <rect width="250" height="340" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.4"/>
+        <rect x="12" y="12" width="165" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+        <text x="94" y="26" class="badge" fill="#38bdf8" text-anchor="middle">1. TRANSDUCTION LAYER</text>
+        <text x="12" y="48" class="body-title" fill="#ffffff">Instrumented Langstroth</text>
+        <text x="12" y="62" class="mono-xs" fill="#94a3b8">10-Frame Brood Body (Pine Wood)</text>
+
+        <rect x="12" y="72" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="88" class="mono-xs" fill="#f87171">TI TMP117 NIST RTD (+-0.1 deg C)</text>
+        <text x="20" y="102" class="mono-xs" fill="#94a3b8">Frame 3 Core Brood Regulation (34.5 C)</text>
+
+        <rect x="12" y="120" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="136" class="mono-xs" fill="#38bdf8">Maxim DS18B20 1-Wire Array</text>
+        <text x="20" y="150" class="mono-xs" fill="#94a3b8">5-Point Lateral Brood Gradient (F1-F5)</text>
+
+        <rect x="12" y="168" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="184" class="mono-xs" fill="#fbbf24">InvenSense INMP441 I2S MEMS</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">Acoustic Resonance (fs = 2000 Hz, 24-bit)</text>
+
+        <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="232" class="mono-xs" fill="#34d399">Sensirion SCD41 + BME688</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">Photoacoustic NDIR CO2 + MOX VOC Gas</text>
+
+        <rect x="12" y="264" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="280" class="mono-xs" fill="#cbd5e1">HX711 Scale + LIS3DH Tilt</text>
+        <text x="20" y="294" class="mono-xs" fill="#94a3b8">24-Bit Honey Stores + Tamper/Theft INT</text>
+
+        <text x="12" y="324" class="mono-xs" fill="#38bdf8">I2C, I2S &amp; 1-Wire Solderless Harness</text>
+    </g>
+
+    <path d="M 275 270 L 293 270" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
+
+    <!-- Pillar 2: Edge MCU & DSP -->
+    <g transform="translate(295, 100)">
+        <rect width="250" height="340" rx="8" fill="url(#cardGradHighlight)" stroke="#f59e0b" stroke-width="1.6"/>
+        <rect x="12" y="12" width="165" height="20" rx="4" fill="rgba(245, 158, 11, 0.2)"/>
+        <text x="94" y="26" class="badge" fill="#fbbf24" text-anchor="middle">2. EDGE COMPUTATION</text>
+        <text x="12" y="48" class="body-title" fill="#ffffff">RAK4631 WisBlock Core</text>
+        <text x="12" y="62" class="mono-xs" fill="#94a3b8">Nordic nRF52840 (Cortex-M4F @ 64MHz)</text>
+
+        <rect x="12" y="72" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="88" class="mono-xs" fill="#fbbf24">CMSIS-DSP FFT Acceleration</text>
+        <text x="20" y="102" class="mono-xs" fill="#94a3b8">256-pt Real FFT (delta-f = 7.81 Hz, 1.28 ms)</text>
+
+        <rect x="12" y="120" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="136" class="mono-xs" fill="#38bdf8">Spectral Band Extraction</text>
+        <text x="20" y="150" class="mono-xs" fill="#94a3b8">E_fan (100-200Hz), E_swm (300-500Hz)</text>
+
+        <rect x="12" y="168" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="184" class="mono-xs" fill="#34d399">Power Gating &amp; MPPT Harvester</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">18.4 uA Deep Sleep | 3.7V LiFePO4</text>
+
+        <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="232" class="mono-xs" fill="#cbd5e1">Binary Telemetry Packer</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">32-Byte Packed Frame + CRC-16 Checksum</text>
+
+        <rect x="12" y="264" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="280" class="mono-xs" fill="#a855f7">Semtech SX1262 LoRa Driver</text>
+        <text x="20" y="294" class="mono-xs" fill="#94a3b8">SPI DMA Engine @ 8 MHz (BUSY/DIO1)</text>
+
+        <text x="12" y="324" class="mono-xs" fill="#fbbf24">TinyML On-Device Execution (99.7% Comp)</text>
+    </g>
+
+    <path d="M 545 270 L 563 270" stroke="#a855f7" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrPurple)"/>
+
+    <!-- Pillar 3: LoRa RF Mesh Uplink -->
+    <g transform="translate(565, 100)">
+        <rect width="250" height="340" rx="8" fill="url(#cardGrad)" stroke="#a855f7" stroke-width="1.4"/>
+        <rect x="12" y="12" width="165" height="20" rx="4" fill="rgba(168, 85, 247, 0.15)"/>
+        <text x="94" y="26" class="badge" fill="#c084fc" text-anchor="middle">3. SUB-GHz RF MESH</text>
+        <text x="12" y="48" class="body-title" fill="#ffffff">Long-Range Telemetry Link</text>
+        <text x="12" y="62" class="mono-xs" fill="#94a3b8">IN865 Band (865.0 - 867.0 MHz)</text>
+
+        <rect x="12" y="72" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="88" class="mono-xs" fill="#c084fc">Foliage Penetration Budget</text>
+        <text x="20" y="102" class="mono-xs" fill="#94a3b8">151 dB Link Budget (+26 dB Fade Margin)</text>
+
+        <rect x="12" y="120" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="136" class="mono-xs" fill="#38bdf8">Multi-Hop Mesh Topology</text>
+        <text x="20" y="150" class="mono-xs" fill="#94a3b8">Relay routing around terrain obstacles</text>
+
+        <rect x="12" y="168" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="184" class="mono-xs" fill="#34d399">Propagation Range Limits</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">1.5 km Pine Canopy / 15.0 km Line-of-Sight</text>
+
+        <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="232" class="mono-xs" fill="#fbbf24">Adaptive Data Rate (ADR)</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">SF7 (Fast / Low Latency) to SF12 (Deep RF)</text>
+
+        <rect x="12" y="264" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="280" class="mono-xs" fill="#f87171">Regional Regulatory Standard</text>
+        <text x="20" y="294" class="mono-xs" fill="#94a3b8">&lt; 0.1% Duty Cycle (25 mW / +14 dBm EIRP)</text>
+
+        <text x="12" y="324" class="mono-xs" fill="#c084fc">Robust Sub-GHz Physical Modulation</text>
+    </g>
+
+    <path d="M 815 270 L 833 270" stroke="#10b981" stroke-width="2" marker-end="url(#arrEmerald)"/>
+
+    <!-- Pillar 4: Gateway & Operational Consoles -->
+    <g transform="translate(835, 100)">
+        <rect width="260" height="340" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.4"/>
+        <rect x="12" y="12" width="175" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="99" y="26" class="badge" fill="#34d399" text-anchor="middle">4. HARBOR GATEWAY</text>
+        <text x="12" y="48" class="body-title" fill="#ffffff">Raspberry Pi 3B+ Gateway</text>
+        <text x="12" y="62" class="mono-xs" fill="#94a3b8">Broadcom BCM2837B0 + SX1262 HAT</text>
+
+        <rect x="12" y="72" width="236" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="88" class="mono-xs" fill="#34d399">OverlayFS Read-Only Linux Root</text>
+        <text x="20" y="102" class="mono-xs" fill="#94a3b8">Zero SD card corruption on abrupt outage</text>
+
+        <rect x="12" y="120" width="236" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="136" class="mono-xs" fill="#fbbf24">Page (1954) CUSUM Drift Filter</text>
+        <text x="20" y="150" class="mono-xs" fill="#94a3b8">Early thermal chill &amp; swarming alarm</text>
+
+        <rect x="12" y="168" width="236" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="184" class="mono-xs" fill="#38bdf8">HoneyChain Immutable Ledger</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">SHA-256 forward hash-chain proof</text>
+
+        <rect x="12" y="216" width="236" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="232" class="mono-xs" fill="#cbd5e1">Local Persistence Store</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">SQLite 3 WAL Mode (&lt; 7 ms write latency)</text>
+
+        <rect x="12" y="264" width="236" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="280" class="mono-xs" fill="#34d399">Zero-Cloud Local Consoles</text>
+        <text x="20" y="294" class="mono-xs" fill="#94a3b8">Playdate 1-bit | Mobile PWA | Web Portal</text>
+
+        <text x="12" y="324" class="mono-xs" fill="#34d399">Zero Cloud Lock-in / Fully Autonomous</text>
+    </g>
+
+    <!-- Bottom Stat Bar -->
+    <g transform="translate(25, 452)">
+        <rect width="1070" height="34" rx="6" fill="#0c1220" stroke="#1e293b"/>
+        <text x="20" y="22" class="mono-xs" fill="#94a3b8">OPERATIONAL METRICS:</text>
+        <text x="170" y="22" class="mono-xs" fill="#34d399">Solar Autonomy: 18+ Months</text>
+        <text x="360" y="22" class="mono-xs" fill="#38bdf8">Cadence: 5-Min Telemetry</text>
+        <text x="540" y="22" class="mono-xs" fill="#fbbf24">Swarm Early Warning: 36h</text>
+        <text x="730" y="22" class="mono-xs" fill="#a855f7">RF Link: 1.5km Canopy / 15km LOS</text>
+        <text x="960" y="22" class="mono-xs" fill="#34d399">Density: 100 Hives/Hub</text>
+    </g>
+</svg>"""
+    with open(os.path.join(diagrams_dir, "00_system_hero_architecture.svg"), "w", encoding="utf-8") as f:
+        f.write(svg)
+    print("Generated 00_system_hero_architecture.svg")
+
+# ==============================================================================
+# DIAGRAM 02A: INSTRUMENTED LANGSTROTH HIVE MECHANICAL CUTAWAY
+# ==============================================================================
+def generate_02_cutaway():
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 580" width="100%" height="100%">
+    {SHARED_DEFS}
+    <rect width="1120" height="580" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1120" height="580" fill="url(#grid)" rx="10"/>
+
+    <!-- Header -->
+    <rect x="25" y="18" width="225" height="24" rx="12" fill="rgba(6, 182, 212, 0.15)" stroke="#06b6d4" stroke-width="1.2"/>
+    <text x="137" y="34" class="badge" fill="#38bdf8" text-anchor="middle">PHYSICAL SENSORY CUTAWAY</text>
+    <text x="25" y="64" class="headline">02A - INSTRUMENTED 10-FRAME LANGSTROTH HIVE MECHANICAL CUTAWAY</text>
+    <text x="25" y="82" class="subhead">Exact sensor placement, brood chamber geometry, hermetic pass-throughs, and external telemetry node</text>
+
+    <!-- Left: Hive Architectural Cutaway Drawing -->
+    <g transform="translate(25, 100)">
+        <rect width="520" height="425" rx="8" fill="#0b111e" stroke="#334155" stroke-width="1.5"/>
+
+        <!-- Outer Hive Stack Schematic -->
+        <!-- Telescoping Outer Cover (Metal Galvanized Cap) -->
+        <rect x="35" y="20" width="370" height="26" rx="4" fill="#1e293b" stroke="#64748b" stroke-width="1.2"/>
+        <text x="45" y="37" class="mono-xs" fill="#f8fafc">Galvanized Sheet Outer Telescoping Cover</text>
+
+        <!-- Inner Cover with Ventilation Notch & Center Port -->
+        <rect x="45" y="50" width="350" height="18" rx="2" fill="#2d2213" stroke="#78350f" stroke-width="1"/>
+        <text x="55" y="63" class="mono-xs" fill="#fbbf24">Inner Cover (Ventilation &amp; Harness Pass-Through)</text>
+
+        <!-- Shallow Honey Super Box -->
+        <rect x="45" y="72" width="350" height="60" rx="3" fill="#17120c" stroke="#b45309" stroke-width="1.2"/>
+        <text x="55" y="88" class="mono-xs" fill="#fde68a">Honey Super Box (Frames 1-10 Honey Storage)</text>
+        <line x1="55" y1="96" x2="385" y2="96" stroke="#451a03" stroke-width="1" stroke-dasharray="6 4"/>
+        <text x="55" y="112" class="mono-xs" fill="#94a3b8">Preserves 9.5 mm Inter-Frame Bee Space</text>
+
+        <!-- Deep Brood Chamber (465 x 375 x 240 mm) -->
+        <rect x="45" y="136" width="350" height="180" rx="4" fill="#1c160e" stroke="#d97706" stroke-width="1.5"/>
+        <text x="55" y="154" class="body-title" fill="#fbbf24">Deep Brood Chamber (Apis mellifera Nest)</text>
+
+        <!-- 10 Frames Representation -->
+        <g transform="translate(55, 164)">
+            <!-- Frames 1 to 10 lines -->
+            <rect x="0" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#475569"/>
+            <text x="14" y="70" class="mono-xs" fill="#64748b" text-anchor="middle">F1</text>
+            <circle cx="14" cy="95" r="4" fill="#38bdf8"/> <!-- DS18B20 1 -->
+
+            <rect x="33" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#475569"/>
+            <text x="47" y="70" class="mono-xs" fill="#64748b" text-anchor="middle">F2</text>
+            <circle cx="47" cy="95" r="4" fill="#38bdf8"/> <!-- DS18B20 2 -->
+
+            <!-- Frame 3 (Brood Nest Core Center) -->
+            <rect x="66" y="0" width="34" height="135" rx="2" fill="#2d1215" stroke="#ef4444" stroke-width="1.4"/>
+            <text x="83" y="45" class="mono-xs" fill="#fca5a5" text-anchor="middle">F3</text>
+            <text x="83" y="58" class="badge" fill="#ef4444" text-anchor="middle">CORE</text>
+            <!-- TMP117 Transducer at Center -->
+            <circle cx="83" cy="85" r="6" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+            <text x="83" y="110" class="mono-xs" fill="#f87171" text-anchor="middle">TMP117</text>
+            <text x="83" y="122" class="mono-xs" fill="#fca5a5" text-anchor="middle">34.5 C</text>
+
+            <!-- Frame 4 (Acoustic Capsule Location) -->
+            <rect x="105" y="0" width="34" height="135" rx="2" fill="#172235" stroke="#0284c7" stroke-width="1.4"/>
+            <text x="122" y="45" class="mono-xs" fill="#7dd3fc" text-anchor="middle">F4</text>
+            <text x="122" y="58" class="badge" fill="#38bdf8" text-anchor="middle">MIC</text>
+            <!-- INMP441 Microphone Probe Capsule -->
+            <circle cx="122" cy="85" r="6" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+            <text x="122" y="110" class="mono-xs" fill="#38bdf8" text-anchor="middle">INMP441</text>
+            <circle cx="122" cy="122" r="4" fill="#38bdf8"/> <!-- DS18B20 3 -->
+
+            <rect x="144" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#475569"/>
+            <text x="158" y="70" class="mono-xs" fill="#64748b" text-anchor="middle">F5</text>
+            <circle cx="158" cy="95" r="4" fill="#38bdf8"/> <!-- DS18B20 4 -->
+
+            <rect x="177" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#475569"/>
+            <text x="191" y="70" class="mono-xs" fill="#64748b" text-anchor="middle">F6</text>
+            <circle cx="191" cy="95" r="4" fill="#38bdf8"/> <!-- DS18B20 5 -->
+
+            <rect x="210" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#334155"/>
+            <text x="224" y="70" class="mono-xs" fill="#475569" text-anchor="middle">F7</text>
+
+            <rect x="243" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#334155"/>
+            <text x="257" y="70" class="mono-xs" fill="#475569" text-anchor="middle">F8</text>
+
+            <rect x="276" y="0" width="28" height="135" rx="2" fill="#0d1117" stroke="#334155"/>
+            <text x="290" y="70" class="mono-xs" fill="#475569" text-anchor="middle">F9</text>
+
+            <rect x="309" y="0" width="21" height="135" rx="2" fill="#0d1117" stroke="#334155"/>
+            <text x="319" y="70" class="mono-xs" fill="#475569" text-anchor="middle">10</text>
+        </g>
+
+        <!-- SCD41 & BME688 In Upper Gas Crown Headspace -->
+        <rect x="240" y="142" width="145" height="18" rx="3" fill="#1e1533" stroke="#8b5cf6"/>
+        <text x="246" y="155" class="mono-xs" fill="#c4b5fd">SCD41 (CO2) + BME688</text>
+
+        <!-- Screen Bottom Board & Dual Shear Load Cell Scale -->
+        <rect x="45" y="320" width="350" height="28" rx="2" fill="#111827" stroke="#475569" stroke-width="1.2"/>
+        <text x="55" y="338" class="mono-xs" fill="#94a3b8">Screen Bottom Board + Varroa Mite Tray</text>
+
+        <rect x="40" y="352" width="360" height="34" rx="4" fill="#0f172a" stroke="#059669" stroke-width="1.4"/>
+        <circle cx="65" cy="369" r="6" fill="#059669"/>
+        <circle cx="375" cy="369" r="6" fill="#059669"/>
+        <text x="80" y="373" class="mono-xs" fill="#34d399">Dual-Shear Beam Load Cell Platform (HX711 24-Bit ADC Unit, 0-100 kg)</text>
+
+        <!-- External Enclosure Mounted to Sidewall -->
+        <g transform="translate(415, 145)">
+            <!-- Cable pass-through gland -->
+            <rect x="-10" y="40" width="12" height="18" fill="#334155" rx="2"/>
+            <path d="M -10 49 L 10 49" stroke="#38bdf8" stroke-width="2"/>
+            <rect x="10" y="10" width="85" height="130" rx="6" fill="#111a2e" stroke="#38bdf8" stroke-width="1.5"/>
+            <text x="52" y="30" class="badge" fill="#38bdf8" text-anchor="middle">IP67 NODE</text>
+            <text x="52" y="48" class="mono-xs" fill="#ffffff" text-anchor="middle">RAK4631</text>
+            <text x="52" y="62" class="mono-xs" fill="#94a3b8" text-anchor="middle">nRF52840</text>
+            <text x="52" y="74" class="mono-xs" fill="#94a3b8" text-anchor="middle">+ SX1262</text>
+            <!-- Solar Panel on Enclosure bracket -->
+            <rect x="18" y="85" width="68" height="40" rx="3" fill="#0d1b2a" stroke="#fbbf24" stroke-width="1.2"/>
+            <line x1="18" y1="98" x2="86" y2="98" stroke="#fbbf24" stroke-width="0.8"/>
+            <line x1="18" y1="112" x2="86" y2="112" stroke="#fbbf24" stroke-width="0.8"/>
+            <line x1="40" y1="85" x2="40" y2="125" stroke="#fbbf24" stroke-width="0.8"/>
+            <line x1="64" y1="85" x2="64" y2="125" stroke="#fbbf24" stroke-width="0.8"/>
+            <!-- Antenna -->
+            <line x1="52" y1="10" x2="52" y2="-30" stroke="#a855f7" stroke-width="2.5"/>
+            <circle cx="52" cy="-30" r="2.5" fill="#a855f7"/>
+            <text x="52" y="-35" class="mono-xs" fill="#c084fc" text-anchor="middle">865MHz</text>
+        </g>
+    </g>
+
+    <!-- Right: 4 Rigorous Engineering Callout Cards -->
+    <g transform="translate(565, 100)">
+        <!-- Card 1: Precision Core Brood Temperature -->
+        <rect width="530" height="98" rx="8" fill="url(#cardGrad)" stroke="#ef4444" stroke-width="1.2"/>
+        <rect x="14" y="10" width="180" height="20" rx="4" fill="rgba(239, 68, 68, 0.15)"/>
+        <text x="104" y="24" class="badge" fill="#f87171" text-anchor="middle">1. BROOD CORE THERMAL ARRAY</text>
+        <text x="205" y="24" class="mono-xs" fill="#fca5a5">TI TMP117 (+-0.1 deg C NIST) + 5x DS18B20</text>
+        <text x="14" y="46" class="body-desc">- Transducer: TI TMP117 (0x48) positioned at Frame 3 geometric center of active brood cluster.</text>
+        <text x="14" y="62" class="body-desc">- Lateral Array: 5x Maxim DS18B20 digital probes span Frame 1 (honey perimeter) to Frame 5.</text>
+        <text x="14" y="78" class="body-desc">- Biological Setpoint: Core brood strictly regulated at 34.5 deg C +- 1.0 deg C by worker clustering.</text>
+
+        <!-- Card 2: Bio-Acoustic Resonance & Transduction -->
+        <g transform="translate(0, 108)">
+            <rect width="530" height="98" rx="8" fill="url(#cardGrad)" stroke="#0284c7" stroke-width="1.2"/>
+            <rect x="14" y="10" width="180" height="20" rx="4" fill="rgba(2, 132, 199, 0.15)"/>
+            <text x="104" y="24" class="badge" fill="#38bdf8" text-anchor="middle">2. ACOUSTIC TRANSDUCTION</text>
+            <text x="205" y="24" class="mono-xs" fill="#7dd3fc">InvenSense INMP441 I2S MEMS (24-bit PCM)</text>
+            <text x="14" y="46" class="body-desc">- Acoustic Pickup: Suspended inside 9.5 mm inter-frame space between Brood Frames 3 and 4.</text>
+            <text x="14" y="62" class="body-desc">- Protective Capsule: Hydrophobic sintered PTFE membrane prevents propolis coating and wax sealing.</text>
+            <text x="14" y="78" class="body-desc">- DSP Sampling: fs = 2000 Hz, 24-bit resolution, 61 dBA SNR, CMSIS-DSP 256-pt complex FFT on-MCU.</text>
+        </g>
+
+        <!-- Card 3: Metabolic Respiration & Security -->
+        <g transform="translate(0, 216)">
+            <rect width="530" height="98" rx="8" fill="url(#cardGrad)" stroke="#8b5cf6" stroke-width="1.2"/>
+            <rect x="14" y="10" width="180" height="20" rx="4" fill="rgba(139, 92, 246, 0.15)"/>
+            <text x="104" y="24" class="badge" fill="#c084fc" text-anchor="middle">3. METABOLIC &amp; RESISTANCE</text>
+            <text x="205" y="24" class="mono-xs" fill="#ddd6fe">Sensirion SCD41 + BME688 + LIS3DH</text>
+            <text x="14" y="46" class="body-desc">- Respiration CO2: Sensirion SCD41 photoacoustic NDIR (400 - 5000 ppm +-40 ppm) in crown headspace.</text>
+            <text x="14" y="62" class="body-desc">- Volatiles &amp; Pheromones: Bosch BME688 MOX gas sensor detects European foulbrood VOC emissions.</text>
+            <text x="14" y="78" class="body-desc">- Anti-Theft: ST LIS3DH accelerometer triggers immediate LoRa emergency packet upon hive tip-over.</text>
+        </g>
+
+        <!-- Card 4: External Enclosure & Energy Autonomy -->
+        <g transform="translate(0, 324)">
+            <rect width="530" height="101" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.2"/>
+            <rect x="14" y="10" width="180" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+            <text x="104" y="24" class="badge" fill="#34d399" text-anchor="middle">4. ENCLOSURE &amp; SOLAR HARVEST</text>
+            <text x="205" y="24" class="mono-xs" fill="#a7f3d0">IP67 Weatherproof Chassis + MPPT</text>
+            <text x="14" y="46" class="body-desc">- Chassis: Polycarbonate enclosure with CNC silicone gasket and 2x IP68 PG-7 cable glands.</text>
+            <text x="14" y="62" class="body-desc">- Power: 3.7V 2000 mAh LiFePO4 cell + 6V 100mA monocrystalline solar panel; 18.4 uA sleep.</text>
+            <text x="14" y="78" class="body-desc">- Solderless Field Assembly: Lever spring terminal blocks for 100% screwless field maintenance.</text>
+        </g>
+    </g>
+
+    <!-- Bottom Stat Bar -->
+    <g transform="translate(25, 532)">
+        <rect width="1070" height="34" rx="6" fill="#0c1220" stroke="#1e293b"/>
+        <text x="20" y="22" class="mono-xs" fill="#94a3b8">BIOMECHANICAL STANDARDS:</text>
+        <text x="190" y="22" class="mono-xs" fill="#34d399">9.5 mm Bee-Space Preserved</text>
+        <text x="400" y="22" class="mono-xs" fill="#38bdf8">Propolis-Resistant PTFE Barrier</text>
+        <text x="630" y="22" class="mono-xs" fill="#fbbf24">Zero Thermal Shock (Hermetic Pass-Through)</text>
+        <text x="910" y="22" class="mono-xs" fill="#34d399">100% Solderless Terminal</text>
+    </g>
+</svg>"""
+    with open(os.path.join(diagrams_dir, "02_langstroth_sensor_cutaway.svg"), "w", encoding="utf-8") as f:
+        f.write(svg)
+    print("Generated 02_langstroth_sensor_cutaway.svg")
+
+# ==============================================================================
+# DIAGRAM 03A: BIO-ACOUSTIC TRANSDUCTION & CAVITY SCHEMATIC
+# ==============================================================================
+def generate_03_transduction_schematic():
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 540" width="100%" height="100%">
+    {SHARED_DEFS}
+    <rect width="1120" height="540" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1120" height="540" fill="url(#grid)" rx="10"/>
+
+    <!-- Header -->
+    <rect x="25" y="18" width="225" height="24" rx="12" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
+    <text x="137" y="34" class="badge" fill="#fbbf24" text-anchor="middle">BIO-ACOUSTIC TRANSDUCTION</text>
+    <text x="25" y="64" class="headline">03A - BIO-ACOUSTIC TRANSDUCTION, CAVITY IMPEDANCE &amp; SPECTRAL BANDS</text>
+    <text x="25" y="82" class="subhead">Physical pressure transduction, I2S 24-bit streaming, CMSIS-DSP 256-pt FFT, and biological frequency mapping</text>
+
+    <!-- Section 1: Physical Transduction & MEMS -->
+    <g transform="translate(25, 100)">
+        <rect width="330" height="380" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.4"/>
+        <rect x="12" y="12" width="170" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+        <text x="97" y="26" class="badge" fill="#38bdf8" text-anchor="middle">1. ACOUSTIC CAVITY</text>
+        <text x="12" y="50" class="body-title" fill="#ffffff">Brood Nest Acoustic Pickup</text>
+        <text x="12" y="64" class="mono-xs" fill="#94a3b8">9.5 mm Inter-Frame Resonator</text>
+
+        <rect x="12" y="76" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="94" class="mono-xs" fill="#fbbf24">Acoustic Excitation Sources</text>
+        <text x="20" y="108" class="body-desc">Thoracic flight muscle vibration (p_air) +</text>
+        <text x="20" y="120" class="body-desc">comb substrate dorso-ventral stridulation (v_comb).</text>
+
+        <rect x="12" y="134" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="152" class="mono-xs" fill="#38bdf8">Hydrophobic PTFE Membrane</text>
+        <text x="20" y="166" class="body-desc">Sintered porous acoustic barrier (0.2 um pore size);</text>
+        <text x="20" y="178" class="body-desc">blocks wax, honey, and propolis without attenuation.</text>
+
+        <rect x="12" y="192" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="210" class="mono-xs" fill="#34d399">InvenSense INMP441 MEMS</text>
+        <text x="20" y="224" class="body-desc">Omnidirectional capacitive silicon diaphragm;</text>
+        <text x="20" y="236" class="body-desc">integrated 24-bit Sigma-Delta ADC with 61 dBA SNR.</text>
+
+        <rect x="12" y="250" width="306" height="60" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="268" class="mono-xs" fill="#cbd5e1">I2S Bus Electrical Interface</text>
+        <text x="20" y="282" class="mono-xs" fill="#38bdf8">SCK / BCLK : 128 kHz (32-bit slot clock)</text>
+        <text x="20" y="294" class="mono-xs" fill="#38bdf8">WS / LRCLK : 2000 Hz (Sample Word Select)</text>
+        <text x="20" y="306" class="mono-xs" fill="#38bdf8">SD / DATA  : 24-bit PCM Two's Complement</text>
+
+        <!-- Waveform sketch -->
+        <path d="M 20 345 Q 35 325 50 345 T 80 345 T 110 320 T 140 365 T 170 335 T 200 350 T 240 330 T 280 345 T 310 345" fill="none" stroke="#38bdf8" stroke-width="1.6"/>
+        <text x="165" y="370" class="mono-xs" fill="#94a3b8" text-anchor="middle">Raw Time-Domain Audio (10s Continuous Capture)</text>
+    </g>
+
+    <path d="M 355 285 L 375 285" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
+
+    <!-- Section 2: On-Device CMSIS-DSP FFT Transform -->
+    <g transform="translate(375, 100)">
+        <rect width="330" height="380" rx="8" fill="url(#cardGradHighlight)" stroke="#f59e0b" stroke-width="1.6"/>
+        <rect x="12" y="12" width="170" height="20" rx="4" fill="rgba(245, 158, 11, 0.2)"/>
+        <text x="97" y="26" class="badge" fill="#fbbf24" text-anchor="middle">2. CMSIS-DSP FFT</text>
+        <text x="12" y="50" class="body-title" fill="#ffffff">ARM Cortex-M4F Transform</text>
+        <text x="12" y="64" class="mono-xs" fill="#94a3b8">Hardware Single-Precision FPU</text>
+
+        <rect x="12" y="76" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="94" class="mono-xs" fill="#fbbf24">Double DMA Ping-Pong Buffer</text>
+        <text x="20" y="108" class="body-desc">Seamless double-buffered DMA continuous fill;</text>
+        <text x="20" y="120" class="body-desc">2 x 256 samples (1024 bytes) zero CPU cycle loss.</text>
+
+        <rect x="12" y="134" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="152" class="mono-xs" fill="#38bdf8">Hanning Sidelobe Suppression</text>
+        <text x="20" y="166" class="body-desc">w[n] = 0.5(1 - cos(2pi*n / N)); N = 256 points;</text>
+        <text x="20" y="178" class="body-desc">-32 dB peak sidelobe suppression eliminates leakage.</text>
+
+        <rect x="12" y="192" width="306" height="50" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="210" class="mono-xs" fill="#34d399">arm_rfft_fast_f32 Engine</text>
+        <text x="20" y="224" class="body-desc">Radix-4 complex FFT: delta-f = 7.8125 Hz / bin;</text>
+        <text x="20" y="236" class="body-desc">1.28 ms execution latency @ 64 MHz (&lt; 0.1% CPU load).</text>
+
+        <rect x="12" y="250" width="306" height="60" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="268" class="mono-xs" fill="#cbd5e1">Feature Extraction &amp; Compression</text>
+        <text x="20" y="282" class="mono-xs" fill="#34d399">Integrate energy: E_k = sum(|X[i]|^2)</text>
+        <text x="20" y="294" class="mono-xs" fill="#fbbf24">Raw Audio (40 kB/s) -&gt; 8 Bytes / Cycle</text>
+        <text x="20" y="306" class="mono-xs" fill="#34d399">Net Edge Compression Ratio: 99.7%</text>
+
+        <!-- FFT Graph sketch -->
+        <g transform="translate(20, 335)">
+            <line x1="0" y1="20" x2="290" y2="20" stroke="#334155"/>
+            <rect x="25" y="10" width="6" height="10" fill="#38bdf8"/>
+            <rect x="40" y="4" width="6" height="16" fill="#38bdf8"/>
+            <rect x="55" y="8" width="6" height="12" fill="#38bdf8"/>
+            <rect x="85" y="0" width="8" height="20" fill="#fbbf24"/>
+            <rect x="100" y="2" width="8" height="18" fill="#fbbf24"/>
+            <rect x="140" y="6" width="8" height="14" fill="#f87171"/>
+            <rect x="155" y="12" width="8" height="8" fill="#f87171"/>
+            <text x="145" y="35" class="mono-xs" fill="#94a3b8" text-anchor="middle">256-Point Discrete Magnitude Spectrum</text>
+        </g>
+    </g>
+
+    <path d="M 705 285 L 725 285" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
+
+    <!-- Section 3: Biological Spectral Bands -->
+    <g transform="translate(725, 100)">
+        <rect width="370" height="380" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.4"/>
+        <rect x="12" y="12" width="180" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="102" y="26" class="badge" fill="#34d399" text-anchor="middle">3. BIOLOGICAL BANDS</text>
+        <text x="12" y="50" class="body-title" fill="#ffffff">Colony Diagnostic Mapping</text>
+        <text x="12" y="64" class="mono-xs" fill="#94a3b8">Sub-Band Boundaries (delta-f = 7.81 Hz)</text>
+
+        <!-- Band 1 -->
+        <rect x="12" y="76" width="346" height="60" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <circle cx="24" cy="94" r="5" fill="#38bdf8"/>
+        <text x="36" y="97" class="body-title" fill="#38bdf8">E_fan: 100 - 200 Hz (Bins 13 - 25)</text>
+        <text x="36" y="112" class="body-desc">Thermal ventilation fanning &amp; metabolic baseline.</text>
+        <text x="36" y="125" class="mono-xs" fill="#94a3b8">Active when brood core exceeds 35.5 deg C.</text>
+
+        <!-- Band 2 -->
+        <rect x="12" y="144" width="346" height="60" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <circle cx="24" cy="162" r="5" fill="#34d399"/>
+        <text x="36" y="165" class="body-title" fill="#34d399">E_wag: 200 - 300 Hz (Bins 26 - 38)</text>
+        <text x="36" y="180" class="body-desc">Forager waggle dance abdominal communication.</text>
+        <text x="36" y="193" class="mono-xs" fill="#94a3b8">Signals robust workforce &amp; active nectar flow.</text>
+
+        <!-- Band 3 -->
+        <rect x="12" y="212" width="346" height="64" rx="4" fill="rgba(245, 158, 11, 0.08)" stroke="#f59e0b" stroke-width="1"/>
+        <circle cx="24" cy="230" r="5" fill="#fbbf24"/>
+        <text x="36" y="233" class="body-title" fill="#fbbf24">E_swm: 300 - 500 Hz (Bins 39 - 64)</text>
+        <text x="36" y="248" class="body-desc">Pre-swarming acoustic energy surge &amp; queen piping.</text>
+        <text x="36" y="261" class="mono-xs" fill="#fde68a">Power surges 3.8x baseline 24-48h prior to swarm.</text>
+
+        <!-- Band 4 -->
+        <rect x="12" y="284" width="346" height="64" rx="4" fill="rgba(239, 68, 68, 0.08)" stroke="#ef4444" stroke-width="1"/>
+        <circle cx="24" cy="302" r="5" fill="#f87171"/>
+        <text x="36" y="305" class="body-title" fill="#f87171">E_dst: 500 - 1000 Hz (Bins 65 - 127)</text>
+        <text x="36" y="320" class="body-desc">Queenless roar, defense arousal, parasite friction.</text>
+        <text x="36" y="333" class="mono-xs" fill="#fca5a5">Triggers immediate CUSUM emergency alarm.</text>
+
+        <text x="12" y="365" class="mono-xs" fill="#34d399">Packed into 8-Byte Over-the-Air Payload</text>
+    </g>
+
+    <!-- Bottom Metric Bar -->
+    <g transform="translate(25, 492)">
+        <rect width="1070" height="34" rx="6" fill="#0c1220" stroke="#1e293b"/>
+        <text x="20" y="22" class="mono-xs" fill="#94a3b8">DSP VALIDATION METRICS:</text>
+        <text x="190" y="22" class="mono-xs" fill="#38bdf8">Sampling: fs = 2000 Hz</text>
+        <text x="360" y="22" class="mono-xs" fill="#34d399">Delta-f: 7.8125 Hz / bin</text>
+        <text x="560" y="22" class="mono-xs" fill="#fbbf24">Execution Latency: 1.28 ms @ 64MHz</text>
+        <text x="820" y="22" class="mono-xs" fill="#38bdf8">Memory Footprint: &lt; 8.2 KB RAM</text>
+    </g>
+</svg>"""
+    with open(os.path.join(diagrams_dir, "03_acoustic_transduction_schematic.svg"), "w", encoding="utf-8") as f:
+        f.write(svg)
+    print("Generated 03_acoustic_transduction_schematic.svg")
+
+# ==============================================================================
+# DIAGRAM 04A: FIELD NODE IP67 RUGGEDIZED ENCLOSURE SCHEMATIC
+# ==============================================================================
+def generate_04_enclosure_schematic():
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 560" width="100%" height="100%">
+    {SHARED_DEFS}
+    <rect width="1120" height="560" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1120" height="560" fill="url(#grid)" rx="10"/>
+
+    <!-- Header -->
+    <rect x="25" y="18" width="225" height="24" rx="12" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.2"/>
+    <text x="137" y="34" class="badge" fill="#34d399" text-anchor="middle">MECHANICAL CAD SPECIFICATION</text>
+    <text x="25" y="64" class="headline">04A - FIELD NODE IP67 RUGGEDIZED ENCLOSURE &amp; MECHANICAL INTEGRATION</text>
+    <text x="25" y="82" class="subhead">Polycarbonate weather-sealing, continuous silicone gasket, RP-SMA antenna bulkhead, and solderless gland routing</text>
+
+    <!-- Left: Mechanical CAD Assembly Drawing -->
+    <g transform="translate(25, 100)">
+        <rect width="530" height="405" rx="8" fill="#0b111e" stroke="#334155" stroke-width="1.5"/>
+
+        <!-- External Mounting Flange (Stainless Steel 304) -->
+        <rect x="70" y="35" width="370" height="315" rx="10" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+        <!-- Flange mounting screw holes -->
+        <circle cx="85" cy="50" r="5" fill="#070a14" stroke="#94a3b8" stroke-width="1.2"/>
+        <circle cx="425" cy="50" r="5" fill="#070a14" stroke="#94a3b8" stroke-width="1.2"/>
+        <circle cx="85" cy="335" r="5" fill="#070a14" stroke="#94a3b8" stroke-width="1.2"/>
+        <circle cx="425" cy="335" r="5" fill="#070a14" stroke="#94a3b8" stroke-width="1.2"/>
+        <text x="255" y="55" class="mono-xs" fill="#94a3b8" text-anchor="middle">304 Stainless Steel Hive Mounting Flange (120 x 80 mm)</text>
+
+        <!-- Main Enclosure Outer Wall (Polycarbonate UL94-V0) -->
+        <rect x="100" y="70" width="310" height="245" rx="6" fill="#111a2d" stroke="#38bdf8" stroke-width="2"/>
+
+        <!-- Continuous CNC Silicone Seal Gasket -->
+        <rect x="106" y="76" width="298" height="233" rx="4" fill="none" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 4"/>
+        <text x="255" y="95" class="badge" fill="#fbbf24" text-anchor="middle">IP67 CONTINUOUS CNC SILICONE GASKET</text>
+
+        <!-- 4x Captive Stainless Steel Corner Machine Screws -->
+        <circle cx="118" cy="88" r="4" fill="#94a3b8"/>
+        <circle cx="392" cy="88" r="4" fill="#94a3b8"/>
+        <circle cx="118" cy="297" r="4" fill="#94a3b8"/>
+        <circle cx="392" cy="297" r="4" fill="#94a3b8"/>
+
+        <!-- Top RP-SMA RF Bulkhead with O-Ring -->
+        <rect x="235" y="55" width="40" height="15" rx="2" fill="#d97706" stroke="#fbbf24"/>
+        <line x1="255" y1="55" x2="255" y2="10" stroke="#a855f7" stroke-width="3"/>
+        <circle cx="255" cy="10" r="3" fill="#a855f7"/>
+        <text x="255" y="5" class="mono-xs" fill="#c084fc" text-anchor="middle">865-868MHz 1.8 dBi Antenna</text>
+        <text x="290" y="65" class="mono-xs" fill="#fbbf24">RP-SMA Bulkhead</text>
+
+        <!-- Internal Subsystems Area -->
+        <g transform="translate(120, 110)">
+            <!-- RAK5005-O Baseboard + RAK4631 -->
+            <rect x="0" y="0" width="135" height="110" rx="4" fill="#0f1f38" stroke="#38bdf8" stroke-width="1.2"/>
+            <text x="67" y="20" class="badge" fill="#38bdf8" text-anchor="middle">RAK4631 CORE</text>
+            <text x="67" y="38" class="mono-xs" fill="#ffffff" text-anchor="middle">nRF52840 MCU</text>
+            <text x="67" y="52" class="mono-xs" fill="#cbd5e1" text-anchor="middle">+ SX1262 LoRa</text>
+            <rect x="15" y="62" width="105" height="36" rx="3" fill="#08101d"/>
+            <text x="67" y="78" class="mono-xs" fill="#34d399" text-anchor="middle">18.4 uA Deep Sleep</text>
+            <text x="67" y="90" class="mono-xs" fill="#38bdf8" text-anchor="middle">CMSIS-DSP FFT</text>
+
+            <!-- 3.7V 2000mAh LiFePO4 Battery Pack -->
+            <rect x="145" y="0" width="125" height="110" rx="4" fill="#1b2518" stroke="#10b981" stroke-width="1.2"/>
+            <text x="207" y="20" class="badge" fill="#34d399" text-anchor="middle">LiFePO4 BATTERY</text>
+            <text x="207" y="38" class="mono-xs" fill="#ffffff" text-anchor="middle">3.7V 2000 mAh</text>
+            <text x="207" y="52" class="mono-xs" fill="#cbd5e1" text-anchor="middle">7.4 Wh Capacity</text>
+            <rect x="155" y="62" width="105" height="36" rx="3" fill="#0d170f"/>
+            <text x="207" y="78" class="mono-xs" fill="#34d399" text-anchor="middle">18+ Month Life</text>
+            <text x="207" y="90" class="mono-xs" fill="#fbbf24" text-anchor="middle">Solar MPPT Charged</text>
+
+            <!-- Solderless Lever Terminal Block -->
+            <rect x="0" y="120" width="270" height="42" rx="4" fill="#131c2e" stroke="#334155"/>
+            <text x="135" y="136" class="badge" fill="#cbd5e1" text-anchor="middle">4:2 POLE SOLDERLESS SPRING LEVER JUNCTION BLOCK</text>
+            <text x="135" y="152" class="mono-xs" fill="#94a3b8" text-anchor="middle">TMP117 + 5x DS18B20 Probes + INMP441 + SCD41</text>
+        </g>
+
+        <!-- Bottom PG-7 Cable Glands -->
+        <rect x="160" y="315" width="40" height="28" rx="2" fill="#334155" stroke="#64748b"/>
+        <line x1="180" y1="343" x2="180" y2="390" stroke="#38bdf8" stroke-width="3"/>
+        <text x="180" y="402" class="mono-xs" fill="#38bdf8" text-anchor="middle">Frame Sensors</text>
+
+        <rect x="310" y="315" width="40" height="28" rx="2" fill="#334155" stroke="#64748b"/>
+        <line x1="330" y1="343" x2="330" y2="390" stroke="#fbbf24" stroke-width="3"/>
+        <text x="330" y="402" class="mono-xs" fill="#fbbf24" text-anchor="middle">6V Solar Ingress</text>
+
+        <text x="255" y="332" class="mono-xs" fill="#64748b" text-anchor="middle">Polyamide PG-7 IP68 Glands (3.0 - 6.5 mm)</text>
+    </g>
+
+    <!-- Right: Mechanical & Environmental Specification Cards -->
+    <g transform="translate(575, 100)">
+        <!-- Card 1: Ingress & Environmental Protection -->
+        <rect width="520" height="92" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.2"/>
+        <rect x="14" y="10" width="190" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="109" y="24" class="badge" fill="#34d399" text-anchor="middle">INGRESS &amp; MATERIAL SPECS</text>
+        <text x="215" y="24" class="mono-xs" fill="#a7f3d0">IP67 Waterproof / Dust-Tight</text>
+        <text x="14" y="46" class="body-desc">- Chassis: Polycarbonate (UL94-V0 flame-retardant, UV-stabilized 10-year outdoor rating).</text>
+        <text x="14" y="60" class="body-desc">- Submersion: Certified 1.0 meter water immersion for 30 minutes with continuous silicone seal.</text>
+        <text x="14" y="74" class="body-desc">- Impact Rating: IK08 certified (resists 5-Joule mechanical impact and bear scratching).</text>
+
+        <!-- Card 2: Thermal & Environmental Durability -->
+        <g transform="translate(0, 104)">
+            <rect width="520" height="92" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.2"/>
+            <rect x="14" y="10" width="190" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+            <text x="109" y="24" class="badge" fill="#38bdf8" text-anchor="middle">OPERATING TEMPERATURE</text>
+            <text x="215" y="24" class="mono-xs" fill="#7dd3fc">-20 deg C to +65 deg C Rated</text>
+            <text x="14" y="46" class="body-desc">- Winter Cold Soak: Cold-starting verified at -20 deg C during severe overwintering conditions.</text>
+            <text x="14" y="60" class="body-desc">- Internal Temperature Rise: &lt; 3.2 deg C above ambient at peak summer solar irradiation (1000 W/m2).</text>
+            <text x="14" y="74" class="body-desc">- Hermetic Gland Seal: PG-7 glands clamp with NBR compression bushings preventing moisture creep.</text>
+        </g>
+
+        <!-- Card 3: Power Subsystem & MPPT Solar Window -->
+        <g transform="translate(0, 208)">
+            <rect width="520" height="92" rx="8" fill="url(#cardGrad)" stroke="#fbbf24" stroke-width="1.2"/>
+            <rect x="14" y="10" width="190" height="20" rx="4" fill="rgba(245, 158, 11, 0.15)"/>
+            <text x="109" y="24" class="badge" fill="#fbbf24" text-anchor="middle">SOLAR MPPT HARVESTING</text>
+            <text x="215" y="24" class="mono-xs" fill="#fde68a">6V Monocrystalline PV Panel</text>
+            <text x="14" y="46" class="body-desc">- PV Window: 6V 100mA monocrystalline solar module mounted via adjustable angle bracket.</text>
+            <text x="14" y="60" class="body-desc">- Charge Controller: 134N3P / BQ25171 PMIC with CC/CV charge profile and undervoltage cutoff.</text>
+            <text x="14" y="74" class="body-desc">- Battery Autonomy: 18+ months autonomous operation without direct sunlight on full charge.</text>
+        </g>
+
+        <!-- Card 4: Solderless Field Serviceability -->
+        <g transform="translate(0, 312)">
+            <rect width="520" height="93" rx="8" fill="url(#cardGrad)" stroke="#a855f7" stroke-width="1.2"/>
+            <rect x="14" y="10" width="190" height="20" rx="4" fill="rgba(168, 85, 247, 0.15)"/>
+            <text x="109" y="24" class="badge" fill="#c084fc" text-anchor="middle">FIELD SERVICEABILITY</text>
+            <text x="215" y="24" class="mono-xs" fill="#ddd6fe">100% Solderless Deployment</text>
+            <text x="14" y="46" class="body-desc">- Interconnects: Spring-loaded lever clamp terminals allow toolless probe replacement in field.</text>
+            <text x="14" y="60" class="body-desc">- Modular Tray: Baseboard and battery mount to removable internal chassis for rapid servicing.</text>
+            <text x="14" y="74" class="body-desc">- Secure Lock: 4x captive M4 screws prevent lost fasteners in deep field clover or apiary grass.</text>
+        </g>
+    </g>
+
+    <!-- Bottom Stat Bar -->
+    <g transform="translate(25, 514)">
+        <rect width="1070" height="34" rx="6" fill="#0c1220" stroke="#1e293b"/>
+        <text x="20" y="22" class="mono-xs" fill="#94a3b8">MECHANICAL CERTIFICATIONS:</text>
+        <text x="210" y="22" class="mono-xs" fill="#34d399">IP67 Enclosure Rating</text>
+        <text x="410" y="22" class="mono-xs" fill="#38bdf8">IK08 Impact Resistance</text>
+        <text x="610" y="22" class="mono-xs" fill="#fbbf24">UL94-V0 Polycarbonate</text>
+        <text x="820" y="22" class="mono-xs" fill="#34d399">100% Solderless Field Serviceable</text>
+    </g>
+</svg>"""
+    with open(os.path.join(diagrams_dir, "04_field_node_enclosure_schematic.svg"), "w", encoding="utf-8") as f:
+        f.write(svg)
+    print("Generated 04_field_node_enclosure_schematic.svg")
+
+
 if __name__ == "__main__":
     print("Executing Master Publication Diagram Generator...")
+    generate_00_system_hero()
     generate_01_problem()
+    generate_02_cutaway()
     generate_02_sensor_placement()
+    generate_03_transduction_schematic()
     generate_03_acoustic_pipeline()
+    generate_04_enclosure_schematic()
     generate_04_field_node()
     generate_05_lora_mesh()
     generate_06_gateway()
     generate_07_edge_analytics()
     generate_08_full_architecture()
-    print("ALL 8 PUBLICATION-GRADE DIAGRAMS GENERATED SUCCESSFULLY!")
+    print("ALL 12 PUBLICATION-GRADE DIAGRAMS GENERATED SUCCESSFULLY!")

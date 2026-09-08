@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![BEEVIL KNIEVEL Engineering Hero](docs/media/hero/beevil_knievel_hero_engineering.png)
+![BEEVIL KNIEVEL System Architecture](docs/media/diagrams/00_system_hero_architecture.svg)
 
 [![Hardware Status](https://img.shields.io/badge/Hardware-nRF52840%20%2B%20SX1262%20%2B%20Raspberry Pi 3B+-22c55e?style=flat-square)](#05--field-node)
 [![Acoustic DSP](https://img.shields.io/badge/DSP-CMSIS--DSP%20256--pt%20FFT%20(%CE%94f%3D7.81Hz)-3b82f6?style=flat-square)](#06--acoustic-dsp)
@@ -50,8 +50,8 @@ BEEVIL KNIEVEL instruments the standard 10-frame Langstroth hive body through no
 
 <div align="center">
 
-![Instrumented Langstroth Cutaway](docs/media/sensing/langstroth_sensor_cutaway.png)
-*Figure 2.1: Technical cutaway illustration of commercial 10-frame Langstroth brood box instrumented with BEEVIL flexible sensor arrays.*
+![Instrumented Langstroth Hive Cutaway](docs/media/diagrams/02_langstroth_sensor_cutaway.svg)
+*Figure 2.1: Technical mechanical cutaway of 10-frame Langstroth hive body detailing exact sensor placement, hermetic PG-7 cable pass-throughs, and external telemetry node.*
 
 </div>
 
@@ -77,8 +77,8 @@ Honeybee acoustic emissions provide a direct, pre-symptomatic window into colony
 
 <div align="center">
 
-![Acoustic Sensing Concept](docs/media/acoustics/acoustic_transduction_concept.png)
-*Figure 3.1: Acoustic activity inside a commercial Langstroth honeybee hive captured by a MEMS microphone and transformed into frequency-domain features.*
+![Bio-Acoustic Transduction & Spectral Mapping](docs/media/diagrams/03_acoustic_transduction_schematic.svg)
+*Figure 3.1: Bio-acoustic transduction physics, inter-frame acoustic cavity resonator, I2S 24-bit PCM streaming, and biological frequency mapping.*
 
 </div>
 
@@ -128,8 +128,8 @@ The field telemetry node is engineered for multi-year field autonomy, housed in 
 
 <div align="center">
 
-![Field Node Enclosure](docs/media/hardware/field_node_rugged_enclosure.png)
-*Figure 5.1: Industrial product engineering visualization of the rugged low-power field node mounted to a commercial Langstroth hive body.*
+![Field Node IP67 Enclosure Schematic](docs/media/diagrams/04_field_node_enclosure_schematic.svg)
+*Figure 5.1: Mechanical dimensioned CAD layout and internal component packaging of the IP67 ruggedized field telemetry node.*
 
 </div>
 

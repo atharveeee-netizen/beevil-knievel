@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 560" width="100%" height="100%">
+    
+    <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#070a14"/>
+            <stop offset="50%" stop-color="#0b111e"/>
+            <stop offset="100%" stop-color="#0f172a"/>
+        </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#111a2d"/>
+            <stop offset="100%" stop-color="#0c1220"/>
+        </linearGradient>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a253c"/>
+            <stop offset="100%" stop-color="#0f182b"/>
+        </linearGradient>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#d97706"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+        </linearGradient>
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#0284c7"/>
+            <stop offset="100%" stop-color="#38bdf8"/>
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#059669"/>
+            <stop offset="100%" stop-color="#34d399"/>
+        </linearGradient>
+        <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e11d48"/>
+            <stop offset="100%" stop-color="#fb7185"/>
+        </linearGradient>
+        <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+        
+        <marker id="arrCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+        </marker>
+        <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
+        </marker>
+        <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
+        </marker>
+        <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fb7185"/>
+        </marker>
+        <marker id="arrPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7"/>
+        </marker>
+        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#a855f7"/>
+        </linearGradient>
+
+        <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.35"/>
+        </pattern>
+    </defs>
+    <style>
+        .headline { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.3px; }
+        .body-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #94a3b8; line-height: 1.4; }
+        .mono-sm { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 8.5px; }
+        .badge { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
+    </style>
+
+    <rect width="1120" height="560" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1120" height="560" fill="url(#grid)" rx="10"/>
+
+    <!-- Header -->
+    <rect x="25" y="18" width="225" height="24" rx="12" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" stroke-width="1.2"/>
+    <text x="137" y="34" class="badge" fill="#34d399" text-anchor="middle">MECHANICAL CAD SPECIFICATION</text>
+    <text x="25" y="64" class="headline">04A - FIELD NODE IP67 RUGGEDIZED ENCLOSURE &amp; MECHANICAL INTEGRATION</text>
+    <text x="25" y="82" class="subhead">Polycarbonate weather-sealing, continuous silicone gasket, RP-SMA antenna bulkhead, and solderless gland routing</text>
+
+    <!-- Left: Mechanical CAD Assembly Drawing -->
+    <g transform="translate(25, 100)">
+        <rect width="530" height="405" rx="8" fill="#0b111e" stroke="#334155" stroke-width="1.5"/>
+
+        <!-- External Mounting Flange (Stainless Steel 304) -->
+        <rect x="70" y="35" width="370" height="315" rx="10" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+        <!-- Flange mounting screw holes -->
+        <circle cx="85" cy="50" r="5" fill="#070a14" stroke="#94a3b8" stroke-width="1.2"/>
+        <circle cx="425" cy="50" r="5" fill="#070a14" stroke="#94a3b8" stroke-width="1.2"/>
+        <circle cx="85" cy="335" r="5" fill="#070a14" stroke="#94a3b8" stroke-width="1.2"/>
+        <circle cx="425" cy="335" r="5" fill="#070a14" stroke="#94a3b8" stroke-width="1.2"/>
+        <text x="255" y="55" class="mono-xs" fill="#94a3b8" text-anchor="middle">304 Stainless Steel Hive Mounting Flange (120 x 80 mm)</text>
+
+        <!-- Main Enclosure Outer Wall (Polycarbonate UL94-V0) -->
+        <rect x="100" y="70" width="310" height="245" rx="6" fill="#111a2d" stroke="#38bdf8" stroke-width="2"/>
+
+        <!-- Continuous CNC Silicone Seal Gasket -->
+        <rect x="106" y="76" width="298" height="233" rx="4" fill="none" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8 4"/>
+        <text x="255" y="95" class="badge" fill="#fbbf24" text-anchor="middle">IP67 CONTINUOUS CNC SILICONE GASKET</text>
+
+        <!-- 4x Captive Stainless Steel Corner Machine Screws -->
+        <circle cx="118" cy="88" r="4" fill="#94a3b8"/>
+        <circle cx="392" cy="88" r="4" fill="#94a3b8"/>
+        <circle cx="118" cy="297" r="4" fill="#94a3b8"/>
+        <circle cx="392" cy="297" r="4" fill="#94a3b8"/>
+
+        <!-- Top RP-SMA RF Bulkhead with O-Ring -->
+        <rect x="235" y="55" width="40" height="15" rx="2" fill="#d97706" stroke="#fbbf24"/>
+        <line x1="255" y1="55" x2="255" y2="10" stroke="#a855f7" stroke-width="3"/>
+        <circle cx="255" cy="10" r="3" fill="#a855f7"/>
+        <text x="255" y="5" class="mono-xs" fill="#c084fc" text-anchor="middle">865-868MHz 1.8 dBi Antenna</text>
+        <text x="290" y="65" class="mono-xs" fill="#fbbf24">RP-SMA Bulkhead</text>
+
+        <!-- Internal Subsystems Area -->
+        <g transform="translate(120, 110)">
+            <!-- RAK5005-O Baseboard + RAK4631 -->
+            <rect x="0" y="0" width="135" height="110" rx="4" fill="#0f1f38" stroke="#38bdf8" stroke-width="1.2"/>
+            <text x="67" y="20" class="badge" fill="#38bdf8" text-anchor="middle">RAK4631 CORE</text>
+            <text x="67" y="38" class="mono-xs" fill="#ffffff" text-anchor="middle">nRF52840 MCU</text>
+            <text x="67" y="52" class="mono-xs" fill="#cbd5e1" text-anchor="middle">+ SX1262 LoRa</text>
+            <rect x="15" y="62" width="105" height="36" rx="3" fill="#08101d"/>
+            <text x="67" y="78" class="mono-xs" fill="#34d399" text-anchor="middle">18.4 uA Deep Sleep</text>
+            <text x="67" y="90" class="mono-xs" fill="#38bdf8" text-anchor="middle">CMSIS-DSP FFT</text>
+
+            <!-- 3.7V 2000mAh LiFePO4 Battery Pack -->
+            <rect x="145" y="0" width="125" height="110" rx="4" fill="#1b2518" stroke="#10b981" stroke-width="1.2"/>
+            <text x="207" y="20" class="badge" fill="#34d399" text-anchor="middle">LiFePO4 BATTERY</text>
+            <text x="207" y="38" class="mono-xs" fill="#ffffff" text-anchor="middle">3.7V 2000 mAh</text>
+            <text x="207" y="52" class="mono-xs" fill="#cbd5e1" text-anchor="middle">7.4 Wh Capacity</text>
+            <rect x="155" y="62" width="105" height="36" rx="3" fill="#0d170f"/>
+            <text x="207" y="78" class="mono-xs" fill="#34d399" text-anchor="middle">18+ Month Life</text>
+            <text x="207" y="90" class="mono-xs" fill="#fbbf24" text-anchor="middle">Solar MPPT Charged</text>
+
+            <!-- Solderless Lever Terminal Block -->
+            <rect x="0" y="120" width="270" height="42" rx="4" fill="#131c2e" stroke="#334155"/>
+            <text x="135" y="136" class="badge" fill="#cbd5e1" text-anchor="middle">4:2 POLE SOLDERLESS SPRING LEVER JUNCTION BLOCK</text>
+            <text x="135" y="152" class="mono-xs" fill="#94a3b8" text-anchor="middle">TMP117 + 5x DS18B20 Probes + INMP441 + SCD41</text>
+        </g>
+
+        <!-- Bottom PG-7 Cable Glands -->
+        <rect x="160" y="315" width="40" height="28" rx="2" fill="#334155" stroke="#64748b"/>
+        <line x1="180" y1="343" x2="180" y2="390" stroke="#38bdf8" stroke-width="3"/>
+        <text x="180" y="402" class="mono-xs" fill="#38bdf8" text-anchor="middle">Frame Sensors</text>
+
+        <rect x="310" y="315" width="40" height="28" rx="2" fill="#334155" stroke="#64748b"/>
+        <line x1="330" y1="343" x2="330" y2="390" stroke="#fbbf24" stroke-width="3"/>
+        <text x="330" y="402" class="mono-xs" fill="#fbbf24" text-anchor="middle">6V Solar Ingress</text>
+
+        <text x="255" y="332" class="mono-xs" fill="#64748b" text-anchor="middle">Polyamide PG-7 IP68 Glands (3.0 - 6.5 mm)</text>
+    </g>
+
+    <!-- Right: Mechanical & Environmental Specification Cards -->
+    <g transform="translate(575, 100)">
+        <!-- Card 1: Ingress & Environmental Protection -->
+        <rect width="520" height="92" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.2"/>
+        <rect x="14" y="10" width="190" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="109" y="24" class="badge" fill="#34d399" text-anchor="middle">INGRESS &amp; MATERIAL SPECS</text>
+        <text x="215" y="24" class="mono-xs" fill="#a7f3d0">IP67 Waterproof / Dust-Tight</text>
+        <text x="14" y="46" class="body-desc">- Chassis: Polycarbonate (UL94-V0 flame-retardant, UV-stabilized 10-year outdoor rating).</text>
+        <text x="14" y="60" class="body-desc">- Submersion: Certified 1.0 meter water immersion for 30 minutes with continuous silicone seal.</text>
+        <text x="14" y="74" class="body-desc">- Impact Rating: IK08 certified (resists 5-Joule mechanical impact and bear scratching).</text>
+
+        <!-- Card 2: Thermal & Environmental Durability -->
+        <g transform="translate(0, 104)">
+            <rect width="520" height="92" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.2"/>
+            <rect x="14" y="10" width="190" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+            <text x="109" y="24" class="badge" fill="#38bdf8" text-anchor="middle">OPERATING TEMPERATURE</text>
+            <text x="215" y="24" class="mono-xs" fill="#7dd3fc">-20 deg C to +65 deg C Rated</text>
+            <text x="14" y="46" class="body-desc">- Winter Cold Soak: Cold-starting verified at -20 deg C during severe overwintering conditions.</text>
+            <text x="14" y="60" class="body-desc">- Internal Temperature Rise: &lt; 3.2 deg C above ambient at peak summer solar irradiation (1000 W/m2).</text>
+            <text x="14" y="74" class="body-desc">- Hermetic Gland Seal: PG-7 glands clamp with NBR compression bushings preventing moisture creep.</text>
+        </g>
+
+        <!-- Card 3: Power Subsystem & MPPT Solar Window -->
+        <g transform="translate(0, 208)">
+            <rect width="520" height="92" rx="8" fill="url(#cardGrad)" stroke="#fbbf24" stroke-width="1.2"/>
+            <rect x="14" y="10" width="190" height="20" rx="4" fill="rgba(245, 158, 11, 0.15)"/>
+            <text x="109" y="24" class="badge" fill="#fbbf24" text-anchor="middle">SOLAR MPPT HARVESTING</text>
+            <text x="215" y="24" class="mono-xs" fill="#fde68a">6V Monocrystalline PV Panel</text>
+            <text x="14" y="46" class="body-desc">- PV Window: 6V 100mA monocrystalline solar module mounted via adjustable angle bracket.</text>
+            <text x="14" y="60" class="body-desc">- Charge Controller: 134N3P / BQ25171 PMIC with CC/CV charge profile and undervoltage cutoff.</text>
+            <text x="14" y="74" class="body-desc">- Battery Autonomy: 18+ months autonomous operation without direct sunlight on full charge.</text>
+        </g>
+
+        <!-- Card 4: Solderless Field Serviceability -->
+        <g transform="translate(0, 312)">
+            <rect width="520" height="93" rx="8" fill="url(#cardGrad)" stroke="#a855f7" stroke-width="1.2"/>
+            <rect x="14" y="10" width="190" height="20" rx="4" fill="rgba(168, 85, 247, 0.15)"/>
+            <text x="109" y="24" class="badge" fill="#c084fc" text-anchor="middle">FIELD SERVICEABILITY</text>
+            <text x="215" y="24" class="mono-xs" fill="#ddd6fe">100% Solderless Deployment</text>
+            <text x="14" y="46" class="body-desc">- Interconnects: Spring-loaded lever clamp terminals allow toolless probe replacement in field.</text>
+            <text x="14" y="60" class="body-desc">- Modular Tray: Baseboard and battery mount to removable internal chassis for rapid servicing.</text>
+            <text x="14" y="74" class="body-desc">- Secure Lock: 4x captive M4 screws prevent lost fasteners in deep field clover or apiary grass.</text>
+        </g>
+    </g>
+
+    <!-- Bottom Stat Bar -->
+    <g transform="translate(25, 514)">
+        <rect width="1070" height="34" rx="6" fill="#0c1220" stroke="#1e293b"/>
+        <text x="20" y="22" class="mono-xs" fill="#94a3b8">MECHANICAL CERTIFICATIONS:</text>
+        <text x="210" y="22" class="mono-xs" fill="#34d399">IP67 Enclosure Rating</text>
+        <text x="410" y="22" class="mono-xs" fill="#38bdf8">IK08 Impact Resistance</text>
+        <text x="610" y="22" class="mono-xs" fill="#fbbf24">UL94-V0 Polycarbonate</text>
+        <text x="820" y="22" class="mono-xs" fill="#34d399">100% Solderless Field Serviceable</text>
+    </g>
+</svg>

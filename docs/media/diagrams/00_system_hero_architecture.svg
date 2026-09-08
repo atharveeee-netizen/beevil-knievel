@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 500" width="100%" height="100%">
+    
+    <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#070a14"/>
+            <stop offset="50%" stop-color="#0b111e"/>
+            <stop offset="100%" stop-color="#0f172a"/>
+        </linearGradient>
+        <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#111a2d"/>
+            <stop offset="100%" stop-color="#0c1220"/>
+        </linearGradient>
+        <linearGradient id="cardGradHighlight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1a253c"/>
+            <stop offset="100%" stop-color="#0f182b"/>
+        </linearGradient>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#d97706"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+        </linearGradient>
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#0284c7"/>
+            <stop offset="100%" stop-color="#38bdf8"/>
+        </linearGradient>
+        <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#059669"/>
+            <stop offset="100%" stop-color="#34d399"/>
+        </linearGradient>
+        <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#e11d48"/>
+            <stop offset="100%" stop-color="#fb7185"/>
+        </linearGradient>
+        <linearGradient id="violetGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+        
+        <marker id="arrCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+        </marker>
+        <marker id="arrGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24"/>
+        </marker>
+        <marker id="arrEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399"/>
+        </marker>
+        <marker id="arrRose" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#fb7185"/>
+        </marker>
+        <marker id="arrPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#a855f7"/>
+        </marker>
+        <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#7c3aed"/>
+            <stop offset="100%" stop-color="#a855f7"/>
+        </linearGradient>
+
+        <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+            <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#1e293b" stroke-width="0.5" stroke-opacity="0.35"/>
+        </pattern>
+    </defs>
+    <style>
+        .headline { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 800; font-size: 17px; fill: #ffffff; letter-spacing: 0.5px; }
+        .subhead { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #94a3b8; }
+        .sec-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 12.5px; letter-spacing: 0.3px; }
+        .body-title { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 600; font-size: 11px; fill: #f1f5f9; }
+        .body-desc { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #94a3b8; line-height: 1.4; }
+        .mono-sm { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 9.5px; }
+        .mono-xs { font-family: "SF Mono", "JetBrains Mono", Consolas, Menlo, monospace; font-size: 8.5px; }
+        .badge { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-weight: 700; font-size: 9px; letter-spacing: 0.5px; }
+    </style>
+
+    <rect width="1120" height="500" fill="url(#bgGrad)" rx="10"/>
+    <rect width="1120" height="500" fill="url(#grid)" rx="10"/>
+
+    <!-- Header Section -->
+    <rect x="25" y="18" width="220" height="24" rx="12" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
+    <text x="135" y="34" class="badge" fill="#fbbf24" text-anchor="middle">IEEE-HART SYSTEM SPECIFICATION</text>
+    <text x="25" y="64" class="headline">BEEVIL KNIEVEL - AUTONOMOUS PRECISION APICULTURE CYBER-PHYSICAL SYSTEM</text>
+    <text x="25" y="82" class="subhead">Multi-Modal Transduction, Cortex-M4 CMSIS-DSP, Sub-GHz Foliage-Penetrating LoRa Mesh &amp; Hardened Edge Gateway</text>
+
+    <!-- Pillar 1: Instrumented Hive Node -->
+    <g transform="translate(25, 100)">
+        <rect width="250" height="340" rx="8" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.4"/>
+        <rect x="12" y="12" width="165" height="20" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+        <text x="94" y="26" class="badge" fill="#38bdf8" text-anchor="middle">1. TRANSDUCTION LAYER</text>
+        <text x="12" y="48" class="body-title" fill="#ffffff">Instrumented Langstroth</text>
+        <text x="12" y="62" class="mono-xs" fill="#94a3b8">10-Frame Brood Body (Pine Wood)</text>
+
+        <rect x="12" y="72" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="88" class="mono-xs" fill="#f87171">TI TMP117 NIST RTD (+-0.1 deg C)</text>
+        <text x="20" y="102" class="mono-xs" fill="#94a3b8">Frame 3 Core Brood Regulation (34.5 C)</text>
+
+        <rect x="12" y="120" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="136" class="mono-xs" fill="#38bdf8">Maxim DS18B20 1-Wire Array</text>
+        <text x="20" y="150" class="mono-xs" fill="#94a3b8">5-Point Lateral Brood Gradient (F1-F5)</text>
+
+        <rect x="12" y="168" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="184" class="mono-xs" fill="#fbbf24">InvenSense INMP441 I2S MEMS</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">Acoustic Resonance (fs = 2000 Hz, 24-bit)</text>
+
+        <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="232" class="mono-xs" fill="#34d399">Sensirion SCD41 + BME688</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">Photoacoustic NDIR CO2 + MOX VOC Gas</text>
+
+        <rect x="12" y="264" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="280" class="mono-xs" fill="#cbd5e1">HX711 Scale + LIS3DH Tilt</text>
+        <text x="20" y="294" class="mono-xs" fill="#94a3b8">24-Bit Honey Stores + Tamper/Theft INT</text>
+
+        <text x="12" y="324" class="mono-xs" fill="#38bdf8">I2C, I2S &amp; 1-Wire Solderless Harness</text>
+    </g>
+
+    <path d="M 275 270 L 293 270" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrCyan)"/>
+
+    <!-- Pillar 2: Edge MCU & DSP -->
+    <g transform="translate(295, 100)">
+        <rect width="250" height="340" rx="8" fill="url(#cardGradHighlight)" stroke="#f59e0b" stroke-width="1.6"/>
+        <rect x="12" y="12" width="165" height="20" rx="4" fill="rgba(245, 158, 11, 0.2)"/>
+        <text x="94" y="26" class="badge" fill="#fbbf24" text-anchor="middle">2. EDGE COMPUTATION</text>
+        <text x="12" y="48" class="body-title" fill="#ffffff">RAK4631 WisBlock Core</text>
+        <text x="12" y="62" class="mono-xs" fill="#94a3b8">Nordic nRF52840 (Cortex-M4F @ 64MHz)</text>
+
+        <rect x="12" y="72" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="88" class="mono-xs" fill="#fbbf24">CMSIS-DSP FFT Acceleration</text>
+        <text x="20" y="102" class="mono-xs" fill="#94a3b8">256-pt Real FFT (delta-f = 7.81 Hz, 1.28 ms)</text>
+
+        <rect x="12" y="120" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="136" class="mono-xs" fill="#38bdf8">Spectral Band Extraction</text>
+        <text x="20" y="150" class="mono-xs" fill="#94a3b8">E_fan (100-200Hz), E_swm (300-500Hz)</text>
+
+        <rect x="12" y="168" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="184" class="mono-xs" fill="#34d399">Power Gating &amp; MPPT Harvester</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">18.4 uA Deep Sleep | 3.7V LiFePO4</text>
+
+        <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="232" class="mono-xs" fill="#cbd5e1">Binary Telemetry Packer</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">32-Byte Packed Frame + CRC-16 Checksum</text>
+
+        <rect x="12" y="264" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="280" class="mono-xs" fill="#a855f7">Semtech SX1262 LoRa Driver</text>
+        <text x="20" y="294" class="mono-xs" fill="#94a3b8">SPI DMA Engine @ 8 MHz (BUSY/DIO1)</text>
+
+        <text x="12" y="324" class="mono-xs" fill="#fbbf24">TinyML On-Device Execution (99.7% Comp)</text>
+    </g>
+
+    <path d="M 545 270 L 563 270" stroke="#a855f7" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrPurple)"/>
+
+    <!-- Pillar 3: LoRa RF Mesh Uplink -->
+    <g transform="translate(565, 100)">
+        <rect width="250" height="340" rx="8" fill="url(#cardGrad)" stroke="#a855f7" stroke-width="1.4"/>
+        <rect x="12" y="12" width="165" height="20" rx="4" fill="rgba(168, 85, 247, 0.15)"/>
+        <text x="94" y="26" class="badge" fill="#c084fc" text-anchor="middle">3. SUB-GHz RF MESH</text>
+        <text x="12" y="48" class="body-title" fill="#ffffff">Long-Range Telemetry Link</text>
+        <text x="12" y="62" class="mono-xs" fill="#94a3b8">IN865 Band (865.0 - 867.0 MHz)</text>
+
+        <rect x="12" y="72" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="88" class="mono-xs" fill="#c084fc">Foliage Penetration Budget</text>
+        <text x="20" y="102" class="mono-xs" fill="#94a3b8">151 dB Link Budget (+26 dB Fade Margin)</text>
+
+        <rect x="12" y="120" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="136" class="mono-xs" fill="#38bdf8">Multi-Hop Mesh Topology</text>
+        <text x="20" y="150" class="mono-xs" fill="#94a3b8">Relay routing around terrain obstacles</text>
+
+        <rect x="12" y="168" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="184" class="mono-xs" fill="#34d399">Propagation Range Limits</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">1.5 km Pine Canopy / 15.0 km Line-of-Sight</text>
+
+        <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="232" class="mono-xs" fill="#fbbf24">Adaptive Data Rate (ADR)</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">SF7 (Fast / Low Latency) to SF12 (Deep RF)</text>
+
+        <rect x="12" y="264" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="280" class="mono-xs" fill="#f87171">Regional Regulatory Standard</text>
+        <text x="20" y="294" class="mono-xs" fill="#94a3b8">&lt; 0.1% Duty Cycle (25 mW / +14 dBm EIRP)</text>
+
+        <text x="12" y="324" class="mono-xs" fill="#c084fc">Robust Sub-GHz Physical Modulation</text>
+    </g>
+
+    <path d="M 815 270 L 833 270" stroke="#10b981" stroke-width="2" marker-end="url(#arrEmerald)"/>
+
+    <!-- Pillar 4: Gateway & Operational Consoles -->
+    <g transform="translate(835, 100)">
+        <rect width="260" height="340" rx="8" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.4"/>
+        <rect x="12" y="12" width="175" height="20" rx="4" fill="rgba(16, 185, 129, 0.15)"/>
+        <text x="99" y="26" class="badge" fill="#34d399" text-anchor="middle">4. HARBOR GATEWAY</text>
+        <text x="12" y="48" class="body-title" fill="#ffffff">Raspberry Pi 3B+ Gateway</text>
+        <text x="12" y="62" class="mono-xs" fill="#94a3b8">Broadcom BCM2837B0 + SX1262 HAT</text>
+
+        <rect x="12" y="72" width="236" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="88" class="mono-xs" fill="#34d399">OverlayFS Read-Only Linux Root</text>
+        <text x="20" y="102" class="mono-xs" fill="#94a3b8">Zero SD card corruption on abrupt outage</text>
+
+        <rect x="12" y="120" width="236" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="136" class="mono-xs" fill="#fbbf24">Page (1954) CUSUM Drift Filter</text>
+        <text x="20" y="150" class="mono-xs" fill="#94a3b8">Early thermal chill &amp; swarming alarm</text>
+
+        <rect x="12" y="168" width="236" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="184" class="mono-xs" fill="#38bdf8">HoneyChain Immutable Ledger</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">SHA-256 forward hash-chain proof</text>
+
+        <rect x="12" y="216" width="236" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="232" class="mono-xs" fill="#cbd5e1">Local Persistence Store</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">SQLite 3 WAL Mode (&lt; 7 ms write latency)</text>
+
+        <rect x="12" y="264" width="236" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
+        <text x="20" y="280" class="mono-xs" fill="#34d399">Zero-Cloud Local Consoles</text>
+        <text x="20" y="294" class="mono-xs" fill="#94a3b8">Playdate 1-bit | Mobile PWA | Web Portal</text>
+
+        <text x="12" y="324" class="mono-xs" fill="#34d399">Zero Cloud Lock-in / Fully Autonomous</text>
+    </g>
+
+    <!-- Bottom Stat Bar -->
+    <g transform="translate(25, 452)">
+        <rect width="1070" height="34" rx="6" fill="#0c1220" stroke="#1e293b"/>
+        <text x="20" y="22" class="mono-xs" fill="#94a3b8">OPERATIONAL METRICS:</text>
+        <text x="170" y="22" class="mono-xs" fill="#34d399">Solar Autonomy: 18+ Months</text>
+        <text x="360" y="22" class="mono-xs" fill="#38bdf8">Cadence: 5-Min Telemetry</text>
+        <text x="540" y="22" class="mono-xs" fill="#fbbf24">Swarm Early Warning: 36h</text>
+        <text x="730" y="22" class="mono-xs" fill="#a855f7">RF Link: 1.5km Canopy / 15km LOS</text>
+        <text x="960" y="22" class="mono-xs" fill="#34d399">Density: 100 Hives/Hub</text>
+    </g>
+</svg>

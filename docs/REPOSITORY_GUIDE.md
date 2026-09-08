@@ -30,7 +30,7 @@ beevil-knievel/
 │   └── media/                                # 25+ visual evidence assets, SVGs, real photos & screenshots
 │       ├── SOURCES.md                        # Image source, copyright license, and attribution registry
 │       ├── MEDIA_INDEX.md                    # Master catalog of visual assets and README locations
-│       ├── 01-hero/                          # Hero product visualization (beevil_knievel_hero.png)
+│       ├── diagrams/                         # 12 Precision publication-grade vector SVG figures
 │       ├── 02-apiary-problem/                # Real USDA apiary context & problem flow diagram
 │       ├── 03-acoustic-problem/              # Bio-acoustic spectrum diagrams & research benchmarks
 │       ├── 04-system/                        # Cyber-physical architecture & telemetry packet maps
