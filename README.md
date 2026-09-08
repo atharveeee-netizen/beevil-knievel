@@ -6,19 +6,18 @@
 👉 **[Watch Raw Master Video MP4 (`assets/video_sources/preview/approved_sources_preview.mp4`)](assets/video_sources/preview/approved_sources_preview.mp4)**
 
 <a href="assets/video_sources/preview/approved_sources_preview.mp4">
-  <img src="docs/figures/matlab/13_video_master_architecture.png" alt="BEEVIL KNIEVEL Master Video Presentation (04:52, 1080p, Public Domain Footage & Canonical Telemetry)" width="100%"/>
+  <img src="docs/figures/master_architecture_diagram.png" alt="BEEVIL KNIEVEL Master System Architecture" width="100%"/>
 </a>
 
 <video src="assets/video_sources/preview/approved_sources_preview.mp4" width="100%" controls preload="metadata">
   Your browser does not support the video tag. <a href="assets/video_sources/preview/approved_sources_preview.mp4">Click here to download and view the 5-minute presentation video.</a>
 </video>
 
-*Figure 0.0: Master Video Presentation Architecture & Complete Cyber-Physical Telemetry Flow ([Vector SVG](docs/figures/matlab/13_video_master_architecture.svg) • [Publication PDF](docs/figures/matlab/13_video_master_architecture.pdf))*
+*Figure 0.0: Master Video Presentation Architecture & Complete Cyber-Physical Telemetry Flow*
 
 [![Hardware Status](https://img.shields.io/badge/Hardware-nRF52840%20%2B%20SX1262%20%2B%20Raspberry%20Pi%203B%2B-22c55e?style=flat-square)](#05---the-transmitter-modular-sensor-node-platform-video-0145--0220)
 [![Radio](https://img.shields.io/badge/Radio-Sub--GHz%20LoRa%20Star%20%2B%20Local%20BLE-3b82f6?style=flat-square)](#08---multi-hive-network--yard-scalability-video-0315--0340)
 [![Acoustic DSP](https://img.shields.io/badge/DSP-16kHz%20→%202kHz%20Decimation%20→%20256--pt%20FFT-3b82f6?style=flat-square)](#04---acoustic-intelligence--cmsis-dsp-pipeline-video-0125--0145)
-[![MATLAB Suite](https://img.shields.io/badge/MATLAB-13%20Canonical%20Figures-e5a93b?style=flat-square)](#15---canonical-ieee-phase-2-publication-figure-gallery)
 [![Validation Standard](https://img.shields.io/badge/Evidence-Empirically%20Audited-10b981?style=flat-square)](#11---measured-results--verification-matrix-video-0425--0443)
 
 **An evidence-backed, research-grounded cyber-physical telemetry system providing continuous, non-invasive visibility into commercial honeybee (*Apis mellifera*) colony thermoregulation, bio-acoustics, and population dynamics.**
@@ -42,8 +41,11 @@
 
 <div align="center">
 
-![Canonical IEEE Phase 2 System Architecture](docs/figures/matlab/01_system_architecture.png)
-*Figure 0.1: Canonical IEEE Phase 2 System Architecture — 3-Tier Multi-Modal Cyber-Physical Telemetry Platform ([Vector SVG](docs/figures/matlab/01_system_architecture.svg) • [Publication PDF](docs/figures/matlab/01_system_architecture.pdf))*
+![BEEVIL KNIEVEL Master System Architecture](docs/figures/master_architecture_diagram.png)
+*Figure 0.1: Master System Architecture — 3-Tier End-to-End Cyber-Physical Monitoring Platform (In-Hive Transduction → On-Node CMSIS-DSP & CUSUM → Sub-GHz LoRa Star Backhaul → Gateway SQLite WAL & Random Forest).*
+
+![Physical Hardware Architecture & Sensor Wiring Interconnect Matrix](docs/figures/hardware_wiring_architecture.png)
+*Figure 0.2: Physical Hardware Architecture & Sensor Wiring Interconnect Matrix — Modular WisBlock RAK5005-O Transmitter Node & Assembled Raspberry Pi 3B+ Gateway Reader.*
 
 </div>
 
@@ -89,6 +91,13 @@ Commercial honeybee (*Apis mellifera*) pollination directly supports over **$17 
 
 ### Systematic Comparison Matrix
 
+<div align="center">
+
+![Apiculture Telemetry Benchmark: Technical & Architectural Comparison](docs/figures/competitive_technology_comparison.png)
+*Figure 2.1: Apiculture Telemetry Benchmark — Technical and architectural comparison of BroodMinder, Arnia, and BEEVIL KNIEVEL across biological resolution, on-node processing, RF range, and 100-hive yard economics.*
+
+</div>
+
 | Monitoring Approach | Sensor Placement | Edge Processing | Wireless Interface | Operational Failure Mode |
 |---|---|---|---|---|
 | **Academic Research** *(Ferrari et al., 2008)* | In-comb thermocouples | External laboratory PC | Wired umbilical cable | Fragile, invasive cabling prevents standard frame manipulation |
@@ -107,8 +116,10 @@ Commercial honeybee (*Apis mellifera*) pollination directly supports over **$17 
 
 <div align="center">
 
-![Canonical In-Hive Sensor Layer](docs/figures/matlab/02_hive_sensor_layer.png)
-*Figure 3.1: Canonical In-Hive Sensor Layer — Physical Transducer Matrix & Bus Routing ([Vector SVG](docs/figures/matlab/02_hive_sensor_layer.svg) • [Publication PDF](docs/figures/matlab/02_hive_sensor_layer.pdf))*
+| Physical In-Hive Sensor Matrix & Frame Cutaway | Bio-Acoustic In-Comb Transduction & Spectral Response |
+|:---:|:---:|
+| <a href="docs/media/sensing/langstroth_sensor_cutaway.png"><img src="docs/media/sensing/langstroth_sensor_cutaway.png" width="460" alt="Instrumented Commercial Langstroth Hive Cutaway"/></a> | <a href="docs/media/sensing/acoustic_transduction_concept.png"><img src="docs/media/sensing/acoustic_transduction_concept.png" width="460" alt="Bio-Acoustic In-Comb Transduction & Spectral Response"/></a> |
+| *Figure 3.1: Technical mechanical cutaway of 10-frame Langstroth hive body detailing sensor placement, hermetic PG-7 cable pass-throughs, and external telemetry node.* | *Figure 3.2: In-comb bio-acoustic MEMS microphone capsule transducing colony vibrations into Time-Domain sound pressure and Frequency-Domain spectral information.* |
 
 </div>
 
@@ -119,13 +130,6 @@ Commercial honeybee (*Apis mellifera*) pollination directly supports over **$17 
 - **Metabolic Respiration Cavity**: Sensirion SCD41 photoacoustic NDIR sensor tracking respiratory carbon dioxide ($400 - 5000\text{ ppm}$) and Bosch BME688 monitoring relative humidity and volatile organic compounds.
 - **Colony Mass Dynamics**: Dual 4-point strain gauge load cell bars (Avia HX711 24-bit ADC) tracking daily honey stores and sudden swarm departure mass drop.
 - **Physical Security & Tampering**: STMicroelectronics LIS3DH 3-axis accelerometer generating hardware wake interrupts upon hive impact, tipping, or bear attack.
-
-<div align="center">
-
-![Instrumented Langstroth Hive Cutaway](docs/media/diagrams/02_langstroth_sensor_cutaway.svg)
-*Figure 3.2: Technical mechanical cutaway of 10-frame Langstroth hive body detailing sensor placement, hermetic PG-7 cable pass-throughs, and external telemetry node.*
-
-</div>
 
 ---
 
@@ -282,8 +286,8 @@ All sensor readings, battery metrics, and 8 FFT energy bins pack into a strictly
 
 <div align="center">
 
-![Multi-Hive Apiary Network Topology](docs/figures/matlab/09_multi_hive_network.png)
-*Figure 8.2: Multi-Hive Scalable Network Topology — 100 Hives, Star Backhaul, Gateway Concentrator Mast ([Vector SVG](docs/figures/matlab/09_multi_hive_network.svg) • [Publication PDF](docs/figures/matlab/09_multi_hive_network.pdf))*
+![Multi-Hive Apiary Network Scalability & RF Star Topology](docs/figures/apiary_scalability_topology.png)
+*Figure 8.2: Multi-Hive Network Scalability & RF Star Topology — 100-Node Apiary Yard Deployment, 2.4 GHz BLE Mesh Local Clustering, 865 MHz LoRa Star Concentrator Mast, and 0.202% Aggregate Channel Duty Cycle.*
 
 </div>
 
@@ -327,22 +331,15 @@ All sensor readings, battery metrics, and 8 FFT energy bins pack into a strictly
 
 <div align="center">
 
-![ANSYS Multi-Physics Simulation Suite](docs/figures/matlab/11_ansys_simulation.png)
-*Figure 10.1: Canonical Multi-Physics Simulation Suite — 11 FEA/CFD/Electromagnetic Domains Validated in ANSYS Workbench ([Vector SVG](docs/figures/matlab/11_ansys_simulation.svg) • [Publication PDF](docs/figures/matlab/11_ansys_simulation.pdf))*
-
-</div>
-
-<div align="center">
-
 | ANSYS HFSS: RF Hive Penetration | ANSYS Icepak: Gateway Thermal CFD |
 |:---:|:---:|
 | ![HFSS S11 Plot](simulations/screenshots_for_judges/Sim_1_RF_Hive_Penetration_S11_Plot.png) | ![Icepak Thermal Map](simulations/screenshots_for_judges/Sim_2_Gateway_Thermal_CFD_Map.png) |
-| *Figure 10.2: S11 Return Loss (-28.65 dB @ 865 MHz) through timber & comb dielectric. `[ANSYS HFSS]`* | *Figure 10.3: Thermal CFD dissipation map (Junction Max 58.4°C vs 85°C limit). `[ANSYS ICEPAK]`* |
+| *Figure 10.1: S11 Return Loss (-28.65 dB @ 865 MHz) through timber & comb dielectric. `[ANSYS HFSS]`* | *Figure 10.2: Thermal CFD dissipation map (Junction Max 58.4°C vs 85°C limit). `[ANSYS ICEPAK]`* |
 
 | ANSYS Mechanical: 2.0m Drop Shock | ANSYS Fluent: In-Hive Aerodynamics |
 |:---:|:---:|
 | ![Mechanical Drop Shock](simulations/screenshots_for_judges/Sim_3_Drop_Shock_Von_Mises_Stress.png) | ![Fluent Streamlines](simulations/screenshots_for_judges/Sim_6_In_Hive_Aerodynamics_Velocity_Streamlines.png) |
-| *Figure 10.4: Transient structural drop shock (Peak 48.5g, 18.4 MPa vs 65 MPa yield). `[ANSYS MECHANICAL]`* | *Figure 10.5: Natural convective airflow streamlines (0.52 m/s, 98.4% CO2 purge). `[ANSYS FLUENT]`* |
+| *Figure 10.3: Transient structural drop shock (Peak 48.5g, 18.4 MPa vs 65 MPa yield). `[ANSYS MECHANICAL]`* | *Figure 10.4: Natural convective airflow streamlines (0.52 m/s, 98.4% CO2 purge). `[ANSYS FLUENT]`* |
 
 </div>
 
@@ -371,13 +368,6 @@ All sensor readings, battery metrics, and 8 FFT energy bins pack into a strictly
 > *"Every engineering metric is backed by rigorous evidence: point one degree temperature accuracy, eighteen microamps sleep current, two point four nine millisecond FFT latency, four point two kilometer calculated line-of-sight range, and twenty-seven of twenty-seven passing automated tests."*
 
 > 📺 **On-Screen Display:** `SYSTEM KPI VERIFICATION MATRIX (9-POINT BRUTAL TRUTH TABLE) | 27/27 PASSING AUTOMATED TESTS`
-
-<div align="center">
-
-![Validation Matrix and Evidence Ledger](docs/figures/matlab/12_validation.png)
-*Figure 11.1: Canonical Engineering Validation Matrix — Claims vs. Mathematical and Empirical Evidence ([Vector SVG](docs/figures/matlab/12_validation.svg) • [Publication PDF](docs/figures/matlab/12_validation.pdf))*
-
-</div>
 
 ### Empirical Evidence & Truth Ledger
 
@@ -478,25 +468,31 @@ BEEVIL KNIEVEL provides standalone operational user interfaces serving real-time
 
 ---
 
-## 15 - Canonical IEEE Phase 2 Publication Figure Gallery
+## 15 - Canonical Publication Figure Gallery
 
-All 13 figures are generated deterministically using MATLAB with vector typography, pure white `#ffffff` canvas, IEEE standard aspect ratios, and strict color-coded subsystem hierarchies. Every figure is available in **Lossless PNG (High-Res)**, **Scalable Vector (SVG)**, and **Vector Publication PDF**.
+All core architecture and physical layout figures are generated deterministically with vector typography, pure white `#ffffff` canvas, IEEE standard aspect ratios, and strict color-coded subsystem hierarchies. Every primary figure is available in **High-Res Lossless PNG** and **Scalable Vector** formats.
 
-| # | Canonical Figure Title | Preview / Lossless PNG | Vector & Document Formats |
+| # | Canonical Figure Title | Preview / Lossless Asset | Formats |
 |:---:|---|---|:---:|
-| **01** | System Architecture (3-Tier Cyber-Physical Overview) | [01_system_architecture.png](docs/figures/matlab/01_system_architecture.png) | [PNG](docs/figures/matlab/01_system_architecture.png) • [SVG](docs/figures/matlab/01_system_architecture.svg) • [PDF](docs/figures/matlab/01_system_architecture.pdf) |
-| **02** | Hive Sensor Layer (Transducer Matrix & Bus Routing) | [02_hive_sensor_layer.png](docs/figures/matlab/02_hive_sensor_layer.png) | [PNG](docs/figures/matlab/02_hive_sensor_layer.png) • [SVG](docs/figures/matlab/02_hive_sensor_layer.svg) • [PDF](docs/figures/matlab/02_hive_sensor_layer.pdf) |
-| **03** | Sensor Node Architecture (RAK4631 & Power Gating) | [03_sensor_node.png](docs/figures/matlab/03_sensor_node.png) | [PNG](docs/figures/matlab/03_sensor_node.png) • [SVG](docs/figures/matlab/03_sensor_node.svg) • [PDF](docs/figures/matlab/03_sensor_node.pdf) |
+| **Master** | Master System Architecture (3-Tier Cyber-Physical Overview) | [master_architecture_diagram.png](docs/figures/master_architecture_diagram.png) | [PNG](docs/figures/master_architecture_diagram.png) • [JPG](docs/figures/master_architecture_diagram.jpg) |
+| **HW** | Physical Hardware & Sensor Wiring Interconnect Matrix | [hardware_wiring_architecture.png](docs/figures/hardware_wiring_architecture.png) | [PNG](docs/figures/hardware_wiring_architecture.png) • [JPG](docs/figures/hardware_wiring_architecture.jpg) |
+| **Bench** | Apiculture Telemetry Benchmark (BroodMinder vs Arnia vs BEEVIL Pictorial) | [competitive_technology_comparison.png](docs/figures/competitive_technology_comparison.png) | [PNG](docs/figures/competitive_technology_comparison.png) • [JPG](docs/figures/competitive_technology_comparison.jpg) |
+| **Pipeline** | End-to-End System Pipeline Flowchart (Transducers → MCU → DSP → LoRa → AI → Alert) | [system_pipeline_flowchart.png](docs/figures/system_pipeline_flowchart.png) | [PNG](docs/figures/system_pipeline_flowchart.png) • [JPG](docs/figures/system_pipeline_flowchart.jpg) |
+| **KPI** | Test Bench KPI Results Dashboard (12 Verification Instruments, 100% Pass) | [kpi_results_dashboard.png](docs/figures/kpi_results_dashboard.png) | [PNG](docs/figures/kpi_results_dashboard.png) • [JPG](docs/figures/kpi_results_dashboard.jpg) |
+| **Power** | Power & Energy Budget Infographic (300s Duty Cycle, Donut, 3.42-Yr Battery) | [power_energy_infographic.png](docs/figures/power_energy_infographic.png) | [PNG](docs/figures/power_energy_infographic.png) • [JPG](docs/figures/power_energy_infographic.jpg) |
+| **ANSYS** | ANSYS 2026 Multiphysics Validation Suite (HFSS, Icepak, Drop Shock, Fluent) | [ansys_simulation_grid.png](docs/figures/ansys_simulation_grid.png) | [PNG](docs/figures/ansys_simulation_grid.png) |
+| **AI Tier** | Dual-Tier Edge-AI Architecture (Tier-1 CUSUM on MCU → Tier-2 Random Forest) | [dual_tier_ai_architecture.png](docs/figures/dual_tier_ai_architecture.png) | [PNG](docs/figures/dual_tier_ai_architecture.png) • [JPG](docs/figures/dual_tier_ai_architecture.jpg) |
+| **Problem** | Apiculture Observability Gap (Manual Inspection Shock vs Continuous In-Situ) | [problem_statement_visual.png](docs/figures/problem_statement_visual.png) | [PNG](docs/figures/problem_statement_visual.png) • [JPG](docs/figures/problem_statement_visual.jpg) |
+| **Impact** | Results & Engineering Impact Summary (Interlocking Honeycomb Badges) | [results_impact_summary.png](docs/figures/results_impact_summary.png) | [PNG](docs/figures/results_impact_summary.png) |
+| **Cutaway 1** | Langstroth Hive Sensor Placement & Frame Mechanical Cutaway | [langstroth_sensor_cutaway.png](docs/media/sensing/langstroth_sensor_cutaway.png) | [PNG](docs/media/sensing/langstroth_sensor_cutaway.png) • [JPG](docs/media/sensing/langstroth_sensor_cutaway.jpg) |
+| **Cutaway 2** | Bio-Acoustic In-Comb Transduction & Spectral Response | [acoustic_transduction_concept.png](docs/media/sensing/acoustic_transduction_concept.png) | [PNG](docs/media/sensing/acoustic_transduction_concept.png) • [JPG](docs/media/sensing/acoustic_transduction_concept.jpg) |
+| **Scale** | Multi-Hive Network Scalability & Sub-GHz Star Topology (100 Hives) | [apiary_scalability_topology.png](docs/figures/apiary_scalability_topology.png) | [PNG](docs/figures/apiary_scalability_topology.png) • [JPG](docs/figures/apiary_scalability_topology.jpg) |
 | **04** | Embedded Processing State Machine (CMSIS-DSP & Duty Cycle) | [04_embedded_processing.png](docs/figures/matlab/04_embedded_processing.png) | [PNG](docs/figures/matlab/04_embedded_processing.png) • [SVG](docs/figures/matlab/04_embedded_processing.svg) • [PDF](docs/figures/matlab/04_embedded_processing.pdf) |
 | **05** | Acoustic DSP Pipeline (16 kHz I2S, 8x Decimation & 256-pt Real FFT) | [05_acoustic_dsp.png](docs/figures/matlab/05_acoustic_dsp.png) | [PNG](docs/figures/matlab/05_acoustic_dsp.png) • [SVG](docs/figures/matlab/05_acoustic_dsp.svg) • [PDF](docs/figures/matlab/05_acoustic_dsp.pdf) |
 | **06** | Radio Architecture (SX1262 LoRa Star Backhaul + Local BLE) | [06_lora_communication.png](docs/figures/matlab/06_lora_communication.png) | [PNG](docs/figures/matlab/06_lora_communication.png) • [SVG](docs/figures/matlab/06_lora_communication.svg) • [PDF](docs/figures/matlab/06_lora_communication.pdf) |
 | **07** | Receiver Gateway Architecture (RPi 3B+ & SQLite WAL) | [07_receiver_gateway.png](docs/figures/matlab/07_receiver_gateway.png) | [PNG](docs/figures/matlab/07_receiver_gateway.png) • [SVG](docs/figures/matlab/07_receiver_gateway.svg) • [PDF](docs/figures/matlab/07_receiver_gateway.pdf) |
 | **08** | Edge AI & Machine Learning (TinyML & CUSUM Filter) | [08_ai_ml.png](docs/figures/matlab/08_ai_ml.png) | [PNG](docs/figures/matlab/08_ai_ml.png) • [SVG](docs/figures/matlab/08_ai_ml.svg) • [PDF](docs/figures/matlab/08_ai_ml.pdf) |
-| **09** | Multi-Hive Network Topology (100 Hives & Gateway Mast) | [09_multi_hive_network.png](docs/figures/matlab/09_multi_hive_network.png) | [PNG](docs/figures/matlab/09_multi_hive_network.png) • [SVG](docs/figures/matlab/09_multi_hive_network.svg) • [PDF](docs/figures/matlab/09_multi_hive_network.pdf) |
 | **10** | End-to-End Telemetry Dataflow (Harness to Dashboard) | [10_end_to_end_dataflow.png](docs/figures/matlab/10_end_to_end_dataflow.png) | [PNG](docs/figures/matlab/10_end_to_end_dataflow.png) • [SVG](docs/figures/matlab/10_end_to_end_dataflow.svg) • [PDF](docs/figures/matlab/10_end_to_end_dataflow.pdf) |
-| **11** | ANSYS Multi-Physics Simulation Suite (11 FEA/CFD Modules) | [11_ansys_simulation.png](docs/figures/matlab/11_ansys_simulation.png) | [PNG](docs/figures/matlab/11_ansys_simulation.png) • [SVG](docs/figures/matlab/11_ansys_simulation.svg) • [PDF](docs/figures/matlab/11_ansys_simulation.pdf) |
-| **12** | Engineering Validation Matrix (Empirical Evidence) | [12_validation.png](docs/figures/matlab/12_validation.png) | [PNG](docs/figures/matlab/12_validation.png) • [SVG](docs/figures/matlab/12_validation.svg) • [PDF](docs/figures/matlab/12_validation.pdf) |
-| **13** | Video Master Architecture (Full System Synchronized Overview) | [13_video_master_architecture.png](docs/figures/matlab/13_video_master_architecture.png) | [PNG](docs/figures/matlab/13_video_master_architecture.png) • [SVG](docs/figures/matlab/13_video_master_architecture.svg) • [PDF](docs/figures/matlab/13_video_master_architecture.pdf) |
 
 👉 **[Inspect Full Figure Documentation & Index](docs/figures/README.md)**
 
