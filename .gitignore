@@ -51,3 +51,5 @@ firmware/build/
 *.elf
 *.map
 
+# Raw Video Downloads (Outside Submission Package)
+assets/video_sources/raw/
