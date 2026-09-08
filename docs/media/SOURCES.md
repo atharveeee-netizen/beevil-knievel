@@ -21,8 +21,7 @@ Every asset is tagged with one of five standardized classifications:
 |---|---|---|---|---|---|
 | `docs/media/hero/beevil_knievel_hero_engineering.png` | **`GENERATED ORIGINAL`** | Team Beevil Knievel (AI Tool Assisted) | CC BY 4.0 | Engineering editorial hero visual showing Langstroth apiary context | 2026-09-06 |
 | `docs/media/apiary/commercial_apiary_context.png` | **`GENERATED ORIGINAL`** | Team Beevil Knievel (AI Tool Assisted) | CC BY 4.0 | Authentic commercial apiary inspection context illustration | 2026-09-06 |
-| `docs/media/apiary/real_commercial_apiary.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | USDA NRCS (Montana Apiary) | Public Domain (US Gov) | Commercial apiary scale documentation (Montana rangeland) | 2026-09-06 |
-| `docs/media/research/apiary/commercial_apiary_montana_usda.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | USDA NRCS | Public Domain (US Gov) | Commercial apiary operations reference photograph | 2026-09-06 |
+| `docs/media/02-apiary-problem/real_commercial_apiary.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | USDA NRCS (Montana Apiary) | Public Domain (US Gov) | Commercial apiary scale documentation (Montana rangeland) | 2026-09-06 |
 | `docs/media/research/apiary/usda_beekeeper_inspection.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | USDA Agricultural Research Service | Public Domain (US Gov) | Beekeeper brood frame inspection disruption documentation | 2026-09-06 |
 | `docs/media/research/brood/real_brood_nest_slice.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | Wikimedia Commons / Dr. M. Engel | CC BY 4.0 | Biological cross-section of brood comb cells & pupae | 2026-09-06 |
 | `docs/media/research/brood/real_capped_worker_brood.jpg` | **`EXTERNAL RESEARCH REFERENCE`** | Wikimedia Commons / Waugsberg | CC BY-SA 4.0 | Capped worker brood pattern indicating healthy queen laying | 2026-09-06 |

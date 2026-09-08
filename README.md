@@ -24,7 +24,7 @@ Commercial honeybee (*Apis mellifera*) pollination directly underpins over **$17
 
 <div align="center">
 
-![Commercial Apiary Context](docs/media/apiary/real_commercial_apiary.jpg)
+![Commercial Apiary Context](docs/media/02-apiary-problem/real_commercial_apiary.jpg)
 *Figure 1.1: Commercial migratory apiary operations in Montana rangeland. Photo: USDA NRCS (Public Domain).*
 
 </div>
@@ -381,12 +381,12 @@ BEEVIL KNIEVEL includes actual operational user interfaces serving real-time tel
 
 | Unified Operations Portal (Desktop Browser) | HiveOS Field PWA (Mobile Technician) |
 |:---:|:---:|
-| ![Dashboard Overview](docs/media/application/dashboard_overview.png) | ![Mobile Field Console](docs/media/application/mobile_field_console.png) |
+| ![Dashboard Overview](docs/media/10-dashboard/dashboard_overview.png) | ![Mobile Field Console](docs/media/10-dashboard/mobile_field_console.png) |
 | *Figure 14.1: Gateway desktop browser portal. `[ACTUAL BEEVIL IMPLEMENTATION]`* | *Figure 14.2: Mobile PWA console for apiary technicians. `[ACTUAL BEEVIL IMPLEMENTATION]`* |
 
 | Panic Playdate 1-Bit Field Console | Deep Hive Telemetry & 5-Pt Thermal Array |
 |:---:|:---:|
-| ![Playdate Console](docs/media/application/playdate_console.png) | ![Hive Detail](docs/media/application/dashboard_hive_detail.png) |
+| ![Playdate Console](docs/media/10-dashboard/playdate_console.png) | ![Hive Detail](docs/media/10-dashboard/dashboard_hive_detail.png) |
 | *Figure 14.3: High-contrast outdoor display. `[ACTUAL BEEVIL IMPLEMENTATION]`* | *Figure 14.4: 5-point thermal & acoustic inspector. `[ACTUAL BEEVIL IMPLEMENTATION]`* |
 
 </div>

@@ -23,11 +23,11 @@ def run_level1_benchmark():
 
     dataset_dir = os.path.join(os.path.dirname(__file__), "datasets", "sample_bee_audio")
 
-    # Real-world Zenodo dataset test cases with expected diagnostic categories
+    # Real-world Zenodo dataset test cases with expected diagnostic categories (canonical filenames)
     real_zenodo_tests = [
-        ("zenodo_queen_present_h1.wav", 10.5, ["NORMAL_HEALTHY", "HIGH_ACOUSTIC_ACTIVITY"], "Zenodo NU-Hive H1 (Queen Present)"),
-        ("zenodo_missing_queen_h1.wav", 4.0,  ["QUEENLESS_DISTRESS", "THERMAL_STRESS_WARNING"], "Zenodo NU-Hive H1 (Missing Queen / Chill)"),
-        ("zenodo_active_hive_214.wav",  9.8,  ["NORMAL_HEALTHY", "HIGH_ACOUSTIC_ACTIVITY"], "Zenodo OSBH (Active Hive Recording)")
+        ("zenodo_h1_queen_1500.wav",   10.5, ["NORMAL_HEALTHY", "HIGH_ACOUSTIC_ACTIVITY"], "Zenodo NU-Hive H1 (Queen Present 15:00)"),
+        ("zenodo_h1_noqueen_1500.wav", 4.0,  ["QUEENLESS_DISTRESS", "THERMAL_STRESS_WARNING"], "Zenodo NU-Hive H1 (Missing Queen / Chill 15:00)"),
+        ("zenodo_active_214.wav",      9.8,  ["NORMAL_HEALTHY", "HIGH_ACOUSTIC_ACTIVITY"], "Zenodo OSBH (Active Hive Recording 214)")
     ]
 
     print("\n[STEP 1] Verifying Zenodo Dataset Audio Files (DOI: 10.5281/zenodo.1321278)...")

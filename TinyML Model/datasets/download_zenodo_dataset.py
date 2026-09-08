@@ -14,22 +14,19 @@ import sys
 # Official Zenodo Dataset Files (Zenodo DOI: 10.5281/zenodo.1321278)
 ZENODO_FILES = [
     {
-        "filename": "zenodo_active_hive_214.wav",
-        "alt_name": "zenodo_active_214.wav",
+        "filename": "zenodo_active_214.wav",
         "url": "https://zenodo.org/records/1321278/files/CF003%20-%20Active%20-%20Day%20-%20(214).wav?download=1",
-        "desc": "Real Beehive Recording - Active Hive (Day)"
+        "desc": "Real Beehive Recording - Active Hive 214 (Day)"
     },
     {
-        "filename": "zenodo_queen_present_h1.wav",
-        "alt_name": "zenodo_h1_queen_1500.wav",
+        "filename": "zenodo_h1_queen_1500.wav",
         "url": "https://zenodo.org/records/1321278/files/Hive1_12_06_2018_QueenBee_H1_audio___15_00_00.wav?download=1",
-        "desc": "Real Beehive Recording - Queen Bee Present (NU-Hive H1)"
+        "desc": "Real Beehive Recording - Queen Present 15:00 (NU-Hive H1)"
     },
     {
-        "filename": "zenodo_missing_queen_h1.wav",
-        "alt_name": "zenodo_h1_noqueen_1500.wav",
+        "filename": "zenodo_h1_noqueen_1500.wav",
         "url": "https://zenodo.org/records/1321278/files/Hive1_31_05_2018_NO_QueenBee_H1_audio___15_00_00.wav?download=1",
-        "desc": "Real Beehive Recording - Missing Queen / Distress (NU-Hive H1)"
+        "desc": "Real Beehive Recording - Missing Queen 15:00 (NU-Hive H1)"
     }
 ]
 
@@ -43,19 +40,11 @@ def download_zenodo_samples():
 
     for item in ZENODO_FILES:
         filepath = os.path.join(target_dir, item["filename"])
-        alt_path = os.path.join(target_dir, item["alt_name"])
 
         # 1. Check if target exists
         if os.path.exists(filepath) and os.path.getsize(filepath) > 1000:
             size_mb = os.path.getsize(filepath) / (1024.0 * 1024.0)
             print(f"[EXISTS] {item['filename']} already present ({size_mb:.2f} MB)")
-            continue
-
-        # 2. Check if alternative named file exists from full downloader
-        if os.path.exists(alt_path) and os.path.getsize(alt_path) > 1000:
-            shutil.copyfile(alt_path, filepath)
-            size_mb = os.path.getsize(filepath) / (1024.0 * 1024.0)
-            print(f"[LINK] Copied from {item['alt_name']} -> {item['filename']} ({size_mb:.2f} MB)")
             continue
 
         # 3. Download via curl with browser headers
