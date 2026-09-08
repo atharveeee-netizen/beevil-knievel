@@ -1,4 +1,4 @@
-# Beevil Knievel — 3D Printable Enclosure Manufacturing Guide
+# Beevil Knievel - 3D Printable Enclosure Manufacturing Guide
 
 ---
 

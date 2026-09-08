@@ -1,5 +1,5 @@
 """
-BEEVIL ADVISOR — ON-PREMISES CONVERSATIONAL EDGE AI (Linux / Raspberry Pi 3B+)
+BEEVIL ADVISOR - ON-PREMISES CONVERSATIONAL EDGE AI (Linux / Raspberry Pi 3B+)
 ==================================================================
 Local Small Language Model (SLM) / Rule-Augmented Intelligence:
 - Analyzes 100-hive multi-modal time-series telemetry.
@@ -33,7 +33,7 @@ class LocalBeeAdvisor:
         date_str = datetime.now(timezone.utc).strftime("%A, %B %d, %Y")
 
         briefing = [
-            f"🌅 **APIARY MORNING BRIEFING — {date_str}**",
+            f"🌅 **APIARY MORNING BRIEFING - {date_str}**",
             f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
             f"📊 **Apiary Health Status:** {healthy_count}/{total_hives} Colonies Optimal (🟢 {healthy_count} | 🟡 {warning_count} | 🔴 {critical_count})",
             ""
@@ -51,7 +51,7 @@ class LocalBeeAdvisor:
                 elif a_type in ["QUEENLESS_DISTRESS", "QUEEN_ABSENT_STRESS"]:
                     briefing.append(f"• **Hive #{h_id:03d} [WARNING]:** Acoustic queen piping absent and core brood temp dropped below 32°C ({conf:.1f}% confidence). Inspect Frame 3 for emergency queen cells.")
                 elif a_type in ["PRE_SWARM_WARNING", "SWARM_PREPARATION"]:
-                    briefing.append(f"• **Hive #{h_id:03d} [WARNING]:** High-frequency 450Hz crescendo detected with CO2 surge. Swarm departure expected within 24–48 hours. Add supers or prepare swarm trap.")
+                    briefing.append(f"• **Hive #{h_id:03d} [WARNING]:** High-frequency 450Hz crescendo detected with CO2 surge. Swarm departure expected within 24-48 hours. Add supers or prepare swarm trap.")
                 elif a_type in ["VARROA_HIGH", "VARROA_BROOD_COLLAPSE"]:
                     briefing.append(f"• **Hive #{h_id:03d} [CRITICAL]:** Severe brood thermal gradient collapse. Varroa mite infestation threshold exceeded. Apply organic oxalic acid treatment.")
             briefing.append("")
@@ -78,7 +78,7 @@ class LocalBeeAdvisor:
 
         if "queen" in query_lower:
             if diag in ["QUEENLESS_DISTRESS", "QUEEN_ABSENT_STRESS"]:
-                return f"⚠️ **Hive #{h_id:03d} Queen Status:** Queen is likely MISSING or failing. The 220–250Hz acoustic resonance has collapsed, and brood core temperature is {temp:.1f}°C (below target 34.5°C). Recommend immediate frame inspection."
+                return f"⚠️ **Hive #{h_id:03d} Queen Status:** Queen is likely MISSING or failing. The 220-250Hz acoustic resonance has collapsed, and brood core temperature is {temp:.1f}°C (below target 34.5°C). Recommend immediate frame inspection."
             else:
                 return f"👑 **Hive #{h_id:03d} Queen Status:** Queen is ACTIVE and healthy. Brood nest temperature is rock-solid at {temp:.1f}°C with normal 250Hz worker fanning harmonics."
 

@@ -1,6 +1,6 @@
 """
 =============================================================================
-BEEVIL KNIEVEL — High-Stress TinyML 1D-CNN Benchmark Suite (30 Test Cases)
+BEEVIL KNIEVEL - High-Stress TinyML 1D-CNN Benchmark Suite (30 Test Cases)
 Pushes the 75.4 KB TinyML model to its limit across clean, noisy, edge-case,
 and multi-variable environmental audio stress conditions.
 =============================================================================
@@ -14,7 +14,7 @@ from datasets.sample_bee_audio.generate_synthetic_bee_wavs import generate_bee_a
 
 def run_stress_test():
     print("=================================================================================")
-    print("      BEEVIL KNIEVEL — 30-SAMPLE EXTREME TinyML STRESS TEST SUITE               ")
+    print("      BEEVIL KNIEVEL - 30-SAMPLE EXTREME TinyML STRESS TEST SUITE               ")
     print("=================================================================================")
     print(f"  * Model Architecture: 1D-CNN + 4-Band Spectral Feature Extractor")
     print(f"  * Flash Footprint:    {MODEL_FLASH_FOOTPRINT_KB} KB / 256 KB (Wio-E5)")

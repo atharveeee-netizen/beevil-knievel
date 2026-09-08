@@ -1,4 +1,4 @@
-# 🤖 BEEVIL KNIEVEL — Production Edge Model Registry
+# 🤖 BEEVIL KNIEVEL - Production Edge Model Registry
 
 This registry documents all machine learning models, statistical change-point filters, and expert diagnostic systems operating within the BEEVIL KNIEVEL cyber-physical platform.
 
@@ -8,7 +8,7 @@ This registry documents all machine learning models, statistical change-point fi
 
 ### Model 1: `BeevilFusionNetEdge` (Gateway Multi-Modal Neural Network)
 * **Purpose**: Classifies overall hive health into 8 diagnostic states using multi-sensor environmental telemetry fused with 8-band acoustic FFT energy.
-* **Target Hardware**: Raspberry Pi Compute Module 4 (Raspberry Pi 3B+) — Broadcom BCM2711 Quad-Core Cortex-A72 @ 1.5 GHz.
+* **Target Hardware**: Raspberry Pi Compute Module 4 (Raspberry Pi 3B+) - Broadcom BCM2711 Quad-Core Cortex-A72 @ 1.5 GHz.
 * **Input Modalities (16 Channels)**:
   - Brood Core Temperature (°C, TMP117)
   - 5-Frame Thermal Gradient (°C, DS18B20 Array)
@@ -40,10 +40,10 @@ This registry documents all machine learning models, statistical change-point fi
 * **Purpose**: On-device real-time acoustic swarm prediction, queenless distress detection, and environmental noise filtering.
 * **Target Hardware**: Nordic nRF52840 / nRF52840 (ARM Cortex-M4F @ 64 MHz).
 * **Input**: 4-Channel Multi-Spectral Energy Vector:
-  - Channel 1 (100 Hz – 180 Hz): Fanning and ventilation hum.
-  - Channel 2 (200 Hz – 400 Hz): Worker flight baseline and queen piping.
-  - Channel 3 (450 Hz – 750 Hz): Queenless distress and colony agitation roar.
-  - Channel 4 (800 Hz – 1200 Hz): Environmental rain, wind, and traffic noise floor.
+  - Channel 1 (100 Hz - 180 Hz): Fanning and ventilation hum.
+  - Channel 2 (200 Hz - 400 Hz): Worker flight baseline and queen piping.
+  - Channel 3 (450 Hz - 750 Hz): Queenless distress and colony agitation roar.
+  - Channel 4 (800 Hz - 1200 Hz): Environmental rain, wind, and traffic noise floor.
 * **Output**: 4 Predicted State Classes (`NORMAL_HEALTHY`, `PRE_SWARM_WARNING`, `QUEENLESS_DISTRESS`, `NOISE_SUPPRESSED_FLIGHT`).
 * **Implementation**: Python 1D-CNN reference in `TinyML Model/bee_acoustic_classifier.py`; exportable to TensorFlow Lite for Microcontrollers (`.tflite`).
 * **Model Size**: **$75.4\text{ KB}$ Flash** (29.5% of 256 KB Flash budget); **$14.2\text{ KB}$ SRAM** (22.2% of 64 KB RAM budget).

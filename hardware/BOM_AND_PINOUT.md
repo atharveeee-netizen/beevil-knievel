@@ -1,4 +1,4 @@
-# 🐝 BEEVIL KNIEVEL — OFFICIAL BILL OF MATERIALS (BOM) & HARDWARE SPECIFICATION
+# 🐝 BEEVIL KNIEVEL - OFFICIAL BILL OF MATERIALS (BOM) & HARDWARE SPECIFICATION
 
 **Project:** Beevil Knievel: Precision Edge AI & Multi-Hop LoRa Smart Apiculture Platform  
 **Target Hardware:** RAKwireless WisBlock RAK4631 + Raspberry Pi 3B+  

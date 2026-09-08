@@ -1,4 +1,4 @@
-# 🐝 BEEVIL KNIEVEL — MATLAB & Simulink Simulation Suite
+# 🐝 BEEVIL KNIEVEL - MATLAB & Simulink Simulation Suite
 
 This directory contains the reproducible mathematical, acoustic, thermal, power, and RF simulation models underpinning the **BEEVIL KNIEVEL** autonomous precision-apiculture cyber-physical monitoring platform.
 
@@ -16,7 +16,7 @@ simulation/
 │   ├── hive_thermal_model.m         # 2-node lumped parameter differential thermal ODE model
 │   ├── node_energy_budget_model.m   # 2.0 µA sleep, duty cycle, and 18-month battery SOC
 │   ├── rf_link_budget_and_range.m   # Free-space path loss & ITU-R P.833-9 canopy attenuation
-│   ├── telemetry_network_scaling.m  # 1–100 hive airtime scaling & 8-channel gateway load
+│   ├── telemetry_network_scaling.m  # 1-100 hive airtime scaling & 8-channel gateway load
 │   └── run_simulations.py           # Automated mathematical execution & figure exporter
 ├── simulink/                        # Open Packaging Convention (.slx) Simulink models
 │   ├── beevil_node_duty_cycle.slx   # Discrete stateflow duty-cycle current profile model
@@ -47,7 +47,7 @@ simulation/
 ## ⚙️ Software Compatibility & Required Toolboxes
 
 ### MATLAB & Simulink Native Execution
-- **Recommended Version**: MATLAB R2022b or later (Compatible with R2020a–R2024b).
+- **Recommended Version**: MATLAB R2022b or later (Compatible with R2020a-R2024b).
 - **Required MATLAB Toolboxes**:
   - **DSP System Toolbox**: For `arm_rfft_fast_f32` emulation, frame-based streaming, and multirate filtering.
   - **Signal Processing Toolbox**: For `spectrogram()`, `hann()`, and spectral power density calculation.

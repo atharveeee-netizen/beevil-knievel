@@ -1,4 +1,4 @@
-# 📐 BEEVIL KNIEVEL — COMPREHENSIVE MATHEMATICAL MODELS, PHYSICAL DERIVATIONS & RIGOROUS PROOFS
+# 📐 BEEVIL KNIEVEL - COMPREHENSIVE MATHEMATICAL MODELS, PHYSICAL DERIVATIONS & RIGOROUS PROOFS
 
 > **Document Version**: 2.0.0 (Master Unified Mathematical Compendium)  
 > **Target Standard**: IEEE HardwAIre & ACM Embedded Cyber-Physical Systems Specification  

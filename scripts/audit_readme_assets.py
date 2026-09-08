@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — Automated README Asset & Evidence Compliance Auditor
+BEEVIL KNIEVEL - Automated README Asset & Evidence Compliance Auditor
 Audits the README.md file to ensure:
 1. Every image and SVG reference resolves physically to a valid file on disk.
 2. ZERO website/dashboard screenshots appear in engineering sections (01 to 13).
@@ -21,7 +21,7 @@ readme_path = os.path.join(repo_dir, "README.md")
 
 def run_audit():
     print("=" * 80)
-    print("🐝 BEEVIL KNIEVEL — README ASSET & EVIDENCE COMPLIANCE AUDIT")
+    print("🐝 BEEVIL KNIEVEL - README ASSET & EVIDENCE COMPLIANCE AUDIT")
     print("=" * 80)
     
     if not os.path.exists(readme_path):
@@ -38,7 +38,7 @@ def run_audit():
     img_pattern = re.compile(r'!\[.*?\]\((.*?)\)|<img.*?src=[\"\'](.*?)[\"\']')
     found_images = []
     
-    current_section = "00 — Header"
+    current_section = "00 - Header"
     section_images = {}
     
     for idx, line in enumerate(lines, 1):
@@ -90,16 +90,16 @@ def run_audit():
     for line_num, sec, src in found_images:
         # Check if source is in application/ or dashboard
         if "application/" in src or "dashboard" in src or "mobile_field" in src or "playdate" in src:
-            if not sec.startswith("14 —"):
+            if not sec.startswith("14"):
                 illegal_screenshots.append((line_num, sec, src))
 
     if illegal_screenshots:
-        print("❌ SOFTWARE SCREENSHOTS DETECTED IN ENGINEERING SECTIONS (01–13):")
+        print("❌ SOFTWARE SCREENSHOTS DETECTED IN ENGINEERING SECTIONS (01-13):")
         for l, sec, s in illegal_screenshots:
             print(f"   Line {l} [{sec}]: {s}")
         all_passed = False
     else:
-        print("✅ Zero website/dashboard screenshots in primary engineering sections (01–13).")
+        print("✅ Zero website/dashboard screenshots in primary engineering sections (01-13).")
         print("   All UI captures properly isolated in Section 14 (Software Implementation).")
 
     # 4. Simulation Results Physical Verification

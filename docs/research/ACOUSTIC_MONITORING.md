@@ -9,20 +9,20 @@ Honey bees generate acoustic signals through two primary physiological mechanism
 
 ## 2. Biological Acoustic Spectral Regimes
 
-### A. Worker Flight & Homeostatic Fanning (180 Hz – 240 Hz)
+### A. Worker Flight & Homeostatic Fanning (180 Hz - 240 Hz)
 Under normal queenright conditions, worker bees generate a steady, uniform hum centered around **200 Hz to 240 Hz**. This acoustic output corresponds to the baseline metabolic hum of bees circulating air and maintaining nest homeostasis.
 
-### B. The Queenless Roar (285 Hz – 350 Hz)
+### B. The Queenless Roar (285 Hz - 350 Hz)
 Within 30 to 60 minutes of removing or losing a queen, the colony’s acoustic profile undergoes a marked transformation documented across literature (Wenner 1962, Cecchi et al. 2018). In the absence of queen mandibular pheromones, worker bees exhibit agitated exploratory behavior and produce an uncoordinated, high-amplitude acoustic roar centered in the **285 Hz to 350 Hz** band.
 
-### C. Virgin Queen Piping & Pre-Swarm Crescendo (380 Hz – 500 Hz)
+### C. Virgin Queen Piping & Pre-Swarm Crescendo (380 Hz - 500 Hz)
 When a colony prepares to cast a reproductive swarm, virgin queens inside emergent cells produce distinct acoustic pulses:
-- **Tooting**: A sustained pulse of 1–2 seconds duration at **$380\text{ Hz}$ to $450\text{ Hz}$**, followed by short bursts.
+- **Tooting**: A sustained pulse of 1-2 seconds duration at **$380\text{ Hz}$ to $450\text{ Hz}$**, followed by short bursts.
 - **Quacking**: The muffled reply of rival queens trapped within sealed queen wax cells.
 Additionally, 24 to 48 hours before swarm departure, thousands of worker bees undergo flight muscle warm-up, causing collective acoustic energy between **$350\text{ Hz}$ and $480\text{ Hz}$** to crescendo.
 
 ### D. Weather Noise Rejection (> 800 Hz)
-Environmental interference—such as rainfall on the tin hive roof or wind gusts blowing across the entrance—produces broadband noise predominantly concentrated **above 800 Hz**. By measuring high-frequency energy separately, BEEVIL’s firmware dynamically normalizes spectral thresholds, preventing rainstorms from triggering false swarming alarms.
+Environmental interference - such as rainfall on the tin hive roof or wind gusts blowing across the entrance - produces broadband noise predominantly concentrated **above 800 Hz**. By measuring high-frequency energy separately, BEEVIL’s firmware dynamically normalizes spectral thresholds, preventing rainstorms from triggering false swarming alarms.
 
 ---
 

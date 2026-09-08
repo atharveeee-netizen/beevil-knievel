@@ -1,4 +1,4 @@
-# 🗺️ BEEVIL KNIEVEL — Research-to-System Traceability Map
+# 🗺️ BEEVIL KNIEVEL - Research-to-System Traceability Map
 
 > [!IMPORTANT]
 > **Engineering Boundary Disclaimer**:
@@ -25,22 +25,20 @@ BEEVIL COMPONENT
 ### 1. Acoustic Frequencies & Swarm Pre-Warning
 - **Research Finding**: Ferrari et al. (2008) and Bencsik et al. (2011) demonstrate that *Apis mellifera* acoustic emissions shift during pre-swarming preparation: energy in the $100 - 200\text{ Hz}$ fanning band surges into the $300 - 400\text{ Hz}$ band 24 to 48 hours before swarm takeoff, accompanied by queen piping pulses at $320 - 450\text{ Hz}$.
 - **Engineering Implication**: An embedded acoustic sensing system must achieve frequency resolution finer than $10\text{ Hz}$ across the $100 - 500\text{ Hz}$ band, with high sidelobe suppression to prevent fanning leakage from triggering false pre-swarm warnings.
-- **BEEVIL Design Decision**: Sample at $f_s = 2000\text{ Hz}$, apply a 256-point Hanning window, and execute a 256-point real FFT yielding $\Delta f = 7.8125\text{ Hz}$ resolution per bin. Partition bins into 4 dedicated sub-bands: Fanning (100–180 Hz, $k=13..23$), Waggle (200–280 Hz, $k=26..36$), Pre-Swarm (300–400 Hz, $k=38..51$), and Distress (450–750 Hz, $k=58..96$).
+- **BEEVIL Design Decision**: Sample at $f_s = 2000\text{ Hz}$, apply a 256-point Hanning window, and execute a 256-point real FFT yielding $\Delta f = 7.8125\text{ Hz}$ resolution per bin. Partition bins into 4 dedicated sub-bands: Fanning (100-180 Hz, $k=13..23$), Waggle (200-280 Hz, $k=26..36$), Pre-Swarm (300-400 Hz, $k=38..51$), and Distress (450-750 Hz, $k=58..96$).
 - **BEEVIL Component**:
-  - Firmware: [`firmware/main_node.cpp`](../../firmware/main_node.cpp) (I2S DMA audio acquisition and CMSIS-DSP `arm_rfft_fast_f32`)
-  - MATLAB Model: [`simulation/matlab/acoustic_dsp_pipeline.m`](../../simulation/matlab/acoustic_dsp_pipeline.m)
-  - Validation Plot: [`docs/media/results/fft_resolution_validation.png`](../media/results/fft_resolution_validation.png)
-
----
-
-### 2. Brood Nest Core Thermoregulation & Larval Health
-- **Research Finding**: Heinrich (1993), Jones et al. (*Science* 2004), and Stabentheiner et al. (2010) show that honeybees regulate the core brood nest at $34.5^\circ\text{C} \pm 1.5^\circ\text{C}$ to ensure proper pupal wing development. Temperature drops below $32.0^\circ\text{C}$ cause high larval mortality and morphological wing deformities; sustained elevation above $36.5^\circ\text{C}$ causes heat stupor.
+  - Firmware: [`firmware/beevil_rak4631_transmitter/beevil_rak4631_transmitter.ino`](../../firmware/beevil_rak4631_transmitter/beevil_rak4631_transmitter.ino) (I2S DMA audio acquisition and CMSIS-DSP `arm_rfft_fast_f32`)
+  - Verification Model: [`simulation/matlab/acoustic_dsp_pipeline.m`](../../simulation/matlab/acoustic_dsp_pipeline.m)
+  - Hardware: [`hardware/BOM_AND_PINOUT.md`](../../hardware/BOM_AND_PINOUT.md)
+- **4. Ultra-Low-Power Operation & Battery Longevity**
+  - References: [TI TPS62840 Datasheet](../references/HARDWARE_DATASHEETS.md), [Nordic nRF52840 Product Spec](../references/HARDWARE_DATASHEETS.md)
+  - System Implementation: 5-minute duty cycle with 2.0 uA deep-sleep current, achieving 18+ months of battery life.
+  - Firmware: [`firmware/beevil_rak4631_transmitter/beevil_rak4631_transmitter.ino`](../../firmware/beevil_rak4631_transmitter/beevil_rak4631_transmitter.ino) (FreeRTOS low-power tickless idle) brood nest at $34.5^\circ\text{C} \pm 1.5^\circ\text{C}$ to ensure proper pupal wing development. Temperature drops below $32.0^\circ\text{C}$ cause high larval mortality and morphological wing deformities; sustained elevation above $36.5^\circ\text{C}$ causes heat stupor.
 - **Engineering Implication**: Temperature sensors must have sub-tenth-degree absolute accuracy ($\pm0.1^\circ\text{C}$) and NIST traceability, placed directly along the central brood frame face without conducting hive outer wall temperature gradients into the reading.
 - **BEEVIL Design Decision**: Deploy a 5-point sensor probe utilizing Texas Instruments TMP117 NIST-traceable digital RTDs ($\pm0.1^\circ\text{C}$ across $-20^\circ\text{C}$ to $+50^\circ\text{C}$, 16-bit resolution $0.0078^\circ\text{C}$) routed on ultra-thin flexible PCB ribbon clamped to Frame 4.
 - **BEEVIL Component**:
-  - Hardware Schematic: [`hardware/schematics/`](../../hardware/schematics/)
+  - Hardware Schematic: [`hardware/BOM_AND_PINOUT.md`](../../hardware/BOM_AND_PINOUT.md)
   - MATLAB Model: [`simulation/matlab/hive_thermal_model.m`](../../simulation/matlab/hive_thermal_model.m)
-  - Thermal Plot: [`docs/media/results/hive_thermal_model.png`](../media/results/hive_thermal_model.png)
 
 ---
 
@@ -71,7 +69,7 @@ BEEVIL COMPONENT
 - **Engineering Implication**: In-hive nodes cannot maintain continuous radio or acoustic listening without depleting typical lithium batteries in under 14 days. Energy harvesting and aggressive deep sleep are strictly required.
 - **BEEVIL Design Decision**: Structure firmware into a 300-second (5-minute) periodic duty cycle: $289.45\text{s}$ in System ON deep sleep ($2.0\,\mu\text{A}$), $0.15\text{s}$ sensor read ($2.5\text{ mA}$), $10.0\text{s}$ acoustic acquisition ($3.2\text{ mA}$), $0.05\text{s}$ FFT execution ($8.5\text{ mA}$), and $0.35\text{s}$ LoRa transmission ($38\text{ mA}$). Total energy per cycle is $3.0\text{ mJ}$ ($0.85\text{ mWh/day}$), supported by a $1200\text{ mAh}$ LiFePO4 cell and $0.5\text{W}$ monocrystalline solar MPPT charger.
 - **BEEVIL Component**:
-  - Firmware: [`firmware/main_node.cpp`](../../firmware/main_node.cpp) (FreeRTOS low-power tickless idle)
+  - Firmware: [`firmware/beevil_rak4631_transmitter/beevil_rak4631_transmitter.ino`](../../firmware/beevil_rak4631_transmitter/beevil_rak4631_transmitter.ino) (FreeRTOS low-power tickless idle)
   - MATLAB Model: [`simulation/matlab/node_energy_budget_model.m`](../../simulation/matlab/node_energy_budget_model.m)
   - Simulink Model: [`simulation/simulink/beevil_node_duty_cycle.slx`](../../simulation/simulink/beevil_node_duty_cycle.slx)
   - Energy Plot: [`docs/media/results/battery_soc_simulation.png`](../media/results/battery_soc_simulation.png)

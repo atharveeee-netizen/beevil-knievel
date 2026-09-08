@@ -1,6 +1,6 @@
 """
 =============================================================================
-BEEVIL KNIEVEL — Bee Audio Dataset Generator (Standard Library Version)
+BEEVIL KNIEVEL - Bee Audio Dataset Generator (Standard Library Version)
 Generates sample .wav audio dataset files matching 200-400Hz acoustic signatures
 =============================================================================
 """

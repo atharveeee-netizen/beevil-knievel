@@ -31,7 +31,7 @@
 
     <rect width="960" height="460" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">04 — TELEMETRY FIELD NODE EMBEDDED HARDWARE ARCHITECTURE</text>
+    <text x="30" y="38" class="title">04 - TELEMETRY FIELD NODE EMBEDDED HARDWARE ARCHITECTURE</text>
     <text x="30" y="58" class="subtitle">Nordic Semiconductor nRF52840 SoC + Semtech SX1262 LoRa Transceiver Subsystem</text>
     
     <!-- Central SoC -->
@@ -43,7 +43,7 @@
     <text x="350" y="175" class="box-body">• 1024 KB Flash / 256 KB SRAM</text>
     <text x="350" y="195" class="box-body">• System ON Sleep: 1.5 µA (RAM Retention)</text>
     <text x="350" y="215" class="box-body">• Semtech SX1262 LoRa Engine (+22 dBm Tx)</text>
-    <text x="350" y="235" class="box-body">• Operating Frequency: 865–867 MHz (IN865)</text>
+    <text x="350" y="235" class="box-body">• Operating Frequency: 865-867 MHz (IN865)</text>
     <text x="350" y="255" class="box-body">• Sensitivity: -137 dBm (SF12 / 125 kHz BW)</text>
     <text x="350" y="275" class="mono" fill="#34d399">Link Budget: 159.0 dB | Payload: 24 Bytes</text>
     <text x="350" y="295" class="mono" fill="#e5a93b">Firmware: FreeRTOS + CMSIS-DSP v1.14.4</text>
@@ -55,7 +55,7 @@
 
     <rect x="45" y="130" width="230" height="50" fill="#1e293b" rx="4"/>
     <text x="55" y="148" class="mono" fill="#ffffff">TI TMP117 Array (x5)</text>
-    <text x="55" y="168" class="mono" fill="#94a3b8">I2C (0x48–0x4B) | P0.13/P0.14</text>
+    <text x="55" y="168" class="mono" fill="#94a3b8">I2C (0x48-0x4B) | P0.13/P0.14</text>
 
     <rect x="45" y="190" width="230" height="50" fill="#1e293b" rx="4"/>
     <text x="55" y="208" class="mono" fill="#ffffff">TDK INMP441 Acoustic</text>
@@ -94,7 +94,7 @@
 
     <rect x="685" y="265" width="230" height="60" fill="#1e293b" rx="4"/>
     <text x="695" y="283" class="mono" fill="#ffffff">1200 mAh LiFePO4 Cell</text>
-    <text x="695" y="301" class="mono" fill="#94a3b8">Nominal: 3.2V (2.5V–3.65V)</text>
+    <text x="695" y="301" class="mono" fill="#94a3b8">Nominal: 3.2V (2.5V-3.65V)</text>
     <text x="695" y="319" class="mono" fill="#34d399">Cycle Life: &gt; 2500 Cycles</text>
 
     <rect x="685" y="335" width="230" height="85" fill="#1e293b" rx="4"/>

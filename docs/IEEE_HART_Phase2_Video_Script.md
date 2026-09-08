@@ -1,4 +1,4 @@
-# IEEE HART HardwAIre Challenge Phase 2 — 5-Minute Presentation Video Script
+# IEEE HART HardwAIre Challenge Phase 2 - 5-Minute Presentation Video Script
 **Project**: Beevil Knievel Precision Apiculture Platform  
 **Target Video Duration**: 4 Minutes 30 Seconds (Strict Limit: 5 Minutes Max)  
 
@@ -8,7 +8,7 @@
 
 ### Scene 1: The Problem & Real-World Scenario (0:00 - 0:45)
 * **Visual**: Footage/graphics of commercial beehives and global colony collapse stats (55.6% colony loss in 2024-2025).
-* **Speaker**: "Welcome! Commercial honeybees pollinate $17 Billion worth of crops, yet beekeepers lose over half their hives every year because manual inspections every two weeks are too slow. Meet Beevil Knievel — an ultra-low-cost, long-range Edge AI telemetry system that catches colony collapse before it happens."
+* **Speaker**: "Welcome! Commercial honeybees pollinate $17 Billion worth of crops, yet beekeepers lose over half their hives every year because manual inspections every two weeks are too slow. Meet Beevil Knievel - an ultra-low-cost, long-range Edge AI telemetry system that catches colony collapse before it happens."
 
 ### Scene 2: The Hardware & Sensor Node (0:45 - 1:45)
 * **Visual**: Close-up of the assembled RAK4631 Mini node, 3x DS18B20 1-Wire sensors, ICS-43434 MEMS mic, 1W solar panel, and NanoVNA H4 antenna tuning.

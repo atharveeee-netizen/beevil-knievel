@@ -1,6 +1,6 @@
 """
 =============================================================================
-BEEVIL KNIEVEL — Cloud AI Pathology Diagnostic Engine (Model 2)
+BEEVIL KNIEVEL - Cloud AI Pathology Diagnostic Engine (Model 2)
 Pure Python Standard Library HTTP REST API (Zero External Dependencies)
 =============================================================================
 """
@@ -33,7 +33,7 @@ LABEL_MAP = {
 
 def predict_pathology_model2(temp, audio_hz, co2_ppm, weight_kg):
     """
-    Model 2 Pathology Engine — Evaluates 4D Multi-Sensor Telemetry Vector
+    Model 2 Pathology Engine - Evaluates 4D Multi-Sensor Telemetry Vector
     [temp_celcius, audio_peak_hz, co2_ppm, weight_kg]
     """
     if weight_kg < 10.0 and temp < 28.0:
@@ -91,7 +91,7 @@ def run_server(port=5000):
     server_address = ('', port)
     httpd = HTTPServer(server_address, CloudModelHandler)
     print(f"=================================================================")
-    print(f"  BEEVIL KNIEVEL — CLOUD AI MODEL 2 REST API SERVER ONLINE      ")
+    print(f"  BEEVIL KNIEVEL - CLOUD AI MODEL 2 REST API SERVER ONLINE      ")
     print(f"  Port: {port} | Zero External Dependencies Version             ")
     print(f"=================================================================")
     httpd.serve_forever()

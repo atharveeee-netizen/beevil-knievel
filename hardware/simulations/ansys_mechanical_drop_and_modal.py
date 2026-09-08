@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — ANSYS Mechanical Drop Impact FEA & Modal Vibration Analysis
+BEEVIL KNIEVEL - ANSYS Mechanical Drop Impact FEA & Modal Vibration Analysis
 Module: ansys_mechanical_drop_and_modal.py
 Models 1.5m drop shock dynamic transient deceleration pulse and
 structural modal harmonic decoupling from 100-500 Hz honeybee acoustic emissions.

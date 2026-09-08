@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — ANSYS Maxwell MPPT SMPS EMI/EMC & RF Front-End Shielding
+BEEVIL KNIEVEL - ANSYS Maxwell MPPT SMPS EMI/EMC & RF Front-End Shielding
 Module: ansys_maxwell_emc_shielding.py
 Models 1.2 MHz buck-boost switching noise, near-field B-field decay,
 and Nickel-Silver RF shield can attenuation at 865 MHz.

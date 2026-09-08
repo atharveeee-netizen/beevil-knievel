@@ -22,7 +22,7 @@ This compendium catalogs the mathematical foundations, digital signal processing
 
 ### 2. Continuous Inspection Schemes (The CUSUM Algorithm)
 * **Author**: E. S. Page
-* **Journal**: *Biometrika*, Vol. 41, Issue 1/2, pp. 100–115 (1954)
+* **Journal**: *Biometrika*, Vol. 41, Issue 1/2, pp. 100-115 (1954)
 * **DOI / URL**: [https://doi.org/10.1093/biomet/41.1-2.100](https://doi.org/10.1093/biomet/41.1-2.100)
 * **Mathematical Formulation**:
   The cumulative sum for negative drift away from target biological mean $\mu_0 = 34.82^\circ\text{C}$:

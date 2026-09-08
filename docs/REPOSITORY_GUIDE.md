@@ -1,4 +1,4 @@
-# 🧭 BEEVIL KNIEVEL — Master Repository & Evaluation Guide
+# 🧭 BEEVIL KNIEVEL - Master Repository & Evaluation Guide
 
 This guide directs judges, engineering evaluators, and peer reviewers to the exact file locations, firmware source code, hardware schematics, mathematical proofs, and live web deployments within the repository.
 

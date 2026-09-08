@@ -1,6 +1,6 @@
 """
 =============================================================================
-BEEVIL KNIEVEL — Official Zenodo Dataset Downloader
+BEEVIL KNIEVEL - Official Zenodo Dataset Downloader
 Downloads actual real-world beehive recordings from Zenodo Record 1321278
 ("To Bee or Not to Bee: An annotated dataset for beehive sound recognition")
 =============================================================================
@@ -16,23 +16,23 @@ ZENODO_FILES = [
     {
         "filename": "zenodo_active_hive_214.wav",
         "url": "https://zenodo.org/records/1321278/files/CF003%20-%20Active%20-%20Day%20-%20(214).wav?download=1",
-        "desc": "Real Beehive Recording — Active Hive (Day)"
+        "desc": "Real Beehive Recording - Active Hive (Day)"
     },
     {
         "filename": "zenodo_queen_present_h1.wav",
         "url": "https://zenodo.org/records/1321278/files/Hive1_12_06_2018_QueenBee_H1_audio___15_00_00.wav?download=1",
-        "desc": "Real Beehive Recording — Queen Bee Present (NU-Hive H1)"
+        "desc": "Real Beehive Recording - Queen Bee Present (NU-Hive H1)"
     },
     {
         "filename": "zenodo_missing_queen_h1.wav",
         "url": "https://zenodo.org/records/1321278/files/Hive1_31_05_2018_NO_QueenBee_H1_audio___15_00_00.wav?download=1",
-        "desc": "Real Beehive Recording — Missing Queen / Distress (NU-Hive H1)"
+        "desc": "Real Beehive Recording - Missing Queen / Distress (NU-Hive H1)"
     }
 ]
 
 def download_zenodo_samples():
     print("=================================================================")
-    print("      BEEVIL KNIEVEL — ZENODO REAL DATASET DOWNLOADER           ")
+    print("      BEEVIL KNIEVEL - ZENODO REAL DATASET DOWNLOADER           ")
     print("=================================================================")
 
     target_dir = os.path.join(os.path.dirname(__file__), "sample_bee_audio")

@@ -1,4 +1,4 @@
-# 🚀 BEEVIL KNIEVEL — MASTER Raspberry Pi 3B+ LINUX EDGE GATEWAY DEPLOYMENT GUIDE
+# 🚀 BEEVIL KNIEVEL - MASTER Raspberry Pi 3B+ LINUX EDGE GATEWAY DEPLOYMENT GUIDE
 **Raspberry Pi Compute Module 4 (2GB RAM / 32GB eMMC) Hardened Linux Reference Manual**
 
 ---
@@ -97,7 +97,7 @@ python3 tests/test_full_gateway_pipeline.py
 Expected output:
 ```text
 =================================================================
-  BEEVIL KNIEVEL — 100-HIVE GATEWAY PIPELINE VERIFICATION
+  BEEVIL KNIEVEL - 100-HIVE GATEWAY PIPELINE VERIFICATION
 =================================================================
 [DB] Local SQLite Database Initialized (WAL Mode, 100 Hives Registered).
 ✅ Root API Status: ONLINE | Version: 2.0.0

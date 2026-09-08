@@ -31,7 +31,7 @@
 
     <rect width="960" height="420" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">03 — ON-NODE ACOUSTIC DSP &amp; FEATURE EXTRACTION PIPELINE</text>
+    <text x="30" y="38" class="title">03 - ON-NODE ACOUSTIC DSP &amp; FEATURE EXTRACTION PIPELINE</text>
     <text x="30" y="58" class="subtitle">ARM Cortex-M4 CMSIS-DSP 256-point real FFT with biologically partitioned frequency bins</text>
     
     <!-- Pipeline Blocks -->
@@ -78,10 +78,10 @@
     <!-- Block 5: Sub-band Bins -->
     <rect x="670" y="90" width="260" height="120" fill="url(#panelGrad)" stroke="#38bdf8" stroke-width="1.5" rx="6"/>
     <text x="680" y="115" class="box-title" fill="#38bdf8">5. Sub-Band Energy Integration</text>
-    <text x="680" y="135" class="mono">E_fanning  = Σ |X[k]|² (100–180 Hz, k:13–23)</text>
-    <text x="680" y="155" class="mono">E_waggle   = Σ |X[k]|² (200–280 Hz, k:26–36)</text>
-    <text x="680" y="175" class="mono">E_preswarm = Σ |X[k]|² (300–400 Hz, k:38–51)</text>
-    <text x="680" y="195" class="mono">E_distress = Σ |X[k]|² (450–750 Hz, k:58–96)</text>
+    <text x="680" y="135" class="mono">E_fanning  = Σ |X[k]|² (100-180 Hz, k:13-23)</text>
+    <text x="680" y="155" class="mono">E_waggle   = Σ |X[k]|² (200-280 Hz, k:26-36)</text>
+    <text x="680" y="175" class="mono">E_preswarm = Σ |X[k]|² (300-400 Hz, k:38-51)</text>
+    <text x="680" y="195" class="mono">E_distress = Σ |X[k]|² (450-750 Hz, k:58-96)</text>
 
     <!-- Bottom Biological Mapping Table -->
     <rect x="30" y="230" width="900" height="160" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
@@ -97,25 +97,25 @@
 
     <!-- Rows -->
     <text x="55" y="315" class="mono" fill="#94a3b8">Thermal Fanning</text>
-    <text x="180" y="315" class="mono" fill="#94a3b8">100 – 180 Hz</text>
+    <text x="180" y="315" class="mono" fill="#94a3b8">100 - 180 Hz</text>
     <text x="290" y="315" class="mono" fill="#94a3b8">k = 13 .. 23</text>
     <text x="410" y="315" class="mono" fill="#cbd5e1">Larval heat evacuation / wing fanning</text>
     <text x="680" y="315" class="mono" fill="#f59e0b">THERMAL_STRESS_WARNING</text>
 
     <text x="55" y="338" class="mono" fill="#94a3b8">Forager Waggle</text>
-    <text x="180" y="338" class="mono" fill="#94a3b8">200 – 280 Hz</text>
+    <text x="180" y="338" class="mono" fill="#94a3b8">200 - 280 Hz</text>
     <text x="290" y="338" class="mono" fill="#94a3b8">k = 26 .. 36</text>
     <text x="410" y="338" class="mono" fill="#cbd5e1">Foraging communication &amp; nectar intake</text>
     <text x="680" y="338" class="mono" fill="#34d399">NORMAL_FORAGING_STATE</text>
 
     <text x="55" y="361" class="mono" fill="#94a3b8">Pre-Swarm Piping</text>
-    <text x="180" y="361" class="mono" fill="#94a3b8">300 – 400 Hz</text>
+    <text x="180" y="361" class="mono" fill="#94a3b8">300 - 400 Hz</text>
     <text x="290" y="361" class="mono" fill="#94a3b8">k = 38 .. 51</text>
     <text x="410" y="361" class="mono" fill="#cbd5e1">Virgin queen piping / colony preparation</text>
     <text x="680" y="361" class="mono" fill="#ef4444">PRE_SWARM_EMERGENCY</text>
 
     <text x="55" y="384" class="mono" fill="#94a3b8">Queenless Roar</text>
-    <text x="180" y="384" class="mono" fill="#94a3b8">450 – 750 Hz</text>
+    <text x="180" y="384" class="mono" fill="#94a3b8">450 - 750 Hz</text>
     <text x="290" y="384" class="mono" fill="#94a3b8">k = 58 .. 96</text>
     <text x="410" y="384" class="mono" fill="#cbd5e1">Disorganized buzzing post queen loss</text>
     <text x="680" y="384" class="mono" fill="#f43f5e">QUEENLESS_DISTRESS</text>

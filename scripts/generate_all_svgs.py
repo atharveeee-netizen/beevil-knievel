@@ -44,7 +44,7 @@ save_svg("docs/media/02-apiary-problem/hive_monitoring_problem.svg", """<svg xml
       <circle cx="14" cy="14" r="14" fill="#21262d" stroke="#ef4444" stroke-width="1.5"/>
       <text x="14" y="18" fill="#ef4444" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">2</text>
       <text x="40" y="14" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="bold">Labor Bottlenecks Across Out-Yards</text>
-      <text x="40" y="32" fill="#8b949e" font-family="sans-serif" font-size="12">Inspecting 100 hives takes 15–20 hours of manual labor per cycle.</text>
+      <text x="40" y="32" fill="#8b949e" font-family="sans-serif" font-size="12">Inspecting 100 hives takes 15-20 hours of manual labor per cycle.</text>
       <text x="40" y="48" fill="#8b949e" font-family="sans-serif" font-size="12">Out-yards located 50+ km away are only visited bi-weekly.</text>
     </g>
 
@@ -53,7 +53,7 @@ save_svg("docs/media/02-apiary-problem/hive_monitoring_problem.svg", """<svg xml
       <text x="14" y="18" fill="#ef4444" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">3</text>
       <text x="40" y="14" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="bold">Lagging Indicators vs Silent Losses</text>
       <text x="40" y="32" fill="#8b949e" font-family="sans-serif" font-size="12">Queen death, swarming, and starving occur inside 48-hour windows.</text>
-      <text x="40" y="48" fill="#8b949e" font-family="sans-serif" font-size="12">Discovered post-mortem (USDA reports 35–45% annual colony loss).</text>
+      <text x="40" y="48" fill="#8b949e" font-family="sans-serif" font-size="12">Discovered post-mortem (USDA reports 35-45% annual colony loss).</text>
     </g>
   </g>
 
@@ -136,19 +136,19 @@ save_svg("docs/media/03-acoustic-problem/bee_acoustic_signals.svg", """<svg xmln
   <g transform="translate(50, 400)">
     <rect x="0" y="0" width="210" height="90" rx="8" fill="#161b22" stroke="#10b981" stroke-width="1.5"/>
     <text x="15" y="25" fill="#10b981" font-family="sans-serif" font-size="12" font-weight="bold">NOMINAL COLONY</text>
-    <text x="15" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">180 Hz – 240 Hz</text>
+    <text x="15" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">180 Hz - 240 Hz</text>
     <text x="15" y="65" fill="#8b949e" font-family="sans-serif" font-size="11">Continuous flight &amp; fanning hum.</text>
-    <text x="15" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Dominant energy in bins 23–31.</text>
+    <text x="15" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Dominant energy in bins 23-31.</text>
 
     <rect x="230" y="0" width="210" height="90" rx="8" fill="#161b22" stroke="#ef4444" stroke-width="1.5"/>
     <text x="245" y="25" fill="#ef4444" font-family="sans-serif" font-size="12" font-weight="bold">QUEENLESS DISTRESS</text>
-    <text x="245" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">285 Hz – 350 Hz</text>
+    <text x="245" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">285 Hz - 350 Hz</text>
     <text x="245" y="65" fill="#8b949e" font-family="sans-serif" font-size="11">Unregulated distress frequency.</text>
-    <text x="245" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Trips alarm bit in bins 36–45.</text>
+    <text x="245" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Trips alarm bit in bins 36-45.</text>
 
     <rect x="460" y="0" width="210" height="90" rx="8" fill="#161b22" stroke="#f59e0b" stroke-width="1.5"/>
     <text x="475" y="25" fill="#f59e0b" font-family="sans-serif" font-size="12" font-weight="bold">PRE-SWARM / PIPING</text>
-    <text x="475" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">380 Hz – 500 Hz</text>
+    <text x="475" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">380 Hz - 500 Hz</text>
     <text x="475" y="65" fill="#8b949e" font-family="sans-serif" font-size="11">Virgin queen tooting/quacking.</text>
     <text x="475" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Acoustic surge 24h pre-swarm.</text>
 
@@ -444,7 +444,7 @@ save_svg("docs/media/04-system/telemetry_packet_flow.svg", """<svg xmlns="http:/
   <rect x="30" y="24" width="170" height="28" rx="14" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.5"/>
   <text x="115" y="43" fill="#f59e0b" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">WIRE PROTOCOL</text>
   <text x="30" y="82" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="800">32-Byte Packed Binary Telemetry Wire Protocol</text>
-  <text x="30" y="108" fill="#8b949e" font-family="monospace" font-size="13">#pragma pack(push, 1) — Strict bit-aligned serialization with zero padding overhead.</text>
+  <text x="30" y="108" fill="#8b949e" font-family="monospace" font-size="13">#pragma pack(push, 1) - Strict bit-aligned serialization with zero padding overhead.</text>
 
   <!-- Byte Map Table -->
   <g transform="translate(30, 140)">
@@ -463,7 +463,7 @@ save_svg("docs/media/04-system/telemetry_packet_flow.svg", """<svg xmlns="http:/
       <text x="90" y="18" fill="#f0f6fc" font-family="sans-serif" font-size="12" font-weight="bold">hive_id</text>
       <text x="320" y="18" fill="#8b949e" font-family="monospace" font-size="11">uint16_t</text>
       <text x="440" y="18" fill="#8b949e" font-family="monospace" font-size="11">2</text>
-      <text x="510" y="18" fill="#8b949e" font-family="sans-serif" font-size="11">Hive Node ID (0x0001 – 0x0064, capacity 100 hives)</text>
+      <text x="510" y="18" fill="#8b949e" font-family="sans-serif" font-size="11">Hive Node ID (0x0001 - 0x0064, capacity 100 hives)</text>
     </g>
 
     <g transform="translate(0, 65)">

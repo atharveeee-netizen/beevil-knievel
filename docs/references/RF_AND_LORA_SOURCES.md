@@ -37,7 +37,7 @@ This compendium documents the telecommunications theory, electromagnetic propaga
 
 ## 🇮🇳 Regulatory Standards: WPC India IN865 Band
 
-### 3. Ministry of Communications (WPC Wing) — GSR 564(E) License-Free Sub-GHz Allocation
+### 3. Ministry of Communications (WPC Wing) - GSR 564(E) License-Free Sub-GHz Allocation
 * **Regulatory Body**: Wireless Planning & Coordination (WPC) Wing, Ministry of Communications, Government of India
 * **Gazette Notification**: GSR 564(E) / WPC IN865
 * **Parameters**:

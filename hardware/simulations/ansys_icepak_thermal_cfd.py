@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — ANSYS Icepak Thermal CFD (Conjugate Heat Transfer)
+BEEVIL KNIEVEL - ANSYS Icepak Thermal CFD (Conjugate Heat Transfer)
 Module: ansys_icepak_thermal_cfd.py
 Models 8.5W internal heat dissipation in sealed NEMA 4X / IP67 gateway enclosure
 under 45°C ambient temperature + 1000 W/m² direct solar radiation flux.

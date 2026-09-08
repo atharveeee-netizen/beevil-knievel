@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# BEEVIL KNIEVEL — MASTER LINUX EDGE GATEWAY PROVISIONING SCRIPT
+# BEEVIL KNIEVEL - MASTER LINUX EDGE GATEWAY PROVISIONING SCRIPT
 # =============================================================================
 # Run on Raspberry Pi 3B+ (Debian 64-Bit Bookworm)
 # Usage: sudo bash setup_gateway.sh
@@ -9,7 +9,7 @@
 set -e
 
 echo "================================================================="
-echo "  BEEVIL KNIEVEL — 100-HIVE LINUX EDGE GATEWAY SETUP"
+echo "  BEEVIL KNIEVEL - 100-HIVE LINUX EDGE GATEWAY SETUP"
 echo "================================================================="
 
 if [ "$EUID" -ne 0 ]; then

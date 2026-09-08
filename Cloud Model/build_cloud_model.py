@@ -1,6 +1,6 @@
 """
 =============================================================================
-BEEVIL KNIEVEL — Cloud AI Pathology Diagnostic Engine Builder (Model 2)
+BEEVIL KNIEVEL - Cloud AI Pathology Diagnostic Engine Builder (Model 2)
 Trains Scikit-Learn RandomForest Ensemble Classifier using verified multi-sensor
 statistical distributions from Kaggle HOBOS & BUT-2 Research Datasets.
 =============================================================================

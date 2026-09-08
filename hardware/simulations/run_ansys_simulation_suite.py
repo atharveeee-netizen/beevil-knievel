@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — Master ANSYS Multi-Physics Simulation Suite Runner
+BEEVIL KNIEVEL - Master ANSYS Multi-Physics Simulation Suite Runner
 Module: run_ansys_simulation_suite.py
 Executes all 4 multi-physics simulation modules and verifies compliance against
 the IEEE HART ANSYS Simulation Dossier Executive Summary criteria.

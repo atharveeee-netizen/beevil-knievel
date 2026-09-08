@@ -1,5 +1,5 @@
 """
-Beevil Knievel — Master ANSYS Multiphysics Automation Suite
+Beevil Knievel - Master ANSYS Multiphysics Automation Suite
 Runs and validates all 11 ANSYS simulations, generating numerical outputs,
 deliverable data, and PyAEDT / PyANSYS project objects.
 """

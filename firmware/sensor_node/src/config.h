@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * BEEVIL KNIEVEL — SENSOR NODE CONFIGURATION
+ * BEEVIL KNIEVEL - SENSOR NODE CONFIGURATION
  * Edit this file to provision the node for your specific apiary.
  * ============================================================================
  */

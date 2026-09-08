@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — LORAWAN / LORA SPI PACKET RECEIVER DAEMON
+BEEVIL KNIEVEL - LORAWAN / LORA SPI PACKET RECEIVER DAEMON
 ===========================================================
 Linux background daemon for Raspberry Pi 3B+ + Waveshare SX1262 LoRa HAT.
 - Interfaces with Semtech SX1262 via SPI (/dev/spidev0.0) or UART.

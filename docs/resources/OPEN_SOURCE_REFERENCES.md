@@ -1,4 +1,4 @@
-# Beevil Knievel — Public Datasets & Industry Standards Index
+# Beevil Knievel - Public Datasets & Industry Standards Index
 
 ---
 
@@ -6,7 +6,7 @@
 
 1. **Zenodo Public Bee Audio Dataset**
    * **Resource**: Public Audio Benchmark for Beehive Swarming & Health Classification
-   * **Usage**: Benchmark dataset for training our 200 Hz – 400 Hz acoustic swarming and queenlessness detection models.
+   * **Usage**: Benchmark dataset for training our 200 Hz - 400 Hz acoustic swarming and queenlessness detection models.
 
 2. **Utah State University Bee Audio Dataset**
    * **Resource**: Public Hive Sound Audio Dataset

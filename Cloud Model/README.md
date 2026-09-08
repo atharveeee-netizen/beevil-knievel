@@ -1,6 +1,6 @@
-# Beevil Knievel — Cloud AI Pathology Diagnostic Engine (Model 2)
+# Beevil Knievel - Cloud AI Pathology Diagnostic Engine (Model 2)
 
-This directory contains **Model 2 — The Cloud AI Pathology Diagnostic Engine**.
+This directory contains **Model 2 - The Cloud AI Pathology Diagnostic Engine**.
 
 While **Model 1 (TinyML)** runs on-device inside the hive MCU for immediate real-time alerts, **Model 2** runs on the Local Edge Server (Raspberry Pi Gateway). 
 

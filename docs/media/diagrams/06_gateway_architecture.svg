@@ -31,7 +31,7 @@
 
     <rect width="960" height="420" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">06 — HARDENED APIARY EDGE GATEWAY ARCHITECTURE</text>
+    <text x="30" y="38" class="title">06 - HARDENED APIARY EDGE GATEWAY ARCHITECTURE</text>
     <text x="30" y="58" class="subtitle">Raspberry Pi 3B+ / Rockchip RK3588 with read-only OverlayFS, SQLite WAL, and local web engine</text>
     
     <!-- Baseboard Carrier -->
@@ -43,7 +43,7 @@
     <text x="65" y="160" class="mono">• RAK2287 SX1302 Concentrator</text>
     <text x="65" y="180" class="mono">• Mini-PCIe Carrier Slot (SPI Bus)</text>
     <text x="65" y="200" class="mono">• 8 Concurrent LoRa Channels</text>
-    <text x="65" y="220" class="mono">• Demodulation: SF7–SF12 parallel</text>
+    <text x="65" y="220" class="mono">• Demodulation: SF7-SF12 parallel</text>
     <text x="65" y="240" class="mono">• Peak Packet Rate: 148 pkts/s</text>
     <text x="65" y="260" class="mono">• Cyclic CRC-16 HW Verification</text>
     <text x="65" y="285" class="box-title" fill="#34d399">Power Delivery</text>

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * BEEVIL KNIEVEL — SMART HIVE TRANSMITTER NODE FIRMWARE
+ * BEEVIL KNIEVEL - SMART HIVE TRANSMITTER NODE FIRMWARE
  * Platform: Nordic Semiconductor nRF52840 (RAK4631 WisBlock Core)
  * RTOS: FreeRTOS v10.x with ARM CMSIS-DSP Vector Acceleration
  * Radio: Semtech SX1262 LoRa (865.0625 MHz IN865 WPC India Band)
@@ -31,7 +31,7 @@
 #define NUM_FRAME_TEMP_PROBES    5          // 5x DS18B20 1-Wire Probes
 
 // ----------------------------------------------------------------------------
-// TELEMETRY BINARY PACKET STRUCT (32 BYTES TOTAL — ZERO FRAGMENTATION)
+// TELEMETRY BINARY PACKET STRUCT (32 BYTES TOTAL - ZERO FRAGMENTATION)
 // ----------------------------------------------------------------------------
 #pragma pack(push, 1)
 typedef struct {

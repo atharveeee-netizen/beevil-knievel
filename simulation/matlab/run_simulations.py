@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — Automated Mathematical Simulation & Plot Generation Engine
+BEEVIL KNIEVEL - Automated Mathematical Simulation & Plot Generation Engine
 Executes all 8 mathematical simulation modules and exports 14 publication-grade figures
 to both simulation/results/ and docs/media/results/.
 Identical mathematics to the .m MATLAB scripts.
@@ -129,10 +129,10 @@ def run_acoustic_dsp():
         E_dis[i] = np.sum(mag[k_dis]**2)
 
     fig4, ax4 = plt.subplots(figsize=(10, 4.5))
-    ax4.plot(t_feat, E_fan, color='#15803d', lw=1.8, label=r'$E_{fanning}$ (100–180 Hz)')
-    ax4.plot(t_feat, E_wag, color='#2563eb', lw=1.8, label=r'$E_{waggle}$ (200–280 Hz)')
-    ax4.plot(t_feat, E_pre, color='#dc2626', lw=2.2, label=r'$E_{preswarm}$ (300–400 Hz)')
-    ax4.plot(t_feat, E_dis, color='#9333ea', lw=1.4, ls='--', label=r'$E_{distress}$ (450–750 Hz)')
+    ax4.plot(t_feat, E_fan, color='#15803d', lw=1.8, label=r'$E_{fanning}$ (100-180 Hz)')
+    ax4.plot(t_feat, E_wag, color='#2563eb', lw=1.8, label=r'$E_{waggle}$ (200-280 Hz)')
+    ax4.plot(t_feat, E_pre, color='#dc2626', lw=2.2, label=r'$E_{preswarm}$ (300-400 Hz)')
+    ax4.plot(t_feat, E_dis, color='#9333ea', lw=1.4, ls='--', label=r'$E_{distress}$ (450-750 Hz)')
     ax4.set_title('BEEVIL On-Node Sub-Band Energy Extraction [SIMULATED SIGNAL]', fontsize=11, fontweight='bold')
     ax4.set_xlabel('Time [seconds]')
     ax4.set_ylabel(r'Integrated Band Energy [$V^2$/Hz]')
@@ -376,7 +376,7 @@ def run_thermal_model():
 
     fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
 
-    ax1.plot(t_hours, T_amb, color='#60a5fa', lw=1.3, label=r'$T_{ambient}$ (Diurnal 15°C–35°C)')
+    ax1.plot(t_hours, T_amb, color='#60a5fa', lw=1.3, label=r'$T_{ambient}$ (Diurnal 15°C-35°C)')
     ax1.plot(t_hours, T_hive, color='#d97706', lw=1.5, label=r'$T_{hive}$ (Inside Box Air)')
     ax1.plot(t_hours, T_brood, color='#dc2626', lw=2.0, label=r'$T_{brood}$ (Core Regulated Nest)')
     ax1.axhline(34.5, color='#000000', ls='--', lw=1.0, label='Optimal Setpoint (34.5°C)')
@@ -624,7 +624,7 @@ def run_telemetry_scaling():
 
 if __name__ == "__main__":
     print("=" * 70)
-    print("BEEVIL KNIEVEL — MATHEMATICAL SIMULATION & FIGURE GENERATION")
+    print("BEEVIL KNIEVEL - MATHEMATICAL SIMULATION & FIGURE GENERATION")
     print("=" * 70)
     run_acoustic_dsp()
     run_fft_validation()

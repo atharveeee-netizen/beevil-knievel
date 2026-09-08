@@ -1,10 +1,10 @@
 """
-BEEVIL NOISE FILTER — ENVIRONMENTAL NOISE & NEGATIVE SOUND REJECTION ENGINE
+BEEVIL NOISE FILTER - ENVIRONMENTAL NOISE & NEGATIVE SOUND REJECTION ENGINE
 =============================================================================
 Trained on Google AudioSet & 'To Bee or Not to Bee' (OSBH / Zenodo):
 - Discriminates between true Honeybee Bio-Acoustics and Outdoor Farm Noise:
-  * Heavy Rain Clatter on Metal Hive Covers (Wideband 2kHz–8kHz erratic energy)
-  * Diesel Tractor / Machinery Rumble (Low-frequency 30Hz–80Hz mechanical hum)
+  * Heavy Rain Clatter on Metal Hive Covers (Wideband 2kHz-8kHz erratic energy)
+  * Diesel Tractor / Machinery Rumble (Low-frequency 30Hz-80Hz mechanical hum)
   * Wind Turbulence (<50Hz non-harmonic gusts)
   * Chainsaw / Trimmer Noise (High-pitched non-biological rasp)
 - Eliminates False Alarms: Prevents rain or passing tractors from falsely

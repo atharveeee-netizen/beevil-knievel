@@ -8,7 +8,7 @@ This compendium documents the biophysical principles of the honey bee (*Apis mel
 
 ### 1. Honey Bee Nest Thermoregulation: Diversity Promotes Stability
 * **Authors**: Julia C. Jones, Mary R. Myerscough, Saul Graham, Benjamin P. Oldroyd
-* **Journal**: *Science*, Vol. 305, Issue 5682, pp. 402–404 (2004)
+* **Journal**: *Science*, Vol. 305, Issue 5682, pp. 402-404 (2004)
 * **DOI / URL**: [https://doi.org/10.1126/science.1096340](https://doi.org/10.1126/science.1096340)
 * **Key Findings**:
   - Honey bee colonies maintain the central brood rearing area within an extraordinarily tight physiological thermal window: **$34.5^\circ\text{C}$ to $35.5^\circ\text{C}$**, despite ambient environmental temperatures fluctuating from $-20^\circ\text{C}$ to $+45^\circ\text{C}$.
@@ -21,7 +21,7 @@ This compendium documents the biophysical principles of the honey bee (*Apis mel
 
 ### 2. Honeybee Colony Thermoregulation: Regulatory Mechanisms & Individual Contributions
 * **Authors**: Anton Stabentheiner, Helmut Kovac, Robert Brodschneider
-* **Journal**: *Journal of Insect Physiology*, Vol. 56, Issue 7, pp. 704–715 (2010)
+* **Journal**: *Journal of Insect Physiology*, Vol. 56, Issue 7, pp. 704-715 (2010)
 * **DOI / URL**: [https://doi.org/10.1016/j.jinsphys.2010.01.001](https://doi.org/10.1016/j.jinsphys.2010.01.001)
 * **Key Findings**:
   - The temperature of developing pupae directly dictates adult bee neuroanatomy, learning capacity, foraging efficiency, and longevity.
@@ -36,7 +36,7 @@ This compendium documents the biophysical principles of the honey bee (*Apis mel
 
 ### 3. Atmospheric Carbon Dioxide Regulation in Honey-Bee Colonies
 * **Authors**: Thomas D. Seeley
-* **Journal**: *Journal of Insect Physiology*, Vol. 20, Issue 11, pp. 2301–2305 (1974)
+* **Journal**: *Journal of Insect Physiology*, Vol. 20, Issue 11, pp. 2301-2305 (1974)
 * **DOI / URL**: [https://doi.org/10.1016/0022-1910(74)90051-7](https://doi.org/10.1016/0022-1910(74)90051-7)
 * **Key Findings**:
   - Honey bees actively regulate internal nest atmosphere, maintaining carbon dioxide ($\text{CO}_2$) levels between **0.10% and 1.5% (1,000 ppm to 15,000 ppm)**.
@@ -51,7 +51,7 @@ This compendium documents the biophysical principles of the honey bee (*Apis mel
 
 ### 4. Continuous Automated Scale Monitoring for Nectar Flow & Hive Health
 * **Authors**: Stephen L. Buchmann, Scott C. Thoenes
-* **Journal**: *American Bee Journal*, Vol. 130, pp. 815–818 (1990)
+* **Journal**: *American Bee Journal*, Vol. 130, pp. 815-818 (1990)
 * **Key Findings**:
   - Real-time precision hive scale telemetry provides instantaneous measurement of nectar flow onset, foraging trip volume, and colony biomass expansion.
   - Sudden daytime weight drops of **$1.5\text{ kg}$ to $3.5\text{ kg}$** indicate immediate swarm departures, allowing beekeepers to recapture swarms before they disperse.

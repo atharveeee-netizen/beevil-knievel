@@ -1,4 +1,4 @@
-# Beevil Knievel — Master ANSYS Multiphysics Simulation Suite
+# Beevil Knievel - Master ANSYS Multiphysics Simulation Suite
 
 This directory contains the complete **ANSYS Multiphysics Simulation Suite (Simulations #1 to #11)** for the **Beevil Knievel Cyber-Physical Beehive Monitoring Platform**.
 

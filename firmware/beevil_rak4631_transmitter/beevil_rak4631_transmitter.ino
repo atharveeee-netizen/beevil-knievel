@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * BEEVIL KNIEVEL — SMART HIVE TRANSMITTER FIRMWARE (RAK4631 / NRF52840)
+ * BEEVIL KNIEVEL - SMART HIVE TRANSMITTER FIRMWARE (RAK4631 / NRF52840)
  * ============================================================================
  * Master Cyber-Physical Edge Engine:
  *   1. Battery State-of-Charge (SoC) Estimator (7-Point OCV + Temp Derating)
@@ -316,7 +316,7 @@ void setup() {
     while (!Serial && (millis() - start < 3000));
     
     Serial.println(F("\n========================================================"));
-    Serial.println(F("  BEEVIL KNIEVEL — RAK4631 SMART TRANSMITTER v2.0"));
+    Serial.println(F("  BEEVIL KNIEVEL - RAK4631 SMART TRANSMITTER v2.0"));
     Serial.println(F("  4 Master Embedded Algorithms: SoC + CUSUM + Blackbox + ADR"));
     Serial.println(F("========================================================"));
     

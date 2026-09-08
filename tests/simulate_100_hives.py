@@ -1,8 +1,8 @@
 """
-BEEVIL KNIEVEL — 100-HIVE SCALE & TELEMETRY SIMULATOR
+BEEVIL KNIEVEL - 100-HIVE SCALE & TELEMETRY SIMULATOR
 ======================================================
 Simulates a real-world commercial apiary with 100 Smart Beehives:
-- Realistic diurnal thermal cycles (Brood 34.5°C–35.5°C, Ambient 18°C–32°C).
+- Realistic diurnal thermal cycles (Brood 34.5°C-35.5°C, Ambient 18°C-32°C).
 - Diurnal scale weight gain (Honey nectar influx during daylight).
 - Realistic 8-band audio FFT bio-acoustics.
 - Injects realistic field anomalies:

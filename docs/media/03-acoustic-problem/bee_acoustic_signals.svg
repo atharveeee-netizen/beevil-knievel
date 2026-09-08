@@ -42,19 +42,19 @@
   <g transform="translate(50, 400)">
     <rect x="0" y="0" width="210" height="90" rx="8" fill="#161b22" stroke="#10b981" stroke-width="1.5"/>
     <text x="15" y="25" fill="#10b981" font-family="sans-serif" font-size="12" font-weight="bold">NOMINAL COLONY</text>
-    <text x="15" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">180 Hz – 240 Hz</text>
+    <text x="15" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">180 Hz - 240 Hz</text>
     <text x="15" y="65" fill="#8b949e" font-family="sans-serif" font-size="11">Continuous flight &amp; fanning hum.</text>
-    <text x="15" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Dominant energy in bins 23–31.</text>
+    <text x="15" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Dominant energy in bins 23-31.</text>
 
     <rect x="230" y="0" width="210" height="90" rx="8" fill="#161b22" stroke="#ef4444" stroke-width="1.5"/>
     <text x="245" y="25" fill="#ef4444" font-family="sans-serif" font-size="12" font-weight="bold">QUEENLESS DISTRESS</text>
-    <text x="245" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">285 Hz – 350 Hz</text>
+    <text x="245" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">285 Hz - 350 Hz</text>
     <text x="245" y="65" fill="#8b949e" font-family="sans-serif" font-size="11">Unregulated distress frequency.</text>
-    <text x="245" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Trips alarm bit in bins 36–45.</text>
+    <text x="245" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Trips alarm bit in bins 36-45.</text>
 
     <rect x="460" y="0" width="210" height="90" rx="8" fill="#161b22" stroke="#f59e0b" stroke-width="1.5"/>
     <text x="475" y="25" fill="#f59e0b" font-family="sans-serif" font-size="12" font-weight="bold">PRE-SWARM / PIPING</text>
-    <text x="475" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">380 Hz – 500 Hz</text>
+    <text x="475" y="45" fill="#f0f6fc" font-family="sans-serif" font-size="14" font-weight="800">380 Hz - 500 Hz</text>
     <text x="475" y="65" fill="#8b949e" font-family="sans-serif" font-size="11">Virgin queen tooting/quacking.</text>
     <text x="475" y="80" fill="#8b949e" font-family="sans-serif" font-size="11">Acoustic surge 24h pre-swarm.</text>
 

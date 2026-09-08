@@ -1,4 +1,4 @@
-# 📜 BEEVIL KNIEVEL — Visual Asset Provenance & License Registry
+# 📜 BEEVIL KNIEVEL - Visual Asset Provenance & License Registry
 
 This registry provides complete legal attribution, provenance metadata, and scientific usage context for all visual assets in the repository.
 
@@ -55,7 +55,7 @@ Every asset is tagged with one of five standardized classifications:
 | `docs/media/results/battery_soc_simulation.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/node_energy_budget_model.m` | MIT License | 18-month LiFePO4 battery SOC trajectory with solar MPPT | 2026-09-06 |
 | `docs/media/results/rf_link_budget.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/rf_link_budget_and_range.m` | MIT License | Waterfall RF link budget (+14 dBm Tx to -132 dBm Rx) | 2026-09-06 |
 | `docs/media/results/rf_range_sweep.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/rf_link_budget_and_range.m` | MIT License | Distance vs. received power and link margin (LOS & Canopy) | 2026-09-06 |
-| `docs/media/results/telemetry_scaling.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/telemetry_network_scaling.m` | MIT License | 1–100 hive airtime duty cycle and packet scaling curves | 2026-09-06 |
+| `docs/media/results/telemetry_scaling.png` | **`GENERATED FROM MATLAB MODEL`** | `simulation/matlab/telemetry_network_scaling.m` | MIT License | 1-100 hive airtime duty cycle and packet scaling curves | 2026-09-06 |
 | `docs/media/application/dashboard_overview.png` | **`ACTUAL BEEVIL IMPLEMENTATION`** | BEEVIL Unified Operations Portal | MIT License | Deployed desktop browser operations dashboard | 2026-09-06 |
 | `docs/media/application/mobile_field_console.png` | **`ACTUAL BEEVIL IMPLEMENTATION`** | BEEVIL HiveOS PWA Mobile Interface | MIT License | Deployed mobile field technician PWA interface | 2026-09-06 |
 | `docs/media/application/playdate_console.png` | **`ACTUAL BEEVIL IMPLEMENTATION`** | BEEVIL Panic Playdate Field Console | MIT License | Deployed 1-bit high-contrast outdoor hardware screen | 2026-09-06 |

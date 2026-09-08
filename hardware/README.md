@@ -1,4 +1,4 @@
-# Beevil Knievel — Hardware Architecture
+# Beevil Knievel - Hardware Architecture
 
 This directory contains the hardware engineering files and reference specifications for the **Beevil Knievel** system.
 
@@ -28,4 +28,4 @@ The field transmitter node deployed on individual hives utilizes an **off-shore 
 
 - **Transmitter Architecture:** Factory-integrated, ultra-low power offshore transmitter with built-in multi-sensor telemetry and integrated solar energy harvesting.
 - **Protocol:** Standardized sub-GHz radio / LoRa link transmitting acoustic feature vectors, hive temperature, humidity, and vibration telemetry directly to the Raspberry Pi 3B+ gateway.
-- **Maintenance-Free:** Factory-encapsulated weatherproof IP67 enclosure with integrated solar harvesting — zero custom PCB fabrication required for hive deployment.
+- **Maintenance-Free:** Factory-encapsulated weatherproof IP67 enclosure with integrated solar harvesting - zero custom PCB fabrication required for hive deployment.

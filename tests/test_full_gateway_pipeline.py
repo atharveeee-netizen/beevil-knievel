@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — END-TO-END GATEWAY PIPELINE TEST
+BEEVIL KNIEVEL - END-TO-END GATEWAY PIPELINE TEST
 ==================================================
 Tests:
 1. Local SQLite WAL Database Initialization & Schema
@@ -23,7 +23,7 @@ from gateway.server import app, init_database, get_db
 
 def run_pipeline_verification():
     print("="*65)
-    print("  BEEVIL KNIEVEL — 100-HIVE GATEWAY PIPELINE VERIFICATION")
+    print("  BEEVIL KNIEVEL - 100-HIVE GATEWAY PIPELINE VERIFICATION")
     print("="*65)
 
     # 1. Initialize Database

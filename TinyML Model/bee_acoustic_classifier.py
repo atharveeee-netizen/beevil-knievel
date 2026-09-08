@@ -1,6 +1,6 @@
 """
 =============================================================================
-BEEVIL KNIEVEL — High-Precision TinyML 1D-CNN & Multi-Spectral Bee Classifier
+BEEVIL KNIEVEL - High-Precision TinyML 1D-CNN & Multi-Spectral Bee Classifier
 Model Architecture: Quantized 1D-CNN + 4-Band Spectral Feature Extractor
 Flash Memory Footprint: ~75.4 KB (Optimized for nRF52840 Microcontroller)
 SRAM Memory Footprint:  ~14.2 KB

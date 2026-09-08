@@ -1,4 +1,4 @@
-# Beevil Knievel — High-Precision 75.4 KB TinyML 1D-CNN Model Architecture
+# Beevil Knievel - High-Precision 75.4 KB TinyML 1D-CNN Model Architecture
 
 This directory contains the official on-device **TinyML Model** designed for the **nRF52840 Microcontroller (RAK4631 node)** for real-time acoustic swarm prediction, queenless distress detection, and environmental noise suppression.
 
@@ -34,10 +34,10 @@ A raw 10-second audio clip would require continuous, heavy LoRaWAN transmission,
 
 The model processes audio across **4 distinct frequency bands** using Discrete Fourier Filtering:
 
-1. **Channel 1 (100 Hz – 180 Hz) — Ventilation & Fan Fanning:** Detects worker bees fanning wings to cool brood when hive temperatures rise.
-2. **Channel 2 (200 Hz – 400 Hz) — Swarm & Queen Piping:** Captures pre-swarm departure acoustic spikes and queen piping frequencies.
-3. **Channel 3 (450 Hz – 750 Hz) — Queenless Distress:** Detects colony distress, queen loss alarms, and parasite (Varroa) irritation.
-4. **Channel 4 (800 Hz – 1200 Hz) — Weather Noise Filter:** Monitors environmental rain/wind noise floor to suppress false alarms.
+1. **Channel 1 (100 Hz - 180 Hz) - Ventilation & Fan Fanning:** Detects worker bees fanning wings to cool brood when hive temperatures rise.
+2. **Channel 2 (200 Hz - 400 Hz) - Swarm & Queen Piping:** Captures pre-swarm departure acoustic spikes and queen piping frequencies.
+3. **Channel 3 (450 Hz - 750 Hz) - Queenless Distress:** Detects colony distress, queen loss alarms, and parasite (Varroa) irritation.
+4. **Channel 4 (800 Hz - 1200 Hz) - Weather Noise Filter:** Monitors environmental rain/wind noise floor to suppress false alarms.
 
 ---
 

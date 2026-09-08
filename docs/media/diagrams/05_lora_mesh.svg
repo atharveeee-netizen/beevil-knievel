@@ -31,14 +31,14 @@
 
     <rect width="960" height="400" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">05 — SUB-GHz WIRELESS TELEMETRY &amp; MESH NETWORK TOPOLOGY</text>
+    <text x="30" y="38" class="title">05 - SUB-GHz WIRELESS TELEMETRY &amp; MESH NETWORK TOPOLOGY</text>
     <text x="30" y="58" class="subtitle">LoRa modulation parameter cascade, ITU-R P.833-9 foliage attenuation, and regenerative hops</text>
     
     <!-- Left: LoRa Modulation Parameters -->
     <rect x="30" y="80" width="310" height="290" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
     <text x="45" y="105" class="box-title">LoRa Physical Layer Configuration</text>
-    <text x="45" y="130" class="mono">• Carrier Frequency: 865.0 – 867.0 MHz</text>
-    <text x="45" y="150" class="mono">• Spreading Factor: SF10 (Adaptive SF7–SF12)</text>
+    <text x="45" y="130" class="mono">• Carrier Frequency: 865.0 - 867.0 MHz</text>
+    <text x="45" y="150" class="mono">• Spreading Factor: SF10 (Adaptive SF7-SF12)</text>
     <text x="45" y="170" class="mono">• Bandwidth (BW): 125.0 kHz</text>
     <text x="45" y="190" class="mono">• Coding Rate (CR): 4/5 (Hamming Forward EC)</text>
     <text x="45" y="210" class="mono">• Tx Output Power: +14.0 dBm (25 mW EIRP)</text>

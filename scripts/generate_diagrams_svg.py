@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — Programmatic Vector Diagram Generator
+BEEVIL KNIEVEL - Programmatic Vector Diagram Generator
 Generates the 8 original technical vector diagrams (SVG) in docs/media/diagrams/:
 1. 01_problem_and_observation.svg
 2. 02_sensor_placement.svg
@@ -53,7 +53,7 @@ def generate_01_problem():
     <rect width="960" height="400" fill="#0b0e14" rx="8"/>
     
     <!-- Title -->
-    <text x="30" y="38" class="title">01 — APICULTURE PROBLEM TAXONOMY & OBSERVABILITY GAP</text>
+    <text x="30" y="38" class="title">01 - APICULTURE PROBLEM TAXONOMY & OBSERVABILITY GAP</text>
     <text x="30" y="58" class="subtitle">Comparison between traditional invasive manual inspections vs. continuous cyber-physical telemetry</text>
     
     <!-- Left: Manual Inspection Failure -->
@@ -62,14 +62,14 @@ def generate_01_problem():
     <text x="53" y="111" class="tag" fill="#ffffff">TRADITIONAL INSPECTION</text>
     
     <text x="45" y="145" class="box-title" fill="#f87171">Catastrophic Observability Blindspots</text>
-    <text x="45" y="170" class="box-body">• Inspection Frequency: Every 14–21 days (Infrequent Discrete Sampling)</text>
+    <text x="45" y="170" class="box-body">• Inspection Frequency: Every 14-21 days (Infrequent Discrete Sampling)</text>
     <text x="45" y="195" class="box-body">• Thermal Disruption: Hive opened to ambient chill (ΔT: -12°C larve shock)</text>
-    <text x="45" y="220" class="box-body">• Swarm Event Horizon: Swarming acoustic surge happens in 24–48h window</text>
+    <text x="45" y="220" class="box-body">• Swarm Event Horizon: Swarming acoustic surge happens in 24-48h window</text>
     <text x="45" y="245" class="box-body">• Queen Failure: Distress humming undetectable without internal acoustics</text>
     <text x="45" y="270" class="box-body">• Labor Bottleneck: 1 human inspects ~40 hives/day max (costly &amp; slow)</text>
     <text x="45" y="300" class="mono" fill="#ef4444">Result: 55.6% Annual Colony Mortality (USDA-ARS 2024-2025)</text>
     <text x="45" y="325" class="mono" fill="#64748b">Direct Global Impact: $17 Billion Crop Pollination Deficit</text>
-    <text x="45" y="350" class="mono" fill="#64748b">Latency to Anomaly Detection: 336 – 504 Hours</text>
+    <text x="45" y="350" class="mono" fill="#64748b">Latency to Anomaly Detection: 336 - 504 Hours</text>
 
     <!-- Center Arrow -->
     <path d="M 470 225 L 485 225" stroke="#e5a93b" stroke-width="2" marker-end="url(#arrowGold)"/>
@@ -82,8 +82,8 @@ def generate_01_problem():
     <text x="515" y="145" class="box-title">Continuous Cyber-Physical Sensing</text>
     <text x="515" y="170" class="box-body">• Sampling Frequency: Acoustic &amp; 5-pt thermal every 5 minutes (288/day)</text>
     <text x="515" y="195" class="box-body">• Non-Invasive Physics: Hermetic seal intact, zero brood nest thermal shock</text>
-    <text x="515" y="220" class="box-body">• Pre-Swarm Warning: 300–400 Hz acoustic surge detected 36 hours early</text>
-    <text x="515" y="245" class="box-body">• Queen Piping &amp; Distress: 450–750 Hz tracked via CMSIS-DSP 256-pt FFT</text>
+    <text x="515" y="220" class="box-body">• Pre-Swarm Warning: 300-400 Hz acoustic surge detected 36 hours early</text>
+    <text x="515" y="245" class="box-body">• Queen Piping &amp; Distress: 450-750 Hz tracked via CMSIS-DSP 256-pt FFT</text>
     <text x="515" y="270" class="box-body">• Scalable Autonomous Mesh: 100 hives monitored per single Raspberry Pi 3B+ gateway</text>
     <text x="515" y="300" class="mono" fill="#34d399">Target: &gt; 60% Mitigation of Preventable Winter Losses</text>
     <text x="515" y="325" class="mono" fill="#38bdf8">Hardware Payback Period: &lt; 2.4 Months per Commercial Apiary</text>
@@ -98,7 +98,7 @@ def generate_02_sensor_placement():
     {COMMON_STYLE}
     <rect width="960" height="480" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">02 — IN-HIVE SENSOR TRANSDUCTION &amp; MECHANICAL TOPOLOGY</text>
+    <text x="30" y="38" class="title">02 - IN-HIVE SENSOR TRANSDUCTION &amp; MECHANICAL TOPOLOGY</text>
     <text x="30" y="58" class="subtitle">Physical placement of 5-point thermal array, acoustic MEMS probe, humidity, and load cell</text>
     
     <!-- Outer Langstroth Representation -->
@@ -157,7 +157,7 @@ def generate_02_sensor_placement():
     <!-- Right: Specification Panels -->
     <rect x="560" y="85" width="370" height="175" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
     <text x="575" y="110" class="box-title">5-Point Precision Thermal Array</text>
-    <text x="575" y="135" class="box-body">• Transducer: TI TMP117 (I2C addressable 0x48–0x4B)</text>
+    <text x="575" y="135" class="box-body">• Transducer: TI TMP117 (I2C addressable 0x48-0x4B)</text>
     <text x="575" y="155" class="box-body">• Accuracy: ±0.1°C NIST-traceable across 30°C to 45°C</text>
     <text x="575" y="175" class="box-body">• Physical Routing: FPC flexible ribbon clamped to frame top-bar</text>
     <text x="575" y="195" class="box-body">• Biological Target: Brood nest thermoregulation (34.5°C target)</text>
@@ -169,7 +169,7 @@ def generate_02_sensor_placement():
     <text x="575" y="325" class="box-body">• Acoustic: TDK InvenSense INMP441 MEMS Omnidirectional</text>
     <text x="575" y="345" class="box-body">• Sensitivity: -26 dBFS | SNR: 61 dBA | Sampling: 2000 Hz</text>
     <text x="575" y="365" class="box-body">• Acoustic Porting: Sintered PTFE hydrophobic protective screen</text>
-    <text x="575" y="385" class="box-body">• Gas/CO2: Sensirion SCD41 Photoacoustic (400–5000 ppm, ±40 ppm)</text>
+    <text x="575" y="385" class="box-body">• Gas/CO2: Sensirion SCD41 Photoacoustic (400-5000 ppm, ±40 ppm)</text>
     <text x="575" y="405" class="box-body">• Vibration: ST LIS3DH 3-axis ultra-low-power interrupt wake</text>
     <text x="575" y="430" class="mono" fill="#e5a93b">Zero Biological Disruption | Propolis-Resistant Enclosure</text>
 </svg>"""
@@ -182,7 +182,7 @@ def generate_03_acoustic_pipeline():
     {COMMON_STYLE}
     <rect width="960" height="420" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">03 — ON-NODE ACOUSTIC DSP &amp; FEATURE EXTRACTION PIPELINE</text>
+    <text x="30" y="38" class="title">03 - ON-NODE ACOUSTIC DSP &amp; FEATURE EXTRACTION PIPELINE</text>
     <text x="30" y="58" class="subtitle">ARM Cortex-M4 CMSIS-DSP 256-point real FFT with biologically partitioned frequency bins</text>
     
     <!-- Pipeline Blocks -->
@@ -229,10 +229,10 @@ def generate_03_acoustic_pipeline():
     <!-- Block 5: Sub-band Bins -->
     <rect x="670" y="90" width="260" height="120" fill="url(#panelGrad)" stroke="#38bdf8" stroke-width="1.5" rx="6"/>
     <text x="680" y="115" class="box-title" fill="#38bdf8">5. Sub-Band Energy Integration</text>
-    <text x="680" y="135" class="mono">E_fanning  = Σ |X[k]|² (100–180 Hz, k:13–23)</text>
-    <text x="680" y="155" class="mono">E_waggle   = Σ |X[k]|² (200–280 Hz, k:26–36)</text>
-    <text x="680" y="175" class="mono">E_preswarm = Σ |X[k]|² (300–400 Hz, k:38–51)</text>
-    <text x="680" y="195" class="mono">E_distress = Σ |X[k]|² (450–750 Hz, k:58–96)</text>
+    <text x="680" y="135" class="mono">E_fanning  = Σ |X[k]|² (100-180 Hz, k:13-23)</text>
+    <text x="680" y="155" class="mono">E_waggle   = Σ |X[k]|² (200-280 Hz, k:26-36)</text>
+    <text x="680" y="175" class="mono">E_preswarm = Σ |X[k]|² (300-400 Hz, k:38-51)</text>
+    <text x="680" y="195" class="mono">E_distress = Σ |X[k]|² (450-750 Hz, k:58-96)</text>
 
     <!-- Bottom Biological Mapping Table -->
     <rect x="30" y="230" width="900" height="160" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
@@ -248,25 +248,25 @@ def generate_03_acoustic_pipeline():
 
     <!-- Rows -->
     <text x="55" y="315" class="mono" fill="#94a3b8">Thermal Fanning</text>
-    <text x="180" y="315" class="mono" fill="#94a3b8">100 – 180 Hz</text>
+    <text x="180" y="315" class="mono" fill="#94a3b8">100 - 180 Hz</text>
     <text x="290" y="315" class="mono" fill="#94a3b8">k = 13 .. 23</text>
     <text x="410" y="315" class="mono" fill="#cbd5e1">Larval heat evacuation / wing fanning</text>
     <text x="680" y="315" class="mono" fill="#f59e0b">THERMAL_STRESS_WARNING</text>
 
     <text x="55" y="338" class="mono" fill="#94a3b8">Forager Waggle</text>
-    <text x="180" y="338" class="mono" fill="#94a3b8">200 – 280 Hz</text>
+    <text x="180" y="338" class="mono" fill="#94a3b8">200 - 280 Hz</text>
     <text x="290" y="338" class="mono" fill="#94a3b8">k = 26 .. 36</text>
     <text x="410" y="338" class="mono" fill="#cbd5e1">Foraging communication &amp; nectar intake</text>
     <text x="680" y="338" class="mono" fill="#34d399">NORMAL_FORAGING_STATE</text>
 
     <text x="55" y="361" class="mono" fill="#94a3b8">Pre-Swarm Piping</text>
-    <text x="180" y="361" class="mono" fill="#94a3b8">300 – 400 Hz</text>
+    <text x="180" y="361" class="mono" fill="#94a3b8">300 - 400 Hz</text>
     <text x="290" y="361" class="mono" fill="#94a3b8">k = 38 .. 51</text>
     <text x="410" y="361" class="mono" fill="#cbd5e1">Virgin queen piping / colony preparation</text>
     <text x="680" y="361" class="mono" fill="#ef4444">PRE_SWARM_EMERGENCY</text>
 
     <text x="55" y="384" class="mono" fill="#94a3b8">Queenless Roar</text>
-    <text x="180" y="384" class="mono" fill="#94a3b8">450 – 750 Hz</text>
+    <text x="180" y="384" class="mono" fill="#94a3b8">450 - 750 Hz</text>
     <text x="290" y="384" class="mono" fill="#94a3b8">k = 58 .. 96</text>
     <text x="410" y="384" class="mono" fill="#cbd5e1">Disorganized buzzing post queen loss</text>
     <text x="680" y="384" class="mono" fill="#f43f5e">QUEENLESS_DISTRESS</text>
@@ -280,7 +280,7 @@ def generate_04_field_node():
     {COMMON_STYLE}
     <rect width="960" height="460" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">04 — TELEMETRY FIELD NODE EMBEDDED HARDWARE ARCHITECTURE</text>
+    <text x="30" y="38" class="title">04 - TELEMETRY FIELD NODE EMBEDDED HARDWARE ARCHITECTURE</text>
     <text x="30" y="58" class="subtitle">Nordic Semiconductor nRF52840 SoC + Semtech SX1262 LoRa Transceiver Subsystem</text>
     
     <!-- Central SoC -->
@@ -292,7 +292,7 @@ def generate_04_field_node():
     <text x="350" y="175" class="box-body">• 1024 KB Flash / 256 KB SRAM</text>
     <text x="350" y="195" class="box-body">• System ON Sleep: 1.5 µA (RAM Retention)</text>
     <text x="350" y="215" class="box-body">• Semtech SX1262 LoRa Engine (+22 dBm Tx)</text>
-    <text x="350" y="235" class="box-body">• Operating Frequency: 865–867 MHz (IN865)</text>
+    <text x="350" y="235" class="box-body">• Operating Frequency: 865-867 MHz (IN865)</text>
     <text x="350" y="255" class="box-body">• Sensitivity: -137 dBm (SF12 / 125 kHz BW)</text>
     <text x="350" y="275" class="mono" fill="#34d399">Link Budget: 159.0 dB | Payload: 24 Bytes</text>
     <text x="350" y="295" class="mono" fill="#e5a93b">Firmware: FreeRTOS + CMSIS-DSP v1.14.4</text>
@@ -304,7 +304,7 @@ def generate_04_field_node():
 
     <rect x="45" y="130" width="230" height="50" fill="#1e293b" rx="4"/>
     <text x="55" y="148" class="mono" fill="#ffffff">TI TMP117 Array (x5)</text>
-    <text x="55" y="168" class="mono" fill="#94a3b8">I2C (0x48–0x4B) | P0.13/P0.14</text>
+    <text x="55" y="168" class="mono" fill="#94a3b8">I2C (0x48-0x4B) | P0.13/P0.14</text>
 
     <rect x="45" y="190" width="230" height="50" fill="#1e293b" rx="4"/>
     <text x="55" y="208" class="mono" fill="#ffffff">TDK INMP441 Acoustic</text>
@@ -343,7 +343,7 @@ def generate_04_field_node():
 
     <rect x="685" y="265" width="230" height="60" fill="#1e293b" rx="4"/>
     <text x="695" y="283" class="mono" fill="#ffffff">1200 mAh LiFePO4 Cell</text>
-    <text x="695" y="301" class="mono" fill="#94a3b8">Nominal: 3.2V (2.5V–3.65V)</text>
+    <text x="695" y="301" class="mono" fill="#94a3b8">Nominal: 3.2V (2.5V-3.65V)</text>
     <text x="695" y="319" class="mono" fill="#34d399">Cycle Life: &gt; 2500 Cycles</text>
 
     <rect x="685" y="335" width="230" height="85" fill="#1e293b" rx="4"/>
@@ -370,14 +370,14 @@ def generate_05_lora_mesh():
     {COMMON_STYLE}
     <rect width="960" height="400" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">05 — SUB-GHz WIRELESS TELEMETRY &amp; MESH NETWORK TOPOLOGY</text>
+    <text x="30" y="38" class="title">05 - SUB-GHz WIRELESS TELEMETRY &amp; MESH NETWORK TOPOLOGY</text>
     <text x="30" y="58" class="subtitle">LoRa modulation parameter cascade, ITU-R P.833-9 foliage attenuation, and regenerative hops</text>
     
     <!-- Left: LoRa Modulation Parameters -->
     <rect x="30" y="80" width="310" height="290" fill="url(#panelGrad)" stroke="#334155" stroke-width="1.5" rx="6"/>
     <text x="45" y="105" class="box-title">LoRa Physical Layer Configuration</text>
-    <text x="45" y="130" class="mono">• Carrier Frequency: 865.0 – 867.0 MHz</text>
-    <text x="45" y="150" class="mono">• Spreading Factor: SF10 (Adaptive SF7–SF12)</text>
+    <text x="45" y="130" class="mono">• Carrier Frequency: 865.0 - 867.0 MHz</text>
+    <text x="45" y="150" class="mono">• Spreading Factor: SF10 (Adaptive SF7-SF12)</text>
     <text x="45" y="170" class="mono">• Bandwidth (BW): 125.0 kHz</text>
     <text x="45" y="190" class="mono">• Coding Rate (CR): 4/5 (Hamming Forward EC)</text>
     <text x="45" y="210" class="mono">• Tx Output Power: +14.0 dBm (25 mW EIRP)</text>
@@ -438,7 +438,7 @@ def generate_06_gateway():
     {COMMON_STYLE}
     <rect width="960" height="420" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">06 — HARDENED APIARY EDGE GATEWAY ARCHITECTURE</text>
+    <text x="30" y="38" class="title">06 - HARDENED APIARY EDGE GATEWAY ARCHITECTURE</text>
     <text x="30" y="58" class="subtitle">Raspberry Pi 3B+ / Rockchip RK3588 with read-only OverlayFS, SQLite WAL, and local web engine</text>
     
     <!-- Baseboard Carrier -->
@@ -450,7 +450,7 @@ def generate_06_gateway():
     <text x="65" y="160" class="mono">• RAK2287 SX1302 Concentrator</text>
     <text x="65" y="180" class="mono">• Mini-PCIe Carrier Slot (SPI Bus)</text>
     <text x="65" y="200" class="mono">• 8 Concurrent LoRa Channels</text>
-    <text x="65" y="220" class="mono">• Demodulation: SF7–SF12 parallel</text>
+    <text x="65" y="220" class="mono">• Demodulation: SF7-SF12 parallel</text>
     <text x="65" y="240" class="mono">• Peak Packet Rate: 148 pkts/s</text>
     <text x="65" y="260" class="mono">• Cyclic CRC-16 HW Verification</text>
     <text x="65" y="285" class="box-title" fill="#34d399">Power Delivery</text>
@@ -501,7 +501,7 @@ def generate_07_edge_analytics():
     {COMMON_STYLE}
     <rect width="960" height="400" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">07 — EDGE-AI ARCHITECTURE &amp; ANOMALY DETECTION ENGINE</text>
+    <text x="30" y="38" class="title">07 - EDGE-AI ARCHITECTURE &amp; ANOMALY DETECTION ENGINE</text>
     <text x="30" y="58" class="subtitle">Multi-modal sensory fusion: 1D-CNN spectral classifier, CUSUM drift filter, and HoneyChain cryptographic provenance</text>
     
     <!-- Pipeline -->
@@ -577,7 +577,7 @@ def generate_08_cyber_physical():
     {COMMON_STYLE}
     <rect width="960" height="480" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">08 — FULL CYBER-PHYSICAL SYSTEM HIERARCHY &amp; REPRODUCIBILITY STACK</text>
+    <text x="30" y="38" class="title">08 - FULL CYBER-PHYSICAL SYSTEM HIERARCHY &amp; REPRODUCIBILITY STACK</text>
     <text x="30" y="58" class="subtitle">Complete vertical integration from biological hive microclimate through firmware, edge gateway, to operator</text>
     
     <!-- Tier 1: Biological / Physical Domain -->
@@ -585,10 +585,10 @@ def generate_08_cyber_physical():
     <rect x="45" y="100" width="160" height="24" fill="#334155" rx="3"/>
     <text x="53" y="116" class="tag" fill="#ffffff">TIER 1: PHYSICAL HIVE</text>
     <text x="45" y="150" class="box-title">Langstroth Microclimate</text>
-    <text x="45" y="175" class="box-body">• Apis mellifera colony (15k–50k bees)</text>
+    <text x="45" y="175" class="box-body">• Apis mellifera colony (15k-50k bees)</text>
     <text x="45" y="195" class="box-body">• Brood nest thermal core: 34.5°C ± 1.5°C</text>
-    <text x="45" y="215" class="box-body">• Acoustic wing vibrations: 100–750 Hz</text>
-    <text x="45" y="235" class="box-body">• Honey accumulation mass: 0–60 kg</text>
+    <text x="45" y="215" class="box-body">• Acoustic wing vibrations: 100-750 Hz</text>
+    <text x="45" y="235" class="box-body">• Honey accumulation mass: 0-60 kg</text>
     <text x="45" y="255" class="box-body">• Comb metabolic respiration: CO2 &amp; RH%</text>
     <text x="45" y="280" class="box-title" fill="#e5a93b">Transduction Elements</text>
     <text x="45" y="305" class="mono">• 5x TMP117 NIST RTD Sensors (±0.1°C)</text>
@@ -612,7 +612,7 @@ def generate_08_cyber_physical():
     <text x="355" y="235" class="box-body">• Deep Sleep: 2.0 µA quiescent current</text>
     <text x="355" y="255" class="box-body">• Energy / Day: 0.85 mWh (18+ Mo Autonomy)</text>
     <text x="355" y="280" class="box-title" fill="#38bdf8">Wireless Mesh Uplink</text>
-    <text x="355" y="305" class="mono">• Frequency: 865–867 MHz (IN865 / EU868)</text>
+    <text x="355" y="305" class="mono">• Frequency: 865-867 MHz (IN865 / EU868)</text>
     <text x="355" y="325" class="mono">• Modulation: LoRa SF10 / BW 125 kHz</text>
     <text x="355" y="345" class="mono">• Link Budget: 159 dB (15 km LOS / 1.5 km Canopy)</text>
     <text x="355" y="365" class="mono">• Packet Size: 24 Bytes Binary Compact</text>

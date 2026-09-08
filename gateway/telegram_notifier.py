@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — AUTOMATED TELEGRAM EMERGENCY ALERT BOT
+BEEVIL KNIEVEL - AUTOMATED TELEGRAM EMERGENCY ALERT BOT
 ========================================================
 100% Free, Zero-Subscription Alert Dispatcher:
 - Monitors local SQLite database for unresolved critical alerts.

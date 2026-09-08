@@ -115,7 +115,7 @@ static inline bool beevil_mesh_handle_rx(beevil_mesh_router_t *router, beevil_me
 
     // 3. If intermediate node: Check TTL before relaying
     if (frame->header.ttl <= 1) {
-        return false; // TTL Expired — Drop to prevent infinite looping
+        return false; // TTL Expired - Drop to prevent infinite looping
     }
 
     // 4. Prepare for Re-Broadcast / Relay Hop

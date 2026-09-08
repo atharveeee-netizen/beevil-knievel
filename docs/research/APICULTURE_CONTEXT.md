@@ -22,4 +22,4 @@ Unlike hobbyist beekeepers who manage 2 to 5 hives in a residential garden, comm
 ---
 
 ## 3. The Cyber-Physical Solution: Continuous Remote Observation
-BEEVIL KNIEVEL bridges this gap by turning the Langstroth hive into a non-invasive cyber-physical sensing node. Rather than forcing beekeepers to guess or perform invasive inspections on every box, the system continuously aggregates multi-modal physical signals—temperature, acoustics, carbon dioxide, tilt, and weight—delivering automated triage directly to mobile field dashboards.
+BEEVIL KNIEVEL bridges this gap by turning the Langstroth hive into a non-invasive cyber-physical sensing node. Rather than forcing beekeepers to guess or perform invasive inspections on every box, the system continuously aggregates multi-modal physical signals - temperature, acoustics, carbon dioxide, tilt, and weight - delivering automated triage directly to mobile field dashboards.

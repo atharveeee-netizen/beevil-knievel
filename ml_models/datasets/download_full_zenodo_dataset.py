@@ -1,6 +1,6 @@
 """
 =============================================================================
-BEEVIL KNIEVEL — Complete Zenodo Public Dataset Downloader
+BEEVIL KNIEVEL - Complete Zenodo Public Dataset Downloader
 Downloads 14 Real-World Beehive Audio Recordings directly from Zenodo Record 1321278
 ("To Bee or Not to Bee: An annotated dataset for beehive sound recognition")
 =============================================================================
@@ -34,7 +34,7 @@ ZENODO_AUDIO_FILES = [
 
 def download_full_zenodo_dataset():
     print("=================================================================")
-    print("      BEEVIL KNIEVEL — FULL ZENODO REAL DATASET DOWNLOADER       ")
+    print("      BEEVIL KNIEVEL - FULL ZENODO REAL DATASET DOWNLOADER       ")
     print("=================================================================")
 
     target_dir = os.path.join(os.path.dirname(__file__), "sample_bee_audio")

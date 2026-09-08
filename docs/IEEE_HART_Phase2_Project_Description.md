@@ -1,4 +1,4 @@
-# IEEE HART HardwAIre Challenge — Phase 2 Project Description
+# IEEE HART HardwAIre Challenge - Phase 2 Project Description
 **Team Name**: Beevil Knievel  
 **Project Title**: Precision Apiculture Telemetry Node & Custom Gateway System  
 **Team Members**: Atharve Dahima (CEO/Hardware), Loshini Shankar (CPO/UX), Srajan Mishra (CTO/Firmware)  
@@ -9,9 +9,9 @@
 
 ## 1. Real-World Scenario & Impact Story
 
-Commercial honeybee pollination underpins over $17 Billion in annual crop production globally. However, during the 2024–2025 season, managed honeybee operations experienced a catastrophic **55.6% colony loss**—the second consecutive record-high loss year. Traditional beekeeping relies on manual physical inspections every 2 to 3 weeks. By the time a beekeeper notices a collapsed hive, the colony is already lost to starvation, queen death, or varroa mite infestations.
+Commercial honeybee pollination underpins over $17 Billion in annual crop production globally. However, during the 2024-2025 season, managed honeybee operations experienced a catastrophic **55.6% colony loss** - the second consecutive record-high loss year. Traditional beekeeping relies on manual physical inspections every 2 to 3 weeks. By the time a beekeeper notices a collapsed hive, the colony is already lost to starvation, queen death, or varroa mite infestations.
 
-**Beevil Knievel** solves this crisis by deploying a low-cost, ultra-low-power, long-range Edge-AI sensor node inside the beehive brood nest. Bees strictly thermoregulate their central brood frames at $34.0^\circ\text{C} - 35.5^\circ\text{C}$ and produce distinct acoustic frequency signatures. When a colony experiences queen failure, mite distress, or thermal collapse, its acoustic frequency shifts into the **200 Hz – 400 Hz band** and brood-nest temperature control begins to drift hours before physical symptoms appear.
+**Beevil Knievel** solves this crisis by deploying a low-cost, ultra-low-power, long-range Edge-AI sensor node inside the beehive brood nest. Bees strictly thermoregulate their central brood frames at $34.0^\circ\text{C} - 35.5^\circ\text{C}$ and produce distinct acoustic frequency signatures. When a colony experiences queen failure, mite distress, or thermal collapse, its acoustic frequency shifts into the **200 Hz - 400 Hz band** and brood-nest temperature control begins to drift hours before physical symptoms appear.
 
 ---
 
@@ -25,7 +25,7 @@ The system comprises an autonomous inside-hive **Transmitter Node** and a self-b
 * **Power System**: 1000mAh 3.7V LiPo + 1W Solar Panel + TPS73033 ultra-low quiescent LDO (~25nA $I_Q$).
 
 ### B. On-Device Model 1 (MCU Micro-FFT Classifier)
-Model 1 runs directly on the nRF52840 MCU. It samples audio via I2S, executes a Real FFT (Fast Fourier Transform) focusing on the **200 Hz – 400 Hz acoustic energy band**, and calculates the brood vs. ambient temperature differential ($\Delta T$). 
+Model 1 runs directly on the nRF52840 MCU. It samples audio via I2S, executes a Real FFT (Fast Fourier Transform) focusing on the **200 Hz - 400 Hz acoustic energy band**, and calculates the brood vs. ambient temperature differential ($\Delta T$). 
 * **State Decision**: Classifies state as `Healthy` or `Distressed`. 
 * **Energy Duty Cycle**: The node stays in ultra-deep sleep (~1.5 $\mu\text{A}$) for 15-minute intervals. The 868MHz radio *only* powers on when a `Distressed` state is triggered or during a single daily heartbeat packet, consuming just **0.85 mWh/day**.
 

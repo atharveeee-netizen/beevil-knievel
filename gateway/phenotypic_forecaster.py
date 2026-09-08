@@ -1,5 +1,5 @@
 """
-BEEVIL PHENOTYPIC FORECASTER — VARROA REGRESSION & HONEY YIELD PREDICTOR
+BEEVIL PHENOTYPIC FORECASTER - VARROA REGRESSION & HONEY YIELD PREDICTOR
 =========================================================================
 Trained on MSPB 2.0 (Zenodo) and BEEP.nl European Scale Database:
 1. Continuous Varroa Mite Load Estimator (MSPB 2.0):

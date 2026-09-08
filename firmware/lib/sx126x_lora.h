@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * BEEVIL KNIEVEL — SX126x Sub-GHz LoRaWAN Radio Driver Header
+ * BEEVIL KNIEVEL - SX126x Sub-GHz LoRaWAN Radio Driver Header
  * Optimized for nRF52840 (Seeed RAK4631 @ 868MHz)
  * ============================================================================
  */

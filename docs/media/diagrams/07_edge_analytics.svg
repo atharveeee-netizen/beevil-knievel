@@ -31,7 +31,7 @@
 
     <rect width="960" height="400" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">07 — EDGE-AI ARCHITECTURE &amp; ANOMALY DETECTION ENGINE</text>
+    <text x="30" y="38" class="title">07 - EDGE-AI ARCHITECTURE &amp; ANOMALY DETECTION ENGINE</text>
     <text x="30" y="58" class="subtitle">Multi-modal sensory fusion: 1D-CNN spectral classifier, CUSUM drift filter, and HoneyChain cryptographic provenance</text>
     
     <!-- Pipeline -->

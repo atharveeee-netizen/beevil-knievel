@@ -1,6 +1,6 @@
 """
 =============================================================================
-BEEVIL KNIEVEL — 100% Real Zenodo Dataset Benchmark Suite (14 Real Files)
+BEEVIL KNIEVEL - 100% Real Zenodo Dataset Benchmark Suite (14 Real Files)
 Evaluates 75.4 KB TinyML model EXCLUSIVELY on 14 real-world field recordings
 from Zenodo Record 1321278 (NU-Hive & Open Source Beehive datasets).
 ZERO synthetic data used!
@@ -15,7 +15,7 @@ from datasets.download_full_zenodo_dataset import download_full_zenodo_dataset, 
 
 def run_real_zenodo_benchmark():
     print("=================================================================================")
-    print("  BEEVIL KNIEVEL — 100% REAL ZENODO DATASET EVALUATION (14 FIELD RECORDINGS)    ")
+    print("  BEEVIL KNIEVEL - 100% REAL ZENODO DATASET EVALUATION (14 FIELD RECORDINGS)    ")
     print("=================================================================================")
     print(f"  * Dataset Source:     Zenodo Public Research Archive (DOI: 10.5281/zenodo.1321278)")
     print(f"  * Model Architecture: 1D-CNN + 4-Band Spectral Feature Extractor")

@@ -1,6 +1,6 @@
 """
 =============================================================================
-BEEVIL KNIEVEL — Level 1 TinyML 1D-CNN Benchmark Suite (~75.4 KB Model Size)
+BEEVIL KNIEVEL - Level 1 TinyML 1D-CNN Benchmark Suite (~75.4 KB Model Size)
 Runs multi-spectral feature evaluation against real Zenodo research audio.
 =============================================================================
 """
@@ -14,7 +14,7 @@ from datasets.download_zenodo_dataset import download_zenodo_samples
 
 def run_level1_benchmark():
     print("=================================================================")
-    print(f"  BEEVIL KNIEVEL — HIGH-PRECISION 75.4 KB TinyML EVALUATION      ")
+    print(f"  BEEVIL KNIEVEL - HIGH-PRECISION 75.4 KB TinyML EVALUATION      ")
     print("=================================================================")
     print(f"  * Model Architecture: 1D-CNN + 4-Band Spectral Feature Extractor")
     print(f"  * Flash Footprint:    {MODEL_FLASH_FOOTPRINT_KB} KB / 256 KB (RAK4631)")
@@ -50,7 +50,7 @@ def run_level1_benchmark():
 
     print("-" * 102)
     print("\n=================================================================")
-    print(f"  75.4 KB TinyML 1D-CNN Evaluation Complete — Status: PASSED (100%)")
+    print(f"  75.4 KB TinyML 1D-CNN Evaluation Complete - Status: PASSED (100%)")
     print("=================================================================\n")
 
 if __name__ == "__main__":

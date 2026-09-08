@@ -31,7 +31,7 @@
 
     <rect width="960" height="480" fill="#0b0e14" rx="8"/>
     
-    <text x="30" y="38" class="title">08 — FULL CYBER-PHYSICAL SYSTEM HIERARCHY &amp; REPRODUCIBILITY STACK</text>
+    <text x="30" y="38" class="title">08 - FULL CYBER-PHYSICAL SYSTEM HIERARCHY &amp; REPRODUCIBILITY STACK</text>
     <text x="30" y="58" class="subtitle">Complete vertical integration from biological hive microclimate through firmware, edge gateway, to operator</text>
     
     <!-- Tier 1: Biological / Physical Domain -->
@@ -39,10 +39,10 @@
     <rect x="45" y="100" width="160" height="24" fill="#334155" rx="3"/>
     <text x="53" y="116" class="tag" fill="#ffffff">TIER 1: PHYSICAL HIVE</text>
     <text x="45" y="150" class="box-title">Langstroth Microclimate</text>
-    <text x="45" y="175" class="box-body">• Apis mellifera colony (15k–50k bees)</text>
+    <text x="45" y="175" class="box-body">• Apis mellifera colony (15k-50k bees)</text>
     <text x="45" y="195" class="box-body">• Brood nest thermal core: 34.5°C ± 1.5°C</text>
-    <text x="45" y="215" class="box-body">• Acoustic wing vibrations: 100–750 Hz</text>
-    <text x="45" y="235" class="box-body">• Honey accumulation mass: 0–60 kg</text>
+    <text x="45" y="215" class="box-body">• Acoustic wing vibrations: 100-750 Hz</text>
+    <text x="45" y="235" class="box-body">• Honey accumulation mass: 0-60 kg</text>
     <text x="45" y="255" class="box-body">• Comb metabolic respiration: CO2 &amp; RH%</text>
     <text x="45" y="280" class="box-title" fill="#e5a93b">Transduction Elements</text>
     <text x="45" y="305" class="mono">• 5x TMP117 NIST RTD Sensors (±0.1°C)</text>
@@ -66,7 +66,7 @@
     <text x="355" y="235" class="box-body">• Deep Sleep: 2.0 µA quiescent current</text>
     <text x="355" y="255" class="box-body">• Energy / Day: 0.85 mWh (18+ Mo Autonomy)</text>
     <text x="355" y="280" class="box-title" fill="#38bdf8">Wireless Mesh Uplink</text>
-    <text x="355" y="305" class="mono">• Frequency: 865–867 MHz (IN865 / EU868)</text>
+    <text x="355" y="305" class="mono">• Frequency: 865-867 MHz (IN865 / EU868)</text>
     <text x="355" y="325" class="mono">• Modulation: LoRa SF10 / BW 125 kHz</text>
     <text x="355" y="345" class="mono">• Link Budget: 159 dB (15 km LOS / 1.5 km Canopy)</text>
     <text x="355" y="365" class="mono">• Packet Size: 24 Bytes Binary Compact</text>

@@ -1,6 +1,6 @@
 """
 =============================================================================
-BEEVIL KNIEVEL — Cloud AI Model 2 Pathology Diagnostic Benchmark Suite
+BEEVIL KNIEVEL - Cloud AI Model 2 Pathology Diagnostic Benchmark Suite
 Evaluates Model 2 Multi-Sensor Telemetry Engine [Temp, Audio, CO2, Weight]
 =============================================================================
 """
@@ -9,7 +9,7 @@ from cloud_server import predict_pathology_model2, LABEL_MAP
 
 def run_cloud_model_benchmark():
     print("=================================================================================")
-    print("  BEEVIL KNIEVEL — CLOUD AI MODEL 2 PATHOLOGY DIAGNOSTIC BENCHMARK SUITE         ")
+    print("  BEEVIL KNIEVEL - CLOUD AI MODEL 2 PATHOLOGY DIAGNOSTIC BENCHMARK SUITE         ")
     print("=================================================================================")
     print("  * Model Type:       Multi-Sensor Cloud Pathology Diagnostic Engine (Model 2)")
     print("  * Telemetry Vector: [Brood Temp (°C), Audio Freq (Hz), CO2 (PPM), Weight (kg)]")

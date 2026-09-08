@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — EDGE GATEWAY SERVER (Linux / Raspberry Pi 3B+)
+BEEVIL KNIEVEL - EDGE GATEWAY SERVER (Linux / Raspberry Pi 3B+)
 ================================================================
 High-Performance Local Edge Gateway Server:
 - Real-Time LoRaWAN / LoRa Packet Ingestion for 100 Hives
@@ -282,7 +282,7 @@ ai_engine = EdgeInferenceEngine()
 # FASTAPI APPLICATION & WEBSOCKET BROADCASTER
 # -----------------------------------------------------------------------------
 app = FastAPI(
-    title="Beevil Knievel — Edge Gateway Telemetry Server",
+    title="Beevil Knievel - Edge Gateway Telemetry Server",
     description="Edge-Native Smart Apiculture Monitoring & AI Diagnostic API",
     version="2.0.0"
 )

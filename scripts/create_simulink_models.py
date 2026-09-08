@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — Simulink Model Package Builder
+BEEVIL KNIEVEL - Simulink Model Package Builder
 Creates valid .slx (Simulink XML Open Packaging Convention ZIP) model files:
 1. simulation/simulink/beevil_node_duty_cycle.slx
 2. simulation/simulink/beevil_cyber_physical_system.slx

@@ -1,5 +1,5 @@
 """
-BEEVIL KNIEVEL — ANSYS HFSS 865 MHz IN865 Antenna & Hive Dielectric Penetration
+BEEVIL KNIEVEL - ANSYS HFSS 865 MHz IN865 Antenna & Hive Dielectric Penetration
 Module: ansys_hfss_lora_antenna.py
 Calculates S11 return loss, VSWR, and RF link penetration through stratified hive media.
 """

@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================================
-# BEEVIL KNIEVEL — WIREGUARD P2P REGIONAL APIARY MESH SETUP
+# BEEVIL KNIEVEL - WIREGUARD P2P REGIONAL APIARY MESH SETUP
 # =============================================================================
 # Connects multiple Raspberry Pi 3B+ Gateways across distant farm locations into an
 # encrypted, zero-cloud peer-to-peer mesh network.
@@ -14,7 +14,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 echo "================================================================="
-echo "  BEEVIL KNIEVEL — WIREGUARD MULTI-APIARY P2P MESH SETUP"
+echo "  BEEVIL KNIEVEL - WIREGUARD MULTI-APIARY P2P MESH SETUP"
 echo "================================================================="
 
 apt-get update -y

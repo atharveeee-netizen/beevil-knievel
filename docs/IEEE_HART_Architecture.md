@@ -1,5 +1,5 @@
 # Beevil Knievel AgriTech Architecture
-**IEEE HART HardwAIre Challenge Phase 2 — Technical Operations Whitepaper**
+**IEEE HART HardwAIre Challenge Phase 2 - Technical Operations Whitepaper**
 
 <div style="page-break-after: always;"></div>
 

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * BEEVIL KNIEVEL — Embedded DS18B20 1-Wire Thermal Sensor Driver Header
+ * BEEVIL KNIEVEL - Embedded DS18B20 1-Wire Thermal Sensor Driver Header
  * Optimized for nRF52840 / ARM Cortex-M4 Microcontrollers
  * ============================================================================
  */
