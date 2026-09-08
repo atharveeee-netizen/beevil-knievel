@@ -14,6 +14,10 @@
 
 **An evidence-backed, research-grounded cyber-physical telemetry system providing continuous, non-invasive visibility into commercial honeybee (*Apis mellifera*) colony thermoregulation, bio-acoustics, and population dynamics.**
 
+> [!NOTE]
+> **Evaluation & Bring-Up Status:** Currently evaluated as a USB-connected **BENCH PROTOTYPE** (evaluation node). Real physical registers are polled dynamically; unpopulated sensors report `NOT_CONNECTED / UNAVAILABLE`. No synthetic values are presented as physical hive measurements.
+> Full Bring-Up Artifacts: [Hardware Bring-Up Status](docs/HARDWARE_BRINGUP_STATUS.md) • [Canonical BOM](docs/CANONICAL_BOM.md) • [Data Provenance](docs/DATA_PROVENANCE.md) • [Hardware Bring-Up Report](docs/HARDWARE_BRINGUP_REPORT.md)
+
 [Architecture](#04--cyber-physical-architecture) • [Acoustic DSP](#06--acoustic-dsp) • [Thermal Model](#08--thermal-model) • [Energy Autonomy](#09--energy-model) • [RF Propagation](#10--radio) • [Validation](#13--validation-boundary) • [Reproducibility](#15--reproducibility)
 
 </div>
@@ -125,7 +129,7 @@ BEEVIL KNIEVEL operates on an autonomous 3-tier architecture designed for rugged
 
 ### Architectural Tiers
 1. **Tier 1: Physical Hive & Transducers**: In-hive probes capture thermodynamic and bio-acoustic signals without disturbing colony propolis seals.
-2. **Tier 2: Embedded Telemetry Field Node**: Nordic nRF52840 SoC executes on-device CMSIS-DSP 256-point FFT, packages a compact 24-byte telemetry frame, and transmits via Semtech SX1262 LoRa mesh.
+2. **Tier 2: Embedded Telemetry Field Node**: Nordic nRF52840 SoC executes on-device CMSIS-DSP 256-point FFT, packages a canonical 33-byte telemetry frame, and transmits via Semtech SX1262 LoRa mesh.
 3. **Tier 3: Hardened Edge Gateway & Analytics**: Mast-mounted Raspberry Pi 3B+ edge server receives packets via RAK2287 8-channel concentrator, stores data in SQLite WAL, executes CUSUM drift detection, and serves local browser, PWA, and Playdate consoles.
 
 ---
@@ -154,9 +158,9 @@ The field telemetry node is engineered for multi-year field autonomy, housed in 
 ### Hardware Subsystem Specifications
 - **Microcontroller**: RAKwireless WisBlock RAK4631 (Nordic nRF52840 MCU @ 64 MHz, 1 MB Flash, 256 KB RAM).
 - **RF Transceiver**: Semtech SX1262 Sub-GHz LoRa Engine (+14 dBm Tx power, -137 dBm sensitivity).
-- **Power Management**: TI BQ25171 solar MPPT charge controller + TI TPS62840 ultra-low-$I_q$ (60 nA) step-down regulator.
-- **Battery Storage**: 1200 mAh LiFePO4 chemistry (3.2V nominal, >2500 cycle life, intrinsically safe thermal runaway profile).
-- **Solar Harvesting**: 0.5W monocrystalline panel integrated directly into the upper enclosure bevel.
+- **Power Management**: Onboard TP4054 linear CC/CV charge management IC (4.20V termination) + TI TPS62840 ultra-low-$I_q$ step-down regulator.
+- **Battery Storage**: 1S 3.7V Li-ion (NMC) / LiPo chemistry (3000 mAh 18650 cell, 3.27V cutoff to 4.20V full, calibrated with 7-point OCV lookup & Arrhenius temperature derating).
+- **Solar Harvesting**: 0.5W / 6V 100mA monocrystalline panel integrated with outdoor field enclosure.
 
 ---
 

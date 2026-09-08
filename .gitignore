@@ -48,8 +48,15 @@ TinyML Model/datasets/sample_bee_audio/zenodo_*.wav
 
 # Firmware Local Build Output
 firmware/build/
+.pio/
 *.elf
+*.hex
+*.bin
+*.zip
 *.map
+
+# Local Serial Logs
+logs/
 
 # Raw Video Downloads (Outside Submission Package)
 assets/video_sources/raw/
