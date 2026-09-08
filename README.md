@@ -4,21 +4,32 @@
 
 ![BEEVIL KNIEVEL Engineering Hero](docs/media/hero/beevil_knievel_hero_engineering.png)
 
-![BEEVIL KNIEVEL System Architecture](docs/media/diagrams/00_system_hero_architecture.svg)
+![BEEVIL KNIEVEL System Architecture](docs/figures/matlab/01_system_architecture.png)
+*Figure 0.1: Canonical IEEE Phase 2 System Architecture — 3-Tier Multi-Modal Cyber-Physical Telemetry Platform ([Vector SVG](docs/figures/matlab/01_system_architecture.svg) • [Publication PDF](docs/figures/matlab/01_system_architecture.pdf))*
 
-[![Hardware Status](https://img.shields.io/badge/Hardware-nRF52840%20%2B%20SX1262%20%2B%20Raspberry Pi 3B+-22c55e?style=flat-square)](#05--field-node)
-[![Acoustic DSP](https://img.shields.io/badge/DSP-CMSIS--DSP%20256--pt%20FFT%20(%CE%94f%3D7.81Hz)-3b82f6?style=flat-square)](#06--acoustic-dsp)
-[![MATLAB Simulation](https://img.shields.io/badge/MATLAB%2FSimulink-8%20Models%20Verified-e5a93b?style=flat-square)](#15--reproducibility)
-[![RF Link Budget](https://img.shields.io/badge/RF%20Link-IN865%20LoRa%20(15km%20LOS%20%2F%201.5km%20Canopy)-8b5cf6?style=flat-square)](#10--radio)
+![BEEVIL KNIEVEL Video Master Architecture](docs/figures/matlab/13_video_master_architecture.png)
+*Figure 0.2: Master Video Presentation Architecture ([Vector SVG](docs/figures/matlab/13_video_master_architecture.svg) • [Publication PDF](docs/figures/matlab/13_video_master_architecture.pdf))*
+
+[![Hardware Status](https://img.shields.io/badge/Hardware-nRF52840%20%2B%20SX1262%20%2B%20Raspberry%20Pi%203B%2B-22c55e?style=flat-square)](#05--field-node)
+[![Radio](https://img.shields.io/badge/Radio-Dual--Radio%20BLE%20Mesh%20%2B%20LoRa%20Star-3b82f6?style=flat-square)](#10--radio)
+[![Acoustic DSP](https://img.shields.io/badge/DSP-CMSIS--DSP%20256--pt%20FFT%20(16kHz)-3b82f6?style=flat-square)](#06--acoustic-dsp)
+[![MATLAB Suite](https://img.shields.io/badge/MATLAB-13%20Canonical%20Figures-e5a93b?style=flat-square)](#15--canonical-ieee-phase-2-publication-figure-gallery)
 [![Validation Standard](https://img.shields.io/badge/Evidence-Audited%20%26%20Calibrated-10b981?style=flat-square)](#13--validation-boundary)
 
 **An evidence-backed, research-grounded cyber-physical telemetry system providing continuous, non-invasive visibility into commercial honeybee (*Apis mellifera*) colony thermoregulation, bio-acoustics, and population dynamics.**
+
+### 📄 IEEE HART Phase 2 Official Submission Report (2-Page Project Description)
+👉 **[Download Official Phase 2 PDF Report (submission/hart_phase2_report.pdf)](submission/hart_phase2_report.pdf)**
+
+| Page 1: System Overview, Architecture & Transduction | Page 2: Mathematical Evidence, RF Budget & BOM |
+|:---:|:---:|
+| <a href="submission/hart_phase2_report.pdf"><img src="report/page_1.png" width="460" alt="IEEE HART Phase 2 Report - Page 1"/></a> | <a href="submission/hart_phase2_report.pdf"><img src="report/page_2.png" width="460" alt="IEEE HART Phase 2 Report - Page 2"/></a> |
 
 > [!NOTE]
 > **Evaluation & Bring-Up Status:** Currently evaluated as a USB-connected **BENCH PROTOTYPE** (evaluation node). Real physical registers are polled dynamically; unpopulated sensors report `NOT_CONNECTED / UNAVAILABLE`. No synthetic values are presented as physical hive measurements.
 > Full Bring-Up Artifacts: [Hardware Bring-Up Status](docs/HARDWARE_BRINGUP_STATUS.md) • [Canonical BOM](docs/CANONICAL_BOM.md) • [Data Provenance](docs/DATA_PROVENANCE.md) • [Hardware Bring-Up Report](docs/HARDWARE_BRINGUP_REPORT.md)
 
-[Architecture](#04--cyber-physical-architecture) • [Acoustic DSP](#06--acoustic-dsp) • [Thermal Model](#08--thermal-model) • [Energy Autonomy](#09--energy-model) • [RF Propagation](#10--radio) • [Validation](#13--validation-boundary) • [Reproducibility](#15--reproducibility)
+[Architecture](#04--cyber-physical-architecture) • [Acoustic DSP](#06--acoustic-dsp) • [Thermal Model](#08--thermal-model) • [Energy Autonomy](#09--energy-model) • [Dual-Radio Network](#10--radio) • [Validation](#13--validation-boundary) • [Figure Gallery](#15--canonical-ieee-phase-2-publication-figure-gallery) • [Reproducibility](#16--reproducibility)
 
 </div>
 
@@ -73,8 +84,11 @@ BEEVIL KNIEVEL instruments the standard 10-frame Langstroth hive body through no
 
 <div align="center">
 
+![Canonical In-Hive Sensor Layer](docs/figures/matlab/02_hive_sensor_layer.png)
+*Figure 2.3: Canonical In-Hive Sensor Layer — Physical Transducer Matrix & Bus Routing ([Vector SVG](docs/figures/matlab/02_hive_sensor_layer.svg) • [Publication PDF](docs/figures/matlab/02_hive_sensor_layer.pdf))*
+
 ![Sensor Placement Topology](docs/media/diagrams/02_sensor_placement.svg)
-*Figure 2.2: Sensor placement and wiring topology across a 10-frame Langstroth deep brood box.*
+*Figure 2.4: Sensor placement and wiring topology across a 10-frame Langstroth deep brood box.*
 
 </div>
 
@@ -122,15 +136,18 @@ BEEVIL KNIEVEL operates on an autonomous 3-tier architecture designed for rugged
 
 <div align="center">
 
-![Full Cyber-Physical Architecture](docs/media/diagrams/08_full_cyber_physical_architecture.svg)
-*Figure 4.1: Complete 3-tier cyber-physical architecture from in-hive transducers through edge gateway to field operators.*
+![End-to-End System Telemetry Dataflow](docs/figures/matlab/10_end_to_end_dataflow.png)
+*Figure 4.1: Canonical End-to-End System Telemetry Dataflow — From Transducer Ping-Pong DMA to Gateway SQLite WAL ([Vector SVG](docs/figures/matlab/10_end_to_end_dataflow.svg) • [Publication PDF](docs/figures/matlab/10_end_to_end_dataflow.pdf))*
+
+![Full Cyber-Physical Architecture Schematic](docs/media/diagrams/08_full_cyber_physical_architecture.svg)
+*Figure 4.2: Complete 3-tier cyber-physical architecture from in-hive transducers through edge gateway to field operators.*
 
 </div>
 
 ### Architectural Tiers
 1. **Tier 1: Physical Hive & Transducers**: In-hive probes capture thermodynamic and bio-acoustic signals without disturbing colony propolis seals.
-2. **Tier 2: Embedded Telemetry Field Node**: Nordic nRF52840 SoC executes on-device CMSIS-DSP 256-point FFT, packages a canonical 33-byte telemetry frame, and transmits via Semtech SX1262 LoRa mesh.
-3. **Tier 3: Hardened Edge Gateway & Analytics**: Mast-mounted Raspberry Pi 3B+ edge server receives packets via RAK2287 8-channel concentrator, stores data in SQLite WAL, executes CUSUM drift detection, and serves local browser, PWA, and Playdate consoles.
+2. **Tier 2: Embedded Telemetry Field Node**: Nordic nRF52840 SoC executes on-device CMSIS-DSP 256-point FFT, packages a canonical 33-byte telemetry frame (`BeevilLoRaPayload`), and transmits over Dual-Radio Hybrid (2.4 GHz BLE Mesh adjacent clustering + Semtech SX1262 LoRa star backhaul).
+3. **Tier 3: Hardened Edge Gateway & Analytics**: Mast-mounted Raspberry Pi 3B+ edge server receives packets via Waveshare SX1262 LoRa HAT, stores data in SQLite WAL, executes CUSUM drift detection, and serves local browser, PWA, and Playdate consoles.
 
 ---
 
@@ -140,18 +157,20 @@ The field telemetry node is engineered for multi-year field autonomy, housed in 
 
 <div align="center">
 
+![Field Node Architecture](docs/figures/matlab/03_sensor_node.png)
+*Figure 5.1: Canonical Field Node Architecture — Nordic nRF52840 SoC, Semtech SX1262 LoRa, Power Domain Gating ([Vector SVG](docs/figures/matlab/03_sensor_node.svg) • [Publication PDF](docs/figures/matlab/03_sensor_node.pdf))*
+
+![Embedded Processing State Machine](docs/figures/matlab/04_embedded_processing.png)
+*Figure 5.2: Canonical Embedded Processing State Machine — 300s Duty Cycle, CMSIS-DSP, Power Gating ([Vector SVG](docs/figures/matlab/04_embedded_processing.svg) • [Publication PDF](docs/figures/matlab/04_embedded_processing.pdf))*
+
 ![Field Node Enclosure](docs/media/hardware/field_node_rugged_enclosure.png)
-*Figure 5.1: Industrial product engineering visualization of the rugged low-power field node mounted to a commercial Langstroth hive body.*
+*Figure 5.3: Industrial product engineering visualization of the rugged low-power field node mounted to a commercial Langstroth hive body.*
 
 ![Field Node IP67 Enclosure Schematic](docs/media/diagrams/04_field_node_enclosure_schematic.svg)
-*Figure 5.2: Mechanical dimensioned CAD layout and internal component packaging of the IP67 ruggedized field telemetry node.*
+*Figure 5.4: Mechanical dimensioned CAD layout and internal component packaging of the IP67 ruggedized field telemetry node.*
 
-</div>
-
-<div align="center">
-
-![Field Node Architecture](docs/media/diagrams/04_field_node_architecture.svg)
-*Figure 5.3: Field node hardware architecture, bus topology, and power management subsystem.*
+![Field Node Architecture Schematic](docs/media/diagrams/04_field_node_architecture.svg)
+*Figure 5.5: Field node hardware architecture, bus topology, and power management subsystem.*
 
 </div>
 
@@ -170,20 +189,23 @@ To minimize radio airtime and avoid streaming raw audio, all spectral transforma
 
 <div align="center">
 
-![Acoustic DSP Pipeline](docs/media/diagrams/03_acoustic_pipeline.svg)
-*Figure 6.1: On-node acoustic signal processing pipeline and biological sub-band integration.*
+![Acoustic DSP Pipeline](docs/figures/matlab/05_acoustic_dsp.png)
+*Figure 6.1: Canonical Acoustic DSP Pipeline — 16 kHz I2S Sampling, 256-pt CMSIS-DSP Real FFT, Sub-Band Integration ([Vector SVG](docs/figures/matlab/05_acoustic_dsp.svg) • [Publication PDF](docs/figures/matlab/05_acoustic_dsp.pdf))*
+
+![Acoustic DSP Pipeline Schematic](docs/media/diagrams/03_acoustic_pipeline.svg)
+*Figure 6.2: On-node acoustic signal processing pipeline and biological sub-band integration.*
 
 </div>
 
 ### FFT Parameter Selection & Resolution Proof
-With sampling frequency $f_s = 2000\text{ Hz}$ and FFT size $N = 256$:
+With sampling frequency $f_s = 2000\text{ Hz}$ (decimated from 16 kHz) and FFT size $N = 256$:
 $$\Delta f = \frac{f_s}{N} = \frac{2000\text{ Hz}}{256} = 7.8125\text{ Hz per bin}$$
 Frame duration is $T_{\text{frame}} = N / f_s = 128.0\text{ ms}$.
 
 <div align="center">
 
 ![FFT Resolution Validation](docs/media/results/fft_resolution_validation.png)
-*Figure 6.2: MATLAB model-based validation of the BEEVIL acoustic FFT configuration comparing Rectangular vs. Hanning window sidelobe suppression. `[MODEL VALIDATION]`*
+*Figure 6.3: MATLAB model-based validation of the BEEVIL acoustic FFT configuration comparing Rectangular vs. Hanning window sidelobe suppression. `[MODEL VALIDATION]`*
 
 </div>
 
@@ -197,8 +219,11 @@ BEEVIL detects pre-symptomatic colony collapse through multi-spectral anomaly tr
 
 <div align="center">
 
+![Edge AI and ML Architecture](docs/figures/matlab/08_ai_ml.png)
+*Figure 7.1: Canonical Edge AI & Machine Learning Architecture — TinyML Acoustic Compression & CUSUM Anomaly Filter ([Vector SVG](docs/figures/matlab/08_ai_ml.svg) • [Publication PDF](docs/figures/matlab/08_ai_ml.pdf))*
+
 ![Edge Analytics Architecture](docs/media/diagrams/07_edge_analytics.svg)
-*Figure 7.1: Edge analytics architecture: CUSUM sequential test, evidential neural network, and HoneyChain audit ledger.*
+*Figure 7.2: Edge analytics architecture: CUSUM sequential test, evidential neural network, and HoneyChain audit ledger.*
 
 </div>
 
@@ -275,12 +300,20 @@ The field node operates on a strict **300-second (5-minute) duty cycle**, spendi
 
 ## 10 - Radio
 
-The telemetry radio operates in the **IN865 (865.0 - 867.0 MHz)** band using Semtech SX1262 LoRa chirp spread spectrum modulation, designed for deep penetration through pine wood, honeycombs, and agricultural forest canopy.
+The telemetry subsystem operates on a **Dual-Radio Hybrid Architecture**:
+1. **2.4 GHz Bluetooth Low Energy (BLE) Mesh**: Ultra-low-power, deterministic intra-yard communication between adjacent beehives, enabling collaborative cluster formation and sensor cross-correlation without consuming sub-GHz airtime.
+2. **Sub-GHz LoRa Star Backhaul (IN865: 865.0 - 867.0 MHz)**: Long-range, foliage-penetrating uplink from field nodes directly to the mast-mounted gateway using Semtech SX1262 chirp spread spectrum modulation.
 
 <div align="center">
 
-![LoRa Mesh Topology](docs/media/diagrams/05_lora_mesh.svg)
-*Figure 10.1: Sub-GHz telemetry network architecture, LoRa modulation parameters, and multi-hop forest mesh.*
+![Dual-Radio LoRa and BLE Mesh Architecture](docs/figures/matlab/06_lora_communication.png)
+*Figure 10.1: Canonical Dual-Radio Architecture — 2.4 GHz BLE Mesh Clustering + Semtech SX1262 LoRa Star Backhaul ([Vector SVG](docs/figures/matlab/06_lora_communication.svg) • [Publication PDF](docs/figures/matlab/06_lora_communication.pdf))*
+
+![Multi-Hive Apiary Network Topology](docs/figures/matlab/09_multi_hive_network.png)
+*Figure 10.2: Multi-Hive Scalable Network Topology — 100 Hives, Star Backhaul, Gateway Concentrator Mast ([Vector SVG](docs/figures/matlab/09_multi_hive_network.svg) • [Publication PDF](docs/figures/matlab/09_multi_hive_network.pdf))*
+
+![Dual-Radio Hybrid Diagram](docs/media/diagrams/05_lora_mesh.svg)
+*Figure 10.3: Dual-radio hybrid network architecture, 33-byte packed telemetry frame (BeevilLoRaPayload), and link budget.*
 
 </div>
 
@@ -289,21 +322,21 @@ The telemetry radio operates in the **IN865 (865.0 - 867.0 MHz)** band using Sem
 | RF Link Budget Waterfall (1.5 km Canopy) | Range Sweep & Zero-Margin Crossing |
 |:---:|:---:|
 | ![RF Link Budget](docs/media/results/rf_link_budget.png) | ![RF Range Sweep](docs/media/results/rf_range_sweep.png) |
-| *Figure 10.2: Link budget waterfall showing +8.3 dB margin. `[CALCULATED LINK BUDGET]`* | *Figure 10.3: Path loss and link margin vs. distance. `[CALCULATED LINK BUDGET]`* |
+| *Figure 10.4: Link budget waterfall showing +8.3 dB margin. `[CALCULATED LINK BUDGET]`* | *Figure 10.5: Path loss and link margin vs. distance. `[CALCULATED LINK BUDGET]`* |
 
 </div>
 
 <div align="center">
 
 ![Telemetry Scaling](docs/media/results/telemetry_scaling.png)
-*Figure 10.4: Airtime duty cycle and packet volume scaling across 1 to 100 monitored hives. `[MODEL / CALCULATED]`*
+*Figure 10.6: Airtime duty cycle and packet volume scaling across 1 to 100 monitored hives. `[MODEL / CALCULATED]`*
 
 </div>
 
 ### Calibrated Link Budget Reality
-- **15.0 km Line-of-Sight (LOS)**: **`CALCULATED`** under standard free-space path loss (FSPL) with 15 dB fade margin.
+- **4.2 km Line-of-Sight (LOS)**: **`CALCULATED`** at SF7 / 125 kHz BW with +26.16 dB net link margin (151 dB link budget).
 - **1.5 km Dense Pine Canopy**: **`CALCULATED`** using ITU-R P.833-9 foliage attenuation ($0.18\text{ dB/m}$) and 8.72 dB hive dielectric loss.
-- **100 Hives Channel Load**: **`CALCULATED`** at $0.137\%$ airtime duty cycle across an 8-channel gateway - well within the $1.0\%$ ETSI regulatory cap.
+- **100 Hives Channel Load**: **`CALCULATED`** at $0.061\%$ airtime duty cycle (18.2 ms airtime per 33-byte frame) across gateway - well below the $1.0\%$ ETSI / regional cap.
 
 ---
 
@@ -313,8 +346,11 @@ The edge gateway consists of an industrial **Raspberry Pi 3B+** single-board com
 
 <div align="center">
 
-![Gateway Architecture](docs/media/diagrams/06_gateway_architecture.svg)
-*Figure 11.1: Hardened edge gateway architecture: OverlayFS read-only rootfs, SQLite WAL, and local API engine.*
+![Receiver Gateway Architecture](docs/figures/matlab/07_receiver_gateway.png)
+*Figure 11.1: Canonical Receiver Gateway Architecture — Raspberry Pi 3B+ + Waveshare SX1262 HAT, SQLite WAL, Read-Only OverlayFS ([Vector SVG](docs/figures/matlab/07_receiver_gateway.svg) • [Publication PDF](docs/figures/matlab/07_receiver_gateway.pdf))*
+
+![Gateway Architecture Schematic](docs/media/diagrams/06_gateway_architecture.svg)
+*Figure 11.2: Hardened edge gateway architecture: OverlayFS read-only rootfs, SQLite WAL, and local API engine.*
 
 </div>
 
@@ -333,6 +369,13 @@ All algorithms, RF budgets, thermal equations, and finite element models are mat
 
 ### ANSYS Multi-Physics Simulation Suite (IEEE HART Supported Build)
 To ensure industrial resilience and validate system performance before deployment, 11 comprehensive FEA/CFD/Electromagnetic simulations were executed in ANSYS Workbench:
+
+<div align="center">
+
+![ANSYS Multi-Physics Simulation Suite](docs/figures/matlab/11_ansys_simulation.png)
+*Figure 12.0: Canonical Multi-Physics Simulation Suite — 11 FEA/CFD/Electromagnetic Domains Validated in ANSYS Workbench ([Vector SVG](docs/figures/matlab/11_ansys_simulation.svg) • [Publication PDF](docs/figures/matlab/11_ansys_simulation.pdf))*
+
+</div>
 
 <div align="center">
 
@@ -372,9 +415,16 @@ To ensure industrial resilience and validate system performance before deploymen
 
 To eliminate marketing hype, every performance claim is classified under empirical evidence standards:
 
+<div align="center">
+
+![Validation Matrix and Evidence Ledger](docs/figures/matlab/12_validation.png)
+*Figure 13.0: Canonical Engineering Validation Matrix — Claims vs. Mathematical and Empirical Evidence ([Vector SVG](docs/figures/matlab/12_validation.svg) • [Publication PDF](docs/figures/matlab/12_validation.pdf))*
+
+</div>
+
 | Engineering Dimension | Claim Value | Evidence Classification | Verification Source / Artifact |
 |---|---|---|---|
-| **RF LoRa Range (LOS)** | 15.0 km | 🟡 **CALCULATED** | MATLAB FSPL link budget model (`simulation/matlab/rf_link_budget_and_range.m`) |
+| **RF LoRa Range (LOS)** | 4.2 km | 🟡 **CALCULATED** | MATLAB FSPL link budget model (`simulation/matlab/rf_link_budget_and_range.m`) |
 | **RF LoRa Range (Canopy)** | 1.5 km | 🟡 **CALCULATED** | ITU-R P.833-9 foliage attenuation model (`docs/media/results/rf_range_sweep.png`) |
 | **Apiary Scale Target** | 100 Hives | 🔵 **DEMONSTRATED** | 100-hive software pipeline load test (`tests/test_full_gateway_pipeline.py`) |
 | **Deep Sleep Current** | 2.0 µA | 🟡 **CALCULATED** | Semiconductor datasheets (nRF52840 + TPS62840 + BQ25171 Iq sums) |
@@ -408,7 +458,31 @@ BEEVIL KNIEVEL includes actual operational user interfaces serving real-time tel
 
 ---
 
-## 15 - Reproducibility
+## 15 - Canonical IEEE Phase 2 Publication Figure Gallery
+
+All 13 figures are generated deterministically using MATLAB with vector typography, pure white `#ffffff` canvas, IEEE standard aspect ratios, and strict color-coded subsystem hierarchies. Every figure is available in **Lossless PNG (High-Res)**, **Scalable Vector (SVG)**, and **Vector Publication PDF**.
+
+| # | Canonical Figure Title | Preview / Lossless PNG | Vector & Document Formats |
+|:---:|---|---|:---:|
+| **01** | System Architecture (3-Tier Cyber-Physical Overview) | [01_system_architecture.png](docs/figures/matlab/01_system_architecture.png) | [PNG](docs/figures/matlab/01_system_architecture.png) • [SVG](docs/figures/matlab/01_system_architecture.svg) • [PDF](docs/figures/matlab/01_system_architecture.pdf) |
+| **02** | Hive Sensor Layer (Transducer Matrix & Bus Routing) | [02_hive_sensor_layer.png](docs/figures/matlab/02_hive_sensor_layer.png) | [PNG](docs/figures/matlab/02_hive_sensor_layer.png) • [SVG](docs/figures/matlab/02_hive_sensor_layer.svg) • [PDF](docs/figures/matlab/02_hive_sensor_layer.pdf) |
+| **03** | Sensor Node Architecture (RAK4631 & Power Gating) | [03_sensor_node.png](docs/figures/matlab/03_sensor_node.png) | [PNG](docs/figures/matlab/03_sensor_node.png) • [SVG](docs/figures/matlab/03_sensor_node.svg) • [PDF](docs/figures/matlab/03_sensor_node.pdf) |
+| **04** | Embedded Processing State Machine (CMSIS-DSP & Duty Cycle) | [04_embedded_processing.png](docs/figures/matlab/04_embedded_processing.png) | [PNG](docs/figures/matlab/04_embedded_processing.png) • [SVG](docs/figures/matlab/04_embedded_processing.svg) • [PDF](docs/figures/matlab/04_embedded_processing.pdf) |
+| **05** | Acoustic DSP Pipeline (16 kHz I2S & 256-pt Real FFT) | [05_acoustic_dsp.png](docs/figures/matlab/05_acoustic_dsp.png) | [PNG](docs/figures/matlab/05_acoustic_dsp.png) • [SVG](docs/figures/matlab/05_acoustic_dsp.svg) • [PDF](docs/figures/matlab/05_acoustic_dsp.pdf) |
+| **06** | Dual-Radio LoRa & BLE Mesh (SX1262 Backhaul + Intra-Yard) | [06_lora_communication.png](docs/figures/matlab/06_lora_communication.png) | [PNG](docs/figures/matlab/06_lora_communication.png) • [SVG](docs/figures/matlab/06_lora_communication.svg) • [PDF](docs/figures/matlab/06_lora_communication.pdf) |
+| **07** | Receiver Gateway Architecture (RPi 3B+ & SQLite WAL) | [07_receiver_gateway.png](docs/figures/matlab/07_receiver_gateway.png) | [PNG](docs/figures/matlab/07_receiver_gateway.png) • [SVG](docs/figures/matlab/07_receiver_gateway.svg) • [PDF](docs/figures/matlab/07_receiver_gateway.pdf) |
+| **08** | Edge AI & Machine Learning (TinyML & CUSUM Filter) | [08_ai_ml.png](docs/figures/matlab/08_ai_ml.png) | [PNG](docs/figures/matlab/08_ai_ml.png) • [SVG](docs/figures/matlab/08_ai_ml.svg) • [PDF](docs/figures/matlab/08_ai_ml.pdf) |
+| **09** | Multi-Hive Network Topology (100 Hives & Gateway Mast) | [09_multi_hive_network.png](docs/figures/matlab/09_multi_hive_network.png) | [PNG](docs/figures/matlab/09_multi_hive_network.png) • [SVG](docs/figures/matlab/09_multi_hive_network.svg) • [PDF](docs/figures/matlab/09_multi_hive_network.pdf) |
+| **10** | End-to-End Telemetry Dataflow (Harness to Dashboard) | [10_end_to_end_dataflow.png](docs/figures/matlab/10_end_to_end_dataflow.png) | [PNG](docs/figures/matlab/10_end_to_end_dataflow.png) • [SVG](docs/figures/matlab/10_end_to_end_dataflow.svg) • [PDF](docs/figures/matlab/10_end_to_end_dataflow.pdf) |
+| **11** | ANSYS Multi-Physics Simulation Suite (11 FEA/CFD Modules) | [11_ansys_simulation.png](docs/figures/matlab/11_ansys_simulation.png) | [PNG](docs/figures/matlab/11_ansys_simulation.png) • [SVG](docs/figures/matlab/11_ansys_simulation.svg) • [PDF](docs/figures/matlab/11_ansys_simulation.pdf) |
+| **12** | Engineering Validation Matrix (Empirical Evidence) | [12_validation.png](docs/figures/matlab/12_validation.png) | [PNG](docs/figures/matlab/12_validation.png) • [SVG](docs/figures/matlab/12_validation.svg) • [PDF](docs/figures/matlab/12_validation.pdf) |
+| **13** | Video Master Architecture (Full System Synchronized Overview) | [13_video_master_architecture.png](docs/figures/matlab/13_video_master_architecture.png) | [PNG](docs/figures/matlab/13_video_master_architecture.png) • [SVG](docs/figures/matlab/13_video_master_architecture.svg) • [PDF](docs/figures/matlab/13_video_master_architecture.pdf) |
+
+👉 **[Inspect Full Figure Documentation & Index](docs/figures/README.md)**
+
+---
+
+## 16 - Reproducibility
 
 ### 1. Run the MATLAB / Simulation Suite
 ```bash

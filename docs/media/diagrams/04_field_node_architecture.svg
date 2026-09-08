@@ -92,7 +92,7 @@
             <text x="12" y="20" class="mono-xs" fill="#38bdf8">- CPU: ARM Cortex-M4F @ 64 MHz (Hardware FPU + DSP)</text>
             <text x="12" y="36" class="mono-xs" fill="#cbd5e1">- Memory: 1024 KB Flash / 256 KB SRAM</text>
             <text x="12" y="52" class="mono-xs" fill="#34d399">- Deep Sleep (System ON): 2.0 uA (RAM Retained)</text>
-            <text x="12" y="68" class="mono-xs" fill="#f59e0b">- RF: Semtech SX1262 Sub-GHz (+14 dBm Tx Output)</text>
+            <text x="12" y="68" class="mono-xs" fill="#f59e0b">- Dual-Radio: 2.4GHz BLE Mesh (nRF52) + LoRa (SX1262)</text>
             <text x="12" y="84" class="mono-xs" fill="#cbd5e1">- Band: IN865 (865.0625 MHz, SF7, BW 125 kHz)</text>
             <text x="12" y="100" class="mono-xs" fill="#cbd5e1">- Rx Sensitivity: -137 dBm | Link Budget: 151 dB</text>
             <text x="12" y="116" class="mono-xs" fill="#a78bfa">- RTOS: FreeRTOS Tickless Idle + CMSIS-DSP v1.14.4</text>
@@ -110,9 +110,9 @@
 
         <!-- RF Out Line (Bottom) -->
         <path d="M 170 340 L 170 385" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
-        <rect x="75" y="390" width="190" height="35" rx="5" fill="#0d1424" stroke="#f59e0b" stroke-width="1.2"/>
-        <text x="170" y="405" class="mono-xs" fill="#fbbf24" text-anchor="middle">IPEX/U.FL to RP-SMA Female</text>
-        <text x="170" y="418" class="mono-xs" fill="#94a3b8" text-anchor="middle">Tuned 865MHz 1.8 dBi Antenna (50 Ohm)</text>
+        <rect x="55" y="390" width="230" height="35" rx="5" fill="#0d1424" stroke="#f59e0b" stroke-width="1.2"/>
+        <text x="170" y="405" class="mono-xs" fill="#fbbf24" text-anchor="middle">Dual Antennas: 865MHz Whip + 2.4GHz BLE</text>
+        <text x="170" y="418" class="mono-xs" fill="#94a3b8" text-anchor="middle">LoRa Star Backhaul (SX1262) &amp; BLE Mesh (nRF52)</text>
     </g>
 
     <!-- Left Column: Sensor Interfaces (Direct Wiring to Pins) -->

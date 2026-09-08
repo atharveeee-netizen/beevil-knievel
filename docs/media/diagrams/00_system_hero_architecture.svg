@@ -77,7 +77,7 @@
     <rect x="25" y="18" width="220" height="24" rx="12" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
     <text x="135" y="34" class="badge" fill="#fbbf24" text-anchor="middle">IEEE-HART SYSTEM SPECIFICATION</text>
     <text x="25" y="64" class="headline">BEEVIL KNIEVEL - AUTONOMOUS PRECISION APICULTURE CYBER-PHYSICAL SYSTEM</text>
-    <text x="25" y="82" class="subhead">Multi-Modal Transduction, Cortex-M4 CMSIS-DSP, Sub-GHz Foliage-Penetrating LoRa Mesh &amp; Hardened Edge Gateway</text>
+    <text x="25" y="82" class="subhead">Multi-Modal Transduction, Cortex-M4 CMSIS-DSP, Dual-Radio BLE Mesh + LoRa Star &amp; Hardened Edge Gateway</text>
 
     <!-- Pillar 1: Instrumented Hive Node -->
     <g transform="translate(25, 100)">
@@ -97,7 +97,7 @@
 
         <rect x="12" y="168" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
         <text x="20" y="184" class="mono-xs" fill="#fbbf24">InvenSense INMP441 I2S MEMS</text>
-        <text x="20" y="198" class="mono-xs" fill="#94a3b8">Acoustic Resonance (fs = 2000 Hz, 24-bit)</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">Acoustic Resonance (fs = 16 kHz, 24-bit)</text>
 
         <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
         <text x="20" y="232" class="mono-xs" fill="#34d399">Sensirion SCD41 + BME688</text>
@@ -134,7 +134,7 @@
 
         <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
         <text x="20" y="232" class="mono-xs" fill="#cbd5e1">Binary Telemetry Packer</text>
-        <text x="20" y="246" class="mono-xs" fill="#94a3b8">32-Byte Packed Frame + CRC-16 Checksum</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">33-Byte Packed Frame (BeevilLoRaPayload)</text>
 
         <rect x="12" y="264" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
         <text x="20" y="280" class="mono-xs" fill="#a855f7">Semtech SX1262 LoRa Driver</text>
@@ -145,35 +145,35 @@
 
     <path d="M 545 270 L 563 270" stroke="#a855f7" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrPurple)"/>
 
-    <!-- Pillar 3: LoRa RF Mesh Uplink -->
+    <!-- Pillar 3: Dual-Radio Hybrid (BLE Mesh + LoRa Star) -->
     <g transform="translate(565, 100)">
         <rect width="250" height="340" rx="8" fill="url(#cardGrad)" stroke="#a855f7" stroke-width="1.4"/>
         <rect x="12" y="12" width="165" height="20" rx="4" fill="rgba(168, 85, 247, 0.15)"/>
-        <text x="94" y="26" class="badge" fill="#c084fc" text-anchor="middle">3. SUB-GHz RF MESH</text>
-        <text x="12" y="48" class="body-title" fill="#ffffff">Long-Range Telemetry Link</text>
-        <text x="12" y="62" class="mono-xs" fill="#94a3b8">IN865 Band (865.0 - 867.0 MHz)</text>
+        <text x="94" y="26" class="badge" fill="#c084fc" text-anchor="middle">3. DUAL-RADIO HYBRID</text>
+        <text x="12" y="48" class="body-title" fill="#ffffff">BLE Mesh + LoRa Star</text>
+        <text x="12" y="62" class="mono-xs" fill="#94a3b8">2.4 GHz Local + 865 MHz Backhaul</text>
 
         <rect x="12" y="72" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
-        <text x="20" y="88" class="mono-xs" fill="#c084fc">Foliage Penetration Budget</text>
-        <text x="20" y="102" class="mono-xs" fill="#94a3b8">151 dB Link Budget (+26 dB Fade Margin)</text>
+        <text x="20" y="88" class="mono-xs" fill="#38bdf8">BLE Mesh Intra-Yard Cluster</text>
+        <text x="20" y="102" class="mono-xs" fill="#94a3b8">Sub-meter local relay across adjacent hives</text>
 
         <rect x="12" y="120" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
-        <text x="20" y="136" class="mono-xs" fill="#38bdf8">Multi-Hop Mesh Topology</text>
-        <text x="20" y="150" class="mono-xs" fill="#94a3b8">Relay routing around terrain obstacles</text>
+        <text x="20" y="136" class="mono-xs" fill="#c084fc">SX1262 LoRa Star Backhaul</text>
+        <text x="20" y="150" class="mono-xs" fill="#94a3b8">Long-range direct uplink to Gateway mast</text>
 
         <rect x="12" y="168" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
         <text x="20" y="184" class="mono-xs" fill="#34d399">Propagation Range Limits</text>
-        <text x="20" y="198" class="mono-xs" fill="#94a3b8">1.5 km Pine Canopy / 15.0 km Line-of-Sight</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">4.2 km LOS / 1.5 km Pine Canopy</text>
 
         <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
-        <text x="20" y="232" class="mono-xs" fill="#fbbf24">Adaptive Data Rate (ADR)</text>
-        <text x="20" y="246" class="mono-xs" fill="#94a3b8">SF7 (Fast / Low Latency) to SF12 (Deep RF)</text>
+        <text x="20" y="232" class="mono-xs" fill="#fbbf24">Link Budget &amp; Fade Margin</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">151 dB Link Budget (+26.16 dB Net Margin)</text>
 
         <rect x="12" y="264" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
-        <text x="20" y="280" class="mono-xs" fill="#f87171">Regional Regulatory Standard</text>
-        <text x="20" y="294" class="mono-xs" fill="#94a3b8">&lt; 0.1% Duty Cycle (25 mW / +14 dBm EIRP)</text>
+        <text x="20" y="280" class="mono-xs" fill="#f87171">Airtime &amp; Duty Cycle</text>
+        <text x="20" y="294" class="mono-xs" fill="#94a3b8">18.2 ms Airtime (33B @ SF7) | &lt; 0.1% DC</text>
 
-        <text x="12" y="324" class="mono-xs" fill="#c084fc">Robust Sub-GHz Physical Modulation</text>
+        <text x="12" y="324" class="mono-xs" fill="#c084fc">Hybrid BLE Mesh Cluster + LoRa Star</text>
     </g>
 
     <path d="M 815 270 L 833 270" stroke="#10b981" stroke-width="2" marker-end="url(#arrEmerald)"/>

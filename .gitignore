@@ -65,5 +65,4 @@ assets/video_sources/raw/
 tools/tectonic/
 submission/*.aux
 submission/*.log
-submission/page_*.png
 

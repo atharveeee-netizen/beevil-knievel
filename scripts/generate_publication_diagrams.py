@@ -582,7 +582,7 @@ def generate_04_field_node():
             <text x="12" y="20" class="mono-xs" fill="#38bdf8">- CPU: ARM Cortex-M4F @ 64 MHz (Hardware FPU + DSP)</text>
             <text x="12" y="36" class="mono-xs" fill="#cbd5e1">- Memory: 1024 KB Flash / 256 KB SRAM</text>
             <text x="12" y="52" class="mono-xs" fill="#34d399">- Deep Sleep (System ON): 2.0 uA (RAM Retained)</text>
-            <text x="12" y="68" class="mono-xs" fill="#f59e0b">- RF: Semtech SX1262 Sub-GHz (+14 dBm Tx Output)</text>
+            <text x="12" y="68" class="mono-xs" fill="#f59e0b">- Dual-Radio: 2.4GHz BLE Mesh (nRF52) + LoRa (SX1262)</text>
             <text x="12" y="84" class="mono-xs" fill="#cbd5e1">- Band: IN865 (865.0625 MHz, SF7, BW 125 kHz)</text>
             <text x="12" y="100" class="mono-xs" fill="#cbd5e1">- Rx Sensitivity: -137 dBm | Link Budget: 151 dB</text>
             <text x="12" y="116" class="mono-xs" fill="#a78bfa">- RTOS: FreeRTOS Tickless Idle + CMSIS-DSP v1.14.4</text>
@@ -600,9 +600,9 @@ def generate_04_field_node():
 
         <!-- RF Out Line (Bottom) -->
         <path d="M 170 340 L 170 385" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
-        <rect x="75" y="390" width="190" height="35" rx="5" fill="#0d1424" stroke="#f59e0b" stroke-width="1.2"/>
-        <text x="170" y="405" class="mono-xs" fill="#fbbf24" text-anchor="middle">IPEX/U.FL to RP-SMA Female</text>
-        <text x="170" y="418" class="mono-xs" fill="#94a3b8" text-anchor="middle">Tuned 865MHz 1.8 dBi Antenna (50 Ohm)</text>
+        <rect x="55" y="390" width="230" height="35" rx="5" fill="#0d1424" stroke="#f59e0b" stroke-width="1.2"/>
+        <text x="170" y="405" class="mono-xs" fill="#fbbf24" text-anchor="middle">Dual Antennas: 865MHz Whip + 2.4GHz BLE</text>
+        <text x="170" y="418" class="mono-xs" fill="#94a3b8" text-anchor="middle">LoRa Star Backhaul (SX1262) &amp; BLE Mesh (nRF52)</text>
     </g>
 
     <!-- Left Column: Sensor Interfaces (Direct Wiring to Pins) -->
@@ -712,10 +712,10 @@ def generate_05_lora_mesh():
     <rect width="1080" height="560" fill="url(#grid)" rx="10"/>
     
     <!-- Header -->
-    <rect x="25" y="20" width="175" height="24" rx="12" fill="rgba(139, 92, 246, 0.15)" stroke="#8b5cf6" stroke-width="1.2"/>
-    <text x="112" y="36" class="badge" fill="#c4b5fd" text-anchor="middle">SUB-GHz RF PROPAGATION</text>
-    <text x="25" y="66" class="headline">05 - SUB-GHz WIRELESS TELEMETRY, ITU-R P.833-9 CANOPY ATTENUATION &amp; MESH</text>
-    <text x="25" y="84" class="subhead">Indian IN865 physical layer, link budget waterfall with pine canopy loss, and multi-hop regenerative routing</text>
+    <rect x="25" y="20" width="220" height="24" rx="12" fill="rgba(139, 92, 246, 0.15)" stroke="#8b5cf6" stroke-width="1.2"/>
+    <text x="135" y="36" class="badge" fill="#c4b5fd" text-anchor="middle">DUAL-RADIO TELEMETRY</text>
+    <text x="25" y="66" class="headline">05 - DUAL-RADIO HYBRID TELEMETRY: BLE MESH CLUSTERING &amp; SUB-GHz LoRa BACKHAUL</text>
+    <text x="25" y="84" class="subhead">2.4 GHz Bluetooth Mesh for adjacent-hive row clustering + Semtech SX1262 Sub-GHz LoRa for long-range gateway star backhaul</text>
 
     <!-- Left Column: RF Parameter Cascade & Link Budget Waterfall -->
     <g transform="translate(25, 105)">
@@ -726,13 +726,13 @@ def generate_05_lora_mesh():
         <!-- Parameter Table -->
         <g transform="translate(16, 48)">
             <rect width="428" height="120" rx="6" fill="#0b101c" stroke="#1e293b"/>
-            <text x="12" y="20" class="mono-xs" fill="#38bdf8">- Carrier Frequency: 865.0625 MHz (India WPC Band)</text>
-            <text x="12" y="36" class="mono-xs" fill="#cbd5e1">- Bandwidth (BW): 125.0 kHz | Coding Rate (CR): 4/5</text>
-            <text x="12" y="52" class="mono-xs" fill="#cbd5e1">- Spreading Factor: SF7 (Adaptive SF7 - SF10)</text>
-            <text x="12" y="68" class="mono-xs" fill="#fbbf24">- Transmit Power: +14 dBm (25 mW EIRP)</text>
-            <text x="12" y="84" class="mono-xs" fill="#34d399">- Rx Sensitivity: -137 dBm (SX1262 LoRa Engine)</text>
-            <text x="12" y="100" class="mono-xs" fill="#cbd5e1">- Packet On-Air Time: 350 ms / 24-Byte Binary Frame</text>
-            <text x="12" y="114" class="mono-xs" fill="#38bdf8">- Duty Cycle: 0.116% (Strictly below 1.0% regulatory cap)</text>
+            <text x="12" y="20" class="mono-xs" fill="#38bdf8">- Carrier Frequency: 865.0625 MHz (India WPC Band) + 2.4 GHz BLE</text>
+            <text x="12" y="36" class="mono-xs" fill="#cbd5e1">- Bandwidth (BW): 125.0 kHz | Coding Rate (CR): 4/5 | SF7</text>
+            <text x="12" y="52" class="mono-xs" fill="#cbd5e1">- BLE Mesh Profile: Bluetooth SIG 2.4 GHz (Local Inter-Hive)</text>
+            <text x="12" y="68" class="mono-xs" fill="#fbbf24">- Transmit Power: +14 dBm (25 mW ERP) | 18 uA Deep Sleep</text>
+            <text x="12" y="84" class="mono-xs" fill="#34d399">- Rx Sensitivity: -137 dBm (SX1262 LoRa) | 151 dB Link Budget</text>
+            <text x="12" y="100" class="mono-xs" fill="#cbd5e1">- Packet On-Air Time: 18.2 ms / 33-Byte Packed Binary Struct</text>
+            <text x="12" y="114" class="mono-xs" fill="#38bdf8">- Duty Cycle: 0.202% across 100 Hives (Well below 1.0% limit)</text>
         </g>
 
         <!-- Link Budget Waterfall Graphic -->
@@ -741,7 +741,7 @@ def generate_05_lora_mesh():
             
             <!-- Stage 1: Tx Power -->
             <rect x="0" y="25" width="428" height="24" rx="4" fill="#0f172a"/>
-            <text x="10" y="41" class="mono-xs" fill="#f1f5f9">Tx Power Output (+14.0 dBm)</text>
+            <text x="10" y="41" class="mono-xs" fill="#f1f5f9">Tx Power Output (+14.0 dBm ERP)</text>
             <rect x="260" y="29" width="65" height="16" rx="3" fill="#10b981"/>
             <text x="292" y="41" class="mono-xs" fill="#ffffff" text-anchor="middle">+14 dBm</text>
 
@@ -765,16 +765,16 @@ def generate_05_lora_mesh():
 
             <!-- Result: Link Margin -->
             <rect x="0" y="137" width="428" height="30" rx="4" fill="#141d2e" stroke="#10b981" stroke-width="1.2"/>
-            <text x="10" y="156" class="body-title" fill="#34d399">Calculated Rx Level: -111.0 dBm</text>
-            <text x="250" y="156" class="badge" fill="#34d399">NET FADE MARGIN: +26.0 dB (ROBUST)</text>
+            <text x="10" y="156" class="body-title" fill="#34d399">Calculated Rx Level: -110.8 dBm</text>
+            <text x="250" y="156" class="badge" fill="#34d399">NET FADE MARGIN: +26.16 dB (ROBUST)</text>
         </g>
     </g>
 
     <!-- Right Column: Mesh Network Topology Graphic -->
     <g transform="translate(515, 105)">
         <rect width="540" height="385" rx="10" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
-        <rect x="16" y="14" width="230" height="22" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
-        <text x="131" y="29" class="badge" fill="#38bdf8" text-anchor="middle">MULTI-HOP REGENERATIVE MESH</text>
+        <rect x="16" y="14" width="280" height="22" rx="4" fill="rgba(6, 182, 212, 0.15)"/>
+        <text x="156" y="29" class="badge" fill="#38bdf8" text-anchor="middle">DUAL-RADIO HYBRID: BLE MESH + LoRa STAR</text>
 
         <!-- Network Diagram Area -->
         <g transform="translate(20, 50)">
@@ -797,26 +797,30 @@ def generate_05_lora_mesh():
             <text x="150" y="270" class="badge" fill="#c4b5fd" text-anchor="middle">HIVE</text>
             <text x="150" y="283" class="mono-xs" fill="#ffffff" text-anchor="middle">#012</text>
 
-            <!-- Central Cluster Relay: Node #01 -->
+            <!-- Inter-Hive 2.4 GHz BLE Mesh links -->
+            <path d="M 52 103 L 64 167" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="3 3"/>
+            <text x="36" y="138" class="mono-xs" fill="#38bdf8">BLE Mesh</text>
+
+            <path d="M 87 205 L 132 252" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="3 3"/>
+            <text x="96" y="238" class="mono-xs" fill="#38bdf8">BLE Mesh</text>
+
+            <!-- Central Cluster Node: Node #01 -->
             <circle cx="250" cy="140" r="32" fill="#291e0f" stroke="#f59e0b" stroke-width="2.5"/>
-            <text x="250" y="136" class="badge" fill="#fbbf24" text-anchor="middle">RELAY NODE</text>
+            <text x="250" y="136" class="badge" fill="#fbbf24" text-anchor="middle">DUAL NODE</text>
             <text x="250" y="149" class="mono-xs" fill="#ffffff" text-anchor="middle">HIVE #001</text>
-            <text x="250" y="161" class="mono-xs" fill="#34d399" text-anchor="middle">Hop Relay</text>
+            <text x="250" y="161" class="mono-xs" fill="#34d399" text-anchor="middle">BLE + LoRa</text>
 
-            <!-- Hops to Relay -->
-            <path d="M 69 80 L 218 135" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrGold)"/>
-            <text x="135" y="98" class="mono-xs" fill="#94a3b8">Hop: 420m</text>
+            <!-- Inter-Hive BLE Mesh to Cluster Node -->
+            <path d="M 69 80 L 218 135" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <text x="135" y="98" class="mono-xs" fill="#38bdf8">BLE Mesh Relay</text>
 
-            <path d="M 94 190 L 218 145" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrGold)"/>
-            <text x="140" y="180" class="mono-xs" fill="#94a3b8">Hop: 380m</text>
+            <path d="M 94 190 L 218 145" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <text x="140" y="180" class="mono-xs" fill="#38bdf8">BLE Mesh Relay</text>
 
-            <path d="M 174 270 L 235 172" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrGold)"/>
-            <text x="215" y="235" class="mono-xs" fill="#94a3b8">Hop: 490m</text>
-
-            <!-- High-Power Long Range Backhaul to Gateway -->
-            <path d="M 282 140 L 415 140" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrCyan)"/>
-            <text x="348" y="130" class="mono-xs" fill="#38bdf8" text-anchor="middle">Backhaul Uplink</text>
-            <text x="348" y="158" class="mono-xs" fill="#34d399" text-anchor="middle">1.5 km (Canopy)</text>
+            <!-- High-Power Long Range Backhaul to Gateway over LoRa -->
+            <path d="M 282 140 L 415 140" stroke="#f59e0b" stroke-width="3" marker-end="url(#arrGold)"/>
+            <text x="348" y="130" class="mono-xs" fill="#fbbf24" text-anchor="middle">LoRa Star Backhaul</text>
+            <text x="348" y="158" class="mono-xs" fill="#34d399" text-anchor="middle">865.0625 MHz (4.2km LOS)</text>
 
             <!-- EDGE GATEWAY MAST (RASPBERRY PI 3B+ + SX1262 HAT) -->
             <rect x="420" y="90" width="95" height="100" rx="6" fill="#0d1b2a" stroke="#38bdf8" stroke-width="2"/>
@@ -828,51 +832,61 @@ def generate_05_lora_mesh():
             <text x="467" y="172" class="mono-xs" fill="#34d399" text-anchor="middle">10m Mast</text>
         </g>
 
-        <!-- 24-Byte Binary Frame Layout -->
+        <!-- 33-Byte Binary Frame Layout -->
         <g transform="translate(16, 290)">
-            <text x="0" y="15" class="badge" fill="#38bdf8">24-BYTE PACKED BINARY TELEMETRY FRAME STRUCTURE:</text>
+            <text x="0" y="15" class="badge" fill="#38bdf8">33-BYTE PACKED BINARY TELEMETRY FRAME STRUCTURE (BeevilLoRaPayload):</text>
             <g transform="translate(0, 24)">
-                <!-- Bytes 0-1 -->
-                <rect x="0" y="0" width="50" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="25" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">HDR</text>
-                <text x="25" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+                <!-- NodeID (2B) -->
+                <rect x="0" y="0" width="38" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="19" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">Node</text>
+                <text x="19" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
                 
-                <!-- Bytes 2-3 -->
-                <rect x="50" y="0" width="50" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="75" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">NodeID</text>
-                <text x="75" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+                <!-- Time (4B) -->
+                <rect x="38" y="0" width="46" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="61" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">Time</text>
+                <text x="61" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">4B</text>
 
-                <!-- Bytes 4-7 -->
-                <rect x="100" y="0" width="55" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="127" y="15" class="mono-xs" fill="#38bdf8" text-anchor="middle">Time</text>
-                <text x="127" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">4B</text>
+                <!-- T_core (2B) -->
+                <rect x="84" y="0" width="42" height="34" fill="#291e0f" stroke="#f59e0b"/>
+                <text x="105" y="15" class="mono-xs" fill="#fbbf24" text-anchor="middle">Tcore</text>
+                <text x="105" y="27" class="mono-xs" fill="#f59e0b" text-anchor="middle">2B</text>
 
-                <!-- Bytes 8-17: 5x Temps -->
-                <rect x="155" y="0" width="145" height="34" fill="#291e0f" stroke="#f59e0b"/>
-                <text x="227" y="15" class="mono-xs" fill="#fbbf24" text-anchor="middle">5x Temp Array (TMP117)</text>
-                <text x="227" y="27" class="mono-xs" fill="#f59e0b" text-anchor="middle">10 Bytes (int16 x 5)</text>
+                <!-- T_grid (10B) -->
+                <rect x="126" y="0" width="90" height="34" fill="#291e0f" stroke="#f59e0b"/>
+                <text x="171" y="15" class="mono-xs" fill="#fbbf24" text-anchor="middle">T_grid[5]</text>
+                <text x="171" y="27" class="mono-xs" fill="#f59e0b" text-anchor="middle">10B (int16x5)</text>
 
-                <!-- Bytes 18-19: CO2 -->
-                <rect x="300" y="0" width="48" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="324" y="15" class="mono-xs" fill="#a78bfa" text-anchor="middle">CO2</text>
-                <text x="324" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+                <!-- CO2 (2B) -->
+                <rect x="216" y="0" width="38" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="235" y="15" class="mono-xs" fill="#a78bfa" text-anchor="middle">CO2</text>
+                <text x="235" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
 
-                <!-- Byte 20: Acoustic Alert -->
-                <rect x="348" y="0" width="55" height="34" fill="#0f291e" stroke="#10b981"/>
-                <text x="375" y="15" class="mono-xs" fill="#34d399" text-anchor="middle">AI-Alert</text>
-                <text x="375" y="27" class="mono-xs" fill="#10b981" text-anchor="middle">1B</text>
+                <!-- RH (2B) -->
+                <rect x="254" y="0" width="38" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="273" y="15" class="mono-xs" fill="#a78bfa" text-anchor="middle">RH%</text>
+                <text x="273" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
 
-                <!-- Byte 21: Batt -->
-                <rect x="403" y="0" width="45" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="425" y="15" class="mono-xs" fill="#cbd5e1" text-anchor="middle">Batt</text>
-                <text x="425" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">1B</text>
+                <!-- Weight (4B) -->
+                <rect x="292" y="0" width="46" height="34" fill="#0f291e" stroke="#10b981"/>
+                <text x="315" y="15" class="mono-xs" fill="#34d399" text-anchor="middle">Mass</text>
+                <text x="315" y="27" class="mono-xs" fill="#10b981" text-anchor="middle">4B</text>
 
-                <!-- Bytes 22-23: CRC16 -->
-                <rect x="448" y="0" width="55" height="34" fill="#1e293b" stroke="#334155"/>
-                <text x="475" y="15" class="mono-xs" fill="#f87171" text-anchor="middle">CRC16</text>
-                <text x="475" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">2B</text>
+                <!-- Bins (4B) -->
+                <rect x="338" y="0" width="56" height="34" fill="#0f291e" stroke="#10b981"/>
+                <text x="366" y="15" class="mono-xs" fill="#34d399" text-anchor="middle">Bins[8]</text>
+                <text x="366" y="27" class="mono-xs" fill="#10b981" text-anchor="middle">4B (4-bit)</text>
+
+                <!-- Flags (1B) -->
+                <rect x="394" y="0" width="36" height="34" fill="#1e293b" stroke="#334155"/>
+                <text x="412" y="15" class="mono-xs" fill="#cbd5e1" text-anchor="middle">Flag</text>
+                <text x="412" y="27" class="mono-xs" fill="#64748b" text-anchor="middle">1B</text>
+
+                <!-- CRC16 (2B) -->
+                <rect x="430" y="0" width="75" height="34" fill="#1e293b" stroke="#f87171"/>
+                <text x="467" y="15" class="mono-xs" fill="#f87171" text-anchor="middle">CRC16</text>
+                <text x="467" y="27" class="mono-xs" fill="#f87171" text-anchor="middle">2B (CCITT)</text>
             </g>
-            <text x="0" y="76" class="mono-xs" fill="#94a3b8">Zero IP Overhead | Strict Packing | Zero Fragmentation Across LoRa PHY Frame</text>
+            <text x="0" y="76" class="mono-xs" fill="#94a3b8">Total sizeof = 33 Bytes | Zero String Overhead | Verified by Gateway Receiver CRC Hardware</text>
         </g>
     </g>
 
@@ -1256,20 +1270,20 @@ def generate_08_full_architecture():
             <text x="12" y="54" class="mono-xs" fill="#38bdf8">- CMSIS-DSP 256-pt Real FFT (1.28 ms execution)</text>
             <text x="12" y="70" class="mono-xs" fill="#34d399">- CUSUM Change-Point Filter (h = 4.5*sigma)</text>
             <text x="12" y="86" class="mono-xs" fill="#fbbf24">- Quantized TinyML Feature Extractor (INT8)</text>
-            <text x="12" y="102" class="mono-xs" fill="#cbd5e1">- Strict 24-Byte Binary Frame Packing</text>
+            <text x="12" y="102" class="mono-xs" fill="#cbd5e1">- Strict 33-Byte Binary Frame Packing (BeevilLoRaPayload)</text>
             <text x="12" y="118" class="mono-xs" fill="#34d399">- Deep Sleep: 2.0 uA @ 3.3V (TPS62840 Buck)</text>
             <text x="12" y="134" class="mono-xs" fill="#38bdf8">- Solar MPPT: 0.5W PV + TI BQ25171 PMIC</text>
         </g>
 
         <!-- LoRa Mesh Uplink Specs -->
         <g transform="translate(15, 207)">
-            <text x="0" y="15" class="badge" fill="#fbbf24">SUB-GHz WIRELESS MESH UPLINK:</text>
+            <text x="0" y="15" class="badge" fill="#fbbf24">DUAL-RADIO HYBRID: BLE MESH + LoRa STAR:</text>
             <rect y="24" width="310" height="135" rx="6" fill="#0f172a" stroke="#1e293b"/>
-            <text x="12" y="44" class="mono-xs" fill="#38bdf8">- Band: IN865 (865.0625 MHz, SF7, 125 kHz BW)</text>
-            <text x="12" y="62" class="mono-xs" fill="#cbd5e1">- Tx Power: +14 dBm (25 mW EIRP)</text>
-            <text x="12" y="80" class="mono-xs" fill="#34d399">- Link Budget: 151 dB Net Fade Margin (+26 dB)</text>
-            <text x="12" y="98" class="mono-xs" fill="#cbd5e1">- Multi-Hop Regenerative Mesh Protocol</text>
-            <text x="12" y="116" class="mono-xs" fill="#34d399">- Range: 1,500,000 cm (15km LOS) / 150,000 cm Canopy</text>
+            <text x="12" y="44" class="mono-xs" fill="#38bdf8">- BLE Mesh: 2.4 GHz Intra-Yard Hive Clustering</text>
+            <text x="12" y="62" class="mono-xs" fill="#fbbf24">- LoRa Backhaul: IN865 (865.0625 MHz, SF7, 125kHz)</text>
+            <text x="12" y="80" class="mono-xs" fill="#34d399">- Airtime: 18.2 ms | Net Fade Margin: +26.16 dB</text>
+            <text x="12" y="98" class="mono-xs" fill="#cbd5e1">- Range: 4.2 km LOS / 1.5 km Dense Pine Canopy</text>
+            <text x="12" y="116" class="mono-xs" fill="#34d399">- Link Budget: 151 dB net | 33-Byte CCITT-16 Packet</text>
         </g>
 
         <path d="M 340 220 L 380 220" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
@@ -1336,7 +1350,7 @@ def generate_00_system_hero():
     <rect x="25" y="18" width="220" height="24" rx="12" fill="rgba(245, 158, 11, 0.15)" stroke="#f59e0b" stroke-width="1.2"/>
     <text x="135" y="34" class="badge" fill="#fbbf24" text-anchor="middle">IEEE-HART SYSTEM SPECIFICATION</text>
     <text x="25" y="64" class="headline">BEEVIL KNIEVEL - AUTONOMOUS PRECISION APICULTURE CYBER-PHYSICAL SYSTEM</text>
-    <text x="25" y="82" class="subhead">Multi-Modal Transduction, Cortex-M4 CMSIS-DSP, Sub-GHz Foliage-Penetrating LoRa Mesh &amp; Hardened Edge Gateway</text>
+    <text x="25" y="82" class="subhead">Multi-Modal Transduction, Cortex-M4 CMSIS-DSP, Dual-Radio BLE Mesh + LoRa Star &amp; Hardened Edge Gateway</text>
 
     <!-- Pillar 1: Instrumented Hive Node -->
     <g transform="translate(25, 100)">
@@ -1356,7 +1370,7 @@ def generate_00_system_hero():
 
         <rect x="12" y="168" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
         <text x="20" y="184" class="mono-xs" fill="#fbbf24">InvenSense INMP441 I2S MEMS</text>
-        <text x="20" y="198" class="mono-xs" fill="#94a3b8">Acoustic Resonance (fs = 2000 Hz, 24-bit)</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">Acoustic Resonance (fs = 16 kHz, 24-bit)</text>
 
         <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
         <text x="20" y="232" class="mono-xs" fill="#34d399">Sensirion SCD41 + BME688</text>
@@ -1393,7 +1407,7 @@ def generate_00_system_hero():
 
         <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
         <text x="20" y="232" class="mono-xs" fill="#cbd5e1">Binary Telemetry Packer</text>
-        <text x="20" y="246" class="mono-xs" fill="#94a3b8">32-Byte Packed Frame + CRC-16 Checksum</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">33-Byte Packed Frame (BeevilLoRaPayload)</text>
 
         <rect x="12" y="264" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
         <text x="20" y="280" class="mono-xs" fill="#a855f7">Semtech SX1262 LoRa Driver</text>
@@ -1404,35 +1418,35 @@ def generate_00_system_hero():
 
     <path d="M 545 270 L 563 270" stroke="#a855f7" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrPurple)"/>
 
-    <!-- Pillar 3: LoRa RF Mesh Uplink -->
+    <!-- Pillar 3: Dual-Radio Hybrid (BLE Mesh + LoRa Star) -->
     <g transform="translate(565, 100)">
         <rect width="250" height="340" rx="8" fill="url(#cardGrad)" stroke="#a855f7" stroke-width="1.4"/>
         <rect x="12" y="12" width="165" height="20" rx="4" fill="rgba(168, 85, 247, 0.15)"/>
-        <text x="94" y="26" class="badge" fill="#c084fc" text-anchor="middle">3. SUB-GHz RF MESH</text>
-        <text x="12" y="48" class="body-title" fill="#ffffff">Long-Range Telemetry Link</text>
-        <text x="12" y="62" class="mono-xs" fill="#94a3b8">IN865 Band (865.0 - 867.0 MHz)</text>
+        <text x="94" y="26" class="badge" fill="#c084fc" text-anchor="middle">3. DUAL-RADIO HYBRID</text>
+        <text x="12" y="48" class="body-title" fill="#ffffff">BLE Mesh + LoRa Star</text>
+        <text x="12" y="62" class="mono-xs" fill="#94a3b8">2.4 GHz Local + 865 MHz Backhaul</text>
 
         <rect x="12" y="72" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
-        <text x="20" y="88" class="mono-xs" fill="#c084fc">Foliage Penetration Budget</text>
-        <text x="20" y="102" class="mono-xs" fill="#94a3b8">151 dB Link Budget (+26 dB Fade Margin)</text>
+        <text x="20" y="88" class="mono-xs" fill="#38bdf8">BLE Mesh Intra-Yard Cluster</text>
+        <text x="20" y="102" class="mono-xs" fill="#94a3b8">Sub-meter local relay across adjacent hives</text>
 
         <rect x="12" y="120" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
-        <text x="20" y="136" class="mono-xs" fill="#38bdf8">Multi-Hop Mesh Topology</text>
-        <text x="20" y="150" class="mono-xs" fill="#94a3b8">Relay routing around terrain obstacles</text>
+        <text x="20" y="136" class="mono-xs" fill="#c084fc">SX1262 LoRa Star Backhaul</text>
+        <text x="20" y="150" class="mono-xs" fill="#94a3b8">Long-range direct uplink to Gateway mast</text>
 
         <rect x="12" y="168" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
         <text x="20" y="184" class="mono-xs" fill="#34d399">Propagation Range Limits</text>
-        <text x="20" y="198" class="mono-xs" fill="#94a3b8">1.5 km Pine Canopy / 15.0 km Line-of-Sight</text>
+        <text x="20" y="198" class="mono-xs" fill="#94a3b8">4.2 km LOS / 1.5 km Pine Canopy</text>
 
         <rect x="12" y="216" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
-        <text x="20" y="232" class="mono-xs" fill="#fbbf24">Adaptive Data Rate (ADR)</text>
-        <text x="20" y="246" class="mono-xs" fill="#94a3b8">SF7 (Fast / Low Latency) to SF12 (Deep RF)</text>
+        <text x="20" y="232" class="mono-xs" fill="#fbbf24">Link Budget &amp; Fade Margin</text>
+        <text x="20" y="246" class="mono-xs" fill="#94a3b8">151 dB Link Budget (+26.16 dB Net Margin)</text>
 
         <rect x="12" y="264" width="226" height="42" rx="4" fill="#0b111e" stroke="#1e293b"/>
-        <text x="20" y="280" class="mono-xs" fill="#f87171">Regional Regulatory Standard</text>
-        <text x="20" y="294" class="mono-xs" fill="#94a3b8">&lt; 0.1% Duty Cycle (25 mW / +14 dBm EIRP)</text>
+        <text x="20" y="280" class="mono-xs" fill="#f87171">Airtime &amp; Duty Cycle</text>
+        <text x="20" y="294" class="mono-xs" fill="#94a3b8">18.2 ms Airtime (33B @ SF7) | &lt; 0.1% DC</text>
 
-        <text x="12" y="324" class="mono-xs" fill="#c084fc">Robust Sub-GHz Physical Modulation</text>
+        <text x="12" y="324" class="mono-xs" fill="#c084fc">Hybrid BLE Mesh Cluster + LoRa Star</text>
     </g>
 
     <path d="M 815 270 L 833 270" stroke="#10b981" stroke-width="2" marker-end="url(#arrEmerald)"/>

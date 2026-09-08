@@ -4,6 +4,20 @@ This directory contains the official **2-Page Project Description Report** in La
 
 ---
 
+## 🖼️ Rendered 2-Page Final Submission Previews
+
+<div align="center">
+
+| Page 1: System Architecture, Transduction & Edge TinyML | Page 2: Simulations, BOM & Evidence Matrix |
+| :---: | :---: |
+| <img src="page_1.png" width="480" alt="IEEE HART Phase 2 Report - Page 1"/> | <img src="page_2.png" width="480" alt="IEEE HART Phase 2 Report - Page 2"/> |
+
+[📥 Download Full-Resolution Compiled Submission PDF (submission/hart_phase2_report.pdf)](../submission/hart_phase2_report.pdf)
+
+</div>
+
+---
+
 ## 📌 Document Specifications & IEEE Compliance Summary
 
 | Requirement | IEEE Phase 2 Rule | Beevil Knievel Submission | Compliance |

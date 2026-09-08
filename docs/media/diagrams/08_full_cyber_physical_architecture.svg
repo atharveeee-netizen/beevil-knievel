@@ -127,20 +127,20 @@
             <text x="12" y="54" class="mono-xs" fill="#38bdf8">- CMSIS-DSP 256-pt Real FFT (1.28 ms execution)</text>
             <text x="12" y="70" class="mono-xs" fill="#34d399">- CUSUM Change-Point Filter (h = 4.5*sigma)</text>
             <text x="12" y="86" class="mono-xs" fill="#fbbf24">- Quantized TinyML Feature Extractor (INT8)</text>
-            <text x="12" y="102" class="mono-xs" fill="#cbd5e1">- Strict 24-Byte Binary Frame Packing</text>
+            <text x="12" y="102" class="mono-xs" fill="#cbd5e1">- Strict 33-Byte Binary Frame Packing (BeevilLoRaPayload)</text>
             <text x="12" y="118" class="mono-xs" fill="#34d399">- Deep Sleep: 2.0 uA @ 3.3V (TPS62840 Buck)</text>
             <text x="12" y="134" class="mono-xs" fill="#38bdf8">- Solar MPPT: 0.5W PV + TI BQ25171 PMIC</text>
         </g>
 
         <!-- LoRa Mesh Uplink Specs -->
         <g transform="translate(15, 207)">
-            <text x="0" y="15" class="badge" fill="#fbbf24">SUB-GHz WIRELESS MESH UPLINK:</text>
+            <text x="0" y="15" class="badge" fill="#fbbf24">DUAL-RADIO HYBRID: BLE MESH + LoRa STAR:</text>
             <rect y="24" width="310" height="135" rx="6" fill="#0f172a" stroke="#1e293b"/>
-            <text x="12" y="44" class="mono-xs" fill="#38bdf8">- Band: IN865 (865.0625 MHz, SF7, 125 kHz BW)</text>
-            <text x="12" y="62" class="mono-xs" fill="#cbd5e1">- Tx Power: +14 dBm (25 mW EIRP)</text>
-            <text x="12" y="80" class="mono-xs" fill="#34d399">- Link Budget: 151 dB Net Fade Margin (+26 dB)</text>
-            <text x="12" y="98" class="mono-xs" fill="#cbd5e1">- Multi-Hop Regenerative Mesh Protocol</text>
-            <text x="12" y="116" class="mono-xs" fill="#34d399">- Range: 1,500,000 cm (15km LOS) / 150,000 cm Canopy</text>
+            <text x="12" y="44" class="mono-xs" fill="#38bdf8">- BLE Mesh: 2.4 GHz Intra-Yard Hive Clustering</text>
+            <text x="12" y="62" class="mono-xs" fill="#fbbf24">- LoRa Backhaul: IN865 (865.0625 MHz, SF7, 125kHz)</text>
+            <text x="12" y="80" class="mono-xs" fill="#34d399">- Airtime: 18.2 ms | Net Fade Margin: +26.16 dB</text>
+            <text x="12" y="98" class="mono-xs" fill="#cbd5e1">- Range: 4.2 km LOS / 1.5 km Dense Pine Canopy</text>
+            <text x="12" y="116" class="mono-xs" fill="#34d399">- Link Budget: 151 dB net | 33-Byte CCITT-16 Packet</text>
         </g>
 
         <path d="M 340 220 L 380 220" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrGold)"/>
