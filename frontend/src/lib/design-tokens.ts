@@ -130,6 +130,12 @@ export const TOKENS = {
         border: "#64748b",
         text: "#94a3b8",
       },
+      ESTIMATED: {
+        label: "ESTIMATED",
+        bg: "rgba(167, 139, 250, 0.12)",
+        border: "#a78bfa",
+        text: "#c4b5fd",
+      },
     },
   },
   typography: {

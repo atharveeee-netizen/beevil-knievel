@@ -27,7 +27,7 @@ export function TechnicalDocsSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-[#f59e0b] mb-1">
-              12 — Peer-Reviewed Reproducibility
+              16 — Technical Documentation &amp; Reproducibility Suite
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-mono uppercase tracking-tight text-[#f1f5f9]">
               Reproducibility Suite &amp; Figure Gallery

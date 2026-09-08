@@ -11,10 +11,10 @@ export function DualRadioNetworkSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-[#f59e0b] mb-1">
-              06 — Telemetry &amp; RF Propagation
+              08 — Wireless Link: Multi-Node Star Backhaul &amp; Local BLE
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-mono uppercase tracking-tight text-[#f1f5f9]">
-              Dual-Radio Hybrid Architecture (BLE Mesh + LoRa Star)
+              Multi-Node LoRa Star Backhaul &amp; Local BLE Topology
             </h2>
           </div>
           <div className="flex items-center gap-2">
@@ -25,18 +25,18 @@ export function DualRadioNetworkSection() {
         {/* Technical Narrative Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
           
-          {/* Radio 1: 2.4 GHz BLE Mesh */}
+          {/* Radio 1: 2.4 GHz Direct BLE Link */}
           <div className="lg:col-span-6 p-5 rounded-sm bg-[#11141d] border border-[#283144] font-mono text-xs space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-[#283144]">
               <div className="flex items-center gap-2 text-[#38bdf8] font-bold text-sm">
                 <Wifi className="w-4 h-4" />
-                <span>Tier 2A: 2.4 GHz BLE Mesh Clustering</span>
+                <span>Local Link: 2.4 GHz BLE Field Technician Link</span>
               </div>
-              <Badge claim="DEMONSTRATED" size="sm">Intra-Yard</Badge>
+              <Badge claim="DEMONSTRATED" size="sm">Point-to-Point</Badge>
             </div>
 
             <p className="text-xs text-[#94a3b8] font-sans leading-relaxed">
-              Adjacent beehives within an apiary row (spaced 1 to 3 meters apart) communicate over ultra-low-power Bluetooth Low Energy Mesh. This enables localized cross-hive correlation—such as detecting when an entire yard begins robbing or reacting to a bear attack—without consuming sub-GHz RF duty cycle.
+              Visiting beekeepers and field technicians connect directly to the node over Bluetooth Low Energy 5.0. This enables instant glove-friendly brood inspection and hardware parameter configuration within 15 meters, with zero reliance on cellular networks and zero interruption of the primary LoRa telemetry backhaul.
             </p>
 
             <div className="space-y-1.5 p-3 bg-[#090b10] border border-[#1d2332] rounded text-[11px] text-[#f1f5f9]">

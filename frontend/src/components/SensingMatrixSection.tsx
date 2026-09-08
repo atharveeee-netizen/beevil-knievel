@@ -5,10 +5,10 @@ import { Badge } from "@/components/ui/Badge";
 export function SensingMatrixSection() {
   const SENSOR_CATALOG = [
     {
-      name: "TI TMP117 NIST RTD",
+      name: "TI TMP117 Digital Sensor",
       metric: "Brood Core Temp T(core)",
       range: "-40°C to +125°C",
-      accuracy: "±0.1°C NIST-Traceable",
+      accuracy: "±0.1°C Factory Calibrated",
       interface: "I2C (0x48, 400 kHz)",
       purpose: "Brood nest center thermal homeostasis (Frame 4/5)",
       status: "DRIVER_VERIFIED",
@@ -102,14 +102,14 @@ export function SensingMatrixSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-[#f59e0b] mb-1">
-              02 — Physical Transduction Layer
+              04 — Where We Measure: In-Hive Sensor Matrix
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-mono uppercase tracking-tight text-[#f1f5f9]">
               In-Hive Multi-Modal Sensor Matrix
             </h2>
           </div>
           <div className="flex items-center gap-2">
-            <Badge claim="REAL_SENSOR">NIST &amp; COTS Transducers</Badge>
+            <Badge claim="REAL_SENSOR">9 Precision COTS Transducers</Badge>
           </div>
         </div>
 

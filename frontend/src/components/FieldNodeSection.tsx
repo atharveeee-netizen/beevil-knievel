@@ -19,7 +19,7 @@ export function FieldNodeSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-[#f59e0b] mb-1">
-              05 — Ultra-Low-Power Embedded Hardware
+              06 — Sensor Node Hardware &amp; Energy Budget
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-mono uppercase tracking-tight text-[#f1f5f9]">
               Field Telemetry Node &amp; Energy Budget

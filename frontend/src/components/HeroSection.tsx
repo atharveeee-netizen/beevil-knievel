@@ -74,7 +74,7 @@ export function HeroSection() {
             <div className="text-[10px] text-[#64748b] uppercase tracking-wider">Brood Homeostasis</div>
             <div className="text-xl sm:text-2xl font-bold text-[#10b981] font-tabular mt-0.5">34.5°C</div>
             <div className="text-[10px] text-[#94a3b8] mt-1 flex items-center justify-between">
-              <span>±0.1°C NIST RTD</span>
+              <span>±0.1°C Digital Sensor</span>
               <Badge claim="VALIDATED" size="sm">TMP117</Badge>
             </div>
           </div>

@@ -2,16 +2,21 @@ import React from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
 import { ProblemSection } from "@/components/ProblemSection";
+import { InspectionLimitsSection } from "@/components/InspectionLimitsSection";
+import { OurApproachSection } from "@/components/OurApproachSection";
 import { SensingMatrixSection } from "@/components/SensingMatrixSection";
-import { AcousticIntelligenceSection } from "@/components/AcousticIntelligenceSection";
 import { ThermalThermodynamicsSection } from "@/components/ThermalThermodynamicsSection";
+import { AcousticIntelligenceSection } from "@/components/AcousticIntelligenceSection";
 import { FieldNodeSection } from "@/components/FieldNodeSection";
+import { EmbeddedProcessingSection } from "@/components/EmbeddedProcessingSection";
 import { DualRadioNetworkSection } from "@/components/DualRadioNetworkSection";
 import { GatewayEdgeSection } from "@/components/GatewayEdgeSection";
 import { EdgeDiagnosticsSection } from "@/components/EdgeDiagnosticsSection";
+import { MultiHiveNetworkSection } from "@/components/MultiHiveNetworkSection";
 import { MultiPhysicsSimulationSection } from "@/components/MultiPhysicsSimulationSection";
 import { ValidationEvidenceSection } from "@/components/ValidationEvidenceSection";
 import { PrototypeBenchSection } from "@/components/PrototypeBenchSection";
+import { ResultsSection } from "@/components/ResultsSection";
 import { TechnicalDocsSection } from "@/components/TechnicalDocsSection";
 import { Footer } from "@/components/Footer";
 
@@ -21,45 +26,60 @@ export default function Home() {
       {/* Top Technical Navigation */}
       <Navbar />
 
-      {/* Main Narrative Pipeline: Problem -> Transduction -> DSP -> Radio -> Gateway -> Simulation -> Evidence */}
+      {/* Main Narrative Pipeline: 16 Chronological Stages (IEEE HART Phase 2 Standard) */}
       <main className="flex-grow">
-        {/* 00. Hero Section & System Identification */}
+        {/* 00. Hero Section: System Identification & Evaluation Prototype Status */}
         <HeroSection />
 
-        {/* 01. Problem: Commercial Apiary Mortality & Observability Gap */}
+        {/* 01. The Problem: Commercial Apiary Mortality & Observability Gap */}
         <ProblemSection />
 
-        {/* 02. In-Hive Transducers: Multi-Modal Sensor Matrix & 10-Frame Cutaway */}
+        {/* 02. Why Current Inspection Is Limited: Frame Pulls, Audio Loggers, Cloud Systems */}
+        <InspectionLimitsSection />
+
+        {/* 03. Our Approach: 3-Tier Cyber-Physical Pipeline & End-to-End Dataflow */}
+        <OurApproachSection />
+
+        {/* 04A. Where We Measure: In-Hive Sensor Matrix & 10-Frame Cutaway */}
         <SensingMatrixSection />
 
-        {/* 03. Acoustic DSP: CMSIS-DSP 256-pt Real FFT & Biological Sub-Bands */}
-        <AcousticIntelligenceSection />
-
-        {/* 04. Thermodynamics: 2-Node Lumped Model & CUSUM Brood Filter */}
+        {/* 04B. Thermal Modeling: Brood Nest Thermoregulation & CUSUM Drift Filter */}
         <ThermalThermodynamicsSection />
 
-        {/* 05. Field Node: RAK4631, SX1262, Power Gating & 300s Duty Cycle */}
+        {/* 05. Acoustic Signal: CMSIS-DSP 256-pt Real FFT & Biological Sub-Bands */}
+        <AcousticIntelligenceSection />
+
+        {/* 06. Sensor Node: RAK4631 nRF52840, Power Gating & Hardware Architecture */}
         <FieldNodeSection />
 
-        {/* 06. Dual-Radio: BLE Mesh Intra-Yard + LoRa Star Backhaul */}
+        {/* 07. Embedded DSP: State Machine Execution & 300s Power Duty Cycle */}
+        <EmbeddedProcessingSection />
+
+        {/* 08. Wireless Link: Sub-GHz LoRa Star Backhaul & Local BLE Topology */}
         <DualRadioNetworkSection />
 
-        {/* 07. Edge Gateway: Raspberry Pi 3B+, SQLite WAL & OverlayFS Root */}
+        {/* 09. Receiver / Gateway: Hardened Base Station, SQLite WAL & OverlayFS */}
         <GatewayEdgeSection />
 
-        {/* 08. Edge Diagnostics: 8-State Multi-Modal Decision Engine */}
+        {/* 10. Analytics / AI: Multi-Modal Diagnostics & 5-Tier Truth Taxonomy */}
         <EdgeDiagnosticsSection />
 
-        {/* 09. Multi-Physics: 11 ANSYS FEA/CFD Simulation Domains */}
+        {/* 11. Multi-Hive System: 100-Hive Scalable Apiary Star Topology */}
+        <MultiHiveNetworkSection />
+
+        {/* 12. Simulation: 11 ANSYS Multi-Physics FEA/CFD Simulation Domains */}
         <MultiPhysicsSimulationSection />
 
-        {/* 10. Engineering Validation Matrix & Claims Evidence Ledger */}
+        {/* 13. Validation: Claims vs. Empirical & Mathematical Evidence Ledger */}
         <ValidationEvidenceSection />
 
-        {/* 11. Hardware Bring-Up Report & Physical Bench Prototype Status */}
+        {/* 14. Prototype: Bench Prototype Bring-Up Reality & Report Previews */}
         <PrototypeBenchSection />
 
-        {/* 12. Reproducibility Suite & 13 Canonical Figures Index */}
+        {/* 15. Results: Defensible Performance Tables (Measured / Calculated / Simulated / Estimated) */}
+        <ResultsSection />
+
+        {/* 16. Technical Documentation: Reproducibility Suite & 13 Canonical Figures */}
         <TechnicalDocsSection />
       </main>
 

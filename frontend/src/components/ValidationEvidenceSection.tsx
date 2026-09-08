@@ -74,7 +74,7 @@ export function ValidationEvidenceSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
           <div>
             <div className="text-xs font-mono font-bold uppercase tracking-widest text-[#f59e0b] mb-1">
-              10 — Empirical Truth &amp; Verification
+              13 — Empirical Truth &amp; Validation Ledger
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold font-mono uppercase tracking-tight text-[#f1f5f9]">
               Engineering Validation Matrix &amp; Evidence Ledger
