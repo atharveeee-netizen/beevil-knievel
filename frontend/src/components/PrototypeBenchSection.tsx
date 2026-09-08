@@ -91,28 +91,10 @@ export function PrototypeBenchSection() {
               </a>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div className="rounded border border-[#283144] overflow-hidden bg-[#ffffff]">
-                <img
-                  src="/images/evidence/page_1.png"
-                  alt="IEEE HART Phase 2 Report - Page 1: System Overview & Architecture"
-                  className="w-full h-auto object-cover"
-                />
-                <div className="p-1.5 bg-[#090b10] text-[9px] text-[#64748b] text-center border-t border-[#283144]">
-                  Page 1: System &amp; Transduction
-                </div>
-              </div>
-
-              <div className="rounded border border-[#283144] overflow-hidden bg-[#ffffff]">
-                <img
-                  src="/images/evidence/page_2.png"
-                  alt="IEEE HART Phase 2 Report - Page 2: Mathematical Evidence & BOM"
-                  className="w-full h-auto object-cover"
-                />
-                <div className="p-1.5 bg-[#090b10] text-[9px] text-[#64748b] text-center border-t border-[#283144]">
-                  Page 2: Math, RF &amp; BOM
-                </div>
-              </div>
+            <div className="p-4 rounded border border-[#283144] bg-[#0d1017] text-center">
+              <p className="text-[11px] text-[#94a3b8]">
+                Full 2-page IEEE report available as PDF download above.
+              </p>
             </div>
 
           </div>
