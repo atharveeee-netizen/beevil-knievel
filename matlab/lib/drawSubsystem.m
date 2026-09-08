@@ -1,0 +1,33 @@
+function h = drawSubsystem(ax, pos, title_str, style, options)
+% DRAWSUBSYSTEM Draws a boundary enclosure representing a physical or functional subsystem
+% pos = [x, y, w, h]
+
+if nargin < 5; options = struct(); end
+if ~isfield(options, 'stroke_color'); options.stroke_color = style.stroke_med; end
+if ~isfield(options, 'fill_color'); options.fill_color = [0.99, 0.99, 1.00]; end
+if ~isfield(options, 'line_width'); options.line_width = style.lw_thin; end
+if ~isfield(options, 'line_style'); options.line_style = '--'; end
+
+% Draw boundary
+h.rect = rectangle(ax, 'Position', pos, ...
+    'FaceColor', options.fill_color, ...
+    'EdgeColor', options.stroke_color, ...
+    'LineWidth', options.line_width, ...
+    'LineStyle', options.line_style);
+
+x = pos(1); y = pos(2); w = pos(3); h_box = pos(4);
+
+% Title banner
+if ~isempty(title_str)
+    tx = x + 0.03 * w;
+    ty = y + h_box - 0.04 * h_box;
+    h.title = text(ax, tx, ty, title_str, ...
+        'FontName', style.font_family, ...
+        'FontSize', style.fs_subhead, ...
+        'FontWeight', 'bold', ...
+        'Color', style.stroke_dark, ...
+        'HorizontalAlignment', 'left', ...
+        'VerticalAlignment', 'top');
+end
+
+end
