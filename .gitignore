@@ -18,6 +18,7 @@ node_modules/
 .next/
 out/
 frontend/out/
+scratch/
 *.tmp
 
 # IDE / Editor Files
