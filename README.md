@@ -228,31 +228,4 @@
 
 </div>
 
----
-
-## 06 - Reproducibility & Automated Verification Suite
-
-To verify the integrity of the data and simulations behind this presentation:
-
-```bash
-# 1. Run the Multi-Physics Simulation Suite (ANSYS)
-python simulations/run_all_ansys_simulations.py
-
-# 2. Run the MATLAB Numerical Simulation Suite
-python simulation/matlab/run_simulations.py
-
-# 3. Run all Gateway & System Unit Tests
-pytest tests/ -v
-```
-
----
-
-## 07 - Project Session & Agentic Development Metadata
-
-This project was developed with the assistance of autonomous AI agents. Below is the conversation session metadata log detailing the AI-assisted engineering process:
-
-### Conversation `1741650a-26de-4fc4-a265-0f556b0d6bff`
-- **Title**: Hackathon Jury Evaluation Framework
-- **Created**: 2026-09-09T06:52:21Z
-- **Last Modified**: 2026-09-09T07:11:58Z
 
