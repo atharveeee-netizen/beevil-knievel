@@ -61,8 +61,14 @@ logs/
 # Raw Video Downloads (Outside Submission Package)
 assets/video_sources/raw/
 
-# Local TeX Engine
+# Local TeX Engine & Executables
 tools/tectonic/
 submission/*.aux
 submission/*.log
+proposal/*.png
+proposal/rendered_pages/
+*.exe
+*.dll
+*.so
+*.dylib
 

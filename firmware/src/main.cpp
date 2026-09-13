@@ -30,7 +30,7 @@
 #include "algorithm_config.h"
 
 // ----------------------------------------------------------------------------
-// CANONICAL 32-BYTE BINARY TELEMETRY PACKET (STRICT PACKING)
+// CANONICAL 33-BYTE BINARY TELEMETRY PACKET (STRICT PACKING)
 // ----------------------------------------------------------------------------
 #pragma pack(push, 1)
 typedef struct {
@@ -44,7 +44,7 @@ typedef struct {
     uint16_t lux;                      // 2 bytes: 0 to 65,535 Lux (0xFFFF if NOT_CONNECTED)
     uint8_t  tilt_deg;                 // 1 byte: 0 to 90 deg (0xFF if NOT_CONNECTED)
     uint8_t  fft_energy_bands[8];      // 8 bytes: Normalized acoustic sub-bands (0 if silent/absent)
-} BeevilLoRaPayload;                   // Exactly 32 Bytes
+} BeevilLoRaPayload;                   // Exactly 33 Bytes (sizeof == 33)
 #pragma pack(pop)
 
 // Sensor Presence Bitmask Flags

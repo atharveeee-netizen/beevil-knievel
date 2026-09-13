@@ -37,11 +37,11 @@ typedef struct {
 } beevil_mesh_header_t;
 
 // ----------------------------------------------------------------------------
-// FULL MESH RADIO FRAME (40 Bytes Total)
+// FULL MESH RADIO FRAME (41 Bytes Total: 8-Byte Header + 33-Byte Sensor Payload)
 // ----------------------------------------------------------------------------
 typedef struct {
     beevil_mesh_header_t header;    // 8 bytes routing header
-    uint8_t  payload[32];           // 32 bytes packed sensor telemetry
+    uint8_t  payload[33];           // 33 bytes packed sensor telemetry (sizeof(BeevilLoRaPayload))
 } beevil_mesh_frame_t;
 
 #pragma pack(pop)
@@ -91,7 +91,7 @@ static inline void beevil_mesh_create_frame(beevil_mesh_router_t *router, const 
     out_frame->header.packet_seq_num = router->tx_seq_counter++;
     out_frame->header.hop_count = 0;
     out_frame->header.ttl = MESH_MAX_HOPS;
-    memcpy(out_frame->payload, sensor_payload, 32);
+    memcpy(out_frame->payload, sensor_payload, sizeof(out_frame->payload));
 
     // Register our own packet in seen cache
     beevil_mesh_is_duplicate(router, router->my_hive_id, out_frame->header.packet_seq_num);

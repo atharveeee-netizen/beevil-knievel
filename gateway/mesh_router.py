@@ -2,7 +2,7 @@
 BEEVIL MESH - GATEWAY TOPOLOGY & MESH ROUTER (Python / Linux Raspberry Pi 3B+)
 ==================================================================
 Manages the 100-Hive LoRa Multi-Hop Mesh Network:
-- Ingests 40-byte BeevilMesh frames (8-byte header + 32-byte payload).
+- Ingests 41-byte BeevilMesh frames (8-byte header + 33-byte payload).
 - Deduplicates packets and tracks multi-hop relay topology.
 - Computes Link Quality (RSSI/SNR), hop distribution, and battery relay load.
 - Exposes live Mesh Network Graph for the Next.js interactive frontend.
@@ -18,14 +18,14 @@ from collections import deque
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [BeevilMesh] %(message)s")
 logger = logging.getLogger("BeevilMesh")
 
-# 40-Byte Mesh Frame Header (< = Little Endian)
+# 41-Byte Mesh Frame Header (< = Little Endian)
 # H = uint16 (source_hive_id)
 # H = uint16 (target_node_id)
 # H = uint16 (packet_seq_num)
 # B = uint8  (hop_count)
 # B = uint8  (ttl)
-# 32s = 32 bytes (sensor_payload)
-MESH_FRAME_FORMAT = "<HHHBB 32s"
+# 33s = 33 bytes (sensor_payload)
+MESH_FRAME_FORMAT = "<HHHBB 33s"
 MESH_FRAME_SIZE = struct.calcsize(MESH_FRAME_FORMAT)
 
 class BeevilMeshGatewayRouter:
@@ -121,7 +121,7 @@ mesh_router = BeevilMeshGatewayRouter()
 
 if __name__ == "__main__":
     # Self-test with simulated 3-hop mesh frame
-    test_sensor_payload = b"\x00" * 32
+    test_sensor_payload = b"\x00" * 33
     test_frame = struct.pack(MESH_FRAME_FORMAT, 42, 0, 101, 2, 2, test_sensor_payload)
     parsed = mesh_router.process_mesh_frame(test_frame, -82.0, 8.0)
     print("Test Frame Parsed Successfully:", parsed)

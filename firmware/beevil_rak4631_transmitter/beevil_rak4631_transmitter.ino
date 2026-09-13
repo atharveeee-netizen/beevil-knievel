@@ -11,7 +11,7 @@
  *   - Real WisBlock Battery / USB 3.3V ADC Voltage Divider (A0 / P0.05)
  *   - Real Hardware I2C Bus Scanner (TMP117, SCD41, BME688 detection)
  *   - Interactive Serial Command Parser (STATUS, SOC, CUSUM, BLACKBOX, ADR, SCAN, PING)
- *   - Semtech SX1262 LoRa 32-Byte Payload Generation (IN865 Band)
+ *   - Semtech SX1262 LoRa 33-Byte Payload Generation (IN865 Band)
  * ============================================================================
  */
 
@@ -22,7 +22,7 @@
 #include "config.h"
 
 // ----------------------------------------------------------------------------
-// 32-BYTE BINARY TELEMETRY PACKET STRUCTURE (STRICT PACKING)
+// 33-BYTE BINARY TELEMETRY PACKET STRUCTURE (STRICT PACKING)
 // ----------------------------------------------------------------------------
 #pragma pack(push, 1)
 typedef struct {
@@ -36,7 +36,7 @@ typedef struct {
     uint16_t lux;                      // 2 bytes: Solar Illuminance
     uint8_t  tilt_deg;                 // 1 byte: Tilt Angle / Alert Bitfield
     uint8_t  fft_energy_bands[8];      // 8 bytes: Acoustic Spectrum Bands
-} BeevilLoRaPayload;                   // 32 BYTES TOTAL
+} BeevilLoRaPayload;                   // 33 BYTES TOTAL (sizeof == 33)
 #pragma pack(pop)
 
 // Alert Flag Bits inside tilt_deg / alert field
@@ -357,7 +357,7 @@ void loop() {
         // 5. Algorithm 3: Non-Volatile Blackbox Record
         recordBlackboxEntry(die_temp_c, vbat_mv, soc_pct, g_cusum.S_k, g_adr.current_tx_power_dbm);
 
-        // 6. Build 32-Byte LoRa Binary Packet
+        // 6. Build 33-Byte LoRa Binary Packet
         g_telemetry.hive_id = 0x0001;
         g_telemetry.brood_core_temp_c_x100 = (int16_t)(die_temp_c * 100.0f);
         

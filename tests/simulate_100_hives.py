@@ -21,6 +21,13 @@ from datetime import datetime, timezone
 import urllib.request
 import urllib.error
 
+# Ensure UTF-8 output on Windows consoles if supported
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 GATEWAY_API = "http://127.0.0.1:8000/api/v1/telemetry"
 
 def generate_hive_packet(hive_id: int, sim_hour: float) -> dict:
@@ -83,7 +90,7 @@ def generate_hive_packet(hive_id: int, sim_hour: float) -> dict:
     }
 
 def run_simulation(num_hives: int = 100, burst_mode: bool = False):
-    print(f"🚀 Starting Multi-Hive Telemetry Simulator ({num_hives} Hives)...")
+    print(f"[START] Multi-Hive Telemetry Simulator ({num_hives} Hives)...")
     print(f"Target Gateway: {GATEWAY_API}\n")
 
     latencies = []
@@ -105,10 +112,10 @@ def run_simulation(num_hives: int = 100, burst_mode: bool = False):
                 diag = resp_json.get("diagnosis", "UNKNOWN")
                 diagnoses[diag] = diagnoses.get(diag, 0) + 1
                 
-                status_icon = "🟢" if diag == "HEALTHY_ACTIVE" else "🚨"
-                print(f"{status_icon} Hive #{h:03d} -> {diag:<24} (Conf: {resp_json.get('confidence')*100:.1f}%) | API Latency: {elapsed_ms:.1f}ms")
+                status_icon = "[OK]   " if diag in ["HEALTHY_ACTIVE", "HEALTHY_NORMAL", "QUEEN_PRESENT"] else "[ALERT]"
+                print(f"{status_icon} Hive #{h:03d} -> {diag:<24} (Conf: {resp_json.get('confidence', 0.0)*100:.1f}%) | API Latency: {elapsed_ms:.1f}ms")
         except Exception as e:
-            print(f"❌ Error sending packet for Hive #{h:03d}: {e}")
+            print(f"[ERROR] Failed to send packet for Hive #{h:03d}: {e}")
 
         if not burst_mode:
             # Stagger packets slightly to simulate real-world LoRa distribution (0.33 pkts/sec)
@@ -118,15 +125,15 @@ def run_simulation(num_hives: int = 100, burst_mode: bool = False):
     avg_latency = sum(latencies) / len(latencies) if latencies else 0.0
 
     print("\n" + "="*60)
-    print("📊 100-HIVE BENCHMARK SIMULATION RESULTS")
+    print("[RESULTS] 100-HIVE BENCHMARK SIMULATION RESULTS")
     print("="*60)
     print(f"Total Hives Ingested:      {len(latencies)} / {num_hives}")
     print(f"Total Wall-Clock Time:    {total_time:.2f} seconds")
     print(f"Average Ingestion Latency: {avg_latency:.2f} ms")
-    print(f"Throughput Achieved:       {len(latencies) / total_time:.2f} packets/second")
-    print("\n🩺 AI Diagnostic Breakdown Across Apiary:")
+    print(f"Throughput Achieved:       {len(latencies) / total_time if total_time > 0 else 0:.2f} packets/second")
+    print("\n[DIAGNOSTICS] AI Diagnostic Breakdown Across Apiary:")
     for k, v in diagnoses.items():
-        print(f"   • {k:<25}: {v} hives")
+        print(f"   * {k:<25}: {v} hives")
     print("="*60)
 
 if __name__ == "__main__":

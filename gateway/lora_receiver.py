@@ -4,7 +4,7 @@ BEEVIL KNIEVEL - LORAWAN / LORA SPI PACKET RECEIVER DAEMON
 Linux background daemon for Raspberry Pi 3B+ + Waveshare SX1262 LoRa HAT.
 - Interfaces with Semtech SX1262 via SPI (/dev/spidev0.0) or UART.
 - Operates on 865.0625 MHz (India WPC De-licensed Band).
-- Unpacks 32-byte binary binary payloads from 100 field transmitter nodes.
+- Unpacks 33-byte binary payloads from 100 field transmitter nodes.
 - Dispatches parsed telemetry directly into the local FastAPI Edge Gateway.
 """
 
@@ -25,23 +25,24 @@ logger = logging.getLogger("BeevilLoRa")
 
 GATEWAY_API_URL = "http://127.0.0.1:8000/api/v1/telemetry"
 
-# Binary struct format for 32-byte payload:
+# Binary struct format for 33-byte payload:
 # < = Little-endian
-# H = uint16 (hive_id)
-# h = int16 (core_temp * 100)
-# 5h = 5 x int16 (frame_temps * 100)
-# H = uint16 (humidity * 100)
-# H = uint16 (voc_gas_kohm * 10)
-# H = uint16 (co2_ppm)
-# H = uint16 (weight_kg * 100)
-# H = uint16 (lux)
-# B = uint8 (tilt_deg)
-# 8B = 8 x uint8 (fft_bands normalized 0..255)
+# H = uint16 (hive_id) -> 2 bytes
+# h = int16 (core_temp * 100) -> 2 bytes
+# 5h = 5 x int16 (frame_temps * 100) -> 10 bytes
+# H = uint16 (humidity * 100) -> 2 bytes
+# H = uint16 (voc_gas_kohm * 10) -> 2 bytes
+# H = uint16 (co2_ppm) -> 2 bytes
+# H = uint16 (weight_kg * 100) -> 2 bytes
+# H = uint16 (lux) -> 2 bytes
+# B = uint8 (tilt_deg) -> 1 byte
+# 8B = 8 x uint8 (fft_bands normalized 0..255) -> 8 bytes
+# Total: 2 + 2 + 10 + 2 + 2 + 2 + 2 + 2 + 1 + 8 = 33 bytes
 PAYLOAD_FORMAT = "<Hh5hHHHHH B8B"
 PAYLOAD_SIZE = struct.calcsize(PAYLOAD_FORMAT)
 
 def unpack_lora_payload(raw_bytes: bytes) -> Optional[Dict[str, Any]]:
-    """Unpacks 32-byte binary radio packet into JSON telemetry dict."""
+    """Unpacks 33-byte binary radio packet into JSON telemetry dict."""
     if len(raw_bytes) != PAYLOAD_SIZE:
         logger.warning(f"Invalid packet size: expected {PAYLOAD_SIZE} bytes, got {len(raw_bytes)}")
         return None

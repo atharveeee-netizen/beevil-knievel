@@ -22,6 +22,9 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from gateway.server import app, init_database, get_db
+from gateway.lora_receiver import unpack_lora_payload, PAYLOAD_FORMAT, PAYLOAD_SIZE
+from gateway.mesh_router import BeevilMeshGatewayRouter, MESH_FRAME_FORMAT, MESH_FRAME_SIZE
+import struct
 
 @pytest.fixture(scope="module")
 def client():
@@ -151,6 +154,80 @@ def test_hive_detail_and_alerts(client):
     assert len(alerts) >= 1
     assert any(a["alert_type"] == "TAMPER_THEFT" for a in alerts)
 
+def test_lora_binary_unpacking_and_gateway_e2e(client):
+    """Verifies that 33-byte radio packets unpack accurately and ingest into FastAPI."""
+    assert PAYLOAD_SIZE == 33, f"Expected 33 bytes, got {PAYLOAD_SIZE}"
+
+    # Pack a 33-byte simulated packet
+    hive_id = 7
+    raw_packet = struct.pack(
+        PAYLOAD_FORMAT,
+        hive_id,
+        3485,                              # 34.85 C
+        3450, 3420, 3390, 3360, 3330,      # 5 frame temps
+        5850,                              # 58.5% RH
+        1420,                              # 142.0 kOhm
+        1180,                              # 1180 ppm
+        3350,                              # 33.50 kg
+        42000,                             # 42000 lux
+        0,                                 # 0 deg tilt
+        25, 128, 178, 51, 25, 13, 5, 2     # 8 FFT bands
+    )
+    assert len(raw_packet) == 33
+
+    # Unpack via daemon function
+    telemetry_dict = unpack_lora_payload(raw_packet)
+    assert telemetry_dict is not None
+    assert telemetry_dict["hive_id"] == 7
+    assert telemetry_dict["brood_core_temp"] == 34.85
+    assert len(telemetry_dict["frame_temps"]) == 5
+    assert telemetry_dict["humidity"] == 58.5
+    assert telemetry_dict["voc_gas_res"] == 142.0
+    assert telemetry_dict["co2_ppm"] == 1180.0
+    assert telemetry_dict["weight_kg"] == 33.5
+    assert len(telemetry_dict["fft_bands"]) == 8
+
+    # Reject malformed packet lengths
+    assert unpack_lora_payload(raw_packet[:30]) is None
+    assert unpack_lora_payload(raw_packet + b"\x00") is None
+
+    # Ingest unpacked dictionary into FastAPI Gateway
+    resp = client.post("/api/v1/telemetry", json=telemetry_dict)
+    assert resp.status_code == 200
+    res_data = resp.json()
+    assert res_data["status"] == "SUCCESS"
+    assert res_data["hive_id"] == 7
+
+def test_mesh_router_dedup_and_topology():
+    """Verifies 41-byte mesh frames, duplicate detection, and topology graph."""
+    assert MESH_FRAME_SIZE == 41, f"Expected 41 bytes, got {MESH_FRAME_SIZE}"
+
+    router = BeevilMeshGatewayRouter()
+    dummy_payload = b"\xAA" * 33
+    
+    # Create a 41-byte mesh packet from Hive 12, seq 42, 2 hops
+    mesh_frame = struct.pack(MESH_FRAME_FORMAT, 12, 0, 42, 2, 2, dummy_payload)
+    assert len(mesh_frame) == 41
+
+    # 1. First RX should succeed
+    rx1 = router.process_mesh_frame(mesh_frame, rssi_dbm=-78.5, snr_db=8.2)
+    assert rx1 is not None
+    assert rx1["source_hive_id"] == 12
+    assert rx1["hop_count"] == 2
+    assert rx1["sensor_payload_raw"] == dummy_payload
+
+    # 2. Duplicate RX should be dropped
+    rx_dup = router.process_mesh_frame(mesh_frame, rssi_dbm=-78.5, snr_db=8.2)
+    assert rx_dup is None
+
+    # 3. Invalid length frame should be rejected
+    assert router.process_mesh_frame(mesh_frame[:35]) is None
+
+    # 4. Topology summary checks
+    topo = router.get_mesh_topology()
+    assert topo["total_nodes"] >= 2  # Gateway + Hive 12
+    assert topo["multi_hop_rate_pct"] == 100.0
+
 if __name__ == "__main__":
     init_database()
     with TestClient(app) as test_c:
@@ -160,4 +237,6 @@ if __name__ == "__main__":
         test_telemetry_ingest_anomalies(test_c)
         test_telemetry_strict_validation(test_c)
         test_hive_detail_and_alerts(test_c)
+        test_lora_binary_unpacking_and_gateway_e2e(test_c)
+        test_mesh_router_dedup_and_topology()
     print("All gateway pipeline tests passed successfully!")

@@ -4,7 +4,7 @@ BEEVIL KNIEVEL — AUTOMATED FIRMWARE & TELEMETRY TEST SUITE
 ===============================================================================
 Standard: IEEE HARDWAIre Phase 2 Bench Bring-Up
 Tests:
-  1. 32-byte packed binary struct layout, sizeof, endianness, field offsets.
+  1. 33-byte packed binary struct layout, sizeof, endianness, field offsets.
   2. CRC-16 / CRC-8 checksum integrity on payload bytes.
   3. Sensor validation & range checking (sentinel values for unconnected sensors).
   4. 7-point OCV battery SoC estimator math with Arrhenius temperature compensation.
@@ -24,7 +24,7 @@ from typing import Dict, Any
 
 
 # -----------------------------------------------------------------------------
-# 1. 32-BYTE BINARY STRUCT TESTS
+# 1. 33-BYTE BINARY STRUCT TESTS
 # -----------------------------------------------------------------------------
 class TestBinaryTelemetryStruct:
     """Validate packing, size, and layout of BeevilLoRaPayload."""
@@ -41,7 +41,7 @@ class TestBinaryTelemetryStruct:
     # H = uint16 (lux) -> 2
     # B = uint8 (tilt_deg) -> 1
     # 8B = 8 * uint8 (fft_energy_bands) -> 8
-    # Total: 2 + 2 + 10 + 2 + 2 + 2 + 2 + 2 + 1 + 8 = 31 bytes payload
+    # Total: 2 + 2 + 10 + 2 + 2 + 2 + 2 + 2 + 1 + 8 = 33 bytes payload
     STRUCT_FORMAT = "<Hh5hHHHHHBBBBBBBBB"
     EXPECTED_SIZE = struct.calcsize(STRUCT_FORMAT)
 

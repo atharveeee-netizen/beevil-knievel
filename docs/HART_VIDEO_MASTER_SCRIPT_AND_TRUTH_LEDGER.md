@@ -522,7 +522,7 @@ Every visual, audio, and data asset referenced in the script is legally cleared 
 2. **Audio Training Dataset**:
    - Zenodo Open Record 1321278 (*NU-Hive Audio Dataset for Honeybee Monitoring*). Published under **Creative Commons Attribution 4.0 International (CC BY 4.0)**.
 3. **Engineering Diagrams & Schematics**:
-   - Figures 0.0, 0.8, 2.1, 3.1, 4.1, and 6.1: Original team-authored technical graphics generated deterministically via KiCad, Python, and Graphviz. Licensed under project **MIT License**.
+   - Figures 0.0, 0.8, 2.1, 3.1, 4.1, and 6.1: Original team-authored technical graphics generated deterministically via KiCad, Python, and Graphviz. Licensed under project **Proprietary Notice (All Rights Reserved)**.
 4. **Hardware & Bench Visuals**:
    - CAD engineering cutaways and 3D enclosure renderings (`docs/figures/matlab/02_hive_sensor_layer.png` and `docs/figures/matlab/03_sensor_node.png`). **Zero personal or user photos utilized.**
 

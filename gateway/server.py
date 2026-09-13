@@ -45,13 +45,19 @@ except ImportError:
     TORCH_AVAILABLE = False
 
 # -----------------------------------------------------------------------------
-# CONFIGURATION & PATHS
+# CONFIGURATION & ENVIRONMENT VARIABLES
 # -----------------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent
 REPO_ROOT = BASE_DIR.parent
-DB_PATH = BASE_DIR / "beevil_telemetry.db"
-MODEL_PATH = REPO_ROOT / "Cloud Model" / "beevil_fusion_net_edge_torchscript.pt"
+DB_PATH = Path(os.getenv("BEEVIL_DB_PATH", str(BASE_DIR / "beevil_telemetry.db")))
+MODEL_PATH = Path(os.getenv("BEEVIL_MODEL_PATH", str(REPO_ROOT / "Cloud Model" / "beevil_fusion_net_edge_torchscript.pt")))
 NORM_PARAMS_PATH = REPO_ROOT / "TinyML Model" / "norm_params.json"
+BEEVIL_DEMO_MODE = os.getenv("BEEVIL_DEMO_MODE", "true").lower() in ("true", "1", "yes")
+BEEVIL_API_HOST = os.getenv("BEEVIL_API_HOST", "0.0.0.0")
+BEEVIL_API_PORT = int(os.getenv("BEEVIL_API_PORT", "8000"))
+
+CORS_ORIGINS_RAW = os.getenv("BEEVIL_CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000,http://localhost:8000,http://127.0.0.1:8000")
+CORS_ORIGINS = [orig.strip() for orig in CORS_ORIGINS_RAW.split(",") if orig.strip()]
 
 DIAGNOSTIC_CLASSES = [
     "HEALTHY_NORMAL",       # 0
@@ -149,32 +155,38 @@ def init_database():
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_alerts_unresolved ON alerts (resolved, epoch_sec DESC);")
 
     cursor.execute("SELECT COUNT(*) as count FROM hives;")
-    if cursor.fetchone()["count"] == 0:
-        print("[DB] Initializing 100 hive registry in local database...")
-        now_str = datetime.now(timezone.utc).isoformat()
-        now_epoch = int(time.time())
-        hive_rows = [
-            (
-                i,
-                f"Hive-{i:03d}",
-                f"Sector {chr(65 + (i % 6))}-Row {(i // 6) + 1}",
-                4 + (i % 12),
-                now_str,
-                21.0 + (i % 5) * 0.5,
-                "HEALTHY",
-                now_epoch,
-                95.0 + (i % 5)
-            )
-            for i in range(1, 101)
-        ]
-        cursor.executemany("""
-        INSERT INTO hives (hive_id, name, location, queen_age_months, installation_date, tare_weight_kg, status, last_seen_epoch, last_health_score)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
-        """, hive_rows)
+    hive_count = cursor.fetchone()["count"]
+    if hive_count == 0:
+        if BEEVIL_DEMO_MODE:
+            print("[DB] [DEMO MODE] Initializing 100 demo hive registry in local database...")
+            now_str = datetime.now(timezone.utc).isoformat()
+            now_epoch = int(time.time())
+            hive_rows = [
+                (
+                    i,
+                    f"Hive-{i:03d}",
+                    f"Sector {chr(65 + (i % 6))}-Row {(i // 6) + 1}",
+                    4 + (i % 12),
+                    now_str,
+                    21.0 + (i % 5) * 0.5,
+                    "HEALTHY",
+                    now_epoch,
+                    95.0 + (i % 5)
+                )
+                for i in range(1, 101)
+            ]
+            cursor.executemany("""
+            INSERT INTO hives (hive_id, name, location, queen_age_months, installation_date, tare_weight_kg, status, last_seen_epoch, last_health_score)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+            """, hive_rows)
+            print("[DB] [DEMO MODE] 100 demo hives seeded successfully.")
+        else:
+            print("[DB] [LIVE MODE] Empty database initialized with clean schema (0 hives). Register field nodes via API.")
 
     conn.commit()
     conn.close()
-    print("[DB] Local SQLite Database Initialized (WAL Mode, 100 Hives Registered).")
+    mode_str = "DEMO MODE (100 Synthetic Hives)" if BEEVIL_DEMO_MODE else "LIVE MODE (Clean Production)"
+    print(f"[DB] Local SQLite Database Initialized (WAL Mode, {mode_str}).")
 
 # -----------------------------------------------------------------------------
 # AI MODEL RUNTIME & INFERENCE ENGINE
@@ -312,10 +324,11 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+is_wildcard_cors = "*" in CORS_ORIGINS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=["*"] if is_wildcard_cors else CORS_ORIGINS,
+    allow_credentials=False if is_wildcard_cors else True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -363,12 +376,18 @@ class TelemetryPayload(BaseModel):
 # -----------------------------------------------------------------------------
 @app.get("/")
 def root():
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT COUNT(*) as count FROM hives;")
+    reg_count = cursor.fetchone()["count"]
+    conn.close()
     return {
         "system": "Beevil Knievel Linux Edge Gateway Server",
         "version": "2.0.0",
         "status": "ONLINE",
+        "mode": "DEMO" if BEEVIL_DEMO_MODE else "LIVE",
         "time_utc": datetime.now(timezone.utc).isoformat(),
-        "registered_hives": 100,
+        "registered_hives": reg_count,
         "engine": "Edge Multi-Modal Sensor Fusion & Expert Diagnostic Engine"
     }
 
@@ -583,5 +602,6 @@ async def websocket_endpoint(websocket: WebSocket):
         ws_manager.disconnect(websocket)
 
 if __name__ == "__main__":
-    print("[SERVER] Starting Beevil Knievel Linux Edge Gateway Server on port 8000...")
-    uvicorn.run("server:app", host="0.0.0.0", port=8000, reload=False, workers=2)
+    mode_label = "DEMO MODE" if BEEVIL_DEMO_MODE else "LIVE PRODUCTION MODE"
+    print(f"[SERVER] Starting Beevil Knievel Linux Edge Gateway Server on {BEEVIL_API_HOST}:{BEEVIL_API_PORT} ({mode_label})...")
+    uvicorn.run("server:app", host=BEEVIL_API_HOST, port=BEEVIL_API_PORT, reload=False, workers=1)
