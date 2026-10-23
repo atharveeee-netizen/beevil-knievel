@@ -1,11 +1,12 @@
-# Hive-Independent, Edge-Deployable Acoustic–Thermal Colony Monitoring on a LoRa Node: A Leakage-Safe Multi-Dataset Benchmark
+# Beevil Knievel: Precision Apiculture Cyber-Physical Monitoring & Multi-Dataset Benchmark
 
-**Atharve Dahima**, **Srajan Mishra**, and **Vishal Sharma**  
+**Atharve Dahima**, **Srajan Mishra**, and **Dr. Vishal Sharma**  
 *Department of Electronics and Communication Engineering, Malaviya National Institute of Technology Jaipur, Rajasthan, India*  
-*Code and data for the manuscript "Hive-Independent, Edge-Deployable Acoustic–Thermal Colony Monitoring on a LoRa Node: A Leakage-Safe Multi-Dataset Benchmark" (in preparation).*
 
-[![CI](https://github.com/atharvadahima/beevil-knievel/actions/workflows/ci.yml/badge.svg)](https://github.com/atharvadahima/beevil-knievel/actions)
+[![CI](https://github.com/atharveeee-netizen/beevil-knievel/actions/workflows/ci.yml/badge.svg)](https://github.com/atharveeee-netizen/beevil-knievel/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![IEEE Conference Paper](https://img.shields.io/badge/Paper-IEEE%20Conference-blue.svg)](paper/main.tex)
+[![Q1 Journal Manuscript](https://img.shields.io/badge/Manuscript-Elsevier%20Q1%20Ready-green.svg)](paper_q1/manuscript/main.tex)
 
 ---
 
@@ -27,14 +28,16 @@ The following benchmark metrics are generated programmatically across 15 outer t
 <!-- RESULTS:START -->
 | Task | Dataset | Protocol | Model | Balanced Accuracy (Mean ± SD) | Macro F1 | AUROC | Provenance |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Floor: Majority Class | 0.00% ± 0.00% | 0.0000 | 0.0000 | `REAL_PUBLIC_DATASET` |
-| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Floor: Stratified Random | 0.00% ± 0.00% | 0.0000 | 0.0000 | `REAL_PUBLIC_DATASET` |
-| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Repo Heuristic V1 | 0.00% ± 0.00% | 0.0000 | 0.0000 | `REAL_PUBLIC_DATASET` |
-| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | F0: Logistic Regression | 0.00% ± 0.00% | 0.0000 | 0.0000 | `REAL_PUBLIC_DATASET` |
-| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | F0: Random Forest | 0.00% ± 0.00% | 0.0000 | 0.0000 | `REAL_PUBLIC_DATASET` |
-| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | F0: HistGradientBoosting | 0.00% ± 0.00% | 0.0000 | 0.0000 | `REAL_PUBLIC_DATASET` |
-| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | F0: MLP (TinyML Candidate) | 0.00% ± 0.00% | 0.0000 | 0.0000 | `REAL_PUBLIC_DATASET` |
-| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Hive-Adaptive Normalization | 0.00% ± 0.00% | 0.0000 | 0.0000 | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Floor: Majority Class | 50.00% ± 0.00% | 0.3873 | 0.5000 | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Floor: Stratified Random | 50.50% ± 4.75% | 0.5018 | 0.5050 | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Repo Heuristic V1 | 73.50% ± 5.92% | 0.7491 | 0.7350 | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | F0: Logistic Regression | 71.90% ± 5.66% | 0.7090 | 0.7759 | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | F0: Random Forest | 70.67% ± 4.21% | 0.7093 | 0.7939 | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | F0: HistGradientBoosting | 73.17% ± 6.32% | 0.7319 | 0.8182 | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | F0: MLP (TinyML Candidate) | 72.95% ± 4.90% | 0.7268 | 0.7963 | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | SVM (RBF on F0) | 70.49% ± 4.47% | 0.7015 | 0.7670 | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Multi-Modal Fusion (Early) | **81.96% ± 5.52%** | **0.8312** | **0.8964** | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Hive-Adaptive Normalization | 72.80% ± 5.02% | 0.7164 | 0.7828 | `REAL_PUBLIC_DATASET` |
 <!-- RESULTS:END -->
 
 ---
@@ -63,19 +66,24 @@ Every empirical claim in this repository is explicitly tagged with its operation
 
 ```text
 beevil-knievel/
-├── firmware/                 # Node C++ source (RAK4631 WisBlock, CMSIS-DSP, SX1262)
-├── gateway/                  # Gateway daemon (FastAPI, SQLite WAL, Waveshare SX1262)
-├── spec/                     # Canonical machine-readable schema (beevil_spec.yaml)
-├── data/                     # Public dataset ingest & cryptographic MANIFEST.csv
+├── paper/                    # IEEE Conference Paper artifact (main.tex, bib, 6 vector figures)
+│   ├── main.tex              # IEEEtran conference manuscript
+│   ├── references.bib        # Comprehensive bibliography
+│   ├── figs/                 # 6 publication-ready vector figures + photos
+│   └── run_all.sh            # Script to regenerate all paper results & figures
 ├── paper_q1/                 # Journal manuscript pipeline (submission artifact)
 │   ├── data_tools/           # Ingestion, MSPB phenotype mapping, and forensic audit
 │   ├── features/             # Firmware-faithful 8-band DSP feature engine
 │   ├── splits/               # Cryptographically frozen StratifiedGroupKFold splits
 │   ├── results/              # Programmatic JSON result files (no manual numbers)
 │   ├── figures/              # Vector PDF and PNG publication figures
-│   ├── manuscript/           # LaTeX manuscript (main.tex, numbers.tex, references.bib)
+│   ├── manuscript/           # Elsevier Q1 LaTeX manuscript (main.tex, numbers.tex)
 │   ├── human_tasks/          # Physical bench measurement protocols & checklists
 │   └── run.py                # Unified cross-platform CLI entrypoint
+├── firmware/                 # Node C++ source (RAK4631 WisBlock, CMSIS-DSP, SX1262)
+├── gateway/                  # Gateway daemon (FastAPI, SQLite WAL, Waveshare SX1262)
+├── spec/                     # Canonical machine-readable schema (beevil_spec.yaml)
+├── data/                     # Public dataset ingest & cryptographic MANIFEST.csv
 ├── tests/                    # Pytest test suite (DSP, gateway wire protocol, telemetry)
 ├── archive/                  # [LEGACY] Archived competition files & mock scripts (not in paper)
 ├── CITATION.cff              # Machine-readable citation metadata
@@ -204,8 +212,19 @@ A complete disclosure of operational boundaries is maintained in [`LIMITATIONS.m
 
 Machine-readable citation metadata is provided in [`CITATION.cff`](CITATION.cff).
 
+### IEEE Conference Paper
 ```bibtex
-@article{dahima2026beevil,
+@inproceedings{dahima2026beevil_ieee,
+  title={Beevil Knievel: An Edge-Native LoRa Cyber-Physical System for Non-Invasive In-Comb Honeybee Colony Health Monitoring},
+  author={Dahima, Atharve and Mishra, Srajan and Sharma, Vishal},
+  booktitle={IEEE Conference on Cyber-Physical Systems and Precision Agriculture (in review)},
+  year={2026}
+}
+```
+
+### Q1 Journal Manuscript
+```bibtex
+@article{dahima2026beevil_journal,
   title={Hive-Independent, Edge-Deployable Acoustic--Thermal Colony Monitoring on a LoRa Node: A Leakage-Safe Multi-Dataset Benchmark},
   author={Dahima, Atharve and Mishra, Srajan and Sharma, Vishal},
   journal={Computers and Electronics in Agriculture (in preparation)},

@@ -12,7 +12,7 @@
     "tailwindcss"
   ],
   "engines": {
-    "node": ">=24"
+    "node": ">=20"
   },
   "scripts": {
     "dev": "next dev",
