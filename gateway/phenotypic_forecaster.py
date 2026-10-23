@@ -1,13 +1,13 @@
 """
-BEEVIL PHENOTYPIC FORECASTER - VARROA REGRESSION & HONEY YIELD PREDICTOR
-=========================================================================
-Trained on MSPB 2.0 (Zenodo) and BEEP.nl European Scale Database:
-1. Continuous Varroa Mite Load Estimator (MSPB 2.0):
-   - Predicts exact numerical infestation load: (Mites per 100 bees).
-   - Classifies economic intervention thresholds (Safe <3%, Treat 3-5%, Critical >5%).
-2. Multi-Day Honey Yield & Nectar Flow Forecaster (BEEP):
-   - Computes daily foraging delta (dW/dt) and correlates with Solar Lux.
-   - Forecasts 7-day surplus honey accumulation and estimated super fill date.
+BEEVIL PHENOTYPIC FORECASTER - RULE-BASED VARROA & HONEY ACCUMULATION HEURISTIC
+================================================================================
+Parametric heuristic model for estimating indicative Varroa pressure and nectar delta:
+1. Indicative Varroa Load Scorer:
+   - Evaluates multi-point brood temperature variance and VOC/CO2 proxy signals using heuristic weighting.
+   - Categorizes estimated pressure into low, moderate, and critical treatment guidance brackets.
+2. Honey Yield & Nectar Flow Estimator:
+   - Computes daily weight delta (dW/dt) against standard Langstroth super capacities.
+NOTE: This is a parametric heuristic demonstration model, not a cross-validated empirical regression model.
 """
 
 import numpy as np

@@ -1,0 +1,172 @@
+# ==============================================================================
+# BEEVIL KNIEVEL CANONICAL SPECIFICATION (SINGLE SOURCE OF TRUTH)
+# ==============================================================================
+# Standard: Elsevier COMPAG / IEEE Journal Submission Standard
+# Auto-generates:
+#   - firmware/config/beevil_spec_gen.h
+#   - gateway/beevil_spec.py
+#   - paper_q1/manuscript/spec.tex
+# Run code generator via: python -m paper_q1.run spec
+# ==============================================================================
+
+system:
+  project_name: "Beevil Knievel"
+  working_title: "Hive-independent, edge-deployable acoustic-thermal colony monitoring on a LoRa node"
+  node_mcu: "Nordic Semiconductor nRF52840 (ARM Cortex-M4F @ 64 MHz, 1MB Flash, 256KB RAM)"
+  module: "RAKwireless RAK4631 WisBlock Core on RAK5005-O Baseboard"
+  gateway_soc: "Raspberry Pi 3B+ (Broadcom BCM2837B0 Quad Cortex-A53 @ 1.4 GHz)"
+  gateway_radio_hat: "Waveshare SX1262 LoRa HAT (Ebyte E22-900T22S)"
+
+battery:
+  cell_type: "1S Li-ion 18650 NMC"
+  nominal_voltage_v: 3.7
+  max_voltage_v: 4.2
+  cutoff_voltage_v: 3.27
+  capacity_mah: 3000
+  capacity_mwh: 11100
+  solar_panel_watts: 0.5
+  charger_ic: "TP4054 Linear Li-ion Charger"
+
+radio:
+  transceiver: "Semtech SX1262"
+  band: "IN865"
+  frequency_mhz: 865.0625
+  bandwidth_khz: 125
+  spreading_factor: 7
+  coding_rate: "4/5"
+  preamble_symbols: 8
+  tx_power_dbm: 14
+  crc_enabled: true
+  explicit_header: true
+  low_data_rate_opt: false
+  airtime_v1_33b_ms: 71.94
+  airtime_v2_36b_ms: 77.06
+
+payload_v1:
+  size_bytes: 33
+  struct_format: "<Hh5hHHHHHB8B"
+  description: "Legacy 33-byte packed frame with alert flags OR'd into tilt"
+
+payload_v2:
+  size_bytes: 36
+  struct_format: "<HHh5hHHHHHBB8B"
+  description: "Canonical 36-byte packed frame with dedicated sequence counter and alert flags"
+
+fields_v2:
+  - name: "hive_id"
+    type: "uint16_t"
+    bytes: 2
+    description: "Unique Hive Identifier (1-65535)"
+    sentinel: 0
+  - name: "seq"
+    type: "uint16_t"
+    bytes: 2
+    description: "Rolling sequence counter for packet loss detection"
+    sentinel: 0
+  - name: "brood_core_temp_c_x100"
+    type: "int16_t"
+    bytes: 2
+    scale: 0.01
+    unit: "deg_C"
+    description: "Brood core temperature from TI TMP117 (scaled x100)"
+    sentinel: -9999
+  - name: "frame_temps_c_x100"
+    type: "int16_t[5]"
+    bytes: 10
+    scale: 0.01
+    unit: "deg_C"
+    description: "Spatial brood frame gradient from 5x DS18B20 1-Wire sensors (scaled x100)"
+    sentinel: -9999
+  - name: "humidity_pct_x100"
+    type: "uint16_t"
+    bytes: 2
+    scale: 0.01
+    unit: "pct"
+    description: "Relative humidity from Bosch BME688 (scaled x100)"
+    sentinel: 65535
+  - name: "voc_gas_kohm_x10"
+    type: "uint16_t"
+    bytes: 2
+    scale: 0.1
+    unit: "kohm"
+    description: "VOC gas resistance from Bosch BME688 (scaled x10)"
+    sentinel: 65535
+  - name: "co2_ppm"
+    type: "uint16_t"
+    bytes: 2
+    scale: 1.0
+    unit: "ppm"
+    description: "CO2 concentration from Sensirion SCD41"
+    sentinel: 65535
+  - name: "weight_kg_x100"
+    type: "uint16_t"
+    bytes: 2
+    scale: 0.01
+    unit: "kg"
+    description: "Hive scale gross weight from HX711 (scaled x100)"
+    sentinel: 65535
+  - name: "lux"
+    type: "uint16_t"
+    bytes: 2
+    scale: 1.0
+    unit: "lux"
+    description: "Ambient light intensity from Vishay VEML7700"
+    sentinel: 65535
+  - name: "tilt_deg"
+    type: "uint8_t"
+    bytes: 1
+    scale: 1.0
+    unit: "deg"
+    description: "Mechanical tilt angle from ST LIS3DH (0 to 90 degrees strictly)"
+    sentinel: 255
+  - name: "flags"
+    type: "uint8_t"
+    bytes: 1
+    unit: "bitmask"
+    description: "Discrete alert and status flags"
+    sentinel: 0
+  - name: "fft_energy_bands"
+    type: "uint8_t[8]"
+    bytes: 8
+    unit: "normalized_energy"
+    description: "8-band acoustic relative energy vector (normalized 0-255)"
+    sentinel: 0
+
+alert_flags:
+  ALERT_FLAG_QUEENLESS_CUSUM: 0x80      # Bit 7: Page CUSUM negative drift detection
+  ALERT_FLAG_PRE_SWARM_ACOUSTIC: 0x40   # Bit 6: Acoustic energy surge in 380-500 Hz
+  ALERT_FLAG_LOW_BATTERY_SOC: 0x20      # Bit 5: Battery State-of-Charge < 15%
+  ALERT_FLAG_TILT_TAMPER: 0x10          # Bit 4: Accelerometer tilt > 15 degrees
+
+presence_flags:
+  PRESENCE_FLAG_TMP117: 0x0001
+  PRESENCE_FLAG_SCD41: 0x0002
+  PRESENCE_FLAG_BME688: 0x0004
+  PRESENCE_FLAG_LIS3DH: 0x0008
+  PRESENCE_FLAG_VEML7700: 0x0010
+  PRESENCE_FLAG_HX711: 0x0020
+  PRESENCE_FLAG_DS18B20: 0x0040
+  PRESENCE_FLAG_INMP441: 0x0080
+
+dsp:
+  capture_sample_rate_hz: 16000
+  decimation_factor: 4
+  processing_sample_rate_hz: 4000
+  fft_length: 512
+  bin_resolution_hz: 7.8125
+  window_function: "Hann"
+  overlap_percent: 50
+  bands:
+    - { index: 0, f_min_hz: 30,   f_max_hz: 100,  label: "Sub-harmonic / tractor / wind" }
+    - { index: 1, f_min_hz: 100,  f_max_hz: 180,  label: "Worker fanning baseline" }
+    - { index: 2, f_min_hz: 180,  f_max_hz: 280,  label: "Brood nest thermoregulation" }
+    - { index: 3, f_min_hz: 280,  f_max_hz: 380,  label: "Foraging & flight prep" }
+    - { index: 4, f_min_hz: 380,  f_max_hz: 500,  label: "Pre-swarm acoustic crescendo" }
+    - { index: 5, f_min_hz: 500,  f_max_hz: 750,  label: "Queenless distress piping" }
+    - { index: 6, f_min_hz: 750,  f_max_hz: 1200, label: "Defensive & robber bee alarm" }
+    - { index: 7, f_min_hz: 1200, f_max_hz: 2000, label: "High-frequency rain / electrical" }
+
+cusum:
+  rolling_baseline_window_hours: 24
+  slack_parameter_k_c: 0.15
+  decision_threshold_h_c: 1.2

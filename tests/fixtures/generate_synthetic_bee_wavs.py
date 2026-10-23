@@ -1,7 +1,10 @@
 """
 =============================================================================
-BEEVIL KNIEVEL - Bee Audio Dataset Generator (Standard Library Version)
-Generates sample .wav audio dataset files matching 200-400Hz acoustic signatures
+BEEVIL KNIEVEL - Synthetic Test Audio Generator (Software Unit Testing Only)
+PROVENANCE_TAG: SYNTHETIC_FIXTURE
+Notice: Generates synthetic harmonic tones for DSP code path unit tests.
+This output is strictly a synthetic software test fixture and is NEVER
+to be reported as biological evidence or benchmark results.
 =============================================================================
 """
 

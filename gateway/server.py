@@ -218,15 +218,15 @@ class EdgeDiagnosticEngine:
         else:
             self.model = None
 
-    def predict(self, sensor_16: List[float], fft_8: List[float], tilt_deg: float = 0.0) -> Dict[str, Any]:
+    def predict(self, sensor_16: List[float], fft_8: List[float], tilt_deg: float = 0.0, flags: int = 0) -> Dict[str, Any]:
         """
         Runs multi-modal fusion inference on Raspberry Pi 3B+ CPU.
         Returns diagnostic classification and dynamic decision score.
         """
         start_t = time.perf_counter()
 
-        # Safety override: Theft / Knockdown
-        if tilt_deg > 15.0:
+        # Priority 1: Theft / Knockdown override
+        if (flags & 0x10) or (tilt_deg > 15.0):
             elapsed_ms = (time.perf_counter() - start_t) * 1000.0
             tilt_score = round(min(0.999, 0.85 + (tilt_deg / 90.0) * 0.14), 3)
             return {
@@ -235,6 +235,32 @@ class EdgeDiagnosticEngine:
                 "confidence": tilt_score,
                 "decision_score": tilt_score,
                 "probabilities": {c: (tilt_score if c == "TAMPER_THEFT" else round((1.0 - tilt_score) / (len(DIAGNOSTIC_CLASSES) - 1), 4)) for c in DIAGNOSTIC_CLASSES},
+                "inference_ms": round(elapsed_ms, 2)
+            }
+
+        # Priority 2: On-node CUSUM Queenless drift collapse alert
+        if flags & 0x80:
+            elapsed_ms = (time.perf_counter() - start_t) * 1000.0
+            cusum_score = 0.95
+            return {
+                "diagnosis": "QUEENLESS_CONFIRMED",
+                "class_id": 4,
+                "confidence": cusum_score,
+                "decision_score": cusum_score,
+                "probabilities": {c: (cusum_score if c == "QUEENLESS_CONFIRMED" else round((1.0 - cusum_score) / (len(DIAGNOSTIC_CLASSES) - 1), 4)) for c in DIAGNOSTIC_CLASSES},
+                "inference_ms": round(elapsed_ms, 2)
+            }
+
+        # Priority 3: Pre-swarm acoustic flag
+        if flags & 0x40:
+            elapsed_ms = (time.perf_counter() - start_t) * 1000.0
+            swarm_score = 0.92
+            return {
+                "diagnosis": "PRE_SWARM_HEATING",
+                "class_id": 3,
+                "confidence": swarm_score,
+                "decision_score": swarm_score,
+                "probabilities": {c: (swarm_score if c == "PRE_SWARM_HEATING" else round((1.0 - swarm_score) / (len(DIAGNOSTIC_CLASSES) - 1), 4)) for c in DIAGNOSTIC_CLASSES},
                 "inference_ms": round(elapsed_ms, 2)
             }
 
@@ -368,6 +394,9 @@ class TelemetryPayload(BaseModel):
     weight_kg: float = Field(..., ge=0, le=200, description="Phaeton 200kg Scale Total Weight (kg)")
     lux: float = Field(..., ge=0, description="VEML7700 Solar Irradiance (Lux)")
     tilt_deg: float = Field(0.0, ge=0, le=90, description="LIS3DH Accelerometer Tilt Angle (degrees)")
+    flags: int = Field(0, description="Discrete alert and status bitmask flags")
+    seq: int = Field(0, description="Rolling sequence counter")
+    version: int = Field(2, description="Protocol version (1 or 2)")
     fft_bands: List[float] = Field(..., min_length=8, max_length=8, description="INMP441 8-Band Audio FFT Energy")
     timestamp: Optional[str] = None
 
@@ -503,7 +532,7 @@ async def ingest_telemetry(payload: TelemetryPayload, background_tasks: Backgrou
     ]
 
     # Run AI Inference (8.2ms)
-    ai_result = ai_engine.predict(sensor_16, payload.fft_bands, payload.tilt_deg)
+    ai_result = ai_engine.predict(sensor_16, payload.fft_bands, payload.tilt_deg, payload.flags)
     diagnosis = ai_result["diagnosis"]
     confidence = ai_result["confidence"]
 

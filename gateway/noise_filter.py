@@ -1,14 +1,12 @@
 """
-BEEVIL NOISE FILTER - ENVIRONMENTAL NOISE & NEGATIVE SOUND REJECTION ENGINE
+BEEVIL NOISE FILTER - RULE-BASED ENVIRONMENTAL NOISE REJECTION HEURISTIC
 =============================================================================
-Trained on Google AudioSet & 'To Bee or Not to Bee' (OSBH / Zenodo):
-- Discriminates between true Honeybee Bio-Acoustics and Outdoor Farm Noise:
-  * Heavy Rain Clatter on Metal Hive Covers (Wideband 2kHz-8kHz erratic energy)
-  * Diesel Tractor / Machinery Rumble (Low-frequency 30Hz-80Hz mechanical hum)
-  * Wind Turbulence (<50Hz non-harmonic gusts)
-  * Chainsaw / Trimmer Noise (High-pitched non-biological rasp)
-- Eliminates False Alarms: Prevents rain or passing tractors from falsely
-  triggering "Swarm Departure" or "Theft" alerts.
+Heuristic sub-band thresholding engine for environmental sound filtering:
+- Rule-based discrimination between honeybee spectral bands and noise bands:
+  * High-frequency noise (droplet clatter / hiss, bands 7-8: >1.2 kHz)
+  * Low-frequency mechanical noise (tractor rumble / wind, band 1: 30-100 Hz)
+- Operates as a rule-based pre-filter on the gateway to reject non-biological frames.
+NOTE: This is a deterministic rule-based heuristic, not an ML model trained on AudioSet.
 """
 
 import sys

@@ -12,7 +12,7 @@ export function ValidationEvidenceSection() {
   }> = [
     {
       dimension: "RF LoRa Range (LOS)",
-      claim: "4.2 km Line-of-Sight",
+      claim: "4.2 km Line-of-Sight (Modelled)",
       classification: "CALCULATED",
       source: "MATLAB Free-Space Path Loss model (simulation/matlab/rf_link_budget_and_range.m)",
     },

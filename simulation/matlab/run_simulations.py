@@ -13,12 +13,14 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from scipy import signal
 
+from pathlib import Path
+
 # Paths
-base_dir = r"C:\Users\25beevdt047\.gemini\antigravity-ide\scratch\beevil-knievel"
-sim_results = os.path.join(base_dir, "simulation", "results")
-doc_results = os.path.join(base_dir, "docs", "media", "results")
-os.makedirs(sim_results, exist_ok=True)
-os.makedirs(doc_results, exist_ok=True)
+base_dir = Path(__file__).resolve().parents[2]
+sim_results = base_dir / "simulation" / "results"
+doc_results = base_dir / "docs" / "media" / "results"
+sim_results.mkdir(parents=True, exist_ok=True)
+doc_results.mkdir(parents=True, exist_ok=True)
 
 # Styling
 plt.rcParams['font.sans-serif'] = 'DejaVu Sans'

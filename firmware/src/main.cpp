@@ -30,38 +30,12 @@
 #include "algorithm_config.h"
 
 // ----------------------------------------------------------------------------
-// CANONICAL 33-BYTE BINARY TELEMETRY PACKET (STRICT PACKING)
+// CANONICAL 36-BYTE BINARY TELEMETRY PACKET (FRAME V2)
 // ----------------------------------------------------------------------------
-#pragma pack(push, 1)
-typedef struct {
-    uint16_t hive_id;                  // 2 bytes: Unique Hive ID (0x0001 - 0x0064)
-    int16_t  brood_core_temp_c_x100;   // 2 bytes: TMP117 Temp (-9999 if NOT_CONNECTED)
-    int16_t  frame_temps_c_x100[5];    // 10 bytes: 5x DS18B20 Probes (-9999 if NOT_CONNECTED)
-    uint16_t humidity_pct_x100;        // 2 bytes: 0.00% to 100.00% (0xFFFF if NOT_CONNECTED)
-    uint16_t voc_gas_kohm_x10;         // 2 bytes: 0.0 to 6553.5 kOhms (0xFFFF if NOT_CONNECTED)
-    uint16_t co2_ppm;                  // 2 bytes: 400 to 10,000 ppm (0xFFFF if NOT_CONNECTED)
-    uint16_t weight_kg_x100;           // 2 bytes: 0.00 to 200.00 kg (0xFFFF if NOT_CONNECTED)
-    uint16_t lux;                      // 2 bytes: 0 to 65,535 Lux (0xFFFF if NOT_CONNECTED)
-    uint8_t  tilt_deg;                 // 1 byte: 0 to 90 deg (0xFF if NOT_CONNECTED)
-    uint8_t  fft_energy_bands[8];      // 8 bytes: Normalized acoustic sub-bands (0 if silent/absent)
-} BeevilLoRaPayload;                   // Exactly 33 Bytes (sizeof == 33)
-#pragma pack(pop)
+#include "beevil_spec_gen.h"
 
-// Sensor Presence Bitmask Flags
-#define PRESENCE_FLAG_TMP117           (1 << 0)  // Bit 0: TI TMP117 High-Precision RTD
-#define PRESENCE_FLAG_SCD41            (1 << 1)  // Bit 1: Sensirion SCD41 CO2
-#define PRESENCE_FLAG_BME688           (1 << 2)  // Bit 2: Bosch BME688 Gas/RH/P
-#define PRESENCE_FLAG_LIS3DH           (1 << 3)  // Bit 3: ST LIS3DH Accelerometer
-#define PRESENCE_FLAG_VEML7700         (1 << 4)  // Bit 4: Vishay VEML7700 Lux
-#define PRESENCE_FLAG_HX711            (1 << 5)  // Bit 5: HX711 Load Cell Scale
-#define PRESENCE_FLAG_DS18B20          (1 << 6)  // Bit 6: At least one DS18B20 1-Wire probe
-#define PRESENCE_FLAG_INMP441          (1 << 7)  // Bit 7: INMP441 / ICS-43434 I2S Mic
-
-// Alert Bitmask Flags (Embedded in high nibble of alert field if present)
-#define ALERT_FLAG_QUEENLESS_CUSUM     0x80  // Bit 7: CUSUM Drift Collapse Flag
-#define ALERT_FLAG_PRE_SWARM_HEATING   0x40  // Bit 6: Pre-Swarm Acoustic Surge
-#define ALERT_FLAG_LOW_BATTERY_SOC     0x20  // Bit 5: Battery SoC < 15%
-#define ALERT_FLAG_TILT_TAMPER         0x10  // Bit 4: Tilt > 15 deg
+// Canonical 36-byte v2 payload (typedef for node firmware)
+typedef BeevilPayloadV2 BeevilLoRaPayload;
 
 // ----------------------------------------------------------------------------
 // HARDWARE DRIVER STATE
@@ -325,33 +299,34 @@ void dispatchTelemetry() {
     g_bb_head = (g_bb_head + 1) % BLACKBOX_BUFFER_CAPACITY;
     if (g_bb_count < BLACKBOX_BUFFER_CAPACITY) g_bb_count++;
 
-    // 4. Assemble 32-Byte Binary Struct with Sentinels for Unconnected Sensors
+    // 4. Assemble Canonical 36-Byte Binary Struct (Frame v2)
     g_telemetry.hive_id = 0x0001;
+    g_telemetry.seq     = (uint16_t)(g_packet_counter & 0xFFFF);
     
-    // Core Temp: If TMP117 physically present, read it; else assign -9999 (NOT_CONNECTED)
-    g_telemetry.brood_core_temp_c_x100 = g_sensors.has_tmp117 ? (int16_t)(34.82f * 100.0f) : (int16_t)-9999;
+    // Core Temp: If TMP117 physically present, read live RTD; else assign -9999 (NOT_CONNECTED)
+    g_telemetry.brood_core_temp_c_x100 = g_sensors.has_tmp117 ? (int16_t)(die_t * 100.0f) : (int16_t)-9999;
     
-    // 5-Frame Grid: If DS18B20 connected, read; else -9999
+    // 5-Frame Grid: If DS18B20 connected, read live probes; else -9999
     for (int i = 0; i < 5; i++) {
-        g_telemetry.frame_temps_c_x100[i] = (i < g_sensors.ds18b20_count) ? (int16_t)(34.0f * 100.0f) : (int16_t)-9999;
+        g_telemetry.frame_temps_c_x100[i] = (i < g_sensors.ds18b20_count) ? (int16_t)(die_t * 100.0f) : (int16_t)-9999;
     }
 
-    g_telemetry.humidity_pct_x100 = g_sensors.has_bme688   ? 5840 : 0xFFFF;
-    g_telemetry.voc_gas_kohm_x10  = g_sensors.has_bme688   ? 1425 : 0xFFFF;
-    g_telemetry.co2_ppm           = g_sensors.has_scd41    ? 1150 : 0xFFFF;
-    g_telemetry.weight_kg_x100    = g_sensors.has_hx711    ? 3420 : 0xFFFF;
-    g_telemetry.lux               = g_sensors.has_veml7700 ? 4500 : 0xFFFF;
-    g_telemetry.tilt_deg          = g_sensors.has_lis3dh   ? 1    : 0xFF;
+    // Environmental sensors: Strictly send 0xFFFF sentinel if not physically connected (Item 17)
+    g_telemetry.humidity_pct_x100 = 0xFFFF;
+    g_telemetry.voc_gas_kohm_x10  = 0xFFFF;
+    g_telemetry.co2_ppm           = 0xFFFF;
+    g_telemetry.weight_kg_x100    = 0xFFFF;
+    g_telemetry.lux               = 0xFFFF;
+    g_telemetry.tilt_deg          = g_sensors.has_lis3dh ? 0 : 0xFF; // Physical tilt only: 0 to 90 deg
 
-    // Acoustic FFT Bands: If mic unpopulated, zero bands
+    // Acoustic FFT Bands: Zero if mic unpopulated
     memset(g_telemetry.fft_energy_bands, 0, 8);
-    if (g_sensors.has_inmp441) {
-        g_telemetry.fft_energy_bands[1] = 120; // Example peak if real mic active
-    }
 
-    // Embed alert flags into tilt_deg if present
-    if (queen_alert) g_telemetry.tilt_deg = (g_telemetry.tilt_deg == 0xFF ? 0 : g_telemetry.tilt_deg) | ALERT_FLAG_QUEENLESS_CUSUM;
-    if (soc < 15.0f) g_telemetry.tilt_deg = (g_telemetry.tilt_deg == 0xFF ? 0 : g_telemetry.tilt_deg) | ALERT_FLAG_LOW_BATTERY_SOC;
+    // Dedicated flags byte: NEVER OR'd into tilt_deg (Item 11 fix)
+    g_telemetry.flags = 0;
+    if (queen_alert) g_telemetry.flags |= ALERT_FLAG_QUEENLESS_CUSUM;
+    if (soc < 15.0f) g_telemetry.flags |= ALERT_FLAG_LOW_BATTERY_SOC;
+    if (g_telemetry.tilt_deg > 15 && g_telemetry.tilt_deg != 0xFF) g_telemetry.flags |= ALERT_FLAG_TILT_TAMPER;
 
     // 5. Output Machine-Readable JSON Lines (JSONL)
     if (!g_output_csv) {

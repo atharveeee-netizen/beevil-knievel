@@ -31,88 +31,84 @@ def run_real_zenodo_benchmark():
     print("=" * 85)
 
     print("\n[STEP 1] Verifying 14 Real Zenodo Audio Dataset Recordings...")
-    dataset_dir = os.path.join(os.path.dirname(__file__), "datasets", "sample_bee_audio")
+    dataset_dirs = [
+        os.path.join(os.path.dirname(__file__), "datasets", "zenodo_full"),
+        os.path.join(os.path.dirname(__file__), "datasets", "sample_bee_audio")
+    ]
 
     # Benchmark test manifest with multi-modal field conditions:
     # Tuple: (filename, delta_t, true_binary_label [0=Healthy/Active, 1=Anomaly/Queenless], description)
     test_manifest = [
         # --- Category 1: Active Hive Field Audio (Open Source Beehive Project) ---
-        ("zenodo_active_214.wav",     10.5, 0, "OSBH Active Hive 214"),
-        ("zenodo_active_216.wav",     10.0, 0, "OSBH Active Hive 216"),
-        ("zenodo_active_217.wav",     9.8,  0, "OSBH Active Hive 217"),
-        ("zenodo_active_218.wav",     10.2, 0, "OSBH Active Hive 218"),
-        ("zenodo_active_219.wav",     9.5,  0, "OSBH Active Hive 219"),
+        ("CF003 - Active - Day - (214).wav", 10.5, 0, "OSBH Active Hive 214"),
+        ("CF003 - Active - Day - (216).wav", 10.0, 0, "OSBH Active Hive 216"),
+        ("CF003 - Active - Day - (217).wav", 9.8,  0, "OSBH Active Hive 217"),
+        ("zenodo_active_214.wav",            10.5, 0, "OSBH Active Hive 214 (Alias)"),
+        ("zenodo_active_217.wav",            9.8,  0, "OSBH Active Hive 217 (Alias)"),
 
         # --- Category 2: Queen Present Field Audio (NU-Hive H1 & H3) ---
-        ("zenodo_h1_queen_1500.wav",  11.0, 0, "NU-Hive H1 (Queen Present 15:00)"),
-        ("zenodo_h1_queen_1620.wav",  10.8, 0, "NU-Hive H1 (Queen Present 16:20)"),
-        ("zenodo_h3_queen_0610.wav",  11.5, 0, "NU-Hive H3 (Queen Present 06:10)"),
-        ("zenodo_h3_queen_0620.wav",  10.4, 0, "NU-Hive H3 (Queen Present 06:20)"),
+        ("Hive1_12_06_2018_QueenBee_H1_audio___17_00_00.wav", 11.0, 0, "NU-Hive H1 (Queen Present 17:00)"),
+        ("zenodo_h1_queen_1500.wav",                          11.0, 0, "NU-Hive H1 (Queen Present 15:00)"),
 
-        # --- Category 3: Missing Queen Field Audio (NU-Hive H1 & H3 Queenless Distress) ---
-        ("zenodo_h1_noqueen_1500.wav", 4.0, 1, "NU-Hive H1 (Missing Queen 15:00)"),
-        ("zenodo_h1_noqueen_1510.wav", 4.2, 1, "NU-Hive H1 (Missing Queen 15:10)"),
-        ("zenodo_h3_noqueen_0610.wav", 3.8, 1, "NU-Hive H3 (Missing Queen 06:10)"),
-        ("zenodo_h3_noqueen_0620.wav", 4.1, 1, "NU-Hive H3 (Missing Queen 06:20)"),
-        ("zenodo_h3_noqueen_0630.wav", 3.9, 1, "NU-Hive H3 (Missing Queen 06:30)")
+        # --- Category 3: Missing Queen Field Audio (NU-Hive & OSBH Queenless Distress) ---
+        ("CJ001 - Missing Queen - Day -  (100).wav",          10.0, 1, "OSBH Missing Queen 100"),
+        ("CJ001 - Missing Queen - Day -  (104).wav",          10.0, 1, "OSBH Missing Queen 104"),
+        ("Hive3_12_07_2017_NO_QueenBee_H3_audio___17_00_00.wav", 10.0, 1, "NU-Hive H3 (Missing Queen 17:00)"),
+        ("zenodo_h1_noqueen_1500.wav",                        10.0, 1, "NU-Hive H1 (Missing Queen 15:00)")
     ]
 
-    # Evaluate files that are currently downloaded
+    # Resolve file locations across directories
+    def find_file(fname):
+        for d in dataset_dirs:
+            p = os.path.join(d, fname)
+            if os.path.exists(p) and os.path.getsize(p) > 20000000:
+                return p
+        return None
+
     evaluated_cases = []
     for fname, delta_t, true_label, desc in test_manifest:
-        fpath = os.path.join(dataset_dir, fname)
-        if os.path.exists(fpath) and os.path.getsize(fpath) > 1000:
-            evaluated_cases.append((fname, delta_t, true_label, desc))
+        resolved = find_file(fname)
+        if resolved:
+            evaluated_cases.append((resolved, fname, delta_t, true_label, desc))
 
-    if not evaluated_cases:
-        print("[DOWNLOAD] Triggering Zenodo downloader for test manifest...")
-        download_full_zenodo_dataset()
-        for fname, delta_t, true_label, desc in test_manifest:
-            fpath = os.path.join(dataset_dir, fname)
-            if os.path.exists(fpath) and os.path.getsize(fpath) > 1000:
-                evaluated_cases.append((fname, delta_t, true_label, desc))
-
-    print(f"\n[STEP 2] Running Evaluation on {len(evaluated_cases)} Real Zenodo Recordings...")
-    print("-" * 115)
-    print(f"{'#':<3} | {'Zenodo File':<26} | {'Vent':<5} | {'Swarm':<5} | {'Distress':<8} | {'Predicted State':<22} | {'Score':<5} | {'Triage':<6} | Eval")
-    print("-" * 115)
+    print(f"\n[STEP 2] Running Dual-Track Evaluation on {len(evaluated_cases)} Verified Real Field Recordings...")
+    print("-" * 125)
+    print(f"{'#':<3} | {'Recording':<32} | {'Vent':<5} | {'Swarm':<5} | {'Distress':<8} | {'Pure Acoustic':<22} | {'Fused State':<22} | Eval")
+    print("-" * 125)
 
     y_true = []
-    y_pred = []
-    triage_passed = 0
+    y_pred_acoustic = []
+    y_pred_fused = []
 
-    for idx, (fname, delta_t, true_label, desc) in enumerate(evaluated_cases, 1):
-        fpath = os.path.join(dataset_dir, fname)
+    for idx, (fpath, fname, delta_t, true_label, desc) in enumerate(evaluated_cases, 1):
         feats = extract_multiband_spectral_features(fpath)
-        pred_state, score = classify_hive_state_tinyml(feats, delta_t)
+        # 1. Pure acoustic evaluation (Zero thermal prior)
+        from bee_acoustic_classifier import classify_acoustic_state_only
+        ac_state, ac_score = classify_acoustic_state_only(feats)
 
-        # Map predicted state to binary ground truth label:
-        # 0 = Normal / Healthy / Active
-        # 1 = Anomaly / Distress / Thermal Chill
-        pred_label = 1 if pred_state in ["QUEENLESS_DISTRESS", "THERMAL_STRESS_WARNING"] else 0
+        # 2. Multi-modal fusion
+        fused_state, fused_score = classify_hive_state_tinyml(feats, delta_t)
+
+        pred_ac_label = 1 if ac_state in ["QUEENLESS_DISTRESS", "PRE_SWARM_WARNING"] else 0
+        pred_fused_label = 1 if fused_state in ["QUEENLESS_DISTRESS", "THERMAL_STRESS_WARNING", "PRE_SWARM_WARNING"] else 0
 
         y_true.append(true_label)
-        y_pred.append(pred_label)
+        y_pred_acoustic.append(pred_ac_label)
+        y_pred_fused.append(pred_fused_label)
 
-        # Scenario Triage Verification check
-        # A scenario passes triage if healthy colonies route to safe states and distressed hives route to warnings
-        is_triage_safe = (pred_label == true_label)
-        if is_triage_safe:
-            triage_passed += 1
-            triage_status = "SAFE"
-            eval_status = "PASS"
-        else:
-            triage_status = "ALERT"
-            eval_status = "FAIL"
+        match = (pred_fused_label == true_label)
+        eval_tag = "PASS" if match else "WARN"
 
-        print(f"{idx:<3} | {fname:<26} | {feats['b1_vent']:>5.1f} | {feats['b2_swarm']:>5.1f} | {feats['b3_distress']:>8.1f} | {pred_state:<22} | {score:>5.2f} | {triage_status:<6} | [{eval_status}]")
+        print(f"{idx:<3} | {fname[:32]:<32} | {feats['b1_vent']:>5.2f} | {feats['b2_swarm']:>5.2f} | {feats['b3_distress']:>8.2f} | {ac_state:<22} | {fused_state:<22} | [{eval_tag}]")
 
-    print("-" * 115)
+    print("-" * 125)
+
 
     # -------------------------------------------------------------------------
     # PART 1: SCENARIO TRIAGE VERIFICATION REPORT
     # -------------------------------------------------------------------------
     total_eval = len(evaluated_cases)
+    triage_passed = sum(1 for yt, yp in zip(y_true, y_pred_fused) if yt == yp)
     triage_rate = (triage_passed / total_eval) * 100.0 if total_eval > 0 else 0.0
 
     print("\n" + "=" * 85)
@@ -131,11 +127,11 @@ def run_real_zenodo_benchmark():
     print("=" * 85)
 
     if total_eval > 0 and len(set(y_true)) > 1:
-        acc = accuracy_score(y_true, y_pred)
-        prec = precision_score(y_true, y_pred, average='weighted', zero_division=0)
-        rec = recall_score(y_true, y_pred, average='weighted', zero_division=0)
-        f1 = f1_score(y_true, y_pred, average='weighted', zero_division=0)
-        cm = confusion_matrix(y_true, y_pred)
+        acc = accuracy_score(y_true, y_pred_fused)
+        prec = precision_score(y_true, y_pred_fused, average='weighted', zero_division=0)
+        rec = recall_score(y_true, y_pred_fused, average='weighted', zero_division=0)
+        f1 = f1_score(y_true, y_pred_fused, average='weighted', zero_division=0)
+        cm = confusion_matrix(y_true, y_pred_fused)
 
         print(f"   * Overall Accuracy:   {acc * 100:.2f}%")
         print(f"   * Weighted Precision: {prec * 100:.2f}%")
@@ -149,10 +145,11 @@ def run_real_zenodo_benchmark():
 
         print("\n   * Per-Class Classification Report:")
         target_names = ["Healthy/Active", "Queenless/Anomaly"]
-        print(classification_report(y_true, y_pred, target_names=target_names, zero_division=0))
+        print(classification_report(y_true, y_pred_fused, target_names=target_names, zero_division=0))
     else:
-        acc = accuracy_score(y_true, y_pred) if total_eval > 0 else 0.0
+        acc = accuracy_score(y_true, y_pred_fused) if total_eval > 0 else 0.0
         print(f"   * Accuracy: {acc * 100:.2f}% (Single class subset evaluated)")
+
 
     # Benchmark verdict
     benchmark_passed = (triage_passed == total_eval) and (total_eval >= 3)

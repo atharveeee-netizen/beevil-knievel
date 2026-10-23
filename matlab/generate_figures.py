@@ -201,9 +201,9 @@ def generate_fig01():
                 "Model 1: Page's CUSUM Drift Filter", "Brood Decay Alarm (-0.02°C/hr)"], tag="VALIDATED")
     draw_block(ax, 0.365, 0.28, 0.26, 0.18, "Dual-Radio Communication",
                ["Semtech SX1262 LoRa (865 MHz Backhaul)", "nRF52840 2.4 GHz Native BLE Mesh",
-                "33-Byte Packed Binary Telemetry Struct", "18.2 ms Airtime | 4.2 km LOS Range"], tag="CALCULATED")
+                "33-Byte Packed Binary Telemetry Struct", "77.06 ms Airtime (36B v2) | Modelled LOS Range"], tag="CALCULATED")
     draw_block(ax, 0.365, 0.11, 0.26, 0.15, "Ultra-Low-Power Rail",
-               ["Switched Rail (WB_IO2 MOSFET Isolation)", "18 uA Sleep Current [MEASURED]", "0.5W Solar + 1S Li-ion (TP4054 CC/CV)"], tag="MEASURED")
+               ["Switched Rail (WB_IO2 MOSFET Isolation)", "Switched Power Rail (P-MOSFET Gating)", "0.5W Solar + 1S Li-ion (TP4054 CC/CV)"], tag="MEASURED")
     
     draw_arrow(ax, 0.64, 0.50, 0.70, 0.50, "LoRa Star Backhaul\n(865 MHz) / BLE Mesh", color=COLOR_ACCENT_BLUE, lw=1.6, ls='--')
     
@@ -214,7 +214,7 @@ def generate_fig01():
                 "Zero Custom PCB | Linux Daemon", "100 Hives Capacity (<0.2% Duty Cycle)"], tag="DEMONSTRATED")
     draw_block(ax, 0.715, 0.48, 0.24, 0.18, "Gateway Edge AI (Model 2)",
                ["Supervised Random Forest Classifier", "10-hr Zenodo 1321278 Audio Dataset",
-                "94.2% Validation Accuracy [VALIDATED]", "Colony Collapse & Swarm Early Warning"], tag="VALIDATED")
+                "Acoustic-Thermal Triage Engine", "Colony Collapse & Swarm Early Warning"], tag="VALIDATED")
     draw_block(ax, 0.715, 0.28, 0.24, 0.18, "Local Persistence & Server",
                ["SQLite WAL Local Database Store", "FastAPI Telemetry Daemon (beevil.local)",
                 "WebSocket Real-Time Metric Streaming", "Zero Monthly Recurring Cellular SIM Fees"], tag="DEMONSTRATED")
@@ -339,11 +339,11 @@ def generate_fig03():
                tag="SIMULATED", title_size=8.0, body_size=6.8)
     draw_arrow(ax, 0.845, 0.71, 0.845, 0.68, "RF Coax", lw=1.2, label_pos='right', label_offset=0.012)
     
-    draw_subsystem(ax, 0.31, 0.09, 0.66, 0.18, "Ultra-Low-Power Subsystem & Power Management (18 uA Deep Sleep)")
+    draw_subsystem(ax, 0.31, 0.09, 0.66, 0.18, "Ultra-Low-Power Subsystem & Power Management (Gated Power Rail)")
     draw_block(ax, 0.33, 0.105, 0.19, 0.13, "Harvesting & Battery",
                ["0.5W, 6V Solar Panel", "1S 3.7V Li-ion (18650)", "TP4054 Linear CC/CV"], tag="DEMONSTRATED", title_size=7.5, body_size=6.5)
     draw_block(ax, 0.54, 0.105, 0.20, 0.13, "Switched Rail (WB_IO2)",
-               ["P-MOSFET Gate Switch", "Cuts all sensor drain", "18.0 uA Sleep Current [MEASURED]"], tag="MEASURED", title_size=7.5, body_size=6.5)
+               ["P-MOSFET Gate Switch", "Cuts all sensor drain", "Switched Power Rail (P-MOSFET Gating)"], tag="MEASURED", title_size=7.5, body_size=6.5)
     draw_block(ax, 0.76, 0.105, 0.19, 0.13, "Solderless Terminals",
                ["4:2 Spring Levers", "Zero Custom PCB", "IP68 PG-7 Cable Glands"], tag="DEMONSTRATED", title_size=7.5, body_size=6.5)
     
@@ -355,7 +355,7 @@ def generate_fig03():
 def generate_fig04():
     fig, ax = create_base_canvas((14, 8.5),
         "FIGURE 04: EMBEDDED SIGNAL PROCESSING & FIRMWARE STATEFLOW",
-        "Deterministic State Execution Flow on Nordic nRF52840 MCU: From RTC Wake to Deep Sleep [18 µA Bench Validated]")
+        "Deterministic State Execution Flow on Nordic nRF52840 MCU: Deterministic State Execution Flow from RTC Wake to Deep Sleep")
     
     states = [
         ("STATE 0: RTC WAKE", ["15-min Cadence or", "LIS3DH Tamper IRQ", "LFCLK Active"], "MEASURED"),
@@ -365,9 +365,9 @@ def generate_fig04():
         ("STATE 4: CMSIS FFT", ["Hanning Window w(n)", "arm_rfft_fast_f32", "2.49ms on Cortex-M4F", "8 Spectral Energy Bins"], "MEASURED"),
         ("STATE 5: MODEL 1 CUSUM", ["Page's CUSUM Filter", "Detect -0.02°C/hr Drift", "Brood Decay Bit", "k=0.3°C, h=2.5°C"], "VALIDATED"),
         ("STATE 6: STRUCT PACK", ["Pack 33B LoRa Struct", "Compress 8 Energy Bins", "Compute CRC-16 CCITT", "Load into SX1262 FIFO"], "VALIDATED"),
-        ("STATE 7: LORA TRANSMIT", ["SX1262 TX (+14 dBm)", "865.0625 MHz, SF7", "18.2 ms On-Air Time", "Wait TX_DONE IRQ"], "CALCULATED"),
+        ("STATE 7: LORA TRANSMIT", ["SX1262 TX (+14 dBm)", "865.0625 MHz, SF7", "77.06 ms On-Air Time (36B v2)", "Wait TX_DONE IRQ"], "CALCULATED"),
         ("STATE 8: SENSOR CUT", ["Deassert WB_IO2 LOW", "Cut Sensor VDD Line", "Disable Peripherals"], "DEMONSTRATED"),
-        ("STATE 9: DEEP SLEEP", ["System ON Idle Mode", "Retention RAM Only", "18.0 uA Current Draw", "Sleep 899.8 seconds"], "MEASURED")
+        ("STATE 9: DEEP SLEEP", ["System ON Idle Mode", "Retention RAM Only", "Power-Gated Quiescent State", "Sleep 899.8 seconds"], "MEASURED")
     ]
     
     bw, bh = 0.165, 0.28
@@ -456,7 +456,7 @@ def generate_fig05():
     
     draw_block(ax, 0.15, 0.08, 0.70, 0.16, "Edge vs Gateway Feature Handoff",
                ["On-Node MCU calculates 8 spectral bin energies and packs them into the 33-byte LoRa packet.",
-                "Raspberry Pi Gateway Reader feeds these 8 bins + environmental features into Model 2 (Random Forest) for 94.2% colony classification."],
+                "Raspberry Pi Gateway Reader feeds these 8 bins + environmental features into Model 2 (Random Forest) for multi-sensor colony classification."],
                tag="VALIDATED", title_size=8, body_size=6.8)
     
     draw_legend(ax, x=0.18, y=0.014, w=0.64, h=0.036)
@@ -502,8 +502,8 @@ def generate_fig06():
                 "Coding Rate: 4/5 | Preamble: 8 symbols", "Tx Power: +14 dBm (25 mW ERP)", "Rx Sensitivity: -137 dBm"],
                tag="VALIDATED", title_size=8, body_size=6.8)
     draw_block(ax, 0.72, 0.58, 0.22, 0.28, "Calculated Link Performance",
-               ["Packet On-Air Time: 18.2 ms [CALCULATED]", "Total Link Budget: 151 dB",
-                "Line-of-Sight Range: 4.2 km [CALCULATED]", "Dense Forest Canopy: 1.5 km", "Link Margin at 1 km: 26.16 dB"],
+               ["Packet On-Air Time: 77.06 ms (36B v2) [CALCULATED]", "Total Link Budget: 151 dB",
+                "Modelled Line-of-Sight Range [CALCULATED]", "Modelled Canopy Path Loss: 1.5 km", "Link Margin at 1 km: 26.16 dB"],
                tag="CALCULATED", title_size=8, body_size=6.8)
     
     draw_subsystem(ax, 0.45, 0.09, 0.51, 0.43, "Packed Binary Payload Memory Map (sizeof = 33 Bytes)")
@@ -579,7 +579,7 @@ def generate_fig07():
     draw_subsystem(ax, 0.525, 0.09, 0.21, 0.82, "Layer 3: Edge AI Engine")
     draw_block(ax, 0.54, 0.51, 0.18, 0.35, "Random Forest (Model 2)",
                ["Scikit-Learn / NumPy Engine", "100 Decision Trees", "Input: 8 Audio Bins + Env",
-                "Trained on Zenodo 1321278", "Validation Accuracy: 94.2%", "0 False Negatives Queenless"],
+                "Trained on Zenodo 1321278", "Diagnostic Classification Pipeline", "Continuous Acoustic Triage"],
                tag="VALIDATED", title_size=7.8, body_size=6.8)
     draw_block(ax, 0.54, 0.15, 0.18, 0.32, "Anomaly State Detector",
                ["NORMAL FORAGING (98%)", "QUEENLESS COLLAPSE (Alert)", "SWARM PIPING SURGE (Alert)",
@@ -623,7 +623,7 @@ def generate_fig08():
     draw_block(ax, 0.05, 0.13, 0.42, 0.26, "Edge Output & Telemetry Encoding",
                ["Drift Flag Trigger: When S_t > h, sets Queenless Alert Bit in LoRa packet.",
                 "Zero False Alarms from Diurnal Fanning Fluctuations (filtered by parameter k).",
-                "Instant Alert Transmission in single 33-byte packet (18.2 ms airtime).",
+                "Instant Alert Transmission in single 36-byte packet (77.06 ms airtime).",
                 "Status: IMPLEMENTED & VALIDATED in firmware/src/analytics/cusum.cpp."],
                tag="VALIDATED", title_size=8.5, body_size=7.0)
     
@@ -642,8 +642,8 @@ def generate_fig08():
                tag="VALIDATED", title_size=8.5, body_size=7.0)
     
     draw_block(ax, 0.53, 0.13, 0.42, 0.26, "Classification Metrics & Empirical Performance",
-               ["Validation Accuracy: 94.2% across field test splits [VALIDATED]",
-                "False Negative Rate: 0.0% for Queenless Collapse Detection [VALIDATED]",
+               ["Supervised Ensemble Multi-Sensor Pipeline [DEMONSTRATED]",
+                "Colony Collapse Early Warning Pipeline [DEMONSTRATED]",
                 "Class 1: NORMAL FORAGING (Baseline diurnal murmur)",
                 "Class 2: QUEENLESS COLLAPSE (Progressive high-freq roar + temp decay)",
                 "Class 3: PRE-SWARM PIPING (200-400 Hz acoustic surge in Bins 3-5)",
@@ -682,7 +682,7 @@ def generate_fig09():
     draw_block(ax, 0.05, 0.13, 0.42, 0.26, "Channel Capacity & Duty Cycle Proof",
                ["100 Hives organized in local 2.4 GHz BLE Mesh row clusters.",
                 "Designated cluster nodes uplink over Sub-GHz LoRa star link.",
-                "Packet airtime = 18.2 ms on channel (33-byte packed struct).",
+                "Packet airtime = 77.06 ms on channel (36-byte packed frame v2).",
                 "Aggregate Yard Duty Cycle = 1.82 s / 900 s = 0.202% (< 1.0% limit).",
                 "Dual-Radio Hybrid preserves low battery while extending yard range."],
                tag="CALCULATED", title_size=8, body_size=6.8)
@@ -756,12 +756,12 @@ def generate_fig10():
             "BLE Mesh Clustering:", "2.4 GHz Local Yard Relay",
             "Semtech SX1262 Backhaul:", "+14 dBm Config ERP",
             "IN865 Band SF7:", "865.0625 MHz 125kHz",
-            "Sub-GHz Star Range:", "4.2 km Line-of-Sight"
+            "Sub-GHz Star Range:", "Modelled LOS (151 dB Budget)"
         ], "CALCULATED", "#f8fafc"),
         ("STAGE 5: GATEWAY AI", [
             "Raspberry Pi 3B+:", "Waveshare LoRa HAT",
             "SQLite WAL Engine:", "beevil_telemetry.db",
-            "Edge AI (Model 2):", "Random Forest (94%)",
+            "Edge AI (Model 2):", "Random Forest Model",
             "Validation Protocol:", "CRC-16 & Node Check"
         ], "VALIDATED", "#eff6ff"),
         ("STAGE 6: BEEKEEPER UI", [
@@ -849,7 +849,7 @@ def generate_fig12():
     
     categories = [
         ("MEASURED", "[MEASURED]", "Direct Bench Instruments", [
-            ("Quiescent Current", "18.0 uA (Keithley 6514)"),
+            ("Quiescent Current", "Pending PPK2 Measurement"),
             ("DSP FFT Latency", "2.49 ms (DWT Cycles)"),
             ("MCU Die Temp", "25.4°C–26.8°C (TEMP)"),
             ("Hardware Weight", "67 g (Digital Scale)"),
@@ -860,13 +860,13 @@ def generate_fig12():
             ("Spatial Grid", "±0.5°C (5x DS18B20)"),
             ("Audio Stream", "16 kHz 24-bit PCM"),
             ("CUSUM Drift", "-0.02°C/hr Queenless"),
-            ("Model 2 AI", "94.2% Acc (Zenodo)"),
+            ("Model 2 AI", "Ensemble Classifier"),
             ("Test Suite", "27/27 Tests Pass")
         ]),
         ("CALCULATED", "[CALCULATED]", "Analytical Physics Models", [
-            ("Packet Airtime", "18.2 ms (SX1262 Calc)"),
+            ("Packet Airtime", "77.06 ms (36B v2 Calc)"),
             ("Daily Energy", "0.85 mWh/day (15m)"),
-            ("LoRa LOS Range", "4.2 km (Free-Space)"),
+            ("LoRa LOS Range", "Modelled Free-Space"),
             ("Link Margin", "26.16 dB @ 1 km"),
             ("Apiary Duty Cycle", "0.202% (<1.0% Limit)"),
             ("BOM Unit Cost", "$18.74 (No Custom PCB)")
@@ -947,7 +947,7 @@ def generate_fig13():
     draw_block(ax, 0.26, 0.42, 0.195, 0.17, "On-Node DSP & Model 1",
                ["CMSIS-DSP 256-pt FFT (2.49ms)", "8 Spectral Energy Bins", "Page's CUSUM (-0.02°C/hr)"], tag="VALIDATED", title_size=7.5, body_size=6.5)
     draw_block(ax, 0.26, 0.19, 0.195, 0.17, "Dual Radio & Power",
-               ["SX1262 LoRa (865 MHz Backhaul)", "nRF52840 2.4GHz BLE Mesh", "18 uA Sleep Current [MEASURED]"], tag="MEASURED", title_size=7.5, body_size=6.5)
+               ["SX1262 LoRa (865 MHz Backhaul)", "nRF52840 2.4GHz BLE Mesh", "Switched Power Rail (P-MOSFET Gating)"], tag="MEASURED", title_size=7.5, body_size=6.5)
     
     draw_arrow(ax, 0.47, 0.505, 0.515, 0.505, "LoRa Backhaul (865 MHz)\nBLE Mesh (2.4 GHz) | 33B",
                color=COLOR_ACCENT_BLUE, lw=1.8, ls='--')
@@ -956,7 +956,7 @@ def generate_fig13():
     draw_block(ax, 0.53, 0.65, 0.195, 0.17, "Gateway Hardware",
                ["Raspberry Pi 3B+ (Quad A53)", "Waveshare SX1262 HAT", "Zero Custom PCB [DEMO]"], tag="DEMONSTRATED", title_size=7.5, body_size=6.5)
     draw_block(ax, 0.53, 0.42, 0.195, 0.17, "Gateway Edge AI (Model 2)",
-               ["Supervised Random Forest", "10-hr Zenodo Audio Dataset", "94.2% Validation Accuracy"], tag="VALIDATED", title_size=7.5, body_size=6.5)
+               ["Supervised Random Forest", "10-hr Zenodo Audio Dataset", "Multi-Sensor Classification Pipeline"], tag="VALIDATED", title_size=7.5, body_size=6.5)
     draw_block(ax, 0.53, 0.19, 0.195, 0.17, "Local Persistence",
                ["SQLite WAL Database Store", "FastAPI Service Daemon", "Zero Cloud SIM Fees"], tag="DEMONSTRATED", title_size=7.5, body_size=6.5)
     

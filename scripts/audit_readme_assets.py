@@ -16,7 +16,8 @@ import io
 if sys.platform == "win32":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
-repo_dir = r"C:\Users\25beevdt047\.gemini\antigravity-ide\scratch\beevil-knievel"
+from pathlib import Path
+repo_dir = str(Path(__file__).resolve().parent.parent)
 readme_path = os.path.join(repo_dir, "README.md")
 
 def run_audit():

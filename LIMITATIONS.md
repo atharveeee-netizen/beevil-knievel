@@ -1,59 +1,65 @@
-# ⚠️ BEEVIL KNIEVEL - Engineering Limitations & Scientific Disclosures
+# Engineering Limitations & Scientific Disclosures
+
 **Formal Scientific Constraints, Operational Boundaries, and Validity Scope**  
-*Standard: IEEE-HART Peer Review Defense Standard*
+*Standard: Elsevier COMPAG / IEEE Journal Submission Standard*
 
 ---
 
-## 1. DATASET LIMITATIONS & GENERALIZABILITY
+## 1. Zero Field Deployment Constraint
 
-### 1.1 Acoustic Training & Benchmark Datasets
-- **Geographical & Subspecies Scope**: The real-world acoustic field validation in this repository uses annotated beehive recordings from Zenodo Record [1321278](https://doi.org/10.5281/zenodo.1321278) (NU-Hive and Open Source Beehive projects). These recordings represent European honeybee subspecies (*Apis mellifera carnica* and *Apis mellifera ligustica*) managed in temperate European climates (United Kingdom and Italy).
-- **Subspecies Variance**: Subspecies indigenous to tropical or desert climates (e.g., *Apis cerana*, *Apis mellifera scutellata*, or *Apis dorsata*) exhibit differing baseline wingbeat frequencies and fanning dynamics that may require localized retuning of the 4 spectral sub-band filters.
-- **Microphone Placement Sensitivity**: Spectral energy amplitudes depend on physical proximity to the active brood cluster. Placement of the INMP441 sensor outside the central comb gap results in acoustic attenuation of up to $6\text{ dB}$, which could delay queenless agitation detection if thresholds are not calibrated to the specific hive geometry.
-
----
-
-## 2. SYNTHETIC DATA & MODEL PROVENANCE
-
-### 2.1 Cloud Pathology Model (`CloudAdvisorModel`)
-- **Parametric Empirical Distributions**: The 1500-sample training dataset (`Synthetic_Hive_Parametric_Dataset.csv`) used to train the Scikit-Learn Random Forest model is **synthetic data** generated from parametric Gaussian distributions.
-- **Grounding in Literature**: Distribution parameters ($\mu, \sigma$) are derived directly from empirical ranges published in scientific apiculture literature:
-  - Brood thermoregulation dynamics: Southwick & Heldmaier (1987).
-  - Colony acoustic spectral shifts: Ferrari et al. (2008), Bencsik et al. (2011).
-  - Respiration and metabolic $\text{CO}_2$ spikes: Sensirion Apiculture Application Notes.
-- **Operational Reality**: While the model achieves 100% classification accuracy on holdout test splits drawn from these parametric distributions, real-world apiaries experience complex multi-variable interactions (e.g., simultaneous pesticide exposure and starvation) that require continued multi-season empirical calibration.
+> [!IMPORTANT]
+> **Hard Constraint: Zero Apiary Deployment.**
+> The monitoring system described in this repository was **not deployed in an active apiary**. No living honeybee colonies were instrumented in the field by the authors.
+> 
+> All empirical evidence presented in this work is strictly bounded by:
+> 1. **Real public field recordings** collected and published by independent apiculture researchers in real colonies (BeeTogether D1, Zenodo 1321278 D2, SBCM D3, MSPB D4);
+> 2. **Physical bench measurements** on real hardware (Nordic nRF52840 / RAK4631 WisBlock, Semtech SX1262, Raspberry Pi 3B+ gateway);
+> 3. **Analytical engineering models** clearly tagged as `ANALYTICAL_MODEL`.
 
 ---
 
-## 3. ON-NODE ALGORITHM BOUNDARIES
+## 2. Dataset Limitations & Leakage-Safe Evaluation
+
+### 2.1 Acoustic Generalization & Hive Leakage
+- **The Hive-Independence Gap**: In bee audio literature, randomly splitting audio frames across train and test sets yields deceptively high accuracies (>95%), because the model memorizes individual hive acoustics, ambient acoustics, and background acoustic signatures. When entire hives are held out (leave-one-hive-out / `StratifiedGroupKFold`), performance drops significantly.
+- **Microphone Placement**: All real-world acoustic datasets used (BeeTogether, Zenodo 1321278, SBCM) were recorded by third parties with varying microphone distances from the central comb cluster. Microphone placement shifts introduce acoustic attenuation of up to 6 dB that can mask low-amplitude piping harmonics.
+- **Geographic and Subspecies Constraints**: The public field datasets originate predominantly from European honeybee subspecies (*Apis mellifera carnica*, *Apis mellifera ligustica*) managed in temperate climates. Subspecies indigenous to tropical climates (e.g. *Apis cerana indica*) exhibit higher wingbeat frequencies (240–310 Hz) requiring calibrated spectral band edges.
+
+---
+
+## 3. Algorithm & Firmware Boundaries
 
 ### 3.1 CUSUM Thermal Change-Point Detection
-- **Progressive Cooling Lead Time**: The claim that CUSUM provides up to a **72-hour early warning** is validated against modeled progressive thermal degradation scenarios where colony thermoregulation fails gradually. In events involving catastrophic physical box destruction or sudden chemical poisoning, cluster collapse occurs faster than the 72-hour window.
-- **Diurnal Sensitivity**: The slack parameter $K = 0.15^\circ\text{C}$ successfully rejects normal diurnal oscillations in standard double-walled Langstroth hives. However, single-walled hives deployed in extreme desert climates ($> 45^\circ\text{C}$ day, $< 10^\circ\text{C}$ night) may require dynamic temperature-dependent slack adjustments.
+- **Diurnal Thermal Cycling**: Honeybee colonies thermoregulate brood between 34.0 °C and 35.5 °C. Diurnal ambient swings introduce periodic brood temperature oscillations. The Page CUSUM detector implemented in firmware operates on residuals from a 24-hour rolling baseline; using a fixed latched baseline (as done in legacy code) produces premature false alarms within 24 to 48 hours.
+- **Lead Time Scope**: CUSUM detects progressive thermal degradation (e.g. queen failure leading to gradual brood neglect). Catastrophic mechanical damage or sudden pesticide collapse occurs faster than thermal drift lead times.
 
-### 3.2 Environmental Acoustic Noise Rejection
-- **Heavy Rain Clatter**: High-velocity raindrops striking thin metallic hive roofs produce acoustic energy in the $200 - 600\text{ Hz}$ band that closely mimics pre-swarm worker piping.
-- **Cross-Modal Suppression**: To prevent false swarm alarms, the platform mandates cross-modal verification: acoustic swarm alerts are suppressed unless accompanied by a corresponding $\text{CO}_2$ respiration spike ($> 2000\text{ ppm}$) and diurnal solar lux ($> 10,000\text{ Lux}$).
-
----
-
-## 4. HARDWARE & SENSOR CONSTRAINTS
-
-### 4.1 BME688 MOX Gas Sensor Baseline Drift
-- Metal-oxide (MOX) gas sensors undergo baseline resistance drift over 6 to 12 months due to humidity cycling and sensor poisoning by atmospheric siloxanes. A baseline calibration cycle must be executed at the beginning of each apiculture season.
-
-### 4.2 LIS3DH Accelerometer Orientation
-- The knockdown tamper alarm requires the node to be rigidly fastened to the hive brood box. Loose mounting introduces structural vibration artifacts from heavy wind gusts that could trip false tamper alerts.
-
-### 4.3 Solar Energy Harvesting in Extended Winter Overcast
-- The 3000 mAh LiPo battery provides 90 days of autonomous operation under standard 5-minute transmission duty cycles without any solar input. However, in high-latitude winter regions experiencing $> 100$ consecutive days of heavy cloud cover and temperatures $< -10^\circ\text{C}$, internal battery self-discharge and electrolyte freezing reduce effective capacity by up to 35%.
+### 3.2 Wire Protocol (Frame v1 vs. Frame v2)
+- **Legacy Alert Collision (Frame v1)**: In legacy 33-byte payloads, high-nibble alert flags (0x80 CUSUM, 0x40 swarm, 0x20 low battery, 0x10 tilt) were bit-packed into the `tilt_deg` field. This caused gateway frame drops (`tilt > 90` rejected by Pydantic validation) and false tamper alerts.
+- **Frame v2 Remediation**: Frame v2 expands the payload to 36 bytes, allocating an independent `uint8_t flags` byte and a `uint16_t seq` counter. At SF7/BW125/CR4/5, packet airtime is 77.06 ms (identical to 35 bytes). The gateway accepts both frame lengths for backwards compatibility.
 
 ---
 
-## 5. SIMULATION VS PHYSICAL MEASUREMENT BOUNDARIES
+## 4. Hardware & Power Boundaries
 
-| Engineering Domain | Simulated Metric | Real-World Physical Measurement Boundary |
-|---|---|---|
-| **ANSYS HFSS RF** | $S_{11} = -24.75\text{ dB}$, Range $= 5.11\text{ km}$ | Range is an analytical Friis link budget derived from simulated far-field gain; field range is subject to non-line-of-sight foliage clutter and Fresnel zone obstruction ($3.2 - 4.5\text{ km}$ typical). |
-| **ANSYS Icepak Thermal** | Junction $T_j = 64.45^\circ\text{C}$ @ $45^\circ\text{C}$ amb | Simulated under quiescent ambient air. Forced air convection from natural wind ($1 - 3\text{ m/s}$) reduces physical junction temperatures by $5 - 12^\circ\text{C}$. |
-| **ANSYS Maxwell EMI** | Shielding $\text{SE} = 288.5\text{ dB}$ | 288.5 dB is a theoretical analytical result for an unbroken shield. Practical RF testing in an anechoic chamber is bounded by the $100 - 110\text{ dB}$ dynamic range of lab spectrum analyzers. |
+### 4.1 Quiescent Power & Measurement
+- Deep sleep current on the switched power domain is controlled by high-side P-MOSFET gating (pin `WB_IO2`), disconnecting external I2C/I2S peripherals during sleep.
+- All sleep current and energy-per-inference metrics reported in the paper must be directly measured on a Nordic Power Profiler Kit II (PPK2). Any unmeasured placeholder numbers have been eliminated.
+
+### 4.2 RF Propagation & Link Budget
+- Sub-GHz LoRa (865.0625 MHz, +14 dBm) range claims are derived from closed-form log-distance path loss models. In open agricultural line-of-sight conditions with elevated gateway antennas (3–5 m), link margin supports extended range; however, dense orchard canopies and Fresnel zone obstruction attenuate signals, reducing practical range to 1.0–1.5 km.
+
+---
+
+## 5. Master Evidence Ledger
+
+| Engineering Parameter | Status | Provenance Tag | Source Artifact |
+| :--- | :--- | :--- | :--- |
+| **Node Firmware Logic** | Verified on Silicon | `REAL_BENCH_MEASUREMENT` | [`firmware/src/main.cpp`](file:///firmware/src/main.cpp) |
+| **CMSIS-DSP FFT Parity** | Parity Verified | `REAL_BENCH_MEASUREMENT` | [`spec/beevil_spec.yaml`](file:///spec/beevil_spec.yaml) |
+| **Wire Protocol (36B v2)** | Verified via Pytest | `REAL_BENCH_MEASUREMENT` | [`tests/test_full_gateway_pipeline.py`](file:///tests/test_full_gateway_pipeline.py) |
+| **LoRa Airtime (77.06 ms)** | Verified Closed-Form | `ANALYTICAL_MODEL` | [`paper_q1/spec_generator.py`](file:///paper_q1/spec_generator.py) |
+| **LoRa Link Budget (151 dB)** | Modelled | `ANALYTICAL_MODEL` | [`simulation/matlab/run_simulations.py`](file:///simulation/matlab/run_simulations.py) |
+| **Public Datasets (D1–D4)** | Manifested & Hashed | `REAL_PUBLIC_DATASET` | [`data/MANIFEST.csv`](file:///data/MANIFEST.csv) |
+| **PPK2 Power Profile** | Pending Hardware Run | `REAL_BENCH_MEASUREMENT` | `paper_q1/human_tasks/PPK2_CHECKLIST.md` |
+| **HIL Audio Playback** | Pending Hardware Run | `REAL_BENCH_MEASUREMENT` | `paper_q1/human_tasks/HIL_CHECKLIST.md` |
+| **Conducted RF Attenuation** | Pending Hardware Run | `REAL_BENCH_MEASUREMENT` | `paper_q1/human_tasks/RF_CHECKLIST.md` |

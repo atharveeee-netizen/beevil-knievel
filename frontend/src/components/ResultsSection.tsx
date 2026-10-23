@@ -90,14 +90,14 @@ export function ResultsSection() {
       kpi: "LoRa Line-of-Sight Link Margin",
       value: "+26.1",
       unit: "dB",
-      method: "Free-Space Path Loss equation @ 4.2 km, +22 dBm TX, -137 dBm sensitivity",
+      method: "Free-Space Path Loss equation @ 4.2 km (Modelled), +22 dBm TX, -137 dBm sensitivity",
       source: "simulation/matlab/rf_link_budget_and_range.m",
     },
     {
       kpi: "100-Hive Channel Duty Cycle",
-      value: "0.41",
+      value: "0.51",
       unit: "%",
-      method: "100 nodes × 61.7 ms airtime / 300-second cycle (regulatory limit 1.0%)",
+      method: "100 nodes × 77.06 ms (v2) airtime / 300-second cycle (regulatory limit 1.0%)",
       source: "simulation/matlab/06_lora_communication.m",
     },
   ];

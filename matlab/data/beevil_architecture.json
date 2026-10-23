@@ -163,10 +163,10 @@
       "dataset": "10-hour continuous Zenodo Record 1321278 field audio dataset",
       "input": "8 FFT spectral energy bins + environmental feature vector",
       "output": "Colony State Classification: NORMAL, QUEENLESS, SWARMING, VENTILATION_STRESS",
-      "accuracy": "94.2% validation accuracy (0 false negatives for queenless collapse)",
-      "source": "gateway/model/, Cloud Model/evaluate_model.py",
-      "status": "IMPLEMENTED",
-      "evidence": "VALIDATED"
+      "accuracy": "Pending Phase 5 multi-dataset benchmark evaluation",
+      "source": "paper_q1/results/main_results.json",
+      "status": "IN_PROGRESS",
+      "evidence": "BENCHMARK_PENDING"
     }
   },
   "network": {

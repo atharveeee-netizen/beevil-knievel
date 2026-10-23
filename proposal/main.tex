@@ -321,25 +321,77 @@ where $\mu_0 = 34.82^\circ$C is the nominal brood core reference, $K = 0.15^\cir
 %% ============================================================
 %% 4. TINYML MODEL ARCHITECTURE
 %% ============================================================
-\section{TinyML On-Device Acoustic Classifier}
+%% ============================================================
+%% 4. EMBEDDED TINYML BIOACOUSTIC ARCHITECTURE & PARETO BENCHMARK
+%% ============================================================
+\section{Embedded TinyML Bioacoustic Architecture \& Pareto Benchmark}
 
-A 75.4 KB 1D Convolutional Neural Network (1D-CNN) Multi-Spectral Acoustic Feature Classifier has been designed for direct deployment on the nRF52840 microcontroller. The model architecture processes four parallel frequency-band channels extracted from the CMSIS-DSP FFT output and produces a single 1-byte colony state classification, reducing the raw acoustic data volume by over 99\% before LoRa transmission.
+Edge computing in precision apiculture faces a stringent trade-off: streaming raw 16~kHz audio over Sub-GHz LPWANs is physically impossible due to duty cycle limitations and energy budgets ($>180\text{ mJ}$ per transmission). Conversely, executing unquantized deep learning models on a Cortex-M4F microcontroller risks memory overflow and battery depletion. BEEVIL KNIEVEL resolves this dilemma via a deterministic two-stage embedded pipeline: hardware-accelerated ARM CMSIS-DSP spectral decomposition coupled with an ultralight quantized INT8 micro-neural network.
 
-\subsection{Memory Budget}
+\subsection{On-Node TinyML Micro-Architecture \& Memory Footprint}
 
-The TinyML model operates within the strict memory constraints of the nRF52840. The model requires 75.4 KB of Flash (29.5\% of capacity) and 14.2 KB of SRAM (22.2\% of capacity). This leaves sufficient headroom for the LoRa stack, system operation, and a 14-day offline telemetry cache.
+The bioacoustic pipeline executes entirely within the Nordic nRF52840 (64~MHz, 256~KB Flash, 64~KB SRAM). Rather than feeding raw audio samples into heavy convolutional backbones, the pipeline extracts eight biological sub-bands using a 256-point Real FFT (\texttt{arm\_rfft\_fast\_f32}) at 62.5~Hz/bin resolution across 0--8000~Hz:
+\begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Band 1 (100--180 Hz):} Worker thoracic fanning and brood ventilation baseline.
+    \item \textbf{Band 2 (200--400 Hz):} Flight muscle warmup and pre-swarm departure piping.
+    \item \textbf{Band 3 (450--750 Hz):} Queenless distress roar triggered by queen pheromone depletion.
+    \item \textbf{Band 4 (800--1200 Hz):} Environmental aerodynamic noise floor.
+    \item \textbf{Bands 5--8 (1.2--8.0 kHz):} Harmonic overtone decay bands.
+\end{itemize}
 
-\subsection{Benchmark Results}
+The resulting 8-element normalized vector feeds the \textbf{EdgeTinyMLP} neural network (Architecture: $8 \rightarrow 16 \rightarrow 8 \rightarrow 2$). The network is post-training quantized to 8-bit signed integers (\texttt{q7\_t}), generating the embedded C header \texttt{tinyml\_weights.h}. The entire model occupies exactly \textbf{298 Bytes of Flash} and \textbf{$<$128 Bytes of SRAM}, executing in \textbf{0.18~ms} with an energy consumption of only \textbf{2.5~$\mu$J} per inference (at 3.3V, 4.2~mA active draw).
 
-Three independent benchmark suites validate the TinyML classifier:
+\subsection{Cross-Validation \& Pareto Frontier Comparison}
 
-\begin{enumerate}[leftmargin=2em]
-    \item \textbf{30-Sample Extreme Stress Test:} Evaluates the classifier across 30 extreme audio conditions including ventilation hum, flight buzz, queen piping, pre-swarm acoustics, queenless distress, and environmental noise floor variations. Result: \textbf{30/30 passed, 100.0\% accuracy.}
-    
-    \item \textbf{Level 1 Real Zenodo Benchmark:} Evaluates against three core real-world field recordings from Zenodo Record 1321278. Result: \textbf{3/3 passed, 100.0\% accuracy.}
-    
-    \item \textbf{Full Multi-Recording Zenodo Benchmark:} Evaluates against 14 real-world field recordings spanning multiple colony states and recording conditions. Result: \textbf{14/14 passed, 100.0\% accuracy.}
+To benchmark the proposed embedded TinyML architecture against prevailing cloud and gateway literature, we evaluate five representative paradigms on the complete public Zenodo 1321278 corpus ("To Bee or Not to Bee", Cejrowski et al., 2018):
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{Edge Deterministic DSP (Proposed):} Pure embedded CMSIS-DSP ratio triage ($15.8~\mu\text{J}$, 33~B uplink).
+    \item \textbf{Edge INT8 Micro-MLP (Proposed):} 8-band quantized neural network running on nRF52840 ($18.3~\mu\text{J}$, 33~B uplink).
+    \item \textbf{Baseline MFCC-39 + SVM:} 13 static + 13 delta + 13 delta-delta cepstrals with RBF kernel ($41,140~\mu\text{J}$, 156~B uplink).
+    \item \textbf{Baseline MFCC-39 + Random Forest:} 100-tree ensemble ($62,560~\mu\text{J}$, 156~B uplink).
+    \item \textbf{Gateway SOTA 2D-CNN:} 64-band Log-Mel Spectrogram ($64 \times 63$) input with 3 convolutional blocks ($181,050~\mu\text{J}$, 4,032~B uplink).
 \end{enumerate}
+
+Validation enforces strict \textbf{Stratified Group-K-Fold Cross-Validation} grouped by 60-second temporal recording blocks. This strictly prevents temporal data leakage between training and validation windows, addressing a pervasive methodological flaw in existing apiculture ML literature.
+
+\begin{table*}[t]
+\centering
+\caption{Comparative Architectural Benchmark: Embedded Edge vs. Gateway/Cloud Apiculture Classifiers}
+\label{tab:acoustic_pareto}
+\begin{tabular}{l l r r r r r r r}
+\toprule
+\textbf{Architecture} & \textbf{Execution Tier} & \textbf{Bal. Acc} & \textbf{Macro F1} & \textbf{RAM} & \textbf{Flash} & \textbf{Latency} & \textbf{Energy} & \textbf{Bandwidth} \\
+ & & (\%) & (\%) & (KB) & (KB) & (ms) & ($\mu$J) & (B/reading) \\
+\midrule
+Edge Deterministic DSP & Edge Node (nRF52840) & 26.6\% & 26.5\% & 8.2 & 14.6 & 1.14 & 15.8 & 33 \\
+\textbf{Edge INT8 Micro-MLP} & \textbf{Edge Node (nRF52840)} & \textbf{58.8\%} & \textbf{57.9\%} & \textbf{8.6} & \textbf{15.2} & \textbf{1.32} & \textbf{18.3} & \textbf{33} \\
+Baseline MFCC-39 + SVM & Gateway (RPi 4) & 79.7\% & 77.9\% & 640.0 & 420.0 & 12.10 & 41,140.0 & 156 \\
+Baseline MFCC-39 + RF & Gateway (RPi 4) & 67.9\% & 67.9\% & 1240.0 & 890.0 & 18.40 & 62,560.0 & 156 \\
+Gateway SOTA 2D-CNN & Gateway (RPi 4) & 57.6\% & 57.6\% & 14800.0 & 172.0 & 42.60 & 181,050.0 & 4032 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.95\textwidth]{fig_energy_pareto_frontier.png}
+    \caption{Empirical Pareto frontier comparing active inference energy versus acoustic pathology detection fidelity (Macro F1-score). BEEVIL KNIEVEL's on-device INT8 Micro-MLP achieves comparable discriminative performance while operating at $9,890\times$ lower energy and $122\times$ lower bandwidth than gateway 2D-CNN architectures, enabling continuous 18+ month solar-harvested deployment.}
+    \label{fig:pareto_frontier}
+\end{figure}
+
+\subsection{Hierarchical Multi-Modal Pre-Symptomatic Triage}
+
+Crucially, acoustic monitoring is not evaluated in isolation. BEEVIL KNIEVEL implements a hierarchical multi-modal fusion architecture:
+\begin{enumerate}[leftmargin=1.5em]
+    \item \textbf{Pre-Symptomatic Acoustic Surge ($0-2$ hours):} Queen mortality or departure induces immediate agitation and elevated Band 3 piping (450--750~Hz), detected within minutes by the edge TinyML model while the brood core remains at nominal temperature ($34.5^\circ\text{C}$).
+    \item \textbf{Thermal Decay Confirmation ($12-48$ hours):} Following colony demoralization, worker clustering collapses, triggering the recursive Page's CUSUM thermal change-point filter as core temperature decays at $-0.02^\circ\text{C/hr}$.
+\end{enumerate}
+
+\subsection{Out-of-Distribution Validation on Heterogeneous Field Audio}
+
+To evaluate out-of-distribution (OOD) robustness, the pipeline was benchmarked against six external field recordings spanning heterogeneous bit depths (16-bit, 24-bit PCM), sample rates (44.1 kHz, 48 kHz, 96 kHz), and acoustic topologies (single-bee flight, bumblebee flight, and ambient apiary noise). The stereophonic downmixing $(L+R)/2$ and sample-rate invariant windowing ($62.5\text{ ms}$) achieved 100\% non-corrupt ingestion across all 41 automated unit and integration test cases.
+
+
 
 %% ============================================================
 %% 6. SUSTAINABILITY AND ENERGY ARCHITECTURE

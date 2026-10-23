@@ -10,7 +10,12 @@ import os
 import sys
 
 from bee_acoustic_classifier import extract_multiband_spectral_features, classify_hive_state_tinyml, MODEL_FLASH_FOOTPRINT_KB, MODEL_RAM_FOOTPRINT_KB
-from datasets.sample_bee_audio.generate_synthetic_bee_wavs import generate_bee_audio_wav
+
+# Import synthetic test fixture generator
+from pathlib import Path
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from tests.fixtures.generate_synthetic_bee_wavs import generate_bee_audio_wav
 
 def run_stress_test():
     print("=================================================================================")
