@@ -72,3 +72,7 @@ proposal/rendered_pages/
 *.so
 *.dylib
 
+# Raw Datasets (Never commit raw data)
+data/*
+!data/MANIFEST.csv
+TinyML Model/datasets/zenodo_full/

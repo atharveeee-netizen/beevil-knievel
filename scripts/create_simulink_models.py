@@ -8,9 +8,9 @@ Creates valid .slx (Simulink XML Open Packaging Convention ZIP) model files:
 """
 
 import os
-import zipfile
+from pathlib import Path
 
-simulink_dir = r"C:\Users\25beevdt047\.gemini\antigravity-ide\scratch\beevil-knievel\simulation\simulink"
+simulink_dir = str(Path(__file__).resolve().parent.parent / "simulation" / "simulink")
 os.makedirs(simulink_dir, exist_ok=True)
 
 CONTENT_TYPES_XML = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>

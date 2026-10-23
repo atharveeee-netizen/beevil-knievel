@@ -1,0 +1,173 @@
+{
+  "metadata": {
+    "title": "Beevil Knievel Preregistered Statistical Significance Audit",
+    "provenance": "REAL_PUBLIC_DATASET",
+    "folds_evaluated": 15,
+    "correction_method": "Nadeau-Bengio (2003) Resampled t-test + Friedman"
+  },
+  "bootstrap_95_ci": {
+    "Floor_Majority": {
+      "mean": 0.5,
+      "ci_95_low": 0.5,
+      "ci_95_high": 0.5
+    },
+    "Floor_Stratified": {
+      "mean": 0.5032,
+      "ci_95_low": 0.5012,
+      "ci_95_high": 0.5054
+    },
+    "Repo_Heuristic_V1": {
+      "mean": 0.5345,
+      "ci_95_low": 0.5264,
+      "ci_95_high": 0.5426
+    },
+    "F0_Logistic_Regression": {
+      "mean": 0.7705,
+      "ci_95_low": 0.7491,
+      "ci_95_high": 0.7924
+    },
+    "F0_Random_Forest": {
+      "mean": 0.7988,
+      "ci_95_low": 0.7792,
+      "ci_95_high": 0.8189
+    },
+    "F0_LightGBM": {
+      "mean": 0.8046,
+      "ci_95_low": 0.7856,
+      "ci_95_high": 0.8248
+    },
+    "F0_MLP": {
+      "mean": 0.8047,
+      "ci_95_low": 0.786,
+      "ci_95_high": 0.823
+    },
+    "Literature_MFCC_SVM": {
+      "mean": 0.8065,
+      "ci_95_low": 0.7859,
+      "ci_95_high": 0.8274
+    },
+    "Neural_DS_CNN": {
+      "mean": 0.8103,
+      "ci_95_low": 0.7921,
+      "ci_95_high": 0.8285
+    },
+    "MultiModal_Fusion_Early": {
+      "mean": 0.8725,
+      "ci_95_low": 0.8479,
+      "ci_95_high": 0.8966
+    },
+    "Hive_Adaptive_Norm": {
+      "mean": 0.5845,
+      "ci_95_low": 0.5767,
+      "ci_95_high": 0.5915
+    }
+  },
+  "friedman_test": {
+    "statistic": 137.0545,
+    "p_value": 1.6902164796922253e-24,
+    "degrees_of_freedom": 10,
+    "average_ranks": {
+      "Floor_Majority": 10.73,
+      "Floor_Stratified": 10.27,
+      "Repo_Heuristic_V1": 8.93,
+      "F0_Logistic_Regression": 6.8,
+      "F0_Random_Forest": 5.07,
+      "F0_LightGBM": 4.2,
+      "F0_MLP": 3.93,
+      "Literature_MFCC_SVM": 4.0,
+      "Neural_DS_CNN": 3.0,
+      "MultiModal_Fusion_Early": 1.0,
+      "Hive_Adaptive_Norm": 8.07
+    }
+  },
+  "pairwise_comparisons": {
+    "vs_Floor_Majority": {
+      "F0_Logistic_Regression": {
+        "mean_diff": 0.2705,
+        "t_statistic": 11.1889,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "F0_Random_Forest": {
+        "mean_diff": 0.2988,
+        "t_statistic": 12.7143,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "F0_LightGBM": {
+        "mean_diff": 0.3046,
+        "t_statistic": 13.5615,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "F0_MLP": {
+        "mean_diff": 0.3047,
+        "t_statistic": 14.0004,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "Literature_MFCC_SVM": {
+        "mean_diff": 0.3065,
+        "t_statistic": 12.7952,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "Neural_DS_CNN": {
+        "mean_diff": 0.3103,
+        "t_statistic": 14.6215,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "MultiModal_Fusion_Early": {
+        "mean_diff": 0.3725,
+        "t_statistic": 13.4296,
+        "p_value": 0.0,
+        "significant_improvement": true
+      }
+    },
+    "vs_Repo_Heuristic_V1": {
+      "F0_Logistic_Regression": {
+        "mean_diff": 0.236,
+        "t_statistic": 10.8687,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "F0_Random_Forest": {
+        "mean_diff": 0.2643,
+        "t_statistic": 11.3404,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "F0_LightGBM": {
+        "mean_diff": 0.2701,
+        "t_statistic": 12.0247,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "F0_MLP": {
+        "mean_diff": 0.2702,
+        "t_statistic": 12.9053,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "Literature_MFCC_SVM": {
+        "mean_diff": 0.2721,
+        "t_statistic": 12.4229,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "Neural_DS_CNN": {
+        "mean_diff": 0.2759,
+        "t_statistic": 13.2838,
+        "p_value": 0.0,
+        "significant_improvement": true
+      },
+      "MultiModal_Fusion_Early": {
+        "mean_diff": 0.338,
+        "t_statistic": 13.1625,
+        "p_value": 0.0,
+        "significant_improvement": true
+      }
+    }
+  }
+}

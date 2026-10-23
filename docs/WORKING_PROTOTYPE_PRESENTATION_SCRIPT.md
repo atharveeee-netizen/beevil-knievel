@@ -2,8 +2,7 @@
 
 **Project:** Beevil Knievel Precision Apiculture Platform  
 **Target Delivery:** High-Density Engineering Video Presentation & Defense  
-**Compiled 4-Page PDF:** [`docs/BEEVIL_KNIEVEL_WORKING_PROTOTYPE_PRESENTATION.pdf`](file:///C:/Users/noobg/OneDrive/Desktop/IEEEXSIH/BEEVIL_KNIEVEL_FULL_PROJECT_BACKUP/beevil-knievel/docs/BEEVIL_KNIEVEL_WORKING_PROTOTYPE_PRESENTATION.pdf)  
-**Artifact PDF Copy:** [`BEEVIL_KNIEVEL_WORKING_PROTOTYPE_PRESENTATION.pdf`](file:///C:/Users/noobg/.gemini/antigravity-ide/brain/b017c0fc-fc27-4553-b95d-27c00b193f21/BEEVIL_KNIEVEL_WORKING_PROTOTYPE_PRESENTATION.pdf)
+**Compiled 4-Page PDF:** [`docs/BEEVIL_KNIEVEL_WORKING_PROTOTYPE_PRESENTATION.pdf`](BEEVIL_KNIEVEL_WORKING_PROTOTYPE_PRESENTATION.pdf)  
 
 ---
 
@@ -25,9 +24,9 @@ graph LR
 ---
 
 ### Page 1 — Mechanical & In-Comb Biological Integration
-![Page 1: Instrumented Commercial Langstroth Hive Cutaway](C:/Users/noobg/OneDrive/Desktop/IEEEXSIH/BEEVIL_KNIEVEL_FULL_PROJECT_BACKUP/beevil-knievel/docs/media/sensing/langstroth_sensor_cutaway.png)
+![Page 1: Instrumented Commercial Langstroth Hive Cutaway](media/diagrams/02_langstroth_sensor_cutaway.svg)
 
-* **Visual Asset:** [`docs/media/sensing/langstroth_sensor_cutaway.png`](file:///C:/Users/noobg/OneDrive/Desktop/IEEEXSIH/BEEVIL_KNIEVEL_FULL_PROJECT_BACKUP/beevil-knievel/docs/media/sensing/langstroth_sensor_cutaway.png)  
+* **Visual Asset:** [`docs/media/diagrams/02_langstroth_sensor_cutaway.svg`](media/diagrams/02_langstroth_sensor_cutaway.svg)  
 * **Role in Narrative:** *Establishes the physical habitat and biological measurement locations inside the colony.*  
 * **OSD Badge:** `PHYSICAL IN-HIVE TRANSDUCTION | 10-FRAME LANGSTROTH INTEGRATION | PG-7 HERMETIC ROUTING | ZERO COMB ALTERATION`
 
@@ -47,11 +46,11 @@ graph LR
 ---
 
 ### Page 2 — Physical Hardware Architecture & Sensor Wiring Interconnect Matrix
-![Page 2: Physical Hardware Architecture & Sensor Wiring Interconnect Matrix](C:/Users/noobg/OneDrive/Desktop/IEEEXSIH/BEEVIL_KNIEVEL_FULL_PROJECT_BACKUP/beevil-knievel/docs/figures/hardware_wiring_architecture.png)
+![Page 2: Physical Hardware Architecture & Sensor Wiring Interconnect Matrix](media/diagrams/01_system_architecture.svg)
 
-* **Visual Asset:** [`docs/figures/hardware_wiring_architecture.png`](file:///C:/Users/noobg/OneDrive/Desktop/IEEEXSIH/BEEVIL_KNIEVEL_FULL_PROJECT_BACKUP/beevil-knievel/docs/figures/hardware_wiring_architecture.png)  
+* **Visual Asset:** [`docs/media/diagrams/01_system_architecture.svg`](media/diagrams/01_system_architecture.svg)  
 * **Role in Narrative:** *Transitions from in-hive physical probes to the electrical circuits, power gating, and custom gateway hardware.*  
-* **OSD Badge:** `PHYSICAL HARDWARE BRING-UP | RAK4631 (nRF52840 + SX1262) | P-MOSFET POWER GATING | SLEEP: 18 µA [MEASURED] | RPi 3B+ LoRa GATEWAY`
+* **OSD Badge:** `PHYSICAL HARDWARE BRING-UP | RAK4631 (nRF52840 + SX1262) | P-MOSFET POWER GATING | BENCH PROTOTYPE | RPi 3B+ LoRa GATEWAY`
 
 #### 🎙️ Spoken Script (Page 2)
 > *"Moving from hive mechanics to physical electronics, Page Two details the exact bench prototype wiring and hardware architecture. In compliance with commercial apiculture realities, we designed this system with a strict Zero Custom PCB Guarantee, using industrial modular COTS hardware to minimize unit cost and maximize field repairability.
@@ -74,11 +73,11 @@ graph LR
 ---
 
 ### Page 3 — Master Cyber-Physical System Architecture & Dual-Tier AI Dataflow
-![Page 3: Master Cyber-Physical System Architecture & Telemetry Dataflow](C:/Users/noobg/OneDrive/Desktop/IEEEXSIH/BEEVIL_KNIEVEL_FULL_PROJECT_BACKUP/beevil-knievel/docs/figures/master_architecture_diagram.png)
+![Page 3: Master Cyber-Physical System Architecture & Telemetry Dataflow](media/diagrams/04_radio_telemetry.svg)
 
-* **Visual Asset:** [`docs/figures/master_architecture_diagram.png`](file:///C:/Users/noobg/OneDrive/Desktop/IEEEXSIH/BEEVIL_KNIEVEL_FULL_PROJECT_BACKUP/beevil-knievel/docs/figures/master_architecture_diagram.png)  
+* **Visual Asset:** [`docs/media/diagrams/04_radio_telemetry.svg`](media/diagrams/04_radio_telemetry.svg)  
 * **Role in Narrative:** *Explains the software intelligence: on-node CMSIS-DSP, CUSUM filtering, 33-byte LoRa packets, and gateway machine learning.*  
-* **OSD Badge:** `MASTER PIPELINE: 9-STAGE TELEMETRY DATAFLOW | CMSIS-DSP 256-PT FFT (2.49 ms) | ON-NODE CUSUM FILTER | TIER-2 RANDOM FOREST (94.2% ACCURACY)`
+* **OSD Badge:** `MASTER PIPELINE: 9-STAGE TELEMETRY DATAFLOW | CMSIS-DSP 256-PT FFT | ON-NODE CUSUM FILTER | TIER-2 RANDOM FOREST`
 
 #### 🎙️ Spoken Script (Page 3)
 > *"With hardware established, Page Three explains how raw signals become actionable intelligence through our nine-stage cyber-physical pipeline.
@@ -98,9 +97,9 @@ graph LR
 ---
 
 ### Page 4 — Empirical Test Bench Verification & 12 KPI Meters
-![Page 4: Laboratory & Field Test Bench KPI Dashboard](C:/Users/noobg/OneDrive/Desktop/IEEEXSIH/BEEVIL_KNIEVEL_FULL_PROJECT_BACKUP/beevil-knievel/docs/figures/kpi_results_dashboard.png)
+![Page 4: Laboratory & Field Test Bench KPI Dashboard](media/diagrams/05_acoustic_dsp.svg)
 
-* **Visual Asset:** [`docs/figures/kpi_results_dashboard.png`](file:///C:/Users/noobg/OneDrive/Desktop/IEEEXSIH/BEEVIL_KNIEVEL_FULL_PROJECT_BACKUP/beevil-knievel/docs/figures/kpi_results_dashboard.png)  
+* **Visual Asset:** [`docs/media/diagrams/05_acoustic_dsp.svg`](media/diagrams/05_acoustic_dsp.svg)  
 * **Role in Narrative:** *Proves all engineering claims with verified bench test instruments, electrical ammeters, RF analyzers, and pass rates.*  
 * **OSD Badge:** `LABORATORY KPI DASHBOARD | 12 PHYSICAL INSTRUMENTS | 100% PASS RATE | 27/27 VERIFIED AUTOMATED TESTS`
 

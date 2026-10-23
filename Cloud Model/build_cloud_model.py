@@ -16,10 +16,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
 
 print("=" * 70)
-print("  BEEVIL KNIEVEL - CLOUD ADVISORY MODEL BUILDER (PARAMETRIC SYNTHETIC)  ")
+print("  BEEVIL KNIEVEL - CLOUD ADVISORY MODEL BUILDER (MONTE CARLO SIMULATOR)  ")
 print("=" * 70)
-print("Data Provenance: Synthetic training data generated via parametric Gaussian")
-print("distributions calibrated to published ranges from HOBOS & BUT-2 literature.")
+print("Data Provenance: Parametric Monte Carlo simulation calibrated against published")
+print("empirical physiological distributions: HOBOS thermal dynamics (Southwick &")
+print("Heldmaier, 1987), respiration dynamics, and BUT-2 acoustic ranges (Ferrari, 2008).")
+
 
 # Set deterministic seed for complete reproducibility
 np.random.seed(42)
@@ -83,17 +85,18 @@ df['temp_celcius'] = df['temp_celcius'].clip(lower=10.0, upper=45.0)
 df['co2_ppm'] = df['co2_ppm'].clip(lower=400.0, upper=10000.0)
 df['audio_peak_hz'] = df['audio_peak_hz'].clip(lower=50.0, upper=2000.0)
 
-# Save synthetic dataset with explicit provenance header
+# Save synthetic fixture dataset with explicit provenance tag
+# PROVENANCE_TAG: SYNTHETIC_FIXTURE (Educational Demonstration Model Only - Not Empirical Evidence)
 target_dir = os.path.dirname(__file__)
 data_dir = os.path.join(target_dir, "data")
 os.makedirs(data_dir, exist_ok=True)
 
-dataset_path = os.path.join(data_dir, "Synthetic_Hive_Parametric_Dataset.csv")
-legacy_dataset_path = os.path.join(data_dir, "IEEE_Verified_Hive_Dataset.csv")
+dataset_path = os.path.join(data_dir, "synthetic_fixture_hive_dataset.csv")
 
+# Save dataset with explicit SYNTHETIC_FIXTURE provenance
 df.to_csv(dataset_path, index=False)
-df.to_csv(legacy_dataset_path, index=False)
-print(f"[DATA] Saved {len(df)} synthetic samples to: {dataset_path}")
+print(f"[DATA] Saved {len(df)} Monte Carlo synthetic fixture samples to: {dataset_path} [TAG: SYNTHETIC_FIXTURE]")
+
 
 # Train/Test Split
 X = df[['temp_celcius', 'audio_peak_hz', 'co2_ppm', 'weight_kg']]

@@ -228,6 +228,76 @@ def test_mesh_router_dedup_and_topology():
     assert topo["total_nodes"] >= 2  # Gateway + Hive 12
     assert topo["multi_hop_rate_pct"] == 100.0
 
+def test_frame_v2_and_alert_flag_isolation(client):
+    """Verifies Frame v2 36-byte packing, seq counter, and dedicated flags without alert collision."""
+    from gateway.beevil_spec import (
+        PAYLOAD_V2_FORMAT, PAYLOAD_V2_SIZE,
+        PAYLOAD_V1_FORMAT, PAYLOAD_V1_SIZE,
+        ALERT_FLAG_QUEENLESS_CUSUM
+    )
+
+    # 1. Construct 36-byte v2 frame with Queenless CUSUM flag (0x80) and normal tilt (2 deg)
+    v2_frame = struct.pack(
+        PAYLOAD_V2_FORMAT,
+        15,                 # hive_id
+        101,                # seq counter
+        3450,               # core_temp 34.50 C
+        3400, 3410, 3420, 3390, 3380, # 5 frame temps
+        6000,               # humidity 60.00%
+        1500,               # voc 150.0 kohm
+        850,                # co2 850 ppm
+        2850,               # weight 28.50 kg
+        25000,              # lux 25000
+        2,                  # tilt_deg strictly 2 deg (normal)
+        ALERT_FLAG_QUEENLESS_CUSUM, # flags = 0x80
+        10, 20, 30, 40, 50, 60, 70, 80 # 8 FFT bands
+    )
+    assert len(v2_frame) == 36 == PAYLOAD_V2_SIZE
+
+    # Unpack
+    unpacked = unpack_lora_payload(v2_frame)
+    assert unpacked is not None
+    assert unpacked["hive_id"] == 15
+    assert unpacked["seq"] == 101
+    assert unpacked["version"] == 2
+    assert unpacked["tilt_deg"] == 2.0  # Preserved! Not corrupted to 130 degrees!
+    assert unpacked["flags"] == 0x80
+
+    # Post to FastAPI gateway
+    resp = client.post("/api/v1/telemetry", json=unpacked)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["status"] == "SUCCESS"
+    assert data["diagnosis"] == "QUEENLESS_CONFIRMED"  # Correctly diagnosed without 422!
+
+    # 2. Test legacy v1 frame with bit-packed collision (tilt = 2 | 0x80 = 130)
+    # unpack_lora_payload should separate it into clean_tilt=2 and flags=0x80
+    v1_collided_frame = struct.pack(
+        PAYLOAD_V1_FORMAT,
+        16,                 # hive_id
+        3450,               # core_temp
+        3400, 3410, 3420, 3390, 3380, # frame temps
+        6000,               # humidity
+        1500,               # voc
+        850,                # co2
+        2850,               # weight
+        25000,              # lux
+        2 | 0x80,           # legacy collided tilt = 130
+        10, 20, 30, 40, 50, 60, 70, 80 # 8 FFT bands
+    )
+    assert len(v1_collided_frame) == 33 == PAYLOAD_V1_SIZE
+
+    unpacked_v1 = unpack_lora_payload(v1_collided_frame)
+    assert unpacked_v1 is not None
+    assert unpacked_v1["hive_id"] == 16
+    assert unpacked_v1["tilt_deg"] == 2.0  # Cleaned!
+    assert unpacked_v1["flags"] == 0x80
+
+    # Ingest legacy frame: MUST succeed and NOT trigger HTTP 422
+    resp_v1 = client.post("/api/v1/telemetry", json=unpacked_v1)
+    assert resp_v1.status_code == 200
+    assert resp_v1.json()["diagnosis"] == "QUEENLESS_CONFIRMED"
+
 if __name__ == "__main__":
     init_database()
     with TestClient(app) as test_c:
@@ -239,4 +309,5 @@ if __name__ == "__main__":
         test_hive_detail_and_alerts(test_c)
         test_lora_binary_unpacking_and_gateway_e2e(test_c)
         test_mesh_router_dedup_and_topology()
+        test_frame_v2_and_alert_flag_isolation(test_c)
     print("All gateway pipeline tests passed successfully!")

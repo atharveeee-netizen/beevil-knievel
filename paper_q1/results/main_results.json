@@ -1,0 +1,1518 @@
+{
+  "metadata": {
+    "title": "Beevil Knievel Multi-Dataset Q1 Benchmark Results",
+    "protocol": "Protocol P-A (Unseen Hive StratifiedGroupKFold)",
+    "outer_folds_count": 15,
+    "provenance": "REAL_PUBLIC_DATASET (MSPB D4)",
+    "date": "2026-10-23"
+  },
+  "model_summaries": {
+    "Floor_Majority": {
+      "description": "Level 0: Majority Class Floor",
+      "balanced_accuracy": {
+        "mean": 0.5,
+        "std": 0.0
+      },
+      "macro_f1": {
+        "mean": 0.3618,
+        "std": 0.026
+      },
+      "roc_auc": {
+        "mean": 0.5,
+        "std": 0.0
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.4117,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.326,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3453,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3549,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.379,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3111,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3943,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3825,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.367,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3556,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3672,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3689,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3304,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3831,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5,
+          "macro_f1": 0.3498,
+          "roc_auc": 0.5,
+          "sensitivity": 0.0,
+          "specificity": 1.0,
+          "brier_score": 0.25
+        }
+      ]
+    },
+    "Floor_Stratified": {
+      "description": "Level 0: Stratified Random Floor",
+      "balanced_accuracy": {
+        "mean": 0.5032,
+        "std": 0.0043
+      },
+      "macro_f1": {
+        "mean": 0.4999,
+        "std": 0.0061
+      },
+      "roc_auc": {
+        "mean": 0.5,
+        "std": 0.0
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.4955,
+          "macro_f1": 0.4821,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4555,
+          "specificity": 0.5355,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.4995,
+          "macro_f1": 0.4935,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4072,
+          "specificity": 0.5918,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5112,
+          "macro_f1": 0.5094,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4222,
+          "specificity": 0.6003,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5024,
+          "macro_f1": 0.5021,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4306,
+          "specificity": 0.5742,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.4983,
+          "macro_f1": 0.497,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4379,
+          "specificity": 0.5588,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5107,
+          "macro_f1": 0.4991,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4063,
+          "specificity": 0.6152,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.501,
+          "macro_f1": 0.4956,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4511,
+          "specificity": 0.5508,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5038,
+          "macro_f1": 0.5017,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4478,
+          "specificity": 0.5597,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5051,
+          "macro_f1": 0.505,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4358,
+          "specificity": 0.5744,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5041,
+          "macro_f1": 0.5038,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4294,
+          "specificity": 0.5787,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5002,
+          "macro_f1": 0.5001,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4347,
+          "specificity": 0.5658,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.4996,
+          "macro_f1": 0.4994,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4356,
+          "specificity": 0.5636,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5076,
+          "macro_f1": 0.5036,
+          "roc_auc": 0.5,
+          "sensitivity": 0.424,
+          "specificity": 0.5913,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5039,
+          "macro_f1": 0.5017,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4465,
+          "specificity": 0.5612,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5057,
+          "macro_f1": 0.5047,
+          "roc_auc": 0.5,
+          "sensitivity": 0.4232,
+          "specificity": 0.5881,
+          "brier_score": 0.25
+        }
+      ]
+    },
+    "Repo_Heuristic_V1": {
+      "description": "Level 1: Existing Repo Heuristic",
+      "balanced_accuracy": {
+        "mean": 0.5345,
+        "std": 0.0161
+      },
+      "macro_f1": {
+        "mean": 0.4707,
+        "std": 0.0305
+      },
+      "roc_auc": {
+        "mean": 0.5,
+        "std": 0.0
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.5126,
+          "macro_f1": 0.483,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1113,
+          "specificity": 0.9139,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5287,
+          "macro_f1": 0.4264,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1177,
+          "specificity": 0.9396,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5226,
+          "macro_f1": 0.4389,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1166,
+          "specificity": 0.9287,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5598,
+          "macro_f1": 0.5033,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1795,
+          "specificity": 0.94,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5601,
+          "macro_f1": 0.5206,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1734,
+          "specificity": 0.9469,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5148,
+          "macro_f1": 0.4035,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1159,
+          "specificity": 0.9136,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5328,
+          "macro_f1": 0.4833,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1063,
+          "specificity": 0.9593,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5345,
+          "macro_f1": 0.495,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1542,
+          "specificity": 0.9148,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5486,
+          "macro_f1": 0.4874,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1394,
+          "specificity": 0.9578,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5326,
+          "macro_f1": 0.4761,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1622,
+          "specificity": 0.9031,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5368,
+          "macro_f1": 0.4719,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1249,
+          "specificity": 0.9487,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5278,
+          "macro_f1": 0.4711,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1345,
+          "specificity": 0.9211,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5644,
+          "macro_f1": 0.4973,
+          "roc_auc": 0.5,
+          "sensitivity": 0.2047,
+          "specificity": 0.9241,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5173,
+          "macro_f1": 0.461,
+          "roc_auc": 0.5,
+          "sensitivity": 0.104,
+          "specificity": 0.9307,
+          "brier_score": 0.25
+        },
+        {
+          "balanced_accuracy": 0.5234,
+          "macro_f1": 0.4411,
+          "roc_auc": 0.5,
+          "sensitivity": 0.1125,
+          "specificity": 0.9342,
+          "brier_score": 0.25
+        }
+      ]
+    },
+    "F0_Logistic_Regression": {
+      "description": "Level 2: Classical LogReg on F0",
+      "balanced_accuracy": {
+        "mean": 0.7705,
+        "std": 0.0415
+      },
+      "macro_f1": {
+        "mean": 0.7685,
+        "std": 0.0421
+      },
+      "roc_auc": {
+        "mean": 0.8438,
+        "std": 0.0414
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.7008,
+          "macro_f1": 0.6892,
+          "roc_auc": 0.7673,
+          "sensitivity": 0.6389,
+          "specificity": 0.7628,
+          "brier_score": 0.1877
+        },
+        {
+          "balanced_accuracy": 0.7772,
+          "macro_f1": 0.7766,
+          "roc_auc": 0.858,
+          "sensitivity": 0.757,
+          "specificity": 0.7974,
+          "brier_score": 0.1509
+        },
+        {
+          "balanced_accuracy": 0.7821,
+          "macro_f1": 0.7828,
+          "roc_auc": 0.8459,
+          "sensitivity": 0.743,
+          "specificity": 0.8212,
+          "brier_score": 0.1572
+        },
+        {
+          "balanced_accuracy": 0.7821,
+          "macro_f1": 0.7777,
+          "roc_auc": 0.8575,
+          "sensitivity": 0.8227,
+          "specificity": 0.7415,
+          "brier_score": 0.1568
+        },
+        {
+          "balanced_accuracy": 0.8251,
+          "macro_f1": 0.8201,
+          "roc_auc": 0.9023,
+          "sensitivity": 0.8187,
+          "specificity": 0.8314,
+          "brier_score": 0.1252
+        },
+        {
+          "balanced_accuracy": 0.7984,
+          "macro_f1": 0.7985,
+          "roc_auc": 0.8756,
+          "sensitivity": 0.8208,
+          "specificity": 0.7759,
+          "brier_score": 0.1413
+        },
+        {
+          "balanced_accuracy": 0.7112,
+          "macro_f1": 0.7134,
+          "roc_auc": 0.7962,
+          "sensitivity": 0.6082,
+          "specificity": 0.8142,
+          "brier_score": 0.1727
+        },
+        {
+          "balanced_accuracy": 0.7109,
+          "macro_f1": 0.7051,
+          "roc_auc": 0.7814,
+          "sensitivity": 0.6908,
+          "specificity": 0.7309,
+          "brier_score": 0.1907
+        },
+        {
+          "balanced_accuracy": 0.7956,
+          "macro_f1": 0.7941,
+          "roc_auc": 0.87,
+          "sensitivity": 0.7777,
+          "specificity": 0.8135,
+          "brier_score": 0.1451
+        },
+        {
+          "balanced_accuracy": 0.805,
+          "macro_f1": 0.8039,
+          "roc_auc": 0.867,
+          "sensitivity": 0.802,
+          "specificity": 0.808,
+          "brier_score": 0.1461
+        },
+        {
+          "balanced_accuracy": 0.7283,
+          "macro_f1": 0.7288,
+          "roc_auc": 0.8081,
+          "sensitivity": 0.6786,
+          "specificity": 0.7781,
+          "brier_score": 0.1742
+        },
+        {
+          "balanced_accuracy": 0.8147,
+          "macro_f1": 0.8108,
+          "roc_auc": 0.8872,
+          "sensitivity": 0.8179,
+          "specificity": 0.8116,
+          "brier_score": 0.1347
+        },
+        {
+          "balanced_accuracy": 0.8155,
+          "macro_f1": 0.8156,
+          "roc_auc": 0.8929,
+          "sensitivity": 0.8296,
+          "specificity": 0.8014,
+          "brier_score": 0.1312
+        },
+        {
+          "balanced_accuracy": 0.7253,
+          "macro_f1": 0.7277,
+          "roc_auc": 0.7986,
+          "sensitivity": 0.6373,
+          "specificity": 0.8133,
+          "brier_score": 0.1752
+        },
+        {
+          "balanced_accuracy": 0.7852,
+          "macro_f1": 0.7837,
+          "roc_auc": 0.8483,
+          "sensitivity": 0.7999,
+          "specificity": 0.7705,
+          "brier_score": 0.1577
+        }
+      ]
+    },
+    "F0_Random_Forest": {
+      "description": "Level 2: Classical Random Forest on F0",
+      "balanced_accuracy": {
+        "mean": 0.7988,
+        "std": 0.0403
+      },
+      "macro_f1": {
+        "mean": 0.8025,
+        "std": 0.0375
+      },
+      "roc_auc": {
+        "mean": 0.8878,
+        "std": 0.032
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.7524,
+          "macro_f1": 0.7611,
+          "roc_auc": 0.8315,
+          "sensitivity": 0.6171,
+          "specificity": 0.8877,
+          "brier_score": 0.1417
+        },
+        {
+          "balanced_accuracy": 0.8083,
+          "macro_f1": 0.8048,
+          "roc_auc": 0.9023,
+          "sensitivity": 0.7209,
+          "specificity": 0.8958,
+          "brier_score": 0.1302
+        },
+        {
+          "balanced_accuracy": 0.8197,
+          "macro_f1": 0.8214,
+          "roc_auc": 0.9029,
+          "sensitivity": 0.7369,
+          "specificity": 0.9026,
+          "brier_score": 0.1254
+        },
+        {
+          "balanced_accuracy": 0.7729,
+          "macro_f1": 0.7744,
+          "roc_auc": 0.8731,
+          "sensitivity": 0.7191,
+          "specificity": 0.8267,
+          "brier_score": 0.1422
+        },
+        {
+          "balanced_accuracy": 0.8438,
+          "macro_f1": 0.849,
+          "roc_auc": 0.9208,
+          "sensitivity": 0.7762,
+          "specificity": 0.9114,
+          "brier_score": 0.1071
+        },
+        {
+          "balanced_accuracy": 0.8269,
+          "macro_f1": 0.8238,
+          "roc_auc": 0.9165,
+          "sensitivity": 0.8007,
+          "specificity": 0.8531,
+          "brier_score": 0.1188
+        },
+        {
+          "balanced_accuracy": 0.743,
+          "macro_f1": 0.7564,
+          "roc_auc": 0.8599,
+          "sensitivity": 0.5736,
+          "specificity": 0.9124,
+          "brier_score": 0.1409
+        },
+        {
+          "balanced_accuracy": 0.7641,
+          "macro_f1": 0.7683,
+          "roc_auc": 0.835,
+          "sensitivity": 0.6749,
+          "specificity": 0.8532,
+          "brier_score": 0.1516
+        },
+        {
+          "balanced_accuracy": 0.7922,
+          "macro_f1": 0.7988,
+          "roc_auc": 0.893,
+          "sensitivity": 0.6776,
+          "specificity": 0.9068,
+          "brier_score": 0.1322
+        },
+        {
+          "balanced_accuracy": 0.8561,
+          "macro_f1": 0.8585,
+          "roc_auc": 0.9203,
+          "sensitivity": 0.8063,
+          "specificity": 0.9059,
+          "brier_score": 0.1089
+        },
+        {
+          "balanced_accuracy": 0.7721,
+          "macro_f1": 0.7753,
+          "roc_auc": 0.8606,
+          "sensitivity": 0.696,
+          "specificity": 0.8482,
+          "brier_score": 0.1445
+        },
+        {
+          "balanced_accuracy": 0.8455,
+          "macro_f1": 0.849,
+          "roc_auc": 0.9243,
+          "sensitivity": 0.7896,
+          "specificity": 0.9014,
+          "brier_score": 0.108
+        },
+        {
+          "balanced_accuracy": 0.8327,
+          "macro_f1": 0.8317,
+          "roc_auc": 0.9247,
+          "sensitivity": 0.7772,
+          "specificity": 0.8882,
+          "brier_score": 0.1145
+        },
+        {
+          "balanced_accuracy": 0.7235,
+          "macro_f1": 0.7344,
+          "roc_auc": 0.8507,
+          "sensitivity": 0.5278,
+          "specificity": 0.9193,
+          "brier_score": 0.1504
+        },
+        {
+          "balanced_accuracy": 0.8287,
+          "macro_f1": 0.8303,
+          "roc_auc": 0.9019,
+          "sensitivity": 0.7791,
+          "specificity": 0.8783,
+          "brier_score": 0.1225
+        }
+      ]
+    },
+    "F0_LightGBM": {
+      "description": "Level 2: LightGBM Gradient Boosting on F0",
+      "balanced_accuracy": {
+        "mean": 0.8046,
+        "std": 0.0386
+      },
+      "macro_f1": {
+        "mean": 0.808,
+        "std": 0.0358
+      },
+      "roc_auc": {
+        "mean": 0.8878,
+        "std": 0.0307
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.7516,
+          "macro_f1": 0.7603,
+          "roc_auc": 0.8367,
+          "sensitivity": 0.6152,
+          "specificity": 0.8879,
+          "brier_score": 0.1384
+        },
+        {
+          "balanced_accuracy": 0.8122,
+          "macro_f1": 0.8089,
+          "roc_auc": 0.896,
+          "sensitivity": 0.7299,
+          "specificity": 0.8944,
+          "brier_score": 0.1318
+        },
+        {
+          "balanced_accuracy": 0.8285,
+          "macro_f1": 0.8301,
+          "roc_auc": 0.9071,
+          "sensitivity": 0.7609,
+          "specificity": 0.8962,
+          "brier_score": 0.1192
+        },
+        {
+          "balanced_accuracy": 0.7827,
+          "macro_f1": 0.7835,
+          "roc_auc": 0.8731,
+          "sensitivity": 0.7448,
+          "specificity": 0.8205,
+          "brier_score": 0.1411
+        },
+        {
+          "balanced_accuracy": 0.8405,
+          "macro_f1": 0.8446,
+          "roc_auc": 0.915,
+          "sensitivity": 0.7785,
+          "specificity": 0.9024,
+          "brier_score": 0.1047
+        },
+        {
+          "balanced_accuracy": 0.8344,
+          "macro_f1": 0.8317,
+          "roc_auc": 0.9187,
+          "sensitivity": 0.8132,
+          "specificity": 0.8555,
+          "brier_score": 0.1152
+        },
+        {
+          "balanced_accuracy": 0.7505,
+          "macro_f1": 0.7628,
+          "roc_auc": 0.857,
+          "sensitivity": 0.595,
+          "specificity": 0.9059,
+          "brier_score": 0.1423
+        },
+        {
+          "balanced_accuracy": 0.7616,
+          "macro_f1": 0.7654,
+          "roc_auc": 0.8336,
+          "sensitivity": 0.6749,
+          "specificity": 0.8484,
+          "brier_score": 0.1528
+        },
+        {
+          "balanced_accuracy": 0.8044,
+          "macro_f1": 0.8093,
+          "roc_auc": 0.886,
+          "sensitivity": 0.7189,
+          "specificity": 0.8898,
+          "brier_score": 0.1289
+        },
+        {
+          "balanced_accuracy": 0.8648,
+          "macro_f1": 0.8668,
+          "roc_auc": 0.9277,
+          "sensitivity": 0.8228,
+          "specificity": 0.9068,
+          "brier_score": 0.1005
+        },
+        {
+          "balanced_accuracy": 0.7732,
+          "macro_f1": 0.7756,
+          "roc_auc": 0.8654,
+          "sensitivity": 0.7073,
+          "specificity": 0.8391,
+          "brier_score": 0.1441
+        },
+        {
+          "balanced_accuracy": 0.8433,
+          "macro_f1": 0.847,
+          "roc_auc": 0.921,
+          "sensitivity": 0.7847,
+          "specificity": 0.9019,
+          "brier_score": 0.1045
+        },
+        {
+          "balanced_accuracy": 0.8395,
+          "macro_f1": 0.8387,
+          "roc_auc": 0.9198,
+          "sensitivity": 0.7956,
+          "specificity": 0.8834,
+          "brier_score": 0.1114
+        },
+        {
+          "balanced_accuracy": 0.7477,
+          "macro_f1": 0.7591,
+          "roc_auc": 0.8588,
+          "sensitivity": 0.5794,
+          "specificity": 0.9161,
+          "brier_score": 0.1447
+        },
+        {
+          "balanced_accuracy": 0.8341,
+          "macro_f1": 0.8355,
+          "roc_auc": 0.9017,
+          "sensitivity": 0.7894,
+          "specificity": 0.8788,
+          "brier_score": 0.1179
+        }
+      ]
+    },
+    "F0_MLP": {
+      "description": "Level 2: Multi-Layer Perceptron on F0",
+      "balanced_accuracy": {
+        "mean": 0.8047,
+        "std": 0.0374
+      },
+      "macro_f1": {
+        "mean": 0.8084,
+        "std": 0.0346
+      },
+      "roc_auc": {
+        "mean": 0.8873,
+        "std": 0.0318
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.7522,
+          "macro_f1": 0.7584,
+          "roc_auc": 0.8326,
+          "sensitivity": 0.6268,
+          "specificity": 0.8775,
+          "brier_score": 0.1417
+        },
+        {
+          "balanced_accuracy": 0.8055,
+          "macro_f1": 0.8013,
+          "roc_auc": 0.8889,
+          "sensitivity": 0.7069,
+          "specificity": 0.9041,
+          "brier_score": 0.1389
+        },
+        {
+          "balanced_accuracy": 0.829,
+          "macro_f1": 0.8308,
+          "roc_auc": 0.9069,
+          "sensitivity": 0.7484,
+          "specificity": 0.9096,
+          "brier_score": 0.1191
+        },
+        {
+          "balanced_accuracy": 0.7988,
+          "macro_f1": 0.8011,
+          "roc_auc": 0.886,
+          "sensitivity": 0.734,
+          "specificity": 0.8636,
+          "brier_score": 0.1318
+        },
+        {
+          "balanced_accuracy": 0.8337,
+          "macro_f1": 0.8418,
+          "roc_auc": 0.9178,
+          "sensitivity": 0.7425,
+          "specificity": 0.9248,
+          "brier_score": 0.1029
+        },
+        {
+          "balanced_accuracy": 0.8412,
+          "macro_f1": 0.8364,
+          "roc_auc": 0.9204,
+          "sensitivity": 0.794,
+          "specificity": 0.8884,
+          "brier_score": 0.1147
+        },
+        {
+          "balanced_accuracy": 0.7453,
+          "macro_f1": 0.7576,
+          "roc_auc": 0.8513,
+          "sensitivity": 0.586,
+          "specificity": 0.9046,
+          "brier_score": 0.1454
+        },
+        {
+          "balanced_accuracy": 0.7658,
+          "macro_f1": 0.7705,
+          "roc_auc": 0.8399,
+          "sensitivity": 0.6732,
+          "specificity": 0.8584,
+          "brier_score": 0.1495
+        },
+        {
+          "balanced_accuracy": 0.8077,
+          "macro_f1": 0.813,
+          "roc_auc": 0.89,
+          "sensitivity": 0.7192,
+          "specificity": 0.8962,
+          "brier_score": 0.1249
+        },
+        {
+          "balanced_accuracy": 0.8445,
+          "macro_f1": 0.8475,
+          "roc_auc": 0.9164,
+          "sensitivity": 0.7827,
+          "specificity": 0.9063,
+          "brier_score": 0.1072
+        },
+        {
+          "balanced_accuracy": 0.7795,
+          "macro_f1": 0.7841,
+          "roc_auc": 0.8627,
+          "sensitivity": 0.6868,
+          "specificity": 0.8721,
+          "brier_score": 0.1436
+        },
+        {
+          "balanced_accuracy": 0.8332,
+          "macro_f1": 0.8381,
+          "roc_auc": 0.917,
+          "sensitivity": 0.7605,
+          "specificity": 0.9059,
+          "brier_score": 0.1077
+        },
+        {
+          "balanced_accuracy": 0.8541,
+          "macro_f1": 0.8535,
+          "roc_auc": 0.9294,
+          "sensitivity": 0.8151,
+          "specificity": 0.8931,
+          "brier_score": 0.1051
+        },
+        {
+          "balanced_accuracy": 0.7429,
+          "macro_f1": 0.7536,
+          "roc_auc": 0.8454,
+          "sensitivity": 0.577,
+          "specificity": 0.9088,
+          "brier_score": 0.1532
+        },
+        {
+          "balanced_accuracy": 0.837,
+          "macro_f1": 0.8386,
+          "roc_auc": 0.9055,
+          "sensitivity": 0.7896,
+          "specificity": 0.8844,
+          "brier_score": 0.1153
+        }
+      ]
+    },
+    "Literature_MFCC_SVM": {
+      "description": "Level 3: Literature MFCC-SVM Baseline",
+      "balanced_accuracy": {
+        "mean": 0.8065,
+        "std": 0.0411
+      },
+      "macro_f1": {
+        "mean": 0.809,
+        "std": 0.0392
+      },
+      "roc_auc": {
+        "mean": 0.8831,
+        "std": 0.0359
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.7482,
+          "macro_f1": 0.7515,
+          "roc_auc": 0.8251,
+          "sensitivity": 0.6331,
+          "specificity": 0.8632,
+          "brier_score": 0.1491
+        },
+        {
+          "balanced_accuracy": 0.8024,
+          "macro_f1": 0.7996,
+          "roc_auc": 0.8884,
+          "sensitivity": 0.7286,
+          "specificity": 0.8762,
+          "brier_score": 0.1363
+        },
+        {
+          "balanced_accuracy": 0.8351,
+          "macro_f1": 0.8364,
+          "roc_auc": 0.8974,
+          "sensitivity": 0.783,
+          "specificity": 0.8872,
+          "brier_score": 0.1225
+        },
+        {
+          "balanced_accuracy": 0.8131,
+          "macro_f1": 0.8127,
+          "roc_auc": 0.8922,
+          "sensitivity": 0.8011,
+          "specificity": 0.8251,
+          "brier_score": 0.1341
+        },
+        {
+          "balanced_accuracy": 0.8536,
+          "macro_f1": 0.8551,
+          "roc_auc": 0.9189,
+          "sensitivity": 0.8121,
+          "specificity": 0.895,
+          "brier_score": 0.1041
+        },
+        {
+          "balanced_accuracy": 0.8223,
+          "macro_f1": 0.8207,
+          "roc_auc": 0.9037,
+          "sensitivity": 0.8154,
+          "specificity": 0.8292,
+          "brier_score": 0.1247
+        },
+        {
+          "balanced_accuracy": 0.7538,
+          "macro_f1": 0.7632,
+          "roc_auc": 0.832,
+          "sensitivity": 0.6206,
+          "specificity": 0.887,
+          "brier_score": 0.1493
+        },
+        {
+          "balanced_accuracy": 0.7549,
+          "macro_f1": 0.7573,
+          "roc_auc": 0.8291,
+          "sensitivity": 0.6774,
+          "specificity": 0.8324,
+          "brier_score": 0.1602
+        },
+        {
+          "balanced_accuracy": 0.8139,
+          "macro_f1": 0.8186,
+          "roc_auc": 0.8947,
+          "sensitivity": 0.7343,
+          "specificity": 0.8935,
+          "brier_score": 0.1247
+        },
+        {
+          "balanced_accuracy": 0.8588,
+          "macro_f1": 0.8613,
+          "roc_auc": 0.9262,
+          "sensitivity": 0.808,
+          "specificity": 0.9096,
+          "brier_score": 0.1028
+        },
+        {
+          "balanced_accuracy": 0.7781,
+          "macro_f1": 0.7806,
+          "roc_auc": 0.8529,
+          "sensitivity": 0.7134,
+          "specificity": 0.8428,
+          "brier_score": 0.1533
+        },
+        {
+          "balanced_accuracy": 0.8466,
+          "macro_f1": 0.85,
+          "roc_auc": 0.9187,
+          "sensitivity": 0.7924,
+          "specificity": 0.9009,
+          "brier_score": 0.1068
+        },
+        {
+          "balanced_accuracy": 0.8499,
+          "macro_f1": 0.8495,
+          "roc_auc": 0.9262,
+          "sensitivity": 0.8195,
+          "specificity": 0.8804,
+          "brier_score": 0.1087
+        },
+        {
+          "balanced_accuracy": 0.7333,
+          "macro_f1": 0.7441,
+          "roc_auc": 0.8382,
+          "sensitivity": 0.5535,
+          "specificity": 0.9131,
+          "brier_score": 0.1536
+        },
+        {
+          "balanced_accuracy": 0.8337,
+          "macro_f1": 0.8351,
+          "roc_auc": 0.9023,
+          "sensitivity": 0.7896,
+          "specificity": 0.8777,
+          "brier_score": 0.1187
+        }
+      ]
+    },
+    "Neural_DS_CNN": {
+      "description": "Level 4: Depthwise-Separable CNN (Edge Neural)",
+      "balanced_accuracy": {
+        "mean": 0.8103,
+        "std": 0.0364
+      },
+      "macro_f1": {
+        "mean": 0.8131,
+        "std": 0.0344
+      },
+      "roc_auc": {
+        "mean": 0.8922,
+        "std": 0.0313
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.7546,
+          "macro_f1": 0.7616,
+          "roc_auc": 0.838,
+          "sensitivity": 0.6273,
+          "specificity": 0.8819,
+          "brier_score": 0.138
+        },
+        {
+          "balanced_accuracy": 0.8082,
+          "macro_f1": 0.8063,
+          "roc_auc": 0.8981,
+          "sensitivity": 0.7542,
+          "specificity": 0.8622,
+          "brier_score": 0.1307
+        },
+        {
+          "balanced_accuracy": 0.8403,
+          "macro_f1": 0.8415,
+          "roc_auc": 0.9109,
+          "sensitivity": 0.7924,
+          "specificity": 0.8881,
+          "brier_score": 0.116
+        },
+        {
+          "balanced_accuracy": 0.7957,
+          "macro_f1": 0.7952,
+          "roc_auc": 0.8875,
+          "sensitivity": 0.782,
+          "specificity": 0.8093,
+          "brier_score": 0.1341
+        },
+        {
+          "balanced_accuracy": 0.8428,
+          "macro_f1": 0.8491,
+          "roc_auc": 0.916,
+          "sensitivity": 0.7673,
+          "specificity": 0.9183,
+          "brier_score": 0.1033
+        },
+        {
+          "balanced_accuracy": 0.8307,
+          "macro_f1": 0.8289,
+          "roc_auc": 0.9233,
+          "sensitivity": 0.8204,
+          "specificity": 0.8411,
+          "brier_score": 0.1114
+        },
+        {
+          "balanced_accuracy": 0.7543,
+          "macro_f1": 0.7654,
+          "roc_auc": 0.8536,
+          "sensitivity": 0.6099,
+          "specificity": 0.8986,
+          "brier_score": 0.1434
+        },
+        {
+          "balanced_accuracy": 0.7633,
+          "macro_f1": 0.7627,
+          "roc_auc": 0.8382,
+          "sensitivity": 0.7118,
+          "specificity": 0.8149,
+          "brier_score": 0.1558
+        },
+        {
+          "balanced_accuracy": 0.8213,
+          "macro_f1": 0.8251,
+          "roc_auc": 0.9017,
+          "sensitivity": 0.755,
+          "specificity": 0.8877,
+          "brier_score": 0.1212
+        },
+        {
+          "balanced_accuracy": 0.8496,
+          "macro_f1": 0.8508,
+          "roc_auc": 0.9223,
+          "sensitivity": 0.8177,
+          "specificity": 0.8816,
+          "brier_score": 0.1061
+        },
+        {
+          "balanced_accuracy": 0.7826,
+          "macro_f1": 0.7862,
+          "roc_auc": 0.8669,
+          "sensitivity": 0.7052,
+          "specificity": 0.86,
+          "brier_score": 0.1401
+        },
+        {
+          "balanced_accuracy": 0.8462,
+          "macro_f1": 0.8482,
+          "roc_auc": 0.9195,
+          "sensitivity": 0.8029,
+          "specificity": 0.8895,
+          "brier_score": 0.1067
+        },
+        {
+          "balanced_accuracy": 0.8512,
+          "macro_f1": 0.8504,
+          "roc_auc": 0.9338,
+          "sensitivity": 0.8053,
+          "specificity": 0.8971,
+          "brier_score": 0.1024
+        },
+        {
+          "balanced_accuracy": 0.7654,
+          "macro_f1": 0.7757,
+          "roc_auc": 0.8617,
+          "sensitivity": 0.6237,
+          "specificity": 0.9072,
+          "brier_score": 0.1421
+        },
+        {
+          "balanced_accuracy": 0.8486,
+          "macro_f1": 0.8491,
+          "roc_auc": 0.9112,
+          "sensitivity": 0.829,
+          "specificity": 0.8682,
+          "brier_score": 0.1144
+        }
+      ]
+    },
+    "MultiModal_Fusion_Early": {
+      "description": "Level 5: Early Fusion (F0 + Humidity)",
+      "balanced_accuracy": {
+        "mean": 0.8725,
+        "std": 0.0476
+      },
+      "macro_f1": {
+        "mean": 0.8803,
+        "std": 0.0403
+      },
+      "roc_auc": {
+        "mean": 0.9449,
+        "std": 0.0244
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.7966,
+          "macro_f1": 0.8267,
+          "roc_auc": 0.9178,
+          "sensitivity": 0.6113,
+          "specificity": 0.9819,
+          "brier_score": 0.094
+        },
+        {
+          "balanced_accuracy": 0.8615,
+          "macro_f1": 0.8569,
+          "roc_auc": 0.9376,
+          "sensitivity": 0.7519,
+          "specificity": 0.9711,
+          "brier_score": 0.0993
+        },
+        {
+          "balanced_accuracy": 0.8868,
+          "macro_f1": 0.8895,
+          "roc_auc": 0.9583,
+          "sensitivity": 0.8004,
+          "specificity": 0.9731,
+          "brier_score": 0.0773
+        },
+        {
+          "balanced_accuracy": 0.9106,
+          "macro_f1": 0.912,
+          "roc_auc": 0.9646,
+          "sensitivity": 0.8847,
+          "specificity": 0.9366,
+          "brier_score": 0.0703
+        },
+        {
+          "balanced_accuracy": 0.9082,
+          "macro_f1": 0.9133,
+          "roc_auc": 0.9558,
+          "sensitivity": 0.8612,
+          "specificity": 0.9553,
+          "brier_score": 0.066
+        },
+        {
+          "balanced_accuracy": 0.9246,
+          "macro_f1": 0.9209,
+          "roc_auc": 0.9747,
+          "sensitivity": 0.889,
+          "specificity": 0.9601,
+          "brier_score": 0.0603
+        },
+        {
+          "balanced_accuracy": 0.7843,
+          "macro_f1": 0.8068,
+          "roc_auc": 0.9092,
+          "sensitivity": 0.592,
+          "specificity": 0.9767,
+          "brier_score": 0.1106
+        },
+        {
+          "balanced_accuracy": 0.8144,
+          "macro_f1": 0.8297,
+          "roc_auc": 0.9006,
+          "sensitivity": 0.6669,
+          "specificity": 0.9619,
+          "brier_score": 0.1085
+        },
+        {
+          "balanced_accuracy": 0.8898,
+          "macro_f1": 0.8969,
+          "roc_auc": 0.9523,
+          "sensitivity": 0.8142,
+          "specificity": 0.9653,
+          "brier_score": 0.0761
+        },
+        {
+          "balanced_accuracy": 0.9209,
+          "macro_f1": 0.925,
+          "roc_auc": 0.9683,
+          "sensitivity": 0.8634,
+          "specificity": 0.9783,
+          "brier_score": 0.0593
+        },
+        {
+          "balanced_accuracy": 0.8298,
+          "macro_f1": 0.839,
+          "roc_auc": 0.9134,
+          "sensitivity": 0.7062,
+          "specificity": 0.9533,
+          "brier_score": 0.1058
+        },
+        {
+          "balanced_accuracy": 0.9094,
+          "macro_f1": 0.917,
+          "roc_auc": 0.9649,
+          "sensitivity": 0.8396,
+          "specificity": 0.9791,
+          "brier_score": 0.064
+        },
+        {
+          "balanced_accuracy": 0.9238,
+          "macro_f1": 0.9234,
+          "roc_auc": 0.9728,
+          "sensitivity": 0.892,
+          "specificity": 0.9557,
+          "brier_score": 0.0572
+        },
+        {
+          "balanced_accuracy": 0.8266,
+          "macro_f1": 0.8432,
+          "roc_auc": 0.9248,
+          "sensitivity": 0.6805,
+          "specificity": 0.9728,
+          "brier_score": 0.0994
+        },
+        {
+          "balanced_accuracy": 0.9002,
+          "macro_f1": 0.9038,
+          "roc_auc": 0.9582,
+          "sensitivity": 0.8293,
+          "specificity": 0.9712,
+          "brier_score": 0.0718
+        }
+      ]
+    },
+    "Hive_Adaptive_Norm": {
+      "description": "Level 6: Hive-Adaptive Z-Score Normalization",
+      "balanced_accuracy": {
+        "mean": 0.5845,
+        "std": 0.015
+      },
+      "macro_f1": {
+        "mean": 0.5761,
+        "std": 0.0227
+      },
+      "roc_auc": {
+        "mean": 0.6441,
+        "std": 0.0211
+      },
+      "fold_scores": [
+        {
+          "balanced_accuracy": 0.5903,
+          "macro_f1": 0.5901,
+          "roc_auc": 0.6322,
+          "sensitivity": 0.4284,
+          "specificity": 0.7522,
+          "brier_score": 0.2245
+        },
+        {
+          "balanced_accuracy": 0.5665,
+          "macro_f1": 0.5357,
+          "roc_auc": 0.6322,
+          "sensitivity": 0.3258,
+          "specificity": 0.8071,
+          "brier_score": 0.273
+        },
+        {
+          "balanced_accuracy": 0.6001,
+          "macro_f1": 0.5909,
+          "roc_auc": 0.6756,
+          "sensitivity": 0.416,
+          "specificity": 0.7842,
+          "brier_score": 0.2417
+        },
+        {
+          "balanced_accuracy": 0.5698,
+          "macro_f1": 0.5597,
+          "roc_auc": 0.6254,
+          "sensitivity": 0.3619,
+          "specificity": 0.7776,
+          "brier_score": 0.2552
+        },
+        {
+          "balanced_accuracy": 0.6118,
+          "macro_f1": 0.6129,
+          "roc_auc": 0.6722,
+          "sensitivity": 0.4229,
+          "specificity": 0.8007,
+          "brier_score": 0.2228
+        },
+        {
+          "balanced_accuracy": 0.583,
+          "macro_f1": 0.5564,
+          "roc_auc": 0.6561,
+          "sensitivity": 0.3915,
+          "specificity": 0.7746,
+          "brier_score": 0.2647
+        },
+        {
+          "balanced_accuracy": 0.5869,
+          "macro_f1": 0.5888,
+          "roc_auc": 0.6536,
+          "sensitivity": 0.3897,
+          "specificity": 0.7842,
+          "brier_score": 0.2263
+        },
+        {
+          "balanced_accuracy": 0.6014,
+          "macro_f1": 0.6029,
+          "roc_auc": 0.6648,
+          "sensitivity": 0.4298,
+          "specificity": 0.7729,
+          "brier_score": 0.2269
+        },
+        {
+          "balanced_accuracy": 0.5558,
+          "macro_f1": 0.5446,
+          "roc_auc": 0.6026,
+          "sensitivity": 0.3138,
+          "specificity": 0.7978,
+          "brier_score": 0.2565
+        },
+        {
+          "balanced_accuracy": 0.5849,
+          "macro_f1": 0.5787,
+          "roc_auc": 0.6329,
+          "sensitivity": 0.4007,
+          "specificity": 0.769,
+          "brier_score": 0.249
+        },
+        {
+          "balanced_accuracy": 0.5837,
+          "macro_f1": 0.5823,
+          "roc_auc": 0.6233,
+          "sensitivity": 0.4203,
+          "specificity": 0.747,
+          "brier_score": 0.2505
+        },
+        {
+          "balanced_accuracy": 0.5944,
+          "macro_f1": 0.5909,
+          "roc_auc": 0.6715,
+          "sensitivity": 0.3897,
+          "specificity": 0.7991,
+          "brier_score": 0.2296
+        },
+        {
+          "balanced_accuracy": 0.5612,
+          "macro_f1": 0.5398,
+          "roc_auc": 0.6213,
+          "sensitivity": 0.3521,
+          "specificity": 0.7704,
+          "brier_score": 0.269
+        },
+        {
+          "balanced_accuracy": 0.5916,
+          "macro_f1": 0.5915,
+          "roc_auc": 0.6451,
+          "sensitivity": 0.3813,
+          "specificity": 0.8019,
+          "brier_score": 0.2344
+        },
+        {
+          "balanced_accuracy": 0.5861,
+          "macro_f1": 0.5764,
+          "roc_auc": 0.6522,
+          "sensitivity": 0.3897,
+          "specificity": 0.7825,
+          "brier_score": 0.2464
+        }
+      ]
+    }
+  }
+}

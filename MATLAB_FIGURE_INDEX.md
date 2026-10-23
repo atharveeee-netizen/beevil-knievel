@@ -34,7 +34,7 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
 | **05** | `05_acoustic_dsp` | Bio-Acoustic DSP Pipeline | 16:9 | INMP441 I2S DMA, 256-pt Hanning window, CMSIS-DSP FFT, 8 Spectral Energy Bins (0–500 Hz) | `firmware/src/dsp/fft.cpp`, `firmware/src/audio/` | `[VALIDATED]`, `[MEASURED]` | Section 4.2: Acoustic DSP | 2:05 – 2:25 (Worker piping & FFT) |
 | **06** | `06_lora_communication` | Wireless Communication & Memory Map | 16:9 | Sub-GHz Star Topology (100 Hives -> Gateway), IN865 Link Budget, 33-Byte Binary Payload Memory Map | `firmware/src/radio/lora.cpp`, `gateway/src/radio/` | `[DEMONSTRATED]`, `[VALIDATED]`, `[CALCULATED]` | Section 5.1: RF Link & Protocol | 2:25 – 2:50 (Star topology & packet) |
 | **07** | `07_receiver_gateway` | Gateway Receiver & Local Analytics | 16:9 | Raspberry Pi 3B+, Waveshare SX1262 HAT, SQLite WAL DB, Scikit-Learn Model 2, FastAPI Daemon, PWA UI | `gateway/src/main.py`, `gateway/src/db.py` | `[DEMONSTRATED]`, `[VALIDATED]` | Section 5.2: Gateway Architecture | 2:50 – 3:15 (Edge gateway demo) |
-| **08** | `08_ai_ml` | Dual AI/ML Pipeline Architecture | 16:9 | Separation: On-Node Page's CUSUM (nRF52840) vs Gateway Random Forest (RPi 3B+, 94.2% Acc, Zenodo) | `firmware/src/analytics/cusum.cpp`, `gateway/src/ml/` | `[VALIDATED]` | Section 6: Machine Learning | 3:15 – 3:45 (Dual AI engine) |
+| **08** | `08_ai_ml` | Dual AI/ML Pipeline Architecture | 16:9 | Separation: On-Node Page's CUSUM (nRF52840) vs Gateway Classifier (RPi 3B+, Phase 5 Benchmark) | `firmware/src/analytics/cusum.cpp`, `gateway/src/ml/` | `[VALIDATED]` | Section 6: Machine Learning | 3:15 – 3:45 (Dual AI engine) |
 | **09** | `09_multi_hive_network` | Multi-Hive Scalability & Economics | 16:9 | 100-Hive Apiary Yard, ALOHA 0.202% Duty Cycle, Economic Comparison (Zero SIM cards vs $25k Cellular) | `simulations/network_scalability.py` | `[DEMONSTRATED]`, `[CALCULATED]`, `[VALIDATED]` | Section 7.1: Scalability & BOM | 3:45 – 4:10 (Commercial economics) |
 | **10** | `10_end_to_end_dataflow` | End-to-End Data Flow Pipeline | 16:9 | 6-Stage Chronology: Physical -> Transduction -> Embedded DSP -> LoRa Radio -> Gateway AI -> Beekeeper UI | Full Codebase Integration | `[VALIDATED]`, `[MEASURED]`, `[CALCULATED]`, `[DEMONSTRATED]` | Section 2.2: Signal Flow | 4:10 – 4:30 (Data journey summary) |
 | **11** | `11_ansys_simulation` | Ansys Multiphysics Simulation | 16:9 | Ansys Maxwell/HFSS 3D Antenna (S11 -22.4 dB, VSWR 1.16) & Ansys Fluent CFD (10-frame Brood Box, 34.5°C) | `simulations/ansys/` | `[SIMULATED]` | Section 7.2: Multiphysics FEA | 4:30 – 4:45 (Simulation verification) |
@@ -50,7 +50,7 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
 - **Subsystems**:
   1. *Tier 1: Commercial Langstroth Hive*: Brood Nest Thermal Core (TI TMP117, NIST ±0.1°C), Spatial Thermal Grid (5x DS18B20 1-Wire), Bio-Acoustic Transduction (INMP441 I2S MEMS), Environmental & Mass (SCD41 CO2, BME688 VOC, HX711 200 kg scale).
   2. *Tier 2: Modular Sensor Node (RAK4631)*: Nordic nRF52840 MCU (64 MHz ARM Cortex-M4F, 1MB Flash, 256KB SRAM), CMSIS-DSP 256-pt FFT (2.49 ms), Model 1 CUSUM, Dual-Radio Transceivers (SX1262 LoRa + nRF52840 BLE Mesh), Switched Rail (WB_IO2 MOSFET, 18 µA sleep).
-  3. *Tier 3: Gateway Reader & Analytics*: Raspberry Pi 3B+ (Quad A53 @ 1.4GHz), Waveshare SX1262 HAT, SQLite WAL database, Gateway Edge AI (Model 2 Random Forest, 94.2% Acc), FastAPI local daemon (`beevil.local`).
+  3. *Tier 3: Gateway Reader & Analytics*: Raspberry Pi 3B+ (Quad A53 @ 1.4GHz), Waveshare SX1262 HAT, SQLite WAL database, Gateway Edge AI (Model 2 Classifier, evaluated in Phase 5 benchmark), FastAPI local daemon (`beevil.local`).
 - **Primary Source Files**: `firmware/src/main.cpp`, `gateway/src/main.py`, `hardware/bom.csv`.
 - **Evidence Status**: `[DEMONSTRATED]`, `[VALIDATED]`, `[CALCULATED]`, `[MEASURED]`.
 - **Target Use**: IEEE Phase 2 Final Report Section 2; Video 0:35–0:55.
@@ -129,7 +129,7 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
 - **Key Details**:
   - Layer 1 (Radio Ingestion): Waveshare SX1262 LoRa HAT on Raspberry Pi 3B+ over SPI, hardware CRC validation, node whitelist filtering.
   - Layer 2 (Local Persistence): SQLite WAL database (`beevil_telemetry.db`) storing raw audit logs and time-series metrics (>365 days offline capacity).
-  - Layer 3 (Edge AI Engine): Supervised Random Forest (Model 2, 100 trees, 94.2% validation accuracy on Zenodo dataset, 0 false negatives for queenless collapse).
+  - Layer 3 (Edge AI Engine): Supervised Random Forest (Model 2, 100 trees, evaluated under leakage-safe multi-dataset protocol in Phase 5).
   - Layer 4 (Serving & UI): FastAPI daemon (`beevil.local`) providing REST and WebSockets to an offline PWA dashboard. Zero monthly cloud fees.
 - **Primary Source Files**: `gateway/src/main.py`, `gateway/src/db.py`, `gateway/src/ml/model.py`.
 - **Evidence Status**: `[DEMONSTRATED]`, `[VALIDATED]`.
@@ -163,8 +163,8 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
   - Stage 1: Physical (34.5°C brood core, 100–500 Hz vibrations, 400–5000 ppm CO2, 0–100 kg weight).
   - Stage 2: Transduction (TMP117 RTD, DS18B20 1-Wire grid, INMP441 MEMS, SCD41 NDIR, HX711 scale).
   - Stage 3: Embedded DSP (CMSIS-DSP 256-pt FFT in 2.49 ms, 8 energy bins, Page's CUSUM, 33-byte struct).
-  - Stage 4: Dual Radio (nRF52840 2.4 GHz BLE Mesh local cluster + Semtech SX1262 LoRa 865 MHz star backhaul, +14 dBm ERP, 18.2 ms airtime, 4.2 km range).
-  - Stage 5: Gateway AI (RPi 3B+, Waveshare LoRa HAT, SQLite WAL, Random Forest 94.2% accuracy).
+  - Stage 4: Dual Radio (nRF52840 2.4 GHz BLE Mesh local cluster + Semtech SX1262 LoRa 865 MHz star backhaul, +14 dBm ERP, 77.06 ms airtime, 4.2 km modelled range).
+  - Stage 5: Gateway AI (RPi 3B+, Waveshare LoRa HAT, SQLite WAL, Gateway ML Classifier).
   - Stage 6: Beekeeper UI (Local PWA, predictive alerts, single-frame targeted intervention, zero cloud fees).
 - **Primary Source Files**: Integration across all layers.
 - **Evidence Status**: `[VALIDATED]`, `[MEASURED]`, `[CALCULATED]`, `[DEMONSTRATED]`.
@@ -182,9 +182,9 @@ All figures adhere strictly to the **SYZYGY Engineering Guidelines**:
 #### Figure 12: Scientific Evidence & Validation Taxonomy Matrix
 - **Purpose**: Authoritative classification matrix ensuring all project metrics are backed by demonstrable evidence.
 - **Key Details**:
-  - `[MEASURED]`: 18.0 µA sleep current (Keithley 6514), 2.49 ms FFT latency (DWT cycles), 25.4°C–26.8°C MCU temp, 67 g node weight, 65x55x15 mm enclosure.
-  - `[VALIDATED]`: ±0.1°C NIST brood RTD, ±0.5°C spatial grid, 16 kHz PCM audio, -0.02°C/hr CUSUM drift, 94.2% Model 2 accuracy, 27/27 passing unit tests.
-  - `[CALCULATED]`: 18.2 ms packet airtime, 0.85 mWh/day energy budget, 4.2 km LOS range, 26.16 dB link margin, 0.202% apiary duty cycle, $18.74 BOM unit cost.
+  - `[MEASURED]`: Bench electrical measurements pending PPK2 procedure (Phase 7), 67 g node weight, 65x55x15 mm enclosure.
+  - `[VALIDATED]`: ±0.1°C NIST brood RTD, ±0.5°C spatial grid, 16 kHz PCM audio, -0.02°C/hr CUSUM drift, passing unit tests.
+  - `[CALCULATED]`: 77.06 ms (v2) packet airtime, 0.85 mWh/day energy budget, 4.2 km LOS range (modelled), 26.16 dB link margin, 0.202% apiary duty cycle, $18.74 BOM unit cost.
   - `[SIMULATED]`: $S_{11} = -22.4$ dB return loss, VSWR 1.16 : 1, 91.4% radiation efficiency, 34.5°C brood core CFD, 0.18 m/s convective draft.
   - `[DEMONSTRATED]`: WisBlock RAK5005-O transmitter, Raspberry Pi 3B+ receiver, 4:2 spring terminals & PG-7 glands, FastAPI server daemon, SQLite WAL store.
 - **Primary Source Files**: `docs/MATLAB_ARCHITECTURE_SOURCE_OF_TRUTH.md`.

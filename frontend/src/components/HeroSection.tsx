@@ -101,7 +101,7 @@ export function HeroSection() {
             <div className="text-[10px] text-[#64748b] uppercase tracking-wider">Sub-GHz Link Margin</div>
             <div className="text-xl sm:text-2xl font-bold text-[#a78bfa] font-tabular mt-0.5">+26.1 dB</div>
             <div className="text-[10px] text-[#94a3b8] mt-1 flex items-center justify-between">
-              <span>4.2 km LOS SF7</span>
+              <span>Modelled LOS (SF7)</span>
               <Badge claim="CALCULATED" size="sm">SX1262</Badge>
             </div>
           </div>

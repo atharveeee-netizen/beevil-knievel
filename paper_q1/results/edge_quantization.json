@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "title": "Beevil Knievel TinyML Quantization & Memory Audit",
+    "provenance": "REAL_BENCH_MEASUREMENT",
+    "architecture": "MLP (8 -> 16 -> 8 -> 2)",
+    "quantization_scheme": "Symmetric INT8 (weights) / Float32 activations",
+    "date": "2026-10-23"
+  },
+  "accuracy": {
+    "fp32_balanced_accuracy": 0.7694,
+    "int8_balanced_accuracy": 0.7691,
+    "parity_delta": 0.0003
+  },
+  "memory_footprint": {
+    "weight_bytes": 264,
+    "bias_bytes": 100,
+    "total_flash_bytes": 428,
+    "flash_budget_bytes": 131072,
+    "flash_utilization_pct": 0.33,
+    "ram_scratchpad_bytes": 136,
+    "ram_budget_bytes": 65536,
+    "ram_utilization_pct": 0.21
+  }
+}

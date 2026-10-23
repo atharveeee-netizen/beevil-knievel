@@ -2,9 +2,9 @@ name: IEEE-HART Engineering CI & Verification Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, q1-journal ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, q1-journal ]
   workflow_dispatch:
 
 concurrency:
@@ -28,7 +28,8 @@ jobs:
       - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install fastapi uvicorn pydantic numpy scikit-learn joblib pytest
+          pip install fastapi uvicorn pydantic numpy scikit-learn scipy pyyaml joblib pytest
+          pip install torch --extra-index-url https://download.pytorch.org/whl/cpu
 
       - name: Repository Hygiene Audit
         run: |
@@ -46,20 +47,20 @@ jobs:
           echo "Running unit and gateway integration tests..."
           pytest tests/ -v
 
-      - name: Execute Cloud Pathology Random Forest Benchmark
+      - name: Execute Cloud Model Demo Benchmark
         run: |
-          echo "Verifying Cloud Model 2 Pathology Diagnostics..."
+          echo "Verifying Cloud Model Demonstration on Synthetic Fixture..."
           python "Cloud Model/run_cloud_model_benchmark.py"
 
-      - name: Execute TinyML 30-Scenario Stress Test Benchmark
+      - name: Execute TinyML Stress Test Benchmark
         run: |
-          echo "Verifying TinyML Multi-Band Feature Classifier on Stress Suite..."
+          echo "Verifying TinyML Feature Classifier on Synthetic Fixture Suite..."
           python "TinyML Model/run_stress_test_benchmark.py"
 
-      - name: Execute Level 1 Real Zenodo Acoustic Benchmark
+      - name: Execute Q1 Journal Pipeline Smoke Test
         run: |
-          echo "Verifying TinyML Model on Real Zenodo Research Audio..."
-          python "TinyML Model/run_level1_testing.py"
+          echo "Verifying paper_q1 smoke verification on offline fixtures..."
+          python -m paper_q1.run smoke
 
   frontend_build_verification:
     name: Frontend Static Build & Typecheck

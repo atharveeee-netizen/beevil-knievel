@@ -1,11 +1,10 @@
 """
-BEEVIL ADVISOR - ON-PREMISES CONVERSATIONAL EDGE AI (Linux / Raspberry Pi 3B+)
-==================================================================
-Local Small Language Model (SLM) / Rule-Augmented Intelligence:
-- Analyzes 100-hive multi-modal time-series telemetry.
-- Synthesizes complex thermal, acoustic, and scale trends into plain English.
-- Generates daily morning briefings, actionable triage recommendations,
-  and instant conversational Q&A for beekeepers with ZERO cloud API calls!
+BEEVIL ADVISOR - RULE-BASED TRIAGE & BRIEFING GENERATOR (Linux / Raspberry Pi 3B+)
+==================================================================================
+Deterministic template and rule-based diagnostic summary generator:
+- Summarizes multi-sensor hive telemetry and threshold alerts into human-readable text.
+- Generates structured morning briefings and triage inspection recommendations.
+NOTE: This is a rule-based deterministic template engine running on-gateway, not a trained neural language model.
 """
 
 import os

@@ -108,7 +108,7 @@ export function DualRadioNetworkSection() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
             <div className="p-4 rounded bg-[#090b10] border border-[#1d2332]">
               <div className="text-[10px] text-[#64748b] uppercase">Line-of-Sight (LOS) Range</div>
-              <div className="text-xl font-bold text-[#10b981] font-tabular mt-1">4.2 km</div>
+              <div className="text-xl font-bold text-[#10b981] font-tabular mt-1">4.2 km <span className="text-xs font-normal text-[#94a3b8]">(Modelled)</span></div>
               <div className="text-[10px] text-[#94a3b8] mt-1">+26.16 dB Net Margin</div>
             </div>
 
