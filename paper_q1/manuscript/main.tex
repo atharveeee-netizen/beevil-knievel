@@ -3,6 +3,7 @@
 \usepackage{lineno}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
+\graphicspath{{figures/}{../figures/}{./}}
 \usepackage{booktabs}
 \usepackage{cite}
 \usepackage{hyperref}
@@ -89,7 +90,7 @@ Specifically, this paper makes the following five contributions:
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.95\textwidth]{../figures/fig1_system_architecture.pdf}
+\includegraphics[width=0.95\textwidth]{fig1_system_architecture.pdf}
 \caption{End-to-end monitoring pipeline: (1) Sensor node executes FIR decimation, 512-pt CMSIS-DSP FFT, 8-band energy integration, and INT8 TinyML inference; (2) 36-byte Frame v2 telemetry transmission over LoRa PHY; (3) Multi-channel gateway concentrator; (4) Backend decision support and Page CUSUM anomaly detection.}
 \label{fig:arch}
 \end{figure*}
@@ -115,7 +116,7 @@ To compute bio-acoustic features within the SRAM constraints of the Cortex-M4F w
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.9\textwidth]{../figures/fig2_acoustic_bands.pdf}
+\includegraphics[width=0.9\textwidth]{fig2_acoustic_bands.pdf}
 \caption{(a) Frequency response of the 31-tap anti-aliasing FIR decimation filter; (b) Definition of the 8 biological acoustic bands spanning 30~Hz to 2000~Hz.}
 \label{fig:bands}
 \end{figure}
@@ -160,7 +161,7 @@ We evaluated 11 candidate model families representing existing heuristics, class
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.92\textwidth]{../figures/fig3_benchmark_performance.pdf}
+\includegraphics[width=0.92\textwidth]{fig3_benchmark_performance.pdf}
 \caption{Distribution of balanced accuracy across 15 outer test folds with strict hive isolation [REAL\_PUBLIC\_DATASET]. The legacy heuristic achieves 73.5\%, while on-device 8-band features (F0) achieve $\approx 73\%$, matching MFCC-SVM and DS-CNN. Multi-modal early fusion achieves 82.0\% (AUROC 0.896).}
 \label{fig:results}
 \end{figure*}
@@ -204,7 +205,7 @@ Several key findings emerge:
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.7\textwidth]{../figures/fig4_modality_ablation.pdf}
+\includegraphics[width=0.7\textwidth]{fig4_modality_ablation.pdf}
 \caption{Modality ablation across unseen hives: Combining acoustic band energies with environmental telemetry improves balanced accuracy to 82.0\% over acoustic features alone.}
 \label{fig:ablation}
 \end{figure}
@@ -242,7 +243,7 @@ The compiled inference function (\texttt{beevil\_tinyml\_predict\_mlp}) executes
 \subsection{Analytical Energy Budget Ledger}
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.88\textwidth]{../figures/fig5_energy_breakdown.pdf}
+\includegraphics[width=0.88\textwidth]{fig5_energy_breakdown.pdf}
 \caption{Analytical energy consumption ledger per 36-byte telemetry cycle: (a) On-device computation energy (DSP FFT + TinyML); (b) Total system energy breakdown including LoRa TX burst and 15-minute sleep [ANALYTICAL\_MODEL].}
 \label{fig:energy}
 \end{figure*}
@@ -258,7 +259,7 @@ Under this analytical model, the maximum coverage through apiary vegetation is \
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.7\textwidth]{../figures/fig6_lora_link_budget.pdf}
+\includegraphics[width=0.7\textwidth]{fig6_lora_link_budget.pdf}
 \caption{Analytical LoRa link budget and receiver sensitivity limits at SF7 and SF10 under two-ray ground reflection and ITU-R P.833 orchard canopy foliage attenuation [ANALYTICAL\_MODEL].}
 \label{fig:rf}
 \end{figure}
