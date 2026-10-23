@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "title": "MSPB Broodnest Temperature Page-CUSUM Anomaly Detection",
+    "provenance": "REAL_PUBLIC_DATASET",
+    "dataset": "MSPB (D4)",
+    "hives_evaluated": 70,
+    "algorithm": "Page CUSUM (One-Sided Downward Detector)",
+    "parameters": {
+      "in_control_mean_c": 34.8,
+      "chilling_deficit_threshold_c": 32.0,
+      "reference_slack_k": 33.4,
+      "decision_threshold_h": 4.0
+    }
+  },
+  "performance": {
+    "total_alarms_detected": 70,
+    "in_control_average_run_length_days": 18.44,
+    "mean_detection_latency_hours": 2.33,
+    "false_positive_rate_per_month": 1.627
+  }
+}

@@ -1,0 +1,12 @@
+bibkey,doi_or_url,title,authors,venue_or_journal,year,verified,date_checked,claim_supported
+bricout2024beetogether,10.3390/s24186067,Bee Together: A Multi-Dataset Collection for Honey Bee Audio Analysis,Bricout et al.,Sensors,2024,YES,2026-10-23,Mel-CNN reaches 99.2% on random split but drops to 34-84% under leave-one-hive-out
+abdollahi2026urban,arXiv:2607.20386,Colony Strength Estimation via In-Hive Sensing,Abdollahi et al.,arXiv,2026,YES,2026-10-23,Colony strength correlation drops from r=0.97 random to r=0.78 hive-independent
+deluca2025tinyml,arXiv:2509.14061,TinyML Honeybee Colony Health Monitoring,De Luca & Donati,arXiv,2025,YES,2026-10-23,LightGBM on STM32 shares hives across train and test sets
+harshit2025beehivesound,arXiv:2509.17800,Deep Learning for Beehive Audio Classification,Harshit et al.,arXiv,2025,YES,2026-10-23,CNN on Kaggle beehive-sounds without hive-level grouping
+ormeno2026insects,10.3390/insects17060547,Acoustic Monitoring of Apis mellifera Colonies,Ormeño-Arriagada et al.,Insects,2026,YES,2026-10-23,Acoustic classification reporting 0.70-0.73 without strict hive isolation
+sucipto2025survey,arXiv:2509.08822,Smart Beehive Monitoring Systems: A Systematic Review,Sucipto et al.,arXiv,2025,YES,2026-10-23,Notes that hive-dependent splits inflate accuracy across literature
+nolasco2021tobee,10.1016/j.patter.2021.100344,To bee or not to bee: Investigating machine learning approaches to beehive sound recognition,Nolasco et al.,Patterns,2021,YES,2026-10-23,Zenodo 1321278 dataset benchmark and SVM baseline
+nadeau2003inference,10.1023/A:1024068626366,Inference for the Generalization Error,Nadeau & Bengio,Machine Learning,2003,YES,2026-10-23,Corrected resampled t-test for cross-validation variance correction
+page1954continuous,10.2307/2333009,Continuous Inspection Schemes,E. S. Page,Biometrika,1954,YES,2026-10-23,One-sided Page CUSUM sequential change-point detection
+arm2023cmsis,https://github.com/ARM-software/CMSIS_5,Cortex Microcontroller Software Interface Standard,ARM Limited,Whitepaper,2023,YES,2026-10-23,CMSIS-DSP and CMSIS-NN real FFT and quantized tensor operations
+semtech2021sx1262,DS.SX1261-2.W.APP,SX1261/2 Long Range Low Power LoRa Transceiver Datasheet,Semtech Corporation,Datasheet,2021,YES,2026-10-23,SX1262 LoRa airtime sensitivity and power consumption specifications

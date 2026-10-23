@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "title": "Beevil Knievel LoRa PHY Analytical Link Budget",
+    "provenance": "ANALYTICAL_MODEL",
+    "transceiver": "Semtech SX1262 (RAK4631)",
+    "gateway_concentrator": "Semtech SX1302 (RAK2287)",
+    "frame_version": "Frame v2 (36 Bytes)"
+  },
+  "rf_parameters": {
+    "frequency_mhz": 868.1,
+    "tx_power_dbm": 14.0,
+    "tx_antenna_gain_dbi": 2.0,
+    "rx_antenna_gain_dbi": 2.5,
+    "fade_margin_db": 10.0
+  },
+  "sf7_mode": {
+    "spreading_factor": 7,
+    "bandwidth_khz": 125,
+    "coding_rate": "4/5",
+    "payload_bytes": 36,
+    "airtime_ms": 77.06,
+    "receiver_sensitivity_dbm": -124.0,
+    "max_allowable_path_loss_db": 132.5,
+    "theoretical_los_range_km": 0.12,
+    "modelled_canopy_range_m": 4148.2
+  },
+  "sf10_mode": {
+    "spreading_factor": 10,
+    "bandwidth_khz": 125,
+    "coding_rate": "4/5",
+    "payload_bytes": 36,
+    "airtime_ms": 411.65,
+    "receiver_sensitivity_dbm": -132.0,
+    "max_allowable_path_loss_db": 140.5,
+    "theoretical_los_range_km": 0.29,
+    "modelled_canopy_range_m": 8008.9
+  }
+}
