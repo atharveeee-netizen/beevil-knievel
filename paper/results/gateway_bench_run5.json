@@ -1,0 +1,23 @@
+{
+ "packets": 1000,
+ "wall_s": 3.342,
+ "throughput_pps": 299.18,
+ "lat_mean_ms": 3.26,
+ "lat_p50_ms": 3.1,
+ "lat_p95_ms": 4.58,
+ "lat_p99_ms": 6.45,
+ "diagnoses": {
+  "others": [
+   "QUEEN_PRESENT"
+  ],
+  "12": [
+   "PRE_SWARM_WARNING"
+  ],
+  "45": [
+   "THERMAL_STRESS"
+  ],
+  "88": [
+   "TAMPER_THEFT"
+  ]
+ }
+}

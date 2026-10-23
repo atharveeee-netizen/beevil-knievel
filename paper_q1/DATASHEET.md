@@ -17,18 +17,22 @@
 
 ### D2: Zenodo 1321278 ("To bee or not to bee")
 - **Task Relevance:** T2 (Bee vs. non-bee acoustic gating).
-- **Total Audio Files:** 2
-- **Total Duration:** 0.08 hours
+- **Total Audio Files:** 56
+- **Total Duration:** 7.34 hours
 - **Label Distribution (Annotated Seconds):**
-  - Bee: 59.4 s
-  - No-Bee: 255.7 s
+  - Bee: 21730.5 s
+  - No-Bee: 7871.4 s
 - **Hive Distribution:**
-  - `OSBH_CF003`: 1 recordings
+  - `OSBH_CF003`: 14 recordings
+  - `OSBH_CJ001`: 5 recordings
+  - `NU_Hive_1`: 17 recordings
+  - `NU_Hive_3`: 18 recordings
   - `OSBH_CF001`: 1 recordings
+  - `OSBH_GH001`: 1 recordings
 
 ### D4: MSPB (Multi-Sensor Polish Beehive)
 - **Task Relevance:** T4 (Winter survival, colony strength, queen cells) & C4 (Page CUSUM thermal baseline calibration).
-- **Hives Monitored:** 94 hives across 2 apiaries.
+- **Hives Monitored:** 53 hives across 2 apiaries.
 - **Total Sensor Telemetry Rows:** 1,836,914 records.
 - **Sensor Cadence:** 15-minute brood frame temperature and relative humidity; 5-minute extracted acoustic feature vectors.
 - **Ground Truth Inspections:** Bi-weekly apiary inspections recording frames of adult bees, brood coverage, queen cells, Varroa count, and post-winter colony survival.

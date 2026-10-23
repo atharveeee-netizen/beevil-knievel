@@ -2,15 +2,19 @@
   "metadata": {
     "title": "Beevil Knievel LoRa PHY Analytical Link Budget",
     "provenance": "ANALYTICAL_MODEL",
-    "transceiver": "Semtech SX1262 (RAK4631)",
-    "gateway_concentrator": "Semtech SX1302 (RAK2287)",
+    "node_transceiver": "Semtech SX1262 (RAK4631)",
+    "gateway_radio_hat": "Waveshare SX1262 LoRa HAT (Ebyte E22-900T22S, UART)",
+    "gateway_host": "Raspberry Pi 3B+",
+    "regulatory_band": "IN865 (India 865-867 MHz)",
     "frame_version": "Frame v2 (36 Bytes)"
   },
   "rf_parameters": {
-    "frequency_mhz": 868.1,
+    "frequency_mhz": 865.0625,
     "tx_power_dbm": 14.0,
     "tx_antenna_gain_dbi": 2.0,
     "rx_antenna_gain_dbi": 2.5,
+    "node_antenna_height_m": 0.5,
+    "gateway_antenna_height_m": 4.0,
     "fade_margin_db": 10.0
   },
   "sf7_mode": {
@@ -21,8 +25,10 @@
     "airtime_ms": 77.06,
     "receiver_sensitivity_dbm": -124.0,
     "max_allowable_path_loss_db": 132.5,
-    "theoretical_los_range_km": 0.12,
-    "modelled_canopy_range_m": 4148.2
+    "free_space_range_km": 116.27,
+    "two_ray_ground_range_km": 2.9,
+    "orchard_canopy_range_km": 0.58,
+    "orchard_canopy_range_m": 579.4
   },
   "sf10_mode": {
     "spreading_factor": 10,
@@ -32,7 +38,9 @@
     "airtime_ms": 411.65,
     "receiver_sensitivity_dbm": -132.0,
     "max_allowable_path_loss_db": 140.5,
-    "theoretical_los_range_km": 0.29,
-    "modelled_canopy_range_m": 8008.9
+    "free_space_range_km": 292.05,
+    "two_ray_ground_range_km": 4.6,
+    "orchard_canopy_range_km": 0.92,
+    "orchard_canopy_range_m": 918.4
   }
 }

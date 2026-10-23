@@ -339,6 +339,137 @@ def step_all(args: argparse.Namespace) -> int:
     return 0
 
 
+def step_readme(args: argparse.Namespace) -> int:
+    """Dynamically inject validated key results from results/*.json into README.md."""
+    print("=== [paper_q1] Step: readme ===")
+    results_path = REPO_ROOT / "paper_q1" / "results" / "main_results.json"
+    if not results_path.exists():
+        print(f"  [ERROR] Results file missing: {results_path}")
+        return 1
+
+    with open(results_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    summaries = data.get("model_summaries", {})
+    if not summaries:
+        print("  [ERROR] No model summaries found in main_results.json")
+        return 1
+
+    lines = [
+        "| Task | Dataset | Protocol | Model | Balanced Accuracy (Mean ± SD) | Macro F1 | AUROC | Provenance |",
+        "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
+    ]
+
+    model_display_names = {
+        "Floor_Majority": "Floor: Majority Class",
+        "Floor_Stratified": "Floor: Stratified Random",
+        "Repo_Heuristic_V1": "Repo Heuristic V1",
+        "F0_Logistic_Regression": "F0: Logistic Regression",
+        "F0_Random_Forest": "F0: Random Forest",
+        "F0_HistGradientBoosting": "F0: HistGradientBoosting",
+        "F0_MLP": "F0: MLP (TinyML Candidate)",
+        "SVM_RBF_on_F0": "SVM (RBF on F0)",
+        "F0_Deep_MLP": "Deep MLP",
+        "MultiModal_Fusion_Early": "**Multi-Modal Early Fusion**",
+        "MultiModal_Early_Fusion": "**Multi-Modal Early Fusion**",
+        "Hive_Adaptive_Norm": "Hive-Adaptive Normalization",
+    }
+
+    for m_key, disp_name in model_display_names.items():
+        if m_key in summaries:
+            m_data = summaries[m_key]
+            # Handle nested or flat structures
+            if isinstance(m_data.get("balanced_accuracy"), dict):
+                acc_mean = m_data["balanced_accuracy"].get("mean", 0.0) * 100
+                acc_std = m_data["balanced_accuracy"].get("std", 0.0) * 100
+            else:
+                acc_mean = m_data.get("balanced_accuracy_mean", 0.0) * 100
+                acc_std = m_data.get("balanced_accuracy_std", 0.0) * 100
+
+            if isinstance(m_data.get("macro_f1"), dict):
+                f1_mean = m_data["macro_f1"].get("mean", 0.0)
+            else:
+                f1_mean = m_data.get("f1_macro_mean", m_data.get("macro_f1_mean", 0.0))
+
+            if isinstance(m_data.get("roc_auc"), dict):
+                auc_mean = m_data["roc_auc"].get("mean", 0.0)
+            else:
+                auc_mean = m_data.get("roc_auc_mean", 0.0)
+
+            prov = "REAL_PUBLIC_DATASET"
+            if "MultiModal" in m_key:
+                lines.append(
+                    f"| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | {disp_name} | **{acc_mean:.2f}% ± {acc_std:.2f}%** | **{f1_mean:.4f}** | **{auc_mean:.4f}** | `{prov}` |"
+                )
+            else:
+                lines.append(
+                    f"| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | {disp_name} | {acc_mean:.2f}% ± {acc_std:.2f}% | {f1_mean:.4f} | {auc_mean:.4f} | `{prov}` |"
+                )
+
+    table_block = "\n".join(lines)
+
+    readme_path = REPO_ROOT / "README.md"
+    if not readme_path.exists():
+        print(f"  [ERROR] README.md missing at {readme_path}")
+        return 1
+
+    readme_content = readme_path.read_text(encoding="utf-8")
+    start_tag = "<!-- RESULTS:START -->"
+    end_tag = "<!-- RESULTS:END -->"
+
+    if start_tag not in readme_content or end_tag not in readme_content:
+        print(f"  [ERROR] Markers {start_tag} and {end_tag} not found in README.md")
+        return 1
+
+    idx_start = readme_content.find(start_tag) + len(start_tag)
+    idx_end = readme_content.find(end_tag)
+
+    new_content = readme_content[:idx_start] + "\n" + table_block + "\n" + readme_content[idx_end:]
+    readme_path.write_text(new_content, encoding="utf-8")
+    print("  [OK] Successfully injected latest benchmark results into README.md")
+    return 0
+
+
+def step_linkcheck(args: argparse.Namespace) -> int:
+    """Verify all relative markdown links in README.md resolve to existing files."""
+    print("=== [paper_q1] Step: linkcheck ===")
+    readme_path = REPO_ROOT / "README.md"
+    if not readme_path.exists():
+        print(f"  [ERROR] README.md missing at {readme_path}")
+        return 1
+
+    import re
+    content = readme_path.read_text(encoding="utf-8")
+    pattern = r'\[([^\]]+)\]\(([^)]+)\)'
+    matches = re.findall(pattern, content)
+
+    broken_links = []
+    checked_count = 0
+
+    for text, link in matches:
+        if link.startswith(("http://", "https://", "mailto:", "#")):
+            continue
+        clean_link = link.split("#")[0].strip()
+        if not clean_link:
+            continue
+        checked_count += 1
+        resolved = (REPO_ROOT / clean_link).resolve()
+        if not resolved.exists():
+            broken_links.append((text, link, str(resolved)))
+        else:
+            print(f"  [OK] Link resolves: {link}")
+
+    print(f"\n  Checked {checked_count} relative links.")
+    if broken_links:
+        print(f"  [FAIL] Found {len(broken_links)} broken relative link(s):")
+        for text, link, res in broken_links:
+            print(f"    - [{text}]({link}) -> {res} (NOT FOUND)")
+        return 1
+    
+    print("  [PASS] All relative links in README.md resolved successfully.")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         prog="python -m paper_q1.run",
@@ -361,6 +492,8 @@ def main() -> int:
         "numbers": step_numbers,
         "paper": step_paper,
         "smoke": step_smoke,
+        "readme": step_readme,
+        "linkcheck": step_linkcheck,
         "all": step_all,
     }
 
