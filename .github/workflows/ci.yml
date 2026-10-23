@@ -2,9 +2,9 @@ name: IEEE-HART Engineering CI & Verification Pipeline
 
 on:
   push:
-    branches: [ main, q1-journal ]
+    branches: [ main, "fix/*" ]
   pull_request:
-    branches: [ main, q1-journal ]
+    branches: [ main ]
   workflow_dispatch:
 
 concurrency:

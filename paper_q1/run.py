@@ -368,8 +368,9 @@ def step_readme(args: argparse.Namespace) -> int:
         "F0_Random_Forest": "F0: Random Forest",
         "F0_HistGradientBoosting": "F0: HistGradientBoosting",
         "F0_MLP": "F0: MLP (TinyML Candidate)",
-        "Literature_MFCC_SVM": "Literature: MFCC-SVM",
-        "Neural_DS_CNN": "Edge: DS-CNN",
+        "SVM_RBF_on_F0": "SVM (RBF on F0)",
+        "F0_Deep_MLP": "Deep MLP",
+        "MultiModal_Fusion_Early": "**Multi-Modal Early Fusion**",
         "MultiModal_Early_Fusion": "**Multi-Modal Early Fusion**",
         "Hive_Adaptive_Norm": "Hive-Adaptive Normalization",
     }
@@ -377,12 +378,26 @@ def step_readme(args: argparse.Namespace) -> int:
     for m_key, disp_name in model_display_names.items():
         if m_key in summaries:
             m_data = summaries[m_key]
-            acc_mean = m_data.get("balanced_accuracy_mean", 0.0) * 100
-            acc_std = m_data.get("balanced_accuracy_std", 0.0) * 100
-            f1_mean = m_data.get("f1_macro_mean", 0.0)
-            auc_mean = m_data.get("roc_auc_mean", 0.0)
+            # Handle nested or flat structures
+            if isinstance(m_data.get("balanced_accuracy"), dict):
+                acc_mean = m_data["balanced_accuracy"].get("mean", 0.0) * 100
+                acc_std = m_data["balanced_accuracy"].get("std", 0.0) * 100
+            else:
+                acc_mean = m_data.get("balanced_accuracy_mean", 0.0) * 100
+                acc_std = m_data.get("balanced_accuracy_std", 0.0) * 100
+
+            if isinstance(m_data.get("macro_f1"), dict):
+                f1_mean = m_data["macro_f1"].get("mean", 0.0)
+            else:
+                f1_mean = m_data.get("f1_macro_mean", m_data.get("macro_f1_mean", 0.0))
+
+            if isinstance(m_data.get("roc_auc"), dict):
+                auc_mean = m_data["roc_auc"].get("mean", 0.0)
+            else:
+                auc_mean = m_data.get("roc_auc_mean", 0.0)
+
             prov = "REAL_PUBLIC_DATASET"
-            if m_key == "MultiModal_Early_Fusion":
+            if "MultiModal" in m_key:
                 lines.append(
                     f"| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | {disp_name} | **{acc_mean:.2f}% ± {acc_std:.2f}%** | **{f1_mean:.4f}** | **{auc_mean:.4f}** | `{prov}` |"
                 )
