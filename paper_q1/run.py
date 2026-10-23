@@ -258,15 +258,18 @@ def step_smoke(args: argparse.Namespace) -> int:
         import numpy as np
         import scipy
         import sklearn
-        import torch
         import pydantic
         import fastapi
         import pytest
         print(f"    numpy: {np.__version__}")
         print(f"    scipy: {scipy.__version__}")
         print(f"    sklearn: {sklearn.__version__}")
-        print(f"    torch: {torch.__version__} (CUDA available: {torch.cuda.is_available()})")
         print(f"    pydantic: {pydantic.__version__}")
+        try:
+            import torch
+            print(f"    torch: {torch.__version__} (CUDA available: {torch.cuda.is_available()})")
+        except ImportError:
+            print("    torch: not installed (optional in lightweight CI environment)")
     except ImportError as e:
         print(f"  [FAIL] Missing library: {e}")
         return 1
