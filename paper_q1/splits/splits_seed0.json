@@ -1,0 +1,6 @@
+{
+  "t2": "t2_bee_vs_nobee_splits.json",
+  "t4": "t4_mspb_splits.json",
+  "status": "FROZEN_BEFORE_TRAINING",
+  "protocol": "P-A (Hive-Independent)"
+}

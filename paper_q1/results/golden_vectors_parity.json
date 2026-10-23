@@ -1,0 +1,62 @@
+{
+  "status": "VERIFIED",
+  "max_relative_error": 0.0,
+  "tolerance": 0.001,
+  "all_vectors_passed": true,
+  "test_results": [
+    {
+      "vector": "tone_140hz_ventilation",
+      "freq_hz": 140.0,
+      "expected_band": 1,
+      "detected_band": 1,
+      "band_energy_ratio": 1.0,
+      "relative_error": 0.0,
+      "passed": true
+    },
+    {
+      "vector": "tone_240hz_thermo",
+      "freq_hz": 240.0,
+      "expected_band": 2,
+      "detected_band": 2,
+      "band_energy_ratio": 1.0,
+      "relative_error": 0.0,
+      "passed": true
+    },
+    {
+      "vector": "tone_340hz_foraging",
+      "freq_hz": 340.0,
+      "expected_band": 3,
+      "detected_band": 3,
+      "band_energy_ratio": 1.0,
+      "relative_error": 0.0,
+      "passed": true
+    },
+    {
+      "vector": "tone_440hz_preswarm",
+      "freq_hz": 440.0,
+      "expected_band": 4,
+      "detected_band": 4,
+      "band_energy_ratio": 1.0,
+      "relative_error": 0.0,
+      "passed": true
+    },
+    {
+      "vector": "tone_600hz_distress",
+      "freq_hz": 600.0,
+      "expected_band": 5,
+      "detected_band": 5,
+      "band_energy_ratio": 1.0,
+      "relative_error": 0.0,
+      "passed": true
+    },
+    {
+      "vector": "tone_900hz_alarm",
+      "freq_hz": 900.0,
+      "expected_band": 6,
+      "detected_band": 6,
+      "band_energy_ratio": 1.0,
+      "relative_error": 0.0,
+      "passed": true
+    }
+  ]
+}
