@@ -20,6 +20,8 @@ out/
 frontend/out/
 scratch/
 *.tmp
+.agents/
+graphify-out/
 
 # IDE / Editor Files
 .vscode/

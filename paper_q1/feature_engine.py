@@ -234,7 +234,11 @@ def test_feature_parity(results_dir: Path) -> int:
         print(f"  [{status_str}] {vec['name']}: Band {dom_band} (Expected {vec['expected_band']}), Energy: {dom_energy:.3f}, RelErr: {rel_err:.2e}")
 
     parity_summary = {
-        "status": "VERIFIED",
+        "test_type": "Python reference-pipeline unit test (host numerical reference verification)",
+        "provenance": "NUMERICAL_SIMULATION",
+        "description": "Validates that pure tone frequencies cleanly project into the expected biological bands with >= 85% energy concentration",
+        "status": "PASS",
+        "hardware_hil_status": "PENDING_HARDWARE_BENCH",
         "max_relative_error": float(max_observed_rel_err),
         "tolerance": 1e-3,
         "all_vectors_passed": all(r["passed"] for r in results),
@@ -245,7 +249,7 @@ def test_feature_parity(results_dir: Path) -> int:
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(parity_summary, f, indent=2)
 
-    print(f"  [OK] Golden vector parity verified (Max RelErr: {max_observed_rel_err:.2e} <= 1e-3).")
+    print(f"  [OK] Python reference-pipeline unit test verified (All {len(results)} vectors passed).")
     print(f"  [OK] Written report -> {out_file.relative_to(results_dir.parent)}")
     return 0 if parity_summary["all_vectors_passed"] else 1
 

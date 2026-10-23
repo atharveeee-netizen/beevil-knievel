@@ -1,0 +1,140 @@
+{
+ "max_rel_diff_vs_repo_impl": 2.097796749154005e-14,
+ "inband_ripple_dB_probe": {
+  "b1_vent": 3.4,
+  "b2_swarm": 14.0,
+  "b3_distress": 16.4,
+  "b4_noise": 23.3
+ },
+ "inband_ripple_dB_fft": {
+  "b1_vent": 0.1,
+  "b2_swarm": 0.2,
+  "b3_distress": 0.2,
+  "b4_noise": 0.4
+ },
+ "sweep_band_error_probe": 0.006,
+ "sweep_band_error_fft": 0.0,
+ "acc_vs_snr": {
+  "snr_dB": [
+   30,
+   20,
+   10,
+   5,
+   0,
+   -5,
+   -10,
+   -15
+  ],
+  "probe": [
+   0.942,
+   0.954,
+   0.946,
+   0.842,
+   0.708,
+   0.692,
+   0.471,
+   0.333
+  ],
+  "fft": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.971,
+   0.35,
+   0.254
+  ]
+ },
+ "acc_vs_level": {
+  "level_dBFS": [
+   -6,
+   -12,
+   -18,
+   -24,
+   -30,
+   -36,
+   -42
+  ],
+  "probe": [
+   0.904,
+   0.708,
+   0.479,
+   0.254,
+   0.25,
+   0.25,
+   0.25
+  ],
+  "fft": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ]
+ },
+ "design_space": [
+  {
+   "fs_Hz": 2000,
+   "N": 256,
+   "df_Hz": 7.812,
+   "nyquist_Hz": 1000.0,
+   "frame_ms": 128.0,
+   "fft_buffer_kB": 2.0,
+   "b1_vent_bins": 11,
+   "b2_swarm_bins": 26,
+   "b3_distress_bins": 39,
+   "b4_noise_bins": "26 (aliased)"
+  },
+  {
+   "fs_Hz": 16000,
+   "N": 256,
+   "df_Hz": 62.5,
+   "nyquist_Hz": 8000.0,
+   "frame_ms": 16.0,
+   "fft_buffer_kB": 2.0,
+   "b1_vent_bins": 1,
+   "b2_swarm_bins": 3,
+   "b3_distress_bins": 5,
+   "b4_noise_bins": 7
+  },
+  {
+   "fs_Hz": 16000,
+   "N": 2048,
+   "df_Hz": 7.812,
+   "nyquist_Hz": 8000.0,
+   "frame_ms": 128.0,
+   "fft_buffer_kB": 16.0,
+   "b1_vent_bins": 11,
+   "b2_swarm_bins": 26,
+   "b3_distress_bins": 39,
+   "b4_noise_bins": 51
+  },
+  {
+   "fs_Hz": 4000,
+   "N": 512,
+   "df_Hz": 7.812,
+   "nyquist_Hz": 2000.0,
+   "frame_ms": 128.0,
+   "fft_buffer_kB": 4.0,
+   "b1_vent_bins": 11,
+   "b2_swarm_bins": 26,
+   "b3_distress_bins": 39,
+   "b4_noise_bins": 51
+  },
+  {
+   "fs_Hz": 8000,
+   "N": 1024,
+   "df_Hz": 7.812,
+   "nyquist_Hz": 4000.0,
+   "frame_ms": 128.0,
+   "fft_buffer_kB": 8.0,
+   "b1_vent_bins": 11,
+   "b2_swarm_bins": 26,
+   "b3_distress_bins": 39,
+   "b4_noise_bins": 51
+  }
+ ]
+}

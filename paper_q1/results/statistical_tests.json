@@ -12,160 +12,124 @@
       "ci_95_high": 0.5
     },
     "Floor_Stratified": {
-      "mean": 0.5032,
-      "ci_95_low": 0.5012,
-      "ci_95_high": 0.5054
+      "mean": 0.505,
+      "ci_95_low": 0.4811,
+      "ci_95_high": 0.5279
     },
     "Repo_Heuristic_V1": {
-      "mean": 0.5345,
-      "ci_95_low": 0.5264,
-      "ci_95_high": 0.5426
+      "mean": 0.735,
+      "ci_95_low": 0.7057,
+      "ci_95_high": 0.7631
     },
     "F0_Logistic_Regression": {
-      "mean": 0.7705,
-      "ci_95_low": 0.7491,
-      "ci_95_high": 0.7924
+      "mean": 0.719,
+      "ci_95_low": 0.6908,
+      "ci_95_high": 0.7465
     },
     "F0_Random_Forest": {
-      "mean": 0.7988,
-      "ci_95_low": 0.7792,
-      "ci_95_high": 0.8189
+      "mean": 0.7067,
+      "ci_95_low": 0.685,
+      "ci_95_high": 0.7292
     },
-    "F0_LightGBM": {
-      "mean": 0.8046,
-      "ci_95_low": 0.7856,
-      "ci_95_high": 0.8248
+    "F0_HistGradientBoosting": {
+      "mean": 0.7317,
+      "ci_95_low": 0.7017,
+      "ci_95_high": 0.7652
     },
     "F0_MLP": {
-      "mean": 0.8047,
-      "ci_95_low": 0.786,
-      "ci_95_high": 0.823
+      "mean": 0.7295,
+      "ci_95_low": 0.7065,
+      "ci_95_high": 0.7542
     },
-    "Literature_MFCC_SVM": {
-      "mean": 0.8065,
-      "ci_95_low": 0.7859,
-      "ci_95_high": 0.8274
+    "SVM_RBF_on_F0": {
+      "mean": 0.7049,
+      "ci_95_low": 0.6846,
+      "ci_95_high": 0.7287
     },
-    "Neural_DS_CNN": {
-      "mean": 0.8103,
-      "ci_95_low": 0.7921,
-      "ci_95_high": 0.8285
+    "F0_Deep_MLP": {
+      "mean": 0.7092,
+      "ci_95_low": 0.6887,
+      "ci_95_high": 0.7302
     },
     "MultiModal_Fusion_Early": {
-      "mean": 0.8725,
-      "ci_95_low": 0.8479,
-      "ci_95_high": 0.8966
+      "mean": 0.8196,
+      "ci_95_low": 0.7922,
+      "ci_95_high": 0.8465
     },
     "Hive_Adaptive_Norm": {
-      "mean": 0.5845,
-      "ci_95_low": 0.5767,
-      "ci_95_high": 0.5915
+      "mean": 0.728,
+      "ci_95_low": 0.7032,
+      "ci_95_high": 0.7503
     }
   },
   "friedman_test": {
-    "statistic": 137.0545,
-    "p_value": 1.6902164796922253e-24,
+    "statistic": 92.0786,
+    "p_value": 2.071197368747614e-15,
     "degrees_of_freedom": 10,
     "average_ranks": {
-      "Floor_Majority": 10.73,
-      "Floor_Stratified": 10.27,
-      "Repo_Heuristic_V1": 8.93,
-      "F0_Logistic_Regression": 6.8,
-      "F0_Random_Forest": 5.07,
-      "F0_LightGBM": 4.2,
-      "F0_MLP": 3.93,
-      "Literature_MFCC_SVM": 4.0,
-      "Neural_DS_CNN": 3.0,
-      "MultiModal_Fusion_Early": 1.0,
-      "Hive_Adaptive_Norm": 8.07
+      "Floor_Majority": 10.53,
+      "Floor_Stratified": 10.47,
+      "Repo_Heuristic_V1": 5.13,
+      "F0_Logistic_Regression": 5.2,
+      "F0_Random_Forest": 6.17,
+      "F0_HistGradientBoosting": 5.07,
+      "F0_MLP": 4.73,
+      "SVM_RBF_on_F0": 6.47,
+      "F0_Deep_MLP": 6.0,
+      "MultiModal_Fusion_Early": 1.4,
+      "Hive_Adaptive_Norm": 4.83
     }
   },
   "pairwise_comparisons": {
     "vs_Floor_Majority": {
       "F0_Logistic_Regression": {
-        "mean_diff": 0.2705,
-        "t_statistic": 11.1889,
-        "p_value": 0.0,
+        "mean_diff": 0.219,
+        "t_statistic": 6.6448,
+        "p_value": 1.1e-05,
         "significant_improvement": true
       },
       "F0_Random_Forest": {
-        "mean_diff": 0.2988,
-        "t_statistic": 12.7143,
-        "p_value": 0.0,
-        "significant_improvement": true
-      },
-      "F0_LightGBM": {
-        "mean_diff": 0.3046,
-        "t_statistic": 13.5615,
-        "p_value": 0.0,
+        "mean_diff": 0.2067,
+        "t_statistic": 8.4344,
+        "p_value": 1e-06,
         "significant_improvement": true
       },
       "F0_MLP": {
-        "mean_diff": 0.3047,
-        "t_statistic": 14.0004,
-        "p_value": 0.0,
-        "significant_improvement": true
-      },
-      "Literature_MFCC_SVM": {
-        "mean_diff": 0.3065,
-        "t_statistic": 12.7952,
-        "p_value": 0.0,
-        "significant_improvement": true
-      },
-      "Neural_DS_CNN": {
-        "mean_diff": 0.3103,
-        "t_statistic": 14.6215,
-        "p_value": 0.0,
+        "mean_diff": 0.2295,
+        "t_statistic": 8.047,
+        "p_value": 1e-06,
         "significant_improvement": true
       },
       "MultiModal_Fusion_Early": {
-        "mean_diff": 0.3725,
-        "t_statistic": 13.4296,
+        "mean_diff": 0.3196,
+        "t_statistic": 9.9385,
         "p_value": 0.0,
         "significant_improvement": true
       }
     },
     "vs_Repo_Heuristic_V1": {
       "F0_Logistic_Regression": {
-        "mean_diff": 0.236,
-        "t_statistic": 10.8687,
-        "p_value": 0.0,
-        "significant_improvement": true
+        "mean_diff": -0.016,
+        "t_statistic": -0.2887,
+        "p_value": 0.77705,
+        "significant_improvement": false
       },
       "F0_Random_Forest": {
-        "mean_diff": 0.2643,
-        "t_statistic": 11.3404,
-        "p_value": 0.0,
-        "significant_improvement": true
-      },
-      "F0_LightGBM": {
-        "mean_diff": 0.2701,
-        "t_statistic": 12.0247,
-        "p_value": 0.0,
-        "significant_improvement": true
+        "mean_diff": -0.0284,
+        "t_statistic": -0.9542,
+        "p_value": 0.35616,
+        "significant_improvement": false
       },
       "F0_MLP": {
-        "mean_diff": 0.2702,
-        "t_statistic": 12.9053,
-        "p_value": 0.0,
-        "significant_improvement": true
-      },
-      "Literature_MFCC_SVM": {
-        "mean_diff": 0.2721,
-        "t_statistic": 12.4229,
-        "p_value": 0.0,
-        "significant_improvement": true
-      },
-      "Neural_DS_CNN": {
-        "mean_diff": 0.2759,
-        "t_statistic": 13.2838,
-        "p_value": 0.0,
-        "significant_improvement": true
+        "mean_diff": -0.0055,
+        "t_statistic": -0.1242,
+        "p_value": 0.902908,
+        "significant_improvement": false
       },
       "MultiModal_Fusion_Early": {
-        "mean_diff": 0.338,
-        "t_statistic": 13.1625,
-        "p_value": 0.0,
+        "mean_diff": 0.0846,
+        "t_statistic": 4.0703,
+        "p_value": 0.001147,
         "significant_improvement": true
       }
     }

@@ -122,50 +122,65 @@ def generate_t2_splits(zenodo_dir: Path, splits_dir: Path) -> Dict[str, Any]:
     return {"file": out_file, "sha256": sha256}
 
 
-def generate_t4_splits(mspb_dir: Path, splits_dir: Path) -> Dict[str, Any]:
+def generate_t4_splits(data_dir: Path, splits_dir: Path) -> Dict[str, Any]:
     """
-    Generate hive-independent splits for T4 (Winter survival & colony strength on D4 MSPB).
-    Groups strictly by hive identity across 53 monitored colonies.
+    Generate hive-independent splits for T4 (Colony strength >= 20 frames on D4 MSPB).
+    Groups strictly by physical hive identity across all 53 colonies.
+    Saves frozen indices and verifies 0 hive overlap.
     """
     splits_dir.mkdir(parents=True, exist_ok=True)
-    
-    # 53 hives in MSPB
-    hives = [f"Hive_{i:02d}" for i in range(1, 54)]
-    # Stratify by simulated survival label (roughly 70% winter survival baseline in literature)
-    np.random.seed(42)
-    survival_labels = (np.random.rand(len(hives)) > 0.30).astype(int).tolist()
+    features_csv = data_dir / "processed" / "mspb_colony_strength_features.csv"
+    if not features_csv.exists():
+        from paper_q1.features.mspb_feature_builder import extract_mspb_7day_features
+        extract_mspb_7day_features(data_dir, data_dir.parent / "spec" / "beevil_spec.yaml", features_csv)
 
-    X = np.array(hives)
-    y = np.array(survival_labels)
-    g = np.array(hives)
+    import pandas as pd
+    df_feat = pd.read_csv(features_csv)
+
+    X_indices = np.arange(len(df_feat))
+    y = df_feat["is_strong"].values
+    groups = df_feat["hive_id"].values
+    unique_hives = sorted(list(set(groups)))
 
     t4_manifest: Dict[str, Any] = {
         "task_id": "T4",
-        "task_name": "MSPB Phenotypic Colony Outcomes",
+        "task_name": "MSPB Phenotypic Colony Strength (>= 20 frames)",
         "dataset": "D4 (MSPB)",
         "protocol": "P-A (StratifiedGroupKFold, group=hive_id)",
         "n_splits": N_SPLITS,
         "seeds": SEEDS,
-        "total_hives": len(hives),
+        "total_samples": len(df_feat),
+        "total_hives": len(unique_hives),
+        "unique_hives": [int(h) for h in unique_hives],
+        "class_balance": {
+            "strong_ge_20_frames": int((y == 1).sum()),
+            "moderate_weak_lt_20_frames": int((y == 0).sum())
+        },
         "splits_by_seed": {}
     }
 
     for seed in SEEDS:
         sgkf = StratifiedGroupKFold(n_splits=N_SPLITS, shuffle=True, random_state=seed)
         seed_folds = []
-        for fold_idx, (train_idx, test_idx) in enumerate(sgkf.split(X, y, groups=g)):
-            train_hives = X[train_idx].tolist()
-            test_hives = X[test_idx].tolist()
+        for fold_idx, (train_idx, test_idx) in enumerate(sgkf.split(X_indices, y, groups=groups)):
+            train_hives = sorted(list(set(groups[train_idx])))
+            test_hives = sorted(list(set(groups[test_idx])))
 
             overlap = set(train_hives).intersection(set(test_hives))
-            assert len(overlap) == 0, f"LEAKAGE DETECTED in Fold {fold_idx}: {overlap}"
+            assert len(overlap) == 0, f"CRITICAL LEAKAGE: Hive overlap in Fold {fold_idx}: {overlap}"
 
             seed_folds.append({
                 "fold": fold_idx,
-                "train_hives": train_hives,
-                "test_hives": test_hives,
-                "train_hives_count": len(train_hives),
-                "test_hives_count": len(test_hives)
+                "train_indices": [int(i) for i in train_idx],
+                "test_indices": [int(i) for i in test_idx],
+                "train_hives": [int(h) for h in train_hives],
+                "test_hives": [int(h) for h in test_hives],
+                "train_samples_count": len(train_idx),
+                "test_samples_count": len(test_idx),
+                "test_class_balance": {
+                    "strong": int((y[test_idx] == 1).sum()),
+                    "weak": int((y[test_idx] == 0).sum())
+                }
             })
         t4_manifest["splits_by_seed"][f"seed_{seed}"] = seed_folds
 
@@ -187,7 +202,7 @@ def freeze_splits(splits_dir: Path) -> int:
     mspb_dir = repo_root / "data" / "raw" / "mspb"
 
     t2_res = generate_t2_splits(zenodo_dir, splits_dir)
-    t4_res = generate_t4_splits(mspb_dir, splits_dir)
+    t4_res = generate_t4_splits(repo_root / "data", splits_dir)
 
     # Also create compatibility alias splits_seed0.json for run.py train gate
     seed0_file = splits_dir / "splits_seed0.json"

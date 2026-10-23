@@ -1,0 +1,32 @@
+{
+ "nominal tilt=1": {
+  "tilt_byte": 1,
+  "parsed_tilt_deg": 1.0,
+  "http": 200,
+  "diagnosis": "QUEEN_PRESENT"
+ },
+ "low-SoC flag (0x20|1)": {
+  "tilt_byte": 33,
+  "parsed_tilt_deg": 33.0,
+  "http": 200,
+  "diagnosis": "TAMPER_THEFT"
+ },
+ "CUSUM flag (0x80|1)": {
+  "tilt_byte": 129,
+  "parsed_tilt_deg": 129.0,
+  "http": 422,
+  "diagnosis": null
+ },
+ "pre-swarm flag (0x40)": {
+  "tilt_byte": 64,
+  "parsed_tilt_deg": 64.0,
+  "http": 200,
+  "diagnosis": "TAMPER_THEFT"
+ },
+ "true 20-deg tilt": {
+  "tilt_byte": 20,
+  "parsed_tilt_deg": 20.0,
+  "http": 200,
+  "diagnosis": "TAMPER_THEFT"
+ }
+}

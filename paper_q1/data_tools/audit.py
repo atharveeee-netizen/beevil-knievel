@@ -149,25 +149,31 @@ def audit_mspb(mspb_dir: Path) -> Dict[str, Any]:
     """Audit Multi-Sensor Polish Beehive (MSPB) dataset (D4)."""
     info: Dict[str, Any] = {
         "dataset_id": "D4",
-        "name": "MSPB: Multi-Sensor Polish Beehive Dataset",
+        "name": "MSPB: a longitudinal multi-sensor dataset with phenotypic trait measurements from honey bees",
+        "location": "Quebec, Canada (CRSAD research apiaries: Dubuc & Cote)",
         "source": "Scientific Data 2024, doi:10.1038/s41597-024-03695-1 (Zenodo 11398835)",
         "available_files": [],
         "d1_sample_count": 0,
         "d2_sample_count": 0,
         "total_sensor_records": 0,
-        "hives_count": 0,
-        "apiaries": ["Apiary_D1", "Apiary_D2"],
+        "sensor_tags_count": 0,
+        "hives_count": 53,
+        "physical_hives": [],
+        "tag_to_hive_mapping_count": 0,
+        "apiaries": ["Dubuc", "Cote"],
         "date_range": {},
         "phenotypic_inspections": {
             "total_inspections": 0,
+            "colony_strength_samples": 0,
+            "colony_strength_distribution": {},
+            "winter_survival_samples": 0,
             "winter_survival_rates": {},
-            "queen_cells_observed": 0,
-            "colony_strength_samples": 0
+            "queen_cells_observed": 0
         },
         "features": {
             "thermal_sample_interval_min": 15,
-            "acoustic_features_sample_interval_min": 5,
-            "acoustic_feature_columns": ["hive_power", "band_density_ratio", "density_variation", "c0..c15"]
+            "acoustic_features_sample_interval_min": 15,
+            "acoustic_feature_columns": ["hz_122.0703125..hz_579.833984375", "audio_density", "audio_density_ratio", "density_variation"]
         }
     }
 
@@ -179,63 +185,92 @@ def audit_mspb(mspb_dir: Path) -> Dict[str, Any]:
 
     # Parse D1 sensor data CSV if present
     d1_csv = mspb_dir / "D1_sensor_data.csv"
+    tags_d1 = set()
     if d1_csv.exists():
         try:
             with open(d1_csv, "r", encoding="utf-8", errors="ignore") as f:
                 reader = csv.reader(f)
                 header = next(reader, None)
                 tag_idx = header.index("tag_number") if header and "tag_number" in header else 3
-                hives_d1 = set()
                 count = 0
                 for row in reader:
                     count += 1
                     if row and len(row) > tag_idx:
-                        hives_d1.add(row[tag_idx])
+                        try:
+                            tags_d1.add(int(float(row[tag_idx])))
+                        except ValueError:
+                            pass
                 info["d1_sample_count"] = count
-                info["d1_hives"] = sorted(list(hives_d1))
         except Exception as e:
             info["d1_error"] = str(e)
 
     # Parse D2 sensor data CSV if present
     d2_csv = mspb_dir / "D2_sensor_data.csv"
+    tags_d2 = set()
     if d2_csv.exists():
         try:
             with open(d2_csv, "r", encoding="utf-8", errors="ignore") as f:
                 reader = csv.reader(f)
                 header = next(reader, None)
                 tag_idx = header.index("tag_number") if header and "tag_number" in header else 3
-                hives_d2 = set()
                 count = 0
                 for row in reader:
                     count += 1
                     if row and len(row) > tag_idx:
-                        hives_d2.add(row[tag_idx])
+                        try:
+                            tags_d2.add(int(float(row[tag_idx])))
+                        except ValueError:
+                            pass
                 info["d2_sample_count"] = count
-                info["d2_hives"] = sorted(list(hives_d2))
         except Exception as e:
             info["d2_error"] = str(e)
 
-    all_hives = set(info.get("d1_hives", [])).union(set(info.get("d2_hives", [])))
-    info["hives_count"] = len(all_hives)
+    all_tags = tags_d1.union(tags_d2)
+    info["sensor_tags_count"] = len(all_tags)
     info["total_sensor_records"] = info["d1_sample_count"] + info["d2_sample_count"]
 
-    # Parse inspection Excel files
-    d1_xlsx = mspb_dir / "D1_ant.xlsx"
-    if d1_xlsx.exists():
-        try:
-            import pandas as pd
-            xl = pd.ExcelFile(d1_xlsx)
-            eval_sheets = [s for s in xl.sheet_names if s.startswith("Evaluation")]
-            total_evals = 0
-            for s in eval_sheets:
-                df_eval = xl.parse(s)
-                total_evals += len(df_eval)
-            info["phenotypic_inspections"]["total_inspections"] += total_evals
-            if "Phenotypic measurements" in xl.sheet_names:
-                df_pheno = xl.parse("Phenotypic measurements")
-                info["phenotypic_inspections"]["phenotypic_table_rows"] = len(df_pheno)
-        except Exception as e:
-            info["phenotypic_inspections"]["error"] = str(e)
+    # Parse phenotypic labels via mspb_phenotypes parser
+    try:
+        from paper_q1.data_tools.mspb_phenotypes import (
+            parse_tag_to_hive_mapping,
+            parse_colony_strength_evaluations,
+            parse_winter_survival,
+            parse_queen_cell_annotations
+        )
+        tag_map = parse_tag_to_hive_mapping(mspb_dir)
+        info["tag_to_hive_mapping_count"] = len(tag_map)
+
+        df_strength = parse_colony_strength_evaluations(mspb_dir)
+        df_winter = parse_winter_survival(mspb_dir)
+        qc_events = parse_queen_cell_annotations(mspb_dir)
+
+        if not df_strength.empty:
+            info["phenotypic_inspections"]["colony_strength_samples"] = len(df_strength)
+            info["phenotypic_inspections"]["total_inspections"] = len(df_strength)
+            info["phenotypic_inspections"]["colony_strength_distribution"] = {
+                "strong_colonies_ge_20_frames": int((df_strength["is_strong"] == 1).sum()),
+                "moderate_weak_colonies_lt_20_frames": int((df_strength["is_strong"] == 0).sum())
+            }
+            hives_in_eval = sorted(df_strength["hive_id"].unique().tolist())
+            info["hives_count"] = len(hives_in_eval)
+            info["physical_hives"] = hives_in_eval
+
+        if not df_winter.empty:
+            info["phenotypic_inspections"]["winter_survival_samples"] = len(df_winter)
+            survived_cnt = int((df_winter["winter_survived"] == 1).sum())
+            died_cnt = int((df_winter["winter_survived"] == 0).sum())
+            info["phenotypic_inspections"]["winter_survival_rates"] = {
+                "evaluated_hives": len(df_winter),
+                "survived_healthy": survived_cnt,
+                "mortality_or_queen_failure": died_cnt,
+                "survival_percentage": round(100.0 * survived_cnt / len(df_winter), 2)
+            }
+
+        info["phenotypic_inspections"]["queen_cells_observed"] = len(qc_events)
+        info["phenotypic_inspections"]["queen_cell_events_detail"] = qc_events
+
+    except Exception as e:
+        info["phenotypic_inspections"]["parser_error"] = str(e)
 
     return info
 

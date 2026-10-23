@@ -1,0 +1,88 @@
+{
+ "A: all sensors every 5 min (CO2 not gated)": {
+  "components_mAs": {
+   "Sleep floor (MCU+radio+board)": 1.5,
+   "CO$_2$ (SCD41)": 135.0,
+   "Frame grid (5$\\times$DS18B20)": 3.75,
+   "Gas/RH (BME688)": 1.8,
+   "Load cell (HX711+bridge)": 3.6,
+   "Audio (INMP441+MCU)": 4.7,
+   "MCU housekeeping": 0.99,
+   "Core temp (TMP117)": 0.002,
+   "LoRa TX (SX1262)": 6.618
+  },
+  "Q_cycle_mAs": 157.96,
+  "I_avg_mA": 0.5265,
+  "mAh_per_day": 12.64,
+  "days_2600mAh_no_sd": 205.7,
+  "days_2600mAh_sd2pct": 180.9
+ },
+ "B: CO2 every 30 min, power-gated": {
+  "components_mAs": {
+   "Sleep floor (MCU+radio+board)": 1.5,
+   "CO$_2$ (SCD41)": 15.0,
+   "Frame grid (5$\\times$DS18B20)": 3.75,
+   "Gas/RH (BME688)": 1.8,
+   "Load cell (HX711+bridge)": 3.6,
+   "Audio (INMP441+MCU)": 4.7,
+   "MCU housekeeping": 0.99,
+   "Core temp (TMP117)": 0.002,
+   "LoRa TX (SX1262)": 6.618
+  },
+  "Q_cycle_mAs": 37.96,
+  "I_avg_mA": 0.1265,
+  "mAh_per_day": 3.04,
+  "days_2600mAh_no_sd": 856.2,
+  "days_2600mAh_sd2pct": 545.1
+ },
+ "C: B + no CO2 sensor": {
+  "components_mAs": {
+   "Sleep floor (MCU+radio+board)": 1.5,
+   "CO$_2$ (SCD41)": 0.0,
+   "Frame grid (5$\\times$DS18B20)": 3.75,
+   "Gas/RH (BME688)": 1.8,
+   "Load cell (HX711+bridge)": 3.6,
+   "Audio (INMP441+MCU)": 4.7,
+   "MCU housekeeping": 0.99,
+   "Core temp (TMP117)": 0.002,
+   "LoRa TX (SX1262)": 6.618
+  },
+  "Q_cycle_mAs": 22.96,
+  "I_avg_mA": 0.0765,
+  "mAh_per_day": 1.84,
+  "days_2600mAh_no_sd": 1415.5,
+  "days_2600mAh_sd2pct": 728.3
+ },
+ "life_days_caseB_vs_T": {
+  "1000": {
+   "60": 95.0,
+   "120": 159.0,
+   "300": 270.0,
+   "600": 351.0,
+   "900": 391.0,
+   "1800": 440.0
+  },
+  "2600": {
+   "60": 223.0,
+   "120": 354.0,
+   "300": 545.0,
+   "600": 665.0,
+   "900": 717.0,
+   "1800": 779.0
+  },
+  "3000": {
+   "60": 252.0,
+   "120": 394.0,
+   "300": 596.0,
+   "600": 718.0,
+   "900": 771.0,
+   "1800": 832.0
+  }
+ },
+ "solar_mAh_per_day": {
+  "0.5": 49.0,
+  "1": 97.0,
+  "2": 195.0,
+  "5": 486.0
+ }
+}

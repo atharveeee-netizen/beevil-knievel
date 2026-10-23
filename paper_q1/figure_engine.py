@@ -50,8 +50,8 @@ def plot_fig1_pipeline(out_dir: Path):
     # Boxes: Node -> LoRa Frame v2 -> Gateway -> Edge Analytics
     boxes = [
         ("Sensor Node\n(RAK4631 nRF52840)", "16 kHz Audio DMA\n31-tap FIR + 4x Decimate\n512-pt FFT (CMSIS-DSP)\nINT8 TinyML Inference\nDS18B20 Temp Probe", 0.05, 0.2, 0.22, 0.65, "#E3F2FD"),
-        ("LoRa PHY Link\n(Conducted / Model)", "Airtime: 77.06 ms (SF7)\nTx Power: +14 dBm\n36-byte Frame v2\nPayload CRC + Flags", 0.35, 0.2, 0.18, 0.65, "#FFF3E0"),
-        ("Gateway Concentrator\n(RAK2287 / RPi)", "SX1302 Concentrator\nUART Dual v1/v2 Ingestion\nMQTT / JSON Stream\nSensor Sentinels Handling", 0.61, 0.2, 0.18, 0.65, "#E8F5E9"),
+        ("LoRa PHY Link\n(IN865 / Model)", "Airtime: 77.06 ms (SF7)\nTx Power: +14 dBm\n36-byte Frame v2\nPayload CRC + Flags", 0.35, 0.2, 0.18, 0.65, "#FFF3E0"),
+        ("Gateway Radio HAT\n(Waveshare / RPi 3B+)", "Ebyte E22-900T22S\nSX1262 LoRa (UART)\nFastAPI + SQLite Ingest\nSentinels & Triage Rules", 0.61, 0.2, 0.18, 0.65, "#E8F5E9"),
         ("Decision Support\n(Edge Server)", "Page-CUSUM Anomaly\nThermal Deficit Alerts\nStratified Evaluation\nAnti-Leakage Validation", 0.86, 0.2, 0.13, 0.65, "#F3E5F5")
     ]
 
@@ -230,25 +230,46 @@ def plot_fig5_energy_breakdown(out_dir: Path):
 
 
 def plot_fig6_lora_link_budget(out_dir: Path):
-    """Fig 6: Conducted bench sensitivity vs Analytical Log-Distance Link Budget."""
+    """Fig 6: Analytical LoRa Path Loss models (Friis, Two-Ray, Canopy) at IN865."""
     fig, ax = plt.subplots(figsize=(7.5, 3.8), dpi=300)
 
-    # Analytical Log-Distance Path Loss model: PL(d) = PL(d0) + 10 n log10(d/d0) + X_sigma
-    # At 868 MHz, PL(1m) = 31.2 dB. For suburban / rural apiary: n = 2.8
-    dist_m = np.linspace(10, 5000, 200)
-    pl_db = 31.2 + 10.0 * 2.8 * np.log10(dist_m)
+    dist_m = np.linspace(20, 3000, 300)
     tx_power = 14.0  # dBm
-    rx_power = tx_power - pl_db
+    freq_mhz = 865.0625
 
-    ax.plot(dist_m, rx_power, label="Analytical Path Loss (n=2.8, +14 dBm Tx)", color="#1E88E5", lw=2)
-    ax.axhline(-124.0, color="#FF9800", linestyle="--", label="SF7 Sensitivity Limit (-124 dBm, 77 ms airtime)")
-    ax.axhline(-132.0, color="#E91E63", linestyle="--", label="SF10 Sensitivity Limit (-132 dBm, 411 ms airtime)")
+    # 1. Free Space (Friis)
+    pl_fs = 20.0 * np.log10(dist_m) + 20.0 * np.log10(freq_mhz) - 27.55
+    rx_fs = tx_power - pl_fs
+
+    # 2. Two-Ray Ground Reflection (node 0.5 m, gateway 4.0 m)
+    pl_tworay = 40.0 * np.log10(dist_m) - 6.02
+    rx_tworay = tx_power - pl_tworay
+
+    # 3. Two-Ray + Canopy (ITU-R P.833 / Weissberger)
+    f_ghz = freq_mhz / 1000.0
+    veg_loss = np.minimum(28.0, 1.33 * (f_ghz ** 0.284) * ((dist_m * 0.5) ** 0.588))
+    pl_canopy = pl_tworay + veg_loss
+    rx_canopy = tx_power - pl_canopy
+
+    ax.plot(dist_m, rx_fs, label="Free Space LoS (Friis)", color="#9E9E9E", linestyle=":", lw=1.5)
+    ax.plot(dist_m, rx_tworay, label="Two-Ray Ground Reflection (0.5m / 4.0m)", color="#1E88E5", lw=2)
+    ax.plot(dist_m, rx_canopy, label="Two-Ray + Orchard Canopy (ITU-R P.833)", color="#2E7D32", lw=2.2)
+
+    ax.axhline(-124.0, color="#FF9800", linestyle="--", label="SF7 Sensitivity Limit (-124 dBm, 77.1 ms)")
+    ax.axhline(-132.0, color="#E91E63", linestyle="--", label="SF10 Sensitivity Limit (-132 dBm, 411.7 ms)")
+
+    # Vertical markers for canopy range
+    ax.axvline(579.4, color="#FF9800", linestyle=":", alpha=0.7)
+    ax.axvline(918.4, color="#E91E63", linestyle=":", alpha=0.7)
+    ax.text(595, -70, "SF7 Canopy: 0.58 km", color="#E65100", fontsize=8, weight="bold")
+    ax.text(935, -78, "SF10 Canopy: 0.92 km", color="#880E4F", fontsize=8, weight="bold")
 
     ax.set_xlabel("Distance between Node and Gateway (meters)")
     ax.set_ylabel("Received Signal Power (dBm)")
-    ax.set_title("Figure 6: Analytical Link Budget & Bench Sensitivity Thresholds [ANALYTICAL_MODEL]", fontsize=10.5, weight="bold")
+    ax.set_title("Figure 6: Analytical LoRa Link Budget across Ground & Canopy Models [ANALYTICAL_MODEL]", fontsize=10.5, weight="bold")
     ax.set_ylim(-145, -50)
-    ax.legend(loc="upper right", fontsize=8.5)
+    ax.set_xlim(0, 3000)
+    ax.legend(loc="upper right", fontsize=8.2)
 
     fig.savefig(out_dir / "fig6_lora_link_budget.pdf", bbox_inches="tight")
     fig.savefig(out_dir / "fig6_lora_link_budget.png", bbox_inches="tight")

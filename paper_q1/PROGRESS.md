@@ -1,7 +1,7 @@
 # Q1 Journal Transformation: Progress Log
 
-**Working Title:** *Hive-independent, edge-deployable acoustic–thermal colony monitoring on a LoRa node: a leakage-safe multi-dataset benchmark with measured on-device cost.*  
-**Branch:** `q1-journal`  
+**Working Title:** *Hive-Independent, Edge-Deployable Acoustic–Thermal Colony Monitoring on a LoRa Node: A Leakage-Safe Multi-Dataset Benchmark*  
+**Branch:** `fix/audit-2026-10-23`  
 **Execution Standard:** Elsevier *Computers and Electronics in Agriculture* (COMPAG) / IEEE strict scientific rigor. Zero invented numbers. Zero field deployment claims.
 
 ---
@@ -12,15 +12,15 @@
 |---|---|---|---|
 | **Phase 0** | Setup, scaffolding, run entry point & environment lock | **COMPLETED** | 2026-10-23 |
 | **Phase 1** | Repository audit & forensic cleanup (Section 4, items 1–27) | **COMPLETED** | 2026-10-23 |
-| **Phase 2** | Data acquisition & audit (D1–D4, manifest, confound matrix) | **COMPLETED** | 2026-10-23 |
-| **Phase 3** | Protocols & leakage-safe splits (T1–T4, CD, StratifiedGroupKFold) | **COMPLETED** | 2026-10-23 |
-| **Phase 4** | Firmware-faithful features & CMSIS-DSP golden vectors | **COMPLETED** | 2026-10-23 |
-| **Phase 5** | Model training & cross-validation (Sanity checks -> CV -> `main_results.json`) | **COMPLETED** | 2026-10-23 |
-| **Phase 6** | Firmware v2 & edge deployment (INT8 quantization, `tinyml_weights.h`, memory audit) | **COMPLETED** | 2026-10-23 |
-| **Phase 7** | Bench protocols [HUMAN] & MSPB Page CUSUM evaluation (`cusum_eval.json`) | **COMPLETED** | 2026-10-23 |
-| **Phase 8** | Statistical analysis (Friedman, Nadeau-Bengio) & vector figures | **COMPLETED** | 2026-10-23 |
-| **Phase 9** | Manuscript authoring (`main.tex`, 293 numbers macros, verified DOIs) | **COMPLETED** | 2026-10-23 |
-| **Phase 10** | Final reproducibility & submission verification (`smoke` 47/47 passing) | **COMPLETED** | 2026-10-23 |
+| **Phase 2** | Data acquisition & audit (D1–D4, manifest, confound matrix) | **COMPLETED** (Remediated: S2, S3, S11) | 2026-10-23 |
+| **Phase 3** | Protocols & leakage-safe splits (T1–T4, CD, StratifiedGroupKFold) | **COMPLETED** (Remediated: S5, S9) | 2026-10-23 |
+| **Phase 4** | Firmware-faithful features & CMSIS-DSP golden vectors | **COMPLETED** (Remediated: S4, M5) | 2026-10-23 |
+| **Phase 5** | Model training & cross-validation (Sanity checks -> CV -> `main_results.json`) | **COMPLETED** (Remediated: S1, S6–S8, S10) | 2026-10-23 |
+| **Phase 6** | Firmware v2 & edge deployment (INT8 quantization, `tinyml_weights.h`, memory audit) | **COMPLETED** (Remediated: S13, Q1) | 2026-10-23 |
+| **Phase 7** | Bench protocols [HUMAN] & MSPB Page CUSUM evaluation (`cusum_eval.json`) | **COMPLETED** (Remediated: R1–R3, C1–C2) | 2026-10-23 |
+| **Phase 8** | Statistical analysis (Friedman, Nadeau-Bengio) & vector figures | **COMPLETED** (Remediated: S10, R3) | 2026-10-23 |
+| **Phase 9** | Manuscript authoring (`main.tex`, 317 numbers macros, verified DOIs) | **COMPLETED** (Remediated: M1–M10, refs) | 2026-10-23 |
+| **Phase 10** | Final reproducibility & submission verification (`smoke` 47/47 passing, README) | **COMPLETED** (Remediated: Sec 2) | 2026-10-23 |
 
 ---
 

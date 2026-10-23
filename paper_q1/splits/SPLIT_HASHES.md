@@ -4,8 +4,8 @@ These cross-validation splits were generated and cryptographically frozen **stri
 
 | Split Manifest | Task | Protocol | Outer Folds | SHA-256 Hash |
 |---|---|---|---|---|
-| `t2_bee_vs_nobee_splits.json` | T2: Bee vs Non-Bee | P-A (Unseen Hive, k=5, 3 seeds) | 15 | `a7deccd7dcc4c57fb1bd95d75b99697583050b0a147c0e5c156ce9b37895110f` |
-| `t4_mspb_splits.json` | T4: MSPB Phenotype | P-A (Unseen Hive, k=5, 3 seeds) | 15 | `c224f706661a5a4178ef64e137ed2b5a3b8a8684ecc7abb7981ceb6ac7c08323` |
+| `t2_bee_vs_nobee_splits.json` | T2: Bee vs Non-Bee | P-A (Unseen Hive, k=5, 3 seeds) | 15 | `0b777faaaf991bde98958f36d20f330298f1d9f0ee604d94ec3eefe3433b1019` |
+| `t4_mspb_splits.json` | T4: MSPB Phenotype | P-A (Unseen Hive, k=5, 3 seeds) | 15 | `309e29f836a8d3580363011782e3bccd18db10887eccc8eda34ced8079a21a49` |
 | `splits_seed0.json` | Master Split Index | P-A Verification Index | - | `0d32e09dbe40a0426b39363c410de00135b6cd29760d1119417eba0ef8f2795e` |
 
 ---

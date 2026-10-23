@@ -1,5 +1,9 @@
 {
-  "status": "VERIFIED",
+  "test_type": "Python reference-pipeline unit test (host numerical reference verification)",
+  "provenance": "NUMERICAL_SIMULATION",
+  "description": "Validates that pure tone frequencies cleanly project into the expected biological bands with >= 85% energy concentration",
+  "status": "PASS",
+  "hardware_hil_status": "PENDING_HARDWARE_BENCH",
   "max_relative_error": 0.0,
   "tolerance": 0.001,
   "all_vectors_passed": true,
