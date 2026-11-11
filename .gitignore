@@ -74,6 +74,16 @@ proposal/rendered_pages/
 *.so
 *.dylib
 
+# LaTeX Intermediate Artifacts
+*.aux
+*.bbl
+*.blg
+*.out
+*.spl
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
 # Raw Datasets (Never commit raw data)
 data/*
 !data/MANIFEST.csv

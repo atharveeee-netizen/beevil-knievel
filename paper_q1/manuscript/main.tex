@@ -4,8 +4,9 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
 \graphicspath{{figures/}{../figures/}{./}}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{booktabs}
-\usepackage{cite}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{geometry}
@@ -60,7 +61,7 @@ Acoustic monitoring has received significant research interest because hive acou
 
 To overcome these challenges, embedded wireless nodes deployed at the apiary must perform edge feature extraction and inference within tight energy and computational constraints, transmitting low-bandwidth summary telemetry over long-range (LoRa) links~\cite{deluca2025tinyml,harshit2025beehivesound}.
 
-\subsection{Methodological Constraints & Evidence Ledger}
+\subsection{Methodological Constraints \& Evidence Ledger}
 To maintain rigorous scientific standards, this study adheres to the following explicit constraints:
 \begin{enumerate}
     \item \textbf{No Live Apiary Deployment:} The physical hardware node developed in this work was designed and evaluated using open-source firmware, analytical physics models, and numerical host verification. Biological sensor evaluations originate from real, verified, public longitudinal field datasets (specifically the Multi-Sensory Public Beehive [MSPB] corpus from Québec, Canada~\cite{zhu2024mspb}).
@@ -85,7 +86,7 @@ Specifically, this paper makes the following five contributions:
     \item \textbf{C5 (Analytical Energy and Radio Propagation Models):} We establish analytical models for LoRa PHY airtime, two-ray ground reflection, and ITU-R P.833 / Weissberger canopy attenuation (predicting reliable communication up to \AnalyticalLinkBudgetSfSevenModeOrchardCanopyRangeM{}~m at SF7 in orchard foliage) and energy budget modeling (predicting $>18$ months autonomy on a 3000~mAh cell), defining the theoretical operating envelope prior to scheduled bench testing (tasks H-PWR and H-RF).
 \end{itemize}
 
-\section{System Architecture & Embedded DSP Pipeline}
+\section{System Architecture \& Embedded DSP Pipeline}
 \label{sec:arch}
 
 \begin{figure*}[t]
@@ -104,7 +105,7 @@ Radio communication is handled by an on-board Semtech SX1262 LoRa transceiver op
 To compute bio-acoustic features within the SRAM constraints of the Cortex-M4F without dynamic memory allocation, we designed a pipelined DSP engine (Figure~\ref{fig:bands}):
 \begin{enumerate}
     \item \textbf{DMA Acquisition:} Audio is acquired via I2S DMA at a sampling frequency $f_s = \specDspCaptureFs{}$~Hz in blocks of 2048 samples (128~ms duration).
-    \item \textbf{Anti-Aliasing FIR & Decimation:} A 31-tap symmetric linear-phase FIR lowpass filter with a cutoff frequency of 1800~Hz is applied, followed by $4\times$ decimation, yielding an effective bandwidth of $f_{s,\text{dec}} = \specDspProcessingFs{}$~Hz (Nyquist limit = 2000~Hz).
+    \item \textbf{Anti-Aliasing FIR \& Decimation:} A 31-tap symmetric linear-phase FIR lowpass filter with a cutoff frequency of 1800~Hz is applied, followed by $4\times$ decimation, yielding an effective bandwidth of $f_{s,\text{dec}} = \specDspProcessingFs{}$~Hz (Nyquist limit = 2000~Hz).
     \item \textbf{Windowed FFT:} A 512-point real Fast Fourier Transform (FFT) with a Hann window is executed using ARM CMSIS-DSP (\texttt{arm\_rfft\_fast\_f32})~\cite{arm2023cmsis,welch1967,harris1978}, achieving a spectral resolution of $\Delta f = \specDspBinResHz{}$~Hz per bin.
     \item \textbf{Biological Band Integration:} Power spectral density bins are integrated into 8 biological frequency bands:
     $B_1: [30, 100]\text{ Hz}$, $B_2: [100, 180]\text{ Hz}$ (worker flight buzz), $B_3: [180, 280]\text{ Hz}$ (fanning/alarm), $B_4: [280, 380]\text{ Hz}$ (queen piping), $B_5: [380, 500]\text{ Hz}$ (high piping), $B_6: [500, 750]\text{ Hz}$, $B_7: [750, 1200]\text{ Hz}$, and $B_8: [1200, 2000]\text{ Hz}$.
@@ -130,7 +131,7 @@ To resolve alert-flag bit collisions present in legacy implementations, we formu
     \item Sensors: 2-byte brood temperature ($0.1^\circ\text{C}$ resolution, $-9999$ sentinel on fault), 2-byte ambient temperature, 2-byte relative humidity ($0.1\%$ resolution), 2-byte battery voltage (mV).
     \item Physical State: 2-byte tilt angle ($0.1^\circ$ resolution), 1-byte dedicated system alert flags.
     \item Bio-Acoustics: 8-byte relative band energy vector (int8, $0.25\text{ dB}$ quantization), 1-byte total RMS audio energy (dB).
-    \item Health & Integrity: 1-byte TinyML inference result and confidence, 2-byte CRC-16-CCITT payload checksum.
+    \item Health \& Integrity: 1-byte TinyML inference result and confidence, 2-byte CRC-16-CCITT payload checksum.
 \end{itemize}
 At Spreading Factor 7 (BW 125~kHz, CR 4/5), the computed physical airtime is \AnalyticalLinkBudgetSfSevenModeAirtimeMs{}~ms (Semtech AN1200.13)~\cite{semtech2021an1200}. At Spreading Factor 10, airtime is \AnalyticalLinkBudgetSfOneZeroModeAirtimeMs{}~ms.
 
@@ -166,7 +167,7 @@ We evaluated 11 candidate model families representing existing heuristics, class
 \label{fig:results}
 \end{figure*}
 
-\subsection{Quantitative Results & Discussion}
+\subsection{Quantitative Results \& Discussion}
 Table~\ref{tab:main_results} presents the quantitative benchmark results averaged across all 15 outer folds.
 
 \begin{table}[t]
@@ -213,7 +214,7 @@ Several key findings emerge:
 \subsection{Statistical Significance Testing}
 To account for non-independence across cross-validation folds, we performed Nadeau--Bengio corrected resampled paired $t$-tests~\cite{nadeau2003inference,bouckaert2004evaluating}. Multi-modal early fusion demonstrated a statistically significant improvement over the heuristic baseline ($+8.46\%$, $t = 4.07$, $p = 0.0011$). A non-parametric Friedman test across all 11 models and 15 folds confirmed statistically significant performance differences ($\chi^2 = \StatisticalTestsFriedmanTestStatistic{}$, $p = \StatisticalTestsFriedmanTestPValue{}$)~\cite{demsar2006statistical,benavoli2017time}.
 
-\section{Edge Deployment, Quantization & Energy Ledger}
+\section{Edge Deployment, Quantization \& Energy Ledger}
 \label{sec:edge}
 
 \subsection{Post-Training Quantization Parity}
@@ -250,7 +251,7 @@ The compiled inference function (\texttt{beevil\_tinyml\_predict\_mlp}) executes
 
 Figure~\ref{fig:energy} illustrates the analytical energy consumption breakdown per reporting cycle at 3.3~V supply, derived from component manufacturer datasheets (Nordic nRF52840 active current 5.4~mA, Semtech SX1262 transmit current 45~mA at +14~dBm) and firmware cycle estimates. On-device computation (audio capture, 31-tap FIR filtering, 512-point CMSIS-DSP FFT, and INT8 inference) is estimated to consume $25.8~\mu\text{J}$ per cycle. Radio transmission of the 36-byte Frame~v2 at +\specLoraTxPowerDbm{}~dBm consumes $11.44~\text{mJ}$ at SF7 (computed airtime \AnalyticalLinkBudgetSfSevenModeAirtimeMs{}~ms) and $61.13~\text{mJ}$ at SF10 (computed airtime \AnalyticalLinkBudgetSfOneZeroModeAirtimeMs{}~ms). Under a 15-minute sleep interval with an 18~$\mu\text{A}$ quiescent sleep current, the system achieves an analytical battery autonomy exceeding 18 months on a single 3000~mAh cell. Physical power profiling with a Nordic Power Profiler Kit II (PPK2) or bench oscilloscope is scheduled as task H-PWR.
 
-\subsection{Analytical LoRa Link Budget & Propagation Model}
+\subsection{Analytical LoRa Link Budget \& Propagation Model}
 Datasheet sensitivity limits of the Semtech SX1262 transceiver ($-124.0~\text{dBm}$ at SF7/125~kHz and $-132.0~\text{dBm}$ at SF10/125~kHz)~\cite{semtech2021sx1262} were adopted for link-budget modeling. Rather than assuming idealized free-space propagation (which predicts an unrealistic \AnalyticalLinkBudgetSfSevenModeFreeSpaceRangeKm{}~km), we evaluated an analytical two-ray ground reflection model ($h_{\text{node}} = 0.5\text{ m}, h_{\text{gw}} = 4.0\text{ m}$) combined with the ITU-R P.833-10 / Weissberger vegetation canopy attenuation model for agricultural foliage~\cite{itu_p833,weissberger1982} (Figure~\ref{fig:rf}):
 \begin{equation}
     L_{\text{canopy}}(d) = L_{\text{two-ray}}(d) + A_{\text{veg}}(d)
@@ -286,7 +287,7 @@ In adherence to scientific integrity, we explicitly document the limitations of 
 \label{sec:conclusion}
 This study presented a rigorous, leakage-safe evaluation of edge-deployable acoustic--thermal honeybee colony monitoring. By enforcing complete physical hive isolation across 15 outer test folds on \DataAuditSummaryTotalRecords{} field records from 53 physical hives, we established that a lightweight 8-band acoustic MLP matches the accuracy of complex baselines (\MainResultsModelSummariesFZeroMlpBalancedAccuracyMean{} balanced accuracy) while requiring only \EdgeQuantizationMemoryFootprintTotalFlashBytes{}~Bytes of Flash memory. Multi-modal fusion with environmental telemetry achieved \MainResultsModelSummariesMultiModalFusionEarlyBalancedAccuracyMean{} balanced accuracy (AUROC \MainResultsModelSummariesMultiModalFusionEarlyRocAucMean{}). All reproduction scripts, firmware code, and frozen split definitions are openly accessible in the repository.
 
-\section*{Reproducibility & Open Science Statement}
+\section*{Reproducibility \& Open Science Statement}
 All code, frozen dataset splits, golden test vectors, and figure generation routines are executable via a single command: \texttt{python -m paper\_q1.run all}. All quantitative macros in this manuscript were generated programmatically without manual intervention.
 
 \bibliographystyle{elsarticle-num}

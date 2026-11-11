@@ -36,7 +36,8 @@ The following benchmark metrics are generated programmatically across 15 outer t
 | Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | F0: HistGradientBoosting | 73.17% ± 6.32% | 0.7319 | 0.8182 | `REAL_PUBLIC_DATASET` |
 | Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | F0: MLP (TinyML Candidate) | 72.95% ± 4.90% | 0.7268 | 0.7963 | `REAL_PUBLIC_DATASET` |
 | Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | SVM (RBF on F0) | 70.49% ± 4.47% | 0.7015 | 0.7670 | `REAL_PUBLIC_DATASET` |
-| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Multi-Modal Fusion (Early) | **81.96% ± 5.52%** | **0.8312** | **0.8964** | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Deep MLP | 70.92% ± 4.18% | 0.7114 | 0.7974 | `REAL_PUBLIC_DATASET` |
+| Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | **Multi-Modal Early Fusion** | **81.96% ± 5.52%** | **0.8312** | **0.8964** | `REAL_PUBLIC_DATASET` |
 | Colony Strength (T4) | MSPB (53 Hives) | StratifiedGroupKFold (k=5, 15 Folds) | Hive-Adaptive Normalization | 72.80% ± 5.02% | 0.7164 | 0.7828 | `REAL_PUBLIC_DATASET` |
 <!-- RESULTS:END -->
 

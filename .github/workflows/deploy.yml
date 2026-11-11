@@ -30,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: frontend
-        run: npm ci
+        run: npm ci --prefer-offline --no-audit || npm install --prefer-offline --no-audit
 
       - name: Build static export
         working-directory: frontend

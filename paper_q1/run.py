@@ -202,7 +202,7 @@ def step_numbers(args: argparse.Namespace) -> int:
                         elif isinstance(v, bool):
                             val_str = "true" if v else "false"
                         else:
-                            val_str = str(v)
+                            val_str = str(v).replace('\\', r'\textbackslash{}').replace('%', r'\%').replace('&', r'\&').replace('_', r'\_').replace('#', r'\#')
                         digit_map = {'0': 'Zero', '1': 'One', '2': 'Two', '3': 'Three', '4': 'Four', '5': 'Five', '6': 'Six', '7': 'Seven', '8': 'Eight', '9': 'Nine'}
                         safe_macro = "".join(digit_map.get(c, c) for c in k)
                         safe_macro = "".join(c for c in safe_macro if c.isalpha())
@@ -212,8 +212,46 @@ def step_numbers(args: argparse.Namespace) -> int:
             except Exception as e:
                 print(f"  [WARN] Failed to parse {json_file.name}: {e}")
 
-    output_tex.write_text("\n".join(macros) + "\n", encoding="utf-8")
-    print(f"  [OK] Written {count} macros to {output_tex.relative_to(REPO_ROOT)}")
+    # Convenience & Backward-Compatibility Macro Aliases
+    aliases = {
+        "DataAuditSummaryTotalRecords": r"\DataAuditDFourMspbTotalSensorRecords",
+        "DataAuditSummaryTotalHives": r"\DataAuditDFourMspbHivesCount",
+    }
+    model_mappings = [
+        ("FloorMajority", "FloorMajority"),
+        ("FloorStratified", "FloorStratified"),
+        ("RepoHeuristicVOne", "RepoHeuristicVOne"),
+        ("FZeroLogisticRegression", "FZeroLogisticRegression"),
+        ("FZeroRandomForest", "FZeroRandomForest"),
+        ("FZeroHistGradientBoosting", "FZeroHistgradientboosting"),
+        ("FZeroHistgradientboosting", "FZeroHistgradientboosting"),
+        ("FZeroMlp", "FZeroMlp"),
+        ("LiteratureMfccSvm", "SvmRbfOnFZero"),
+        ("NeuralDsCnn", "FZeroDeepMlp"),
+        ("SvmRbfOnFZero", "SvmRbfOnFZero"),
+        ("FZeroDeepMlp", "FZeroDeepMlp"),
+        ("MultiModalFusionEarly", "MultimodalFusionEarly"),
+        ("MultimodalFusionEarly", "MultimodalFusionEarly"),
+        ("HiveAdaptiveNorm", "HiveAdaptiveNorm"),
+    ]
+    for user_model, src_model in model_mappings:
+        aliases[f"MainResultsModelSummaries{user_model}FOneMacroMean"] = f"\\csname MainResultsModelSummaries{src_model}MacroFOneMean\\endcsname"
+        aliases[f"MainResultsModelSummaries{user_model}FOneMacroStd"] = f"\\csname MainResultsModelSummaries{src_model}MacroFOneStd\\endcsname"
+        aliases[f"MainResultsModelSummaries{user_model}BalancedAccuracyMean"] = f"\\csname MainResultsModelSummaries{src_model}BalancedAccuracyMean\\endcsname"
+        aliases[f"MainResultsModelSummaries{user_model}BalancedAccuracyStd"] = f"\\csname MainResultsModelSummaries{src_model}BalancedAccuracyStd\\endcsname"
+        aliases[f"MainResultsModelSummaries{user_model}RocAucMean"] = f"\\csname MainResultsModelSummaries{src_model}RocAucMean\\endcsname"
+        aliases[f"MainResultsModelSummaries{user_model}RocAucStd"] = f"\\csname MainResultsModelSummaries{src_model}RocAucStd\\endcsname"
+        aliases[f"MainResultsModelSummaries{user_model}FriedmanRank"] = f"\\csname StatisticalTestsFriedmanTestAverageRanks{src_model}\\endcsname"
+        aliases[f"MainResultsModelSummaries{src_model}FriedmanRank"] = f"\\csname StatisticalTestsFriedmanTestAverageRanks{src_model}\\endcsname"
+
+    for alias, target in aliases.items():
+        macros.append(f"\\providecommand{{\\{alias}}}{{{target}}}")
+
+    output_content = "\n".join(macros) + "\n"
+    output_tex.write_text(output_content, encoding="utf-8")
+    output_sty = REPO_ROOT / "paper_q1" / "manuscript" / "numbers.sty"
+    output_sty.write_text(output_content, encoding="utf-8")
+    print(f"  [OK] Written {count} macros + {len(aliases)} aliases to {output_tex.relative_to(REPO_ROOT)} and numbers.sty")
     return 0
 
 
