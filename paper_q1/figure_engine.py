@@ -310,7 +310,14 @@ def generate_all_figures() -> int:
     print("Generating Figure 6: LoRa Link Budget...")
     plot_fig6_lora_link_budget(out_dir)
 
-    print(f"[OK] All publication figures successfully generated in {out_dir.relative_to(REPO_ROOT)}")
+    # Mirror to paper_q1/manuscript/figures for flat standalone compilation
+    import shutil
+    manuscript_fig_dir = REPO_ROOT / "paper_q1" / "manuscript" / "figures"
+    manuscript_fig_dir.mkdir(parents=True, exist_ok=True)
+    for fig_file in out_dir.glob("*.*"):
+        shutil.copy2(fig_file, manuscript_fig_dir / fig_file.name)
+
+    print(f"[OK] All publication figures successfully generated in {out_dir.relative_to(REPO_ROOT)} and mirrored to {manuscript_fig_dir.relative_to(REPO_ROOT)}")
     return 0
 
 

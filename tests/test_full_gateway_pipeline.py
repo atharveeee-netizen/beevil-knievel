@@ -298,6 +298,48 @@ def test_frame_v2_and_alert_flag_isolation(client):
     assert resp_v1.status_code == 200
     assert resp_v1.json()["diagnosis"] == "QUEENLESS_CONFIRMED"
 
+
+def test_sentinel_unconnected_sensor_preservation(client):
+    """Verifies that disconnected/unpopulated sensors (sentinel -9999 / 0xFFFF) unpack to None, not fabricated numbers."""
+    from gateway.beevil_spec import PAYLOAD_V2_FORMAT, PAYLOAD_V2_SIZE
+
+    # All sensors disconnected (-9999, 0xFFFF, 255)
+    sentinel_frame = struct.pack(
+        PAYLOAD_V2_FORMAT,
+        22,                 # hive_id
+        1,                  # seq
+        -9999,              # brood_core_temp disconnected
+        -9999, -9999, -9999, -9999, -9999, # 5 frame temps disconnected
+        65535,              # humidity disconnected
+        65535,              # voc disconnected
+        65535,              # co2 disconnected
+        65535,              # weight disconnected
+        65535,              # lux disconnected
+        255,                # tilt disconnected
+        0x00,               # flags
+        0, 0, 0, 0, 0, 0, 0, 0 # 8 FFT bands
+    )
+    assert len(sentinel_frame) == PAYLOAD_V2_SIZE
+
+    unpacked = unpack_lora_payload(sentinel_frame)
+    assert unpacked is not None
+    assert unpacked["brood_core_temp"] is None
+    assert all(t is None for t in unpacked["frame_temps"])
+    assert unpacked["humidity"] is None
+    assert unpacked["voc_gas_res"] is None
+    assert unpacked["co2_ppm"] is None
+    assert unpacked["weight_kg"] is None
+    assert unpacked["lux"] is None
+    assert unpacked["tilt_deg"] is None
+
+    # Ingestion into gateway API must succeed and not crash
+    resp = client.post("/api/v1/telemetry", json=unpacked)
+    assert resp.status_code == 200
+    res_data = resp.json()
+    assert res_data["status"] == "SUCCESS"
+    assert res_data["hive_id"] == 22
+
+
 if __name__ == "__main__":
     init_database()
     with TestClient(app) as test_c:

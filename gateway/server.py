@@ -108,18 +108,18 @@ def init_database():
         hive_id INTEGER NOT NULL,
         timestamp TEXT NOT NULL,
         epoch_sec INTEGER NOT NULL,
-        brood_core_temp REAL NOT NULL,
-        frame_t1 REAL NOT NULL,
-        frame_t2 REAL NOT NULL,
-        frame_t3 REAL NOT NULL,
-        frame_t4 REAL NOT NULL,
-        frame_t5 REAL NOT NULL,
-        humidity REAL NOT NULL,
-        voc_gas_res REAL NOT NULL,
-        co2_ppm REAL NOT NULL,
-        weight_kg REAL NOT NULL,
-        lux REAL NOT NULL,
-        tilt_deg REAL NOT NULL,
+        brood_core_temp REAL,
+        frame_t1 REAL,
+        frame_t2 REAL,
+        frame_t3 REAL,
+        frame_t4 REAL,
+        frame_t5 REAL,
+        humidity REAL,
+        voc_gas_res REAL,
+        co2_ppm REAL,
+        weight_kg REAL,
+        lux REAL,
+        tilt_deg REAL,
         fft_b1 REAL NOT NULL,
         fft_b2 REAL NOT NULL,
         fft_b3 REAL NOT NULL,
@@ -226,9 +226,10 @@ class EdgeDiagnosticEngine:
         start_t = time.perf_counter()
 
         # Priority 1: Theft / Knockdown override
-        if (flags & 0x10) or (tilt_deg > 15.0):
+        if (flags & 0x10) or (tilt_deg is not None and tilt_deg > 15.0):
             elapsed_ms = (time.perf_counter() - start_t) * 1000.0
-            tilt_score = round(min(0.999, 0.85 + (tilt_deg / 90.0) * 0.14), 3)
+            safe_tilt = tilt_deg if tilt_deg is not None else 0.0
+            tilt_score = round(min(0.999, 0.85 + (safe_tilt / 90.0) * 0.14), 3)
             return {
                 "diagnosis": "TAMPER_THEFT",
                 "class_id": 7,
@@ -386,14 +387,14 @@ ws_manager = ConnectionManager()
 # -----------------------------------------------------------------------------
 class TelemetryPayload(BaseModel):
     hive_id: int = Field(..., ge=1, le=500, description="Unique Hive ID (1-100)")
-    brood_core_temp: float = Field(..., description="TMP117 Central Queen Brood Temp (°C)")
-    frame_temps: List[float] = Field(..., min_length=5, max_length=5, description="5x DS18B20 Frame Thermal Grid (°C)")
-    humidity: float = Field(..., ge=0, le=100, description="BME688 Relative Humidity (%)")
-    voc_gas_res: float = Field(..., description="BME688 VOC Gas Resistance (kOhms)")
-    co2_ppm: float = Field(..., ge=400, le=10000, description="SCD41 NDIR CO2 Concentration (ppm)")
-    weight_kg: float = Field(..., ge=0, le=200, description="Phaeton 200kg Scale Total Weight (kg)")
-    lux: float = Field(..., ge=0, description="VEML7700 Solar Irradiance (Lux)")
-    tilt_deg: float = Field(0.0, ge=0, le=90, description="LIS3DH Accelerometer Tilt Angle (degrees)")
+    brood_core_temp: Optional[float] = Field(..., description="TMP117 Central Queen Brood Temp (°C)")
+    frame_temps: List[Optional[float]] = Field(..., min_length=5, max_length=5, description="5x DS18B20 Frame Thermal Grid (°C)")
+    humidity: Optional[float] = Field(..., ge=0, le=100, description="BME688 Relative Humidity (%)")
+    voc_gas_res: Optional[float] = Field(..., description="BME688 VOC Gas Resistance (kOhms)")
+    co2_ppm: Optional[float] = Field(..., ge=400, le=10000, description="SCD41 NDIR CO2 Concentration (ppm)")
+    weight_kg: Optional[float] = Field(..., ge=0, le=200, description="Phaeton 200kg Scale Total Weight (kg)")
+    lux: Optional[float] = Field(..., ge=0, description="VEML7700 Solar Irradiance (Lux)")
+    tilt_deg: Optional[float] = Field(0.0, ge=0, le=90, description="LIS3DH Accelerometer Tilt Angle (degrees)")
     flags: int = Field(0, description="Discrete alert and status bitmask flags")
     seq: int = Field(0, description="Rolling sequence counter")
     version: int = Field(2, description="Protocol version (1 or 2)")
@@ -511,21 +512,31 @@ async def ingest_telemetry(payload: TelemetryPayload, background_tasks: Backgrou
     now_epoch = int(now_utc.timestamp())
 
     # Build 16-parameter sensor vector
-    t_frames = payload.frame_temps
-    t_max = max(payload.brood_core_temp, max(t_frames))
-    t_min = min(payload.brood_core_temp, min(t_frames))
-    delta_t = t_max - t_min
+    t_frames = [t for t in payload.frame_temps]
+    valid_frames = [t for t in t_frames if t is not None]
+    all_temps = ([payload.brood_core_temp] if payload.brood_core_temp is not None else []) + valid_frames
+    if all_temps:
+        t_max = max(all_temps)
+        t_min = min(all_temps)
+        delta_t = t_max - t_min
+    else:
+        t_max, t_min, delta_t = 34.0, 34.0, 0.0
+
+    core_t_val = payload.brood_core_temp if payload.brood_core_temp is not None else 34.5
+    f_vals = [t if t is not None else 34.0 for t in t_frames]
+    while len(f_vals) < 5:
+        f_vals.append(34.0)
 
     sensor_16 = [
-        payload.brood_core_temp,
-        t_frames[0], t_frames[1], t_frames[2], t_frames[3], t_frames[4],
-        payload.humidity,
-        payload.co2_ppm,
-        payload.voc_gas_res,
-        payload.weight_kg,
+        core_t_val,
+        f_vals[0], f_vals[1], f_vals[2], f_vals[3], f_vals[4],
+        payload.humidity if payload.humidity is not None else 50.0,
+        payload.co2_ppm if payload.co2_ppm is not None else 800.0,
+        payload.voc_gas_res if payload.voc_gas_res is not None else 100.0,
+        payload.weight_kg if payload.weight_kg is not None else 25.0,
         0.05, # dW/dt daily rate
-        payload.lux,
-        payload.tilt_deg,
+        payload.lux if payload.lux is not None else 1000.0,
+        payload.tilt_deg if payload.tilt_deg is not None else 0.0,
         delta_t,
         t_max,
         t_min
@@ -545,7 +556,7 @@ async def ingest_telemetry(payload: TelemetryPayload, background_tasks: Backgrou
             # Rainstorm on tin roof confused for swarm buzz -> Suppress false alarm!
             diagnosis = "HEALTHY_NORMAL"
             confidence = noise_eval["confidence"]
-        elif noise_eval["noise_type"] == "TRACTOR_DIESEL" and payload.tilt_deg <= 15.0:
+        elif noise_eval["noise_type"] == "TRACTOR_DIESEL" and (payload.tilt_deg is not None and payload.tilt_deg <= 15.0):
             # Low frequency engine vibration -> Suppress false anomaly!
             diagnosis = "HEALTHY_NORMAL"
             confidence = noise_eval["confidence"]
@@ -554,6 +565,11 @@ async def ingest_telemetry(payload: TelemetryPayload, background_tasks: Backgrou
     is_healthy = diagnosis in ["HEALTHY_NORMAL", "QUEEN_PRESENT"]
     health_score = 98.0 if is_healthy else round(max(15.0, (1.0 - confidence) * 100.0), 1)
     status = "HEALTHY" if is_healthy else ("WARNING" if diagnosis in ["PRE_SWARM_WARNING", "QUEENLESS_DISTRESS"] else "CRITICAL")
+
+    # Format frames for DB
+    t_f_db = [t if t is not None else None for t in payload.frame_temps]
+    while len(t_f_db) < 5:
+        t_f_db.append(None)
 
     # Persist to SQLite
     conn = get_db()
@@ -567,7 +583,7 @@ async def ingest_telemetry(payload: TelemetryPayload, background_tasks: Backgrou
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     """, (
         payload.hive_id, now_iso, now_epoch, payload.brood_core_temp,
-        t_frames[0], t_frames[1], t_frames[2], t_frames[3], t_frames[4],
+        t_f_db[0], t_f_db[1], t_f_db[2], t_f_db[3], t_f_db[4],
         payload.humidity, payload.voc_gas_res, payload.co2_ppm,
         payload.weight_kg, payload.lux, payload.tilt_deg,
         payload.fft_bands[0], payload.fft_bands[1], payload.fft_bands[2], payload.fft_bands[3],

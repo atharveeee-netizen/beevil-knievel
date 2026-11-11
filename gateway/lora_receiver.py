@@ -49,15 +49,15 @@ def unpack_lora_payload(raw_bytes: bytes) -> Optional[Dict[str, Any]]:
     if parsed is None:
         return None
 
-    # Format fields for API ingestion
-    core_temp = parsed["brood_core_temp"] if parsed["brood_core_temp"] is not None else 34.5
-    frame_temps = [t if t is not None else 34.0 for t in parsed["frame_temps"]]
-    humidity = parsed["humidity"] if parsed["humidity"] is not None else 50.0
-    voc_gas = parsed["voc_gas"] if parsed["voc_gas"] is not None else 100.0
-    co2_ppm = parsed["co2_ppm"] if parsed["co2_ppm"] is not None else 800.0
-    weight_kg = parsed["weight_kg"] if parsed["weight_kg"] is not None else 25.0
-    lux = parsed["lux"] if parsed["lux"] is not None else 1000.0
-    tilt_deg = parsed["tilt_deg"] if parsed["tilt_deg"] is not None else 0.0
+    # Format fields for API ingestion (preserve None for disconnected/sentinel sensors)
+    core_temp = round(parsed["brood_core_temp"], 2) if parsed["brood_core_temp"] is not None else None
+    frame_temps = [round(t, 2) if t is not None else None for t in parsed["frame_temps"]]
+    humidity = round(parsed["humidity"], 1) if parsed["humidity"] is not None else None
+    voc_gas = round(parsed["voc_gas"], 1) if parsed["voc_gas"] is not None else None
+    co2_ppm = parsed["co2_ppm"]
+    weight_kg = round(parsed["weight_kg"], 2) if parsed["weight_kg"] is not None else None
+    lux = parsed["lux"]
+    tilt_deg = parsed["tilt_deg"]
     fft_bands = [b / 255.0 for b in parsed["fft_bands"]]
 
     return {
@@ -65,12 +65,12 @@ def unpack_lora_payload(raw_bytes: bytes) -> Optional[Dict[str, Any]]:
         "seq": parsed.get("seq", 0),
         "version": parsed.get("version", 2),
         "flags": parsed.get("flags", 0),
-        "brood_core_temp": round(core_temp, 2),
-        "frame_temps": [round(t, 2) for t in frame_temps],
-        "humidity": round(humidity, 1),
-        "voc_gas_res": round(voc_gas, 1),
+        "brood_core_temp": core_temp,
+        "frame_temps": frame_temps,
+        "humidity": humidity,
+        "voc_gas_res": voc_gas,
         "co2_ppm": co2_ppm,
-        "weight_kg": round(weight_kg, 2),
+        "weight_kg": weight_kg,
         "lux": lux,
         "tilt_deg": tilt_deg,
         "fft_bands": [round(f, 4) for f in fft_bands]

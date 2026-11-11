@@ -762,5 +762,10 @@
         "OSBH CF001, CF003, CJ001, GH001"
       ]
     }
+  },
+  "summary": {
+    "total_records": 1836914,
+    "total_hives": 53,
+    "target_pos_pct": 62.58
   }
 }

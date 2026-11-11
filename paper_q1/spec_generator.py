@@ -288,8 +288,11 @@ def generate_tex_spec(spec: Dict[str, Any], output_path: Path) -> None:
     ]
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(f"  [OK] Generated TeX Spec: {output_path.relative_to(REPO_ROOT)}")
+    content = "\n".join(lines) + "\n"
+    output_path.write_text(content, encoding="utf-8")
+    sty_path = output_path.with_suffix(".sty")
+    sty_path.write_text(content, encoding="utf-8")
+    print(f"  [OK] Generated TeX Spec: {output_path.relative_to(REPO_ROOT)} and {sty_path.relative_to(REPO_ROOT)}")
 
 
 def generate_all_specs(spec_yaml_path: Path) -> int:

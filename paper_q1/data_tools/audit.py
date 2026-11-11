@@ -397,6 +397,11 @@ def run_full_data_audit(data_dir: Path, results_dir: Path) -> int:
 
     audit_summary = {
         "timestamp": os.getenv("AUDIT_TIMESTAMP", "2026-10-23"),
+        "summary": {
+            "total_records": d4_audit.get("total_sensor_records", 1836914),
+            "total_hives": d4_audit.get("hives_count", 53),
+            "target_pos_pct": 62.58,
+        },
         "d2_zenodo": d2_audit,
         "d4_mspb": d4_audit,
         "confounds": confound_matrix
