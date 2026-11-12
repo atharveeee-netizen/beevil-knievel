@@ -1,0 +1,157 @@
+{
+  "metadata": {
+    "title": "Reproduction of the published row-level protocol",
+    "provenance": "REAL_PUBLIC_DATASET",
+    "dataset": "MSPB D1",
+    "features": "16 raw decibel bins",
+    "n_rows": 210600,
+    "n_windows": 306,
+    "n_hives": 53,
+    "n_inspections": 306,
+    "seed": 0,
+    "protocols": {
+      "A": "random rows, every row",
+      "A2": "random rows, one row per window",
+      "B": "hive-grouped rows, every row",
+      "C": "inspection aggregates, hive-grouped"
+    }
+  },
+  "results": {
+    "A": {
+      "LogisticRegression": {
+        "accuracy": 0.7041405508072175,
+        "balanced_accuracy": 0.7015040705592757,
+        "macro_f1": 0.6810314667364225,
+        "auroc": 0.7582694837579477,
+        "n": 210600,
+        "n_pos": 144644
+      },
+      "RandomForest": {
+        "accuracy": 0.8684520417853752,
+        "balanced_accuracy": 0.835052927166455,
+        "macro_f1": 0.8431864349529967,
+        "auroc": 0.9321841527707009,
+        "n": 210600,
+        "n_pos": 144644
+      },
+      "ExtraTrees": {
+        "accuracy": 0.8620987654320987,
+        "balanced_accuracy": 0.8395295538725773,
+        "macro_f1": 0.8396611899976835,
+        "auroc": 0.9307944868468332,
+        "n": 210600,
+        "n_pos": 144644
+      },
+      "HistGradientBoosting": {
+        "accuracy": 0.7714055080721748,
+        "balanced_accuracy": 0.7634839459935185,
+        "macro_f1": 0.7477098725856862,
+        "auroc": 0.8440870176028064,
+        "n": 210600,
+        "n_pos": 144644
+      }
+    },
+    "A2": {
+      "LogisticRegression": {
+        "accuracy": 0.6928104575163399,
+        "balanced_accuracy": 0.6860272459499264,
+        "macro_f1": 0.6787580969399152,
+        "auroc": 0.7499079528718704,
+        "n": 306,
+        "n_pos": 194
+      },
+      "RandomForest": {
+        "accuracy": 0.7026143790849673,
+        "balanced_accuracy": 0.6597938144329897,
+        "macro_f1": 0.6646151252002361,
+        "auroc": 0.726850147275405,
+        "n": 306,
+        "n_pos": 194
+      },
+      "ExtraTrees": {
+        "accuracy": 0.6928104575163399,
+        "balanced_accuracy": 0.6596097201767305,
+        "macro_f1": 0.6622833795143943,
+        "auroc": 0.7300257731958764,
+        "n": 306,
+        "n_pos": 194
+      },
+      "HistGradientBoosting": {
+        "accuracy": 0.6601307189542484,
+        "balanced_accuracy": 0.6281756259204713,
+        "macro_f1": 0.6294881944767847,
+        "auroc": 0.7067378497790869,
+        "n": 306,
+        "n_pos": 194
+      }
+    },
+    "B": {
+      "LogisticRegression": {
+        "accuracy": 0.6898955365622033,
+        "balanced_accuracy": 0.6844610714286079,
+        "macro_f1": 0.6654557664375302,
+        "auroc": 0.7244838642228079,
+        "n": 210600,
+        "n_pos": 144644
+      },
+      "RandomForest": {
+        "accuracy": 0.7332526115859449,
+        "balanced_accuracy": 0.6750935899086854,
+        "macro_f1": 0.6800133845957053,
+        "auroc": 0.7291923214972338,
+        "n": 210600,
+        "n_pos": 144644
+      },
+      "ExtraTrees": {
+        "accuracy": 0.7278442545109212,
+        "balanced_accuracy": 0.685470909894218,
+        "macro_f1": 0.6848046991422236,
+        "auroc": 0.7328660159854029,
+        "n": 210600,
+        "n_pos": 144644
+      },
+      "HistGradientBoosting": {
+        "accuracy": 0.7066524216524217,
+        "balanced_accuracy": 0.6858879723419529,
+        "macro_f1": 0.6750516437449112,
+        "auroc": 0.7263235144394842,
+        "n": 210600,
+        "n_pos": 144644
+      }
+    },
+    "C": {
+      "LogisticRegression": {
+        "accuracy": 0.7745098039215687,
+        "balanced_accuracy": 0.763668998527246,
+        "macro_f1": 0.7600981695469884,
+        "auroc": 0.8271354933726068,
+        "n": 306,
+        "n_pos": 194
+      },
+      "RandomForest": {
+        "accuracy": 0.7516339869281046,
+        "balanced_accuracy": 0.7116623711340206,
+        "macro_f1": 0.7191982612895436,
+        "auroc": 0.7846097201767306,
+        "n": 306,
+        "n_pos": 194
+      },
+      "ExtraTrees": {
+        "accuracy": 0.7516339869281046,
+        "balanced_accuracy": 0.719210235640648,
+        "macro_f1": 0.7245202558635394,
+        "auroc": 0.7858523564064801,
+        "n": 306,
+        "n_pos": 194
+      },
+      "HistGradientBoosting": {
+        "accuracy": 0.7026143790849673,
+        "balanced_accuracy": 0.6654547128129602,
+        "macro_f1": 0.6693934249112516,
+        "auroc": 0.7676730486008837,
+        "n": 306,
+        "n_pos": 194
+      }
+    }
+  }
+}

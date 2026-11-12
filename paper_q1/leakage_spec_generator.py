@@ -12,6 +12,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import numpy as np
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RESULT = REPO_ROOT / "paper_q1" / "results" / "leakage_ladder.json"
 OUT_DIR = REPO_ROOT / "paper_q1" / "manuscript_leakage"
@@ -161,6 +163,237 @@ def main() -> int:
                 continue
             lines.append(f"\\newcommand{{\\LeakRowsGap{m}}}{{{gap:+.4f}}}")
             lines.append(f"\\newcommand{{\\LeakRowsGap{m}Pts}}{{{gap * 100:+.1f}}}")
+
+    # ---- label variance within hives, read from the feature table
+    feat_csv = REPO_ROOT / "data" / "processed" / "mspb_colony_strength_features.csv"
+    n_feat_rows = None
+    if feat_csv.exists():
+        import pandas as pd
+        vdf = pd.read_csv(feat_csv)
+        n_feat_rows = len(vdf)
+        per_hive = vdf.groupby("hive_id")["is_strong"].agg(["nunique", "count"])
+        flips = int((per_hive["nunique"] > 1).sum())
+        rng = vdf.groupby("hive_id")["total_frames"].agg(["min", "max"])
+        within = (rng["max"] - rng["min"])
+        lines.append("")
+        lines.append(f"\\newcommand{{\\LeakNFlipHives}}{{{flips}}}")
+        lines.append(f"\\newcommand{{\\LeakFlipPct}}{{{flips / len(per_hive) * 100:.1f}}}")
+        lines.append(f"\\newcommand{{\\LeakMedianWithinRange}}{{{within.median():.1f}}}")
+        lines.append(f"\\newcommand{{\\LeakMedianInspectionsPerHive}}"
+                     f"{{{per_hive['count'].median():.0f}}}")
+        lines.append(f"\\newcommand{{\\LeakMinInspectionsPerHive}}"
+                     f"{{{int(per_hive['count'].min())}}}")
+        lines.append(f"\\newcommand{{\\LeakMaxInspectionsPerHive}}"
+                     f"{{{int(per_hive['count'].max())}}}")
+        if "evaluation_round" in vdf.columns:
+            lines.append(f"\\newcommand{{\\LeakNRounds}}"
+                         f"{{{int(vdf['evaluation_round'].nunique())}}}")
+        lines.append(f"\\newcommand{{\\LeakFramesMin}}{{{vdf['total_frames'].min():.0f}}}")
+        lines.append(f"\\newcommand{{\\LeakFramesMax}}{{{vdf['total_frames'].max():.0f}}}")
+
+        # median gap between consecutive inspections of the same hive
+        d = pd.to_datetime(vdf["inspection_date"])
+        gap = (pd.DataFrame({"hive": vdf["hive_id"].to_numpy(), "d": d})
+               .sort_values(["hive", "d"])
+               .groupby("hive")["d"].diff().dt.total_seconds().div(86400).dropna())
+        if len(gap):
+            lines.append(f"\\newcommand{{\\LeakMedianGapDays}}{{{gap.median():.1f}}}")
+
+    # ---- dataset size facts from the audit file
+    audit = REPO_ROOT / "paper_q1" / "results" / "data_audit.json"
+    if audit.exists():
+        a = json.loads(audit.read_text(encoding="utf-8"))
+        d4 = a.get("d4_mspb", {})
+        if d4:
+            lines.append("")
+            for name, val in (
+                ("\\LeakRawRowsDOne", d4.get("d1_sample_count")),
+                ("\\LeakRawRowsDTwo", d4.get("d2_sample_count")),
+                ("\\LeakRawRowsTotal", d4.get("total_sensor_records")),
+            ):
+                if val:
+                    lines.append(f"\\newcommand{{{name}}}{{{val:,}}}".replace(",", "{,}"))
+            if d4.get("sensor_tags_count"):
+                lines.append(f"\\newcommand{{\\LeakRawTags}}{{{d4['sensor_tags_count']}}}")
+            insp = d4.get("phenotypic_inspections", {}).get("total_inspections")
+            if insp:
+                lines.append(f"\\newcommand{{\\LeakNInspectionsSource}}{{{insp}}}")
+                if n_feat_rows:
+                    lines.append(f"\\newcommand{{\\LeakNSkippedInspections}}"
+                                 f"{{{insp - n_feat_rows}}}")
+
+    # ---- reproduction of the published row-level protocol
+    repro_json = REPO_ROOT / "paper_q1" / "results" / "literature_reproduction.json"
+    if repro_json.exists():
+        rep = json.loads(repro_json.read_text(encoding="utf-8"))
+        rmeta = rep["metadata"]
+        lines.append("")
+        lines.append(f"\\newcommand{{\\LeakReproNRows}}{{{rmeta['n_rows']:,}}}".replace(",", "{,}"))
+        lines.append(f"\\newcommand{{\\LeakReproNWindows}}{{{rmeta['n_windows']}}}")
+        lines.append(f"\\newcommand{{\\LeakReproNHives}}{{{rmeta['n_hives']}}}")
+        proto = {"A": "A", "A2": "ATwo", "B": "B", "C": "C"}
+        for pkey, block in rep["results"].items():
+            pk = proto.get(pkey, pkey)
+            for model, res in block.items():
+                m = camel_model(model)
+                lines.append(f"\\newcommand{{\\LeakRepro{pk}{m}Accuracy}}"
+                             f"{{{res['accuracy'] * 100:.1f}}}")
+                lines.append(f"\\newcommand{{\\LeakRepro{pk}{m}MacroFone}}"
+                             f"{{{fmt(res['macro_f1'])}}}")
+                if res["auroc"] == res["auroc"]:
+                    lines.append(f"\\newcommand{{\\LeakRepro{pk}{m}Auroc}}"
+                                 f"{{{fmt(res['auroc'])}}}")
+        for model in rep["results"]["A"]:
+            m = camel_model(model)
+            try:
+                gap = (rep["results"]["A"][model]["accuracy"]
+                       - rep["results"]["B"][model]["accuracy"])
+            except KeyError:
+                continue
+            lines.append(f"\\newcommand{{\\LeakReproGap{m}}}{{{gap:+.4f}}}")
+            lines.append(f"\\newcommand{{\\LeakReproGap{m}Pts}}{{{gap * 100:+.1f}}}")
+        # largest and smallest accuracy gap across models
+        gaps = [rep["results"]["A"][m]["accuracy"] - rep["results"]["B"][m]["accuracy"]
+                for m in rep["results"]["A"]]
+        lines.append(f"\\newcommand{{\\LeakReproGapLargest}}{{{max(gaps) * 100:+.1f}}}")
+        lines.append(f"\\newcommand{{\\LeakReproGapSmallest}}{{{min(gaps) * 100:+.1f}}}")
+        best_a = max(rep["results"]["A"].values(), key=lambda r: r["accuracy"])
+        lines.append(f"\\newcommand{{\\LeakReproBestAAccuracy}}"
+                     f"{{{best_a['accuracy'] * 100:.1f}}}")
+        best_b = max(rep["results"]["B"].values(), key=lambda r: r["accuracy"])
+        lines.append(f"\\newcommand{{\\LeakReproBestBAccuracy}}"
+                     f"{{{best_b['accuracy'] * 100:.1f}}}")
+
+    # ---- label threshold sensitivity
+    thr_json = REPO_ROOT / "paper_q1" / "results" / "threshold_sensitivity.json"
+    if thr_json.exists():
+        thr = json.loads(thr_json.read_text(encoding="utf-8"))
+        lines.append("")
+        by_cell: dict = {}
+        for res in thr["results"].values():
+            key = (int(res["threshold"]), res["transform"])
+            by_cell.setdefault(key, []).append(res["gap"])
+        all_gaps = []
+        thresh_words = {15: "Fifteen", 20: "Twenty", 25: "TwentyFive"}
+        for (t, tname), gaps in sorted(by_cell.items()):
+            tt = camel_transform(tname)
+            tw = thresh_words.get(t, f"T{t}")
+            all_gaps.extend(gaps)
+            lines.append(f"\\newcommand{{\\LeakThresh{tw}{tt}GapMean}}"
+                         f"{{{np.mean(gaps):+.4f}}}")
+            lines.append(f"\\newcommand{{\\LeakThresh{tw}{tt}GapMin}}"
+                         f"{{{min(gaps):+.4f}}}")
+            lines.append(f"\\newcommand{{\\LeakThresh{tw}{tt}GapMax}}"
+                         f"{{{max(gaps):+.4f}}}")
+        lines.append(f"\\newcommand{{\\LeakThreshAllGapMin}}{{{min(all_gaps):+.4f}}}")
+        lines.append(f"\\newcommand{{\\LeakThreshAllGapMax}}{{{max(all_gaps):+.4f}}}")
+        lines.append(f"\\newcommand{{\\LeakThreshNCombinations}}{{{len(all_gaps)}}}")
+
+    # size of the temporal test set, used in prose
+    p1_n = next((v["metrics"]["n"] for blk in experiments.values()
+                 for k, v in blk.items() if k.startswith("P1|")), None)
+    if p1_n:
+        lines.append("")
+        lines.append(f"\\newcommand{{\\LeakPoneN}}{{{p1_n}}}")
+
+    # model count, and how many lose ranking under the temporal holdout
+    bands_block = experiments.get("bands", {})
+    n_models = len({k.split("|", 1)[1] for k in bands_block})
+    if n_models:
+        lines.append(f"\\newcommand{{\\LeakNModels}}{{{n_models}}}")
+        degraded = 0
+        for model in {k.split("|", 1)[1] for k in bands_block}:
+            try:
+                if (bands_block[f"P1|{model}"]["metrics"]["auroc"]
+                        < bands_block[f"P2|{model}"]["metrics"]["auroc"]):
+                    degraded += 1
+            except KeyError:
+                continue
+        lines.append(f"\\newcommand{{\\LeakPoneAurocDegradedN}}{{{degraded}}}")
+
+    # ---- formal test that the P0 - P2 gap is centred on zero
+    try:
+        from scipy.stats import wilcoxon
+        gaps_all = []
+        for tname, block in experiments.items():
+            for model in {k.split("|", 1)[1] for k in block}:
+                try:
+                    g = (block[f"P0|{model}"]["metrics"]["macro_f1"]
+                         - block[f"P2|{model}"]["metrics"]["macro_f1"])
+                except KeyError:
+                    continue
+                gaps_all.append(g)
+        if gaps_all:
+            arr = np.asarray(gaps_all)
+            lines.append("")
+            lines.append(f"\\newcommand{{\\LeakPairsN}}{{{len(arr)}}}")
+            lines.append(f"\\newcommand{{\\LeakPairsMeanGap}}{{{arr.mean():+.4f}}}")
+            lines.append(f"\\newcommand{{\\LeakPairsMedianGap}}{{{np.median(arr):+.4f}}}")
+            lines.append(f"\\newcommand{{\\LeakPairsSdGap}}{{{arr.std(ddof=1):.4f}}}")
+            lines.append(f"\\newcommand{{\\LeakPairsNegative}}{{{int((arr < 0).sum())}}}")
+            lines.append(f"\\newcommand{{\\LeakPairsAbsMax}}{{{np.abs(arr).max():.4f}}}")
+            widths = [v["ci95"]["macro_f1"][1] - v["ci95"]["macro_f1"][0]
+                      for blk in experiments.values()
+                      for k, v in blk.items()
+                      if k.startswith("P2|") and "ci95" in v]
+            if widths:
+                lines.append(f"\\newcommand{{\\LeakPairsMinCiWidth}}{{{min(widths):.4f}}}")
+            lines.append(f"\\newcommand{{\\LeakPairsMeanGapPts}}{{{arr.mean() * 100:+.1f}}}")
+            try:
+                stat = wilcoxon(arr, alternative="two-sided")
+                lines.append(f"\\newcommand{{\\LeakPairsWilcoxonP}}{{{stat.pvalue:.3f}}}")
+            except ValueError:
+                lines.append(f"\\newcommand{{\\LeakPairsWilcoxonP}}{{n/a}}")
+    except ImportError:
+        pass
+
+    # ---- D2 temperature label degeneracy, measured once
+    d2_json = REPO_ROOT / "paper_q1" / "results" / "d2_label_check.json"
+    if d2_json.exists():
+        d2 = json.loads(d2_json.read_text(encoding="utf-8"))
+        r = d2["results"]
+        lines.append("")
+        lines.append(f"\\newcommand{{\\LeakDTwoPctBelow}}{{{r['pct_below_cutoff']:.2f}}}")
+        lines.append(f"\\newcommand{{\\LeakDTwoNRows}}{{{r['n_rows']:,}}}".replace(",", "{,}"))
+        lines.append(f"\\newcommand{{\\LeakDTwoNBelow}}{{{r['n_below_cutoff']:,}}}".replace(",", "{,}"))
+        lines.append(f"\\newcommand{{\\LeakDTwoMedianC}}{{{r['median_celsius']:.1f}}}")
+
+    # ---- absolute bins minus relative bands, same model and rung
+    if "raw" in experiments and "bands" in experiments:
+        models = sorted({k.split("|", 1)[1] for k in experiments["bands"]})
+        lines.append("")
+        for model in models:
+            m = camel_model(model)
+            for rung, rname in (("P0", "Pzero"), ("P2", "Ptwo"), ("P3", "Pthree")):
+                try:
+                    gain = (experiments["raw"][f"{rung}|{model}"]["metrics"]["macro_f1"]
+                            - experiments["bands"][f"{rung}|{model}"]["metrics"]["macro_f1"])
+                except KeyError:
+                    continue
+                lines.append(f"\\newcommand{{\\LeakRawGain{m}{rname}}}{{{gain:+.4f}}}")
+                lines.append(f"\\newcommand{{\\LeakRawGain{m}{rname}Pts}}{{{gain * 100:+.1f}}}")
+
+    # ---- environment contribution: bands_env minus bands, same rung
+    if "bands_env" in experiments and "bands" in experiments:
+        models = sorted({k.split("|", 1)[1] for k in experiments["bands"]})
+        env_gains = []
+        lines.append("")
+        for model in models:
+            m = camel_model(model)
+            for rung, rname in (("P2", "Ptwo"), ("P3", "Pthree")):
+                try:
+                    with_env = experiments["bands_env"][f"{rung}|{model}"]["metrics"]["macro_f1"]
+                    without = experiments["bands"][f"{rung}|{model}"]["metrics"]["macro_f1"]
+                except KeyError:
+                    continue
+                gain = with_env - without
+                lines.append(f"\\newcommand{{\\LeakEnvGain{m}{rname}}}{{{gain:+.4f}}}")
+                lines.append(f"\\newcommand{{\\LeakEnvGain{m}{rname}Pts}}{{{gain * 100:+.1f}}}")
+                if rung == "P2":
+                    env_gains.append(gain)
+        if env_gains:
+            lines.append(f"\\newcommand{{\\LeakEnvGainMinPts}}{{{min(env_gains) * 100:.1f}}}")
+            lines.append(f"\\newcommand{{\\LeakEnvGainMaxPts}}{{{max(env_gains) * 100:.1f}}}")
 
     primary = "bands" if "bands" in experiments else next(iter(experiments))
     block = experiments[primary]

@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "title": "D2 temperature label degeneracy check",
+    "provenance": "REAL_PUBLIC_DATASET",
+    "dataset": "MSPB D2",
+    "cutoff_celsius": 32.0
+  },
+  "results": {
+    "n_rows": 876105,
+    "n_below_cutoff": 875004,
+    "n_above_cutoff": 1101,
+    "pct_below_cutoff": 99.87,
+    "median_celsius": 18.34
+  }
+}

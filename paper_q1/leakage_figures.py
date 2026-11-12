@@ -19,6 +19,7 @@ import numpy as np
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RESULT = REPO_ROOT / "paper_q1" / "results" / "leakage_ladder.json"
+REPRO = REPO_ROOT / "paper_q1" / "results" / "literature_reproduction.json"
 OUT = REPO_ROOT / "paper_q1" / "manuscript_leakage" / "figures"
 
 RUNGS = ("P0", "P1", "P2", "P3")
@@ -207,6 +208,56 @@ def fig_band_coverage() -> Path:
     return p
 
 
+def fig_reproduction() -> Path:
+    """Accuracy under the published protocol and under three repairs.
+
+    Reads literature_reproduction.json, so the figure cannot drift from the
+    table.
+    """
+    if not REPRO.exists():
+        raise SystemExit(f"missing {REPRO}")
+    rep = json.loads(REPRO.read_text(encoding="utf-8"))
+    res = rep["results"]
+    models = list(res["A"].keys())
+
+    protocols = [
+        ("A", "A  published", "#c1440e"),
+        ("A2", "A2  duplicates removed", "#e8a33d"),
+        ("B", "B  grouped by hive", "#7a6a3a"),
+        ("C", "C  aggregated", "#1f6f8b"),
+    ]
+
+    fig, ax = plt.subplots(figsize=(6.6, 3.0))
+    x = np.arange(len(models))
+    w = 0.19
+    for i, (key, label, colour) in enumerate(protocols):
+        vals = [res[key][m]["accuracy"] * 100 for m in models]
+        ax.bar(x + (i - 1.5) * w, vals, w, label=label, color=colour)
+
+    any_res = res["A"][models[0]]
+    n, n_pos = any_res["n"], any_res["n_pos"]
+    baseline = max(n_pos, n - n_pos) / n * 100
+    ax.axhline(baseline, ls="--", lw=1.0, color="#555")
+    ax.text(len(models) - 0.45, baseline + 1.2, "majority class",
+            fontsize=6.8, color="#555", ha="right")
+
+    ax.set_xticks(x)
+    ax.set_xticklabels([MODEL_LABEL.get(m, m) for m in models],
+                       rotation=18, ha="right", fontsize=7.5)
+    ax.set_ylabel("Accuracy (%)")
+    ax.set_ylim(40, 100)
+    ax.legend(frameon=False, fontsize=6.8, ncol=2, loc="upper right")
+    ax.set_title("The published protocol, then one change at a time",
+                 fontsize=9, loc="left")
+    fig.tight_layout()
+
+    p = OUT / "fig_reproduction.pdf"
+    fig.savefig(p, bbox_inches="tight")
+    fig.savefig(p.with_suffix(".png"), dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    return p
+
+
 def main() -> int:
     if not RESULT.exists():
         raise SystemExit(f"missing {RESULT}")
@@ -215,6 +266,8 @@ def main() -> int:
     for fn in (fig_rungs, fig_models):
         print(f"wrote {fn(data)}")
     print(f"wrote {fig_band_coverage()}")
+    if REPRO.exists():
+        print(f"wrote {fig_reproduction()}")
     return 0
 
 

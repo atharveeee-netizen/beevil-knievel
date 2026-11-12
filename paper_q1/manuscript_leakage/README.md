@@ -20,11 +20,20 @@ python -m paper_q1.leakage_ladder
 # 4. run the row-level comparison
 python -m paper_q1.leakage_ladder_rows
 
-# 5. generate numbers and figures from the result files
+# 5. reproduce the published row-level protocol, then repair it
+python -m paper_q1.literature_reproduction
+
+# 6. sweep the label cut-off (15, 20, 25 frames)
+python -m paper_q1.threshold_sensitivity
+
+# 7. measure why the original D2 temperature label was abandoned
+python -m paper_q1.d2_label_check
+
+# 8. generate numbers and figures from the result files
 python -m paper_q1.leakage_spec_generator
 python -m paper_q1.leakage_figures
 
-# 6. build the PDF
+# 9. build the PDF
 cd paper_q1/manuscript_leakage
 pdflatex main && bibtex main && pdflatex main && pdflatex main
 ```
@@ -33,10 +42,10 @@ pdflatex main && bibtex main && pdflatex main && pdflatex main
 
 | File | Origin |
 |---|---|
-| `leakage_numbers.tex` / `.sty` | generated from `paper_q1/results/leakage_ladder.json` |
-| `figures/*.pdf` | generated from the same JSON |
+| `leakage_numbers.tex` / `.sty` | generated from `results/leakage_ladder.json` and the other result files |
+| `figures/*.pdf` | generated from `results/leakage_ladder.json` and `results/literature_reproduction.json` |
 | `main.tex` | written by hand, all numbers are macros |
-| `references.bib` | written by hand, every entry verified |
+| `references.bib` | written by hand, every entry verified against Crossref or arXiv |
 
 No number in the manuscript is typed directly. `paper_q1/audit_numbers.py`
 lists every numeric literal that is not a macro, so each one can be justified.
@@ -73,6 +82,10 @@ splitting is both the safer protocol and the better model.
 - Three of eight canonical acoustic bands receive no MSPB data, because the
   sensor covers 122 to 580 Hz and the band spec covers 30 to 2000 Hz.
 - Only 53 of 94 sensor tags carry colony-strength labels.
-- Colony strength is close to constant within a hive, so the hive holdout tests
-  between-hive discrimination rather than state tracking.
+- Colony strength is not stable within a hive: 46 of 53 hives (86.8%) change
+  class across rounds, and the median within-hive range of total frames is 14.0
+  on a 0 to 34 scale. The hive holdout therefore tests generalisation of that
+  within-hive change to new hives, not steady-state discrimination.
 - The apiary holdout is a two-fold comparison.
+- The reproduction applies the published protocol to this dataset. It does not
+  reproduce the number of any single prior study.

@@ -36,30 +36,34 @@ accuracy above 90\%, yet the same models degrade when whole hives are held out.
 Two explanations compete: split leakage, where near-duplicate rows cross the
 train-test boundary, and feature encoding, where microphone gain acts as a hive
 fingerprint.
-We separate them by crossing four split rules with three feature transforms on
-the MSPB dataset, holding data, label, models and metric fixed.
-The unit of analysis is the inspection event: \LeakNRows{} rows from
-\LeakNHives{} hives across two apiaries.
-The most permissive split, which places the same hive in training and test,
-scores \LeakBandsPzeroHistGradientBoostingMacroFone{} macro F1.
-The strict hive holdout scores \LeakBandsPtwoHistGradientBoostingMacroFone{}.
-The gap is \LeakBandsTotalGapHistGradientBoosting{}, and the pre-registered
-inflation claim is falsified.
-Absolute decibel features, which retain gain, do not leak either
-(\LeakRawTotalGapHistGradientBoosting{}).
-The only large effect is indoor environment: temperature and humidity add about
-nine macro-F1 points and transfer to an unseen apiary.
-We also find that three of the eight canonical acoustic bands receive no data,
-because the sensor covers \SI{122}{} to \SI{580}{\hertz}.
-The practical rule is to aggregate before splitting.
-At inspection granularity, leakage does not explain the high scores reported in
-this field.
-We then restore the row-level protocol as a control.
-The leak reappears there, but only for high-capacity models: a random forest
-gains \LeakRowsGapRandomForestPts{} macro-F1 points, while logistic regression
-gains \LeakRowsGapLogisticRegressionPts{}.
-Aggregation removes the leak and also raises the honest score, so it is both
-the safer protocol and the better model.
+
+We test both on the MSPB dataset.
+A reproduction of the published protocol uses \LeakReproNRows{} telemetry rows
+from \LeakReproNWindows{} inspection windows.
+A random row split reaches \LeakReproBestAAccuracy{} percent accuracy.
+Removing duplicate rows, grouping the split by hive, or aggregating to the
+inspection level each removes most of that gain.
+
+We then cross four split rules with three feature transforms at inspection
+granularity, holding data, label, models and metric fixed.
+The most permissive split scores \LeakBandsPzeroHistGradientBoostingMacroFone{}
+macro F1, and the strict hive holdout scores
+\LeakBandsPtwoHistGradientBoostingMacroFone{}.
+The pre-registered inflation claim is falsified
+($p = \LeakPairsWilcoxonP{}$ over \LeakPairsN{} model-transform pairs).
+Absolute decibel features do not leak either.
+The only large effect is indoor environment, worth \LeakEnvGainMinPts{} to
+\LeakEnvGainMaxPts{} macro-F1 points, and it transfers to an unseen apiary.
+
+Three of the eight canonical acoustic bands receive no data, because the sensor
+covers \SI{122}{} to \SI{580}{\hertz}.
+
+At row level the leak returns, and it is capacity-dependent.
+A random forest gains \LeakRowsGapRandomForestPts{} macro-F1 points from a split
+that it loses under hive holdout, and logistic regression gains
+\LeakRowsGapLogisticRegressionPts{}.
+Aggregating before splitting removes the leak and raises the honest score.
+Report the unit of analysis with the score.
 \end{abstract}
 
 \begin{keyword}
@@ -73,11 +77,16 @@ cross-validation \sep group holdout \sep reproducibility
 \section{Introduction}
 % =====================================================================
 
+Pollinator decline threatens crop production and wild plant reproduction
+\cite{potts2010,gallai2009}.
+Continuous hive monitoring lets a beekeeper observe colony state without
+opening the hive \cite{meikle2015}.
+
 Machine learning models that classify honeybee colony state from hive audio
-are frequently reported with accuracy above 90\%.
-Several groups now report that the same models degrade sharply when the
-evaluation holds out whole hives rather than individual recordings
+are frequently reported with accuracy above 90\%
 \cite{nolasco2018tobee,zgank2021,harshit2025beehivesound,sucipto2025survey}.
+When the evaluation holds out whole hives, the same task becomes much harder
+\cite{bricout2024beetogether}.
 The gap between the two protocols is large enough to change the conclusion of
 a study.
 
@@ -89,6 +98,8 @@ A random row split places some of them in training and others in test.
 The model then recognises the hive rather than the colony state.
 This failure mode is well documented outside apiculture
 \cite{kaufman2012leakage,kapoor2023leakage,roberts2017cv}.
+Model selection adds a related bias when the same data choose the model and
+estimate its score \cite{varma2006bias,cawley2010overfitting}.
 
 The second is \emph{feature encoding}.
 Microphone placement, cavity resonance and sensor gain give each hive a stable
@@ -104,11 +115,13 @@ rather than by argument.
 We hold the data, the label, the models and the metric fixed.
 We vary two things independently: the split rule, and the gain invariance of
 the feature transform.
-That design separates the two explanations for the first time in this domain.
+No previous study in this domain varies both in one design.
 
 Our contributions are:
 
 \begin{enumerate}
+\item A direct reproduction of the published row-level protocol on this dataset,
+      followed by removal of its sources of optimism one at a time.
 \item A four-rung split ladder that isolates hive leakage from apiary-level
       environment shift.
 \item A two-way comparison of gain-invariant and gain-retaining features across
@@ -118,6 +131,47 @@ Our contributions are:
 \item A pre-registered analysis, with the falsification outcome reported as
       obtained.
 \end{enumerate}
+
+\subsection{Related work}
+
+Acoustic hive monitoring has a long record of high reported accuracy.
+Early benchmarks compared classical spectral features with shallow classifiers
+for hive sound recognition \cite{nolasco2018tobee}.
+Deep networks followed, first for swarm activity from IoT microphones
+\cite{zgank2021}, and later for colony classification.
+One recent study reports \SI{98.31}{\percent} accuracy on data described as
+unseen \cite{harshit2025beehivesound}.
+A survey of embedded beekeeping systems collects these results and notes that
+evaluation protocols differ between studies \cite{sucipto2025survey}.
+Recent work keeps the time dimension of the modulation spectrum and reports
+better cross-hive transfer than earlier handcrafted features
+\cite{abdollahi2026urban}.
+Precision beekeeping sets out its own engineering constraints
+\cite{zacepins2015}.
+
+The protocol question is not new to this domain.
+The Bee Together study joined several public bee audio datasets to test
+extrapolation to hives that a model has not heard
+\cite{bricout2024beetogether}.
+That work establishes cross-hive transfer as the hard setting.
+It does not separate the mechanisms that produce the gap.
+
+Outside apiculture the mechanisms are well characterised.
+Leakage through near-duplicate records is formalised by
+\cite{kaufman2012leakage} and surveyed at scale by \cite{kapoor2023leakage}.
+Grouped cross-validation for dependent observations is set out by
+\cite{roberts2017cv}.
+
+Sensor fusion is the other established direction.
+Indoor environmental sensing has been used for colony monitoring
+\cite{cecchi2020} and for queen detection at the edge
+\cite{deluca2025tinyml}.
+In-hive thermal patterns have been used to detect colony events
+\cite{kridi2016}.
+Vibrational analysis has been used for long-term health assessment
+\cite{bencsik2011swarming,ramsey2020}.
+We are not aware of a study in this domain that varies the split rule and the
+feature transform independently.
 
 % =====================================================================
 \section{Data}
@@ -129,12 +183,11 @@ and archived at Zenodo record 11398835.
 
 \subsection{Telemetry}
 
-The dataset contains \LeakNRows{} labelled inspection records derived from
-1{,}836{,}914 raw telemetry rows.
+The dataset contains \LeakNInspectionsSource{} labelled inspection records
+derived from \LeakRawRowsTotal{} raw telemetry rows.
 Two files partition the year: D1 covers 16 April to 5 November 2020 and holds
-960{,}809 rows from 85 sensor tags.
-D2 covers 6 November 2020 to 14 April 2021 and holds 876{,}105 rows from 65
-sensor tags.
+\LeakRawRowsDOne{} rows.
+D2 covers 6 November 2020 to 14 April 2021 and holds \LeakRawRowsDTwo{} rows.
 
 The nominal sampling interval is five minutes in the dataset documentation.
 The observed median interval is 15 minutes, measured across both files.
@@ -142,8 +195,7 @@ We report the observed value throughout.
 
 Each row carries 16 acoustic bins spanning \SI{122.07}{\hertz} to
 \SI{579.83}{\hertz} with a uniform spacing of \SI{30.52}{\hertz}.
-Values are already logarithmic, in decibels, and range from approximately
-\SI{-22}{} to \SI{+70}{}.
+Values are already logarithmic, in decibels, and many are negative.
 No additional logarithm is valid.
 
 \subsection{Phenotypic label}
@@ -155,18 +207,18 @@ chambers.
 We follow the dataset authors and label a colony \emph{strong} when the total
 frame count is at least 20.0.
 
-The raw telemetry covers 94 sensor tags.
+The raw telemetry covers \LeakRawTags{} sensor tags.
 Only \LeakNHives{} hives carry a colony-strength label.
-All results in this paper describe those \LeakNHives{} hives, and the two counts are not
-interchangeable.
+All results in this paper describe those \LeakNHives{} hives, and the two counts
+are not interchangeable.
 
 \subsection{Feature construction}
 
 Each inspection is represented by one row.
 Features are computed from a seven-day window that ends strictly before the
 inspection timestamp.
-Inspections are approximately 14.6 days apart, so the windows do not overlap
-and a row can never see its own future.
+Inspections are a median of \LeakMedianGapDays{} days apart, so the windows do
+not overlap and a row can never see its own future.
 
 The 16 source bins are grouped into eight canonical bands spanning
 \SI{30}{\hertz} to \SI{2000}{\hertz}.
@@ -178,14 +230,14 @@ We report results with all eight bands, as the original pipeline does, and we
 state the occupancy in Section~\ref{sec:limitations}.
 
 A window must contain at least ten telemetry samples to be retained.
-Twelve of 318 inspections failed this test, leaving \LeakNRows{} rows across
-\LeakNHives{} hives.
+\LeakNSkippedInspections{} of \LeakNInspectionsSource{} inspections failed this
+test, leaving \LeakNRows{} rows across \LeakNHives{} hives.
 The label balance is \LeakNStrong{} strong and \LeakNWeak{} weak.
 
 \subsection{Apiaries}
 
-The hives sit at two apiaries, \texttt{nectar-bh121} with 27 hives and
-\texttt{nectar-bh131} with 26 hives.
+The hives sit at two apiaries, \texttt{nectar-bh121} with \LeakNApiaryOne{}
+hives and \texttt{nectar-bh131} with \LeakNApiaryTwo{} hives.
 A hive never appears at both sites.
 We verified this after mapping sensor tags to physical hive identifiers,
 because raw tag numbers do overlap between the two files.
@@ -220,7 +272,7 @@ Hives are shared, but no test row precedes a training row.
 This rung isolates temporal generalisation.
 
 \item[P2, unseen hive.] Leave-one-hive-out cross-validation.
-Every fold trains on 52 hives and tests on one.
+Each fold trains on all hives but one.
 No hive contributes to both sides.
 
 \item[P3, unseen apiary.] Train on one apiary and test on the other, in both
@@ -271,13 +323,16 @@ Class imbalance is handled by class weighting only, never by resampling.
 
 Reported values are pooled out-of-fold predictions, not means of per-fold
 scores.
-Per-fold means overweight small folds, and the hive holdout produces 53 folds
-of roughly six rows each.
+Per-fold means overweight small folds, and the hive holdout produces
+\LeakNHives{} folds of roughly six rows each.
 
 Uncertainty is a percentile bootstrap over hives with
-\LeakNBootstrap{} resamples.
+\LeakNBootstrap{} resamples \cite{efron1993bootstrap}.
 Resampling rows would understate the interval, because rows from one hive are
-dependent.
+dependent, and the variance of a cross-validation estimate is itself uncertain
+\cite{nadeau2003inference}.
+Comparisons across models use a two-sided Wilcoxon signed-rank test
+\cite{demsar2006statistical,dietterich1998approximate}.
 
 \subsection{Pre-registration}
 
@@ -285,6 +340,41 @@ The analysis plan, the predictions and the decision rules were written to disk
 before any model was fitted.
 The plan fixed the headline model as the best performer at P2, chosen before
 P3 was inspected, to prevent selecting the model that transfers best.
+The separation of accuracy estimation from model selection is an old concern
+\cite{kohavi1995study}.
+
+\subsection{Reproduction of the published protocol}
+\label{sec:repro-method}
+
+The ladder aggregates before it splits, so it cannot show what a row-level
+protocol does.
+We therefore reproduced the published protocol directly.
+
+Every telemetry row in a retained window enters, with no cap.
+Features are the sixteen absolute decibel bins, which are the closest available
+analogue of the spectral inputs that the literature reports.
+Four protocols share the same features and the same models.
+
+Protocol A splits rows at random.
+Protocol A2 keeps the random split and retains one row per window.
+Protocol B keeps every row and groups the split by hive.
+Protocol C aggregates to one row per inspection and groups by hive.
+
+Accuracy is the reported metric, because accuracy is what the high-scoring
+studies report.
+Macro F1 and AUROC are recorded in the result file for completeness.
+
+\subsection{Row-level control}
+\label{sec:rowlevel-method}
+
+The ladder uses one row per inspection.
+A second experiment keeps the same windows, the same label and the same
+gain-invariant transform, and changes only the unit of analysis.
+Each window contributes at most 300 telemetry records.
+
+It compares a random row split with a five-fold hive-grouped split.
+Three models are used, because the perceptron and the support vector machine do
+not scale to this row count.
 
 % =====================================================================
 \section{Results}
@@ -302,8 +392,19 @@ The difference is \LeakBandsTotalGapHistGradientBoosting{}, and the confidence
 intervals overlap almost completely.
 
 The pattern holds for every model and every transform.
-Across fifteen model-transform pairs, the largest P0 to P2 difference is
-smaller than the width of a single confidence interval.
+Across \LeakPairsN{} model-transform pairs the mean P0 to P2 gap is
+\LeakPairsMeanGap{} and the standard deviation is \LeakPairsSdGap{}.
+The largest absolute gap is \LeakPairsAbsMax{}, which is smaller than the
+narrowest bootstrap interval for any rung in Figure~\ref{fig:rungs}
+(\LeakPairsMinCiWidth{}).
+\LeakPairsNegative{} of the \LeakPairsN{} gaps are negative, so the direction is
+not uniform.
+A two-sided Wilcoxon signed-rank test gives $p = \LeakPairsWilcoxonP{}$, which
+does not reject a median gap of zero at the five percent level.
+
+The pre-registered rule required a gap of twice the bootstrap standard error.
+The observed mean gap is \LeakPairsMeanGap{}, a small fraction of that
+threshold.
 Hive leakage does not inflate the score when the unit of analysis is an
 inspection.
 
@@ -311,9 +412,8 @@ inspection.
 \centering
 \caption{Macro F1 by split rung and feature transform, for the headline model
 (\LeakHeadlineModel{}).
-Brackets give the \LeakNBootstrap-resample percentile bootstrap interval over
-hives.
-P0 leaks hives; P2 does not.}
+The P0 rung leaks hives and the P2 rung does not.
+Bootstrap intervals for each rung appear in Figure~\ref{fig:rungs}.}
 \label{tab:ladder}
 \begin{tabular}{lcccc}
 \toprule
@@ -363,9 +463,11 @@ Absolute bins score \LeakRawPzeroHistGradientBoostingMacroFone{} at P0 and
 Removing the row mean therefore does not remove a leak.
 It removes a nuisance parameter, and the effect on score is close to zero for
 tree models.
-Logistic regression benefits from absolute bins by four to five points at P0
-and P2, and by about one point at P3, which suggests the relative transform
-discards information that a linear model can use.
+Logistic regression benefits from absolute bins by
+\LeakRawGainLogisticRegressionPzeroPts{} points at P0 and
+\LeakRawGainLogisticRegressionPtwoPts{} at P2, and by
+\LeakRawGainLogisticRegressionPthreePts{} at P3, which suggests the relative
+transform discards information that a linear model can use.
 That is a modelling choice, not a leakage effect.
 
 \subsection{Environment features are the only large effect}
@@ -373,7 +475,10 @@ That is a modelling choice, not a leakage effect.
 Adding six indoor measurements raises macro F1 from
 \LeakBandsPtwoHistGradientBoostingMacroFone{} to
 \LeakBandsEnvPtwoHistGradientBoostingMacroFone{} at P2,
-an increase of roughly eight to nine points.
+an increase of \LeakEnvGainHistGradientBoostingPtwoPts{} points for the headline
+model.
+Across the five models the gain at P2 runs from \LeakEnvGainMinPts{} to
+\LeakEnvGainMaxPts{} points.
 No split manipulation in this study produces an effect of that size.
 
 The gain survives the apiary change.
@@ -390,7 +495,7 @@ information that transfers to a site the model has never seen.
 \centering
 \includegraphics[width=\textwidth]{fig_leakage_models.pdf}
 \caption{Macro F1 at the two strict rungs for every model, split by transform.
-The transform changes the score; the rung barely does.}
+The transform changes the score more than the rung does.}
 \label{fig:models}
 \end{figure}
 
@@ -400,10 +505,11 @@ P1 is the exception to the flat pattern, and it is the least reliable rung.
 Macro F1 falls to \LeakBandsPoneHistGradientBoostingMacroFone{} for the
 headline model, with a bootstrap interval from
 \LeakBandsPoneHistGradientBoostingMacroFoneCILo{} to
-\LeakBandsPoneHistGradientBoostingMacroFoneCIHi{} on 48 test rows.
+\LeakBandsPoneHistGradientBoostingMacroFoneCIHi{} on \LeakPoneN{} test rows.
 
-Ranking also degrades for four of the five models, reaching between
-\LeakBandsPoneHistGradientBoostingAuroc{} and \LeakBandsPoneMlpAuroc{}.
+Ranking also degrades for \LeakPoneAurocDegradedN{} of the \LeakNModels{}
+models, reaching between \LeakBandsPoneHistGradientBoostingAuroc{} and
+\LeakBandsPoneMlpAuroc{}.
 That is a genuine generalisation failure, not a threshold artefact.
 
 Logistic regression is the exception.
@@ -412,7 +518,7 @@ falls to \LeakBandsPoneLogisticRegressionMacroFone{}.
 A model that ranks well but classifies badly at a fixed cut-off is
 miscalibrated rather than uninformed.
 
-With 48 test rows we report both patterns and interpret neither strongly.
+With \LeakPoneN{} test rows we report both patterns and interpret neither strongly.
 The correct summary is that the last inspection round is the hardest, and that
 the difficulty can appear either as lost ranking or as a shifted operating
 point, depending on the model.
@@ -444,7 +550,7 @@ inspection-level dataset may be too small and too smooth to leak.
 We tested that by returning the unit of analysis to the individual telemetry
 record.
 
-Each of the 306 windows contributes at most 300 records, giving
+Each of the \LeakNInspections{} windows contributes at most 300 records, giving
 \LeakRowsNRows{} rows across \LeakRowsNHives{} hives.
 The transform, the label and the models are unchanged, apart from dropping the
 two models that do not scale to this row count.
@@ -465,8 +571,8 @@ shows that the mechanism requires both the row-level protocol and a model with
 enough capacity to exploit it.
 
 Two conclusions follow, and they point in the same direction.
-First, aggregation to the inspection window removes the leak entirely for every
-model tested.
+First, aggregation to the inspection window removes the leak for every model
+tested.
 Second, aggregation also raises the honest score: the inspection-level hive
 holdout reaches \LeakBandsPtwoHistGradientBoostingMacroFone{}, while the
 row-level hive holdout reaches only
@@ -475,26 +581,122 @@ row-level hive holdout reaches only
 Aggregating before splitting is therefore not merely a defensive choice.
 It is the better model.
 
+\subsection{The published protocol, reproduced and then broken}
+\label{sec:repro-results}
+
+The row-level control above already used a conservative version of the
+published protocol: 300 rows per window and gain-invariant features.
+We therefore reproduced the protocol in its strongest form.
+Every telemetry row enters, all sixteen absolute decibel bins are used, and the
+split is random.
+
+The data are \LeakReproNRows{} rows from \LeakReproNWindows{} inspection windows
+across \LeakReproNHives{} hives.
+
+Table~\ref{tab:repro} reports accuracy, because accuracy is the metric that the
+high-scoring literature reports.
+Under protocol A the best model reaches \LeakReproBestAAccuracy{} percent.
+That value sits in the range reported for hive audio, and it comes from a
+protocol that places near-duplicate rows on both sides of the boundary.
+
+We then change one thing at a time.
+
+Protocol A2 keeps the random split and removes the duplicate rows, keeping one
+row per window.
+Protocol B keeps every row and groups the split by hive.
+Protocol C aggregates to one row per inspection and groups by hive.
+
+\begin{table}[t]
+\centering
+\caption{Accuracy under four protocols on identical features.
+A is the published protocol. A2 removes duplicate rows. B removes hive
+membership from the test set. C aggregates to one row per inspection.
+Every model uses the same sixteen absolute decibel bins.}
+\label{tab:repro}
+\begin{tabular}{lcccc}
+\toprule
+Model & A published & A2 deduplicated & B grouped & C aggregated \\
+\midrule
+Logistic regression &
+\LeakReproALogisticRegressionAccuracy{} &
+\LeakReproATwoLogisticRegressionAccuracy{} &
+\LeakReproBLogisticRegressionAccuracy{} &
+\LeakReproCLogisticRegressionAccuracy{} \\
+Random forest &
+\LeakReproARandomForestAccuracy{} &
+\LeakReproATwoRandomForestAccuracy{} &
+\LeakReproBRandomForestAccuracy{} &
+\LeakReproCRandomForestAccuracy{} \\
+Extra trees &
+\LeakReproAExtraTreesAccuracy{} &
+\LeakReproATwoExtraTreesAccuracy{} &
+\LeakReproBExtraTreesAccuracy{} &
+\LeakReproCExtraTreesAccuracy{} \\
+Hist.\ gradient boosting &
+\LeakReproAHistGradientBoostingAccuracy{} &
+\LeakReproATwoHistGradientBoostingAccuracy{} &
+\LeakReproBHistGradientBoostingAccuracy{} &
+\LeakReproCHistGradientBoostingAccuracy{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.82\textwidth]{fig_reproduction.pdf}
+\caption{Accuracy under the published protocol and under three repairs.
+Each repair changes one thing.
+Removing duplicate rows and grouping by hive each remove much of the gain.
+Aggregation gives the honest number, and it still clears the majority-class
+line.}
+\label{fig:repro}
+\end{figure}
+
+The drop from A to A2 is the duplicate-row effect with the split held fixed.
+The drop from A to B is the hive-membership effect with the features held
+fixed.
+Both are large, and they are not the same thing.
+
+Protocol C is the honest number, and it is the one a deployment should expect.
+
+\subsection{Robustness to the label cut-off}
+\label{sec:robust}
+
+The 20-frame threshold is inherited from the dataset authors.
+A reviewer can reasonably ask whether the null result depends on it.
+We repeated the two extreme rungs at three thresholds, 15, 20 and 25 frames,
+across three transforms and five models.
+That gives \LeakThreshNCombinations{} gaps.
+
+The gap ranges from \LeakThreshAllGapMin{} to \LeakThreshAllGapMax{}.
+No cut-off produces an inflation of the size that the row-level protocol
+produces in Table~\ref{tab:repro}.
+The null at inspection granularity is therefore not an artefact of the label
+definition.
+
 % =====================================================================
 \section{Discussion}
+\label{sec:discussion}
 % =====================================================================
 
 \subsection{What the null result means}
 
 The pre-registered prediction was that a random row split would inflate macro
 F1 by at least twice the bootstrap standard error.
-That prediction failed for every model and every transform.
+No model-transform pair reached that threshold.
 Under the decision rules fixed before the analysis, the claim is falsified at
 the inspection level.
 
 We report the failure rather than reframe it.
-The result has a clear interpretation: an inspection-level dataset contains six
-rows per hive and no adjacent rows.
+The result has a clear interpretation: an inspection-level dataset holds at most
+\LeakMaxInspectionsPerHive{} rows per hive, and those rows are
+\LeakMedianGapDays{} days apart.
 There is nothing for a random split to memorise.
 The leakage that the literature describes lives in the protocol that splits
 individual recordings, where thousands of near-duplicate rows belong to one
-hive, and the row-level experiment in Section~\ref{sec:rowlevel} confirms that it reappears
-there for high-capacity models.
+hive.
+The row-level experiment in Section~\ref{sec:rowlevel} confirms that it
+reappears there for high-capacity models.
 
 This finding is useful to practitioners.
 It says that a carefully aggregated feature set is robust to the split, and
@@ -505,8 +707,9 @@ for colony-strength prediction is plausibly real rather than an artefact.
 \subsection{Where the signal actually is}
 
 The largest effect in the study is not a leakage effect at all.
-It is the contribution of indoor temperature and humidity, worth roughly nine
-macro-F1 points and stable across apiaries.
+It is the contribution of indoor temperature and humidity, worth
+\LeakEnvGainMinPts{} to \LeakEnvGainMaxPts{} macro-F1 points at P2 and stable
+across apiaries.
 Acoustic bands alone reach
 \LeakBandsPtwoHistGradientBoostingMacroFone{} at P2.
 The combination reaches \LeakBandsEnvPtwoHistGradientBoostingMacroFone{}.
@@ -526,6 +729,13 @@ expected to.
 The two numbers are not comparable, and a paper that reports one should state
 which protocol produced it.
 
+We measured the difference directly in Section~\ref{sec:rowlevel}.
+The same sixteen features reach \LeakReproBestAAccuracy{} percent under a random
+row split and \LeakReproBestBAccuracy{} percent when the split respects hive
+membership.
+The features did not change.
+Only the protocol did.
+
 \subsection{Limitations}
 \label{sec:limitations}
 
@@ -533,12 +743,21 @@ The label is a threshold on frame count, and the threshold at 20 frames is a
 choice inherited from the dataset authors.
 A different cut-off would change the base rate and possibly the ranking of
 models.
+Section~\ref{sec:robust} shows that it does not change the leakage null.
 
-Colony strength is close to constant within a hive over the study period.
-A hive holdout therefore tests between-hive discrimination more than
-within-hive change.
-That is the correct test for deployment, but it is not a test of state
-tracking.
+Colony strength is not constant within a hive.
+Of the \LeakNHives{} hives, \LeakNFlipHives{} change class at least once across
+the \LeakNRounds{} rounds, which is \LeakFlipPct{} percent.
+The median within-hive range of total frames is \LeakMedianWithinRange{} on a
+\LeakFramesMin{} to \LeakFramesMax{} scale.
+A hive holdout therefore tests whether within-hive change generalises to new
+hives, not merely whether hives can be separated.
+That is the correct test for deployment.
+
+The reproduction in Section~\ref{sec:repro-results} applies the published
+protocol to this dataset, not to the dataset of any single prior study.
+It shows that the protocol can produce high accuracy here.
+It does not reproduce a specific published number.
 
 Only \LeakNHives{} hives carry labels, from two apiaries in one region and one season.
 The apiary holdout is a two-fold comparison, so its interval is wide by
@@ -557,19 +776,25 @@ The ladder, the feature builder, the figure generator and the macro generator
 are in \texttt{paper\_q1}.
 The pre-registration, including the falsified prediction, is archived with the
 analysis code.
+Reporting follows the REFORMS recommendations for machine-learning-based
+science \cite{kapoor2024reforms}.
 
 % =====================================================================
 \section{Conclusion}
 % =====================================================================
 
-We crossed four split rules with three feature transforms on a public
-honeybee dataset, holding data, label, models and metric fixed.
+We reproduced the published row-level protocol on a public honeybee dataset,
+then removed one source of optimism at a time.
 
-Hive leakage did not inflate the inspection-level score.
+A random row split reaches \LeakReproBestAAccuracy{} percent accuracy on the
+same features that reach \LeakReproBestBAccuracy{} percent when the split
+respects hive membership.
+
+At inspection granularity, hive leakage did not inflate the score.
 Gain-retaining features did not leak either.
 The only large effect at that unit of analysis came from indoor environment
-measurements, which added about eight to nine macro-F1 points and transferred
-across apiaries.
+measurements, which added \LeakEnvGainMinPts{} to \LeakEnvGainMaxPts{}
+macro-F1 points and transferred across apiaries.
 
 Restoring the row-level protocol did inflate the score, by
 \LeakRowsGapRandomForestPts{} points for a random forest and by
@@ -593,9 +818,64 @@ Analysis code and result files are provided with this submission.
 
 The authors declare no competing interests.
 
+\appendix
+
+\section{Pre-registered decision rules}
+\label{app:prereg}
+
+The analysis plan, the predictions and the decision rules were written to disk
+before any model was fitted.
+This appendix reproduces the parts that constrain the reported conclusion.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Decision rules fixed before the analysis.}
+\label{tab:rules}
+\begin{tabular}{@{}p{0.20\textwidth}p{0.70\textwidth}@{}}
+\toprule
+Outcome & Condition \\
+\midrule
+Claim supported & The P0 to P2 gap exceeds twice the pooled bootstrap standard
+error, and P2 scores at least as high as P3. \\
+Claim weakened & The gap lies between one and two standard errors. Report the
+result as inconclusive. \\
+Claim falsified & The gap lies below one standard error. Report the apiary
+generalisation result alone. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two further rules bind the analysis.
+The headline model is chosen at P2 before P3 is inspected.
+Every number in this paper is generated from a result file by a script.
+
+Section~\ref{sec:discussion} states that the claim is falsified.
+The decision rule was applied as written, and the result is reported without
+reframing.
+
+\section{Deviations from the plan}
+\label{app:deviations}
+
+One deviation was made, before any model was fitted, and it is recorded here.
+
+The original plan used the individual telemetry row as the unit of analysis,
+with a stress label derived from brood-nest temperature.
+Phase 1 profiling showed that this label was degenerate.
+\LeakDTwoNBelow{} of \LeakDTwoNRows{} D2 rows fall below the
+\SI{32}{\celsius} cut-off, which is \LeakDTwoPctBelow{} percent.
+The median D2 temperature is \LeakDTwoMedianC{} degrees Celsius.
+A threshold that almost every row satisfies separates nothing.
+
+The plan was revised to use the inspection event as the unit and colony strength
+as the target.
+The row-level protocol was restored later as a control, not as the main
+analysis, and it is reported in Section~\ref{sec:rowlevel}.
+
 \bibliographystyle{elsarticle-num}
 \bibliography{references}
 
 \end{document}
+
 
 
