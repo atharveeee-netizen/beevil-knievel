@@ -84,7 +84,9 @@ proposal/rendered_pages/
 *.fls
 *.fdb_latexmk
 
-# Raw Datasets (Never commit raw data)
+# Raw Datasets (Never commit raw multi-GB data)
 data/*
 !data/MANIFEST.csv
+!data/processed/
+!data/processed/**
 TinyML Model/datasets/zenodo_full/
