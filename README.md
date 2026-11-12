@@ -6,7 +6,7 @@
 [![CI](https://github.com/atharveeee-netizen/beevil-knievel/actions/workflows/ci.yml/badge.svg)](https://github.com/atharveeee-netizen/beevil-knievel/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![IEEE Conference Paper](https://img.shields.io/badge/Paper-IEEE%20Conference-blue.svg)](paper/main.tex)
-[![Q1 Journal Manuscript](https://img.shields.io/badge/Manuscript-Elsevier%20Q1%20Ready-green.svg)](paper_q1/manuscript/main.tex)
+[![Q1 Journal Manuscript (COMPAG)](https://img.shields.io/badge/Manuscript-Elsevier%20COMPAG%20Ready-green.svg)](paper_q1/manuscript_leakage/main.tex)
 
 ---
 
@@ -55,7 +55,7 @@ Every empirical claim in this repository is explicitly tagged with its operation
 | **INT8 Quantization Parity ($\Delta = +0.32\%$)** | Evaluated (15 Folds) | `NUMERICAL_SIMULATION` | [`paper_q1/results/edge_quantization.json`](paper_q1/results/edge_quantization.json) |
 | **DSP Golden Vectors (8 Bands, Hann FFT)** | Verified on Host | `NUMERICAL_SIMULATION` | [`paper_q1/results/golden_vectors_parity.json`](paper_q1/results/golden_vectors_parity.json) |
 | **Page CUSUM Anomaly Detection** | Evaluated (14 Queen Events) | `REAL_PUBLIC_DATASET` | [`paper_q1/results/cusum_eval.json`](paper_q1/results/cusum_eval.json) |
-| **LoRa PHY Link Budget (Canopy 0.58 km)** | Analytical (Two-Ray + ITU) | `ANALYTICAL_MODEL` | [`paper_q1/results/analytical_link_budget.json`](paper_q1/results/analytical_link_budget.json) |
+| **LoRa PHY Link Budget (Canopy 0.62 km)** | Analytical (Two-Ray + ITU) | `ANALYTICAL_MODEL` | [`paper_q1/results/analytical_link_budget.json`](paper_q1/results/analytical_link_budget.json) |
 | **Node Firmware Logic (Frame v2)** | Verified on Silicon | `REAL_SILICON` | [`firmware/src/main.cpp`](firmware/src/main.cpp) |
 | **Conducted RF Sensitivity Test** | Pending Bench Test | `PENDING_HARDWARE_BENCH` | [`paper_q1/human_tasks/03_conducted_lora_attenuation_test.md`](paper_q1/human_tasks/03_conducted_lora_attenuation_test.md) |
 | **Dynamic Current Profiling (PPK2/DSO)** | Pending Bench Test | `PENDING_HARDWARE_BENCH` | [`paper_q1/human_tasks/02_hardware_bench_measurements.md`](paper_q1/human_tasks/02_hardware_bench_measurements.md) |

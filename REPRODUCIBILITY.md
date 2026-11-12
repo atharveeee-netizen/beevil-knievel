@@ -57,22 +57,13 @@ cd ..
 ## 🧪 3. EXECUTING THE BENCHMARK & REPRODUCIBILITY SUITE
 
 ### 3.1 Suite 1: Automated Unit & Gateway Integration Tests
-Executes 9 end-to-end integration tests covering SQLite database initialization, 100-hive telemetry ingestion, theft knockdown triage, thermal chill detection, and strict Pydantic input validation (HTTP 422):
+Executes 48 automated tests covering SQLite database initialization, 100-hive telemetry ingestion, theft knockdown triage, thermal chill detection, and strict Pydantic input validation (HTTP 422). (Note: 6 hardware-in-the-loop tests requiring physical bench hardware are marked `skipped` by default):
 ```bash
 pytest tests/ -v
 ```
 **Expected Output:**
 ```text
-tests/test_cloud_model.py::TestCloudModel::test_model_inference_execution PASSED
-tests/test_cloud_model.py::TestCloudModel::test_pathology_classes PASSED
-tests/test_cloud_model.py::TestCloudModel::test_required_fields_list PASSED
-tests/test_full_gateway_pipeline.py::test_root_endpoint PASSED
-tests/test_full_gateway_pipeline.py::test_hives_overview PASSED
-tests/test_full_gateway_pipeline.py::test_telemetry_ingest_nominal PASSED
-tests/test_full_gateway_pipeline.py::test_telemetry_ingest_anomalies PASSED
-tests/test_full_gateway_pipeline.py::test_telemetry_strict_validation PASSED
-tests/test_full_gateway_pipeline.py::test_hive_detail_and_alerts PASSED
-======================== 9 passed in 2.5s =========================
+======================== 42 passed, 6 skipped in 4.1s =========================
 ```
 
 ---

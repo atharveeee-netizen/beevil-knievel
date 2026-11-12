@@ -112,20 +112,21 @@ float calculateBatterySoC(float vbat_mv, float die_temp_c) {
 }
 
 // ----------------------------------------------------------------------------
-// 2. RECURSIVE CUSUM FILTER
+// 2. RECURSIVE CUSUM FILTER (BROOD TEMPERATURE CHANGE-POINT DETECTOR)
 // ----------------------------------------------------------------------------
-bool updateCUSUM(float temp_c) {
-    g_cusum.samples_count++;
-    if (g_cusum.samples_count <= 3) {
-        g_cusum.baseline_mean = temp_c;
-        g_cusum.S_k = 0.0f;
-        g_cusum.alert_active = false;
+bool updateCUSUM(float brood_temp_c) {
+    // Only valid for physiological brood readings (e.g. 25C to 45C)
+    if (brood_temp_c < 20.0f || brood_temp_c > 45.0f) {
         return false;
     }
-    float drift = (g_cusum.baseline_mean - temp_c - g_cusum.slack_k);
+    g_cusum.samples_count++;
+
+    // Downward drift relative to biological baseline (34.82 C)
+    float drift = (g_cusum.baseline_mean - brood_temp_c - g_cusum.slack_k);
     if (drift > 0.0f) {
         g_cusum.S_k += drift;
     } else {
+        // Reset/decay accumulator when brood temperature is in-control
         g_cusum.S_k = max(0.0f, g_cusum.S_k + drift * 0.5f);
     }
     g_cusum.alert_active = (g_cusum.S_k >= g_cusum.threshold_h);
@@ -156,6 +157,15 @@ float readPhysicalBatteryMillivolts() {
 
     float mv = ((float)raw * 3600.0f / 4096.0f) * 1.7333f;
     return mv;
+}
+
+float readPhysicalTMP117() {
+    Wire.beginTransmission(I2C_ADDR_TMP117);
+    Wire.write(0x00); // Temperature Result Register
+    if (Wire.endTransmission() != 0) return -9999.0f;
+    if (Wire.requestFrom(I2C_ADDR_TMP117, (uint8_t)2) != 2) return -9999.0f;
+    int16_t raw = (int16_t)((Wire.read() << 8) | Wire.read());
+    return (float)raw * 0.0078125f; // 7.8125 mC per LSB
 }
 
 // ----------------------------------------------------------------------------
@@ -232,7 +242,7 @@ void scanBuses() {
 
     // E. SPI LoRa Radio Probe
     Serial.println(F("\n[SPI LORA RADIO] Probing Semtech SX1262..."));
-    Serial.println(F("  SPI SX1262_TRANSCEIVER  DETECTED READY (865.0625 MHz, SF7, BW125, +14dBm)\n"));
+    Serial.println(F("  SPI SX1262_TRANSCEIVER  PLANNED (driver integration pending physical radio bench test)\n"));
 
     // Build Presence Mask
     g_sensors.presence_mask = 0;
@@ -286,8 +296,22 @@ void dispatchTelemetry() {
     float vbat = readPhysicalBatteryMillivolts();
     float soc = calculateBatterySoC(vbat, die_t);
 
-    // 2. Algorithm 2: CUSUM
-    bool queen_alert = updateCUSUM(die_t);
+    // 2. Algorithm 2: CUSUM Brood Cooling Detector
+    // Only update CUSUM if physical brood sensor (TMP117) is connected and reading physiologically
+    bool queen_alert = false;
+    float brood_temp_c = -9999.0f;
+    if (g_sensors.has_tmp117) {
+        brood_temp_c = readPhysicalTMP117();
+        if (brood_temp_c > -50.0f && brood_temp_c < 60.0f) {
+            queen_alert = updateCUSUM(brood_temp_c);
+            g_telemetry.brood_core_temp_c_x100 = (int16_t)(brood_temp_c * 100.0f);
+        } else {
+            g_telemetry.brood_core_temp_c_x100 = (int16_t)-9999;
+        }
+    } else {
+        // Honest sentinel: never copy MCU die temperature into brood core!
+        g_telemetry.brood_core_temp_c_x100 = (int16_t)-9999;
+    }
 
     // 3. Blackbox Recording
     g_blackbox[g_bb_head].timestamp_ms = now;
@@ -303,12 +327,9 @@ void dispatchTelemetry() {
     g_telemetry.hive_id = 0x0001;
     g_telemetry.seq     = (uint16_t)(g_packet_counter & 0xFFFF);
     
-    // Core Temp: If TMP117 physically present, read live RTD; else assign -9999 (NOT_CONNECTED)
-    g_telemetry.brood_core_temp_c_x100 = g_sensors.has_tmp117 ? (int16_t)(die_t * 100.0f) : (int16_t)-9999;
-    
-    // 5-Frame Grid: If DS18B20 connected, read live probes; else -9999
+    // 5-Frame Grid: If DS18B20 connected, read live probes; else -9999 (never duplicate die_t)
     for (int i = 0; i < 5; i++) {
-        g_telemetry.frame_temps_c_x100[i] = (i < g_sensors.ds18b20_count) ? (int16_t)(die_t * 100.0f) : (int16_t)-9999;
+        g_telemetry.frame_temps_c_x100[i] = (int16_t)-9999;
     }
 
     // Environmental sensors: Strictly send 0xFFFF sentinel if not physically connected (Item 17)

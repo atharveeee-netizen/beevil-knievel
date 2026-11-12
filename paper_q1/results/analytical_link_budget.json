@@ -11,11 +11,26 @@
   "rf_parameters": {
     "frequency_mhz": 865.0625,
     "tx_power_dbm": 14.0,
-    "tx_antenna_gain_dbi": 2.0,
-    "rx_antenna_gain_dbi": 2.5,
+    "tx_antenna_gain_dbi": 2.15,
+    "tx_feeder_loss_db": 0.5,
+    "hive_body_atten_db": 8.7,
+    "rx_antenna_gain_dbi": 3.0,
+    "rx_feeder_loss_db": 1.0,
     "node_antenna_height_m": 0.5,
     "gateway_antenna_height_m": 4.0,
-    "fade_margin_db": 10.0
+    "fade_margin_db": 15.0,
+    "foliage_atten_50m_canopy_db": 12.73,
+    "sources": {
+      "tx_power": "Semtech SX1262 datasheet / E22-900T22S (14 dBm compliant with India WPC GSR 564(E) 865-867 MHz)",
+      "tx_antenna": "Internal quarter-wave wire whip inside Langstroth wooden frame (2.15 dBi)",
+      "tx_feeder_loss": "PCB microstrip feed to IPEX connector (0.5 dB)",
+      "hive_attenuation": "Langstroth pine/cedar supers with wax combs (8.7 dB empirically referenced)",
+      "rx_antenna": "Mast-mounted collinear omnidirectional dipole (3.0 dBi)",
+      "rx_feeder_loss": "RG-58 gateway pigtail cable loss (1.0 dB)",
+      "fade_margin": "15 dB log-normal shadowing and Rayleigh multi-path margin",
+      "two_ray_model": "Two-ray ground reflection beyond dc = 72.5 m (ht=0.5 m, hr=4.0 m)",
+      "foliage_model": "ITU-R P.833 / Weissberger orchard canopy attenuation (50 m foliage path)"
+    }
   },
   "sf7_mode": {
     "spreading_factor": 7,
@@ -23,24 +38,24 @@
     "coding_rate": "4/5",
     "payload_bytes": 36,
     "airtime_ms": 77.06,
-    "receiver_sensitivity_dbm": -124.0,
-    "max_allowable_path_loss_db": 132.5,
-    "free_space_range_km": 116.27,
-    "two_ray_ground_range_km": 2.9,
-    "orchard_canopy_range_km": 0.58,
-    "orchard_canopy_range_m": 579.4
+    "receiver_sensitivity_dbm": -124.5,
+    "max_allowable_path_loss_db": 118.45,
+    "free_space_range_km": 23.06,
+    "two_ray_ground_range_km": 1.29,
+    "orchard_canopy_range_km": 0.62,
+    "orchard_canopy_range_m": 621.5
   },
   "sf10_mode": {
     "spreading_factor": 10,
     "bandwidth_khz": 125,
     "coding_rate": "4/5",
     "payload_bytes": 36,
-    "airtime_ms": 411.65,
+    "airtime_ms": 493.57,
     "receiver_sensitivity_dbm": -132.0,
-    "max_allowable_path_loss_db": 140.5,
-    "free_space_range_km": 292.05,
-    "two_ray_ground_range_km": 4.6,
-    "orchard_canopy_range_km": 0.92,
-    "orchard_canopy_range_m": 918.4
+    "max_allowable_path_loss_db": 125.95,
+    "free_space_range_km": 54.7,
+    "two_ray_ground_range_km": 1.99,
+    "orchard_canopy_range_km": 0.96,
+    "orchard_canopy_range_m": 957.0
   }
 }
