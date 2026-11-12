@@ -1,0 +1,32 @@
+{
+  "title": "Beevil Knievel: Precision Apiculture Cyber-Physical Monitoring and Honeybee Acoustic Leakage Benchmark",
+  "description": "Complete research artifacts, reproducible evaluation pipelines, and telemetry datasets for honeybee (Apis mellifera) bioacoustic classification and edge-native colony monitoring. Includes pre-registered evaluation protocols separating split leakage from acoustic feature encoding across 1,836,914 telemetry rows and 53 hives from the public MSPB dataset.",
+  "creators": [
+    {
+      "name": "Dahima, Atharve",
+      "affiliation": "Department of Electronics and Communication Engineering, Malaviya National Institute of Technology Jaipur, India"
+    },
+    {
+      "name": "Mishra, Srajan",
+      "affiliation": "Department of Electronics and Communication Engineering, Malaviya National Institute of Technology Jaipur, India"
+    },
+    {
+      "name": "Sharma, Vishal",
+      "affiliation": "Department of Electronics and Communication Engineering, Malaviya National Institute of Technology Jaipur, India"
+    }
+  ],
+  "access_right": "open",
+  "license": "MIT",
+  "upload_type": "software",
+  "keywords": [
+    "precision apiculture",
+    "honeybee monitoring",
+    "bioacoustics",
+    "data leakage",
+    "group holdout",
+    "machine learning",
+    "LoRa",
+    "edge computing",
+    "TinyML"
+  ]
+}

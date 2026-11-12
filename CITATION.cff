@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software or benchmark artifacts, please cite it as below."
-title: "Hive-Independent, Edge-Deployable Acoustic-Thermal Colony Monitoring on a LoRa Node: A Leakage-Safe Multi-Dataset Benchmark"
+title: "Beevil Knievel: Precision Apiculture Cyber-Physical Monitoring and Honeybee Acoustic Leakage Benchmark"
 authors:
   - family-names: "Dahima"
     given-names: "Atharve"
@@ -11,10 +11,10 @@ authors:
   - family-names: "Sharma"
     given-names: "Vishal"
     affiliation: "Malaviya National Institute of Technology Jaipur"
-version: "1.0.0"
-date-released: "2026-10-23"
-url: "https://github.com/atharvadahima/beevil-knievel"
-repository-code: "https://github.com/atharvadahima/beevil-knievel"
+version: "2.2.0"
+date-released: "2026-11-12"
+url: "https://github.com/atharveeee-netizen/beevil-knievel"
+repository-code: "https://github.com/atharveeee-netizen/beevil-knievel"
 license: "MIT"
 keywords:
   - "precision apiculture"
