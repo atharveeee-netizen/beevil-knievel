@@ -158,6 +158,12 @@ def extract_mspb_7day_features(
         f0_means = np.mean(band_rel, axis=0)
         f0_stds = np.std(band_rel, axis=0)
 
+        # Absolute bin aggregates, kept as a control. These retain microphone
+        # gain and hive-specific transfer, so they should leak under a random
+        # split if leakage is present at all.
+        raw_mean = np.mean(raw_db_matrix, axis=0)
+        raw_std = np.std(raw_db_matrix, axis=0)
+
         row = {
             "evaluation_round": insp["evaluation_round"],
             "hive_id": int(hive_id),
@@ -176,6 +182,9 @@ def extract_mspb_7day_features(
         for b in range(8):
             row[f"f0_band_{b}_mean"] = float(f0_means[b])
             row[f"f0_band_{b}_std"] = float(f0_stds[b])
+        for i in range(raw_db_matrix.shape[1]):
+            row[f"raw_bin_{i}_mean"] = float(raw_mean[i])
+            row[f"raw_bin_{i}_std"] = float(raw_std[i])
 
         feature_rows.append(row)
 
@@ -183,6 +192,13 @@ def extract_mspb_7day_features(
     print(f"[MSPBBandExtractor] Extracted {len(df_out)} valid inspection feature records (skipped {skipped_inspections}).")
     print(f"[MSPBBandExtractor] Target distribution (is_strong): {df_out['is_strong'].value_counts().to_dict()}")
     print(f"[MSPBBandExtractor] Unique physical hives represented: {df_out['hive_id'].nunique()}")
+
+    # Report which canonical bands actually receive MSPB bins. Bands outside
+    # 122-580 Hz are synthetic and must be declared in the manuscript.
+    occupied = sorted({b for b in bin_to_band.values() if b is not None})
+    empty = [b for b in range(8) if b not in occupied]
+    print(f"[MSPBBandExtractor] Bands with MSPB data: {occupied}")
+    print(f"[MSPBBandExtractor] Synthetic (no data) bands: {empty}")
 
     if output_path:
         output_path.parent.mkdir(parents=True, exist_ok=True)
