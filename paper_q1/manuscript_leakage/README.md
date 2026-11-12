@@ -52,8 +52,21 @@ hive holdout. That claim is falsified at inspection granularity.
 | absolute dB bins | 0.7344 | 0.7178 | +0.0166 |
 | bands + environment | 0.8374 | 0.8342 | +0.0033 |
 
-The largest effect in the study is the indoor environment block, worth about
-nine macro-F1 points and stable across apiaries.
+The largest effect at that unit of analysis is the indoor environment block,
+worth about eight to nine macro-F1 points and stable across apiaries.
+
+Restoring the row-level protocol brings the leak back, and it is
+capacity-dependent:
+
+| Model | P0 random rows | P2 unseen hive | Gap |
+|---|---|---|---|
+| Logistic regression | 0.6889 | 0.6784 | +0.0105 |
+| Random forest | 0.7754 | 0.6832 | +0.0922 |
+| Hist. gradient boosting | 0.7407 | 0.6852 | +0.0555 |
+
+Aggregation removes the leak and raises the honest score
+(inspection-level P2 0.7439 vs row-level P2 0.6852), so aggregating before
+splitting is both the safer protocol and the better model.
 
 ## Known limitations, stated in the paper
 

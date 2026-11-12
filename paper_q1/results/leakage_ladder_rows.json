@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "title": "Row-level leakage test",
+    "provenance": "REAL_PUBLIC_DATASET",
+    "dataset": "MSPB D1",
+    "unit_of_analysis": "telemetry row",
+    "transform": "eight relative bands, gain invariant",
+    "max_rows_per_window": 300,
+    "n_rows": 89372,
+    "n_hives": 53,
+    "seeds": [
+      0
+    ],
+    "cv": "5-fold stratified group (hive)"
+  },
+  "results": {
+    "P0|LogisticRegression": {
+      "macro_f1": 0.6889459686167763,
+      "balanced_accuracy": 0.6999242065322027,
+      "auroc": 0.7610660873460742,
+      "n": 89372
+    },
+    "P0|RandomForest": {
+      "macro_f1": 0.7753605768188009,
+      "balanced_accuracy": 0.7742720517256046,
+      "auroc": 0.8581581649983636,
+      "n": 89372
+    },
+    "P0|HistGradientBoosting": {
+      "macro_f1": 0.7406659076812397,
+      "balanced_accuracy": 0.7480086728148518,
+      "auroc": 0.8282943503781841,
+      "n": 89372
+    },
+    "P2|LogisticRegression": {
+      "macro_f1": 0.6784412601886585,
+      "balanced_accuracy": 0.6880603786993594,
+      "auroc": 0.7370207434287546,
+      "n": 89372
+    },
+    "P2|RandomForest": {
+      "macro_f1": 0.6831978126175992,
+      "balanced_accuracy": 0.6815991056479456,
+      "auroc": 0.7337066238605312,
+      "n": 89372
+    },
+    "P2|HistGradientBoosting": {
+      "macro_f1": 0.6852109520060921,
+      "balanced_accuracy": 0.6894253382241661,
+      "auroc": 0.7433645425293416,
+      "n": 89372
+    }
+  }
+}

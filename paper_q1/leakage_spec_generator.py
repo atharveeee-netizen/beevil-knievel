@@ -134,7 +134,34 @@ def main() -> int:
                 lines.append(f"\\newcommand{{\\Leak{t}{RUNG[r]}{m}MacroFonePct}}"
                              f"{{{f1[r] * 100:.1f}}}")
 
-    # headline model: best P2 on the primary transform, chosen before P3
+    # ---- row-level comparison
+    rows_json = REPO_ROOT / "paper_q1" / "results" / "leakage_ladder_rows.json"
+    if rows_json.exists():
+        rdata = json.loads(rows_json.read_text(encoding="utf-8"))
+        rmeta = rdata["metadata"]
+        lines.append("")
+        lines.append(f"\\newcommand{{\\LeakRowsNRows}}{{{rmeta['n_rows']}}}")
+        lines.append(f"\\newcommand{{\\LeakRowsNHives}}{{{rmeta['n_hives']}}}")
+        for key, res in rdata["results"].items():
+            rung, model = key.split("|", 1)
+            r, m = RUNG[rung], camel_model(model)
+            lines.append(f"\\newcommand{{\\LeakRows{r}{m}MacroFone}}"
+                         f"{{{fmt(res['macro_f1'])}}}")
+            lines.append(f"\\newcommand{{\\LeakRows{r}{m}MacroFonePct}}"
+                         f"{{{res['macro_f1'] * 100:.1f}}}")
+            if "auroc" in res and res["auroc"] == res["auroc"]:
+                lines.append(f"\\newcommand{{\\LeakRows{r}{m}Auroc}}"
+                             f"{{{fmt(res['auroc'])}}}")
+        for model in sorted({k.split("|", 1)[1] for k in rdata["results"]}):
+            m = camel_model(model)
+            try:
+                gap = (rdata["results"][f"P0|{model}"]["macro_f1"]
+                       - rdata["results"][f"P2|{model}"]["macro_f1"])
+            except KeyError:
+                continue
+            lines.append(f"\\newcommand{{\\LeakRowsGap{m}}}{{{gap:+.4f}}}")
+            lines.append(f"\\newcommand{{\\LeakRowsGap{m}Pts}}{{{gap * 100:+.1f}}}")
+
     primary = "bands" if "bands" in experiments else next(iter(experiments))
     block = experiments[primary]
     p2_models = [k.split("|", 1)[1] for k in block if k.startswith("P2|")]

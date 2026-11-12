@@ -54,6 +54,12 @@ because the sensor covers \SI{122}{} to \SI{580}{\hertz}.
 The practical rule is to aggregate before splitting.
 At inspection granularity, leakage does not explain the high scores reported in
 this field.
+We then restore the row-level protocol as a control.
+The leak reappears there, but only for high-capacity models: a random forest
+gains \LeakRowsGapRandomForestPts{} macro-F1 points, while logistic regression
+gains \LeakRowsGapLogisticRegressionPts{}.
+Aggregation removes the leak and also raises the honest score, so it is both
+the safer protocol and the better model.
 \end{abstract}
 
 \begin{keyword}
@@ -430,6 +436,45 @@ Bands 0, 6 and 7 receive no data because the sensor range is
 \label{fig:bands}
 \end{figure}
 
+\subsection{Restoring the row-level protocol brings the leak back}
+\label{sec:rowlevel}
+
+The null result above has an obvious alternative explanation: the
+inspection-level dataset may be too small and too smooth to leak.
+We tested that by returning the unit of analysis to the individual telemetry
+record.
+
+Each of the 306 windows contributes at most 300 records, giving
+\LeakRowsNRows{} rows across \LeakRowsNHives{} hives.
+The transform, the label and the models are unchanged, apart from dropping the
+two models that do not scale to this row count.
+Only the split differs.
+
+Leakage reappears, and it is model-dependent.
+The random forest gains \LeakRowsGapRandomForestPts{} macro-F1 points from a
+random row split that it loses under a hive holdout
+(\LeakRowsPzeroRandomForestMacroFone{} to
+\LeakRowsPtwoRandomForestMacroFone{}).
+Histogram gradient boosting gains \LeakRowsGapHistGradientBoostingPts{} points.
+Logistic regression gains \LeakRowsGapLogisticRegressionPts{}.
+
+The ordering is the useful part.
+A high-capacity model can memorise near-duplicate rows; a linear model cannot.
+This reproduces the mechanism that the leakage literature describes, and it
+shows that the mechanism requires both the row-level protocol and a model with
+enough capacity to exploit it.
+
+Two conclusions follow, and they point in the same direction.
+First, aggregation to the inspection window removes the leak entirely for every
+model tested.
+Second, aggregation also raises the honest score: the inspection-level hive
+holdout reaches \LeakBandsPtwoHistGradientBoostingMacroFone{}, while the
+row-level hive holdout reaches only
+\LeakRowsPtwoHistGradientBoostingMacroFone{}.
+
+Aggregating before splitting is therefore not merely a defensive choice.
+It is the better model.
+
 % =====================================================================
 \section{Discussion}
 % =====================================================================
@@ -448,7 +493,8 @@ rows per hive and no adjacent rows.
 There is nothing for a random split to memorise.
 The leakage that the literature describes lives in the protocol that splits
 individual recordings, where thousands of near-duplicate rows belong to one
-hive.
+hive, and the row-level experiment in Section~\ref{sec:rowlevel} confirms that it reappears
+there for high-capacity models.
 
 This finding is useful to practitioners.
 It says that a carefully aggregated feature set is robust to the split, and
@@ -519,10 +565,17 @@ analysis code.
 We crossed four split rules with three feature transforms on a public
 honeybee dataset, holding data, label, models and metric fixed.
 
-Hive leakage did not inflate the score.
+Hive leakage did not inflate the inspection-level score.
 Gain-retaining features did not leak either.
-The only large effect came from indoor environment measurements, which added
-about nine macro-F1 points and transferred across apiaries.
+The only large effect at that unit of analysis came from indoor environment
+measurements, which added about eight to nine macro-F1 points and transferred
+across apiaries.
+
+Restoring the row-level protocol did inflate the score, by
+\LeakRowsGapRandomForestPts{} points for a random forest and by
+\LeakRowsGapLogisticRegressionPts{} for logistic regression.
+Leakage therefore requires a row-level split and a model with enough capacity
+to memorise near-duplicate records.
 
 The practical conclusion is narrow and testable.
 Aggregate before you split.
@@ -544,4 +597,5 @@ The authors declare no competing interests.
 \bibliography{references}
 
 \end{document}
+
 
