@@ -23,3 +23,4 @@ The following independent researchers have published extensively on bioacoustic 
    - *Affiliation:* Carl Hayden Bee Research Center, USDA Agricultural Research Service (USDA-ARS), Tucson, Arizona, USA  
    - *Expertise:* Precision apiculture, continuous sensor telemetry, hive temperature and weight dynamics, colony health modeling.  
    - *Email / Profile:* [william.meikle@usda.gov](mailto:william.meikle@usda.gov)
+

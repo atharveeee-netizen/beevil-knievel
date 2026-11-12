@@ -5,3 +5,4 @@
 - Relative acoustic band features provide gain-invariant acoustic representation.
 - Indoor microclimate features add 8.5 F1 points that transfer to unseen apiaries.
 - Evaluation across 1.8M telemetry rows and 53 hives on public open-access data.
+

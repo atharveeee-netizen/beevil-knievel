@@ -15,3 +15,4 @@ All code required to download the raw data, verify SHA-256 file checksums agains
 - **Permanent Software Archive:** Zenodo DOI pending upon final release tag (`v2.2.0-compag`).
 
 The repository is structured to enable single-command reproduction using `python -m paper_q1.leakage_ladder` and `python -m paper_q1.leakage_spec_generator`.
+
