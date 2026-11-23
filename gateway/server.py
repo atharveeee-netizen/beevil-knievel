@@ -78,6 +78,136 @@ def get_db():
     conn.row_factory = sqlite3.Row
     return conn
 
+# Schema version, stored in SQLite's PRAGMA user_version.
+#   2: telemetry sensor columns are nullable (Frame v2 sentinels are stored as NULL)
+#      and a link_stats table tracks sequence gaps and duplicates.
+SCHEMA_VERSION = 2
+
+_NULLABLE_SENSOR_COLUMNS = (
+    "brood_core_temp", "frame_t1", "frame_t2", "frame_t3", "frame_t4", "frame_t5",
+    "humidity", "voc_gas_res", "co2_ppm", "weight_kg", "lux", "tilt_deg",
+)
+
+TELEMETRY_DDL = """
+CREATE TABLE IF NOT EXISTS {name} (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    hive_id INTEGER NOT NULL,
+    timestamp TEXT NOT NULL,
+    epoch_sec INTEGER NOT NULL,
+    brood_core_temp REAL,
+    frame_t1 REAL,
+    frame_t2 REAL,
+    frame_t3 REAL,
+    frame_t4 REAL,
+    frame_t5 REAL,
+    humidity REAL,
+    voc_gas_res REAL,
+    co2_ppm REAL,
+    weight_kg REAL,
+    lux REAL,
+    tilt_deg REAL,
+    fft_b1 REAL NOT NULL,
+    fft_b2 REAL NOT NULL,
+    fft_b3 REAL NOT NULL,
+    fft_b4 REAL NOT NULL,
+    fft_b5 REAL NOT NULL,
+    fft_b6 REAL NOT NULL,
+    fft_b7 REAL NOT NULL,
+    fft_b8 REAL NOT NULL,
+    ai_diagnosis TEXT NOT NULL,
+    ai_confidence REAL NOT NULL,
+    FOREIGN KEY (hive_id) REFERENCES hives (hive_id)
+);
+"""
+
+
+def _apply_schema_migrations(cursor):
+    """Bring a database created by an older gateway up to SCHEMA_VERSION.
+
+    CREATE TABLE IF NOT EXISTS never alters an existing table, so a database created when
+    the sensor columns were NOT NULL would reject Frame v2 frames that carry sentinels for
+    unconnected sensors. SQLite cannot drop NOT NULL in place, so the table is rebuilt inside
+    one transaction and every row is preserved.
+    """
+    cursor.execute("PRAGMA table_info(telemetry);")
+    info = {row["name"]: row for row in cursor.fetchall()}
+    if any(info[c]["notnull"] for c in _NULLABLE_SENSOR_COLUMNS if c in info):
+        conn = cursor.connection
+        fk_was_on = cursor.execute("PRAGMA foreign_keys;").fetchone()[0]
+        try:
+            # LIVE-mode databases can hold telemetry for hives that were never registered, so
+            # foreign keys are switched off for the copy (the pragma only works outside a transaction).
+            cursor.execute("PRAGMA foreign_keys = OFF;")
+            if not conn.in_transaction:
+                cursor.execute("BEGIN;")
+            cursor.execute("ALTER TABLE telemetry RENAME TO telemetry_legacy;")
+            cursor.execute(TELEMETRY_DDL.format(name="telemetry"))
+            cursor.execute("PRAGMA table_info(telemetry);")
+            new_cols = {row["name"] for row in cursor.fetchall()}
+            shared = ", ".join(c for c in info if c in new_cols)
+            cursor.execute(f"INSERT INTO telemetry ({shared}) SELECT {shared} FROM telemetry_legacy;")
+            cursor.execute("DROP TABLE telemetry_legacy;")
+            conn.commit()
+            print("[DB] Migrated telemetry table: sensor columns are now nullable (rows preserved).")
+        except Exception:
+            conn.rollback()
+            raise
+        finally:
+            cursor.execute(f"PRAGMA foreign_keys = {'ON' if fk_was_on else 'OFF'};")
+    cursor.execute(f"PRAGMA user_version = {SCHEMA_VERSION};")
+
+
+SEQ_MODULO = 1 << 16
+SEQ_STALE_WINDOW = 8  # a frame this far behind the last accepted one is a duplicate or late arrival
+
+
+def track_sequence(cursor, hive_id: int, seq: Optional[int], now_epoch: int) -> Dict[str, Any]:
+    """Update per-hive link statistics from the Frame v2 sequence counter.
+
+    Returns {"state", "missed"}. State is one of UNSEQUENCED (v1 frame or no seq), FIRST, OK,
+    GAP, RESET, DUPLICATE, STALE. DUPLICATE and STALE mean the frame must not be stored again.
+
+    This finds retransmissions and gaps only. It is NOT replay protection: the frame has no
+    authentication tag, so a forged frame carrying a fresh sequence number is still accepted.
+    """
+    if seq is None:
+        return {"state": "UNSEQUENCED", "missed": 0}
+    cursor.execute("SELECT last_seq FROM link_stats WHERE hive_id = ?;", (hive_id,))
+    row = cursor.fetchone()
+    if row is None:
+        cursor.execute(
+            "INSERT INTO link_stats (hive_id, last_seq, last_rx_epoch, frames_accepted) VALUES (?, ?, ?, 1);",
+            (hive_id, seq, now_epoch),
+        )
+        return {"state": "FIRST", "missed": 0}
+
+    last = row["last_seq"]
+    ahead = (seq - last) % SEQ_MODULO
+    behind = (last - seq) % SEQ_MODULO
+    missed = 0
+    if ahead == 0:
+        state = "DUPLICATE"
+    elif seq <= 2 and ahead > SEQ_STALE_WINDOW:
+        state = "RESET"  # counter restarted, i.e. the node rebooted
+    elif ahead < SEQ_MODULO // 2:
+        missed = ahead - 1
+        state = "OK" if missed == 0 else "GAP"
+    elif behind <= SEQ_STALE_WINDOW:
+        state = "STALE"
+    else:
+        state = "RESET"
+
+    if state in ("DUPLICATE", "STALE"):
+        cursor.execute("UPDATE link_stats SET frames_duplicate = frames_duplicate + 1 WHERE hive_id = ?;", (hive_id,))
+    else:
+        cursor.execute(
+            """UPDATE link_stats SET last_seq = ?, last_rx_epoch = ?, frames_accepted = frames_accepted + 1,
+               frames_missed_est = frames_missed_est + ?, seq_resets = seq_resets + ? WHERE hive_id = ?;""",
+            (seq, now_epoch, missed, 1 if state == "RESET" else 0, hive_id),
+        )
+    return {"state": state, "missed": missed}
+
+
 def init_database():
     conn = get_db()
     cursor = conn.cursor()
@@ -102,37 +232,8 @@ def init_database():
     """)
 
     # Table 2: Multi-Sensor Telemetry
-    cursor.execute("""
-    CREATE TABLE IF NOT EXISTS telemetry (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        hive_id INTEGER NOT NULL,
-        timestamp TEXT NOT NULL,
-        epoch_sec INTEGER NOT NULL,
-        brood_core_temp REAL,
-        frame_t1 REAL,
-        frame_t2 REAL,
-        frame_t3 REAL,
-        frame_t4 REAL,
-        frame_t5 REAL,
-        humidity REAL,
-        voc_gas_res REAL,
-        co2_ppm REAL,
-        weight_kg REAL,
-        lux REAL,
-        tilt_deg REAL,
-        fft_b1 REAL NOT NULL,
-        fft_b2 REAL NOT NULL,
-        fft_b3 REAL NOT NULL,
-        fft_b4 REAL NOT NULL,
-        fft_b5 REAL NOT NULL,
-        fft_b6 REAL NOT NULL,
-        fft_b7 REAL NOT NULL,
-        fft_b8 REAL NOT NULL,
-        ai_diagnosis TEXT NOT NULL,
-        ai_confidence REAL NOT NULL,
-        FOREIGN KEY (hive_id) REFERENCES hives (hive_id)
-    );
-    """)
+    cursor.execute(TELEMETRY_DDL.format(name="telemetry"))
+    _apply_schema_migrations(cursor)
 
     # Table 3: Emergency Alerts
     cursor.execute("""
@@ -147,6 +248,19 @@ def init_database():
         confidence REAL NOT NULL,
         resolved INTEGER DEFAULT 0,
         FOREIGN KEY (hive_id) REFERENCES hives (hive_id)
+    );
+    """)
+
+    # Table 4: link-layer statistics derived from the Frame v2 sequence counter
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS link_stats (
+        hive_id INTEGER PRIMARY KEY,
+        last_seq INTEGER NOT NULL,
+        last_rx_epoch INTEGER NOT NULL,
+        frames_accepted INTEGER NOT NULL DEFAULT 0,
+        frames_duplicate INTEGER NOT NULL DEFAULT 0,
+        frames_missed_est INTEGER NOT NULL DEFAULT 0,
+        seq_resets INTEGER NOT NULL DEFAULT 0
     );
     """)
 
@@ -218,7 +332,8 @@ class EdgeDiagnosticEngine:
         else:
             self.model = None
 
-    def predict(self, sensor_16: List[float], fft_8: List[float], tilt_deg: float = 0.0, flags: int = 0) -> Dict[str, Any]:
+    def predict(self, sensor_16: List[float], fft_8: List[float], tilt_deg: float = 0.0, flags: int = 0,
+                audio_present: bool = True) -> Dict[str, Any]:
         """
         Runs multi-modal fusion inference on Raspberry Pi 3B+ CPU.
         Returns diagnostic classification and dynamic decision score.
@@ -265,7 +380,7 @@ class EdgeDiagnosticEngine:
                 "inference_ms": round(elapsed_ms, 2)
             }
 
-        if self.model is not None and TORCH_AVAILABLE:
+        if self.model is not None and TORCH_AVAILABLE and audio_present:
             try:
                 with torch.no_grad():
                     # Construct 2D spectrogram representation from 8 FFT bands: (1, 1, 129, 256)
@@ -300,23 +415,32 @@ class EdgeDiagnosticEngine:
         brood_core = float(sensor_16[0]) if len(sensor_16) > 0 else 34.8
         co2_val = float(sensor_16[7]) if len(sensor_16) > 7 else 1200.0
 
+        # A node without a microphone reports all eight bands as zero. That is "no data", not a
+        # silent hive: a zero queen band must not be read as queenlessness.
+        swarm_band_high = audio_present and fft_swarm > 0.65
+        queen_band_low = audio_present and fft_queen < 0.18
+
         if brood_core < 31.5:
             pred_class = 6 # THERMAL_STRESS
             deficit = 31.5 - brood_core
             decision_score = round(min(0.98, 0.70 + (deficit / 10.0) * 0.25), 3)
-        elif fft_swarm > 0.65 or co2_val > 2800:
+        elif swarm_band_high or co2_val > 2800:
             pred_class = 3 # PRE_SWARM_WARNING
-            swarm_excess = max(0.0, fft_swarm - 0.65) / 0.35
+            swarm_excess = max(0.0, fft_swarm - 0.65) / 0.35 if audio_present else 0.0
             co2_excess = max(0.0, co2_val - 2800.0) / 4000.0
             decision_score = round(min(0.98, 0.70 + max(swarm_excess, co2_excess) * 0.25), 3)
-        elif fft_queen < 0.18:
+        elif queen_band_low:
             pred_class = 2 # QUEENLESS_DISTRESS
             queen_deficit = (0.18 - fft_queen) / 0.18
             decision_score = round(min(0.98, 0.70 + queen_deficit * 0.25), 3)
         else:
-            pred_class = 1 # QUEEN_PRESENT (Healthy)
+            # QUEEN_PRESENT needs acoustic evidence. Without audio the most that can be said
+            # is that no anomaly was seen in the sensors that are present.
+            pred_class = 1 if audio_present else 0
             temp_dev = abs(brood_core - 34.8) / 2.0
             decision_score = round(max(0.75, min(0.98, 0.95 - temp_dev * 0.15)), 3)
+            if not audio_present:
+                decision_score = min(decision_score, 0.6)
 
         elapsed_ms = (time.perf_counter() - start_t) * 1000.0
         remaining_prob = round((1.0 - decision_score) / (len(DIAGNOSTIC_CLASSES) - 1), 4)
@@ -329,7 +453,8 @@ class EdgeDiagnosticEngine:
             "confidence": decision_score,
             "decision_score": decision_score,
             "probabilities": probs_dict,
-            "inference_ms": round(elapsed_ms, 2)
+            "inference_ms": round(elapsed_ms, 2),
+            "audio_present": audio_present
         }
 
 # Backwards compatibility alias
@@ -396,7 +521,7 @@ class TelemetryPayload(BaseModel):
     lux: Optional[float] = Field(..., ge=0, description="VEML7700 Solar Irradiance (Lux)")
     tilt_deg: Optional[float] = Field(0.0, ge=0, le=90, description="LIS3DH Accelerometer Tilt Angle (degrees)")
     flags: int = Field(0, description="Discrete alert and status bitmask flags")
-    seq: int = Field(0, description="Rolling sequence counter")
+    seq: Optional[int] = Field(None, ge=0, le=65535, description="Frame v2 rolling sequence counter (None for v1 frames)")
     version: int = Field(2, description="Protocol version (1 or 2)")
     fft_bands: List[float] = Field(..., min_length=8, max_length=8, description="INMP441 8-Band Audio FFT Energy")
     timestamp: Optional[str] = None
@@ -469,16 +594,28 @@ def get_hive_detail(hive_id: int):
     # --- MSPB 2.0 & BEEP FORECASTING INTEGRATION ---
     from gateway.phenotypic_forecaster import phenotypic_forecaster
     latest = history[0] if history else {}
-    core_t = latest.get("brood_core_temp", 34.8)
-    frames = [latest.get(f"frame_t{i}", 33.5) for i in range(1, 6)]
-    voc = latest.get("voc_gas_res", 140.0)
-    co2 = latest.get("co2_ppm", 1200.0)
-    weight = latest.get("weight_kg", 32.5)
-    lux = latest.get("lux", 45000.0)
+
+    def _sensor(key, default):
+        # Nominal demo defaults only when there is no history at all. A column that is NULL means
+        # the sensor is absent or failed, and its value must not be invented.
+        return default if not latest else latest.get(key)
+
+    core_t = _sensor("brood_core_temp", 34.8)
+    frames = [_sensor(f"frame_t{i}", 33.5) for i in range(1, 6)]
+    voc = _sensor("voc_gas_res", 140.0)
+    co2 = _sensor("co2_ppm", 1200.0)
+    weight = _sensor("weight_kg", 32.5)
+    lux = _sensor("lux", 45000.0)
     tare = hive["tare_weight_kg"]
 
-    varroa_data = phenotypic_forecaster.estimate_varroa_load(core_t, frames, voc, co2)
-    honey_data = phenotypic_forecaster.forecast_honey_yield(weight, tare, 0.65, lux)
+    if core_t is None or voc is None or co2 is None or any(f is None for f in frames):
+        varroa_data = {"status": "INSUFFICIENT_DATA", "reason": "needs brood, frame, VOC and CO2 sensors"}
+    else:
+        varroa_data = phenotypic_forecaster.estimate_varroa_load(core_t, frames, voc, co2)
+    if weight is None or lux is None:
+        honey_data = {"status": "INSUFFICIENT_DATA", "reason": "needs the scale and light sensors"}
+    else:
+        honey_data = phenotypic_forecaster.forecast_honey_yield(weight, tare, 0.65, lux)
 
     return {
         "hive": dict(hive),
@@ -487,6 +624,22 @@ def get_hive_detail(hive_id: int):
         "recent_telemetry": history,
         "recent_alerts": alerts
     }
+
+@app.get("/api/v1/hives/{hive_id}/link")
+def get_link_stats(hive_id: int):
+    """Measured link quality for one hive, derived from the Frame v2 sequence counter."""
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM link_stats WHERE hive_id = ?;", (hive_id,))
+    row = cursor.fetchone()
+    conn.close()
+    if not row:
+        raise HTTPException(status_code=404, detail=f"No sequenced frames received from hive #{hive_id}.")
+    stats = dict(row)
+    expected = stats["frames_accepted"] + stats["frames_missed_est"]
+    stats["delivery_ratio_est"] = round(stats["frames_accepted"] / expected, 4) if expected else None
+    return stats
+
 
 @app.get("/api/v1/alerts")
 def get_all_alerts(unresolved_only: bool = True):
@@ -510,6 +663,27 @@ async def ingest_telemetry(payload: TelemetryPayload, background_tasks: Backgrou
     now_utc = datetime.now(timezone.utc)
     now_iso = payload.timestamp or now_utc.isoformat()
     now_epoch = int(now_utc.timestamp())
+
+    # --- Link-layer bookkeeping from the Frame v2 sequence counter ---
+    link_conn = get_db()
+    link_cur = link_conn.cursor()
+    seq_info = track_sequence(link_cur, payload.hive_id, payload.seq, now_epoch)
+    link_conn.commit()
+    link_conn.close()
+    if seq_info["state"] in ("DUPLICATE", "STALE"):
+        return {
+            "status": "DUPLICATE",
+            "hive_id": payload.hive_id,
+            "seq": payload.seq,
+            "seq_state": seq_info["state"],
+            "diagnosis": None,
+            "confidence": None,
+        }
+    if seq_info["missed"]:
+        print(f"[LINK] Hive #{payload.hive_id:03d}: {seq_info['missed']} frame(s) missed before seq {payload.seq}.")
+
+    # All-zero bands mean the node has no microphone (or it failed), not a silent hive.
+    audio_present = any(float(b) > 0.0 for b in payload.fft_bands)
 
     # Build 16-parameter sensor vector
     t_frames = [t for t in payload.frame_temps]
@@ -543,13 +717,15 @@ async def ingest_telemetry(payload: TelemetryPayload, background_tasks: Backgrou
     ]
 
     # Run AI Inference (8.2ms)
-    ai_result = ai_engine.predict(sensor_16, payload.fft_bands, payload.tilt_deg, payload.flags)
+    ai_result = ai_engine.predict(sensor_16, payload.fft_bands, payload.tilt_deg, payload.flags,
+                                  audio_present=audio_present)
     diagnosis = ai_result["diagnosis"]
     confidence = ai_result["confidence"]
 
     # --- ENVIRONMENTAL NOISE REJECTION HEAD (AudioSet & OSBH) ---
     from gateway.noise_filter import noise_filter
-    noise_eval = noise_filter.evaluate_acoustic_signal(payload.fft_bands)
+    noise_eval = (noise_filter.evaluate_acoustic_signal(payload.fft_bands) if audio_present
+                  else {"is_environmental_noise": False})
     
     if noise_eval["is_environmental_noise"]:
         if noise_eval["noise_type"] == "RAIN_CLATTER" and diagnosis in ["PRE_SWARM_WARNING", "ACTIVE_SWARM"]:
@@ -624,6 +800,8 @@ async def ingest_telemetry(payload: TelemetryPayload, background_tasks: Backgrou
         "health_score": health_score,
         "status": status,
         "alert_created": alert_created,
+        "audio_present": audio_present,
+        "seq_state": seq_info["state"],
         "inference_ms": ai_result["inference_ms"]
     }
     background_tasks.add_task(ws_manager.broadcast, event_payload)
@@ -634,7 +812,10 @@ async def ingest_telemetry(payload: TelemetryPayload, background_tasks: Backgrou
         "diagnosis": diagnosis,
         "confidence": confidence,
         "decision_score": confidence,
-        "inference_ms": ai_result["inference_ms"]
+        "inference_ms": ai_result["inference_ms"],
+        "audio_present": audio_present,
+        "seq_state": seq_info["state"],
+        "frames_missed": seq_info["missed"]
     }
 
 @app.websocket("/api/v1/ws/live")
