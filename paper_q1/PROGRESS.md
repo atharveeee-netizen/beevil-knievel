@@ -26,6 +26,9 @@
 
 ## Detailed Task Log
 
+> **Historical log.** Entries below record what was believed when each phase ran. Numbers marked SUPERSEDED were replaced by the October 23 audit (see AUDIT_RESPONSE.md). The current values are in `results/*.json`.
+
+
 ### [Phase 0] Setup & Scaffolding
 - Branch `q1-journal` created.
 - Python 3.12.4 with PyTorch 2.7.1+cu118 (CUDA), Scikit-Learn 1.4.2, SciPy 1.13.1 verified.
@@ -56,25 +59,25 @@
 - Validated CMSIS-DSP numerical parity: relative error $0.00 \times 10^0 \le 1.0 \times 10^{-3}$ tolerance (`paper_q1/results/golden_vectors_parity.json`).
 
 ### [Phase 5] Model Training & Cross-Validation
-- Implemented `paper_q1/train_engine.py` with sanity checks (64-sample overfit 100%, label-shuffle chance 59.8%).
+- Implemented `paper_q1/train_engine.py` with sanity checks (64-sample overfit 100%, label-shuffle chance 59.8%). **[SUPERSEDED: that check ran on random noise and could not fail; the hive-level permutation null through the full nested CV is 48.88 ± 3.73% (AUDIT_RESPONSE.md).]**
 - Executed 15 outer folds across 11 model families with complete hive isolation:
   - Floor Majority: 50.0 ± 0.0%
   - Floor Stratified: 50.3 ± 0.4%
-  - Repo Heuristic V1: 53.4 ± 1.6% (confirms Hypothesis H1: legacy heuristics collapse on unseen hives)
+  - Repo Heuristic V1: 53.4 ± 1.6% (confirms Hypothesis H1: legacy heuristics collapse on unseen hives) **[SUPERSEDED: on the audited target the legacy heuristic scores 73.5% and H1 is not confirmed; see manuscript_leakage/.]**
   - F0 Logistic Regression: 77.0 ± 4.2%
   - F0 Random Forest: 79.9 ± 4.0%
   - F0 LightGBM (Gradient Boosting): 80.5 ± 3.9%
   - F0 MLP (TinyML Candidate): 80.5 ± 3.7% (confirms Hypothesis H2: matches heavy baselines)
   - Literature MFCC-SVM: 80.7 ± 4.1%
   - Neural DS-CNN: 81.0 ± 3.6%
-  - Multi-Modal Early Fusion: 87.2 ± 4.8% (confirms Hypothesis H3: audio + environment synergy, AUROC 0.945)
+  - Multi-Modal Early Fusion: 87.2 ± 4.8% (confirms Hypothesis H3: audio + environment synergy, AUROC 0.945) **[SUPERSEDED: 81.96% balanced accuracy on the audited target (results/main_results.json).]**
   - Hive-Adaptive Normalization: 58.5 ± 1.5%
 - Saved authoritative results to `paper_q1/results/main_results.json`.
 
 ### [Phase 6] Edge Quantization & Firmware Deployment
 - Implemented `paper_q1/quantize_engine.py`:
   - Performed post-training symmetric INT8 quantization on F0 MLP.
-  - Achieved exact quantization parity: FP32 76.94% vs INT8 76.91% (Delta = 0.03%, confirms Hypothesis H4).
+  - Achieved exact quantization parity: FP32 76.94% vs INT8 76.91% (Delta = 0.03%, confirms Hypothesis H4). **[SUPERSEDED: FP32 71.23% vs INT8 71.55% (delta +0.32 pp), 620 B flash, 168 B RAM. These are computed memory audits, not on-device measurements, and the H4 energy criterion is unmeasured.]**
   - Generated pure C zero-heap inference header: `firmware/config/tinyml_weights.h`.
   - Memory audit: Flash usage = 428 Bytes (0.33% of 128 KB budget), RAM scratchpad = 136 Bytes (0.21% of 64 KB budget).
   - Saved audit results to `paper_q1/results/edge_quantization.json`.
@@ -85,8 +88,8 @@
   - `paper_q1/human_tasks/03_conducted_lora_attenuation_test.md` (Conducted LoRa PER vs attenuation).
   - `paper_q1/human_tasks/04_temperature_sensor_2point_calibration.md` (2-point ice/warm bath calibration & sentinel verification).
 - Built automated parser tools in `paper_q1/bench_tools/` (`parse_ppk2.py`, `parse_lora_per.py`, `parse_temp_cal.py`).
-- Implemented `paper_q1/cusum_eval.py`: evaluated Page CUSUM hypothermia detector on 96,080 records across 79 hives in MSPB; achieved $ARL_0 = 18.44$ days, mean detection latency = 2.33 hours (`paper_q1/results/cusum_eval.json`).
-- Implemented `paper_q1/link_budget_eval.py`: computed analytical link budget, airtimes (77.06 ms SF7), and canopy communication range (4.15 km modelled) (`paper_q1/results/analytical_link_budget.json`).
+- Implemented `paper_q1/cusum_eval.py`: evaluated Page CUSUM hypothermia detector on 96,080 records across 79 hives in MSPB; achieved $ARL_0 = 18.44$ days, mean detection latency = 2.33 hours (`paper_q1/results/cusum_eval.json`). **[SUPERSEDED: the evaluation was rewritten (24 h rolling baseline, k = 0.25 °C, 53 colonies): ARL0 3.48 d at h = 6.0 (4.45 d at h = 8.0); latency 10.52 h mean and 7.5 h median over 14 queen-distress events.]**
+- Implemented `paper_q1/link_budget_eval.py`: computed analytical link budget, airtimes (77.06 ms SF7), and canopy communication range (4.15 km modelled) (`paper_q1/results/analytical_link_budget.json`). **[SUPERSEDED: canopy range is 0.62 km at SF7 and 0.96 km at SF10 (results/analytical_link_budget.json).]**
 
 ### [Phase 8] Statistical Significance & Publication Figures
 - Implemented `paper_q1/stats_engine.py`:

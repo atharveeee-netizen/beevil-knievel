@@ -1,4 +1,9 @@
 # Protocol HT-03: Conducted LoRa Packet Error Rate (PER) vs. Attenuation Bench Test
+
+> **Status (2026-11-15): tooling incomplete.** `paper_q1.bench_tools.run_conducted_sweep` does not exist yet (`parse_lora_per` does), and the firmware has no radio driver, so a transmit harness is needed first.
+>
+> **Receiver note.** The deployed gateway is an Ebyte E22-900T22S UART module (`docs/HARDWARE_ARCHITECTURE.md`), not an SX1302 concentrator. A sweep with the SX1302 characterises the node transmitter and that receiver only. Repeat it with the deployed E22 gateway, or state which receiver was used. That run is also the first test of whether the E22 can receive the node's raw SX1262 frames at all, which is untested.
+
 **Provenance Tag:** `REAL_BENCH_MEASUREMENT`  
 **Target Hardware:** RAK4631 LoRa node (Transmitter) + RAK2287/SX1302 Concentrator Gateway (Receiver).  
 **RF Connection:** Fully shielded conducted RF coaxial link with calibrated programmable step attenuator (or fixed SMA attenuators: 30 dB, 60 dB, 90 dB, 110 dB, 120 dB, 130 dB).  
@@ -30,9 +35,9 @@
 ```
 
 - **Tx Power:** Programmed to +14 dBm (25 mW).
-- **Center Frequency:** 868.100 MHz (or 865.0625 MHz for IN865).
+- **Center Frequency:** 865.0625 MHz (IN865, the deployed channel).
 - **Packet Generation:** Node transmits 100 Frame v2 packets per attenuation setting (sequence numbers 1 to 100).
-- **Airtime:** 77.06 ms per packet (SF7), 411.65 ms per packet (SF10).
+- **Airtime:** 77.06 ms per packet (SF7), 493.57 ms per packet (SF10).
 
 ---
 

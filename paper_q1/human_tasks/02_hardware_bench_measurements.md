@@ -1,4 +1,7 @@
 # Protocol HT-02: Hardware Bench Power & Cycle-Count Measurements
+
+> **Status (2026-11-15): tooling incomplete.** `firmware/src/bench_power_harness.ino` does not exist yet. It must be written before this protocol can run: it has to implement sleep, sensor-rail gating and a transmit step at SF7 and SF10, because `firmware/src/main.cpp` busy-polls and never sleeps. The directory `paper_q1/bench_raw/` must be created by whoever runs the test. `paper_q1.bench_tools.parse_ppk2` exists. The SF10 airtime is 493.57 ms (computed by `link_budget_eval.py`); an earlier revision of this protocol said 411.65 ms, which was wrong.
+
 **Provenance Tag:** `REAL_BENCH_MEASUREMENT`  
 **Target Hardware:** RAKwireless WisBlock RAK4631 (Nordic nRF52840 MCU @ 64 MHz + Semtech SX1262 LoRa transceiver), RAK5005-O baseboard.  
 **Measurement Instrument:** Nordic Semiconductor Power Profiler Kit II (PPK2) in Ampere Meter mode (or Keithley 2450 SourceMeter).  
@@ -18,7 +21,7 @@
    - +14 dBm (EU868 / IN865 standard).
    - +22 dBm (maximum PA boost).
    - SF7 / BW 125 kHz / CR 4/5 (airtime: 77.06 ms).
-   - SF10 / BW 125 kHz / CR 4/5 (airtime: 411.65 ms).
+   - SF10 / BW 125 kHz / CR 4/5 (airtime: 493.57 ms).
 4. **DWT Cycle Counting:** Read ARM Cortex-M4F Data Watchpoint and Trace (DWT) cycle counter (`DWT->CYCCNT`) directly for DSP and TinyML routines.
 
 ---

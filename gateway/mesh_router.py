@@ -2,7 +2,9 @@
 BEEVIL MESH - GATEWAY TOPOLOGY & MESH ROUTER (Python / Linux Raspberry Pi 3B+)
 ==================================================================
 Manages the 100-Hive LoRa Multi-Hop Mesh Network:
-- Ingests 41-byte BeevilMesh frames (8-byte header + 33-byte payload).
+- Ingests 41-byte BeevilMesh frames (8-byte header + 33-byte Frame v1 payload).
+  NOTE: the node-to-gateway protocol is now Frame v2 (36 bytes). The mesh path has not
+  been updated and is not deployed.
 - Deduplicates packets and tracks multi-hop relay topology.
 - Computes Link Quality (RSSI/SNR), hop distribution, and battery relay load.
 - Exposes live Mesh Network Graph for the Next.js interactive frontend.

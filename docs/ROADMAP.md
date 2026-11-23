@@ -1,13 +1,13 @@
 # 🗺️ BEEVIL KNIEVEL — Engineering Development Roadmap
 
-This document outlines the phased engineering roadmap for transitioning the Beevil Knievel cyber-physical apiculture monitoring platform from its current bench-validated prototype state (TRL 4/5) to commercial agricultural scale.
+This document outlines the phased engineering roadmap for transitioning the Beevil Knievel cyber-physical apiculture monitoring platform from its current prototype state (software-verified; hardware bench measurements are pending, so no TRL is claimed) to commercial agricultural scale.
 
 ---
 
 ## 📅 Roadmap Overview
 
 ```
-Phase 1: Laboratory Prototype (TRL 4) ➔ [COMPLETED]
+Phase 1: Laboratory Prototype ➔ [PARTIAL: software and analysis done; hardware bring-up pending]
 Phase 2: Local Field Pilot & Indian Bee Acoustic Campaign ➔ [CURRENT TARGET / 2026-Q4]
 Phase 3: Edge Deep Learning Quantization & Mesh Extension ➔ [PLANNED / 2027-Q1]
 Phase 4: Commercial Apiary Fleet & Agricultural Certification ➔ [FUTURE / 2027-Q2+]
@@ -15,16 +15,16 @@ Phase 4: Commercial Apiary Fleet & Agricultural Certification ➔ [FUTURE / 2027
 
 ---
 
-## Phase 1: Bench Prototype & Bring-Up 🟢 [COMPLETED]
+## Phase 1: Bench Prototype & Bring-Up 🟡 [PARTIAL]
 
-* [x] **Sub-GHz LoRa RF Stack:** Semtech SX1262 integration on 865.0625 MHz (India WPC de-licensed band) at +14 dBm.
-* [x] **Binary Wire Protocol:** Strict 33-byte packed telemetry struct (`<Hh5hHHHHH B8B`) with sentinel handling for unconnected sensors.
-* [x] **Multi-Sensor Bus Architecture:** I2C bus scanner (TMP117, SCD41, BME688, LIS3DH, VEML7700), 1-Wire DS18B20 5-probe thermal array, I2S INMP441 audio DMA.
-* [x] **On-Node DSP Engine:** 256-point Real FFT (`arm_rfft_fast_f32`, 7.8125 Hz bin resolution, 1.12 ms latency) and Page's CUSUM thermal drift anomaly detector.
+* [ ] **Sub-GHz LoRa RF Stack:** SX1262 on 865.0625 MHz (IN865 band) at +14 dBm is the design target. No radio driver is integrated in `firmware/src/main.cpp` yet.
+* [x] **Binary Wire Protocol:** Frame v2, a 36-byte packed telemetry struct with a flags byte and a 16-bit sequence counter and sentinel handling for unconnected sensors. v1 33-byte frames stay decodable by the gateway. The firmware assembles frames but does not transmit them yet.
+* [ ] **Multi-Sensor Bus Architecture:** the I2C scan and the TMP117 read are implemented. DS18B20, SCD41, BME688, LIS3DH, VEML7700, HX711 and I2S audio are not read by `firmware/src/main.cpp`.
+* [ ] **On-Node DSP Engine:** specified as 16 kHz capture, 4x decimation and a 512-point real FFT (`spec/beevil_spec.yaml`), implemented as a Python reference only. The firmware has a fixed-baseline CUSUM (`algorithm_config.h`) that is not the detector evaluated in `paper_q1`.
 * [x] **Linux Edge Gateway:** Raspberry Pi 3B+ daemon + SQLite WAL database with 100-hive capacity and FastAPI REST/WebSocket endpoints.
 * [x] **Web Dashboard & Diagnostic UI:** Next.js 14 HiveOS web app and 1-bit monochrome retro Playdate console emulator with live Web Audio synthesizer.
-* [x] **Automated Testing Suite:** 27 unit and integration tests passing in CI/CD pipeline (`pytest tests/ -v`).
-* [x] **Multiphysics Validation:** 11 ANSYS structural, thermal, aerodynamic, and RF simulations.
+* [x] **Automated Testing Suite:** `pytest tests/ -v` runs in CI; see `REPRODUCIBILITY.md` for the current pass and skip counts.
+* [ ] **Multiphysics Models:** ANSYS structural, thermal, modal and RF models exist in `simulations/` (settings and screenshots). Mesh-convergence studies and validation against measurement are pending, and some models are set up but not solved or need fixes (see the IEEE paper in `paper/`).
 
 ---
 

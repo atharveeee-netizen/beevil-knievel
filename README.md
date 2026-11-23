@@ -56,7 +56,7 @@ Every empirical claim in this repository is explicitly tagged with its operation
 | **DSP Golden Vectors (8 Bands, Hann FFT)** | Verified on Host | `NUMERICAL_SIMULATION` | [`paper_q1/results/golden_vectors_parity.json`](paper_q1/results/golden_vectors_parity.json) |
 | **Page CUSUM Anomaly Detection** | Evaluated (14 Queen Events) | `REAL_PUBLIC_DATASET` | [`paper_q1/results/cusum_eval.json`](paper_q1/results/cusum_eval.json) |
 | **LoRa PHY Link Budget (Canopy 0.62 km)** | Analytical (Two-Ray + ITU) | `ANALYTICAL_MODEL` | [`paper_q1/results/analytical_link_budget.json`](paper_q1/results/analytical_link_budget.json) |
-| **Node Firmware Logic (Frame v2)** | Verified on Silicon | `REAL_SILICON` | [`firmware/src/main.cpp`](firmware/src/main.cpp) |
+| **Node Firmware Logic (Frame v2)** | Unverified: no bring-up evidence recorded | `PENDING_HARDWARE_BENCH` | [`firmware/src/main.cpp`](firmware/src/main.cpp) |
 | **Conducted RF Sensitivity Test** | Pending Bench Test | `PENDING_HARDWARE_BENCH` | [`paper_q1/human_tasks/03_conducted_lora_attenuation_test.md`](paper_q1/human_tasks/03_conducted_lora_attenuation_test.md) |
 | **Dynamic Current Profiling (PPK2/DSO)** | Pending Bench Test | `PENDING_HARDWARE_BENCH` | [`paper_q1/human_tasks/02_hardware_bench_measurements.md`](paper_q1/human_tasks/02_hardware_bench_measurements.md) |
 | **Temperature 2-Point Calibration** | Pending Bench Test | `PENDING_HARDWARE_BENCH` | [`paper_q1/human_tasks/04_temperature_sensor_2point_calibration.md`](paper_q1/human_tasks/04_temperature_sensor_2point_calibration.md) |

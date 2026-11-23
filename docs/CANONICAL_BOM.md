@@ -27,8 +27,8 @@ The following table specifies every physical component of the **Beevil Knievel**
 | **12** | **Rechargeable Battery Cell** | Panasonic / Samsung / LG | `NCR18650B` 3.7V 3000mAh | 1 | Main electrochemical energy reservoir | JST-PH 2-pin connector to TP4054 on RAK5005-O | `VALIDATED_CANONICAL` (1S 3.7V LiPo/Li-ion NMC; 4.20V termination, 3.27V cutoff) |
 | **13** | **Energy Harvesting Solar Panel** | Waveshare / Voltaic | `6V 100mA` Monocrystalline | 1 | Photovoltaic harvesting to replenish 18650 cell | 2-pin screw terminal to RAK5005-O solar input | `SPECIFIED` (Average 80–100 mA peak solar irradiance yield) |
 | **14** | **Enclosure & Glands** | Bud Industries / Fibox | `IP65 Polycarbonate Enclosure` + 4x `PG-7 Glands` | 1 | Hermetic, UV-stabilized, bee-safe outdoor field enclosure | Mechanical / Solderless pass-throughs | `VALIDATED` (CAD models & 3D render assets verified in repo) |
-| **15** | **Edge Gateway Single Board Computer**| Raspberry Pi Foundation | `Raspberry Pi 3 Model B+` | 1 | Local aggregation, SQLite store, MQTT bridge, FastAPI backend | 40-pin GPIO header, Ethernet / Wi-Fi | `DRIVER_VERIFIED` (`gateway/gateway_receiver.py` validated) |
-| **16** | **Edge Gateway LoRa HAT** | Waveshare | `SX1262 LoRa HAT for RPi` (868M) | 1 | Sub-GHz base station transceiver for multi-node ingestion | SPI Bus (`spidev0.0`), CE0, GPIO Reset/Busy | `DRIVER_VERIFIED` (Receives 32-byte binary payload, passes to SQLite/MQTT) |
+| **15** | **Edge Gateway Single Board Computer**| Raspberry Pi Foundation | `Raspberry Pi 3 Model B+` | 1 | Local aggregation, SQLite store, MQTT bridge, FastAPI backend | 40-pin GPIO header, Ethernet / Wi-Fi | `DRIVER_VERIFIED` (`gateway/lora_receiver.py` validated) |
+| **16** | **Edge Gateway LoRa HAT** | Waveshare | `SX1262 LoRa HAT for RPi` (868M, Ebyte E22-900T22S module) | 1 | Sub-GHz base station transceiver for multi-node ingestion | UART (`/dev/serial0`, 9600 baud default), M0/M1 mode pins, AUX | `UNVERIFIED_INTEROP` (the UART receive path is unit-tested with simulated frames; reception of the node's raw SX1262 frames by the E22 module has not been tested) |
 
 ---
 
@@ -44,7 +44,7 @@ The following table specifies every physical component of the **Beevil Knievel**
 
 3. **FFT Resolution Discrepancy Resolved:**
    - *Legacy Claim:* Some files cited 128-point FFT, while Phase 2 video script cited 256-point FFT.
-   - *Correction:* Standardized canonical pipeline to **256-point Real FFT @ 16 kHz** ($F_s / N = 62.5\text{ Hz}$ per bin). This accurately maps the critical 200–400 Hz swarming acoustic band into bins 3, 4, 5, and 6.
+   - *Correction:* The canonical pipeline (`spec/beevil_spec.yaml`) is 16 kHz capture, 4x decimation to 4 kHz and a **512-point real FFT** ($F_s / N = 7.8125\text{ Hz}$ per bin), which maps the 200–400 Hz swarming band onto bins 26 to 51. An earlier revision of this document standardised on 256 points at 16 kHz (62.5 Hz per bin), which leaves too few bins in the 100–180 Hz band; that choice was withdrawn.
 
 4. **Bench Prototype Status:**
    - *Truth Rule:* The current physical assembly is an engineering **BENCH PROTOTYPE**. Field deployment claims in legacy marketing texts have been reclassified as **TARGET / PROPOSED** until live apicultural validation takes place.

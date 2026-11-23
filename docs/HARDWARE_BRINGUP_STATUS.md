@@ -1,5 +1,8 @@
 # BEEVIL KNIEVEL — HARDWARE BRING-UP STATUS MANIFEST
 
+> **Historical snapshot (September 2026).** The statuses below describe an earlier firmware and a host-side scan; they were not updated when the firmware was rewritten. No node bring-up evidence is recorded in the repository (see `paper_q1/human_tasks/hardware_inventory.md`). Current limits are in `LIMITATIONS.md`.
+
+
 **Document Status:** CANONICAL HARDWARE AUDIT & BRING-UP MATRIX  
 **Standard:** IEEE HARDWAIre Phase 2 / Bench-to-Field Verification  
 **Hardware Revision:** Rev 2.1 Bench Prototype (USB-Connected Evaluation Node)  
@@ -34,7 +37,7 @@ This document tracks the physical hardware identity, bus discovery, driver bring
 | **Solar Illuminance Sensor** | Vishay VEML7700 (I2C 0x10, 0-120k Lux) | Address configured; dummy 4850 lux previously sent | `DRIVER_REFACTORED` | `beevil_rak4631_transmitter.ino:375` | Read physical lux registers; report `NOT_CONNECTED` if bus NACK |
 | **Apiary Scale ADC** | Avia Semiconductor HX711 (24-bit ADC, Load Cells) | I2C bridge address 0x26 configured; dummy 42.80 kg previously sent | `DRIVER_REFACTORED` | `beevil_rak4631_transmitter.ino:374` | Read raw ADC counts; zero tare; output `UNCALIBRATED` if calibration factor uninitialized |
 | **Acoustic MEMS Microphone** | Knowles ICS-43434 / InvenSense INMP441 (I2S Digital) | Synthetic `sinf(180t) + sinf(250t)` generated in FreeRTOS task | `CODE_FIXED_ZERO_SLOP` | `beevil_nrf52_freertos.c:88-91` | Remove fake sine generator; capture real I2S PCM; report `NOT_CONNECTED` if mic unpopulated |
-| **Acoustic DSP / FFT** | ARM CMSIS-DSP 256-pt Real FFT @ 16 kHz sampling | Contradiction between 128-pt (`sensor_node`) and 256-pt (`IEEE_HART_Phase2_Video_Script`) | `STANDARDIZED` | `docs/ARCHITECTURE_CONTRADICTIONS.md` | Standardize on 256-point Real FFT @ 16 kHz ($F_s/N = 62.5$ Hz resolution) |
+| **Acoustic DSP / FFT** | 512-pt real FFT after 4x decimation (16 kHz capture, 4 kHz FFT rate); Python reference only, not in firmware | Contradiction between 128-pt (`sensor_node`) and 256-pt (`IEEE_HART_Phase2_Video_Script`) | `SPEC_ONLY` | `docs/ARCHITECTURE_CONTRADICTIONS.md` | Spec: 512-point, 7.8125 Hz per bin (`spec/beevil_spec.yaml`) |
 | **Battery Management & SoC** | Single-cell 3.7V 3000mAh LiPo / Li-ion (NMC) | 7-point OCV lookup table with Arrhenius temperature derating | `VALIDATED` | `firmware/config/battery_config.h`, `beevil_rak4631_transmitter.ino:123` | Read live nRF52 SAADC on AIN3 (P0.05) with P0.29 divider gate |
 | **LoRa Sub-GHz Transceiver** | Semtech SX1262 on SPI (IN865 Band: 865.0625 MHz, +14 dBm) | SPI pins defined in `sx126x_lora.h`; burst simulation previously toggled LED | `DRIVER_REFACTORED` | `beevil_rak4631_transmitter.ino:395` | Initialize SX1262 via SPI; transmit real 32-byte packed binary struct; output TX status |
 | **USB Telemetry Pipeline** | 115200 baud USB CDC Serial stream (JSON Lines / CSV) | Partial serial command parser present in `.ino` | `EXPANDED_CANONICAL` | `beevil_rak4631_transmitter.ino:254` | Implement robust JSONL/CSV machine-readable telemetry stream with provenance tags |
@@ -54,7 +57,7 @@ This document tracks the physical hardware identity, bus discovery, driver bring
 
 3. **FFT Size Discrepancy:**
    - *Previous state:* `beevil_nrf52_freertos.c` had 128 points, while documentation cited 256 points.
-   - *Resolution:* Canonical size established at **256-point Real FFT** at 16,000 Hz sample rate ($\Delta f = 62.5$ Hz per bin). The 200–400 Hz swarming band occupies bins 3 to 6.
+   - *Resolution:* The spec now fixes a **512-point real FFT** after 4x decimation ($\Delta f = 7.8125$ Hz per bin), so the 200–400 Hz swarming band occupies bins 26 to 51. The 256-point choice recorded here earlier was withdrawn.
 
 4. **Battery Chemistry Contradiction:**
    - *Previous state:* LiFePO4 was mentioned in legacy text, while firmware OCV table used 3.7V / 4.2V LiPo curves.

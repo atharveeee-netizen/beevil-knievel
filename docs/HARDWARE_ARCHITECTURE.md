@@ -29,7 +29,7 @@ To eliminate architectural ambiguities across documentation and firmware, this d
 |                                                                             |
 |   PRIMARY REFERENCE EDGE GATEWAY (1 Per Apiary)                             |
 |   • Single Board Computer: Raspberry Pi 3B+ (Broadcom BCM2837B0, 1GB RAM)  |
-|   • LoRa Gateway HAT:      Waveshare SX1262 LoRa HAT (SPI Interface)       |
+|   • LoRa Gateway HAT:      Waveshare SX1262 LoRa HAT (UART, E22)          |
 |   • Operating System:      Raspberry Pi OS Lite (64-bit, Debian Bookworm)   |
 |   • Local Edge Database:   SQLite WAL (Write-Ahead Logging) 100-Hive Store  |
 |   • Edge AI Runtime:       Edge Multi-Modal Sensor Fusion & Expert Engine   |
@@ -90,8 +90,9 @@ To eliminate architectural ambiguities across documentation and firmware, this d
   - **Memory**: 1 GB LPDDR2 SDRAM.
   - **Thermal Envelope**: 4.5 W typical power consumption under load.
 * **LoRa Concentrator Interface**: **Waveshare SX1262 LoRa Gateway HAT**
-  - Dedicated SPI bus connection (SPI0: MOSI, MISO, SCLK, CE0).
-  - Control lines: RST (GPIO 22), BUSY (GPIO 27), DIO1 (GPIO 18).
+  - UART connection to the Ebyte E22-900T22S module on the HAT (`/dev/serial0`, TXD/RXD).
+  - Mode and status lines: M0/M1 (operating mode) and AUX (module busy).
+  - Interoperability of this module with the node's raw SX1262 frames is untested; see `LIMITATIONS.md`.
 * **Storage Media**: 32 GB SanDisk Industrial MicroSD Card (Class 10 / A1).
 * **Software Stack**:
   - Operating System: Raspberry Pi OS Lite (64-bit, Debian 12 Bookworm).
