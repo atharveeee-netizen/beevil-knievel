@@ -200,76 +200,86 @@ def plot_fig4_modal_ablation(main_results: Dict[str, Any], out_dir: Path):
     plt.close(fig)
 
 
+def _load_link_budget() -> dict:
+    path = REPO_ROOT / "paper_q1" / "results" / "analytical_link_budget.json"
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def plot_fig5_energy_breakdown(out_dir: Path):
-    """Fig 5: Measured / Modelled Energy Breakdown per 36-byte Telemetry Cycle."""
+    """Fig 5: energy per 36-byte telemetry cycle.
+
+    Every input is read from analytical_link_budget.json (energy_assumptions and the per-SF TX energy).
+    They are assumptions or datasheet-typical values, NOT measurements, and the figure says so.
+    """
+    lb = _load_link_budget()
+    ea = lb["energy_assumptions"]
+    comp = ea["compute_energy_uj_estimate"]
+    sleep_mj = ea["sleep_current_ua"] * 1e-6 * 900.0 * ea["supply_v"] * 1e3  # A * s * V = J, then mJ
+    tx7 = lb["sf7_mode"]["tx_energy_mj"]
+    tx10 = lb["sf10_mode"]["tx_energy_mj"]
+
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8.5, 3.6), dpi=300)
 
-    # Energy per operation (uJ at 3.3V)
-    # Active Sampling & FFT: ~400 uA * 10 ms * 3.3V = 13.2 uJ
-    # TinyML MLP Inference: ~2.5 mA * 0.5 ms * 3.3V = 4.1 uJ
-    # LoRa Tx SF7 (+14 dBm): 45 mA * 77.06 ms * 3.3V = 11,443 uJ (11.44 mJ)
-    # LoRa Tx SF10 (+14 dBm): 45 mA * 411.65 ms * 3.3V = 61,128 uJ (61.13 mJ)
-    # Sleep (15 min): 18 uA * 900 s * 3.3V = 53,460 uJ (53.46 mJ)
-
-    ops = ["DSP FFT\n(13.2 µJ)", "TinyML\n(4.1 µJ)", "Sensors I2C\n(8.5 µJ)"]
-    e_on_node = [13.2, 4.1, 8.5]
-    ax1.bar(ops, e_on_node, color=["#42A5F5", "#66BB6A", "#FFA726"], edgecolor="#263238", width=0.5)
+    ops = [f"DSP FFT\n({comp['dsp_fft']:.1f} µJ)", f"TinyML\n({comp['tinyml']:.1f} µJ)",
+           f"Sensors I2C\n({comp['sensors_i2c']:.1f} µJ)"]
+    ax1.bar(ops, [comp["dsp_fft"], comp["tinyml"], comp["sensors_i2c"]],
+            color=["#42A5F5", "#66BB6A", "#FFA726"], edgecolor="#263238", width=0.5)
     ax1.set_ylabel("Energy per Cycle (µJ)")
-    ax1.set_title("(a) On-Device Computation Energy", fontsize=9.5, weight="bold")
+    ax1.set_title("(a) On-Device Computation (estimate)", fontsize=9.5, weight="bold")
 
-    categories = ["Sleep (15 min)\n18 µA", "Computation\n(DSP + TinyML)", "LoRa Tx SF7\n(+14 dBm)", "LoRa Tx SF10\n(+14 dBm)"]
-    e_total_mj = [53.46, 0.026, 11.44, 61.13]
-    ax2.bar(categories, e_total_mj, color=["#B0BEC5", "#81C784", "#FFB74D", "#E57373"], edgecolor="#263238", width=0.55)
+    categories = [f"Sleep\n(15 min)\n{ea['sleep_current_ua']:.0f} µA assumed", "Compute\n(estimate)",
+                  "LoRa Tx\nSF7", "LoRa Tx\nSF10"]
+    ax2.bar(categories, [sleep_mj, ea["compute_total_uj"] / 1000.0, tx7, tx10],
+            color=["#B0BEC5", "#81C784", "#FFB74D", "#E57373"], edgecolor="#263238", width=0.55)
     ax2.set_ylabel("Energy per Report (mJ)")
-    ax2.set_title("(b) Total System Energy per Cycle", fontsize=9.5, weight="bold")
+    ax2.set_title("(b) Energy per 15-minute Cycle", fontsize=9.5, weight="bold")
 
-    fig.suptitle("Figure 5: Energy Consumption Ledger per 36-byte Telemetry Cycle [ANALYTICAL_MODEL]", fontsize=10.5, weight="bold")
+    fig.suptitle("Figure 5: Energy per 36-byte Telemetry Cycle, assumed and unmeasured inputs [ANALYTICAL_MODEL]",
+                 fontsize=10, weight="bold")
     fig.savefig(out_dir / "fig5_energy_breakdown.pdf", bbox_inches="tight")
     fig.savefig(out_dir / "fig5_energy_breakdown.png", bbox_inches="tight")
     plt.close(fig)
 
 
 def plot_fig6_lora_link_budget(out_dir: Path):
-    """Fig 6: Analytical LoRa Path Loss models (Friis, Two-Ray, Canopy) at IN865."""
-    fig, ax = plt.subplots(figsize=(7.5, 3.8), dpi=300)
+    """Fig 6: path loss models against the maximum allowable path loss. All parameters are read from
+    analytical_link_budget.json, so the figure cannot disagree with the text or the table."""
+    lb = _load_link_budget()
+    rf, m7, m10 = lb["rf_parameters"], lb["sf7_mode"], lb["sf10_mode"]
+    f_mhz = rf["frequency_mhz"]
+    h_tx, h_rx = rf["node_antenna_height_m"], rf["gateway_antenna_height_m"]
+    d_break = 4.0 * np.pi * h_tx * h_rx / (299792458.0 / (f_mhz * 1e6))  # two-ray breakpoint distance
 
-    dist_m = np.linspace(20, 3000, 300)
-    tx_power = 14.0  # dBm
-    freq_mhz = 865.0625
+    fig, ax = plt.subplots(figsize=(7.5, 4.6), dpi=300)
+    dist_m = np.linspace(20, 3000, 600)
+    pl_fs = 20.0 * np.log10(dist_m) + 20.0 * np.log10(f_mhz) - 27.55
+    pl_two_ray = np.where(dist_m <= d_break, pl_fs, 40.0 * np.log10(dist_m) - 20.0 * np.log10(h_tx * h_rx))
+    # Weissberger foliage loss on a canopy path of min(d, 50 m): continuous, and equal to the 50 m value
+    # (rf["foliage_atten_50m_canopy_db"]) beyond 50 m, which is what the range calculation uses.
+    pl_canopy = pl_two_ray + 1.33 * (f_mhz / 1000.0) ** 0.284 * np.minimum(dist_m, 50.0) ** 0.588
 
-    # 1. Free Space (Friis)
-    pl_fs = 20.0 * np.log10(dist_m) + 20.0 * np.log10(freq_mhz) - 27.55
-    rx_fs = tx_power - pl_fs
+    ax.plot(dist_m, pl_fs, label="Free space (Friis)", color="#9E9E9E", linestyle=":", lw=1.5)
+    ax.plot(dist_m, pl_two_ray, label=f"Two-ray ground reflection ({h_tx:g} m / {h_rx:g} m)", color="#1E88E5", lw=2)
+    ax.plot(dist_m, pl_canopy,
+            label=f"Two-ray + {rf['foliage_atten_50m_canopy_db']:.1f} dB orchard canopy (ITU-R P.833)",
+            color="#2E7D32", lw=2.2)
 
-    # 2. Two-Ray Ground Reflection (node 0.5 m, gateway 4.0 m)
-    pl_tworay = 40.0 * np.log10(dist_m) - 6.02
-    rx_tworay = tx_power - pl_tworay
-
-    # 3. Two-Ray + Canopy (ITU-R P.833 / Weissberger)
-    f_ghz = freq_mhz / 1000.0
-    veg_loss = np.minimum(28.0, 1.33 * (f_ghz ** 0.284) * ((dist_m * 0.5) ** 0.588))
-    pl_canopy = pl_tworay + veg_loss
-    rx_canopy = tx_power - pl_canopy
-
-    ax.plot(dist_m, rx_fs, label="Free Space LoS (Friis)", color="#9E9E9E", linestyle=":", lw=1.5)
-    ax.plot(dist_m, rx_tworay, label="Two-Ray Ground Reflection (0.5m / 4.0m)", color="#1E88E5", lw=2)
-    ax.plot(dist_m, rx_canopy, label="Two-Ray + Orchard Canopy (ITU-R P.833)", color="#2E7D32", lw=2.2)
-
-    ax.axhline(-124.0, color="#FF9800", linestyle="--", label="SF7 Sensitivity Limit (-124 dBm, 77.1 ms)")
-    ax.axhline(-132.0, color="#E91E63", linestyle="--", label="SF10 Sensitivity Limit (-132 dBm, 411.7 ms)")
-
-    # Vertical markers for canopy range
-    ax.axvline(579.4, color="#FF9800", linestyle=":", alpha=0.7)
-    ax.axvline(918.4, color="#E91E63", linestyle=":", alpha=0.7)
-    ax.text(595, -70, "SF7 Canopy: 0.58 km", color="#E65100", fontsize=8, weight="bold")
-    ax.text(935, -78, "SF10 Canopy: 0.92 km", color="#880E4F", fontsize=8, weight="bold")
+    for mode, name, color, ytext in ((m7, "SF7", "#E65100", 70.0), (m10, "SF10", "#880E4F", 62.0)):
+        ax.axhline(mode["max_allowable_path_loss_db"], color=color, linestyle="--", lw=1.2,
+                   label=(f"{name} maximum path loss {mode['max_allowable_path_loss_db']:.1f} dB "
+                          f"(sensitivity {mode['receiver_sensitivity_dbm']:.1f} dBm, airtime {mode['airtime_ms']:.1f} ms)"))
+        ax.axvline(mode["orchard_canopy_range_m"], color=color, linestyle=":", alpha=0.7)
+        ax.text(mode["orchard_canopy_range_m"] + 20, ytext, f"{name} canopy: {mode['orchard_canopy_range_km']:.2f} km",
+                color=color, fontsize=8, weight="bold")
 
     ax.set_xlabel("Distance between Node and Gateway (meters)")
-    ax.set_ylabel("Received Signal Power (dBm)")
-    ax.set_title("Figure 6: Analytical LoRa Link Budget across Ground & Canopy Models [ANALYTICAL_MODEL]", fontsize=10.5, weight="bold")
-    ax.set_ylim(-145, -50)
+    ax.set_ylabel("Path Loss (dB)")
+    ax.set_title("Figure 6: Analytical LoRa Path Loss vs. Maximum Allowable Path Loss [ANALYTICAL_MODEL]",
+                 fontsize=10.5, weight="bold")
+    ax.set_ylim(55, 150)
     ax.set_xlim(0, 3000)
-    ax.legend(loc="upper right", fontsize=8.2)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), fontsize=7.6, frameon=False)
 
     fig.savefig(out_dir / "fig6_lora_link_budget.pdf", bbox_inches="tight")
     fig.savefig(out_dir / "fig6_lora_link_budget.png", bbox_inches="tight")

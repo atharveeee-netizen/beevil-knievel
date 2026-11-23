@@ -116,6 +116,18 @@ def compute_lora_link_budget() -> Dict[str, Any]:
     airtime_sf7_ms = compute_lora_airtime_ms(7, 125.0, 36)    # 77.06 ms
     airtime_sf10_ms = compute_lora_airtime_ms(10, 125.0, 36)  # 493.57 ms (exact Semtech standard formula)
 
+    # Energy ledger inputs. EVERY value below is an assumption or a datasheet-typical figure; none has been
+    # measured on the prototype. They are recorded in the output JSON so that figures and manuscript text read
+    # them from one place, and so they can be replaced by PPK2 measurements (paper_q1/human_tasks/02).
+    supply_v = 3.3
+    tx_current_ma = 45.0     # SX1262 datasheet-typical at +14 dBm with the DC-DC regulator (paper/ assumes 92 mA)
+    sleep_current_ua = 18.0  # placeholder carried over from the legacy README; no documented source
+    compute_energy_uj = {"dsp_fft": 13.2, "tinyml": 4.1, "sensors_i2c": 8.5}  # firmware cycle estimates; DSP/ML not yet on the node
+
+    def tx_energy_mj(airtime_ms: float) -> float:
+        # mA * V = mW; mW * ms = uJ; / 1000 = mJ
+        return round(tx_current_ma * supply_v * airtime_ms / 1000.0, 2)
+
     results = {
         "metadata": {
             "title": "Beevil Knievel LoRa PHY Analytical Link Budget",
@@ -142,12 +154,25 @@ def compute_lora_link_budget() -> Dict[str, Any]:
                 "tx_power": "Semtech SX1262 datasheet / E22-900T22S (14 dBm compliant with India WPC GSR 564(E) 865-867 MHz)",
                 "tx_antenna": "Internal quarter-wave wire whip inside Langstroth wooden frame (2.15 dBi)",
                 "tx_feeder_loss": "PCB microstrip feed to IPEX connector (0.5 dB)",
-                "hive_attenuation": "Langstroth pine/cedar supers with wax combs (8.7 dB empirically referenced)",
+                "hive_attenuation": "Langstroth pine/cedar supers with wax combs (8.7 dB assumed, not measured; measure with and without the hive body, paper_q1/human_tasks/03)",
                 "rx_antenna": "Mast-mounted collinear omnidirectional dipole (3.0 dBi)",
                 "rx_feeder_loss": "RG-58 gateway pigtail cable loss (1.0 dB)",
                 "fade_margin": "15 dB log-normal shadowing and Rayleigh multi-path margin",
                 "two_ray_model": "Two-ray ground reflection beyond dc = 72.5 m (ht=0.5 m, hr=4.0 m)",
                 "foliage_model": "ITU-R P.833 / Weissberger orchard canopy attenuation (50 m foliage path)"
+            }
+        },
+        "energy_assumptions": {
+            "provenance": "ASSUMPTION_UNMEASURED",
+            "supply_v": supply_v,
+            "tx_current_ma": tx_current_ma,
+            "sleep_current_ua": sleep_current_ua,
+            "compute_energy_uj_estimate": compute_energy_uj,
+            "compute_total_uj": round(sum(compute_energy_uj.values()), 1),
+            "sources": {
+                "tx_current": "SX1262 datasheet-typical value at +14 dBm (DC-DC regulator). The IEEE paper in paper/ assumes 92 mA. Unmeasured: replace with a PPK2 capture.",
+                "sleep_current": "No documented source (legacy README placeholder). Unmeasured: replace with a PPK2 capture. The build in firmware/ has no sleep mode yet.",
+                "compute_energy": "Firmware cycle estimates. The DSP and TinyML stages are not yet implemented on the node. Unmeasured."
             }
         },
         "sf7_mode": {
@@ -156,6 +181,7 @@ def compute_lora_link_budget() -> Dict[str, Any]:
             "coding_rate": "4/5",
             "payload_bytes": 36,
             "airtime_ms": airtime_sf7_ms,
+            "tx_energy_mj": tx_energy_mj(airtime_sf7_ms),
             "receiver_sensitivity_dbm": sf7_sens_dbm,
             "max_allowable_path_loss_db": round(sf7_mapl_db, 2),
             "free_space_range_km": round(sf7_los_m / 1000.0, 2),
@@ -169,6 +195,7 @@ def compute_lora_link_budget() -> Dict[str, Any]:
             "coding_rate": "4/5",
             "payload_bytes": 36,
             "airtime_ms": airtime_sf10_ms,
+            "tx_energy_mj": tx_energy_mj(airtime_sf10_ms),
             "receiver_sensitivity_dbm": sf10_sens_dbm,
             "max_allowable_path_loss_db": round(sf10_mapl_db, 2),
             "free_space_range_km": round(sf10_los_m / 1000.0, 2),
