@@ -24,12 +24,29 @@
       "tx_power": "Semtech SX1262 datasheet / E22-900T22S (14 dBm compliant with India WPC GSR 564(E) 865-867 MHz)",
       "tx_antenna": "Internal quarter-wave wire whip inside Langstroth wooden frame (2.15 dBi)",
       "tx_feeder_loss": "PCB microstrip feed to IPEX connector (0.5 dB)",
-      "hive_attenuation": "Langstroth pine/cedar supers with wax combs (8.7 dB empirically referenced)",
+      "hive_attenuation": "Langstroth pine/cedar supers with wax combs (8.7 dB assumed, not measured; measure with and without the hive body, paper_q1/human_tasks/03)",
       "rx_antenna": "Mast-mounted collinear omnidirectional dipole (3.0 dBi)",
       "rx_feeder_loss": "RG-58 gateway pigtail cable loss (1.0 dB)",
       "fade_margin": "15 dB log-normal shadowing and Rayleigh multi-path margin",
       "two_ray_model": "Two-ray ground reflection beyond dc = 72.5 m (ht=0.5 m, hr=4.0 m)",
       "foliage_model": "ITU-R P.833 / Weissberger orchard canopy attenuation (50 m foliage path)"
+    }
+  },
+  "energy_assumptions": {
+    "provenance": "ASSUMPTION_UNMEASURED",
+    "supply_v": 3.3,
+    "tx_current_ma": 45.0,
+    "sleep_current_ua": 18.0,
+    "compute_energy_uj_estimate": {
+      "dsp_fft": 13.2,
+      "tinyml": 4.1,
+      "sensors_i2c": 8.5
+    },
+    "compute_total_uj": 25.8,
+    "sources": {
+      "tx_current": "SX1262 datasheet-typical value at +14 dBm (DC-DC regulator). The IEEE paper in paper/ assumes 92 mA. Unmeasured: replace with a PPK2 capture.",
+      "sleep_current": "No documented source (legacy README placeholder). Unmeasured: replace with a PPK2 capture. The build in firmware/ has no sleep mode yet.",
+      "compute_energy": "Firmware cycle estimates. The DSP and TinyML stages are not yet implemented on the node. Unmeasured."
     }
   },
   "sf7_mode": {
@@ -38,6 +55,7 @@
     "coding_rate": "4/5",
     "payload_bytes": 36,
     "airtime_ms": 77.06,
+    "tx_energy_mj": 11.44,
     "receiver_sensitivity_dbm": -124.5,
     "max_allowable_path_loss_db": 118.45,
     "free_space_range_km": 23.06,
@@ -51,6 +69,7 @@
     "coding_rate": "4/5",
     "payload_bytes": 36,
     "airtime_ms": 493.57,
+    "tx_energy_mj": 73.3,
     "receiver_sensitivity_dbm": -132.0,
     "max_allowable_path_loss_db": 125.95,
     "free_space_range_km": 54.7,

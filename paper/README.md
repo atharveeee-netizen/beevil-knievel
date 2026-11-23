@@ -72,11 +72,11 @@ Intel Xeon at 2.8 GHz (Python 3.13, scikit-learn 1.9).
 
 * `simulations/SIM*/SIM*_Generated_Result.jpg` — AI-generated images imitating ANSYS GUIs
   (garbled labels, wrong product versions and dates). These should not be presented as simulation results.
-* `simulations/SIM*/SIM*_Simulation_Result.png` and `simulations/master_ansys_results.json` — plots
-  and values written by `simulations/run_all_ansys_simulations.py` from hard-coded numbers rather than
+* `simulations/SIM*/SIM*_Simulation_Result.png` and `archive/hardcoded_simulations/master_ansys_results.json` — plots
+  and values written by `archive/hardcoded_simulations/run_all_ansys_simulations.py` from hard-coded numbers rather than
   exported from a solver; several disagree with the genuine solver screenshots (e.g. the HFSS run shows
   |S11| ≈ 0 dB, not −24.75 dB / −28.65 dB).
-* AI-drawn infographics (`proposal/images/infographic_*.png`, `docs/figures/kpi_results_dashboard.png`,
+* AI-drawn infographics (`proposal/images/infographic_*.png`, `archive/ai_generated/docs_figures/kpi_results_dashboard.png`,
   `power_energy_infographic.png`, `competitive_technology_comparison.*`, `hardware_wiring_architecture.*`,
   `master_architecture_diagram.*`, `dual_tier_ai_architecture.png`, `system_pipeline_flowchart.png`,
   `problem_statement_visual.png`, `apiary_scalability_topology.*`, `docs/media/sensing/*`).

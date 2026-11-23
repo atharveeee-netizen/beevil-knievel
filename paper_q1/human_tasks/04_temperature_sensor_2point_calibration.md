@@ -1,4 +1,7 @@
 # Protocol HT-04: Temperature Sensor Two-Point Bench Calibration
+
+> **Status (2026-11-15): tooling incomplete.** `paper_q1.bench_tools.log_calibration_run` does not exist yet (`parse_temp_cal` does). `firmware/src/main.cpp` currently reads only the TMP117 and the MCU die temperature; DS18B20 and SHTC3 reads are not implemented, so those sensors cannot be calibrated until they are.
+
 **Provenance Tag:** `REAL_BENCH_MEASUREMENT`  
 **Target Sensors:** DS18B20 1-Wire probe (in-hive broodnest probe), Sensirion SHTC3 (ambient internal relative humidity/temperature), RAK4631 internal MCU die temperature sensor.  
 **Reference Instrument:** Calibrated NIST-traceable reference thermometer (or precision RTD Pt100 / ASTM mercury standard thermometer $\pm 0.05^\circ\text{C}$).  

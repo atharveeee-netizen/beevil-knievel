@@ -63,6 +63,18 @@ jobs:
           echo "Verifying paper_q1 smoke verification on offline fixtures..."
           python -m paper_q1.run smoke
 
+      - name: Generated Files Match Their Sources
+        run: |
+          python -m paper_q1.spec_generator
+          python -m paper_q1.run numbers
+          if ! git diff --exit-code -- firmware/config/beevil_spec_gen.h gateway/beevil_spec.py paper_q1/manuscript/spec.tex paper_q1/manuscript/numbers.tex paper_q1/manuscript/numbers.sty; then
+            echo "::error::Generated files are stale. Run 'python -m paper_q1.spec_generator' and 'python -m paper_q1.run numbers', then commit the result."
+            exit 1
+          fi
+
+      - name: Documented Commands And Paths Exist
+        run: python scripts/check_doc_refs.py
+
   frontend_build_verification:
     name: Frontend Static Build & Typecheck
     runs-on: ubuntu-latest

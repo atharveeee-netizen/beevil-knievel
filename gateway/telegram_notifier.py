@@ -4,8 +4,8 @@ BEEVIL KNIEVEL - AUTOMATED TELEGRAM EMERGENCY ALERT BOT
 100% Free, Zero-Subscription Alert Dispatcher:
 - Monitors local SQLite database for unresolved critical alerts.
 - Dispatches instant Telegram messages with formatted diagnosis cards.
-- Supports attaching audio acoustic recordings of Queen piping / Swarm buzz.
-- Zero Twilio / Zero Monthly Fees!
+- Text alerts only. The system does not record audio, so nothing is attached.
+- Uses the free Telegram Bot API (no SMS gateway or subscription fees).
 """
 
 import os

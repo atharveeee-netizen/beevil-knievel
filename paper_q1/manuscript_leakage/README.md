@@ -9,7 +9,7 @@ From the repository root:
 
 ```bash
 # 1. download the public data (415 MB, SHA-256 verified against MANIFEST.csv)
-python -m paper_q1.data_tools.mspb_download
+python -m paper_q1.data_tools.download_mspb
 
 # 2. build the feature table (306 inspection rows, 53 hives)
 python -m paper_q1.features.mspb_feature_builder
@@ -42,8 +42,8 @@ pdflatex main && bibtex main && pdflatex main && pdflatex main
 
 | File | Origin |
 |---|---|
-| `leakage_numbers.tex` / `.sty` | generated from `results/leakage_ladder.json` and the other result files |
-| `figures/*.pdf` | generated from `results/leakage_ladder.json` and `results/literature_reproduction.json` |
+| `leakage_numbers.tex` / `.sty` | generated from `paper_q1/results/leakage_ladder.json` and the other result files |
+| `figures/*.pdf` | generated from `paper_q1/results/leakage_ladder.json` and `paper_q1/results/literature_reproduction.json` |
 | `main.tex` | written by hand, all numbers are macros |
 | `references.bib` | written by hand, every entry verified against Crossref or arXiv |
 

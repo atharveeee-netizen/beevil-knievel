@@ -62,7 +62,7 @@ def unpack_lora_payload(raw_bytes: bytes) -> Optional[Dict[str, Any]]:
 
     return {
         "hive_id": parsed["hive_id"],
-        "seq": parsed.get("seq", 0),
+        "seq": parsed.get("seq") if parsed.get("version", 2) == 2 else None,  # v1 has no counter
         "version": parsed.get("version", 2),
         "flags": parsed.get("flags", 0),
         "brood_core_temp": core_temp,
@@ -89,7 +89,10 @@ def forward_to_gateway_api(payload_dict: Dict[str, Any]) -> bool:
         with urllib.request.urlopen(req, timeout=3.0) as resp:
             if resp.status == 200:
                 resp_data = json.loads(resp.read().decode())
-                logger.info(f"⚡ Hive #{payload_dict['hive_id']:03d} -> AI: {resp_data.get('diagnosis')} ({resp_data.get('confidence')*100:.1f}%) in {resp_data.get('inference_ms')}ms")
+                if resp_data.get("status") == "DUPLICATE":
+                    logger.info(f"Hive #{payload_dict['hive_id']:03d} seq {payload_dict.get('seq')} ignored ({resp_data.get('seq_state')})")
+                    return True
+                logger.info(f"⚡ Hive #{payload_dict['hive_id']:03d} -> AI: {resp_data.get('diagnosis')} ({(resp_data.get('confidence') or 0)*100:.1f}%) in {resp_data.get('inference_ms')}ms")
                 return True
     except urllib.error.URLError as e:
         logger.error(f"Failed to post to local Gateway API: {e}")

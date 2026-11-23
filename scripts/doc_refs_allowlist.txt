@@ -1,0 +1,20 @@
+# References in canonical documents that do not exist in the repository yet, with the reason.
+# scripts/check_doc_refs.py fails when an entry here starts to exist (delete the entry then) or stops being referenced.
+
+# --- Planned bench tooling and outputs (paper_q1/human_tasks/). Not yet written. ---
+firmware/src/bench_power_harness.ino            # power harness: sleep, sensor gating, transmit at SF7 and SF10
+paper_q1.bench_tools.run_conducted_sweep        # conducted attenuation sweep driver
+paper_q1.bench_tools.log_calibration_run        # temperature calibration logger
+paper_q1/bench_raw/                             # raw captures, created by whoever runs the bench tasks
+paper_q1/bench_raw/ppk2_power_profile_20261023.csv
+paper_q1/bench_raw/dwt_cycles_log.txt
+paper_q1/bench_raw/lora_conducted_per_sweep.csv
+paper_q1/bench_raw/temp_calibration_20261023.csv
+paper_q1/results/measured_power_bench.json      # written by parse_ppk2 after the PPK2 run
+paper_q1/results/measured_lora_per.json         # written by parse_lora_per after the conducted sweep
+paper_q1/results/measured_temp_calibration.json # written by parse_temp_cal after the calibration run
+paper_q1/figures/fig_hardware_bench_photo.jpg   # photograph of the bench setup, to be taken
+
+# --- Downloaded at run time, never committed ---
+data/raw/beetogether/                           # needs a Kaggle token (human task 01)
+data/raw/sbcm/                                  # needs a Kaggle token (human task 01)

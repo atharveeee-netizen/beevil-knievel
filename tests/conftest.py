@@ -5,9 +5,20 @@ Ensures cross-platform and cross-version compatibility for peer reviewers,
 CI runners, and local developer setups.
 """
 
+import atexit
+import os
+import shutil
 import sys
+import tempfile
 from pathlib import Path
 import httpx
+
+# Hermetic database. The tests must never read or write gateway/beevil_telemetry.db in the
+# source tree: a stale file created by an older schema once made the suite fail. The path is
+# read by gateway.server at import time, so it has to be set before any test module imports it.
+_TEST_DB_DIR = tempfile.mkdtemp(prefix="beevil_tests_")
+os.environ.setdefault("BEEVIL_DB_PATH", os.path.join(_TEST_DB_DIR, "beevil_telemetry.db"))
+atexit.register(shutil.rmtree, _TEST_DB_DIR, ignore_errors=True)
 
 # Ensure repo root is on sys.path
 REPO_ROOT = Path(__file__).resolve().parent.parent
