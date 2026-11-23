@@ -44,10 +44,14 @@ static const float CUSUM_SLACK_K_C            = 0.15f;
 
 /**
  * Decision Threshold (h)
- * Value: 1.20 °C·hr (or normalized deficit units)
- * Unit: Degree-hours (°C·hr)
- * Rationale: Accumulated continuous cooling below (baseline - slack) exceeding 1.20 degree-hours
- *            corresponds to loss of worker thermoregulation (queen death, brood abandonment, or severe chill).
+ * Value: 1.20 °C per sample
+ * Unit: °C accumulated once per telemetry interval (NOT degree-hours). At the 5 minute field interval
+ *       1.20 °C·sample is about 0.1 °C·h; at the 5 second bench interval it is reached within seconds.
+ * Rationale: Intended to flag persistent cooling below (baseline - slack), the signature of lost worker
+ *            thermoregulation (queen death, brood abandonment, severe chill).
+ * Status: UNVALIDATED. This detector (fixed baseline, k = 0.15, h = 1.20, half-rate decay) is not the one
+ *         evaluated on real hive data in paper_q1 (24 h rolling-median baseline, k = 0.25, h = 6.0, hourly
+ *         samples; run length 3.5 days at h = 6). See LIMITATIONS.md before relying on it.
  */
 static const float CUSUM_THRESHOLD_H          = 1.20f;
 
@@ -73,7 +77,10 @@ static const float TILT_TAMPER_THRESHOLD_DEG  = 15.0f;
  * Telemetry Transmission Timing
  * Units: Milliseconds (ms)
  * Rationale:
- *   - Nominal Field Interval: 300,000 ms (5 minutes) provides 2+ years battery life on 3000 mAh cell.
+ *   - Nominal Field Interval: 300,000 ms (5 minutes). Battery life is NOT established for this build: it has no
+ *     sleep mode yet. The paper/ energy budget (2600 mAh cell, 2 %/month self-discharge) models 181 days with
+ *     continuous CO2 sensing, 545 days with CO2 duty-cycled to 30 minutes and 728 days without CO2. Replace
+ *     with a measured value once paper_q1/human_tasks/02 has been run.
  *   - Benchmark Interval: 5,000 ms (5 seconds) used for automated lab testing and demonstration.
  */
 #define NOMINAL_TELEMETRY_INTERVAL_MS         300000UL  // 5 Minutes (Production)

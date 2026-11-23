@@ -338,7 +338,9 @@ void dispatchTelemetry() {
     g_telemetry.co2_ppm           = 0xFFFF;
     g_telemetry.weight_kg_x100    = 0xFFFF;
     g_telemetry.lux               = 0xFFFF;
-    g_telemetry.tilt_deg          = g_sensors.has_lis3dh ? 0 : 0xFF; // Physical tilt only: 0 to 90 deg
+    // The LIS3DH is detected but never read, so no tilt value exists yet. Send the sentinel rather than a
+    // constant 0 degrees: that would claim "level" and hide a knocked-over or stolen hive.
+    g_telemetry.tilt_deg          = 0xFF;
 
     // Acoustic FFT Bands: Zero if mic unpopulated
     memset(g_telemetry.fft_energy_bands, 0, 8);
